@@ -3,8 +3,14 @@
 ## Welcome
 
 * [About](README.md)
-* [Page 3](welcome/page-3.md)
 
-***
+## Methodologies & Resources
 
-* [Page 2](page-2.md)
+## Methodologies & Resources
+
+* [Enumeration](methodologies-and-resources-1/enumeration.md)
+* [Gaining Access](methodologies-and-resources-1/gaining-access.md)
+* [Maintaining Access](methodologies-and-resources-1/maintaining-access.md)
+* [Privilege Escalation](methodologies-and-resources-1/privilege-escalation/README.md)
+  * [Linux](methodologies-and-resources-1/privilege-escalation/linux.md)
+  * [Windows](methodologies-and-resources-1/privilege-escalation/windows.md)
