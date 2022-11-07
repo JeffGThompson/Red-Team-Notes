@@ -1,6 +1,6 @@
 # Windows
 
-
+**Gathering Info**
 
 ```
 whoami /priv
