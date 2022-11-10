@@ -12,3 +12,8 @@
 * [Privilege Escalation](methodologies-and-resources/privilege-escalation/README.md)
   * [Linux](methodologies-and-resources/privilege-escalation/linux.md)
   * [Windows](methodologies-and-resources/privilege-escalation/windows.md)
+
+## Walkthroughs
+
+* [Tryhackme](walkthroughs/tryhackme/README.md)
+  * [Hydra | DarkStar7471](walkthroughs/tryhackme/hydra-or-darkstar7471.md)
