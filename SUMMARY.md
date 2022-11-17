@@ -16,4 +16,5 @@
 ## Walkthroughs
 
 * [Tryhackme](walkthroughs/tryhackme/README.md)
-  * [Hydra | DarkStar7471](walkthroughs/tryhackme/hydra-or-darkstar7471.md)
+  * [Hydra ](walkthroughs/tryhackme/hydra.md)
+  * [Blue](walkthroughs/tryhackme/blue.md)
