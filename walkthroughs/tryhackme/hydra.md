@@ -2,9 +2,9 @@
 
 **Room Link:** [https://tryhackme.com/room/hydra](https://tryhackme.com/room/hydra)
 
+## **Walkthrough**
 
-
-**Use Hydra to bruteforce molly's web password. What is flag 1?**
+**Use Hydra to brute force molly's web password. What is flag 1?**
 
 Opened up the webconsole and tried entering the credentials to see what the request would look like. We can see the failed login attempt message and the fields used for login which we can used to craft our hydra command.
 
