@@ -32,7 +32,7 @@ The box is vulnerable to ms17-010
 
 `run`
 
-<figure><img src="../../.gitbook/assets/image (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1) (2).png" alt=""><figcaption></figcaption></figure>
 
 ### Cracking
 
@@ -42,7 +42,7 @@ The box is vulnerable to ms17-010
 
 `john --format=nt --wordlist=/usr/share/wordlists/rockyou.txt hashes.txt`
 
-<figure><img src="../../.gitbook/assets/image (3).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (3) (2).png" alt=""><figcaption></figcaption></figure>
 
 ### Flags
 

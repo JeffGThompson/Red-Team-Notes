@@ -18,3 +18,4 @@
 * [Tryhackme](walkthroughs/tryhackme/README.md)
   * [Hydra ](walkthroughs/tryhackme/hydra.md)
   * [Blue](walkthroughs/tryhackme/blue.md)
+  * [Steel Mountain](walkthroughs/tryhackme/steel-mountain.md)
