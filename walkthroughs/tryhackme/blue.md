@@ -14,7 +14,7 @@ The box is vulnerable to ms17-010
 
 `nmap -p135,139,445,3389 --script=vuln 10.10.68.22`
 
-<figure><img src="../../.gitbook/assets/image (5) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (5) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 ### Gain Access / Escalate
 
@@ -52,4 +52,4 @@ Just ran this to find the locations of all the flags then grabbed them
 
 `dir "flag*" /s`
 
-<figure><img src="../../.gitbook/assets/image (5).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (5) (1).png" alt=""><figcaption></figcaption></figure>
