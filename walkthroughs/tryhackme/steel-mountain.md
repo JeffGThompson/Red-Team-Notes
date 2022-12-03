@@ -8,7 +8,7 @@
 
 **Who is the employee of the month?**
 
-<figure><img src="../../.gitbook/assets/image.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (9).png" alt=""><figcaption></figcaption></figure>
 
 ### **Initial Access**
 
@@ -16,13 +16,13 @@
 
 `nmap -A` 10.10.248.189
 
-<figure><img src="../../.gitbook/assets/image (11).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (11) (1).png" alt=""><figcaption></figcaption></figure>
 
 **Take a look at the other web server. What file server is running?**
 
 Google this
 
-<figure><img src="../../.gitbook/assets/image (4).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (4) (1).png" alt=""><figcaption></figcaption></figure>
 
 **What is the CVE number to exploit this file server?**
 
@@ -48,11 +48,11 @@ Google this
 
 For this exploit we usually just need to change the ip\_addr and local\_port to our nc listener
 
-<figure><img src="../../.gitbook/assets/image (9).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (9) (1).png" alt=""><figcaption></figcaption></figure>
 
 Because I performed this on a tryhackme attacker box which has port 80 in user to login through web I had to change the exploit to get the nc.exe from us on a different port.&#x20;
 
-<figure><img src="../../.gitbook/assets/image (6).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (6) (2).png" alt=""><figcaption></figcaption></figure>
 
 `nc -nvlp 443`
 
@@ -84,7 +84,7 @@ Because I performed this on a tryhackme attacker box which has port 80 in user t
 
 `Invoke-AllChecks`
 
-<figure><img src="../../.gitbook/assets/image (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1) (2).png" alt=""><figcaption></figcaption></figure>
 
 **Kali**
 
@@ -109,7 +109,7 @@ I couldn't delete the ASCService.exe but I could replace it when I copied the fi
 
 `sc start AdvancedSystemCareService9`
 
-![](<../../.gitbook/assets/image (3).png>)
+![](<../../.gitbook/assets/image (3) (1).png>)
 
 ``
 

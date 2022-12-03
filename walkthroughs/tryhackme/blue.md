@@ -38,7 +38,7 @@ The box is vulnerable to ms17-010
 
 `hashdump`
 
-<figure><img src="../../.gitbook/assets/image (3) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (3) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 `john --format=nt --wordlist=/usr/share/wordlists/rockyou.txt hashes.txt`
 
