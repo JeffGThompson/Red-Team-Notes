@@ -8,7 +8,7 @@
 
 **Who is the employee of the month?**
 
-<figure><img src="../../.gitbook/assets/image (9).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (9) (2).png" alt=""><figcaption></figcaption></figure>
 
 ### **Initial Access**
 
@@ -26,7 +26,7 @@ Google this
 
 **What is the CVE number to exploit this file server?**
 
-<figure><img src="../../.gitbook/assets/image (12).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (12) (1).png" alt=""><figcaption></figcaption></figure>
 
 **Use Metasploit to get an initial shell. What is the user flag?**
 
@@ -62,7 +62,7 @@ Because I performed this on a tryhackme attacker box which has port 80 in user t
 
 `python2 exploit.py 10.10.181.159 8080`
 
-<figure><img src="../../.gitbook/assets/image (8).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (8) (1).png" alt=""><figcaption></figcaption></figure>
 
 **Use Metasploit to get an initial shell. What is the user flag?**
 
