@@ -21,3 +21,4 @@
   * [Steel Mountain](walkthroughs/tryhackme/steel-mountain.md)
   * [Alfred](walkthroughs/tryhackme/alfred.md)
   * [HackPark](walkthroughs/tryhackme/hackpark.md)
+  * [Game Zone](walkthroughs/tryhackme/game-zone.md)

