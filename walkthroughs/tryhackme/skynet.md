@@ -12,20 +12,20 @@ nmap -A 10.10.13.172
 smbclient -L //10.10.13.172
 ```
 
-<figure><img src="../../.gitbook/assets/image (13) (2).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (13).png" alt=""><figcaption></figcaption></figure>
 
 ```
 smbget -R smb://10.10.13.172/anonymous
 cat logs/log* | sort | uniq  > passwords.txt 
 ```
 
-<figure><img src="../../.gitbook/assets/image (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (39).png" alt=""><figcaption></figcaption></figure>
 
 There is also an email from Miles Dyson, as it's just his name I tried different varations of his name for a username. There is a folder on samba that could be the username as well, milesdyson.&#x20;
 
 <figure><img src="../../.gitbook/assets/image (5) (2).png" alt=""><figcaption></figcaption></figure>
 
-<figure><img src="../../.gitbook/assets/image (4).png" alt=""><figcaption><p>username.txt</p></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (4) (4).png" alt=""><figcaption><p>username.txt</p></figcaption></figure>
 
 
 
@@ -47,7 +47,7 @@ hydra -l milesdyson -P passwords.txt 10.10.13.172 http-post-form "/squirrelmail/
 
 We can now login to squirrelmail that gobuster discovered.
 
-<figure><img src="../../.gitbook/assets/image (10) (3).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (10).png" alt=""><figcaption></figcaption></figure>
 
 <figure><img src="../../.gitbook/assets/image (9).png" alt=""><figcaption></figcaption></figure>
 
@@ -93,7 +93,7 @@ Now we will try RFI to get a reverse shell
 
 Create PHP reverse shell then host the file
 
-<figure><img src="../../.gitbook/assets/image (3) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (3) (3).png" alt=""><figcaption></figcaption></figure>
 
 ```
 python2 -m SimpleHTTPServer 81
@@ -123,7 +123,7 @@ stty raw -echo;fg
 
 There is a backup script that is ran every minute by root which backs up /var/www/html
 
-<figure><img src="../../.gitbook/assets/image (14) (3).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (14).png" alt=""><figcaption></figcaption></figure>
 
 <figure><img src="../../.gitbook/assets/image (31).png" alt=""><figcaption></figcaption></figure>
 
@@ -160,7 +160,7 @@ There is a password in the configuration file, it does not work for root but we 
 cat /var/www/html/configuration.php
 ```
 
-<figure><img src="../../.gitbook/assets/image.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (37).png" alt=""><figcaption></figcaption></figure>
 
 We can login as jjameson&#x20;
 

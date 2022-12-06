@@ -18,7 +18,7 @@ Sent a failed login request to Burp to see what it would look like. With this in
 
 I could also do this without burp by just opening the console and getting the info from there
 
-<figure><img src="../../.gitbook/assets/image (7) (2) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (7) (2).png" alt=""><figcaption></figcaption></figure>
 
 {% code overflow="wrap" %}
 ```bash
@@ -26,7 +26,7 @@ hydra -l admin -P /usr/share/wordlists/SecLists/Passwords/darkweb2017-top10000.t
 ```
 {% endcode %}
 
-<figure><img src="../../.gitbook/assets/image (3) (3).png" alt=""><figcaption><p>Credentials found</p></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (3) (3) (2).png" alt=""><figcaption><p>Credentials found</p></figcaption></figure>
 
 ### Compromise the machine
 

@@ -113,7 +113,7 @@ nc -lvnp 4443
 sc start AdvancedSystemCareService9
 ```
 
-![](<../../.gitbook/assets/image (3) (1) (2) (1).png>)
+![](<../../.gitbook/assets/image (3) (1) (2).png>)
 
 ``
 

