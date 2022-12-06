@@ -75,7 +75,7 @@ Used this PHP reverse shell, just needed to change the IP to my own.
 
 **PHP Reverse Shell:** [https://github.com/pentestmonkey/php-reverse-shell/blob/master/php-reverse-shell.php](https://github.com/pentestmonkey/php-reverse-shell/blob/master/php-reverse-shell.php)
 
-<figure><img src="../../.gitbook/assets/image (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1) (4).png" alt=""><figcaption></figcaption></figure>
 
 <figure><img src="../../.gitbook/assets/image (4).png" alt=""><figcaption></figcaption></figure>
 
@@ -95,4 +95,16 @@ Found a password in the configuration file. The password worked for the user jja
 ssh jjameson@10.10.116.159
 Password: nv5uz9r3ZEDzVjNu
 ```
+
+
+
+jjamerson is able to run yum with no password as sudo
+
+```
+sudo -l
+```
+
+<figure><img src="../../.gitbook/assets/image (1).png" alt=""><figcaption></figcaption></figure>
+
+
 
