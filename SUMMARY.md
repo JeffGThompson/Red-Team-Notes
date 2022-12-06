@@ -22,3 +22,4 @@
   * [Alfred](walkthroughs/tryhackme/alfred.md)
   * [HackPark](walkthroughs/tryhackme/hackpark.md)
   * [Game Zone](walkthroughs/tryhackme/game-zone.md)
+  * [Skynet](walkthroughs/tryhackme/skynet.md)

