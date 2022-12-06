@@ -23,3 +23,4 @@
   * [HackPark](walkthroughs/tryhackme/hackpark.md)
   * [Game Zone](walkthroughs/tryhackme/game-zone.md)
   * [Skynet](walkthroughs/tryhackme/skynet.md)
+  * [Daily Bugle](walkthroughs/tryhackme/daily-bugle.md)

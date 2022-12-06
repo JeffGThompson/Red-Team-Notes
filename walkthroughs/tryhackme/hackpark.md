@@ -18,7 +18,7 @@ Sent a failed login request to Burp to see what it would look like. With this in
 
 I could also do this without burp by just opening the console and getting the info from there
 
-<figure><img src="../../.gitbook/assets/image (7) (2).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (7) (2) (1).png" alt=""><figcaption></figcaption></figure>
 
 {% code overflow="wrap" %}
 ```bash
@@ -32,7 +32,7 @@ hydra -l admin -P /usr/share/wordlists/SecLists/Passwords/darkweb2017-top10000.t
 
 **Now you have logged into the website, are you able to identify the version of the BlogEngine?**
 
-<figure><img src="../../.gitbook/assets/image (22).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (22) (1).png" alt=""><figcaption></figcaption></figure>
 
 **What is the CVE?**
 
@@ -44,7 +44,7 @@ CVE-2019-6714
 
 Created the file mentioned in the exploit, just changed the IP to my IP.
 
-<figure><img src="../../.gitbook/assets/image (6) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (6) (1) (2).png" alt=""><figcaption></figcaption></figure>
 
 Setup a nc listener&#x20;
 
