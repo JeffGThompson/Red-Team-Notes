@@ -49,7 +49,7 @@ We can now login to squirrelmail that gobuster discovered.
 
 <figure><img src="../../.gitbook/assets/image (10).png" alt=""><figcaption></figcaption></figure>
 
-<figure><img src="../../.gitbook/assets/image (9).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (9) (1).png" alt=""><figcaption></figcaption></figure>
 
 Downloaded all the files from the milesdyson folder on smb.
 
@@ -68,7 +68,7 @@ gobuster dir 10.10.13.172 -u http://10.10.13.172/45kra24zxs28v3yd/ -w /usr/share
 
 None of the passwords worked or default credentials for cuppa.
 
-<figure><img src="../../.gitbook/assets/image (17).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (17) (2).png" alt=""><figcaption></figcaption></figure>
 
 Found an exploit for cuppa LFI/RFI
 
@@ -85,7 +85,7 @@ Testing LFI and it works
 http://10.10.13.172/45kra24zxs28v3yd/administrator//alerts/alertConfigField.php?urlConfig=../../../../../../../../../etc/passwd
 ```
 
-<figure><img src="../../.gitbook/assets/image (6) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (6) (1) (2).png" alt=""><figcaption></figcaption></figure>
 
 Now we will try RFI to get a reverse shell
 
@@ -129,7 +129,7 @@ There is a backup script that is ran every minute by root which backs up /var/ww
 
 ****
 
-<figure><img src="../../.gitbook/assets/image (11).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (11) (3).png" alt=""><figcaption></figcaption></figure>
 
 **Victim**
 

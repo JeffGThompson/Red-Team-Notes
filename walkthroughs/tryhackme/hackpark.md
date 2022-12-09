@@ -8,7 +8,7 @@
 
 **What request type is the Windows website login form using?**
 
-<figure><img src="../../.gitbook/assets/image (11) (3).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (11) (3) (1).png" alt=""><figcaption></figcaption></figure>
 
 **Crafting request for Hydra**
 
@@ -44,7 +44,7 @@ CVE-2019-6714
 
 Created the file mentioned in the exploit, just changed the IP to my IP.
 
-<figure><img src="../../.gitbook/assets/image (6) (1) (2).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (6) (1) (2) (1).png" alt=""><figcaption></figcaption></figure>
 
 Setup a nc listener&#x20;
 
@@ -62,7 +62,7 @@ Navigate to the link and the nc listener should have caught it
 
 <figure><img src="../../.gitbook/assets/image (1) (2) (1).png" alt=""><figcaption></figcaption></figure>
 
-<figure><img src="../../.gitbook/assets/image (20).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (20) (2).png" alt=""><figcaption></figcaption></figure>
 
 ### **Windows Privilege Escalation**
 

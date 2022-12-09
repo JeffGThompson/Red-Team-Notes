@@ -35,7 +35,7 @@ Saved the request into a file called request.txt, if you highlight everything an
 sqlmap -r request.txt --dbms=mysql --dump
 ```
 
-<figure><img src="../../.gitbook/assets/image (7).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (7) (3).png" alt=""><figcaption></figcaption></figure>
 
 **In the users table, what is the hashed password?**
 
@@ -89,7 +89,7 @@ Password: videogamer124
 ss -tulpn
 ```
 
-<figure><img src="../../.gitbook/assets/image (8).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (8) (3).png" alt=""><figcaption></figcaption></figure>
 
 **What is the name of the exposed CMS?**
 
