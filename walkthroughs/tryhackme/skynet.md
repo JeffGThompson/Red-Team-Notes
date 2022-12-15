@@ -23,7 +23,7 @@ cat logs/log* | sort | uniq  > passwords.txt
 
 There is also an email from Miles Dyson, as it's just his name I tried different varations of his name for a username. There is a folder on samba that could be the username as well, milesdyson.&#x20;
 
-<figure><img src="../../.gitbook/assets/image (5) (2).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (5) (2) (1).png" alt=""><figcaption></figcaption></figure>
 
 <figure><img src="../../.gitbook/assets/image (4) (4).png" alt=""><figcaption><p>username.txt</p></figcaption></figure>
 
@@ -47,9 +47,9 @@ hydra -l milesdyson -P passwords.txt 10.10.13.172 http-post-form "/squirrelmail/
 
 We can now login to squirrelmail that gobuster discovered.
 
-<figure><img src="../../.gitbook/assets/image (10) (2).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (10).png" alt=""><figcaption></figcaption></figure>
 
-<figure><img src="../../.gitbook/assets/image (9) (3).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (9) (3) (2).png" alt=""><figcaption></figcaption></figure>
 
 Downloaded all the files from the milesdyson folder on smb.
 

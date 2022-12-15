@@ -10,7 +10,7 @@ What was the URL of the page they used to upload a reverse shell?
 
 **Wireshark**
 
-<figure><img src="../../.gitbook/assets/image (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (16).png" alt=""><figcaption></figcaption></figure>
 
 **TCPDump**
 
@@ -26,7 +26,7 @@ tcpdump -r overpass2.pcapng | grep GET
 
 <figure><img src="../../.gitbook/assets/image (15).png" alt=""><figcaption></figcaption></figure>
 
-<figure><img src="../../.gitbook/assets/image (5).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (5) (2).png" alt=""><figcaption></figcaption></figure>
 
 **TCPDump**
 
@@ -46,7 +46,7 @@ I realized I can just change the steam to find this result.
 
 **How did the attacker establish persistence?**
 
-<figure><img src="../../.gitbook/assets/image (6).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (6) (4).png" alt=""><figcaption></figcaption></figure>
 
 **Using the fasttrack wordlist, how many of the system passwords were crackable?**
 
@@ -58,7 +58,7 @@ In the same stream for the previous question we can see the attacker cat the sha
 sudo john --wordlist=/usr/share/wordlists/fasttrack.txt dump.txt
 ```
 
-<figure><img src="../../.gitbook/assets/image (11).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (11) (2).png" alt=""><figcaption></figcaption></figure>
 
 ### Research - Analyze the code
 
@@ -70,11 +70,11 @@ It's in the code on github
 
 **What's the hardcoded salt for the backdoor?**
 
-<figure><img src="../../.gitbook/assets/image (9).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (9) (3).png" alt=""><figcaption></figcaption></figure>
 
 **What was the hash that the attacker used? - go back to the PCAP for this!**
 
-<figure><img src="../../.gitbook/assets/image (14).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (14) (3).png" alt=""><figcaption></figcaption></figure>
 
 **Crack the hash using rockyou and a cracking tool of your choice. What's the password?**
 
@@ -97,7 +97,7 @@ hashcat -m 1710 hash.txt --show
 
 **The attacker defaced the website. What message did they leave as a heading?**
 
-<figure><img src="../../.gitbook/assets/image (1) (3).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1) (6).png" alt=""><figcaption></figcaption></figure>
 
 **Using the information you've found previously, hack your way back in!**
 
@@ -127,6 +127,6 @@ ls -lah
 
 There is a hidden file in james home directory owned by root. When we execute it we become root. -p flag is to turn on privilege's mode. Without it we still are james when we execute the script.
 
-<figure><img src="../../.gitbook/assets/image (16).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (16) (4).png" alt=""><figcaption></figcaption></figure>
 
 <figure><img src="../../.gitbook/assets/image (18).png" alt=""><figcaption></figcaption></figure>
