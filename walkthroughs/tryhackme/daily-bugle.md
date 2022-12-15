@@ -8,7 +8,7 @@
 
 **Access the web server, who robbed the bank?**
 
-<figure><img src="../../.gitbook/assets/image (4).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (4) (5).png" alt=""><figcaption></figcaption></figure>
 
 ### Initial Shell
 
@@ -122,7 +122,7 @@ python2 -m SimpleHTTPServer 81
 
 Our fpm file is now created&#x20;
 
-<figure><img src="../../.gitbook/assets/image (2) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (2) (1) (2).png" alt=""><figcaption></figcaption></figure>
 
 **Victim**&#x20;
 

