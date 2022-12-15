@@ -10,7 +10,7 @@ What was the URL of the page they used to upload a reverse shell?
 
 **Wireshark**
 
-<figure><img src="../../.gitbook/assets/image.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1).png" alt=""><figcaption></figcaption></figure>
 
 **TCPDump**
 
@@ -66,7 +66,7 @@ sudo john --wordlist=/usr/share/wordlists/fasttrack.txt dump.txt
 
 It's in the code on github
 
-<figure><img src="../../.gitbook/assets/image (3).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (3) (5).png" alt=""><figcaption></figcaption></figure>
 
 **What's the hardcoded salt for the backdoor?**
 
@@ -97,7 +97,7 @@ hashcat -m 1710 hash.txt --show
 
 **The attacker defaced the website. What message did they leave as a heading?**
 
-<figure><img src="../../.gitbook/assets/image (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1) (3).png" alt=""><figcaption></figcaption></figure>
 
 **Using the information you've found previously, hack your way back in!**
 

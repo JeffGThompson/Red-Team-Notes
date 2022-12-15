@@ -16,7 +16,7 @@
 nmap -A 10.10.116.159
 ```
 
-![](<../../.gitbook/assets/image (18) (2).png>)
+<figure><img src="../../.gitbook/assets/image (18) (2).png" alt=""><figcaption></figcaption></figure>
 
 
 
