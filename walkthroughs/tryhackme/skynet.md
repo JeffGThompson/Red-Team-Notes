@@ -19,13 +19,13 @@ smbget -R smb://10.10.13.172/anonymous
 cat logs/log* | sort | uniq  > passwords.txt 
 ```
 
-<figure><img src="../../.gitbook/assets/image (39).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (39) (1).png" alt=""><figcaption></figcaption></figure>
 
 There is also an email from Miles Dyson, as it's just his name I tried different varations of his name for a username. There is a folder on samba that could be the username as well, milesdyson.&#x20;
 
 <figure><img src="../../.gitbook/assets/image (5) (2) (1).png" alt=""><figcaption></figcaption></figure>
 
-<figure><img src="../../.gitbook/assets/image (4) (4).png" alt=""><figcaption><p>username.txt</p></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (4) (4) (1).png" alt=""><figcaption><p>username.txt</p></figcaption></figure>
 
 
 
@@ -68,7 +68,7 @@ gobuster dir 10.10.13.172 -u http://10.10.13.172/45kra24zxs28v3yd/ -w /usr/share
 
 None of the passwords worked or default credentials for cuppa.
 
-<figure><img src="../../.gitbook/assets/image (17) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (17) (2).png" alt=""><figcaption></figcaption></figure>
 
 Found an exploit for cuppa LFI/RFI
 
@@ -85,7 +85,7 @@ Testing LFI and it works
 http://10.10.13.172/45kra24zxs28v3yd/administrator//alerts/alertConfigField.php?urlConfig=../../../../../../../../../etc/passwd
 ```
 
-<figure><img src="../../.gitbook/assets/image (6) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (6) (1) (1) (2).png" alt=""><figcaption></figcaption></figure>
 
 Now we will try RFI to get a reverse shell
 
@@ -160,7 +160,7 @@ There is a password in the configuration file, it does not work for root but we 
 cat /var/www/html/configuration.php
 ```
 
-<figure><img src="../../.gitbook/assets/image (37) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (37).png" alt=""><figcaption></figcaption></figure>
 
 We can login as jjameson&#x20;
 

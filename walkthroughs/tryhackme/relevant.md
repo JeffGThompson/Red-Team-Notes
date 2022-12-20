@@ -24,7 +24,7 @@
 nbtscan 10.10.145.102
 ```
 
-<figure><img src="../../.gitbook/assets/image (9).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (9) (1).png" alt=""><figcaption></figcaption></figure>
 
 ### TCP/445 - microsoft-ds
 
@@ -39,9 +39,9 @@ smb: \> exit
 
 </code></pre>
 
-<figure><img src="../../.gitbook/assets/image (6) (5).png" alt=""><figcaption><p>Can't download files with smbget</p></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (6) (1).png" alt=""><figcaption><p>Can't download files with smbget</p></figcaption></figure>
 
-<figure><img src="../../.gitbook/assets/image (3) (2).png" alt=""><figcaption><p>Downloaded password file</p></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (3) (6).png" alt=""><figcaption><p>Downloaded password file</p></figcaption></figure>
 
 The file contained two bade64 encoded strings which decoded into users and passwords
 
@@ -105,7 +105,7 @@ put shell.aspx
 
 ```
 
-<figure><img src="../../.gitbook/assets/image (2) (2) (3).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (2) (2).png" alt=""><figcaption></figcaption></figure>
 
 **Kali #2**
 
@@ -131,9 +131,9 @@ systeminfo
 whoami /priv
 ```
 
-<figure><img src="../../.gitbook/assets/image (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (6).png" alt=""><figcaption></figcaption></figure>
 
-<figure><img src="../../.gitbook/assets/image (2) (2).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (2).png" alt=""><figcaption></figcaption></figure>
 
 **Kali**
 

