@@ -24,7 +24,7 @@ tcpdump -r overpass2.pcapng | grep GET
 
 **Wireshark**
 
-<figure><img src="../../.gitbook/assets/image (15) (2).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (15).png" alt=""><figcaption></figcaption></figure>
 
 <figure><img src="../../.gitbook/assets/image (5) (2).png" alt=""><figcaption></figcaption></figure>
 
@@ -34,7 +34,7 @@ tcpdump -r overpass2.pcapng | grep GET
 tcpdump -vvv -r overpass2.pcapng | grep -i payload.php -A 5
 ```
 
-<figure><img src="../../.gitbook/assets/image (7) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (7) (3).png" alt=""><figcaption></figcaption></figure>
 
 
 
@@ -107,7 +107,7 @@ The development page doesn't exist so we can't get the initial shell like the at
 nmap -A 10.10.167.112
 ```
 
-<figure><img src="../../.gitbook/assets/image (19) (3).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (19).png" alt=""><figcaption></figcaption></figure>
 
 
 

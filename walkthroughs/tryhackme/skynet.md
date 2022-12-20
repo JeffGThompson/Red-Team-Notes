@@ -47,7 +47,7 @@ hydra -l milesdyson -P passwords.txt 10.10.13.172 http-post-form "/squirrelmail/
 
 We can now login to squirrelmail that gobuster discovered.
 
-<figure><img src="../../.gitbook/assets/image (10).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (10) (3).png" alt=""><figcaption></figcaption></figure>
 
 <figure><img src="../../.gitbook/assets/image (9) (3) (2).png" alt=""><figcaption></figcaption></figure>
 
@@ -68,7 +68,7 @@ gobuster dir 10.10.13.172 -u http://10.10.13.172/45kra24zxs28v3yd/ -w /usr/share
 
 None of the passwords worked or default credentials for cuppa.
 
-<figure><img src="../../.gitbook/assets/image (17) (2).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (17).png" alt=""><figcaption></figcaption></figure>
 
 Found an exploit for cuppa LFI/RFI
 
@@ -152,7 +152,7 @@ touch /var/www/html/--checkpoint-action=exec=bash\ shell
 nc -nvlp 1338
 ```
 
-<figure><img src="../../.gitbook/assets/image (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1) (1) (2).png" alt=""><figcaption></figcaption></figure>
 
 There is a password in the configuration file, it does not work for root but we see in the home directory another user called jjameson
 
