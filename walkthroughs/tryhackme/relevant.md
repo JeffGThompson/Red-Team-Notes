@@ -11,7 +11,7 @@
 <pre><code><strong>nmap -A 10.10.145.102
 </strong></code></pre>
 
-<figure><img src="../../.gitbook/assets/image (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 ### Scan all ports
 
@@ -24,7 +24,7 @@
 nbtscan 10.10.145.102
 ```
 
-<figure><img src="../../.gitbook/assets/image (9).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (9) (1).png" alt=""><figcaption></figcaption></figure>
 
 ### TCP/445 - microsoft-ds
 
@@ -39,9 +39,9 @@ smb: \> exit
 
 </code></pre>
 
-<figure><img src="../../.gitbook/assets/image (6).png" alt=""><figcaption><p>Can't download files with smbget</p></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (6) (1).png" alt=""><figcaption><p>Can't download files with smbget</p></figcaption></figure>
 
-<figure><img src="../../.gitbook/assets/image (3) (6).png" alt=""><figcaption><p>Downloaded password file</p></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (3).png" alt=""><figcaption><p>Downloaded password file</p></figcaption></figure>
 
 The file contained two bade64 encoded strings which decoded into users and passwords
 
@@ -90,7 +90,7 @@ gobuster dir -u http://10.10.179.48 -w /usr/share/wordlists/SecLists/Discovery/W
 
 We can see the passwords.txt file from the browser
 
-<figure><img src="../../.gitbook/assets/image (5) (3).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (5) (1).png" alt=""><figcaption></figcaption></figure>
 
 ## Initial Shell
 
@@ -112,7 +112,7 @@ put shell.aspx
 <pre><code><strong>rlwrap nc -lvnp 1337
 </strong></code></pre>
 
-<figure><img src="../../.gitbook/assets/image (11).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (11) (5).png" alt=""><figcaption></figcaption></figure>
 
 
 
@@ -131,9 +131,9 @@ systeminfo
 whoami /priv
 ```
 
-<figure><img src="../../.gitbook/assets/image (23).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image.png" alt=""><figcaption></figcaption></figure>
 
-<figure><img src="../../.gitbook/assets/image (2) (5).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (2) (3).png" alt=""><figcaption></figcaption></figure>
 
 **Kali**
 
@@ -152,6 +152,6 @@ PrintSpoofer.exe -i -c whoami
 PrintSpoofer.exe -i -c powershell.exe
 ```
 
-<figure><img src="../../.gitbook/assets/image (13).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (13) (1).png" alt=""><figcaption></figcaption></figure>
 
 <figure><img src="../../.gitbook/assets/image (22).png" alt=""><figcaption></figcaption></figure>

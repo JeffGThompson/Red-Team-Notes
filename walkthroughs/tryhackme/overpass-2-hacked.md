@@ -10,7 +10,7 @@ What was the URL of the page they used to upload a reverse shell?
 
 **Wireshark**
 
-<figure><img src="../../.gitbook/assets/image (16).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (16) (4).png" alt=""><figcaption></figcaption></figure>
 
 **TCPDump**
 
@@ -24,7 +24,7 @@ tcpdump -r overpass2.pcapng | grep GET
 
 **Wireshark**
 
-<figure><img src="../../.gitbook/assets/image (15).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (15) (1).png" alt=""><figcaption></figcaption></figure>
 
 <figure><img src="../../.gitbook/assets/image (5) (2).png" alt=""><figcaption></figcaption></figure>
 
@@ -107,7 +107,7 @@ The development page doesn't exist so we can't get the initial shell like the at
 nmap -A 10.10.167.112
 ```
 
-<figure><img src="../../.gitbook/assets/image (19) (3).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (19) (1).png" alt=""><figcaption></figcaption></figure>
 
 
 
@@ -127,6 +127,6 @@ ls -lah
 
 There is a hidden file in james home directory owned by root. When we execute it we become root. -p flag is to turn on privilege's mode. Without it we still are james when we execute the script.
 
-<figure><img src="../../.gitbook/assets/image (16) (4).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (16) (4) (1).png" alt=""><figcaption></figcaption></figure>
 
 <figure><img src="../../.gitbook/assets/image (18).png" alt=""><figcaption></figcaption></figure>

@@ -8,7 +8,7 @@
 
 **Access the web server, who robbed the bank?**
 
-<figure><img src="../../.gitbook/assets/image (4) (5).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (4) (1).png" alt=""><figcaption></figcaption></figure>
 
 ### Initial Shell
 
@@ -42,7 +42,7 @@ python3 joomblah.py http://10.10.116.159
 john hash.txt --wordlist=/usr/share/wordlists/rockyou.txt --format=bcrypt
 ```
 
-<figure><img src="../../.gitbook/assets/image (24).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (24) (3).png" alt=""><figcaption></figcaption></figure>
 
 We can  now login to Joomla with the credentials we have found
 
@@ -93,7 +93,7 @@ stty raw -echo;fg
 
 Found a password in the configuration file. The password worked for the user jjameson which was found in the home directory.
 
-<figure><img src="../../.gitbook/assets/image (6) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (6) (1) (3).png" alt=""><figcaption></figcaption></figure>
 
 ```
 ssh jjameson@10.10.116.159
