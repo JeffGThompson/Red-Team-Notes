@@ -10,7 +10,7 @@ What was the URL of the page they used to upload a reverse shell?
 
 **Wireshark**
 
-<figure><img src="../../.gitbook/assets/image (16) (5).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (16) (1).png" alt=""><figcaption></figcaption></figure>
 
 **TCPDump**
 
@@ -18,7 +18,7 @@ What was the URL of the page they used to upload a reverse shell?
 tcpdump -r overpass2.pcapng | grep GET
 ```
 
-<figure><img src="../../.gitbook/assets/image (41).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (41) (1).png" alt=""><figcaption></figcaption></figure>
 
 **What payload did the attacker use to gain access?**
 
@@ -42,7 +42,7 @@ tcpdump -vvv -r overpass2.pcapng | grep -i payload.php -A 5
 
 I realized I can just change the steam to find this result.
 
-<figure><img src="../../.gitbook/assets/image (43).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (43) (1).png" alt=""><figcaption></figcaption></figure>
 
 **How did the attacker establish persistence?**
 
@@ -82,7 +82,7 @@ It's in the code on github
 
 <figure><img src="../../.gitbook/assets/image (27).png" alt=""><figcaption></figcaption></figure>
 
-<figure><img src="../../.gitbook/assets/image (8) (3).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (8).png" alt=""><figcaption></figcaption></figure>
 
 ```
 hashcat -m 1710 -w /usr/share/wordlists/rockyou.txt hash.txt

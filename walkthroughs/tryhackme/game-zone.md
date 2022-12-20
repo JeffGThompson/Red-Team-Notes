@@ -98,7 +98,7 @@ ssh -L 10000:localhost:10000 agent47@10.10.74.145
 Password: videogamer124
 ```
 
-<figure><img src="../../.gitbook/assets/image (24) (2).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (24) (2) (1).png" alt=""><figcaption></figcaption></figure>
 
 **What is the CMS version?**
 
@@ -109,7 +109,7 @@ Username: agent47
 Password: videogamer124
 ```
 
-<figure><img src="../../.gitbook/assets/image (28).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (28) (1).png" alt=""><figcaption></figcaption></figure>
 
 ### **Privilege Escalation with Metasploit**
 
