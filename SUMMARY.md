@@ -26,3 +26,4 @@
   * [Daily Bugle](walkthroughs/tryhackme/daily-bugle.md)
   * [Overpass 2 - Hacked](walkthroughs/tryhackme/overpass-2-hacked.md)
   * [Relevant](walkthroughs/tryhackme/relevant.md)
+  * [Internal](walkthroughs/tryhackme/internal.md)
