@@ -247,7 +247,7 @@ nc -lvnp 443
 
 <figure><img src="../../.gitbook/assets/image (7).png" alt=""><figcaption></figcaption></figure>
 
-### Privilege Escalation
+## Privilege Escalation
 
 There was a note under opt for Aubreanna that had the credentials for root.
 
