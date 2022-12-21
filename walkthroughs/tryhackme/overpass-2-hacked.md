@@ -10,7 +10,7 @@ What was the URL of the page they used to upload a reverse shell?
 
 **Wireshark**
 
-<figure><img src="../../.gitbook/assets/image (16) (5).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (16) (1).png" alt=""><figcaption></figcaption></figure>
 
 **TCPDump**
 
@@ -34,7 +34,7 @@ tcpdump -r overpass2.pcapng | grep GET
 tcpdump -vvv -r overpass2.pcapng | grep -i payload.php -A 5
 ```
 
-<figure><img src="../../.gitbook/assets/image (7) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (7) (2).png" alt=""><figcaption></figcaption></figure>
 
 
 
@@ -82,14 +82,14 @@ It's in the code on github
 
 <figure><img src="../../.gitbook/assets/image (27) (2).png" alt=""><figcaption></figcaption></figure>
 
-<figure><img src="../../.gitbook/assets/image (8) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (8) (3).png" alt=""><figcaption></figcaption></figure>
 
 ```
 hashcat -m 1710 -w /usr/share/wordlists/rockyou.txt hash.txt
 hashcat -m 1710 hash.txt --show
 ```
 
-<figure><img src="../../.gitbook/assets/image (20) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (20).png" alt=""><figcaption></figcaption></figure>
 
 
 
@@ -107,7 +107,7 @@ The development page doesn't exist so we can't get the initial shell like the at
 nmap -A 10.10.167.112
 ```
 
-<figure><img src="../../.gitbook/assets/image (19) (2).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (19).png" alt=""><figcaption></figcaption></figure>
 
 
 
@@ -129,4 +129,4 @@ There is a hidden file in james home directory owned by root. When we execute it
 
 <figure><img src="../../.gitbook/assets/image (16) (4).png" alt=""><figcaption></figcaption></figure>
 
-<figure><img src="../../.gitbook/assets/image (18) (2).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (18).png" alt=""><figcaption></figcaption></figure>
