@@ -102,7 +102,7 @@ sudo nmap $TARGET -p25 --script smtp-vuln* -oN scans/mailman-nmap-scripts-smtp-v
 
 HTTP TCP port 80 / HTTP TCP 443
 
-
+Add things from this room: [https://tryhackme.com/room/contentdiscovery](https://tryhackme.com/room/contentdiscovery)
 
 ```
 dirb http://$TARGET
