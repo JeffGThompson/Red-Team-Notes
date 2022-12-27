@@ -90,9 +90,9 @@ Login the the Windows box then open the oscp.exe within Immunity Debugger. Press
 xfreerdp /u:admin /p:password /cert:ignore /v:$VICTIM /workarea
 ```
 
-<figure><img src="../../.gitbook/assets/image.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (16).png" alt=""><figcaption></figcaption></figure>
 
-<figure><img src="../../.gitbook/assets/image (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (13).png" alt=""><figcaption></figcaption></figure>
 
 ### **Crash Replication & Controlling EIP**
 
@@ -158,7 +158,7 @@ python exploit.py $VICTIM 1337
 
 
 
-<figure><img src="../../.gitbook/assets/image (50).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image.png" alt=""><figcaption></figcaption></figure>
 
 
 

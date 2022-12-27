@@ -158,7 +158,15 @@ $TARGET/robots.txt
 $TARGET/sitemap.xml
 ```
 
-&#x20;
+#### &#x20;Username Enumeration
+
+Example on how to find existing usernames from a website. Command would need to be adjusted to work with the webpage and at least one other user account must be known to know the corrector error message.
+
+```
+ffuf -w /usr/share/wordlists/SecLists/Usernames/Names/names.txt -X POST -d "username=FUZZ&email=x&password=x&cpassword=x" -H "Content-Type: application/x-www-form-urlencoded" -u http://$VICTIM/customers/signup -mr "username already exists" -o users.csv -of csv
+```
+
+
 
 ### **POP3**
 
