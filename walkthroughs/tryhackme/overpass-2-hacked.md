@@ -74,7 +74,7 @@ It's in the code on github
 
 **What was the hash that the attacker used? - go back to the PCAP for this!**
 
-<figure><img src="../../.gitbook/assets/image (14) (3).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (14) (3) (1).png" alt=""><figcaption></figcaption></figure>
 
 **Crack the hash using rockyou and a cracking tool of your choice. What's the password?**
 

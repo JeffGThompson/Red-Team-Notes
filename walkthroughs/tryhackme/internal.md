@@ -38,7 +38,7 @@ wpscan --url http://10.10.46.54
 wpscan --url http://10.10.46.54/blog --passwords /usr/share/wordlists/rockyou.txt
 ```
 
-<figure><img src="../../.gitbook/assets/image (30).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (30) (2).png" alt=""><figcaption></figcaption></figure>
 
 #### Credentials found
 
@@ -74,11 +74,11 @@ zip revshell.zip revshell.php
 nc -lvnp 443
 ```
 
-<figure><img src="../../.gitbook/assets/image (9).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (9) (1).png" alt=""><figcaption></figcaption></figure>
 
 Unable to upload the plugin due to write issues
 
-<figure><img src="../../.gitbook/assets/image.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (14).png" alt=""><figcaption></figcaption></figure>
 
 ## Reverse Shell
 
@@ -198,7 +198,7 @@ Request Body: j_username=test&j_password=pass&from=%2F&Submit=Sign+in
 Failed login message: Invalid username or password
 ```
 
-<figure><img src="../../.gitbook/assets/image (10).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (10) (1).png" alt=""><figcaption></figcaption></figure>
 
 The default hydra was giving false positives and not getting the correct credentials so I downloaded from gitlab and ran the bruteforcing again.
 
@@ -243,15 +243,15 @@ Setup a listener
 nc -lvnp 443
 ```
 
-<figure><img src="../../.gitbook/assets/image (12).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (12) (4).png" alt=""><figcaption></figcaption></figure>
 
-<figure><img src="../../.gitbook/assets/image (7).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (7) (3).png" alt=""><figcaption></figcaption></figure>
 
 ## Privilege Escalation
 
 There was a note under opt for Aubreanna that had the credentials for root.
 
-<figure><img src="../../.gitbook/assets/image (15).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (15) (3).png" alt=""><figcaption></figcaption></figure>
 
 ```
 Username: root
