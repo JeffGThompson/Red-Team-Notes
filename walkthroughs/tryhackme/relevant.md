@@ -112,7 +112,7 @@ put shell.aspx
 <pre><code><strong>rlwrap nc -lvnp 1337
 </strong></code></pre>
 
-<figure><img src="../../.gitbook/assets/image (11).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (11) (5).png" alt=""><figcaption></figcaption></figure>
 
 
 
@@ -131,7 +131,7 @@ systeminfo
 whoami /priv
 ```
 
-<figure><img src="../../.gitbook/assets/image (16) (5).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (16).png" alt=""><figcaption></figcaption></figure>
 
 <figure><img src="../../.gitbook/assets/image (2) (5).png" alt=""><figcaption></figcaption></figure>
 

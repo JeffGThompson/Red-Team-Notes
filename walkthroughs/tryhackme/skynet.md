@@ -12,7 +12,7 @@ nmap -A 10.10.13.172
 smbclient -L //10.10.13.172
 ```
 
-<figure><img src="../../.gitbook/assets/image (13) (2).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (13) (2) (1).png" alt=""><figcaption></figcaption></figure>
 
 ```
 smbget -R smb://10.10.13.172/anonymous
