@@ -42,7 +42,7 @@ tcpdump -vvv -r overpass2.pcapng | grep -i payload.php -A 5
 
 I realized I can just change the steam to find this result.
 
-<figure><img src="../../.gitbook/assets/image (43).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (43) (1).png" alt=""><figcaption></figcaption></figure>
 
 **How did the attacker establish persistence?**
 

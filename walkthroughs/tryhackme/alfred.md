@@ -93,7 +93,7 @@ load incognito
 list_tokens -g
 ```
 
-![](<../../.gitbook/assets/image (17) (1).png>)
+![](<../../.gitbook/assets/image (17) (1) (1).png>)
 
 ```
 impersonate_token "BUILTIN\Administrators" 

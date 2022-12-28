@@ -198,7 +198,7 @@ Request Body: j_username=test&j_password=pass&from=%2F&Submit=Sign+in
 Failed login message: Invalid username or password
 ```
 
-<figure><img src="../../.gitbook/assets/image (10) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (10) (1) (3).png" alt=""><figcaption></figcaption></figure>
 
 The default hydra was giving false positives and not getting the correct credentials so I downloaded from gitlab and ran the bruteforcing again.
 
@@ -225,7 +225,7 @@ Password: spongebob
 
 <figure><img src="../../.gitbook/assets/image (33).png" alt=""><figcaption></figcaption></figure>
 
-<figure><img src="../../.gitbook/assets/image (13) (2).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (13).png" alt=""><figcaption></figcaption></figure>
 
 Just added a reverse shell to the job and ran it.
 
@@ -243,7 +243,7 @@ Setup a listener
 nc -lvnp 443
 ```
 
-<figure><img src="../../.gitbook/assets/image (12) (4).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (12) (4) (1).png" alt=""><figcaption></figcaption></figure>
 
 <figure><img src="../../.gitbook/assets/image (7) (3).png" alt=""><figcaption></figcaption></figure>
 

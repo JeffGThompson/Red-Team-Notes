@@ -12,7 +12,7 @@ nmap -A 10.10.13.172
 smbclient -L //10.10.13.172
 ```
 
-<figure><img src="../../.gitbook/assets/image (13) (2) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (13) (2).png" alt=""><figcaption></figcaption></figure>
 
 ```
 smbget -R smb://10.10.13.172/anonymous
@@ -35,7 +35,7 @@ There is also an email from Miles Dyson, as it's just his name I tried different
 gobuster dir 10.10.13.172 -u http://10.10.13.172 -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt
 ```
 
-<figure><img src="../../.gitbook/assets/image (34).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (34) (1).png" alt=""><figcaption></figcaption></figure>
 
 
 
@@ -68,7 +68,7 @@ gobuster dir 10.10.13.172 -u http://10.10.13.172/45kra24zxs28v3yd/ -w /usr/share
 
 None of the passwords worked or default credentials for cuppa.
 
-<figure><img src="../../.gitbook/assets/image (17).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (17) (1).png" alt=""><figcaption></figcaption></figure>
 
 Found an exploit for cuppa LFI/RFI
 
