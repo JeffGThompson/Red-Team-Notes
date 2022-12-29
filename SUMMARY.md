@@ -8,10 +8,13 @@
 
 * [Enumeration](methodologies-and-resources/enumeration.md)
 * [Gaining Access](methodologies-and-resources/gaining-access.md)
-* [Maintaining Access](methodologies-and-resources/maintaining-access.md)
+* [Shells](methodologies-and-resources/shells.md)
 * [Privilege Escalation](methodologies-and-resources/privilege-escalation/README.md)
   * [Linux](methodologies-and-resources/privilege-escalation/linux.md)
   * [Windows](methodologies-and-resources/privilege-escalation/windows.md)
+* [Cheat Sheets](methodologies-and-resources/cheat-sheets/README.md)
+  * [Buffer Overflow](methodologies-and-resources/cheat-sheets/buffer-overflow/README.md)
+    * [Fuzzers](methodologies-and-resources/cheat-sheets/buffer-overflow/fuzzers.md)
 
 ## Walkthroughs
 

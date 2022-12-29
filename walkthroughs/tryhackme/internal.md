@@ -56,7 +56,7 @@ vi /etc/hosts
 
 We are able to successfully get into wordpress with the credentials
 
-<figure><img src="../../.gitbook/assets/image (8).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (8) (4).png" alt=""><figcaption></figcaption></figure>
 
 Reverse Shell Failed Attempt
 
@@ -159,9 +159,9 @@ cat jenkins.txt
 netstat -tuan
 ```
 
-<figure><img src="../../.gitbook/assets/image (2).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (2) (6).png" alt=""><figcaption></figcaption></figure>
 
-<figure><img src="../../.gitbook/assets/image (3).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (3) (6).png" alt=""><figcaption></figcaption></figure>
 
 ### Pivot
 
@@ -214,7 +214,7 @@ make install
 
 Credentials were found.
 
-<figure><img src="../../.gitbook/assets/image (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 ```
 Username: admin
@@ -225,7 +225,7 @@ Password: spongebob
 
 <figure><img src="../../.gitbook/assets/image (33).png" alt=""><figcaption></figcaption></figure>
 
-<figure><img src="../../.gitbook/assets/image (13) (4).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (13).png" alt=""><figcaption></figcaption></figure>
 
 Just added a reverse shell to the job and ran it.
 
@@ -251,7 +251,7 @@ nc -lvnp 443
 
 There was a note under opt for Aubreanna that had the credentials for root.
 
-<figure><img src="../../.gitbook/assets/image (15) (3) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (15) (3).png" alt=""><figcaption></figcaption></figure>
 
 ```
 Username: root

@@ -162,7 +162,7 @@ python exploit.py $VICTIM 1337
 
 
 
-<figure><img src="../../.gitbook/assets/image.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (8).png" alt=""><figcaption></figcaption></figure>
 
 
 
@@ -276,7 +276,7 @@ except:
 
 <figure><img src="../../.gitbook/assets/image (12) (4).png" alt=""><figcaption><p>How to find the bad characters start location</p></figcaption></figure>
 
-<figure><img src="../../.gitbook/assets/image (15) (3).png" alt=""><figcaption><p>Start location of bad characters</p></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (15).png" alt=""><figcaption><p>Start location of bad characters</p></figcaption></figure>
 
 
 
@@ -482,7 +482,7 @@ python fuzzer.py $VICTIM 1337
 
 Program crashed at 700 bytes with fuzzer.py
 
-<figure><img src="../../.gitbook/assets/image (12) (5).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (12).png" alt=""><figcaption></figcaption></figure>
 
 ```
 /opt/metasploit-framework-5101/tools/exploit/pattern_create.rb -l 700
@@ -585,7 +585,7 @@ After running the program again we now can fill EIP with our Bs so we now have c
 python exploit.py $VICTIM 1337
 ```
 
-<figure><img src="../../.gitbook/assets/image (10) (2).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (10).png" alt=""><figcaption></figcaption></figure>
 
 ### Finding Bad Characters
 
@@ -847,7 +847,7 @@ Program crashed at 1300 bytes with fuzzer.py
 
 
 
-<figure><img src="../../.gitbook/assets/image (10).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1).png" alt=""><figcaption></figcaption></figure>
 
 ```
 /opt/metasploit-framework-5101/tools/exploit/pattern_create.rb -l 1300
@@ -903,7 +903,7 @@ python exploit.py $VICTIM 1337
 !mona findmsp -distance 1300
 ```
 
-<figure><img src="../../.gitbook/assets/image (13).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image.png" alt=""><figcaption></figcaption></figure>
 
 **exploit.py - Code Changes #2**
 
@@ -948,7 +948,7 @@ After running the program again we now can fill EIP with our Bs so we now have c
 python exploit.py $VICTIM 1337
 ```
 
-<figure><img src="../../.gitbook/assets/image (15).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (2).png" alt=""><figcaption></figcaption></figure>
 
 ### Finding Bad Characters
 
