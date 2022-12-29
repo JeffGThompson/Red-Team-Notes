@@ -32,3 +32,4 @@
   * [Relevant](walkthroughs/tryhackme/relevant.md)
   * [Internal](walkthroughs/tryhackme/internal.md)
   * [Buffer Overflow Prep](walkthroughs/tryhackme/buffer-overflow-prep.md)
+  * [File Inclusion](walkthroughs/tryhackme/file-inclusion.md)

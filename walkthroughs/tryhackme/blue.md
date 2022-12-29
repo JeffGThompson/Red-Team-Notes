@@ -45,7 +45,7 @@ hashdump
 john --format=nt --wordlist=/usr/share/wordlists/rockyou.txt hashes.txt
 ```
 
-<figure><img src="../../.gitbook/assets/image (3) (2) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (3) (2) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 ### Flags
 
