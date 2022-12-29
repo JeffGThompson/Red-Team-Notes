@@ -21,7 +21,7 @@ Password: anything
 
 I setup burp to intercept requests and then tried searching for something on the portal page
 
-<figure><img src="../../.gitbook/assets/image (10) (2).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (10) (2) (1).png" alt=""><figcaption></figcaption></figure>
 
 Saved the request into a file called request.txt, if you highlight everything and right click you can copy to file
 

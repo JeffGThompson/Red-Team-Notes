@@ -225,7 +225,7 @@ Password: spongebob
 
 <figure><img src="../../.gitbook/assets/image (33).png" alt=""><figcaption></figcaption></figure>
 
-<figure><img src="../../.gitbook/assets/image (13).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (13) (4).png" alt=""><figcaption></figcaption></figure>
 
 Just added a reverse shell to the job and ran it.
 
@@ -251,7 +251,7 @@ nc -lvnp 443
 
 There was a note under opt for Aubreanna that had the credentials for root.
 
-<figure><img src="../../.gitbook/assets/image (15) (3).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (15) (3) (1).png" alt=""><figcaption></figcaption></figure>
 
 ```
 Username: root
