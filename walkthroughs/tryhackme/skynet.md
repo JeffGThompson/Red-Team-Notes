@@ -25,7 +25,7 @@ There is also an email from Miles Dyson, as it's just his name I tried different
 
 <figure><img src="../../.gitbook/assets/image (5) (2) (1).png" alt=""><figcaption></figcaption></figure>
 
-<figure><img src="../../.gitbook/assets/image (4) (4) (1).png" alt=""><figcaption><p>username.txt</p></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (4) (4).png" alt=""><figcaption><p>username.txt</p></figcaption></figure>
 
 
 

@@ -62,7 +62,7 @@ Navigate to the link and the nc listener should have caught it
 
 <figure><img src="../../.gitbook/assets/image (1) (2) (1).png" alt=""><figcaption></figcaption></figure>
 
-<figure><img src="../../.gitbook/assets/image (20) (2).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (20) (2) (1).png" alt=""><figcaption></figcaption></figure>
 
 ### **Windows Privilege Escalation**
 
@@ -130,7 +130,7 @@ winPEASx64.exe
 
 ``![](<../../.gitbook/assets/image (25).png>)``
 
-<figure><img src="../../.gitbook/assets/image (19) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (19) (1).png" alt=""><figcaption></figcaption></figure>
 
 ```
 cd C:\Program Files (x86)\SystemScheduler\Events
