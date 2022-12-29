@@ -24,7 +24,7 @@
 nbtscan 10.10.145.102
 ```
 
-<figure><img src="../../.gitbook/assets/image (9) (4) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (9) (4).png" alt=""><figcaption></figcaption></figure>
 
 ### TCP/445 - microsoft-ds
 
@@ -105,7 +105,7 @@ put shell.aspx
 
 ```
 
-<figure><img src="../../.gitbook/assets/image (2) (2) (3).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (2) (2).png" alt=""><figcaption></figcaption></figure>
 
 **Kali #2**
 

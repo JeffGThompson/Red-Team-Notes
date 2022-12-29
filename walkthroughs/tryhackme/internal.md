@@ -52,11 +52,11 @@ Trying to login the page redirects to internal.htm so I add that to the host fil
 vi /etc/hosts
 ```
 
-<figure><img src="../../.gitbook/assets/image (24) (2).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (24) (1).png" alt=""><figcaption></figcaption></figure>
 
 We are able to successfully get into wordpress with the credentials
 
-<figure><img src="../../.gitbook/assets/image (8) (4).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (8) (3).png" alt=""><figcaption></figcaption></figure>
 
 Reverse Shell Failed Attempt
 
@@ -159,7 +159,7 @@ cat jenkins.txt
 netstat -tuan
 ```
 
-<figure><img src="../../.gitbook/assets/image (2) (2).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (2) (1).png" alt=""><figcaption></figcaption></figure>
 
 <figure><img src="../../.gitbook/assets/image (3) (1).png" alt=""><figcaption></figcaption></figure>
 
@@ -214,7 +214,7 @@ make install
 
 Credentials were found.
 
-<figure><img src="../../.gitbook/assets/image (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1) (7).png" alt=""><figcaption></figcaption></figure>
 
 ```
 Username: admin
@@ -223,7 +223,7 @@ Password: spongebob
 
 ### Jenkins Web
 
-<figure><img src="../../.gitbook/assets/image (33) (2).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (33).png" alt=""><figcaption></figcaption></figure>
 
 <figure><img src="../../.gitbook/assets/image (13).png" alt=""><figcaption></figcaption></figure>
 

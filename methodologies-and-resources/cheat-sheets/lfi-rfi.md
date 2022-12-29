@@ -16,3 +16,11 @@
 | /var/log/apache2/access.log | the accessed requests for Apache webserver                                                                                                                        |
 | C:\boot.ini                 | contains the boot options for computers with BIOS firmware                                                                                                        |
 |                             |                                                                                                                                                                   |
+
+**Bypasses**
+
+| Bypass                 | Explanation                                                                                                                                                                                                                                                     | Example                                                          |
+| ---------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------- |
+| Bypass extention added | Using null bytes is an injection technique where URL-encoded representation such as %00 or 0x00 in hex with user-supplied data to terminate strings. You could think of it as trying to trick the web app into disregarding whatever comes after the Null Byte. | hxxp://10.10.230.14/lab3.php?file=../../../../../etc/passwd%00   |
+| PHP removing slashes   | This works because the PHP filter only matches and replaces the first subset string ../ it finds and doesn't do another pass.                                                                                                                                   | hxxp://10.10.230.14/lab3.php?file=..//..//..//..//..//etc/passwd |
+|                        |                                                                                                                                                                                                                                                                 |                                                                  |

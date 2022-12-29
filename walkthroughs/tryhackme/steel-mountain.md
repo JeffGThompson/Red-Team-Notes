@@ -8,7 +8,7 @@
 
 **Who is the employee of the month?**
 
-<figure><img src="../../.gitbook/assets/image (9) (2).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (9) (2) (1).png" alt=""><figcaption></figcaption></figure>
 
 ### **Initial Access**
 
@@ -51,7 +51,7 @@ For this exploit we usually just need to change the ip\_addr and local\_port to 
 
 Because I performed this on a tryhackme attacker box which has port 80 in user to login through web I had to change the exploit to get the nc.exe from us on a different port.&#x20;
 
-<figure><img src="../../.gitbook/assets/image (6) (2).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (6) (2) (1).png" alt=""><figcaption></figcaption></figure>
 
 ```
 nc -nvlp 443
@@ -113,7 +113,7 @@ nc -lvnp 4443
 sc start AdvancedSystemCareService9
 ```
 
-![](<../../.gitbook/assets/image (3) (1) (2).png>)
+![](<../../.gitbook/assets/image (3) (1) (2) (1).png>)
 
 ``
 
