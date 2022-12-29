@@ -13,6 +13,7 @@
   * [Linux](methodologies-and-resources/privilege-escalation/linux.md)
   * [Windows](methodologies-and-resources/privilege-escalation/windows.md)
 * [Cheat Sheets](methodologies-and-resources/cheat-sheets/README.md)
+  * [LFI / RFI](methodologies-and-resources/cheat-sheets/lfi-rfi.md)
   * [Buffer Overflow](methodologies-and-resources/cheat-sheets/buffer-overflow/README.md)
     * [Fuzzers](methodologies-and-resources/cheat-sheets/buffer-overflow/fuzzers.md)
 

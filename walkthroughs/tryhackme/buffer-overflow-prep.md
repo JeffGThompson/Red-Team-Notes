@@ -162,7 +162,7 @@ python exploit.py $VICTIM 1337
 
 
 
-<figure><img src="../../.gitbook/assets/image (8).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (20).png" alt=""><figcaption></figcaption></figure>
 
 
 
@@ -847,7 +847,7 @@ Program crashed at 1300 bytes with fuzzer.py
 
 
 
-<figure><img src="../../.gitbook/assets/image (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (3).png" alt=""><figcaption></figcaption></figure>
 
 ```
 /opt/metasploit-framework-5101/tools/exploit/pattern_create.rb -l 1300
@@ -903,7 +903,7 @@ python exploit.py $VICTIM 1337
 !mona findmsp -distance 1300
 ```
 
-<figure><img src="../../.gitbook/assets/image (6).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (7).png" alt=""><figcaption></figcaption></figure>
 
 **exploit.py - Code Changes #2**
 
@@ -1014,7 +1014,7 @@ except:
     sys.exit()
 ```
 
-<figure><img src="../../.gitbook/assets/image (7).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (6).png" alt=""><figcaption></figcaption></figure>
 
 ### Finding a Jump Point
 
@@ -1026,7 +1026,7 @@ Now we need to find a place to jump to to run our payload.  We find there is onl
 !mona modules
 ```
 
-<figure><img src="../../.gitbook/assets/image (3).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (2).png" alt=""><figcaption></figcaption></figure>
 
 We find that essfunc.dll has 9 possible JMP ESPs to use. I started with the first one but later found out that it does not work, neither did most of the other ones. When I was ready to have my listener running to catch a shell nothing was returned. I decided to go down this list until I found one that had enough space for our payload. The one that worked was 0x62501203 but when we add it to our code we need it in little endian format so it becomes \x03\x12\x50\x62. We could have also tried with a smaller payload if none of the JMP ESPs worked.
 
@@ -1064,4 +1064,4 @@ nc -lvnp 4444
 python exploit.py $VICTIM 1337
 ```
 
-<figure><img src="../../.gitbook/assets/image (2).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (4).png" alt=""><figcaption></figcaption></figure>

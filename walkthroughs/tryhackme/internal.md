@@ -56,7 +56,7 @@ vi /etc/hosts
 
 We are able to successfully get into wordpress with the credentials
 
-<figure><img src="../../.gitbook/assets/image (8) (4).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (8).png" alt=""><figcaption></figcaption></figure>
 
 Reverse Shell Failed Attempt
 
@@ -161,7 +161,7 @@ netstat -tuan
 
 <figure><img src="../../.gitbook/assets/image (2) (1).png" alt=""><figcaption></figcaption></figure>
 
-<figure><img src="../../.gitbook/assets/image (3) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (3) (2).png" alt=""><figcaption></figcaption></figure>
 
 ### Pivot
 
@@ -214,7 +214,7 @@ make install
 
 Credentials were found.
 
-<figure><img src="../../.gitbook/assets/image (1) (4).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1) (7).png" alt=""><figcaption></figcaption></figure>
 
 ```
 Username: admin
