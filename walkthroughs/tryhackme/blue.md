@@ -31,7 +31,7 @@ set RHOSTS 10.10.68.22
 run
 ```
 
-<figure><img src="../../.gitbook/assets/image (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1) (1) (1) (2).png" alt=""><figcaption></figcaption></figure>
 
 ### Cracking
 
@@ -39,7 +39,7 @@ run
 hashdump
 ```
 
-<figure><img src="../../.gitbook/assets/image (3) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (3) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 ```
 john --format=nt --wordlist=/usr/share/wordlists/rockyou.txt hashes.txt

@@ -15,7 +15,7 @@ Password: anything
 
 <figure><img src="../../.gitbook/assets/image (5) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
-<figure><img src="../../.gitbook/assets/image (11) (1) (2).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (11) (1) (2) (1).png" alt=""><figcaption></figcaption></figure>
 
 ### **Using SQLMap**
 
@@ -27,7 +27,7 @@ Saved the request into a file called request.txt, if you highlight everything an
 
 <figure><img src="../../.gitbook/assets/image (4) (3) (1).png" alt=""><figcaption></figcaption></figure>
 
-<figure><img src="../../.gitbook/assets/image (29) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (29) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 <figure><img src="../../.gitbook/assets/image (6) (3) (2).png" alt=""><figcaption></figcaption></figure>
 
@@ -35,7 +35,7 @@ Saved the request into a file called request.txt, if you highlight everything an
 sqlmap -r request.txt --dbms=mysql --dump
 ```
 
-<figure><img src="../../.gitbook/assets/image (7) (1) (2).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (7) (1).png" alt=""><figcaption></figcaption></figure>
 
 **In the users table, what is the hashed password?**
 
@@ -59,7 +59,7 @@ Used the following site to idenfitfy what the hash type was. It identified that 
 
 **Hash Analyzer:** [https://www.tunnelsup.com/hash-analyzer/](https://www.tunnelsup.com/hash-analyzer/)
 
-<figure><img src="../../.gitbook/assets/image (27) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (27) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 **What is the de-hashed password?**
 
@@ -79,7 +79,7 @@ Password: videogamer124
 \
 **Now you have a password and username. Try SSH'ing onto the machine. What is the user flag?**
 
-<figure><img src="../../.gitbook/assets/image (30) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (30) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 **Exposing services with reverse SSH tunnels**
 
@@ -89,7 +89,7 @@ Password: videogamer124
 ss -tulpn
 ```
 
-<figure><img src="../../.gitbook/assets/image (8) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (8) (1) (2).png" alt=""><figcaption></figcaption></figure>
 
 **What is the name of the exposed CMS?**
 
@@ -132,4 +132,4 @@ set lport 443
 exploit
 ```
 
-<figure><img src="../../.gitbook/assets/image (3) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (3) (1) (1).png" alt=""><figcaption></figcaption></figure>

