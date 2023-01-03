@@ -21,7 +21,7 @@ Password: anything
 
 I setup burp to intercept requests and then tried searching for something on the portal page
 
-<figure><img src="../../.gitbook/assets/image (10) (2).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (10) (2) (1).png" alt=""><figcaption></figcaption></figure>
 
 Saved the request into a file called request.txt, if you highlight everything and right click you can copy to file
 
@@ -35,7 +35,7 @@ Saved the request into a file called request.txt, if you highlight everything an
 sqlmap -r request.txt --dbms=mysql --dump
 ```
 
-<figure><img src="../../.gitbook/assets/image (7) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (7) (1) (2).png" alt=""><figcaption></figcaption></figure>
 
 **In the users table, what is the hashed password?**
 
@@ -89,7 +89,7 @@ Password: videogamer124
 ss -tulpn
 ```
 
-<figure><img src="../../.gitbook/assets/image (8) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (8) (1).png" alt=""><figcaption></figcaption></figure>
 
 **What is the name of the exposed CMS?**
 
@@ -132,4 +132,4 @@ set lport 443
 exploit
 ```
 
-<figure><img src="../../.gitbook/assets/image (3) (1) (3).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (3) (1).png" alt=""><figcaption></figcaption></figure>

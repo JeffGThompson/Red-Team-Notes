@@ -67,7 +67,7 @@ nc -lvp 1234
 
 **Browser**
 
-<figure><img src="../../.gitbook/assets/image (22) (2) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (22) (2) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 <figure><img src="../../.gitbook/assets/image (3) (4).png" alt=""><figcaption></figcaption></figure>
 
@@ -122,7 +122,7 @@ python2 -m SimpleHTTPServer 81
 
 Our fpm file is now created&#x20;
 
-<figure><img src="../../.gitbook/assets/image (2) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (2) (1) (2).png" alt=""><figcaption></figcaption></figure>
 
 **Victim**&#x20;
 
@@ -133,7 +133,7 @@ sudo yum localinstall root-1.0-1.noarch.rpm
 sudo -i
 ```
 
-<figure><img src="../../.gitbook/assets/image (19) (2) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (19) (2).png" alt=""><figcaption></figcaption></figure>
 
 #### **Option #2 -** Spawn interactive root shell by loading a custom plugin
 
