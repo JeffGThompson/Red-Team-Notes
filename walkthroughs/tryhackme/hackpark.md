@@ -14,7 +14,7 @@
 
 Sent a failed login request to Burp to see what it would look like. With this info I was able to craft my request for hydra. I just needed to get the URL and everything that is sent after VIEWSTATE and just change the input to use ^USER^ and ^PASS^ to brute force these fields.
 
-<figure><img src="../../.gitbook/assets/image (20) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (20) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 I could also do this without burp by just opening the console and getting the info from there
 
@@ -54,7 +54,7 @@ rlwrap nc -lvnp 4445
 
 Upload the file
 
-<figure><img src="../../.gitbook/assets/image (24) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (24) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 <figure><img src="../../.gitbook/assets/image (12) (2).png" alt=""><figcaption></figcaption></figure>
 

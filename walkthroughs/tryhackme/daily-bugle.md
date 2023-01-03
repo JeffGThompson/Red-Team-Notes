@@ -93,7 +93,7 @@ stty raw -echo;fg
 
 Found a password in the configuration file. The password worked for the user jjameson which was found in the home directory.
 
-<figure><img src="../../.gitbook/assets/image (6) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (6) (1).png" alt=""><figcaption></figcaption></figure>
 
 ```
 ssh jjameson@10.10.116.159
@@ -133,7 +133,7 @@ sudo yum localinstall root-1.0-1.noarch.rpm
 sudo -i
 ```
 
-<figure><img src="../../.gitbook/assets/image (19) (2).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (19) (2) (1).png" alt=""><figcaption></figcaption></figure>
 
 #### **Option #2 -** Spawn interactive root shell by loading a custom plugin
 
