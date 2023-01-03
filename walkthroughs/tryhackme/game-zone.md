@@ -35,7 +35,7 @@ Saved the request into a file called request.txt, if you highlight everything an
 sqlmap -r request.txt --dbms=mysql --dump
 ```
 
-<figure><img src="../../.gitbook/assets/image (7) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (7) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 **In the users table, what is the hashed password?**
 
@@ -132,4 +132,4 @@ set lport 443
 exploit
 ```
 
-<figure><img src="../../.gitbook/assets/image (3) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (3) (1) (3).png" alt=""><figcaption></figcaption></figure>

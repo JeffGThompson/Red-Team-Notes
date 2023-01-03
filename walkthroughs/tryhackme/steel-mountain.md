@@ -8,7 +8,7 @@
 
 **Who is the employee of the month?**
 
-<figure><img src="../../.gitbook/assets/image (9) (2).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (9) (2) (1).png" alt=""><figcaption></figcaption></figure>
 
 ### **Initial Access**
 
@@ -24,7 +24,7 @@ nmap -A 10.10.248.189
 
 Google this
 
-<figure><img src="../../.gitbook/assets/image (4) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (4) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 **What is the CVE number to exploit this file server?**
 

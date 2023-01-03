@@ -93,7 +93,7 @@ stty raw -echo;fg
 
 Found a password in the configuration file. The password worked for the user jjameson which was found in the home directory.
 
-<figure><img src="../../.gitbook/assets/image (6) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (6) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 ```
 ssh jjameson@10.10.116.159
