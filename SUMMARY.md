@@ -16,6 +16,7 @@
   * [LFI / RFI](methodologies-and-resources/cheat-sheets/lfi-rfi.md)
   * [Buffer Overflow](methodologies-and-resources/cheat-sheets/buffer-overflow/README.md)
     * [Fuzzers](methodologies-and-resources/cheat-sheets/buffer-overflow/fuzzers.md)
+  * [Command Injection](methodologies-and-resources/cheat-sheets/command-injection.md)
 
 ## Walkthroughs
 
