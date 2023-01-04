@@ -316,7 +316,7 @@ We find that essfunc.dll has 9 possible JMP ESPs to use. So we will start with t
 
 <figure><img src="../../.gitbook/assets/image (28).png" alt=""><figcaption></figcaption></figure>
 
-### Exploit
+### Exploit - Staging
 
 Now that we have the return address to use, we just need to generate our payload without using the bad characters found previously. I also added 16 NOPs before the payload as suggested in the room. All that is left is to is to update our code with our payload and run it against the program.
 
@@ -399,9 +399,9 @@ python exploit.py $VICTIM 1337
 
 <figure><img src="../../.gitbook/assets/image (12).png" alt=""><figcaption></figcaption></figure>
 
-### Testing against prod
+### Exploit - Prod
 
-We now run the exact same code against our actual server we are trying to exploit and it works.
+We now run the exact same code against our actual server we are trying to exploit and it works right away.
 
 **Kali #1**
 
