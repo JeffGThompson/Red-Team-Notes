@@ -10,7 +10,7 @@
 
 **In Lab #2, what is the directory specified in the include function?**
 
-<figure><img src="../../.gitbook/assets/image (23) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (23) (1) (2).png" alt=""><figcaption></figcaption></figure>
 
 **Give Lab #3 a try to read /etc/passwd. What is the request look like?**
 
@@ -18,7 +18,7 @@ Input field didn't work but we were able to bypass by entering our command in th
 
 **URL:** hxxp://10.10.230.14/lab3.php?file=..//..//../../../etc/passwd%00&#x20;
 
-<figure><img src="../../.gitbook/assets/image (22) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (22) (1) (2).png" alt=""><figcaption></figcaption></figure>
 
 **Which function is causing the directory traversal in Lab #4?**
 
@@ -60,7 +60,7 @@ hxxp://10.10.230.14/lab6.php?file=THM-profile//..//..//..//..//etc//os-release%0
 
 **Capture Flag2 at /etc/flag2**
 
-<figure><img src="../../.gitbook/assets/image (28).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (28) (3).png" alt=""><figcaption></figcaption></figure>
 
 Change the value from Guest to Admin and we can bypass the error message above.
 
