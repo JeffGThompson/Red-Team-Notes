@@ -18,7 +18,7 @@
 nmap -A 10.10.248.189
 ```
 
-<figure><img src="../../.gitbook/assets/image (11) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (11) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 **Take a look at the other web server. What file server is running?**
 
@@ -28,7 +28,7 @@ Google this
 
 **What is the CVE number to exploit this file server?**
 
-<figure><img src="../../.gitbook/assets/image (12) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (12) (1).png" alt=""><figcaption></figcaption></figure>
 
 **Use Metasploit to get an initial shell. What is the user flag?**
 
@@ -64,7 +64,7 @@ python2 exploit.py 10.10.181.159 8080
 
 **Use Metasploit to get an initial shell. What is the user flag?**
 
-<figure><img src="../../.gitbook/assets/image (10) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (10) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 ### Privilege Escalation
 

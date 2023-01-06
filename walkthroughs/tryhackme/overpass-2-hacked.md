@@ -10,7 +10,7 @@ What was the URL of the page they used to upload a reverse shell?
 
 **Wireshark**
 
-<figure><img src="../../.gitbook/assets/image (16) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (16) (1).png" alt=""><figcaption></figcaption></figure>
 
 **TCPDump**
 
@@ -24,7 +24,7 @@ tcpdump -r overpass2.pcapng | grep GET
 
 **Wireshark**
 
-<figure><img src="../../.gitbook/assets/image (15) (2) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (15) (2).png" alt=""><figcaption></figcaption></figure>
 
 <figure><img src="../../.gitbook/assets/image (5) (2) (2).png" alt=""><figcaption></figcaption></figure>
 
@@ -70,7 +70,7 @@ It's in the code on github
 
 **What's the hardcoded salt for the backdoor?**
 
-<figure><img src="../../.gitbook/assets/image (9) (3).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (9) (3) (3).png" alt=""><figcaption></figcaption></figure>
 
 **What was the hash that the attacker used? - go back to the PCAP for this!**
 
@@ -89,7 +89,7 @@ hashcat -m 1710 -w /usr/share/wordlists/rockyou.txt hash.txt
 hashcat -m 1710 hash.txt --show
 ```
 
-<figure><img src="../../.gitbook/assets/image (20) (1) (2).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (20) (1).png" alt=""><figcaption></figcaption></figure>
 
 
 
@@ -97,7 +97,7 @@ hashcat -m 1710 hash.txt --show
 
 **The attacker defaced the website. What message did they leave as a heading?**
 
-<figure><img src="../../.gitbook/assets/image (1) (6).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1) (6) (1).png" alt=""><figcaption></figcaption></figure>
 
 **Using the information you've found previously, hack your way back in!**
 

@@ -6,7 +6,7 @@
 nmap -A 10.10.13.172
 ```
 
-<figure><img src="../../.gitbook/assets/image (2) (3).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (2) (3) (1).png" alt=""><figcaption></figcaption></figure>
 
 ```
 smbclient -L //10.10.13.172
@@ -93,7 +93,7 @@ Now we will try RFI to get a reverse shell
 
 Create PHP reverse shell then host the file
 
-<figure><img src="../../.gitbook/assets/image (3) (3).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (3) (3) (3).png" alt=""><figcaption></figcaption></figure>
 
 ```
 python2 -m SimpleHTTPServer 81
@@ -123,9 +123,9 @@ stty raw -echo;fg
 
 There is a backup script that is ran every minute by root which backs up /var/www/html
 
-<figure><img src="../../.gitbook/assets/image (14) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (14) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
-<figure><img src="../../.gitbook/assets/image (31) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (31) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 ****
 
@@ -160,7 +160,7 @@ There is a password in the configuration file, it does not work for root but we 
 cat /var/www/html/configuration.php
 ```
 
-<figure><img src="../../.gitbook/assets/image (37) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (37) (1).png" alt=""><figcaption></figcaption></figure>
 
 We can login as jjameson&#x20;
 
