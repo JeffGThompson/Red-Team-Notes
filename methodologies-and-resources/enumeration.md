@@ -211,7 +211,16 @@ TCP port 445
 ```
 smbclient -L //$TARGET/ # list shares
 smbclient -L //$TARGET/ -p $PORT # specify non-standard SMB/Samba port
+
 ```
+
+Download files with smbclient
+
+<pre><code><strong>cd loot
+</strong>smbclient \\\\$TARGET\\$SHARE
+prompt
+mget *
+</code></pre>
 
 The SMB shares discovered have the following permissions.
 
@@ -220,19 +229,14 @@ smbmap -H $TARGET
 smbmap -H $TARGET -P $PORT
 ```
 
+Download files with smbget
+
 ```
 smbget -R smb://$TARGET/$SHARE
 smbget -R smb://$TARGET:$PORT/$SHARE
 ```
 
-Download files.
 
-```
-cd loot
-smbclient \\\\$TARGET\\$SHARE
-prompt
-mget *
-```
 
 ```
 # check if vulnerable to EternalBlue

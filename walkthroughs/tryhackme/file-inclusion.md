@@ -68,7 +68,7 @@ Change the value from Guest to Admin and we can bypass the error message above.
 
 Change the value to the flag and we can see it on the page.
 
-<figure><img src="../../.gitbook/assets/image (31) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (31).png" alt=""><figcaption></figcaption></figure>
 
 What it would look like in burp.
 
@@ -92,7 +92,7 @@ Changing to post and added extra slashed and null character at end.
 
 Created the following file to run the hostname command.
 
-****![](<../../.gitbook/assets/image (14) (1) (1).png>)****
+****![](<../../.gitbook/assets/image (14) (1).png>)****
 
 **Kali**
 
