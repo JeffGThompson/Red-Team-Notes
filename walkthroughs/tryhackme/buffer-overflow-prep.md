@@ -100,7 +100,7 @@ python fuzzer.py $VICTIM 1337
 
 Program crashed at 2000 bytes with fuzzer.py
 
-<figure><img src="../../.gitbook/assets/image (9) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (9) (1) (2).png" alt=""><figcaption></figcaption></figure>
 
 ```
 /opt/metasploit-framework-5101/tools/exploit/pattern_create.rb -l 2000
@@ -160,7 +160,7 @@ python exploit.py $VICTIM 1337
 
 
 
-<figure><img src="../../.gitbook/assets/image (44).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (44) (1).png" alt=""><figcaption></figcaption></figure>
 
 
 
@@ -1282,7 +1282,7 @@ except:
 
 <figure><img src="../../.gitbook/assets/image (13) (1).png" alt=""><figcaption></figcaption></figure>
 
-<figure><img src="../../.gitbook/assets/image (18) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (18) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 ### Finding a Jump Point
 
@@ -1949,7 +1949,7 @@ After running the program again we now can fill EIP with our Bs so we now have c
 python exploit.py $VICTIM 1337
 ```
 
-<figure><img src="../../.gitbook/assets/image (11) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (11) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 ### Finding Bad Characters
 
@@ -2269,7 +2269,7 @@ python exploit.py $VICTIM 1337
 !mona findmsp -distance 1400
 ```
 
-<figure><img src="../../.gitbook/assets/image (42) (2).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (42).png" alt=""><figcaption></figcaption></figure>
 
 **exploit.py - Code Changes #2**
 
@@ -2313,7 +2313,7 @@ After running the program again we now can fill EIP with our Bs so we now have c
 python exploit.py $VICTIM 1337
 ```
 
-<figure><img src="../../.gitbook/assets/image (1) (7) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1) (7).png" alt=""><figcaption></figcaption></figure>
 
 ### Finding Bad Characters
 
@@ -2381,7 +2381,7 @@ except:
 
 <figure><img src="../../.gitbook/assets/image (13) (2).png" alt=""><figcaption></figcaption></figure>
 
-<figure><img src="../../.gitbook/assets/image (3) (6) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (3) (6).png" alt=""><figcaption></figcaption></figure>
 
 ### Finding a Jump Point
 
@@ -2716,7 +2716,7 @@ except:
 
 <figure><img src="../../.gitbook/assets/image (61).png" alt=""><figcaption></figcaption></figure>
 
-<figure><img src="../../.gitbook/assets/image (20).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (20) (1).png" alt=""><figcaption></figcaption></figure>
 
 ### Finding a Jump Point
 
@@ -2819,7 +2819,7 @@ nc -lvnp 4444
 python exploit.py $VICTIM 1337
 ```
 
-<figure><img src="../../.gitbook/assets/image (18).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (18) (1).png" alt=""><figcaption></figcaption></figure>
 
 ## oscp.exe - OVERFLOW1
 
@@ -2915,7 +2915,7 @@ python fuzzer.py $VICTIM 1337
 
 Program crashed at 1600 bytes with fuzzer.py
 
-<figure><img src="../../.gitbook/assets/image (37).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (37) (1).png" alt=""><figcaption></figcaption></figure>
 
 ```
 /opt/metasploit-framework-5101/tools/exploit/pattern_create.rb -l 1600 
@@ -3015,7 +3015,7 @@ After running the program again we now can fill EIP with our Bs so we now have c
 python exploit.py $VICTIM 1337
 ```
 
-<figure><img src="../../.gitbook/assets/image (8) (4).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (8) (1).png" alt=""><figcaption></figcaption></figure>
 
 ### Finding Bad Characters
 
@@ -3083,7 +3083,7 @@ except:
 
 <figure><img src="../../.gitbook/assets/image (25) (2).png" alt=""><figcaption></figcaption></figure>
 
-<figure><img src="../../.gitbook/assets/image (9) (5).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (9) (1).png" alt=""><figcaption></figcaption></figure>
 
 ### Finding a Jump Point
 
@@ -3382,7 +3382,7 @@ After running the program again we now can fill EIP with our Bs so we now have c
 python exploit.py $VICTIM 1337
 ```
 
-<figure><img src="../../.gitbook/assets/image (2) (6) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (2) (6).png" alt=""><figcaption></figcaption></figure>
 
 ### Finding Bad Characters
 
@@ -3472,7 +3472,7 @@ We find that essfunc.dll has 9 possible JMP ESPs to use. So we will start with t
 !mona find -s "\xff\xe4" -m essfunc.dll
 ```
 
-<figure><img src="../../.gitbook/assets/image (6) (5).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (6) (1).png" alt=""><figcaption></figcaption></figure>
 
 ### Exploit
 

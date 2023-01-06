@@ -56,7 +56,7 @@ vi /etc/hosts
 
 We are able to successfully get into wordpress with the credentials
 
-<figure><img src="../../.gitbook/assets/image (8) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (8) (1) (3).png" alt=""><figcaption></figcaption></figure>
 
 Reverse Shell Failed Attempt
 
@@ -84,7 +84,7 @@ Unable to upload the plugin due to write issues
 
 TWENTY SEVENTEEN theme had a writable pages so I modified the 404 page with a reverse shell and then navigated to a page that does not exist.
 
-<figure><img src="../../.gitbook/assets/image (44) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (44) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 Just added the revshell.php code mentioned earlier.
 
@@ -159,9 +159,9 @@ cat jenkins.txt
 netstat -tuan
 ```
 
-<figure><img src="../../.gitbook/assets/image (2) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (2) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
-<figure><img src="../../.gitbook/assets/image (3) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (3) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 ### Pivot
 
@@ -214,7 +214,7 @@ make install
 
 Credentials were found.
 
-<figure><img src="../../.gitbook/assets/image (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1) (1) (2).png" alt=""><figcaption></figcaption></figure>
 
 ```
 Username: admin

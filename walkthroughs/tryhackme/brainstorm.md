@@ -10,7 +10,7 @@
 nmap -A $VICTIM
 ```
 
-<figure><img src="../../.gitbook/assets/image (4) (6).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (4) (1).png" alt=""><figcaption></figcaption></figure>
 
 ```
 nmap -p- $VICTIM
@@ -28,7 +28,7 @@ ftp> cd chatserver
 ftp> mget *
 ```
 
-<figure><img src="../../.gitbook/assets/image (42).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (18).png" alt=""><figcaption></figcaption></figure>
 
 ## Access
 
@@ -45,7 +45,7 @@ python2 -m SimpleHTTPServer 81
 
 Downloaded the files.
 
-<figure><img src="../../.gitbook/assets/image (1) (7).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 
 
@@ -58,9 +58,9 @@ python -c 'print("A"* 3000)'
 nc -v $TESTMACHINE 9999
 ```
 
-<figure><img src="../../.gitbook/assets/image (7) (5).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (7) (1).png" alt=""><figcaption></figcaption></figure>
 
-<figure><img src="../../.gitbook/assets/image (15) (6).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (15) (2).png" alt=""><figcaption></figcaption></figure>
 
 **fuzzer.py**
 
@@ -290,9 +290,9 @@ except:
 
 
 
-<figure><img src="../../.gitbook/assets/image (3) (6).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (3) (1).png" alt=""><figcaption></figcaption></figure>
 
-<figure><img src="../../.gitbook/assets/image (5) (4).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (5) (1).png" alt=""><figcaption></figcaption></figure>
 
 ### Finding a Jump Point
 
@@ -397,7 +397,7 @@ nc -lvnp 4444
 python exploit.py $VICTIM 1337
 ```
 
-<figure><img src="../../.gitbook/assets/image (12) (8).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (12) (1).png" alt=""><figcaption></figcaption></figure>
 
 ### Exploit - Prod
 
@@ -415,4 +415,4 @@ nc -lvnp 4444
 python exploit.py $VICTIM 1337
 ```
 
-<figure><img src="../../.gitbook/assets/image (2) (6).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (2) (1).png" alt=""><figcaption></figcaption></figure>

@@ -10,7 +10,7 @@ What was the URL of the page they used to upload a reverse shell?
 
 **Wireshark**
 
-<figure><img src="../../.gitbook/assets/image (16) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (16) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 **TCPDump**
 
@@ -24,7 +24,7 @@ tcpdump -r overpass2.pcapng | grep GET
 
 **Wireshark**
 
-<figure><img src="../../.gitbook/assets/image (15) (2).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (15) (2) (1).png" alt=""><figcaption></figcaption></figure>
 
 <figure><img src="../../.gitbook/assets/image (5) (2) (2).png" alt=""><figcaption></figcaption></figure>
 
@@ -89,7 +89,7 @@ hashcat -m 1710 -w /usr/share/wordlists/rockyou.txt hash.txt
 hashcat -m 1710 hash.txt --show
 ```
 
-<figure><img src="../../.gitbook/assets/image (20) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (20) (1) (2).png" alt=""><figcaption></figcaption></figure>
 
 
 
