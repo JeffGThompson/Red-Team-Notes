@@ -35,3 +35,4 @@
   * [Buffer Overflow Prep](walkthroughs/tryhackme/buffer-overflow-prep.md)
   * [File Inclusion](walkthroughs/tryhackme/file-inclusion.md)
   * [Brainstorm](walkthroughs/tryhackme/brainstorm.md)
+  * [Gatekeeper](walkthroughs/tryhackme/gatekeeper.md)

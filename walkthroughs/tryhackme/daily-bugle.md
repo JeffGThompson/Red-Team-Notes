@@ -16,7 +16,7 @@
 nmap -A 10.10.116.159
 ```
 
-<figure><img src="../../.gitbook/assets/image (18) (2).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (18) (2) (2).png" alt=""><figcaption></figcaption></figure>
 
 
 
@@ -77,7 +77,7 @@ Used this PHP reverse shell, just needed to change the IP to my own.
 
 <figure><img src="../../.gitbook/assets/image (1) (4).png" alt=""><figcaption></figcaption></figure>
 
-<figure><img src="../../.gitbook/assets/image (4) (2).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (4) (2) (2).png" alt=""><figcaption></figcaption></figure>
 
 Get autocomplete
 

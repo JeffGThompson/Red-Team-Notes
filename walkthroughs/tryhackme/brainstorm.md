@@ -10,7 +10,7 @@
 nmap -A $VICTIM
 ```
 
-<figure><img src="../../.gitbook/assets/image (4).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (4) (2).png" alt=""><figcaption></figcaption></figure>
 
 ```
 nmap -p- $VICTIM
@@ -28,7 +28,7 @@ ftp> cd chatserver
 ftp> mget *
 ```
 
-<figure><img src="../../.gitbook/assets/image.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (13).png" alt=""><figcaption></figcaption></figure>
 
 ## Access
 
@@ -45,7 +45,7 @@ python2 -m SimpleHTTPServer 81
 
 Downloaded the files.
 
-<figure><img src="../../.gitbook/assets/image (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1) (6).png" alt=""><figcaption></figcaption></figure>
 
 
 
@@ -58,9 +58,9 @@ python -c 'print("A"* 3000)'
 nc -v $TESTMACHINE 9999
 ```
 
-<figure><img src="../../.gitbook/assets/image (7).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (7) (3).png" alt=""><figcaption></figcaption></figure>
 
-<figure><img src="../../.gitbook/assets/image (15).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (15) (1).png" alt=""><figcaption></figcaption></figure>
 
 **fuzzer.py**
 
@@ -108,7 +108,7 @@ except:
 
 It took 2300 before the program crashed.
 
-****![](<../../.gitbook/assets/image (13).png>)****
+****![](<../../.gitbook/assets/image (13) (1).png>)****
 
 
 
@@ -290,9 +290,9 @@ except:
 
 
 
-<figure><img src="../../.gitbook/assets/image (3).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (3) (3).png" alt=""><figcaption></figcaption></figure>
 
-<figure><img src="../../.gitbook/assets/image (5).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (5) (4).png" alt=""><figcaption></figcaption></figure>
 
 ### Finding a Jump Point
 
@@ -316,7 +316,7 @@ We find that essfunc.dll has 9 possible JMP ESPs to use. So we will start with t
 
 <figure><img src="../../.gitbook/assets/image (28).png" alt=""><figcaption></figcaption></figure>
 
-### Exploit
+### Exploit - Staging
 
 Now that we have the return address to use, we just need to generate our payload without using the bad characters found previously. I also added 16 NOPs before the payload as suggested in the room. All that is left is to is to update our code with our payload and run it against the program.
 
@@ -397,11 +397,11 @@ nc -lvnp 4444
 python exploit.py $VICTIM 1337
 ```
 
-<figure><img src="../../.gitbook/assets/image (12).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (12) (5).png" alt=""><figcaption></figcaption></figure>
 
-### Testing against prod
+### Exploit - Prod
 
-We now run the exact same code against our actual server we are trying to exploit and it works.
+We now run the exact same code against our actual server we are trying to exploit and it works right away.
 
 **Kali #1**
 
@@ -415,4 +415,4 @@ nc -lvnp 4444
 python exploit.py $VICTIM 1337
 ```
 
-<figure><img src="../../.gitbook/assets/image (2).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (2) (3).png" alt=""><figcaption></figcaption></figure>
