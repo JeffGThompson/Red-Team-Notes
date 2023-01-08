@@ -1158,7 +1158,7 @@ python fuzzer.py $VICTIM 1337
 
 Program crashed at 2100 bytes with fuzzer.py
 
-<figure><img src="../../.gitbook/assets/image (17) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (17) (1) (2).png" alt=""><figcaption></figcaption></figure>
 
 ```
 /opt/metasploit-framework-5101/tools/exploit/pattern_create.rb -l 2100
@@ -1280,9 +1280,9 @@ except:
     sys.exit()
 ```
 
-<figure><img src="../../.gitbook/assets/image (13) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (13) (1) (3).png" alt=""><figcaption></figcaption></figure>
 
-<figure><img src="../../.gitbook/assets/image (18) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (18) (1) (2).png" alt=""><figcaption></figcaption></figure>
 
 ### Finding a Jump Point
 
@@ -1385,7 +1385,7 @@ nc -lvnp 4444
 python exploit.py $VICTIM 1337
 ```
 
-<figure><img src="../../.gitbook/assets/image (15) (5).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (15) (5) (1).png" alt=""><figcaption></figcaption></figure>
 
 ## oscp.exe - OVERFLOW5
 
@@ -1581,7 +1581,7 @@ After running the program again we now can fill EIP with our Bs so we now have c
 python exploit.py $VICTIM 1337
 ```
 
-<figure><img src="../../.gitbook/assets/image (17).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (17) (1).png" alt=""><figcaption></figcaption></figure>
 
 ### Finding Bad Characters
 
@@ -2015,7 +2015,7 @@ except:
     sys.exit()
 ```
 
-<figure><img src="../../.gitbook/assets/image (12) (7).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (12) (7) (1).png" alt=""><figcaption></figcaption></figure>
 
 <figure><img src="../../.gitbook/assets/image (53).png" alt=""><figcaption></figcaption></figure>
 
@@ -2632,7 +2632,7 @@ python exploit.py $VICTIM 1337
 !mona findmsp -distance 1800
 ```
 
-<figure><img src="../../.gitbook/assets/image (10).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (10) (1).png" alt=""><figcaption></figcaption></figure>
 
 **exploit.py - Code Changes #2**
 
@@ -2716,7 +2716,7 @@ except:
 
 <figure><img src="../../.gitbook/assets/image (61).png" alt=""><figcaption></figcaption></figure>
 
-<figure><img src="../../.gitbook/assets/image (20).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (20) (3).png" alt=""><figcaption></figcaption></figure>
 
 ### Finding a Jump Point
 
@@ -2728,7 +2728,7 @@ Now we need to find a place to jump to to run our payload.  We find there is onl
 !mona modules
 ```
 
-<figure><img src="../../.gitbook/assets/image (21).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (21) (2).png" alt=""><figcaption></figcaption></figure>
 
 We find that essfunc.dll has 9 possible JMP ESPs to use. So we will start with the first one which is 0x625011af but when we add it to our code we need it in little endian format so it becomes \xaf\x11\x50\x62.
 
@@ -2738,7 +2738,7 @@ We find that essfunc.dll has 9 possible JMP ESPs to use. So we will start with t
 !mona find -s "\xff\xe4" -m essfunc.dll
 ```
 
-<figure><img src="../../.gitbook/assets/image (7) (4).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (7) (4) (1).png" alt=""><figcaption></figcaption></figure>
 
 ### Exploit
 
@@ -2819,7 +2819,7 @@ nc -lvnp 4444
 python exploit.py $VICTIM 1337
 ```
 
-<figure><img src="../../.gitbook/assets/image (18).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (18) (1).png" alt=""><figcaption></figcaption></figure>
 
 ## oscp.exe - OVERFLOW1
 
@@ -2971,7 +2971,7 @@ python exploit.py $VICTIM 1337
 !mona findmsp -distance 1600
 ```
 
-<figure><img src="../../.gitbook/assets/image (4) (5).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (4) (5) (1).png" alt=""><figcaption></figcaption></figure>
 
 **exploit.py - Code Changes #2**
 
@@ -3083,7 +3083,7 @@ except:
 
 <figure><img src="../../.gitbook/assets/image (25) (2).png" alt=""><figcaption></figcaption></figure>
 
-<figure><img src="../../.gitbook/assets/image (9).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (9) (5).png" alt=""><figcaption></figcaption></figure>
 
 ### Finding a Jump Point
 
@@ -3105,7 +3105,7 @@ We find that essfunc.dll has 9 possible JMP ESPs to use. So we will start with t
 !mona find -s "\xff\xe4" -m essfunc.dll
 ```
 
-<figure><img src="../../.gitbook/assets/image (19).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (19) (4).png" alt=""><figcaption></figcaption></figure>
 
 ### Exploit
 
@@ -3448,9 +3448,9 @@ except:
     sys.exit()
 ```
 
-<figure><img src="../../.gitbook/assets/image (14).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (14) (5).png" alt=""><figcaption></figcaption></figure>
 
-<figure><img src="../../.gitbook/assets/image (5) (3).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (5) (3) (1).png" alt=""><figcaption></figcaption></figure>
 
 ### Finding a Jump Point
 
@@ -3472,7 +3472,7 @@ We find that essfunc.dll has 9 possible JMP ESPs to use. So we will start with t
 !mona find -s "\xff\xe4" -m essfunc.dll
 ```
 
-<figure><img src="../../.gitbook/assets/image (6).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (6) (5).png" alt=""><figcaption></figcaption></figure>
 
 ### Exploit
 

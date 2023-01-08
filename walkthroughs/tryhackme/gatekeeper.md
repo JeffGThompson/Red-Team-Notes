@@ -10,11 +10,11 @@
 nmap -A $VICTIM
 ```
 
-<figure><img src="../../.gitbook/assets/image (5).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (5) (3).png" alt=""><figcaption></figcaption></figure>
 
-<figure><img src="../../.gitbook/assets/image (3).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (3) (3).png" alt=""><figcaption></figcaption></figure>
 
-<figure><img src="../../.gitbook/assets/image.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (21).png" alt=""><figcaption></figcaption></figure>
 
 ### **RPC/**TCP port 135
 
@@ -22,7 +22,7 @@ nmap -A $VICTIM
 rpcclient -U '' $VICTIM
 ```
 
-<figure><img src="../../.gitbook/assets/image (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1) (6).png" alt=""><figcaption></figcaption></figure>
 
 ### **NetBIOS/**TCP port 139
 
@@ -30,7 +30,7 @@ rpcclient -U '' $VICTIM
 nbtscan $VICTIM
 ```
 
-<figure><img src="../../.gitbook/assets/image (8).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (8) (5).png" alt=""><figcaption></figcaption></figure>
 
 ### **SMB/**TCP port 445
 

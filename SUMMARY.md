@@ -37,3 +37,4 @@
   * [File Inclusion](walkthroughs/tryhackme/file-inclusion.md)
   * [Brainstorm](walkthroughs/tryhackme/brainstorm.md)
   * [Gatekeeper](walkthroughs/tryhackme/gatekeeper.md)
+  * [Brainpan 1](walkthroughs/tryhackme/brainpan-1.md)
