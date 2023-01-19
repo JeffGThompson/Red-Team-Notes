@@ -38,3 +38,4 @@
   * [Brainstorm](walkthroughs/tryhackme/brainstorm.md)
   * [Gatekeeper](walkthroughs/tryhackme/gatekeeper.md)
   * [Brainpan 1](walkthroughs/tryhackme/brainpan-1.md)
+  * [Upload Vulnerabilities](walkthroughs/tryhackme/upload-vulnerabilities.md)
