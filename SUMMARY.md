@@ -40,4 +40,4 @@
   * [Brainpan 1](walkthroughs/tryhackme/brainpan-1.md)
   * [Upload Vulnerabilities](walkthroughs/tryhackme/upload-vulnerabilities.md)
   * [Pickle Rick](walkthroughs/tryhackme/pickle-rick.md)
-  * [Page 1](walkthroughs/tryhackme/page-1.md)
+  * [John The Ripper](walkthroughs/tryhackme/john-the-ripper.md)
