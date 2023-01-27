@@ -22,7 +22,7 @@ nmap -A $VICTIM
 rpcclient -U '' $VICTIM
 ```
 
-<figure><img src="../../.gitbook/assets/image (1) (6).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1) (6) (1).png" alt=""><figcaption></figcaption></figure>
 
 ### **NetBIOS/**TCP port 139
 

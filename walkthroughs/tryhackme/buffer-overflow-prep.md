@@ -292,7 +292,7 @@ Now we need to find a place to jump to to run our payload.  We find there is onl
 !mona modules
 ```
 
-<figure><img src="../../.gitbook/assets/image (23) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (23) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 We find that essfunc.dll has 9 possible JMP ESPs to use. So we will start with the first one which is 0x625011af but when we add it to our code we need it in little endian format so it becomes \xaf\x11\x50\x62.
 
@@ -1849,7 +1849,7 @@ python fuzzer.py $VICTIM 1337
 
 Program crashed at 1100 bytes with fuzzer.py
 
-<figure><img src="../../.gitbook/assets/image (23) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (23) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 ```
 /opt/metasploit-framework-5101/tools/exploit/pattern_create.rb -l 1100
@@ -3015,7 +3015,7 @@ After running the program again we now can fill EIP with our Bs so we now have c
 python exploit.py $VICTIM 1337
 ```
 
-<figure><img src="../../.gitbook/assets/image (8) (4).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (8) (4) (1).png" alt=""><figcaption></figcaption></figure>
 
 ### Finding Bad Characters
 
@@ -3472,7 +3472,7 @@ We find that essfunc.dll has 9 possible JMP ESPs to use. So we will start with t
 !mona find -s "\xff\xe4" -m essfunc.dll
 ```
 
-<figure><img src="../../.gitbook/assets/image (6) (5).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (6) (5) (1).png" alt=""><figcaption></figcaption></figure>
 
 ### Exploit
 

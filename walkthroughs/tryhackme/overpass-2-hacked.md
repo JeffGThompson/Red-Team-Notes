@@ -97,7 +97,7 @@ hashcat -m 1710 hash.txt --show
 
 **The attacker defaced the website. What message did they leave as a heading?**
 
-<figure><img src="../../.gitbook/assets/image (1) (6) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1) (6) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 **Using the information you've found previously, hack your way back in!**
 

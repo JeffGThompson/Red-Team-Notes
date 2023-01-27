@@ -44,7 +44,7 @@ Ran the same dirb scan again except looking for .php files, I was able to find s
 dirb http://$VICTIM:80 /usr/share/wordlists/dirb/big.txt -X .php
 ```
 
-<figure><img src="../../.gitbook/assets/image (4).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (4) (2).png" alt=""><figcaption></figcaption></figure>
 
 ```
 Website: http://$VICTIM/login.php
@@ -56,15 +56,15 @@ Password: Wubbalubbadubdub
 
 Login worked
 
-<figure><img src="../../.gitbook/assets/image (6).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (6) (5).png" alt=""><figcaption></figcaption></figure>
 
 First ingredient found, also tried doing a reverse shell with netcat but not working
 
-<figure><img src="../../.gitbook/assets/image.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (6).png" alt=""><figcaption></figcaption></figure>
 
 Clue to look around.
 
-<figure><img src="../../.gitbook/assets/image (23).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (23) (1).png" alt=""><figcaption></figcaption></figure>
 
 Second ingrediant found
 
@@ -72,11 +72,11 @@ Second ingrediant found
 
 www-data can actually run any command with sudo without entering a password.&#x20;
 
-<figure><img src="../../.gitbook/assets/image (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1) (6).png" alt=""><figcaption></figcaption></figure>
 
 The last ingredient is found in the root directory.
 
-<figure><img src="../../.gitbook/assets/image (15).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (15) (3).png" alt=""><figcaption></figcaption></figure>
 
 ### SSH port 22
 
