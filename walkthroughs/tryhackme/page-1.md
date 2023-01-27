@@ -2,8 +2,6 @@
 
 **Room Link:** [https://tryhackme.com/room/johntheripper0](https://tryhackme.com/room/johntheripper0)
 
-
-
 ### Hash ID
 
 Use when John can't identify the hash
@@ -11,6 +9,8 @@ Use when John can't identify the hash
 ```
 wget https://gitlab.com/kalilinux/packages/hash-identifier/-/raw/kali/master/hash-id.py
 ```
+
+## Cracking Basic Hashes
 
 **What type of hash is hash1.txt?**
 
