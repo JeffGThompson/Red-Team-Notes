@@ -44,7 +44,7 @@ Ran the same dirb scan again except looking for .php files, I was able to find s
 dirb http://$VICTIM:80 /usr/share/wordlists/dirb/big.txt -X .php
 ```
 
-<figure><img src="../../.gitbook/assets/image (4) (2).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (4) (2) (3).png" alt=""><figcaption></figcaption></figure>
 
 ```
 Website: http://$VICTIM/login.php

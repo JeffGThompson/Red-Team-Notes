@@ -1,16 +1,18 @@
-# Page 1
+# John The Ripper
 
 **Room Link:** [https://tryhackme.com/room/johntheripper0](https://tryhackme.com/room/johntheripper0)
 
 ### Hash ID
 
-Use when John can't identify the hash
+Great tool that the room provides, use it to identify the hash type when John can't identify the hash by itself.
 
 ```
 wget https://gitlab.com/kalilinux/packages/hash-identifier/-/raw/kali/master/hash-id.py
 ```
 
-## Cracking Basic Hashes
+## Walkthrough
+
+### Cracking Basic Hashes
 
 **What type of hash is hash1.txt?**
 
@@ -29,7 +31,7 @@ python3 hash-id.py 2e728dd31fb5949bc39cac5a9f066498
 john --format=raw-md5 hash1.txt 
 ```
 
-<figure><img src="../../.gitbook/assets/image.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1).png" alt=""><figcaption></figcaption></figure>
 
 **What type of hash is hash2.txt?**
 
@@ -40,7 +42,7 @@ cat hash2.txt
 python hash-id.py 1A732667F3917C0F4AA98BB13011B9090C6F8065
 ```
 
-<figure><img src="../../.gitbook/assets/image (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1) (9).png" alt=""><figcaption></figcaption></figure>
 
 **What is the cracked value of hash2.txt**
 
@@ -48,7 +50,7 @@ python hash-id.py 1A732667F3917C0F4AA98BB13011B9090C6F8065
 john --format=raw-sha1 hash2.txt
 ```
 
-<figure><img src="../../.gitbook/assets/image (4).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (4) (2).png" alt=""><figcaption></figcaption></figure>
 
 **What type of hash is hash3.txt?**
 
@@ -93,3 +95,26 @@ john --format=whirlpool hash4.txt --wordlist=/usr/share/wordlists/rockyou.txt
 ```
 
 <figure><img src="../../.gitbook/assets/image (23).png" alt=""><figcaption></figcaption></figure>
+
+### Cracking Windows Authentication Hashes
+
+**What do we need to set the "format" flag to, in order to crack this?**
+
+Flag should be set to NT
+
+```
+python hash-id.py 5460C85BD858A11475115D2DD3A82333
+```
+
+<figure><img src="../../.gitbook/assets/image (4).png" alt=""><figcaption></figcaption></figure>
+
+**What is the cracked value of this password?**
+
+```
+john --format=nt ntlm.txt --wordlist=/usr/share/wordlists/rockyou.txt 
+```
+
+<figure><img src="../../.gitbook/assets/image.png" alt=""><figcaption></figcaption></figure>
+
+### Cracking /etc/shadow Hashes
+
