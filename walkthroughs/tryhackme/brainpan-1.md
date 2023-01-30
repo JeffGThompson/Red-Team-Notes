@@ -30,7 +30,7 @@ Abyss appears to have a program running but we can't interact.&#x20;
 gobuster dir -u http://$VICTIM:9999 -w /usr/share/dirb/wordlists/big.txt -t 50
 ```
 
-<figure><img src="../../.gitbook/assets/image (4) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (4) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 ### http/TCP port 10000
 
@@ -298,7 +298,7 @@ We find that brainpan.exe has only one possible JMP ESPs to use. So we will try 
 !mona find -s "\xff\xe4" -m brainpan.exe
 ```
 
-<figure><img src="../../.gitbook/assets/image (9).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (9) (3).png" alt=""><figcaption></figcaption></figure>
 
 ### Exploit - Staging
 
@@ -377,7 +377,7 @@ nc -lvnp 4444
 python exploit.py $TESTMACHINE 9999
 ```
 
-<figure><img src="../../.gitbook/assets/image (11).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (11) (6).png" alt=""><figcaption></figcaption></figure>
 
 ### Exploit - Production #1
 
@@ -492,7 +492,7 @@ We discovered we can run the command anansi\_util as sudo without a password. gt
 
 **Exploit:** [https://gtfobins.github.io/gtfobins/man/](https://gtfobins.github.io/gtfobins/man/)
 
-<figure><img src="../../.gitbook/assets/image (3).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (3) (1).png" alt=""><figcaption></figcaption></figure>
 
 ```
 sudo -l
@@ -510,4 +510,4 @@ We are able to run the commands mentioned on gtfobins and get a root shell.
 </strong>whoami
 </code></pre>
 
-<figure><img src="../../.gitbook/assets/image (5).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (5) (6).png" alt=""><figcaption></figcaption></figure>

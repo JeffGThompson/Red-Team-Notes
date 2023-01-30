@@ -90,7 +90,7 @@ xfreerdp /u:admin /p:password /cert:ignore /v:$VICTIM /workarea
 
 <figure><img src="../../.gitbook/assets/image (50) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
-<figure><img src="../../.gitbook/assets/image (11) (6).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (11) (6) (1).png" alt=""><figcaption></figcaption></figure>
 
 ### **Crash Replication & Controlling EIP**
 

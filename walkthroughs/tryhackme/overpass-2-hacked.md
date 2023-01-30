@@ -70,7 +70,7 @@ It's in the code on github
 
 **What's the hardcoded salt for the backdoor?**
 
-<figure><img src="../../.gitbook/assets/image (9) (3).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (9) (3) (3).png" alt=""><figcaption></figcaption></figure>
 
 **What was the hash that the attacker used? - go back to the PCAP for this!**
 
