@@ -24,5 +24,19 @@ apt install bloodhound neo4j
 
 ### Welcome to Attacktive Directory
 
+**Initial Scan**
 
+```
+nmap -A $VICTIM
+```
+
+<figure><img src="../../.gitbook/assets/image.png" alt=""><figcaption></figcaption></figure>
+
+### Scan all ports
+
+No other ports found.
+
+```
+nmap -sV -sT -O -p 1-65535 $VICTIM
+```
 

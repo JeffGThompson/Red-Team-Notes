@@ -202,7 +202,10 @@ TCP port 139
 
 ```
 nbtscan $VICTIM
+enum4linux $VICTIM
 ```
+
+### ****
 
 ### **SMB**
 
