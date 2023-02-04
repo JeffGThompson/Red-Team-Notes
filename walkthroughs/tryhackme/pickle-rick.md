@@ -32,11 +32,11 @@ dirb http://$VICTIM:80 /usr/share/wordlists/dirb/big.txt
 
 Found Ricks username in the page source of the main page
 
-<figure><img src="../../.gitbook/assets/image (2).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (2) (2).png" alt=""><figcaption></figcaption></figure>
 
 robots.txt just had this, could be a password.
 
-<figure><img src="../../.gitbook/assets/image (18).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (18) (2).png" alt=""><figcaption></figcaption></figure>
 
 Ran the same dirb scan again except looking for .php files, I was able to find some pages.
 
@@ -60,7 +60,7 @@ Login worked
 
 First ingredient found, also tried doing a reverse shell with netcat but not working
 
-<figure><img src="../../.gitbook/assets/image (6) (7).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (6) (2).png" alt=""><figcaption></figcaption></figure>
 
 Clue to look around.
 

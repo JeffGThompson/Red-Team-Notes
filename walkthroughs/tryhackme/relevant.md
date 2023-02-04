@@ -90,7 +90,7 @@ gobuster dir -u http://10.10.179.48 -w /usr/share/wordlists/SecLists/Discovery/W
 
 We can see the passwords.txt file from the browser
 
-<figure><img src="../../.gitbook/assets/image (5) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (5) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 ## Initial Shell
 
@@ -105,7 +105,7 @@ put shell.aspx
 
 ```
 
-<figure><img src="../../.gitbook/assets/image (2) (2).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (2) (2) (3).png" alt=""><figcaption></figcaption></figure>
 
 **Kali #2**
 

