@@ -42,3 +42,4 @@
   * [Pickle Rick](walkthroughs/tryhackme/pickle-rick.md)
   * [John The Ripper](walkthroughs/tryhackme/john-the-ripper.md)
   * [Attacktive Directory](walkthroughs/tryhackme/attacktive-directory.md)
+  * [Attacking Kerberos](walkthroughs/tryhackme/attacking-kerberos.md)
