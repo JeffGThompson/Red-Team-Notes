@@ -50,7 +50,7 @@ python hash-id.py 1A732667F3917C0F4AA98BB13011B9090C6F8065
 john --format=raw-sha1 hash2.txt
 ```
 
-<figure><img src="../../.gitbook/assets/image (4) (2) (4).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (4) (2).png" alt=""><figcaption></figcaption></figure>
 
 **What type of hash is hash3.txt?**
 
@@ -124,7 +124,7 @@ john --format=nt ntlm.txt --wordlist=/usr/share/wordlists/rockyou.txt
 john --wordlist=/usr/share/wordlists/rockyou.txt --format=sha512crypt etchashes.txt 
 ```
 
-<figure><img src="../../.gitbook/assets/image (4).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image.png" alt=""><figcaption></figcaption></figure>
 
 ### Single Crack Mode
 
@@ -138,7 +138,7 @@ vi hash7.txt
 
 <figure><img src="../../.gitbook/assets/image (7).png" alt=""><figcaption></figcaption></figure>
 
-<figure><img src="../../.gitbook/assets/image (5).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (5) (1).png" alt=""><figcaption></figcaption></figure>
 
 ```
 john --single --format=raw-md5 hash7.txt
@@ -153,7 +153,7 @@ zip2john secure.zip > secure_john.txt
 john --wordlist=/usr/share/wordlists/rockyou.txt secure_john.txt 
 ```
 
-<figure><img src="../../.gitbook/assets/image (4) (2).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (4).png" alt=""><figcaption></figcaption></figure>
 
 ### Cracking Password Protected RAR Archives
 

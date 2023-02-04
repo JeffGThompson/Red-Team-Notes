@@ -30,7 +30,7 @@ apt install bloodhound neo4j
 nmap -A $VICTIM
 ```
 
-<figure><img src="../../.gitbook/assets/image.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (5).png" alt=""><figcaption></figcaption></figure>
 
 ### Scan all ports
 
