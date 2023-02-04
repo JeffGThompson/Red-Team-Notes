@@ -492,7 +492,7 @@ We discovered we can run the command anansi\_util as sudo without a password. gt
 
 **Exploit:** [https://gtfobins.github.io/gtfobins/man/](https://gtfobins.github.io/gtfobins/man/)
 
-<figure><img src="../../.gitbook/assets/image (3) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (3) (1) (4).png" alt=""><figcaption></figcaption></figure>
 
 ```
 sudo -l
