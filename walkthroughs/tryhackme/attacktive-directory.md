@@ -39,7 +39,7 @@ wget https://raw.githubusercontent.com/Sq00ky/attacktive-directory-tools/master/
 
 ### Welcome to Attacktive Directory
 
-**Initial Scan**
+#### **Initial Scan**
 
 ```
 nmap -A $VICTIM
@@ -49,7 +49,7 @@ nmap -A $VICTIM
 
 <figure><img src="../../.gitbook/assets/image (16).png" alt=""><figcaption></figcaption></figure>
 
-### Scan all ports
+#### Scan all ports
 
 ```
 nmap -sV -sT -O -p 1-65535 $VICTIM
@@ -67,7 +67,7 @@ The NetBIOS-Domain Name of the machine
 
 <figure><img src="../../.gitbook/assets/image (4).png" alt=""><figcaption></figcaption></figure>
 
-### Enumerating Users via Kerberos
+### Enumerating Users via Kerberos port 88
 
 ```
 kerbrute/dist/kerbrute_linux_386 userenum --dc=$VICTIM -d=spookysec.local. userlist.txt
