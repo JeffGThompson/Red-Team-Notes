@@ -45,7 +45,7 @@ wget https://raw.githubusercontent.com/Sq00ky/attacktive-directory-tools/master/
 nmap -A $VICTIM
 ```
 
-<figure><img src="../../.gitbook/assets/image (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1) (10).png" alt=""><figcaption></figcaption></figure>
 
 <figure><img src="../../.gitbook/assets/image (16).png" alt=""><figcaption></figcaption></figure>
 
@@ -65,7 +65,7 @@ enum4linux $VICTIM
 
 The NetBIOS-Domain Name of the machine
 
-<figure><img src="../../.gitbook/assets/image (4).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (4) (6).png" alt=""><figcaption></figcaption></figure>
 
 ### Enumerating Users via Kerberos port 88
 
@@ -123,7 +123,7 @@ smb: \> dir
 smb: \> get backup_credentials.txt 
 ```
 
-<figure><img src="../../.gitbook/assets/image.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (3).png" alt=""><figcaption></figcaption></figure>
 
 Its a base64 encoded username and password. backup@spookysec.local:backup2517860
 

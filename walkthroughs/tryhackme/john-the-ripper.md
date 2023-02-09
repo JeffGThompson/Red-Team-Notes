@@ -144,7 +144,7 @@ vi hash7.txt
 john --single --format=raw-md5 hash7.txt
 ```
 
-<figure><img src="../../.gitbook/assets/image (3).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (3) (7).png" alt=""><figcaption></figcaption></figure>
 
 ### Cracking Password Protected Zip Files
 
