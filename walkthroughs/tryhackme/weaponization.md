@@ -32,3 +32,9 @@ rlwrap nc -lvnp 443
 <figure><img src="../../.gitbook/assets/image (1).png" alt=""><figcaption></figcaption></figure>
 
 <figure><img src="../../.gitbook/assets/image (79).png" alt=""><figcaption></figcaption></figure>
+
+### VBS
+
+### DOC
+
+### PS1
