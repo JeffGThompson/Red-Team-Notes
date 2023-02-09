@@ -1,4 +1,4 @@
-# Shells / Payloads
+# Payloads
 
 **Python Bind Shell**
 
@@ -115,5 +115,13 @@ export TERM=xterm # be able to clear the screen, etc.
 
 #### HTA
 
-[https://tryhackme.com/room/weaponization](https://tryhackme.com/room/weaponization)
+Under section _'An HTML Application - HTA'_
+
+{% embed url="https://tryhackme.com/room/weaponization" %}
+
+#### VBS
+
+Under section _'Visual Basic for Application - VBA'_
+
+{% embed url="https://tryhackme.com/room/weaponization" %}
 
