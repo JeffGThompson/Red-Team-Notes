@@ -8,7 +8,7 @@
 
 * [Enumeration](methodologies-and-resources/enumeration.md)
 * [Gaining Access](methodologies-and-resources/gaining-access.md)
-* [Payloads](methodologies-and-resources/payloads.md)
+* [Payloads](methodologies-and-resources/maintaining-access.md)
 * [Privilege Escalation](methodologies-and-resources/privilege-escalation/README.md)
   * [Linux](methodologies-and-resources/privilege-escalation/linux.md)
   * [Windows](methodologies-and-resources/privilege-escalation/windows.md)
@@ -43,3 +43,4 @@
   * [John The Ripper](walkthroughs/tryhackme/john-the-ripper.md)
   * [Attacktive Directory](walkthroughs/tryhackme/attacktive-directory.md)
   * [Attacking Kerberos](walkthroughs/tryhackme/attacking-kerberos.md)
+  * [Weaponization](walkthroughs/tryhackme/weaponization.md)
