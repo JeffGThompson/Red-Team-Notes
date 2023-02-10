@@ -86,7 +86,7 @@ john --format=raw-sha512 hash4.txt --wordlist=/usr/share/wordlists/rockyou.txt
 
 SHA-512 didn't work.
 
-<figure><img src="../../.gitbook/assets/image (15).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (15) (6).png" alt=""><figcaption></figcaption></figure>
 
 Hash was Whirlpool which hash-id also thought it could be.
 

