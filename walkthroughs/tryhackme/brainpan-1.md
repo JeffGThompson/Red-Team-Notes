@@ -110,7 +110,7 @@ Fuzzer was able to crash the program around 1000 bytes so we got really lucky wh
 python fuzzer.py $VICTIM 1337
 ```
 
-<figure><img src="../../.gitbook/assets/image (14).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (14) (6).png" alt=""><figcaption></figcaption></figure>
 
 ```
 /opt/metasploit-framework-5101/tools/exploit/pattern_create.rb -l 1000

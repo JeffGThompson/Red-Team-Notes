@@ -123,7 +123,7 @@ smb: \> dir
 smb: \> get backup_credentials.txt 
 ```
 
-<figure><img src="../../.gitbook/assets/image (3).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (3) (8).png" alt=""><figcaption></figcaption></figure>
 
 Its a base64 encoded username and password. backup@spookysec.local:backup2517860
 
