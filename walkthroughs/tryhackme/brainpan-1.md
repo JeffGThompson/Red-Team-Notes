@@ -14,7 +14,7 @@ nmap -A $VICTIM
 nmap -sV -sT -O -p 1-65535 $VICTIM
 ```
 
-<figure><img src="../../.gitbook/assets/image (12).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (12) (1).png" alt=""><figcaption></figcaption></figure>
 
 
 
@@ -30,7 +30,7 @@ Abyss appears to have a program running but we can't interact.&#x20;
 gobuster dir -u http://$VICTIM:9999 -w /usr/share/dirb/wordlists/big.txt -t 50
 ```
 
-<figure><img src="../../.gitbook/assets/image (4) (1) (1) (4).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (4) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 ### http/TCP port 10000
 
@@ -492,7 +492,7 @@ We discovered we can run the command anansi\_util as sudo without a password. gt
 
 **Exploit:** [https://gtfobins.github.io/gtfobins/man/](https://gtfobins.github.io/gtfobins/man/)
 
-<figure><img src="../../.gitbook/assets/image (3) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (3) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 ```
 sudo -l

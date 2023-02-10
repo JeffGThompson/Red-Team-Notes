@@ -59,7 +59,7 @@ cat hash3.txt
 python hash-id.py D7F4D3CCEE7ACD3DD7FAD3AC2BE2AAE9C44F4E9B7FB802D73136D4C53920140A
 ```
 
-****![](<../../.gitbook/assets/image (13) (6).png>)****
+****![](<../../.gitbook/assets/image (13).png>)****
 
 **What is the cracked value of hash3.txt**
 
@@ -106,7 +106,7 @@ Flag should be set to NT
 python hash-id.py 5460C85BD858A11475115D2DD3A82333
 ```
 
-<figure><img src="../../.gitbook/assets/image (4) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (4) (1).png" alt=""><figcaption></figcaption></figure>
 
 **What is the cracked value of this password?**
 
@@ -171,5 +171,5 @@ john --wordlist=/usr/share/wordlists/rockyou.txt secure_john.txt
 john --wordlist=/usr/share/wordlists/rockyou.txt id_john.txt 
 ```
 
-<figure><img src="../../.gitbook/assets/image (1) (1) (2).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1) (1).png" alt=""><figcaption></figcaption></figure>
 

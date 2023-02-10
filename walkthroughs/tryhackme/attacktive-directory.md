@@ -55,7 +55,7 @@ nmap -A $VICTIM
 nmap -sV -sT -O -p 1-65535 $VICTIM
 ```
 
-<figure><img src="../../.gitbook/assets/image (5) (2).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (5).png" alt=""><figcaption></figcaption></figure>
 
 ### netbios-ssn port 139 & microsoft-ds port 445
 
@@ -115,7 +115,7 @@ smbclient -L $VICTIM -U "svc-admin"
 Enter WORKGROUP\svc-admin's password: management2005
 ```
 
-<figure><img src="../../.gitbook/assets/image (7).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (7) (2).png" alt=""><figcaption></figcaption></figure>
 
 ```
 smbclient \\\\$VICTIM\\backup -U "svc-admin"
