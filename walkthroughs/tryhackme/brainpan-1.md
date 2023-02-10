@@ -166,7 +166,7 @@ python exploit.py $VICTIM 9999
 !mona findmsp -distance 1000
 ```
 
-<figure><img src="../../.gitbook/assets/image (3) (7) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (3) (7) (1).png" alt=""><figcaption></figcaption></figure>
 
 **exploit.py - Code Changes #2**
 
@@ -501,7 +501,7 @@ sudo /home/anansi/bin/anansi_util manual
 
 <figure><img src="../../.gitbook/assets/image (10).png" alt=""><figcaption></figcaption></figure>
 
-<figure><img src="../../.gitbook/assets/image (6) (1) (4).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (6) (1).png" alt=""><figcaption></figcaption></figure>
 
 We are able to run the commands mentioned on gtfobins and get a root shell.
 

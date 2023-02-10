@@ -68,7 +68,7 @@ Clue to look around.
 
 Second ingrediant found
 
-<figure><img src="../../.gitbook/assets/image (21).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (21) (1).png" alt=""><figcaption></figcaption></figure>
 
 www-data can actually run any command with sudo without entering a password.&#x20;
 
@@ -89,4 +89,4 @@ Username: R1ckRul3s
 Password: Wubbalubbadubdub
 ```
 
-<figure><img src="../../.gitbook/assets/image (25).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (25) (3).png" alt=""><figcaption></figcaption></figure>

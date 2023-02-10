@@ -11,7 +11,7 @@
 <pre><code><strong>nmap -A 10.10.46.54
 </strong></code></pre>
 
-<figure><img src="../../.gitbook/assets/image (5) (2).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (5) (2) (1).png" alt=""><figcaption></figcaption></figure>
 
 ### Scan all ports
 
@@ -74,7 +74,7 @@ zip revshell.zip revshell.php
 nc -lvnp 443
 ```
 
-<figure><img src="../../.gitbook/assets/image (9) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (9) (1) (1) (2).png" alt=""><figcaption></figcaption></figure>
 
 Unable to upload the plugin due to write issues
 
@@ -214,7 +214,7 @@ make install
 
 Credentials were found.
 
-<figure><img src="../../.gitbook/assets/image (1) (1) (2).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1) (1) (2) (1).png" alt=""><figcaption></figcaption></figure>
 
 ```
 Username: admin
