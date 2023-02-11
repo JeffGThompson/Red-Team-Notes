@@ -76,7 +76,7 @@ cat hash4.txt
 python hash-id.py c5a60cc6bbba781c601c5402755ae1044bbf45b78d1183cbf2ca1c865b6c792cf3c6b87791344986c8a832a0f9ca8d0b4afd3d9421a149d57075e1b4e93f90bf
 ```
 
-****![](<../../.gitbook/assets/image (8).png>)****
+****![](<../../.gitbook/assets/image (8) (4).png>)****
 
 **What is the cracked value of hash4.txt**
 

