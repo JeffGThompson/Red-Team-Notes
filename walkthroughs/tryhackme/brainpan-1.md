@@ -501,7 +501,7 @@ sudo /home/anansi/bin/anansi_util manual
 
 <figure><img src="../../.gitbook/assets/image (10).png" alt=""><figcaption></figcaption></figure>
 
-<figure><img src="../../.gitbook/assets/image (6) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (6) (1) (4).png" alt=""><figcaption></figcaption></figure>
 
 We are able to run the commands mentioned on gtfobins and get a root shell.
 
@@ -510,4 +510,4 @@ We are able to run the commands mentioned on gtfobins and get a root shell.
 </strong>whoami
 </code></pre>
 
-<figure><img src="../../.gitbook/assets/image (5) (6).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (5) (6) (1).png" alt=""><figcaption></figcaption></figure>

@@ -124,7 +124,7 @@ john --format=nt ntlm.txt --wordlist=/usr/share/wordlists/rockyou.txt
 john --wordlist=/usr/share/wordlists/rockyou.txt --format=sha512crypt etchashes.txt 
 ```
 
-<figure><img src="../../.gitbook/assets/image (11).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (11) (10).png" alt=""><figcaption></figcaption></figure>
 
 ### Single Crack Mode
 
@@ -171,5 +171,5 @@ john --wordlist=/usr/share/wordlists/rockyou.txt secure_john.txt
 john --wordlist=/usr/share/wordlists/rockyou.txt id_john.txt 
 ```
 
-<figure><img src="../../.gitbook/assets/image (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1) (1) (4).png" alt=""><figcaption></figcaption></figure>
 
