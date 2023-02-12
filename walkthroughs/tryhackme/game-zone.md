@@ -79,7 +79,7 @@ Password: videogamer124
 \
 **Now you have a password and username. Try SSH'ing onto the machine. What is the user flag?**
 
-<figure><img src="../../.gitbook/assets/image (30) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (30) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 **Exposing services with reverse SSH tunnels**
 

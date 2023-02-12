@@ -45,3 +45,4 @@
   * [Attacking Kerberos](walkthroughs/tryhackme/attacking-kerberos.md)
   * [Weaponization](walkthroughs/tryhackme/weaponization.md)
   * [Attacking Kerberos](walkthroughs/tryhackme/attacking-kerberos-1.md)
+  * [Post-Exploitation Basics](walkthroughs/tryhackme/post-exploitation-basics.md)

@@ -68,7 +68,7 @@ Change the value from Guest to Admin and we can bypass the error message above.
 
 Change the value to the flag and we can see it on the page.
 
-<figure><img src="../../.gitbook/assets/image (31).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (31) (1).png" alt=""><figcaption></figcaption></figure>
 
 What it would look like in burp.
 
@@ -82,7 +82,7 @@ Page is getting rid of our slashes
 
 Changing to post and added extra slashed and null character at end.
 
-<figure><img src="../../.gitbook/assets/image (30) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (30) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 
 
