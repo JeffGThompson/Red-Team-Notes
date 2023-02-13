@@ -31,7 +31,7 @@ python3 hash-id.py 2e728dd31fb5949bc39cac5a9f066498
 john --format=raw-md5 hash1.txt 
 ```
 
-<figure><img src="../../.gitbook/assets/image (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 **What type of hash is hash2.txt?**
 
@@ -59,7 +59,7 @@ cat hash3.txt
 python hash-id.py D7F4D3CCEE7ACD3DD7FAD3AC2BE2AAE9C44F4E9B7FB802D73136D4C53920140A
 ```
 
-****![](<../../.gitbook/assets/image (13).png>)****
+****![](<../../.gitbook/assets/image (13) (1).png>)****
 
 **What is the cracked value of hash3.txt**
 
@@ -138,7 +138,7 @@ vi hash7.txt
 
 <figure><img src="../../.gitbook/assets/image (7) (1).png" alt=""><figcaption></figcaption></figure>
 
-<figure><img src="../../.gitbook/assets/image (5) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (5) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 ```
 john --single --format=raw-md5 hash7.txt

@@ -38,7 +38,7 @@ gobuster dir -u http://$VICTIM:9999 -w /usr/share/dirb/wordlists/big.txt -t 50
 gobuster dir -u http://$VICTIM:10000 -w /usr/share/dirb/wordlists/big.txt -t 50
 ```
 
-<figure><img src="../../.gitbook/assets/image (13) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (13) (1) (4).png" alt=""><figcaption></figcaption></figure>
 
 <figure><img src="../../.gitbook/assets/image (2) (1) (3).png" alt=""><figcaption></figcaption></figure>
 
@@ -492,7 +492,7 @@ We discovered we can run the command anansi\_util as sudo without a password. gt
 
 **Exploit:** [https://gtfobins.github.io/gtfobins/man/](https://gtfobins.github.io/gtfobins/man/)
 
-<figure><img src="../../.gitbook/assets/image (3) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (3) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 ```
 sudo -l

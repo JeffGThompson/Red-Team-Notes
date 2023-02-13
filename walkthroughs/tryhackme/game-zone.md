@@ -69,7 +69,7 @@ john was able to crack the hash ehich gave us the password videogamer124.
 john hash.txt --wordlist=/usr/share/wordlists/rockyou.txt --format=RAW-SHA256
 ```
 
-<figure><img src="../../.gitbook/assets/image (14) (2).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (14) (2) (2).png" alt=""><figcaption></figcaption></figure>
 
 ```
 ssh agent47@10.10.74.145

