@@ -31,7 +31,7 @@ python3 hash-id.py 2e728dd31fb5949bc39cac5a9f066498
 john --format=raw-md5 hash1.txt 
 ```
 
-<figure><img src="../../.gitbook/assets/image (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1) (1) (1) (1) (3).png" alt=""><figcaption></figcaption></figure>
 
 **What type of hash is hash2.txt?**
 
