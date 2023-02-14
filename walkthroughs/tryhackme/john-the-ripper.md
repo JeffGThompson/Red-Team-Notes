@@ -31,7 +31,7 @@ python3 hash-id.py 2e728dd31fb5949bc39cac5a9f066498
 john --format=raw-md5 hash1.txt 
 ```
 
-<figure><img src="../../.gitbook/assets/image (1) (1) (1) (1) (3).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 **What type of hash is hash2.txt?**
 
@@ -67,7 +67,7 @@ python hash-id.py D7F4D3CCEE7ACD3DD7FAD3AC2BE2AAE9C44F4E9B7FB802D73136D4C5392014
 john --format=raw-sha256 hash3.txt --wordlist=/usr/share/wordlists/rockyou.txt 
 ```
 
-<figure><img src="../../.gitbook/assets/image (16) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (16) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 **What type of hash is hash4.txt?**
 
@@ -162,7 +162,7 @@ john --wordlist=/usr/share/wordlists/rockyou.txt secure_john.txt
 john --wordlist=/usr/share/wordlists/rockyou.txt secure_john.txt 
 ```
 
-<figure><img src="../../.gitbook/assets/image (11) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (11) (1) (2).png" alt=""><figcaption></figcaption></figure>
 
 ### Cracking SSH Keys with John
 
