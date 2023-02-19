@@ -216,7 +216,7 @@ You now have impersonated the ticket giving you the same rights as the TGT you'r
 dir \\$VICTIM\admin$
 ```
 
-<figure><img src="../../.gitbook/assets/image (1) (11).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1) (11) (1).png" alt=""><figcaption></figcaption></figure>
 
 ## Golden/Silver Ticket Attacks w/ mimikatz
 
