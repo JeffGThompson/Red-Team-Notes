@@ -47,3 +47,4 @@
   * [Attacking Kerberos](walkthroughs/tryhackme/attacking-kerberos-1.md)
   * [Post-Exploitation Basics](walkthroughs/tryhackme/post-exploitation-basics.md)
   * [Common Linux Privesc](walkthroughs/tryhackme/common-linux-privesc.md)
+  * [Linux PrivEsc](walkthroughs/tryhackme/linux-privesc.md)
