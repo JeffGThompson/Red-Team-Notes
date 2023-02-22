@@ -53,7 +53,7 @@ Some users can write to passwd file
 find / -perm -u=s -type f 2>/dev/null
 ```
 
-<figure><img src="../../.gitbook/assets/image (10).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (10) (1).png" alt=""><figcaption></figcaption></figure>
 
 Running the shell script in user3 home directory gives us root access right away.
 
@@ -63,7 +63,7 @@ Running the shell script in user3 home directory gives us root access right away
 /home/user3/shell
 ```
 
-<figure><img src="../../.gitbook/assets/image (4).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (4) (3).png" alt=""><figcaption></figcaption></figure>
 
 ## Exploiting Writeable /etc/passwd
 
@@ -179,7 +179,7 @@ cd /home/user5
 ./script
 ```
 
-<figure><img src="../../.gitbook/assets/image (2).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (2) (6).png" alt=""><figcaption></figcaption></figure>
 
 We now create a script called ls that gives us a bash shell.
 
@@ -203,7 +203,7 @@ Now after running the below command ls is now directed to our script.
 export PATH=/tmp:$PATH
 ```
 
-<figure><img src="../../.gitbook/assets/image (14).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (14) (3).png" alt=""><figcaption></figcaption></figure>
 
 Now the script in user5s directory acts differently, we now have a root shell.
 

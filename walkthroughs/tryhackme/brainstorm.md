@@ -58,7 +58,7 @@ python -c 'print("A"* 3000)'
 nc -v $TESTMACHINE 9999
 ```
 
-<figure><img src="../../.gitbook/assets/image (7) (4).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (7) (4) (2).png" alt=""><figcaption></figcaption></figure>
 
 <figure><img src="../../.gitbook/assets/image (15) (5).png" alt=""><figcaption></figcaption></figure>
 

