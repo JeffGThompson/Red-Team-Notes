@@ -182,3 +182,31 @@ Password: newpasswordhere
 ```
 
 <figure><img src="../../.gitbook/assets/image (10).png" alt=""><figcaption></figcaption></figure>
+
+## Sudo - Shell Escape Sequences
+
+**Victim**
+
+```
+z
+```
+
+**Victim**
+
+```
+z
+```
+
+## Sudo - Environment Variables
+
+**Victim**
+
+```
+z
+```
+
+**Victim**
+
+```
+z
+```
