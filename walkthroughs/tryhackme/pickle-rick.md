@@ -32,7 +32,7 @@ dirb http://$VICTIM:80 /usr/share/wordlists/dirb/big.txt
 
 Found Ricks username in the page source of the main page
 
-<figure><img src="../../.gitbook/assets/image (2) (2).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (2) (2) (4).png" alt=""><figcaption></figcaption></figure>
 
 robots.txt just had this, could be a password.
 
@@ -68,7 +68,7 @@ Clue to look around.
 
 Second ingrediant found
 
-<figure><img src="../../.gitbook/assets/image (21).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (21) (3).png" alt=""><figcaption></figcaption></figure>
 
 www-data can actually run any command with sudo without entering a password.&#x20;
 

