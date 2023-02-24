@@ -99,7 +99,7 @@ Save the root user's hash to a file called hash.txt on your Kali VM and use john
 john --wordlist=/usr/share/wordlists/rockyou.txt hash.txt
 ```
 
-<figure><img src="../../.gitbook/assets/image (1) (12).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1) (12) (1).png" alt=""><figcaption></figcaption></figure>
 
 ## Weak File Permissions - Writable /etc/shadow
 
@@ -111,7 +111,7 @@ Note that the /etc/shadow file on the VM is world-writable
 ls -l /etc/shadow
 ```
 
-<figure><img src="../../.gitbook/assets/image (7) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (7).png" alt=""><figcaption></figcaption></figure>
 
 Generate a new password hash with a password of your choice.
 
@@ -203,7 +203,7 @@ We can use apache2 to read files and crack hashes.
 sudo apache2 -f /etc/shadow
 ```
 
-<figure><img src="../../.gitbook/assets/image (12).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (12) (9).png" alt=""><figcaption></figcaption></figure>
 
 ### **nmap**
 
@@ -250,7 +250,7 @@ TERM= sudo more /etc/profile
 !/bin/sh
 ```
 
-<figure><img src="../../.gitbook/assets/image (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1) (12).png" alt=""><figcaption></figcaption></figure>
 
 <figure><img src="../../.gitbook/assets/image (2).png" alt=""><figcaption></figcaption></figure>
 
@@ -265,7 +265,7 @@ sudo less /etc/profile
 !/bin/sh
 ```
 
-<figure><img src="../../.gitbook/assets/image (5) (2).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (5) (8).png" alt=""><figcaption></figcaption></figure>
 
 <figure><img src="../../.gitbook/assets/image (9).png" alt=""><figcaption></figcaption></figure>
 
@@ -418,7 +418,7 @@ Create a shared object with the same name as one of the listed libraries (libcry
 gcc -o /tmp/libcrypt.so.1 -shared -fPIC /home/user/tools/sudo/library_path.c
 ```
 
-<figure><img src="../../.gitbook/assets/image.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1).png" alt=""><figcaption></figcaption></figure>
 
 Create a shared object with the same name as one of the listed libraries (libcrypt.so.1) using the code located at /home/user/tools/sudo/library\_path.c.
 
@@ -441,7 +441,7 @@ View the contents of the system-wide crontab.
 cat /etc/crontab
 ```
 
-<figure><img src="../../.gitbook/assets/image (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (5).png" alt=""><figcaption></figcaption></figure>
 
 There should be two cron jobs scheduled to run every minute. One runs overwrite.sh, the other runs /usr/local/bin/compress.sh.
 
@@ -478,7 +478,7 @@ Set up a netcat listener on your Kali box on port 4444 and wait for the cron job
 nc -nvlp 4444
 ```
 
-<figure><img src="../../.gitbook/assets/image (3).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (91).png" alt=""><figcaption></figcaption></figure>
 
 
 
@@ -498,7 +498,7 @@ cat /etc/crontab
 
 Note that the PATH variable starts with /home/user which is our user's home directory. Create a file called overwrite.sh in your home directory with the following contents
 
-<figure><img src="../../.gitbook/assets/image (7).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image.png" alt=""><figcaption></figcaption></figure>
 
 #### overwrite.sh
 
@@ -525,7 +525,7 @@ Wait for the cron job to run (should not take longer than a minute). Run the /tm
 /tmp/rootbash -p
 ```
 
-<figure><img src="../../.gitbook/assets/image (5).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (12).png" alt=""><figcaption></figcaption></figure>
 
 ##
 
