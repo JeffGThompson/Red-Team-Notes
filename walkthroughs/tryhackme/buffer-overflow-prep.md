@@ -160,7 +160,7 @@ python exploit.py $VICTIM 1337
 
 
 
-<figure><img src="../../.gitbook/assets/image (44).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (44) (2).png" alt=""><figcaption></figcaption></figure>
 
 
 

@@ -56,7 +56,7 @@ vi /etc/hosts
 
 We are able to successfully get into wordpress with the credentials
 
-<figure><img src="../../.gitbook/assets/image (8) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (8) (1) (3).png" alt=""><figcaption></figcaption></figure>
 
 Reverse Shell Failed Attempt
 
@@ -177,7 +177,7 @@ sshuttle -r aubreanna@10.10.46.54 127.0.0.1/24
 Password: bubb13guM!@#123
 ```
 
-<figure><img src="../../.gitbook/assets/image (45).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (45) (1).png" alt=""><figcaption></figcaption></figure>
 
 **Option #2**
 

