@@ -41,7 +41,7 @@ smb: \> exit
 
 <figure><img src="../../.gitbook/assets/image (6) (3) (1).png" alt=""><figcaption><p>Can't download files with smbget</p></figcaption></figure>
 
-<figure><img src="../../.gitbook/assets/image (3) (2).png" alt=""><figcaption><p>Downloaded password file</p></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (3) (2) (2).png" alt=""><figcaption><p>Downloaded password file</p></figcaption></figure>
 
 The file contained two bade64 encoded strings which decoded into users and passwords
 
@@ -133,7 +133,7 @@ whoami /priv
 
 <figure><img src="../../.gitbook/assets/image (16) (2) (2).png" alt=""><figcaption></figcaption></figure>
 
-<figure><img src="../../.gitbook/assets/image (2) (5).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (2) (5) (1).png" alt=""><figcaption></figcaption></figure>
 
 **Kali**
 

