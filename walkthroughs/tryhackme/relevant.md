@@ -39,7 +39,7 @@ smb: \> exit
 
 </code></pre>
 
-<figure><img src="../../.gitbook/assets/image (6) (3).png" alt=""><figcaption><p>Can't download files with smbget</p></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (6) (3) (1).png" alt=""><figcaption><p>Can't download files with smbget</p></figcaption></figure>
 
 <figure><img src="../../.gitbook/assets/image (3) (2).png" alt=""><figcaption><p>Downloaded password file</p></figcaption></figure>
 

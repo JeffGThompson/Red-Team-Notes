@@ -25,7 +25,7 @@ I setup burp to intercept requests and then tried searching for something on the
 
 Saved the request into a file called request.txt, if you highlight everything and right click you can copy to file
 
-<figure><img src="../../.gitbook/assets/image (4) (3) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (4) (3) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 <figure><img src="../../.gitbook/assets/image (29) (1) (1).png" alt=""><figcaption></figcaption></figure>
 

