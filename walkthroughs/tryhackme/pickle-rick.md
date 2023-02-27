@@ -28,7 +28,7 @@ No other ports found.
 dirb http://$VICTIM:80 /usr/share/wordlists/dirb/big.txt
 ```
 
-<figure><img src="../../.gitbook/assets/image (24).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (24) (5).png" alt=""><figcaption></figcaption></figure>
 
 Found Ricks username in the page source of the main page
 
@@ -52,7 +52,7 @@ Username: R1ckRul3s
 Password: Wubbalubbadubdub
 ```
 
-<figure><img src="../../.gitbook/assets/image (22).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (22) (5).png" alt=""><figcaption></figcaption></figure>
 
 Login worked
 
@@ -89,4 +89,4 @@ Username: R1ckRul3s
 Password: Wubbalubbadubdub
 ```
 
-<figure><img src="../../.gitbook/assets/image (25).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (25) (3).png" alt=""><figcaption></figcaption></figure>
