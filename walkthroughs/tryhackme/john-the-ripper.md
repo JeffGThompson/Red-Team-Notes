@@ -94,7 +94,7 @@ Hash was Whirlpool which hash-id also thought it could be.
 john --format=whirlpool hash4.txt --wordlist=/usr/share/wordlists/rockyou.txt 
 ```
 
-<figure><img src="../../.gitbook/assets/image (23) (4).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (23).png" alt=""><figcaption></figcaption></figure>
 
 ### Cracking Windows Authentication Hashes
 
