@@ -11,7 +11,7 @@
 <pre><code><strong>nmap -A $VICTIM
 </strong></code></pre>
 
-<figure><img src="../../.gitbook/assets/image (26).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (26) (3).png" alt=""><figcaption></figcaption></figure>
 
 ### Scan all ports
 
@@ -28,7 +28,7 @@ No other ports found.
 dirb http://$VICTIM:80 /usr/share/wordlists/dirb/big.txt
 ```
 
-<figure><img src="../../.gitbook/assets/image (24).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (24) (5).png" alt=""><figcaption></figcaption></figure>
 
 Found Ricks username in the page source of the main page
 
@@ -60,11 +60,11 @@ Login worked
 
 First ingredient found, also tried doing a reverse shell with netcat but not working
 
-<figure><img src="../../.gitbook/assets/image (6) (2).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (6) (2) (2).png" alt=""><figcaption></figcaption></figure>
 
 Clue to look around.
 
-<figure><img src="../../.gitbook/assets/image (23) (1) (3).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (23) (1) (3) (1).png" alt=""><figcaption></figcaption></figure>
 
 Second ingrediant found
 
@@ -72,7 +72,7 @@ Second ingrediant found
 
 www-data can actually run any command with sudo without entering a password.&#x20;
 
-<figure><img src="../../.gitbook/assets/image (1) (6) (3).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1) (6) (3) (1).png" alt=""><figcaption></figcaption></figure>
 
 The last ingredient is found in the root directory.
 
@@ -89,4 +89,4 @@ Username: R1ckRul3s
 Password: Wubbalubbadubdub
 ```
 
-<figure><img src="../../.gitbook/assets/image (25).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (25) (3).png" alt=""><figcaption></figcaption></figure>

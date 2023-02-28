@@ -118,7 +118,7 @@ The fuzzer didn't work as well as it did with other BOF problems. It kept sendin
 python fuzzer.py $VICTIM 1337
 ```
 
-<figure><img src="../../.gitbook/assets/image (62).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (62) (1).png" alt=""><figcaption></figcaption></figure>
 
 **exploit.py**
 
@@ -439,7 +439,7 @@ python exploit.py $VICTIM 31337
 
 There wasn't much running on the server but I was able to see that firefox was running. Browsers can have credentials stored in them so I investigated further into this.
 
-<figure><img src="../../.gitbook/assets/image (63).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (63) (1).png" alt=""><figcaption></figcaption></figure>
 
 ```
 meterpreter > run post/windows/gather/enum_applications
@@ -511,7 +511,7 @@ git clone https://github.com/unode/firefox_decrypt.git
 python3.9 firefox_decrypt.py ./
 ```
 
-<figure><img src="../../.gitbook/assets/image (64).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (64) (1).png" alt=""><figcaption></figcaption></figure>
 
 **Credentials Found**
 

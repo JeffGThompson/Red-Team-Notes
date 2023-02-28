@@ -50,7 +50,7 @@ python hash-id.py 1A732667F3917C0F4AA98BB13011B9090C6F8065
 john --format=raw-sha1 hash2.txt
 ```
 
-<figure><img src="../../.gitbook/assets/image (4) (2) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (4) (2) (1) (2).png" alt=""><figcaption></figcaption></figure>
 
 **What type of hash is hash3.txt?**
 
@@ -94,7 +94,7 @@ Hash was Whirlpool which hash-id also thought it could be.
 john --format=whirlpool hash4.txt --wordlist=/usr/share/wordlists/rockyou.txt 
 ```
 
-<figure><img src="../../.gitbook/assets/image (23) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (23) (1) (3).png" alt=""><figcaption></figcaption></figure>
 
 ### Cracking Windows Authentication Hashes
 
@@ -153,7 +153,7 @@ zip2john secure.zip > secure_john.txt
 john --wordlist=/usr/share/wordlists/rockyou.txt secure_john.txt 
 ```
 
-<figure><img src="../../.gitbook/assets/image (4) (2).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (4) (2) (1).png" alt=""><figcaption></figcaption></figure>
 
 ### Cracking Password Protected RAR Archives
 

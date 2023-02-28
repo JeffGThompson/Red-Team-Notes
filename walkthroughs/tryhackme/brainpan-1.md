@@ -24,7 +24,7 @@ nmap -sV -sT -O -p 1-65535 $VICTIM
 
 Abyss appears to have a program running but we can't interact.&#x20;
 
-![](<../../.gitbook/assets/image (5) (5).png>)
+![](<../../.gitbook/assets/image (5) (5) (1).png>)
 
 ```
 gobuster dir -u http://$VICTIM:9999 -w /usr/share/dirb/wordlists/big.txt -t 50

@@ -764,7 +764,7 @@ Run the suid-env2 executable to gain a root shell.
 /usr/local/bin/suid-env2
 ```
 
-<figure><img src="../../.gitbook/assets/image (3) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (3) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 ## SUID / SGID Executables - Abusing Shell Features (#2)
 
@@ -824,7 +824,7 @@ List the contents of the user's home directory.
 ls /home/user
 ```
 
-<figure><img src="../../.gitbook/assets/image (3).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (3) (1).png" alt=""><figcaption></figcaption></figure>
 
 Note the presence of a myvpn.ovpn config file. View the contents of the file.
 
@@ -836,7 +836,7 @@ cat /home/user/myvpn.ovpn
 
 The file should contain a reference to another location where the root user's credentials can be found. Switch to the root user, using the credentials.
 
-<figure><img src="../../.gitbook/assets/image (2).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (2) (4).png" alt=""><figcaption></figcaption></figure>
 
 
 
@@ -854,7 +854,7 @@ ls -la /
 
 Note that there appears to be a hidden directory called .ssh. View the contents of the directory.
 
-<figure><img src="../../.gitbook/assets/image (4).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (4) (2).png" alt=""><figcaption></figcaption></figure>
 
 Note that there is a world-readable file called root\_key. Further inspection of this file should indicate it is a private SSH key. The name of the file suggests it is for the root user.
 
@@ -866,7 +866,7 @@ Copy the key over to your Kali box (it's easier to just view the contents of the
 ls -l /.ssh
 ```
 
-<figure><img src="../../.gitbook/assets/image (10).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (10) (7).png" alt=""><figcaption></figcaption></figure>
 
 Use the key to login to the Debian VM as the root account (note that due to the age of the box, some additional settings are required when using SSH):
 
@@ -876,7 +876,7 @@ Use the key to login to the Debian VM as the root account (note that due to the 
 </strong><strong>ssh -i root_key -oPubkeyAcceptedKeyTypes=+ssh-rsa -oHostKeyAlgorithms=+ssh-rsa root@10.10.99.76
 </strong></code></pre>
 
-<figure><img src="../../.gitbook/assets/image (8).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (8) (9).png" alt=""><figcaption></figcaption></figure>
 
 ## NFS
 
@@ -890,7 +890,7 @@ Check the NFS share configuration on the Debian VM.
 cat /etc/exports
 ```
 
-<figure><img src="../../.gitbook/assets/image (1) (6).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1) (6) (3).png" alt=""><figcaption></figcaption></figure>
 
 Note that the /tmp share has root squashing disabled.
 
