@@ -52,7 +52,7 @@ Username: R1ckRul3s
 Password: Wubbalubbadubdub
 ```
 
-<figure><img src="../../.gitbook/assets/image (22).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (22) (5).png" alt=""><figcaption></figcaption></figure>
 
 Login worked
 
@@ -64,7 +64,7 @@ First ingredient found, also tried doing a reverse shell with netcat but not wor
 
 Clue to look around.
 
-<figure><img src="../../.gitbook/assets/image (23) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (23) (1) (3).png" alt=""><figcaption></figcaption></figure>
 
 Second ingrediant found
 

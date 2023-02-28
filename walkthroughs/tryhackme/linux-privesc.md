@@ -800,7 +800,7 @@ View the contents of all the hidden history files in the user's home directory.
 cat ~/.*history | less
 ```
 
-<figure><img src="../../.gitbook/assets/image.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (22).png" alt=""><figcaption></figcaption></figure>
 
 Note that the user has tried to connect to a MySQL server at some point, using the "root" username and a password submitted via the command line. Note that there is no space between the -p option and the password!
 
@@ -890,7 +890,7 @@ Check the NFS share configuration on the Debian VM.
 cat /etc/exports
 ```
 
-<figure><img src="../../.gitbook/assets/image (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1) (6).png" alt=""><figcaption></figcaption></figure>
 
 Note that the /tmp share has root squashing disabled.
 
@@ -970,7 +970,7 @@ Once the exploit completes, run /usr/bin/passwd to gain a root shell:
 /usr/bin/passwd
 ```
 
-<figure><img src="../../.gitbook/assets/image (6).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (6) (1).png" alt=""><figcaption></figcaption></figure>
 
 
 

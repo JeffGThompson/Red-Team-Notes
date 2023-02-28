@@ -48,3 +48,4 @@
   * [Post-Exploitation Basics](walkthroughs/tryhackme/post-exploitation-basics.md)
   * [Common Linux Privesc](walkthroughs/tryhackme/common-linux-privesc.md)
   * [Linux PrivEsc](walkthroughs/tryhackme/linux-privesc.md)
+  * [Basic Pentesting](walkthroughs/tryhackme/basic-pentesting.md)
