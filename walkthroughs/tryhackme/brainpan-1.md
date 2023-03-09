@@ -44,7 +44,7 @@ gobuster dir -u http://$VICTIM:10000 -w /usr/share/dirb/wordlists/big.txt -t 50
 
 brainpan.exe file found.
 
-<figure><img src="../../.gitbook/assets/image (15) (1) (3).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (15) (1).png" alt=""><figcaption></figcaption></figure>
 
 ## Initial Shell
 
@@ -501,7 +501,7 @@ sudo /home/anansi/bin/anansi_util manual
 
 <figure><img src="../../.gitbook/assets/image (10) (4) (2).png" alt=""><figcaption></figcaption></figure>
 
-<figure><img src="../../.gitbook/assets/image (6) (1) (4) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (6) (1) (4) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 We are able to run the commands mentioned on gtfobins and get a root shell.
 

@@ -49,4 +49,4 @@
   * [Common Linux Privesc](walkthroughs/tryhackme/common-linux-privesc.md)
   * [Linux PrivEsc](walkthroughs/tryhackme/linux-privesc.md)
   * [Basic Pentesting](walkthroughs/tryhackme/basic-pentesting.md)
-  * [Page 1](walkthroughs/tryhackme/page-1.md)
+  * [Net Sec Challenge](walkthroughs/tryhackme/net-sec-challenge.md)

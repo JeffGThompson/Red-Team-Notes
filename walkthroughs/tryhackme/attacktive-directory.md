@@ -47,7 +47,7 @@ nmap -A $VICTIM
 
 <figure><img src="../../.gitbook/assets/image (1) (10).png" alt=""><figcaption></figcaption></figure>
 
-<figure><img src="../../.gitbook/assets/image (16) (1) (3).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (16) (1).png" alt=""><figcaption></figcaption></figure>
 
 #### Scan all ports
 
@@ -95,7 +95,7 @@ svc-admin allows us to get a ticket without a password. The hash type is Kerbero
 python3.9 /opt/impacket/examples/GetNPUsers.py -no-pass -usersfile validusers.txt -dc-ip $VICTIM spookysec.local/
 ```
 
-<figure><img src="../../.gitbook/assets/image (6) (1) (4).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (6) (1) (4) (1).png" alt=""><figcaption></figcaption></figure>
 
 Cracking the hash we can see the password is management2005
 
