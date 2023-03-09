@@ -935,7 +935,7 @@ Back on the Debian VM, as the low privileged user account, execute the file to g
 /tmp/shell.elf
 ```
 
-<figure><img src="../../.gitbook/assets/image (7).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (7) (7).png" alt=""><figcaption></figcaption></figure>
 
 ## Kernel Exploits
 
