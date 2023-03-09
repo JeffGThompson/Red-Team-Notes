@@ -98,7 +98,7 @@ cd Downloads
 Rubeus.exe kerberoast
 ```
 
-<figure><img src="../../.gitbook/assets/image (12) (8).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (12) (8) (1).png" alt=""><figcaption></figcaption></figure>
 
 Copy the hashes from the command prompt onto the attacker machine and put it into a .txt file so we can crack it with hashcat. Below command removes all the tabs and formats it properly for hashcat. If you don't format it properly than hashcat will error out.
 
