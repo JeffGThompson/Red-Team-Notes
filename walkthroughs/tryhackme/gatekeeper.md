@@ -46,7 +46,7 @@ smb: \Share\> get gatekeeper.exe
 
 <figure><img src="../../.gitbook/assets/image (55).png" alt=""><figcaption></figcaption></figure>
 
-<figure><img src="../../.gitbook/assets/image (65).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (65) (1).png" alt=""><figcaption></figcaption></figure>
 
 <figure><img src="../../.gitbook/assets/image (73).png" alt=""><figcaption></figcaption></figure>
 
@@ -118,7 +118,7 @@ The fuzzer didn't work as well as it did with other BOF problems. It kept sendin
 python fuzzer.py $VICTIM 1337
 ```
 
-<figure><img src="../../.gitbook/assets/image (62) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (62) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 **exploit.py**
 

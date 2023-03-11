@@ -52,7 +52,7 @@ Username: R1ckRul3s
 Password: Wubbalubbadubdub
 ```
 
-<figure><img src="../../.gitbook/assets/image (22) (5).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (22) (5) (1).png" alt=""><figcaption></figcaption></figure>
 
 Login worked
 
