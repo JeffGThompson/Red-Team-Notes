@@ -11,7 +11,7 @@
 <pre><code><strong>nmap -A 10.10.46.54
 </strong></code></pre>
 
-<figure><img src="../../.gitbook/assets/image (5) (2).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (5) (2) (1).png" alt=""><figcaption></figcaption></figure>
 
 ### Scan all ports
 
@@ -29,7 +29,7 @@ gobuster dir -u http://10.10.46.54 -w /usr/share/wordlists/SecLists/Discovery/We
 
 ```
 
-<figure><img src="../../.gitbook/assets/image (46).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (46) (1).png" alt=""><figcaption></figcaption></figure>
 
 Wordpress is running under both /blog and /wordpress. /blog has a login page
 
@@ -214,7 +214,7 @@ make install
 
 Credentials were found.
 
-<figure><img src="../../.gitbook/assets/image (1) (1) (2).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1) (1) (2) (1).png" alt=""><figcaption></figcaption></figure>
 
 ```
 Username: admin

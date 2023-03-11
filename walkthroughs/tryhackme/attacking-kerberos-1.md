@@ -283,7 +283,7 @@ NTLM hash of SQLService
 lsadump::lsa /inject /name:SQLService 
 ```
 
-<figure><img src="../../.gitbook/assets/image (12) (1) (3).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (12) (1).png" alt=""><figcaption></figcaption></figure>
 
 ## Kerberos Backdoors w/ mimikatz
 

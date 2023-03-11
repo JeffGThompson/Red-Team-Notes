@@ -69,7 +69,7 @@ nc -lvp 1234
 
 <figure><img src="../../.gitbook/assets/image (22) (2) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
-<figure><img src="../../.gitbook/assets/image (3) (4).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (3) (4) (1).png" alt=""><figcaption></figcaption></figure>
 
 Used this PHP reverse shell, just needed to change the IP to my own.
 

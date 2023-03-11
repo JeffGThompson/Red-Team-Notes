@@ -23,7 +23,7 @@ cat logs/log* | sort | uniq  > passwords.txt
 
 There is also an email from Miles Dyson, as it's just his name I tried different varations of his name for a username. There is a folder on samba that could be the username as well, milesdyson.&#x20;
 
-<figure><img src="../../.gitbook/assets/image (5) (2) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (5) (2) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 <figure><img src="../../.gitbook/assets/image (4) (4) (1).png" alt=""><figcaption><p>username.txt</p></figcaption></figure>
 
@@ -85,7 +85,7 @@ Testing LFI and it works
 http://10.10.13.172/45kra24zxs28v3yd/administrator//alerts/alertConfigField.php?urlConfig=../../../../../../../../../etc/passwd
 ```
 
-<figure><img src="../../.gitbook/assets/image (6) (1) (1) (2).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (6) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 Now we will try RFI to get a reverse shell
 
