@@ -14,7 +14,7 @@
 hostname
 ```
 
-<figure><img src="../../.gitbook/assets/image (12).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image.png" alt=""><figcaption></figcaption></figure>
 
 **What is the Linux kernel version of the target system?**
 
@@ -24,7 +24,7 @@ hostname
 uname -a
 ```
 
-<figure><img src="../../.gitbook/assets/image (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (12).png" alt=""><figcaption></figcaption></figure>
 
 **What Linux is this?**
 
@@ -34,7 +34,7 @@ uname -a
 cat /etc/issue
 ```
 
-<figure><img src="../../.gitbook/assets/image.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (2).png" alt=""><figcaption></figcaption></figure>
 
 **What version of the Python language is installed on the system?**
 
@@ -44,7 +44,7 @@ cat /etc/issue
 python -V
 ```
 
-<figure><img src="../../.gitbook/assets/image (8).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1).png" alt=""><figcaption></figcaption></figure>
 
 **What vulnerability seem to affect the kernel of the target system? (Enter a CVE number)**
 

