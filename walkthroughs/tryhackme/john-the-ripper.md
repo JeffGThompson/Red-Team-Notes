@@ -59,7 +59,7 @@ cat hash3.txt
 python hash-id.py D7F4D3CCEE7ACD3DD7FAD3AC2BE2AAE9C44F4E9B7FB802D73136D4C53920140A
 ```
 
-****![](<../../.gitbook/assets/image (13) (1) (4).png>)****
+****![](<../../.gitbook/assets/image (13) (1).png>)****
 
 **What is the cracked value of hash3.txt**
 

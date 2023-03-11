@@ -32,7 +32,7 @@ dirb http://$VICTIM:80 /usr/share/wordlists/dirb/big.txt
 
 Found Ricks username in the page source of the main page
 
-<figure><img src="../../.gitbook/assets/image (2) (2) (4) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (2) (2) (4).png" alt=""><figcaption></figcaption></figure>
 
 robots.txt just had this, could be a password.
 

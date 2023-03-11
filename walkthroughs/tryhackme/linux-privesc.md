@@ -87,7 +87,7 @@ View the contents of the /etc/shadow file.
 cat /etc/shadow
 ```
 
-<figure><img src="../../.gitbook/assets/image (2) (2) (4).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (2) (2).png" alt=""><figcaption></figcaption></figure>
 
 Each line of the file represents a user. A user's password hash (if they have one) can be found between the first and second colons (:) of each line.
 
@@ -172,7 +172,7 @@ Edit the /etc/passwd file and place the generated password hash between the firs
 vi /etc/passwd
 ```
 
-<figure><img src="../../.gitbook/assets/image (1) (2) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1) (2) (1).png" alt=""><figcaption></figcaption></figure>
 
 **Victim**
 
@@ -203,7 +203,7 @@ We can use apache2 to read files and crack hashes.
 sudo apache2 -f /etc/shadow
 ```
 
-<figure><img src="../../.gitbook/assets/image (12) (4).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (12).png" alt=""><figcaption></figcaption></figure>
 
 ### **nmap**
 
@@ -250,7 +250,7 @@ TERM= sudo more /etc/profile
 !/bin/sh
 ```
 
-<figure><img src="../../.gitbook/assets/image (1) (2) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1) (2).png" alt=""><figcaption></figcaption></figure>
 
 <figure><img src="../../.gitbook/assets/image (2) (1) (3).png" alt=""><figcaption></figcaption></figure>
 
@@ -824,7 +824,7 @@ List the contents of the user's home directory.
 ls /home/user
 ```
 
-<figure><img src="../../.gitbook/assets/image (3) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (3) (1) (8).png" alt=""><figcaption></figcaption></figure>
 
 Note the presence of a myvpn.ovpn config file. View the contents of the file.
 
@@ -866,7 +866,7 @@ Copy the key over to your Kali box (it's easier to just view the contents of the
 ls -l /.ssh
 ```
 
-<figure><img src="../../.gitbook/assets/image (10) (7).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (10) (7) (1).png" alt=""><figcaption></figcaption></figure>
 
 Use the key to login to the Debian VM as the root account (note that due to the age of the box, some additional settings are required when using SSH):
 

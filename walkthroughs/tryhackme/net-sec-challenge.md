@@ -38,7 +38,7 @@ curl http://$VICTIM -I
 ssh -v $VICTIM
 ```
 
-<figure><img src="../../.gitbook/assets/image (3).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (3) (1).png" alt=""><figcaption></figcaption></figure>
 
 **We have an FTP server listening on a nonstandard port. What is the version of the FTP server?**
 
@@ -53,7 +53,7 @@ vsftpd 3.0.3
 hydra -L users.txt -P /usr/share/wordlists/rockyou.txt ftp://$VICTIM:10021
 ```
 
-<figure><img src="../../.gitbook/assets/image (13).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image.png" alt=""><figcaption></figcaption></figure>
 
 ```
 ftp $VICTIM  10021
