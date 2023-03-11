@@ -147,7 +147,7 @@ nc -lvnp 8888
 cat /etc/crontab 
 ```
 
-<figure><img src="../../.gitbook/assets/image (11) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (11) (1) (4).png" alt=""><figcaption></figcaption></figure>
 
 Add our payload we made in Kali to the script
 
@@ -214,7 +214,7 @@ cd /home/user5
 /script 
 ```
 
-<figure><img src="../../.gitbook/assets/image (18).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (18) (3).png" alt=""><figcaption></figcaption></figure>
 
 Run the following to reset the path variable.
 

