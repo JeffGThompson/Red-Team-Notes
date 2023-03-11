@@ -18,6 +18,7 @@
     * [Fuzzers](methodologies-and-resources/cheat-sheets/buffer-overflow/fuzzers.md)
   * [Command Injection](methodologies-and-resources/cheat-sheets/command-injection.md)
   * [Credential Harvesting](methodologies-and-resources/cheat-sheets/credential-harvesting.md)
+  * [Linux Privilege Escalation](methodologies-and-resources/cheat-sheets/linux-privilege-escalation.md)
 
 ## Walkthroughs
 
@@ -50,3 +51,4 @@
   * [Linux PrivEsc](walkthroughs/tryhackme/linux-privesc.md)
   * [Basic Pentesting](walkthroughs/tryhackme/basic-pentesting.md)
   * [Net Sec Challenge](walkthroughs/tryhackme/net-sec-challenge.md)
+  * [Linux Privilege Escalation](walkthroughs/tryhackme/linux-privilege-escalation.md)

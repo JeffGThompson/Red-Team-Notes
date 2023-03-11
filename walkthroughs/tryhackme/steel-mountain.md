@@ -60,7 +60,7 @@ python2 -m SimpleHTTPServer 81
 python2 exploit.py 10.10.181.159 8080
 ```
 
-<figure><img src="../../.gitbook/assets/image (8) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (8) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 **Use Metasploit to get an initial shell. What is the user flag?**
 
