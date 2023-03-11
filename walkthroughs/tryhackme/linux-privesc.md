@@ -87,7 +87,7 @@ View the contents of the /etc/shadow file.
 cat /etc/shadow
 ```
 
-<figure><img src="../../.gitbook/assets/image (2) (2).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (2) (2) (1).png" alt=""><figcaption></figcaption></figure>
 
 Each line of the file represents a user. A user's password hash (if they have one) can be found between the first and second colons (:) of each line.
 
@@ -172,7 +172,7 @@ Edit the /etc/passwd file and place the generated password hash between the firs
 vi /etc/passwd
 ```
 
-<figure><img src="../../.gitbook/assets/image (1) (2) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1) (2) (1) (3).png" alt=""><figcaption></figcaption></figure>
 
 **Victim**
 
@@ -203,7 +203,7 @@ We can use apache2 to read files and crack hashes.
 sudo apache2 -f /etc/shadow
 ```
 
-<figure><img src="../../.gitbook/assets/image (12).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (12) (1).png" alt=""><figcaption></figcaption></figure>
 
 ### **nmap**
 
@@ -250,7 +250,7 @@ TERM= sudo more /etc/profile
 !/bin/sh
 ```
 
-<figure><img src="../../.gitbook/assets/image (1) (2).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1) (2) (1).png" alt=""><figcaption></figcaption></figure>
 
 <figure><img src="../../.gitbook/assets/image (2) (1) (3).png" alt=""><figcaption></figcaption></figure>
 
@@ -265,7 +265,7 @@ sudo less /etc/profile
 !/bin/sh
 ```
 
-<figure><img src="../../.gitbook/assets/image (5) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (5) (1) (3).png" alt=""><figcaption></figcaption></figure>
 
 <figure><img src="../../.gitbook/assets/image (9) (2).png" alt=""><figcaption></figcaption></figure>
 
@@ -478,7 +478,7 @@ Set up a netcat listener on your Kali box on port 4444 and wait for the cron job
 nc -nvlp 4444
 ```
 
-<figure><img src="../../.gitbook/assets/image (14).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (14) (3).png" alt=""><figcaption></figcaption></figure>
 
 
 
@@ -600,7 +600,7 @@ Find all the SUID/SGID executables on the Debian VM.
 find / -type f -a \( -perm -u+s -o -perm -g+s \) -exec ls -l {} \; 2> /dev/null
 ```
 
-<figure><img src="../../.gitbook/assets/image (15).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (15) (7).png" alt=""><figcaption></figcaption></figure>
 
 Note that /usr/sbin/exim-4.84-3 appears in the results. Try to find a known exploit for this version of exim. Exploit-DB, Google, and GitHub are good places to search!
 
@@ -664,7 +664,7 @@ Execute the suid-so executable again, and note that this time, instead of a prog
 /usr/local/bin/suid-so
 ```
 
-<figure><img src="../../.gitbook/assets/image (3) (2).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (3) (2) (3).png" alt=""><figcaption></figcaption></figure>
 
 ## SUID / SGID Executables - Environment Variables
 
@@ -688,7 +688,7 @@ Run strings on the file to look for strings of printable characters.
 strings /usr/local/bin/suid-env
 ```
 
-<figure><img src="../../.gitbook/assets/image (10) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (10) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 One line ("service apache2 start") suggests that the service executable is being called to start the webserver, however the full path of the executable (/usr/sbin/service) is not being used.
 
@@ -824,7 +824,7 @@ List the contents of the user's home directory.
 ls /home/user
 ```
 
-<figure><img src="../../.gitbook/assets/image (3) (1) (8).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (3) (1).png" alt=""><figcaption></figcaption></figure>
 
 Note the presence of a myvpn.ovpn config file. View the contents of the file.
 
@@ -866,7 +866,7 @@ Copy the key over to your Kali box (it's easier to just view the contents of the
 ls -l /.ssh
 ```
 
-<figure><img src="../../.gitbook/assets/image (10) (7) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (10) (7).png" alt=""><figcaption></figcaption></figure>
 
 Use the key to login to the Debian VM as the root account (note that due to the age of the box, some additional settings are required when using SSH):
 
@@ -970,7 +970,7 @@ Once the exploit completes, run /usr/bin/passwd to gain a root shell:
 /usr/bin/passwd
 ```
 
-<figure><img src="../../.gitbook/assets/image (6) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (6) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 
 

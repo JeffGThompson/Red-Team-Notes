@@ -538,7 +538,7 @@ python exploit.py $VICTIM 1337
 !mona findmsp -distance 700
 ```
 
-<figure><img src="../../.gitbook/assets/image (17) (2).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (17) (2) (1).png" alt=""><figcaption></figcaption></figure>
 
 **exploit.py - Code Changes #2**
 

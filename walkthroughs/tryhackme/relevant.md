@@ -152,6 +152,6 @@ PrintSpoofer.exe -i -c whoami
 PrintSpoofer.exe -i -c powershell.exe
 ```
 
-<figure><img src="../../.gitbook/assets/image (13) (3).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (13) (3) (1).png" alt=""><figcaption></figcaption></figure>
 
 <figure><img src="../../.gitbook/assets/image (22) (3) (1).png" alt=""><figcaption></figcaption></figure>
