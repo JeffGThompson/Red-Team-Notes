@@ -60,7 +60,7 @@ Login worked
 
 First ingredient found, also tried doing a reverse shell with netcat but not working
 
-<figure><img src="../../.gitbook/assets/image (6) (2) (2).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (6) (2) (2) (1).png" alt=""><figcaption></figcaption></figure>
 
 Clue to look around.
 

@@ -31,7 +31,7 @@ python3 hash-id.py 2e728dd31fb5949bc39cac5a9f066498
 john --format=raw-md5 hash1.txt 
 ```
 
-<figure><img src="../../.gitbook/assets/image (1) (1) (1) (1) (3) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1) (1) (1) (1) (3).png" alt=""><figcaption></figcaption></figure>
 
 **What type of hash is hash2.txt?**
 
@@ -50,7 +50,7 @@ python hash-id.py 1A732667F3917C0F4AA98BB13011B9090C6F8065
 john --format=raw-sha1 hash2.txt
 ```
 
-<figure><img src="../../.gitbook/assets/image (4) (2) (1) (2) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (4) (2) (1) (2).png" alt=""><figcaption></figcaption></figure>
 
 **What type of hash is hash3.txt?**
 
@@ -59,7 +59,7 @@ cat hash3.txt
 python hash-id.py D7F4D3CCEE7ACD3DD7FAD3AC2BE2AAE9C44F4E9B7FB802D73136D4C53920140A
 ```
 
-****![](<../../.gitbook/assets/image (13) (1) (4).png>)****
+****![](<../../.gitbook/assets/image (13) (1).png>)****
 
 **What is the cracked value of hash3.txt**
 
@@ -114,7 +114,7 @@ python hash-id.py 5460C85BD858A11475115D2DD3A82333
 john --format=nt ntlm.txt --wordlist=/usr/share/wordlists/rockyou.txt 
 ```
 
-<figure><img src="../../.gitbook/assets/image (9) (1) (2).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (9) (1).png" alt=""><figcaption></figcaption></figure>
 
 ### Cracking /etc/shadow Hashes
 
@@ -136,9 +136,9 @@ python hash-id.py 7bf6d9bb82bed1302f331fc6b816aada
 vi hash7.txt
 ```
 
-<figure><img src="../../.gitbook/assets/image (7) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (7) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
-<figure><img src="../../.gitbook/assets/image (5) (1) (1) (4).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (5) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 ```
 john --single --format=raw-md5 hash7.txt
@@ -153,7 +153,7 @@ zip2john secure.zip > secure_john.txt
 john --wordlist=/usr/share/wordlists/rockyou.txt secure_john.txt 
 ```
 
-<figure><img src="../../.gitbook/assets/image (4) (2) (1) (2).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (4) (2) (1).png" alt=""><figcaption></figcaption></figure>
 
 ### Cracking Password Protected RAR Archives
 

@@ -38,7 +38,7 @@ wpscan --url http://10.10.46.54
 wpscan --url http://10.10.46.54/blog --passwords /usr/share/wordlists/rockyou.txt
 ```
 
-<figure><img src="../../.gitbook/assets/image (30) (2).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (30) (2) (1).png" alt=""><figcaption></figcaption></figure>
 
 #### Credentials found
 

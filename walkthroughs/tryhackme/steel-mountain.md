@@ -28,7 +28,7 @@ Google this
 
 **What is the CVE number to exploit this file server?**
 
-<figure><img src="../../.gitbook/assets/image (12) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (12) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 **Use Metasploit to get an initial shell. What is the user flag?**
 
@@ -60,7 +60,7 @@ python2 -m SimpleHTTPServer 81
 python2 exploit.py 10.10.181.159 8080
 ```
 
-<figure><img src="../../.gitbook/assets/image (8) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (8) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 **Use Metasploit to get an initial shell. What is the user flag?**
 
@@ -113,7 +113,7 @@ nc -lvnp 4443
 sc start AdvancedSystemCareService9
 ```
 
-![](<../../.gitbook/assets/image (3) (1) (2) (1) (1).png>)
+![](<../../.gitbook/assets/image (3) (1) (2) (1).png>)
 
 ``
 
