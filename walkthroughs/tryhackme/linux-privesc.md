@@ -87,7 +87,7 @@ View the contents of the /etc/shadow file.
 cat /etc/shadow
 ```
 
-<figure><img src="../../.gitbook/assets/image (2) (2).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (2) (2) (3).png" alt=""><figcaption></figcaption></figure>
 
 Each line of the file represents a user. A user's password hash (if they have one) can be found between the first and second colons (:) of each line.
 
@@ -203,7 +203,7 @@ We can use apache2 to read files and crack hashes.
 sudo apache2 -f /etc/shadow
 ```
 
-<figure><img src="../../.gitbook/assets/image (12) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (12) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 ### **nmap**
 
@@ -265,7 +265,7 @@ sudo less /etc/profile
 !/bin/sh
 ```
 
-<figure><img src="../../.gitbook/assets/image (5) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (5) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 <figure><img src="../../.gitbook/assets/image (9) (2) (1).png" alt=""><figcaption></figcaption></figure>
 
@@ -824,7 +824,7 @@ List the contents of the user's home directory.
 ls /home/user
 ```
 
-<figure><img src="../../.gitbook/assets/image (3) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (3) (1) (2).png" alt=""><figcaption></figcaption></figure>
 
 Note the presence of a myvpn.ovpn config file. View the contents of the file.
 
@@ -854,7 +854,7 @@ ls -la /
 
 Note that there appears to be a hidden directory called .ssh. View the contents of the directory.
 
-<figure><img src="../../.gitbook/assets/image (4) (2).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (4) (2) (1).png" alt=""><figcaption></figcaption></figure>
 
 Note that there is a world-readable file called root\_key. Further inspection of this file should indicate it is a private SSH key. The name of the file suggests it is for the root user.
 
