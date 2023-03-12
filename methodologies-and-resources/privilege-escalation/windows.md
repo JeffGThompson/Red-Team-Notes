@@ -1,5 +1,9 @@
 # Windows
 
+**Copy info from here:** [**https://tryhackme.com/room/windowsprivesc20**](https://tryhackme.com/room/windowsprivesc20)****
+
+****
+
 **Gathering Info**
 
 ```

