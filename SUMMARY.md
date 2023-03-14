@@ -9,16 +9,17 @@
 * [Enumeration](methodologies-and-resources/enumeration.md)
 * [Gaining Access](methodologies-and-resources/gaining-access.md)
 * [Payloads](methodologies-and-resources/maintaining-access.md)
-* [Transferring Files](methodologies-and-resources/transferring-files.md)
-* [Privilege Escalation](methodologies-and-resources/privilege-escalation/README.md)
-  * [Linux](methodologies-and-resources/privilege-escalation/linux.md)
-  * [Windows](methodologies-and-resources/privilege-escalation/windows.md)
 * [Cheat Sheets](methodologies-and-resources/cheat-sheets/README.md)
+  * [Transferring Files](methodologies-and-resources/cheat-sheets/transferring-files.md)
+  * [Privilege Escalation](methodologies-and-resources/cheat-sheets/privilege-escalation/README.md)
+    * [Linux](methodologies-and-resources/cheat-sheets/privilege-escalation/linux.md)
+    * [Windows](methodologies-and-resources/cheat-sheets/privilege-escalation/windows.md)
   * [LFI / RFI](methodologies-and-resources/cheat-sheets/lfi-rfi.md)
   * [Buffer Overflow](methodologies-and-resources/cheat-sheets/buffer-overflow/README.md)
     * [Fuzzers](methodologies-and-resources/cheat-sheets/buffer-overflow/fuzzers.md)
   * [Command Injection](methodologies-and-resources/cheat-sheets/command-injection.md)
   * [Credential Harvesting](methodologies-and-resources/cheat-sheets/credential-harvesting.md)
+  * [Password Attacks](methodologies-and-resources/cheat-sheets/password-attacks.md)
 
 ## Walkthroughs
 
