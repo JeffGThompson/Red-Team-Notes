@@ -87,7 +87,7 @@ View the contents of the /etc/shadow file.
 cat /etc/shadow
 ```
 
-<figure><img src="../../.gitbook/assets/image (2) (2).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (2) (2) (3).png" alt=""><figcaption></figcaption></figure>
 
 Each line of the file represents a user. A user's password hash (if they have one) can be found between the first and second colons (:) of each line.
 
@@ -376,7 +376,7 @@ Sudo can be configured to inherit certain environment variables from the user's 
 sudo -l
 ```
 
-<figure><img src="../../.gitbook/assets/image (32).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (32) (3).png" alt=""><figcaption></figcaption></figure>
 
 **LD\_PRELOAD** and **LD\_LIBRARY\_PATH** are both inherited from the user's environment. LD\_PRELOAD loads a shared object before any others when a program is run. LD\_LIBRARY\_PATH provides a list of directories where shared libraries are searched for first.
 
@@ -478,7 +478,7 @@ Set up a netcat listener on your Kali box on port 4444 and wait for the cron job
 nc -nvlp 4444
 ```
 
-<figure><img src="../../.gitbook/assets/image (14) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (14) (1) (2).png" alt=""><figcaption></figcaption></figure>
 
 
 

