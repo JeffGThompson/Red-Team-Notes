@@ -115,7 +115,7 @@ smbclient -L $VICTIM -U "svc-admin"
 Enter WORKGROUP\svc-admin's password: management2005
 ```
 
-<figure><img src="../../.gitbook/assets/image (7) (2) (3).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (7) (2).png" alt=""><figcaption></figcaption></figure>
 
 ```
 smbclient \\\\$VICTIM\\backup -U "svc-admin"

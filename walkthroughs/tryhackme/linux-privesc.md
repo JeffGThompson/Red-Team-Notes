@@ -764,7 +764,7 @@ Run the suid-env2 executable to gain a root shell.
 /usr/local/bin/suid-env2
 ```
 
-<figure><img src="../../.gitbook/assets/image (3) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (3) (1) (1) (5).png" alt=""><figcaption></figcaption></figure>
 
 ## SUID / SGID Executables - Abusing Shell Features (#2)
 
@@ -854,7 +854,7 @@ ls -la /
 
 Note that there appears to be a hidden directory called .ssh. View the contents of the directory.
 
-<figure><img src="../../.gitbook/assets/image (4) (2).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (4) (2) (4).png" alt=""><figcaption></figcaption></figure>
 
 Note that there is a world-readable file called root\_key. Further inspection of this file should indicate it is a private SSH key. The name of the file suggests it is for the root user.
 

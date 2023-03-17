@@ -14,7 +14,7 @@ The output of the systeminfo provides information about the machine, including t
 systeminfo | findstr Domain
 ```
 
-<figure><img src="../../.gitbook/assets/image.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (13).png" alt=""><figcaption></figcaption></figure>
 
 ## Users and Groups Management
 
@@ -26,11 +26,11 @@ systeminfo | findstr Domain
  Get-ADUser -Filter * -SearchBase "OU=THM,DC=THMREDTEAM,DC=COM"
 ```
 
-<figure><img src="../../.gitbook/assets/image (2).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (18).png" alt=""><figcaption></figcaption></figure>
 
 **Once you run the previous command, what is the UserPrincipalName (email) of the admin account?**
 
-<figure><img src="../../.gitbook/assets/image (7).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (14).png" alt=""><figcaption></figcaption></figure>
 
 ## Host Security Solution #1
 
@@ -44,7 +44,7 @@ systeminfo | findstr Domain
 Get-NetFirewallProfile | Format-Table Name, Enabled
 ```
 
-<figure><img src="../../.gitbook/assets/image (16).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (26).png" alt=""><figcaption></figcaption></figure>
 
 **Using PowerShell cmdlets such Get-MpThreat can provide us with threats details that have been detected using MS Defender. Run it and answer the following: What is the file name that causes this alert to record?**
 
@@ -54,7 +54,7 @@ Get-NetFirewallProfile | Format-Table Name, Enabled
 Get-MpThreat
 ```
 
-<figure><img src="../../.gitbook/assets/image (94).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (4).png" alt=""><figcaption></figcaption></figure>
 
 
 
@@ -66,6 +66,60 @@ Get-MpThreat
 Get-NetFirewallRule | select DisplayName, Enabled, Description
 ```
 
-<figure><img src="../../.gitbook/assets/image (95).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1).png" alt=""><figcaption></figcaption></figure>
 
 ## Host Security Solution #2
+
+**Victim(powershell)**
+
+```
+net start
+```
+
+<figure><img src="../../.gitbook/assets/image (10).png" alt=""><figcaption></figcaption></figure>
+
+**Victim(powershell)**
+
+<pre><code><strong>wmic service where "name like 'THM Service'" get Name,PathName
+</strong></code></pre>
+
+<figure><img src="../../.gitbook/assets/image (2).png" alt=""><figcaption></figcaption></figure>
+
+**Victim(powershell)**
+
+```
+Get-Process -Name thm-service
+```
+
+<figure><img src="../../.gitbook/assets/image (12).png" alt=""><figcaption></figcaption></figure>
+
+**Victim(powershell)**
+
+```
+netstat -noa |findstr "LISTENING" |findstr "2784"
+```
+
+<figure><img src="../../.gitbook/assets/image.png" alt=""><figcaption></figcaption></figure>
+
+**Visit the localhost on the port you found in Question #1. What is the flag?**
+
+<figure><img src="../../.gitbook/assets/image (8).png" alt=""><figcaption></figcaption></figure>
+
+**Now enumerate the domain name of the domain controller, thmredteam.com, using the nslookup.exe, and perform a DNS zone transfer. What is the flag for one of the records?**
+
+**Victim(powershell)**
+
+```
+nslookup.exe
+> server 10.10.119.90
+> ls -d thmredteam.com
+```
+
+<figure><img src="../../.gitbook/assets/image (7).png" alt=""><figcaption></figcaption></figure>
+
+<figure><img src="../../.gitbook/assets/image (6).png" alt=""><figcaption></figcaption></figure>
+
+<figure><img src="../../.gitbook/assets/image (3).png" alt=""><figcaption></figcaption></figure>
+
+****
+
