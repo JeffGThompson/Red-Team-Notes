@@ -6,7 +6,7 @@
 nmap -A 10.10.13.172
 ```
 
-<figure><img src="../../.gitbook/assets/image (2) (3) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (2) (3) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 ```
 smbclient -L //10.10.13.172

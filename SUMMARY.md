@@ -55,3 +55,4 @@
   * [Linux Privilege Escalation](walkthroughs/tryhackme/linux-privilege-escalation.md)
   * [Windows Privilege Escalation](walkthroughs/tryhackme/windows-privilege-escalation.md)
   * [Password Attacks](walkthroughs/tryhackme/password-attacks.md)
+  * [The Lay of the land](walkthroughs/tryhackme/the-lay-of-the-land.md)

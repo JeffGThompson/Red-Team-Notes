@@ -215,7 +215,7 @@ cd C:\tools\AccessChk
 accesschk64.exe -qlc thmservice
 ```
 
-<figure><img src="../../.gitbook/assets/image (7).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (7) (2).png" alt=""><figcaption></figcaption></figure>
 
 **Kali**
 
@@ -245,7 +245,7 @@ sc.exe stop THMService
 sc.exe start THMService
 ```
 
-<figure><img src="../../.gitbook/assets/image (16).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (16) (2).png" alt=""><figcaption></figcaption></figure>
 
 ## Abusing dangerous privileges
 
