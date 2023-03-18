@@ -24,7 +24,7 @@ type %userprofile%\AppData\Roaming\Microsoft\Windows\PowerShell\PSReadline\Conso
 type C:\Windows\Microsoft.NET\Framework64\v4.0.30319\Config\web.config | findstr connectionString
 ```
 
-<figure><img src="../../.gitbook/assets/image (9) (2).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (9) (2) (1).png" alt=""><figcaption></figcaption></figure>
 
 **There is a saved password on your Windows credentials. Using cmdkey and runas, spawn a shell for mike.katz and retrieve the flag from his desktop.**
 
@@ -57,7 +57,7 @@ reg query HKEY_CURRENT_USER\Software\SimonTatham\PuTTY\Sessions\ /f "Proxy" /s
 schtasks /query /tn vulntask /fo list /v
 ```
 
-<figure><img src="../../.gitbook/assets/image (10) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (10) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 **Victim(cmd)**
 
@@ -204,7 +204,7 @@ sc.exe stop "disk sorter enterprise"
 sc.exe start "disk sorter enterprise"
 ```
 
-<figure><img src="../../.gitbook/assets/image (3) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (3) (1) (4).png" alt=""><figcaption></figcaption></figure>
 
 ### Insecure Service Permissions
 

@@ -53,7 +53,7 @@ Some users can write to passwd file
 find / -perm -u=s -type f 2>/dev/null
 ```
 
-<figure><img src="../../.gitbook/assets/image (10) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (10) (1) (1) (2).png" alt=""><figcaption></figcaption></figure>
 
 Running the shell script in user3 home directory gives us root access right away.
 
