@@ -47,7 +47,7 @@ evil-winrm -i $VICTIM -u thmuser1 -p Password321
 *Evil-WinRM* PS C:\Users\thmuser1\Documents> whoami /groups
 ```
 
-<figure><img src="../../.gitbook/assets/image (1) (4).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1).png" alt=""><figcaption></figcaption></figure>
 
 This is due to User Account Control (UAC). One of the features implemented by UAC, **LocalAccountTokenFilterPolicy**, strips any local account of its administrative privileges when logging in remotely. While you can elevate your privileges through UAC from a graphical user session (Read more on UAC [here](https://tryhackme.com/room/windowsfundamentals1xbx)), if you are using WinRM, you are confined to a limited access token with no administrative privileges.
 
@@ -68,7 +68,7 @@ evil-winrm -i $VICTIM -u thmuser1 -p Password321
 *Evil-WinRM* PS C:\Users\thmuser1\Documents> whoami /groups
 ```
 
-<figure><img src="../../.gitbook/assets/image (5).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (94).png" alt=""><figcaption></figcaption></figure>
 
 \----
 
@@ -91,7 +91,7 @@ With those files, we can dump the password hashes for all users using `secretsdu
 python3.9 /opt/impacket/examples/secretsdump.py -sam sam.bak -system system.bak LOCAL
 ```
 
-<figure><img src="../../.gitbook/assets/image (8).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (3).png" alt=""><figcaption></figcaption></figure>
 
 And finally, perform Pass-the-Hash to connect to the victim machine with Administrator privileges.
 
@@ -101,7 +101,7 @@ And finally, perform Pass-the-Hash to connect to the victim machine with Adminis
 evil-winrm -i $VICTIM -u Administrator -H f3118544a831e728781d780cfdb9c1fa
 ```
 
-<figure><img src="../../.gitbook/assets/image (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (95).png" alt=""><figcaption></figcaption></figure>
 
 ### Special Privileges and Security Descriptors
 
@@ -119,9 +119,9 @@ We can assign such privileges to any user, independent of their group membership
 <pre class="language-powershell"><code class="lang-powershell"><strong>secedit /export /cfg C:\Users\Administrator\Desktop\config.inf
 </strong></code></pre>
 
-<figure><img src="../../.gitbook/assets/image (94).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (6).png" alt=""><figcaption></figcaption></figure>
 
-<figure><img src="../../.gitbook/assets/image.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (4).png" alt=""><figcaption></figcaption></figure>
 
 We finally convert the .inf file into a .sdb file which is then used to load the configuration back into the system.
 
@@ -137,14 +137,15 @@ You should now have a user with equivalent privileges to any Backup Operator. Th
 
 To open the configuration window for WinRM's security descriptor, you can use the following command in Powershell (you'll need to use the GUI session for this).
 
-```
-powershell.exe
-Set-PSSessionConfiguration -Name Microsoft.PowerShell -showSecurityDescriptorUI
-```
+**Victim(powershell)**
+
+<pre><code><strong>powershell.exe
+</strong>Set-PSSessionConfiguration -Name Microsoft.PowerShell -showSecurityDescriptorUI
+</code></pre>
 
 This will open a window where you can add thmuser2 and assign it full privileges to connect to WinRM.
 
-<figure><img src="../../.gitbook/assets/image (7).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image.png" alt=""><figcaption></figcaption></figure>
 
 Once we have done this, our user can connect via WinRM. Since the user has the SeBackup and SeRestore privileges, we can repeat the steps to recover the password hashes from the SAM and connect back with the Administrator user.
 
@@ -152,7 +153,46 @@ Notice that for this user to work with the given privileges fully, you'd have to
 
 If you check your user's group memberships, it will look like a regular user. Nothing suspicious at all!
 
+### RID Hijacking
+
+Another method to gain administrative privileges without being an administrator is changing some registry values to make the operating system think you are the Administrator.
+
+When a user is created, an identifier called **Relative ID (RID)** is assigned to them. The RID is simply a numeric identifier representing the user across the system. When a user logs on, the LSASS process gets its RID from the SAM registry hive and creates an access token associated with that RID. If we can tamper with the registry value, we can make windows assign an Administrator access token to an unprivileged user by associating the same RID to both accounts.
+
+In any Windows system, the default Administrator account is assigned the **RID = 500**, and regular users usually have **RID >= 1000**.
+
+To find the assigned RIDs for any user, you can use the following command.
+
+**Victim(cmd)**
+
+```
+wmic useraccount get name,sid
+```
+
+<figure><img src="../../.gitbook/assets/image (96).png" alt=""><figcaption></figcaption></figure>
+
+The RID is the last bit of the SID (1010 for thmuser3 and 500 for Administrator). The SID is an identifier that allows the operating system to identify a user across a domain, but we won't mind too much about the rest of it for this task.
+
+Now we only have to assign the RID=500 to thmuser3. To do so, we need to access the SAM using Regedit. The SAM is restricted to the SYSTEM account only, so even the Administrator won't be able to edit it. To run Regedit as SYSTEM, we will use psexec, available in `C:\tools\pstools` in your machine.
+
+**Victim(cmd)**
+
+<pre><code><strong>C:\tools\pstools\PsExec64.exe -i -s regedit
+</strong></code></pre>
+
+From Regedit, we will go to **`HKLM\SAM\SAM\Domains\Account\Users\`** where there will be a key for each user in the machine. Since we want to modify thmuser3, we need to search for a key with its RID in hex (1010 = 0x3F2). Under the corresponding key, there will be a value called **F**, which holds the user's effective RID at position 0x30:
+
+<figure><img src="../../.gitbook/assets/image (5).png" alt=""><figcaption></figcaption></figure>
 
 
 
+Notice the RID is stored using little-endian notation, so its bytes appear reversed.
+
+We will now replace those two bytes with the RID of Administrator in hex (500 = 0x01F4), switching around the bytes (F401):
+
+<figure><img src="../../.gitbook/assets/image (13).png" alt=""><figcaption></figcaption></figure>
+
+
+
+The next time thmuser3 logs in, LSASS will associate it with the same RID as Administrator and grant them the same privileges.
 

@@ -26,7 +26,7 @@ cat /etc/*-release
 cat /etc/*-release
 ```
 
-<figure><img src="../../.gitbook/assets/image (6).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (6) (10).png" alt=""><figcaption></figcaption></figure>
 
 
 
@@ -38,7 +38,7 @@ cat /etc/*-release
 last
 ```
 
-<figure><img src="../../.gitbook/assets/image (1) (4) (2).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1) (4).png" alt=""><figcaption></figcaption></figure>
 
 **What is the highest listening TCP port number?**
 
@@ -81,7 +81,7 @@ ps axf
 systeminfo
 ```
 
-<figure><img src="../../.gitbook/assets/image (3).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (3) (1).png" alt=""><figcaption></figcaption></figure>
 
 **What is the OS Version?**
 
@@ -91,7 +91,7 @@ systeminfo
 systeminfo
 ```
 
-<figure><img src="../../.gitbook/assets/image (4).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (4) (1).png" alt=""><figcaption></figcaption></figure>
 
 **How many hotfixes are installed on this MS Windows Server?**
 
@@ -121,7 +121,7 @@ netstat -n
 netstat -nob
 ```
 
-<figure><img src="../../.gitbook/assets/image (7) (9).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (7).png" alt=""><figcaption></figcaption></figure>
 
 ## DNS, SMB, and SNMP
 

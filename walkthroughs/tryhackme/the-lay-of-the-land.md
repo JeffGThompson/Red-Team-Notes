@@ -54,7 +54,7 @@ Get-NetFirewallProfile | Format-Table Name, Enabled
 Get-MpThreat
 ```
 
-<figure><img src="../../.gitbook/assets/image (4) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (4) (1) (5).png" alt=""><figcaption></figcaption></figure>
 
 
 
@@ -99,11 +99,11 @@ Get-Process -Name thm-service
 netstat -noa |findstr "LISTENING" |findstr "2784"
 ```
 
-<figure><img src="../../.gitbook/assets/image (13).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (13) (7).png" alt=""><figcaption></figcaption></figure>
 
 **Visit the localhost on the port you found in Question #1. What is the flag?**
 
-<figure><img src="../../.gitbook/assets/image (8) (11).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (8).png" alt=""><figcaption></figcaption></figure>
 
 **Now enumerate the domain name of the domain controller, thmredteam.com, using the nslookup.exe, and perform a DNS zone transfer. What is the flag for one of the records?**
 
@@ -119,7 +119,7 @@ nslookup.exe
 
 <figure><img src="../../.gitbook/assets/image (6) (1).png" alt=""><figcaption></figcaption></figure>
 
-<figure><img src="../../.gitbook/assets/image (3) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (3) (1) (8).png" alt=""><figcaption></figcaption></figure>
 
 ****
 
