@@ -69,7 +69,7 @@ sudo netstat -atpn
 ps axf
 ```
 
-<figure><img src="../../.gitbook/assets/image (2).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (2) (10).png" alt=""><figcaption></figcaption></figure>
 
 ## Windows Enumeration
 
@@ -134,7 +134,7 @@ netstat -nob
 dig -t AXFR redteam.thm @10.10.100.178
 ```
 
-<figure><img src="../../.gitbook/assets/image.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (2).png" alt=""><figcaption></figcaption></figure>
 
 \
 **What is the name of the share available over SMB protocol and starts with `THM`?**
@@ -145,7 +145,7 @@ dig -t AXFR redteam.thm @10.10.100.178
 net share
 ```
 
-<figure><img src="../../.gitbook/assets/image (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1) (13).png" alt=""><figcaption></figcaption></figure>
 
 **Knowing that the community string used by the SNMP service is `public`, use `snmpcheck` to collect information about the MS Windows Server of IP `10.10.100.178`. What is the location specified?**
 
