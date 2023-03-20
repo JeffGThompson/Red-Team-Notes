@@ -38,7 +38,7 @@ cat /etc/*-release
 last
 ```
 
-<figure><img src="../../.gitbook/assets/image (1) (4).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1) (4) (2).png" alt=""><figcaption></figcaption></figure>
 
 **What is the highest listening TCP port number?**
 
@@ -121,7 +121,7 @@ netstat -n
 netstat -nob
 ```
 
-<figure><img src="../../.gitbook/assets/image (7).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (7) (9).png" alt=""><figcaption></figcaption></figure>
 
 ## DNS, SMB, and SNMP
 
