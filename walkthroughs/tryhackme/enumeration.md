@@ -121,7 +121,7 @@ netstat -n
 netstat -nob
 ```
 
-<figure><img src="../../.gitbook/assets/image (7).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (7) (1).png" alt=""><figcaption></figcaption></figure>
 
 ## DNS, SMB, and SNMP
 
@@ -134,7 +134,7 @@ netstat -nob
 dig -t AXFR redteam.thm @10.10.100.178
 ```
 
-<figure><img src="../../.gitbook/assets/image (2).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (2) (2).png" alt=""><figcaption></figcaption></figure>
 
 \
 **What is the name of the share available over SMB protocol and starts with `THM`?**

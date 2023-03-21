@@ -152,7 +152,7 @@ base64 /etc/shadow | base64 --decode
 base64 /etc/passwd | base64 --decode
 ```
 
-<figure><img src="../../.gitbook/assets/image (15).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (15) (4).png" alt=""><figcaption></figcaption></figure>
 
 **Kali**
 
@@ -221,7 +221,7 @@ cat /home/ubuntu/flag4.txt
 cat /etc/crontab
 ```
 
-<figure><img src="../../.gitbook/assets/image (4) (2).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (4) (2) (2).png" alt=""><figcaption></figcaption></figure>
 
 **Victim**
 
