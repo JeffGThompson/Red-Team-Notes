@@ -57,7 +57,7 @@ xfreerdp /u:admin /p:password /cert:ignore /v:$TESTMACHINE /workarea  +clipboard
 python2 -m SimpleHTTPServer 81
 ```
 
-<figure><img src="../../.gitbook/assets/image (18) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (18) (1) (3).png" alt=""><figcaption></figcaption></figure>
 
 ### **Crash Replication & Controlling EIP**
 

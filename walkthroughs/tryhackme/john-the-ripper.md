@@ -114,7 +114,7 @@ python hash-id.py 5460C85BD858A11475115D2DD3A82333
 john --format=nt ntlm.txt --wordlist=/usr/share/wordlists/rockyou.txt 
 ```
 
-<figure><img src="../../.gitbook/assets/image (9) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (9) (1) (2).png" alt=""><figcaption></figcaption></figure>
 
 ### Cracking /etc/shadow Hashes
 

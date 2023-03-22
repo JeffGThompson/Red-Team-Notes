@@ -35,7 +35,7 @@ cmdkey /list
 runas /savecred /user:WPRIVESC1\mike.katz cmd.exe
 ```
 
-<figure><img src="../../.gitbook/assets/image (1) (2).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1) (2) (1).png" alt=""><figcaption></figcaption></figure>
 
 **Retrieve the saved password stored in the saved PuTTY session under your profile. What is the password for the thom.smith user?**
 
@@ -45,7 +45,7 @@ runas /savecred /user:WPRIVESC1\mike.katz cmd.exe
 reg query HKEY_CURRENT_USER\Software\SimonTatham\PuTTY\Sessions\ /f "Proxy" /s
 ```
 
-<figure><img src="../../.gitbook/assets/image (19).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (19) (1).png" alt=""><figcaption></figcaption></figure>
 
 ## Other Quick Wins
 
