@@ -836,7 +836,7 @@ cat /home/user/myvpn.ovpn
 
 The file should contain a reference to another location where the root user's credentials can be found. Switch to the root user, using the credentials.
 
-<figure><img src="../../.gitbook/assets/image (2) (4) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (2) (4) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 
 

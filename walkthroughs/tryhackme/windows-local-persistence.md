@@ -373,7 +373,7 @@ You should be able to find a stopped service called THMService3. To query the se
 sc.exe qc THMService3
 ```
 
-<figure><img src="../../.gitbook/assets/image.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (2).png" alt=""><figcaption></figcaption></figure>
 
 There are three things we care about when using a service for persistence:
 
@@ -416,7 +416,7 @@ sc.exe config THMservice3 binPath= "C:\Windows\rev-svc2.exe" start= auto obj= "L
 sc.exe start THMservice3
 ```
 
-<figure><img src="../../.gitbook/assets/image (2).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (2) (4).png" alt=""><figcaption></figcaption></figure>
 
 ## Abusing Scheduled Tasks
 
@@ -446,7 +446,7 @@ To check if our task was successfully created, we can use the following command.
 schtasks /query /tn thm-taskbackdoor
 ```
 
-<figure><img src="../../.gitbook/assets/image (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1) (3).png" alt=""><figcaption></figcaption></figure>
 
 ### Making Our Task Invisible
 
@@ -463,6 +463,10 @@ c:\tools\pstools\PsExec64.exe -s -i regedit
 ```
 
 <figure><img src="../../.gitbook/assets/image (8).png" alt=""><figcaption></figcaption></figure>
+
+**Location**: Computer\HKEY\_LOCAL\_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Schedule\TaskCache\Tree\THM-TaskBackdoor
+
+<figure><img src="../../.gitbook/assets/image.png" alt=""><figcaption></figcaption></figure>
 
 We will then delete the security descriptor for our task.
 
