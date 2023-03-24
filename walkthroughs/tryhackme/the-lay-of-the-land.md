@@ -103,7 +103,7 @@ netstat -noa |findstr "LISTENING" |findstr "2784"
 
 **Visit the localhost on the port you found in Question #1. What is the flag?**
 
-<figure><img src="../../.gitbook/assets/image (8).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (8) (11).png" alt=""><figcaption></figcaption></figure>
 
 **Now enumerate the domain name of the domain controller, thmredteam.com, using the nslookup.exe, and perform a DNS zone transfer. What is the flag for one of the records?**
 
