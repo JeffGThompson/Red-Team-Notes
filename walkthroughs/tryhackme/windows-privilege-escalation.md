@@ -35,7 +35,7 @@ cmdkey /list
 runas /savecred /user:WPRIVESC1\mike.katz cmd.exe
 ```
 
-<figure><img src="../../.gitbook/assets/image (1) (2) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1) (2) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 **Retrieve the saved password stored in the saved PuTTY session under your profile. What is the password for the thom.smith user?**
 

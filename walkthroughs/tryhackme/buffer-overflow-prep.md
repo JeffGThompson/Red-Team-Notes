@@ -1754,7 +1754,7 @@ nc -lvnp 4444
 python exploit.py $VICTIM 1337
 ```
 
-<figure><img src="../../.gitbook/assets/image (22) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (22) (1) (3).png" alt=""><figcaption></figcaption></figure>
 
 ## oscp.exe - OVERFLOW6
 
@@ -1849,7 +1849,7 @@ python fuzzer.py $VICTIM 1337
 
 Program crashed at 1100 bytes with fuzzer.py
 
-<figure><img src="../../.gitbook/assets/image (23) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (23) (1) (1) (2).png" alt=""><figcaption></figcaption></figure>
 
 ```
 /opt/metasploit-framework-5101/tools/exploit/pattern_create.rb -l 1100
