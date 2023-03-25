@@ -71,7 +71,7 @@ icacls c:\tasks\schtask.bat
 icacls c:\tasks\schtask.bat
 ```
 
-<figure><img src="../../.gitbook/assets/image (20).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (20) (5).png" alt=""><figcaption></figcaption></figure>
 
 **Kali**
 
@@ -100,7 +100,7 @@ schtasks /run /tn vulntask
 sc qc WindowsScheduler
 ```
 
-<figure><img src="../../.gitbook/assets/image (21) (5).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (21) (5) (1).png" alt=""><figcaption></figcaption></figure>
 
 **Victim(cmd)**
 
