@@ -83,7 +83,7 @@ net start
 <pre><code><strong>wmic service where "name like 'THM Service'" get Name,PathName
 </strong></code></pre>
 
-<figure><img src="../../.gitbook/assets/image (2) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (2) (1) (6).png" alt=""><figcaption></figcaption></figure>
 
 **Victim(powershell)**
 

