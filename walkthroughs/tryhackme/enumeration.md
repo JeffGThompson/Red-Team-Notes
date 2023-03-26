@@ -16,7 +16,7 @@
 cat /etc/*-release
 ```
 
-<figure><img src="../../.gitbook/assets/image (10).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (10) (8).png" alt=""><figcaption></figcaption></figure>
 
 **What is its version number?**
 
@@ -69,7 +69,7 @@ sudo netstat -atpn
 ps axf
 ```
 
-<figure><img src="../../.gitbook/assets/image (2) (10).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (2) (10) (1).png" alt=""><figcaption></figcaption></figure>
 
 ## Windows Enumeration
 
@@ -91,7 +91,7 @@ systeminfo
 systeminfo
 ```
 
-<figure><img src="../../.gitbook/assets/image (4) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (4) (1) (6).png" alt=""><figcaption></figcaption></figure>
 
 **How many hotfixes are installed on this MS Windows Server?**
 

