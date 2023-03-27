@@ -12,7 +12,7 @@ nmap -A 10.10.13.172
 smbclient -L //10.10.13.172
 ```
 
-<figure><img src="../../.gitbook/assets/image (13) (2) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (13) (2) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 ```
 smbget -R smb://10.10.13.172/anonymous
@@ -35,7 +35,7 @@ There is also an email from Miles Dyson, as it's just his name I tried different
 gobuster dir 10.10.13.172 -u http://10.10.13.172 -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt
 ```
 
-<figure><img src="../../.gitbook/assets/image (34) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (34) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 
 
@@ -60,7 +60,7 @@ Password: )s{A&2Z=F^n_E.B`
 
 <figure><img src="../../.gitbook/assets/image (32) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
-<figure><img src="../../.gitbook/assets/image (35) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (35) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 ```
 gobuster dir 10.10.13.172 -u http://10.10.13.172/45kra24zxs28v3yd/ -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt
@@ -77,7 +77,7 @@ searchsploit cuppa
 searchsploit -x php/webapps/25971.txt
 ```
 
-<figure><img src="../../.gitbook/assets/image (33) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (33) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 Testing LFI and it works
 

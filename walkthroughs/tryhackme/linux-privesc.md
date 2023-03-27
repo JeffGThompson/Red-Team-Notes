@@ -111,7 +111,7 @@ Note that the /etc/shadow file on the VM is world-writable
 ls -l /etc/shadow
 ```
 
-<figure><img src="../../.gitbook/assets/image (7) (4).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (7) (4) (3).png" alt=""><figcaption></figcaption></figure>
 
 Generate a new password hash with a password of your choice.
 

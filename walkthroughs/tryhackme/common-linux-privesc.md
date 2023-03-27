@@ -39,7 +39,7 @@ There are 8 users
 
 
 
-<figure><img src="../../.gitbook/assets/image (3) (1) (5).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (3) (1) (5) (1).png" alt=""><figcaption></figcaption></figure>
 
 Some users can write to passwd file
 
@@ -203,7 +203,7 @@ Now after running the below command ls is now directed to our script.
 export PATH=/tmp:$PATH
 ```
 
-<figure><img src="../../.gitbook/assets/image (14) (3).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (14) (3) (1).png" alt=""><figcaption></figcaption></figure>
 
 Now the script in user5s directory acts differently, we now have a root shell.
 

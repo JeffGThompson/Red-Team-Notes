@@ -58,7 +58,7 @@ sudo netstat -atpn
 sudo netstat -atpn
 ```
 
-<figure><img src="../../.gitbook/assets/image (14).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (14) (3).png" alt=""><figcaption></figcaption></figure>
 
 \
 **There is a script running in the background. Its name starts with `THM`. What is the name of the script?**
