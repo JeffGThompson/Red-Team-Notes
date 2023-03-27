@@ -66,7 +66,7 @@ Get-MpThreat
 Get-NetFirewallRule | select DisplayName, Enabled, Description
 ```
 
-<figure><img src="../../.gitbook/assets/image (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1) (1) (1) (4).png" alt=""><figcaption></figcaption></figure>
 
 ## Host Security Solution #2
 

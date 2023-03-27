@@ -58,3 +58,4 @@
   * [The Lay of the land](walkthroughs/tryhackme/the-lay-of-the-land.md)
   * [Enumeration](walkthroughs/tryhackme/enumeration.md)
   * [Windows Local Persistence](walkthroughs/tryhackme/windows-local-persistence.md)
+  * [Lateral Movement and Pivoting](walkthroughs/tryhackme/lateral-movement-and-pivoting.md)

