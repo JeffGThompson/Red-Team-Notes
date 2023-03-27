@@ -121,7 +121,7 @@ netstat -n
 netstat -nob
 ```
 
-<figure><img src="../../.gitbook/assets/image (7) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (7) (1) (3).png" alt=""><figcaption></figcaption></figure>
 
 ## DNS, SMB, and SNMP
 
@@ -159,4 +159,4 @@ chmod +x snmpcheck-1.9.rb
 ./snmpcheck-1.9.rb 10.10.100.178 -c public
 ```
 
-<figure><img src="../../.gitbook/assets/image (11).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (11) (3).png" alt=""><figcaption></figcaption></figure>
