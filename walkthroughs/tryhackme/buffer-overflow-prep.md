@@ -204,7 +204,7 @@ After running the program again we now can fill EIP with our Bs so we now have c
 python exploit.py $VICTIM 1337
 ```
 
-<figure><img src="../../.gitbook/assets/image (6) (4).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (6) (4) (2).png" alt=""><figcaption></figcaption></figure>
 
 ### Finding Bad Characters
 
