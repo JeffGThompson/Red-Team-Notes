@@ -30,7 +30,7 @@ Abyss appears to have a program running but we can't interact.&#x20;
 gobuster dir -u http://$VICTIM:9999 -w /usr/share/dirb/wordlists/big.txt -t 50
 ```
 
-<figure><img src="../../.gitbook/assets/image (4) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (4) (1) (1) (4).png" alt=""><figcaption></figcaption></figure>
 
 ### http/TCP port 10000
 

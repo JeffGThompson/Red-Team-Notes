@@ -74,7 +74,7 @@ zip revshell.zip revshell.php
 nc -lvnp 443
 ```
 
-<figure><img src="../../.gitbook/assets/image (9) (1) (1) (2).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (9) (1) (1) (2) (1).png" alt=""><figcaption></figcaption></figure>
 
 Unable to upload the plugin due to write issues
 

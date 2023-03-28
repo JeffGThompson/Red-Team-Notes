@@ -662,7 +662,7 @@ Add: C:\Windows\revshell.exe
 
 After doing this, sign out of your current session and log in again, and you should receive a shell (it will probably take around 10 seconds).
 
-<figure><img src="../../.gitbook/assets/image (2) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (2) (1) (1) (3).png" alt=""><figcaption></figcaption></figure>
 
 ### Logon scripts
 
@@ -793,7 +793,7 @@ You should now be able to press `SHIFT` five times to access a terminal with SYS
 
 Utilman is a built-in Windows application used to provide Ease of Access options during the lock screen.
 
-<figure><img src="../../.gitbook/assets/image (4) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (4) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 
 
@@ -955,4 +955,4 @@ With all that ready, let's navigate to `http://$VICTIM/` and insert an employee 
 
 
 
-<figure><img src="../../.gitbook/assets/image (2) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (2) (1) (1).png" alt=""><figcaption></figcaption></figure>
