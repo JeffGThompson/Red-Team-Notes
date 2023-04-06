@@ -186,9 +186,9 @@ getcap -r / 2>/dev/null
 
 <figure><img src="../../.gitbook/assets/image (1) (2) (6).png" alt=""><figcaption></figcaption></figure>
 
-****
 
-****
+
+
 
 **What is the content of the flag4.txt file?**
 
@@ -283,7 +283,7 @@ find / -writable 2>/dev/null
 
 <figure><img src="../../.gitbook/assets/image (14) (1) (2).png" alt=""><figcaption></figcaption></figure>
 
-****
+
 
 <figure><img src="../../.gitbook/assets/image (13) (6).png" alt=""><figcaption></figcaption></figure>
 

@@ -166,7 +166,7 @@ sc.exe start windowsscheduler
 
 
 
-****
+
 
 **Victim(cmd)**
 

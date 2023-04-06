@@ -51,7 +51,7 @@ post
 
 <figure><img src="../../.gitbook/assets/image (26) (1).png" alt=""><figcaption></figcaption></figure>
 
-****
+
 
 ### **Cracking a password with JohnTheRipper**
 
@@ -113,7 +113,7 @@ Password: videogamer124
 
 ### **Privilege Escalation with Metasploit**
 
-****
+
 
 <figure><img src="../../.gitbook/assets/image (16) (3) (1).png" alt=""><figcaption></figcaption></figure>
 

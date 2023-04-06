@@ -215,7 +215,7 @@ nbtscan $VICTIM
 enum4linux $VICTIM
 ```
 
-### ****
+###
 
 ### **SMB**
 

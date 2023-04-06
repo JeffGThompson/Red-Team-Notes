@@ -81,7 +81,7 @@ ps axf
 systeminfo
 ```
 
-<figure><img src="../../.gitbook/assets/image (3) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (3) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 **What is the OS Version?**
 
@@ -101,7 +101,7 @@ systeminfo
 systeminfo
 ```
 
-<figure><img src="../../.gitbook/assets/image (12).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (12) (1).png" alt=""><figcaption></figcaption></figure>
 
 **What is the lowest TCP port number listening on the system?**
 
@@ -111,7 +111,7 @@ systeminfo
 netstat -n
 ```
 
-****![](<../../.gitbook/assets/image (6) (3) (4).png>)****
+![](<../../.gitbook/assets/image (6) (3) (4).png>)
 
 **What is the name of the program listening on that port?**
 
@@ -134,7 +134,7 @@ netstat -nob
 dig -t AXFR redteam.thm @10.10.100.178
 ```
 
-<figure><img src="../../.gitbook/assets/image (2) (2).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (2) (2) (3).png" alt=""><figcaption></figcaption></figure>
 
 \
 **What is the name of the share available over SMB protocol and starts with `THM`?**

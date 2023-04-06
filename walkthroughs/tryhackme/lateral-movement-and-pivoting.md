@@ -24,7 +24,7 @@ The way psexec works is as follows:
 2. Connect to the service control manager to create and run a service named PSEXESVC and associate the service binary with `C:\Windows\psexesvc.exe`.
 3. Create some named pipes to handle stdin/stdout/stderr.
 
-<figure><img src="../../.gitbook/assets/image (3) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (3) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 
 
@@ -156,7 +156,7 @@ For this exercise, we will assume we have already captured some credentials with
 
 **Password:** EZpass4ever
 
-<figure><img src="../../.gitbook/assets/image (14).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (14) (2).png" alt=""><figcaption></figcaption></figure>
 
 We'll show how to use those credentials to move laterally to THMIIS using `sc.exe`. Feel free to try the other methods, as they all should work against THMIIS.
 
@@ -439,7 +439,7 @@ We then invoke the Install method from the Win32\_Product class to trigger the p
 Invoke-CimMethod -CimSession $Session -ClassName Win32_Product -MethodName Install -Arguments @{PackageLocation = "C:\Windows\myinstaller.msi"; Options = ""; AllUsers = $false}
 ```
 
-<figure><img src="../../.gitbook/assets/image (13) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (13) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 As a result, you should receive a connection in your AttackBox from where you can access a flag on t1\_corine.waters desktop.
 
@@ -461,7 +461,7 @@ Note: During this task, you are assumed to be familiar with the methods and tool
 
 Before diving into the actual lateral movement techniques, let's take a look at how NTLM authentication works:
 
-<figure><img src="../../.gitbook/assets/image (13).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (13) (1).png" alt=""><figcaption></figcaption></figure>
 
 1. The client sends an authentication request to the server they want to access.
 2. The server generates a random number and sends it as a challenge to the client.
@@ -861,7 +861,7 @@ When an administrator uses Remote Desktop to connect to a machine and closes the
 
 If we have administrator-level access, we can get SYSTEM by any method of our preference. For now, we will be using psexec to do so. First, let's run a cmd.exe as administrator:
 
-<figure><img src="../../.gitbook/assets/image (3).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (3) (1).png" alt=""><figcaption></figcaption></figure>
 
 From there, run `PsExec64.exe`(available at `C:\tools\`):
 
@@ -871,7 +871,7 @@ PsExec64.exe -s cmd.exe
 
 To list the existing sessions on a server, you can use the following command:
 
-<figure><img src="../../.gitbook/assets/image (5).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (5) (1).png" alt=""><figcaption></figcaption></figure>
 
 According to the command output above, if we were currently connected via RDP using the administrator user, our SESSIONNAME would be `rdp-tcp#6`. We can also see that a user named luke has left a session open with id `3`. Any session with a **Disc** state has been left open by the user and isn't being used at the moment. While you can take over active sessions as well, the legitimate user will be forced out of his session when you do, which could be noticed by them.
 
@@ -932,7 +932,7 @@ tscon 4 /dest:rdp-tcp#1
 
 Logged me in a Toby right away
 
-<figure><img src="../../.gitbook/assets/image (10).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (10) (1).png" alt=""><figcaption></figcaption></figure>
 
 
 
@@ -953,7 +953,7 @@ The first protocol we'll be looking at is SSH, as it already has built-in functi
 
 SSH Tunnelling can be used in different ways to forward ports through an SSH connection, which we'll use depending on the situation. To explain each case, let's assume a scenario where we've gained control over the PC-1 machine (it doesn't need to be administrator access) and would like to use it as a pivot to access a port on another machine to which we can't directly connect. We will start a tunnel from the PC-1 machine, acting as an SSH client, to the Attacker's PC, which will act as an SSH server. The reason to do so is that you'll often find an SSH client on Windows machines, but no SSH server will be available most of the time.
 
-<figure><img src="../../.gitbook/assets/image (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 Since we'll be making a connection back to our attacker's machine, we'll want to create a user in it without access to any console for tunnelling and set a password to use for creating the tunnels:
 
@@ -1125,7 +1125,7 @@ Putting the whole command together, we would end up with the following:
 
 Once all port forwards are in place, we can start Metasploit and configure the exploit so that the required ports match the ones we have forwarded through THMJMP2:
 
-<figure><img src="../../.gitbook/assets/image.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (3).png" alt=""><figcaption></figcaption></figure>
 
 There is a lot to unpack here:
 
@@ -1173,7 +1173,7 @@ passwd tunneluser
 ssh tunneluser@$KALI -R 8888:thmdc.za.tryhackme.com:80 -L *:1990:127.0.0.1:1990 -L *:1029:127.0.0.1:1029 -N
 ```
 
-<figure><img src="../../.gitbook/assets/image (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 **Kali(Metasploit**
 

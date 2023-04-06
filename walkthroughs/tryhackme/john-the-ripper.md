@@ -59,7 +59,7 @@ cat hash3.txt
 python hash-id.py D7F4D3CCEE7ACD3DD7FAD3AC2BE2AAE9C44F4E9B7FB802D73136D4C53920140A
 ```
 
-****![](<../../.gitbook/assets/image (13) (1) (5).png>)****
+![](<../../.gitbook/assets/image (13) (1) (5).png>)
 
 **What is the cracked value of hash3.txt**
 
@@ -76,7 +76,7 @@ cat hash4.txt
 python hash-id.py c5a60cc6bbba781c601c5402755ae1044bbf45b78d1183cbf2ca1c865b6c792cf3c6b87791344986c8a832a0f9ca8d0b4afd3d9421a149d57075e1b4e93f90bf
 ```
 
-****![](<../../.gitbook/assets/image (8) (4) (2).png>)****
+![](<../../.gitbook/assets/image (8) (4) (2).png>)
 
 **What is the cracked value of hash4.txt**
 
@@ -138,7 +138,7 @@ vi hash7.txt
 
 <figure><img src="../../.gitbook/assets/image (7) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
-<figure><img src="../../.gitbook/assets/image (5) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (5) (1) (1) (4).png" alt=""><figcaption></figcaption></figure>
 
 ```
 john --single --format=raw-md5 hash7.txt

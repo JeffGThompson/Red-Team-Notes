@@ -122,7 +122,7 @@ put shell.aspx
 
 As SeImpersonatePrivilege is enabled for the user we can use Printspoofer as it works on Windows 10 and Server 2016/2019.
 
-****
+
 
 **Victim**
 

@@ -127,7 +127,7 @@ There is a backup script that is ran every minute by root which backs up /var/ww
 
 <figure><img src="../../.gitbook/assets/image (31) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
-****
+
 
 <figure><img src="../../.gitbook/assets/image (11) (1) (2) (2) (1).png" alt=""><figcaption></figcaption></figure>
 
@@ -135,7 +135,7 @@ There is a backup script that is ran every minute by root which backs up /var/ww
 
 We can use the following from gtfo to create a reverse shell. The checkpoint argument lets us run a command before the files are tar'd so we will create a reverse shell in /var/www/html and then the commands will execute when the folder is tar'd next.
 
-****
+
 
 **Exploit Link:** [https://gtfobins.github.io/gtfobins/tar/](https://gtfobins.github.io/gtfobins/tar/)
 

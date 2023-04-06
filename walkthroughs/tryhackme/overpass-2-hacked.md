@@ -78,7 +78,7 @@ It's in the code on github
 
 **Crack the hash using rockyou and a cracking tool of your choice. What's the password?**
 
-****
+
 
 <figure><img src="../../.gitbook/assets/image (27) (2).png" alt=""><figcaption></figcaption></figure>
 

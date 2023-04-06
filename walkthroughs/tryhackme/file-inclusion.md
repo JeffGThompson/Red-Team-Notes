@@ -42,9 +42,9 @@ hxxp://10.10.230.14/lab6.php?file=THM-profile//..//..//..//..//etc//os-release%0
 
 **Capture Flag1 at /etc/flag1**
 
-****
 
-****
+
+
 
 <figure><img src="../../.gitbook/assets/image (12) (6).png" alt=""><figcaption></figcaption></figure>
 
@@ -92,7 +92,7 @@ Changing to post and added extra slashed and null character at end.
 
 Created the following file to run the hostname command.
 
-****![](<../../.gitbook/assets/image (14) (1) (1).png>)****
+![](<../../.gitbook/assets/image (14) (1) (1).png>)
 
 **Kali**
 
