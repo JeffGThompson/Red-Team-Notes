@@ -81,7 +81,7 @@ ps axf
 systeminfo
 ```
 
-<figure><img src="../../.gitbook/assets/image (3) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (3) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 **What is the OS Version?**
 
@@ -101,7 +101,7 @@ systeminfo
 systeminfo
 ```
 
-<figure><img src="../../.gitbook/assets/image (12) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (12) (5).png" alt=""><figcaption></figcaption></figure>
 
 **What is the lowest TCP port number listening on the system?**
 
@@ -121,7 +121,7 @@ netstat -n
 netstat -nob
 ```
 
-<figure><img src="../../.gitbook/assets/image (7) (1) (3).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (7) (1) (3) (1).png" alt=""><figcaption></figcaption></figure>
 
 ## DNS, SMB, and SNMP
 
@@ -134,7 +134,7 @@ netstat -nob
 dig -t AXFR redteam.thm @10.10.100.178
 ```
 
-<figure><img src="../../.gitbook/assets/image (2) (2) (3).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (2) (2).png" alt=""><figcaption></figcaption></figure>
 
 \
 **What is the name of the share available over SMB protocol and starts with `THM`?**

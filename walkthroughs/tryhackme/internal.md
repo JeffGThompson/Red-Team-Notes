@@ -78,7 +78,7 @@ nc -lvnp 443
 
 Unable to upload the plugin due to write issues
 
-<figure><img src="../../.gitbook/assets/image (14) (4).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (14) (4) (1).png" alt=""><figcaption></figcaption></figure>
 
 ## Reverse Shell
 

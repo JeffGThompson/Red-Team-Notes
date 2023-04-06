@@ -480,7 +480,7 @@ python fuzzer.py $VICTIM 1337
 
 Program crashed at 700 bytes with fuzzer.py
 
-<figure><img src="../../.gitbook/assets/image (12) (5).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (12) (5) (1).png" alt=""><figcaption></figcaption></figure>
 
 ```
 /opt/metasploit-framework-5101/tools/exploit/pattern_create.rb -l 700
