@@ -217,7 +217,7 @@ sc.exe \\thmiis.za.tryhackme.com start THMservice-3249
 
 <figure><img src="../../.gitbook/assets/image (36) (2).png" alt=""><figcaption></figcaption></figure>
 
-<figure><img src="../../.gitbook/assets/image (20).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (20) (6).png" alt=""><figcaption></figcaption></figure>
 
 ## Moving Laterally Using WMI
 
@@ -1125,7 +1125,7 @@ Putting the whole command together, we would end up with the following:
 
 Once all port forwards are in place, we can start Metasploit and configure the exploit so that the required ports match the ones we have forwarded through THMJMP2:
 
-<figure><img src="../../.gitbook/assets/image (6).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (6) (2).png" alt=""><figcaption></figcaption></figure>
 
 There is a lot to unpack here:
 

