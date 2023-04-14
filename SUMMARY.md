@@ -60,3 +60,4 @@
   * [Windows Local Persistence](walkthroughs/tryhackme/windows-local-persistence.md)
   * [Lateral Movement and Pivoting](walkthroughs/tryhackme/lateral-movement-and-pivoting.md)
   * [Bypassing UAC](walkthroughs/tryhackme/bypassing-uac.md)
+  * [Hacking with PowerShell](walkthroughs/tryhackme/hacking-with-powershell.md)
