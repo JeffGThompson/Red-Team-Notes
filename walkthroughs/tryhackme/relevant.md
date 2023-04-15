@@ -24,7 +24,7 @@
 nbtscan 10.10.145.102
 ```
 
-<figure><img src="../../.gitbook/assets/image (9) (4) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (9) (4) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 ### TCP/445 - microsoft-ds
 
@@ -66,7 +66,7 @@ Decided to scan for vulnerabilities and nmap detected that the host is vulnerabl
 sudo nmap 10.10.145.102 -p80,135,139,445,3389 --script *vuln*
 ```
 
-<figure><img src="../../.gitbook/assets/image (11) (4).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (11) (4) (1).png" alt=""><figcaption></figcaption></figure>
 
 The exploit did not work as expected. It seems the credentials do not work for smb so now we must explore a different route.
 

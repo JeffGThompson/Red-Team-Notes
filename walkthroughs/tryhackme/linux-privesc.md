@@ -733,7 +733,7 @@ Verify this with strings
 strings /usr/local/bin/suid-env2
 ```
 
-<figure><img src="../../.gitbook/assets/image (9) (4).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (9) (4) (1).png" alt=""><figcaption></figcaption></figure>
 
 In Bash versions <4.2-048 it is possible to define shell functions with names that resemble file paths, then export those functions so that they are used instead of any actual executable at that file path.
 
@@ -866,7 +866,7 @@ Copy the key over to your Kali box (it's easier to just view the contents of the
 ls -l /.ssh
 ```
 
-<figure><img src="../../.gitbook/assets/image (10) (7).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (10) (7) (1).png" alt=""><figcaption></figcaption></figure>
 
 Use the key to login to the Debian VM as the root account (note that due to the age of the box, some additional settings are required when using SSH):
 
