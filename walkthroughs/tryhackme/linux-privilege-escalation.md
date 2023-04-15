@@ -184,7 +184,7 @@ base64 /home/ubuntu/flag3.txt | base64 --decode
 getcap -r / 2>/dev/null
 ```
 
-<figure><img src="../../.gitbook/assets/image (1) (2) (6).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1) (2) (6) (1).png" alt=""><figcaption></figcaption></figure>
 
 
 

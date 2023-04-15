@@ -824,7 +824,7 @@ List the contents of the user's home directory.
 ls /home/user
 ```
 
-<figure><img src="../../.gitbook/assets/image (3) (1) (2).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (3) (1) (2) (3).png" alt=""><figcaption></figcaption></figure>
 
 Note the presence of a myvpn.ovpn config file. View the contents of the file.
 
@@ -935,7 +935,7 @@ Back on the Debian VM, as the low privileged user account, execute the file to g
 /tmp/shell.elf
 ```
 
-<figure><img src="../../.gitbook/assets/image (7) (7).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (7) (7) (1).png" alt=""><figcaption></figcaption></figure>
 
 ## Kernel Exploits
 

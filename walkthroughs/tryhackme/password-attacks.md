@@ -38,7 +38,7 @@ Answer is !multidisciplinary00
 
 **Perform a brute-forcing attack against the phillips account for the login page at http://10.10.130.199/login-get using hydra? What is the flag?**
 
-<figure><img src="../../.gitbook/assets/image (2) (9).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (2) (9) (1).png" alt=""><figcaption></figcaption></figure>
 
 <figure><img src="../../.gitbook/assets/image (21) (5).png" alt=""><figcaption></figcaption></figure>
 
