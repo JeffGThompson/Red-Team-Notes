@@ -14,7 +14,7 @@ The output of the systeminfo provides information about the machine, including t
 systeminfo | findstr Domain
 ```
 
-<figure><img src="../../.gitbook/assets/image (13) (3).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (13) (3) (2).png" alt=""><figcaption></figcaption></figure>
 
 ## Users and Groups Management
 
@@ -26,7 +26,7 @@ systeminfo | findstr Domain
  Get-ADUser -Filter * -SearchBase "OU=THM,DC=THMREDTEAM,DC=COM"
 ```
 
-<figure><img src="../../.gitbook/assets/image (18) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (18) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 **Once you run the previous command, what is the UserPrincipalName (email) of the admin account?**
 
@@ -44,7 +44,7 @@ systeminfo | findstr Domain
 Get-NetFirewallProfile | Format-Table Name, Enabled
 ```
 
-<figure><img src="../../.gitbook/assets/image (26).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (26) (1).png" alt=""><figcaption></figcaption></figure>
 
 **Using PowerShell cmdlets such Get-MpThreat can provide us with threats details that have been detected using MS Defender. Run it and answer the following: What is the file name that causes this alert to record?**
 

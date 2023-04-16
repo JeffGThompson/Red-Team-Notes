@@ -24,7 +24,7 @@
 nbtscan 10.10.145.102
 ```
 
-<figure><img src="../../.gitbook/assets/image (9) (4) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (9) (4) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 ### TCP/445 - microsoft-ds
 
@@ -133,7 +133,7 @@ whoami /priv
 
 <figure><img src="../../.gitbook/assets/image (16) (2) (2).png" alt=""><figcaption></figcaption></figure>
 
-<figure><img src="../../.gitbook/assets/image (2) (5) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (2) (5) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 **Kali**
 

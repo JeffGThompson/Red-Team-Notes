@@ -301,7 +301,7 @@ cd C:\tools\
 .\Druva_inSync_exploit.ps1
 ```
 
-<figure><img src="../../.gitbook/assets/image (28).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (28) (2).png" alt=""><figcaption></figcaption></figure>
 
 **Victim(Powershell)**
 

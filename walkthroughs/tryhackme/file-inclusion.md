@@ -56,7 +56,7 @@ hxxp://10.10.230.14/lab6.php?file=THM-profile//..//..//..//..//etc//os-release%0
 
 <figure><img src="../../.gitbook/assets/image (47).png" alt=""><figcaption></figcaption></figure>
 
-<figure><img src="../../.gitbook/assets/image (10) (3).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (10) (3) (1).png" alt=""><figcaption></figcaption></figure>
 
 **Capture Flag2 at /etc/flag2**
 

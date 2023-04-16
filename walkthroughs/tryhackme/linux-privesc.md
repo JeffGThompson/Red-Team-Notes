@@ -67,7 +67,7 @@ Exit out of the MySQL shell (type exit or \q and press Enter) and run the /tmp/r
 whoami
 ```
 
-<figure><img src="../../.gitbook/assets/image (3) (3).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (3) (3) (1).png" alt=""><figcaption></figcaption></figure>
 
 ## Weak File Permissions - Readable /etc/shadow
 
@@ -678,7 +678,7 @@ First, execute the file and note that it seems to be trying to start the apache2
 /usr/local/bin/suid-env
 ```
 
-<figure><img src="../../.gitbook/assets/image (2) (5).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (2) (5) (1).png" alt=""><figcaption></figcaption></figure>
 
 Run strings on the file to look for strings of printable characters.
 
@@ -733,7 +733,7 @@ Verify this with strings
 strings /usr/local/bin/suid-env2
 ```
 
-<figure><img src="../../.gitbook/assets/image (9) (4) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (9) (4) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 In Bash versions <4.2-048 it is possible to define shell functions with names that resemble file paths, then export those functions so that they are used instead of any actual executable at that file path.
 
@@ -745,7 +745,7 @@ Verify the version of Bash installed on the Debian VM is less than 4.2-048.
 /bin/bash --version
 ```
 
-<figure><img src="../../.gitbook/assets/image (1) (1) (2).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1) (1) (2) (1).png" alt=""><figcaption></figcaption></figure>
 
 Create a Bash function with the name "/usr/sbin/service" that executes a new Bash shell (using -p so permissions are preserved) and export the function:
 

@@ -101,7 +101,7 @@ sudo find / -name "flag2.txt"
 cat /home/ubuntu/flag2.txt
 ```
 
-<figure><img src="../../.gitbook/assets/image (24).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (24) (1).png" alt=""><figcaption></figcaption></figure>
 
 **How would you use Nmap to spawn a root shell if your user had sudo rights on nmap?**
 
@@ -377,7 +377,7 @@ sudo find . -exec /bin/sh ; -quit
 whoami
 ```
 
-<figure><img src="../../.gitbook/assets/image (16) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (16) (1) (2).png" alt=""><figcaption></figcaption></figure>
 
 
 
