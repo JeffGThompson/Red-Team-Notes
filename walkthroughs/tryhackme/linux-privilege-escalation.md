@@ -285,7 +285,7 @@ find / -writable 2>/dev/null
 
 
 
-<figure><img src="../../.gitbook/assets/image (13) (6).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (13) (6) (1).png" alt=""><figcaption></figcaption></figure>
 
 **Victim**
 
@@ -343,7 +343,7 @@ cd /home/ubuntu/sharedfolder
 ./nfc
 ```
 
-<figure><img src="../../.gitbook/assets/image (1) (3) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1) (3) (1) (2).png" alt=""><figcaption></figcaption></figure>
 
 ## Capstone Challenge
 
@@ -361,7 +361,7 @@ unshadow passwd shadow > passwords.txt
 john --wordlist=/usr/share/wordlists/rockyou.txt passwords.txt
 ```
 
-<figure><img src="../../.gitbook/assets/image (29).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (29) (4).png" alt=""><figcaption></figcaption></figure>
 
 **Victim**
 

