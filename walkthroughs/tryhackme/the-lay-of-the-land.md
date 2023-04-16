@@ -30,7 +30,7 @@ systeminfo | findstr Domain
 
 **Once you run the previous command, what is the UserPrincipalName (email) of the admin account?**
 
-<figure><img src="../../.gitbook/assets/image (14) (1) (3).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (14) (1).png" alt=""><figcaption></figcaption></figure>
 
 ## Host Security Solution #1
 

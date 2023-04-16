@@ -43,7 +43,7 @@ Invoke-AllChecks
 echo "dHFqSnBFWDlRdjh5YktJM3lIY2M9TCE1ZSghd1c7JFQ=" | base64 -d
 ```
 
-<figure><img src="../../.gitbook/assets/image (11).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (11) (5).png" alt=""><figcaption></figcaption></figure>
 
 **Kali**
 
@@ -105,7 +105,7 @@ hashcat -m 13100 -a 0 hash2.txt /usr/share/wordlists/rockyo.txt --force
 hashcat -m 13100 -a 0 hash2.txt /usr/share/wordlists/rockyou.txt --force --show
 ```
 
-<figure><img src="../../.gitbook/assets/image (1) (3).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1).png" alt=""><figcaption></figcaption></figure>
 
 **Kali**
 

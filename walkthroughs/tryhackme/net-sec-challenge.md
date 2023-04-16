@@ -10,7 +10,7 @@
 nmap -sV -sT -O -p 1-10000 $VICTIM
 ```
 
-<figure><img src="../../.gitbook/assets/image (4) (10) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (4) (10).png" alt=""><figcaption></figcaption></figure>
 
 **There is an open port outside the common 1000 ports; it is above 10,000. What is it?**
 

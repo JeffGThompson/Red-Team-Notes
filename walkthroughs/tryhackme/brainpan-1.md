@@ -44,7 +44,7 @@ gobuster dir -u http://$VICTIM:10000 -w /usr/share/dirb/wordlists/big.txt -t 50
 
 brainpan.exe file found.
 
-<figure><img src="../../.gitbook/assets/image (15) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (15) (1) (3).png" alt=""><figcaption></figcaption></figure>
 
 ## Initial Shell
 
@@ -298,7 +298,7 @@ We find that brainpan.exe has only one possible JMP ESPs to use. So we will try 
 !mona find -s "\xff\xe4" -m brainpan.exe
 ```
 
-<figure><img src="../../.gitbook/assets/image (9) (3).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (9) (3) (4).png" alt=""><figcaption></figcaption></figure>
 
 ### Exploit - Staging
 

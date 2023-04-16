@@ -54,7 +54,7 @@ hydra -l phillips -P ../dict.lst 10.10.130.199 http-get-form "/login-get/index.p
 
 
 
-<figure><img src="../../.gitbook/assets/image (12) (2) (3).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (12) (2).png" alt=""><figcaption></figcaption></figure>
 
 
 

@@ -237,7 +237,7 @@ sudo ftp
 ftp> !/bin/sh
 ```
 
-<figure><img src="../../.gitbook/assets/image (10) (6).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (10) (6) (1).png" alt=""><figcaption></figcaption></figure>
 
 ## **more**
 

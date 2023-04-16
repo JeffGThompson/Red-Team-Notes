@@ -1304,7 +1304,7 @@ We find that essfunc.dll has 9 possible JMP ESPs to use. So we will start with t
 !mona find -s "\xff\xe4" -m essfunc.dll
 ```
 
-<figure><img src="../../.gitbook/assets/image (11) (5) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (11) (5) (1) (2).png" alt=""><figcaption></figcaption></figure>
 
 ### Exploit
 
@@ -2381,7 +2381,7 @@ except:
 
 <figure><img src="../../.gitbook/assets/image (13) (2) (1).png" alt=""><figcaption></figcaption></figure>
 
-<figure><img src="../../.gitbook/assets/image (3) (6).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (3) (6) (1).png" alt=""><figcaption></figcaption></figure>
 
 ### Finding a Jump Point
 
@@ -2915,7 +2915,7 @@ python fuzzer.py $VICTIM 1337
 
 Program crashed at 1600 bytes with fuzzer.py
 
-<figure><img src="../../.gitbook/assets/image (37).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (37) (2).png" alt=""><figcaption></figcaption></figure>
 
 ```
 /opt/metasploit-framework-5101/tools/exploit/pattern_create.rb -l 1600 
