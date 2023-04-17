@@ -350,7 +350,7 @@ rlwrap nc -lvnp 4444
 python exploit.py $VICTIM 31337
 ```
 
-<figure><img src="../../.gitbook/assets/image (66).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (66) (1).png" alt=""><figcaption></figcaption></figure>
 
 I saw that the Victims OS is x64 and I wasn't able to run exes or powershell so I changed the payload. I first tried x64 payload but it wasn't working because it was to big so I switched to a meterpreter payload to avoid issues running commands.
 

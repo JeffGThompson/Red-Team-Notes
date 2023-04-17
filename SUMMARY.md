@@ -63,3 +63,4 @@
   * [Hacking with PowerShell](walkthroughs/tryhackme/hacking-with-powershell.md)
   * [Corp](walkthroughs/tryhackme/corp.md)
   * [Mr Robot CTF](walkthroughs/tryhackme/mr-robot-ctf.md)
+  * [Retro](walkthroughs/tryhackme/retro.md)

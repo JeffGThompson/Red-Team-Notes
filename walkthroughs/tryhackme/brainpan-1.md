@@ -8,7 +8,7 @@
 nmap -A $VICTIM
 ```
 
-<figure><img src="../../.gitbook/assets/image (7) (3).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (7) (3) (2).png" alt=""><figcaption></figcaption></figure>
 
 ```
 nmap -sV -sT -O -p 1-65535 $VICTIM
