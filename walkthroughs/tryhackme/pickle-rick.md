@@ -68,7 +68,7 @@ Clue to look around.
 
 Second ingrediant found
 
-<figure><img src="../../.gitbook/assets/image (21) (3).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (21) (3) (1).png" alt=""><figcaption></figcaption></figure>
 
 www-data can actually run any command with sudo without entering a password.&#x20;
 

@@ -194,7 +194,7 @@ reg add "HKCU\Software\Classes\ms-settings\CurVer" /d ".thm" /f
 fodhelper.exe
 </code></pre>
 
-<figure><img src="../../.gitbook/assets/image (3) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (3) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 ## UAC: Environment Variable Expansion
 
@@ -216,7 +216,7 @@ Here we can see that the task is configured to run with the **Users** account, w
 
 Checking the Actions and Settings tabs, we have the following:
 
-<figure><img src="../../.gitbook/assets/image (8) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (8).png" alt=""><figcaption></figcaption></figure>
 
 <figure><img src="../../.gitbook/assets/image (7) (2) (4).png" alt=""><figcaption></figcaption></figure>
 

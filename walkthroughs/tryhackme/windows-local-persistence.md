@@ -787,7 +787,7 @@ After doing so, lock your session from the start menu.
 
 You should now be able to press `SHIFT` five times to access a terminal with SYSTEM privileges directly from the login screen.
 
-<figure><img src="../../.gitbook/assets/image (22).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (22) (6).png" alt=""><figcaption></figcaption></figure>
 
 ### Utilman
 
@@ -819,7 +819,7 @@ To trigger our terminal, we will lock our screen from the start button.
 
 And finally, proceed to click on the "Ease of Access" button. Since we replaced `utilman.exe` with a `cmd.exe` copy, we will get a command prompt with SYSTEM privileges.
 
-<figure><img src="../../.gitbook/assets/image (23).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (23) (4).png" alt=""><figcaption></figcaption></figure>
 
 ##
 

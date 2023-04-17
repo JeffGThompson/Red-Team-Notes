@@ -39,7 +39,7 @@ echo $VICTIM CONTROLLER.local  >> /etc/hosts
 cat /etc/hosts
 ```
 
-<figure><img src="../../.gitbook/assets/image (2) (8) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (2) (8).png" alt=""><figcaption></figcaption></figure>
 
 ## Enumeration w/ Kerbrute
 
@@ -71,7 +71,7 @@ cd Downloads
 Rubeus.exe harvest /interval:30
 ```
 
-<figure><img src="../../.gitbook/assets/image (3) (9) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (3) (9).png" alt=""><figcaption></figcaption></figure>
 
 This will take a given password and "spray" it against all found users then give the .kirbi TGT for that user
 

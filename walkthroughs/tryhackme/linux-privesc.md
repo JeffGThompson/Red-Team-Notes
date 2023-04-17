@@ -441,7 +441,7 @@ View the contents of the system-wide crontab.
 cat /etc/crontab
 ```
 
-<figure><img src="../../.gitbook/assets/image (44) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (44) (1) (2).png" alt=""><figcaption></figcaption></figure>
 
 There should be two cron jobs scheduled to run every minute. One runs overwrite.sh, the other runs /usr/local/bin/compress.sh.
 
@@ -588,7 +588,7 @@ Set up a netcat listener on your Kali box on port 4444 and wait for the cron job
 nc -nvlp 4444
 ```
 
-<figure><img src="../../.gitbook/assets/image (45).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (45) (2).png" alt=""><figcaption></figcaption></figure>
 
 ## SUID / SGID Executables - Known Exploits
 

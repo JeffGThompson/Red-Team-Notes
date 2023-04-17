@@ -35,7 +35,7 @@ Invoke-AllChecks
 
 
 
-<figure><img src="../../.gitbook/assets/image (1) (1) (4).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 **Kali**
 
@@ -105,7 +105,7 @@ hashcat -m 13100 -a 0 hash2.txt /usr/share/wordlists/rockyo.txt --force
 hashcat -m 13100 -a 0 hash2.txt /usr/share/wordlists/rockyou.txt --force --show
 ```
 
-<figure><img src="../../.gitbook/assets/image (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1) (4).png" alt=""><figcaption></figcaption></figure>
 
 **Kali**
 
