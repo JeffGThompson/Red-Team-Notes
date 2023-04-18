@@ -64,3 +64,4 @@
   * [Corp](walkthroughs/tryhackme/corp.md)
   * [Mr Robot CTF](walkthroughs/tryhackme/mr-robot-ctf.md)
   * [Retro](walkthroughs/tryhackme/retro.md)
+  * [Breaching Active Directory](walkthroughs/tryhackme/breaching-active-directory.md)
