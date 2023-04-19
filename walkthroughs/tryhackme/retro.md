@@ -10,7 +10,7 @@
 nmap -A $VICTIM
 ```
 
-<figure><img src="../../.gitbook/assets/image (11).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (11) (12).png" alt=""><figcaption></figcaption></figure>
 
 ### Scan all ports
 
@@ -21,7 +21,7 @@ port 5986 discovered. Potentially we can use this later for WinRM.
 <pre><code><strong>nmap -sV -sT -O -p 1-65535 $VICTIM
 </strong></code></pre>
 
-<figure><img src="../../.gitbook/assets/image (7).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (7) (1).png" alt=""><figcaption></figcaption></figure>
 
 ### HTTP port 80
 
@@ -39,7 +39,7 @@ dirb http://$VICTIM:80 /usr/share/wordlists/dirb/big.txt
 wpscan --url http://$VICTIM/retro
 ```
 
-<figure><img src="../../.gitbook/assets/image (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 **Kali**
 
@@ -64,7 +64,7 @@ Content-Length: 91
 </methodCall>
 ```
 
-<figure><img src="../../.gitbook/assets/image.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (19).png" alt=""><figcaption></figcaption></figure>
 
 
 
@@ -82,7 +82,7 @@ hydra -l wade -P darkweb2017-top1000.txt $VICTIM/retro http-post-form "/retro/wp
 
 wade added his password to one of the blog posts and from there I could login to wp-login.
 
-<figure><img src="../../.gitbook/assets/image (3).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (3) (14).png" alt=""><figcaption></figcaption></figure>
 
 
 

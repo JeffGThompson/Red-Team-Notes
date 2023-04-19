@@ -731,7 +731,7 @@ sekurlsa::pth /user:Administrator /domain:za.tryhackme.com /ntlm:0b2571be7e75e3d
 
 <figure><img src="../../.gitbook/assets/image (6) (4).png" alt=""><figcaption></figcaption></figure>
 
-<figure><img src="../../.gitbook/assets/image (5) (11).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (5) (11) (1).png" alt=""><figcaption></figcaption></figure>
 
 #### Option #2 - Pass-the-Ticket
 
@@ -761,7 +761,7 @@ kerberos::ptt [0;363979]-2-0-40e10000-t1_toby.beck@krbtgt-ZA.TRYHACKME.COM.kirbi
 klist
 ```
 
-<figure><img src="../../.gitbook/assets/image (4) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (4) (1) (7).png" alt=""><figcaption></figcaption></figure>
 
 **Victim**
 
@@ -932,7 +932,7 @@ tscon 4 /dest:rdp-tcp#1
 
 Logged me in a Toby right away
 
-<figure><img src="../../.gitbook/assets/image (10) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (10) (1) (7).png" alt=""><figcaption></figcaption></figure>
 
 
 
@@ -1026,7 +1026,7 @@ The `fork` option allows socat to fork a new process for each connection receive
 
 Coming back to our example, if we wanted to access port 3389 on the server using PC-1 as a pivot as we did with SSH remote port forwarding, we could use the following command:
 
-<figure><img src="../../.gitbook/assets/image (2) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (2) (1) (1) (5).png" alt=""><figcaption></figcaption></figure>
 
 Note that socat can't forward the connection directly to the attacker's machine as SSH did but will open a port on PC-1 that the attacker's machine can then connect to:
 
@@ -1043,7 +1043,7 @@ netsh advfirewall firewall add rule name="Open Port 3389" dir=in action=allow pr
 
 If, on the other hand, we'd like to expose port 80 from the attacker's machine so that it is reachable by the server, we only need to adjust the command a bit:
 
-<figure><img src="../../.gitbook/assets/image (7) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (7) (1) (4).png" alt=""><figcaption></figcaption></figure>
 
 As a result, PC-1 will spawn port 80 and listen for connections to be forwarded to port 80 on the attacker's machine:
 
@@ -1055,7 +1055,7 @@ While single port forwarding works quite well for tasks that require access to s
 
 Since we don't want to rely on an SSH server existing on the Windows machines in our target network, we will normally use the SSH client to establish a reverse dynamic port forwarding with the following command:
 
-<figure><img src="../../.gitbook/assets/image (6) (1) (4).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (6) (1) (4) (3).png" alt=""><figcaption></figcaption></figure>
 
 In this case, the SSH server will start a SOCKS proxy on port `9050`, and forward any connection request through the SSH tunnel, where they are finally proxied by the SSH client.
 
@@ -1193,4 +1193,4 @@ set rport 8888
 exploit
 ```
 
-<figure><img src="../../.gitbook/assets/image (4).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (4) (1).png" alt=""><figcaption></figcaption></figure>
