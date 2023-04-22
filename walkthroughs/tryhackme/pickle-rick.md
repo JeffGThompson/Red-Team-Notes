@@ -56,7 +56,7 @@ Password: Wubbalubbadubdub
 
 Login worked
 
-<figure><img src="../../.gitbook/assets/image (6) (5).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (6) (5) (2).png" alt=""><figcaption></figcaption></figure>
 
 First ingredient found, also tried doing a reverse shell with netcat but not working
 

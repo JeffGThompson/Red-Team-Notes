@@ -23,7 +23,7 @@ cat hash1.txt
 python3 hash-id.py 2e728dd31fb5949bc39cac5a9f066498
 ```
 
-<figure><img src="../../.gitbook/assets/image (7) (5).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (7) (5) (1).png" alt=""><figcaption></figcaption></figure>
 
 **What is the cracked value of hash1.txt?**
 
