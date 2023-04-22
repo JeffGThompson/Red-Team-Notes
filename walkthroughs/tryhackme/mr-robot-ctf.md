@@ -37,7 +37,7 @@ This ran for the majority of the time I was working on the box, I found the word
 dirb http://$VICTIM:80 /usr/share/wordlists/dirb/big.txt
 ```
 
-<figure><img src="../../.gitbook/assets/image (16).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (16) (2).png" alt=""><figcaption></figcaption></figure>
 
 #### Key 1
 
@@ -45,7 +45,7 @@ dirb http://$VICTIM:80 /usr/share/wordlists/dirb/big.txt
 
 **Downloaded fsocity.dic**
 
-<figure><img src="../../.gitbook/assets/image (20).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (20) (1).png" alt=""><figcaption></figcaption></figure>
 
 If you refresh the page you'll go to a wordpress site.
 
@@ -72,7 +72,7 @@ hydra -L fsocity.dic -p test  $VICTIM http-post-form "/wp-login.php:log=^USER^&p
 
 
 
-<figure><img src="../../.gitbook/assets/image (18).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (18) (2).png" alt=""><figcaption></figcaption></figure>
 
 Because there were so many entries in fsocity.dic I tried to reduce it as much as I could by removing duplicates and passwords that I thought would be unlikely.
 
@@ -141,7 +141,7 @@ wpscan found out that twentyfifeen is installed.
 wpscan --url http://$VICTIM
 ```
 
-<figure><img src="../../.gitbook/assets/image (11) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (11) (1) (5).png" alt=""><figcaption></figcaption></figure>
 
 **Kali**
 
@@ -151,7 +151,7 @@ nc -vlnp 443
 
 Added the same shell to footer.php which should appear on every page visited. Then I just went back to http://$VICTIM/join and it worked.
 
-<figure><img src="../../.gitbook/assets/image (2) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (2) (1) (7).png" alt=""><figcaption></figcaption></figure>
 
 
 

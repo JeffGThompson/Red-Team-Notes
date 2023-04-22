@@ -36,7 +36,7 @@ Found Ricks username in the page source of the main page
 
 robots.txt just had this, could be a password.
 
-<figure><img src="../../.gitbook/assets/image (18) (2).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (18) (2) (2).png" alt=""><figcaption></figcaption></figure>
 
 Ran the same dirb scan again except looking for .php files, I was able to find some pages.
 

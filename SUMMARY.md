@@ -66,3 +66,4 @@
   * [Retro](walkthroughs/tryhackme/retro.md)
   * [Breaching Active Directory](walkthroughs/tryhackme/breaching-active-directory.md)
   * [Enumerating Active Directory](walkthroughs/tryhackme/enumerating-active-directory.md)
+  * [Exploiting Active Directory](walkthroughs/tryhackme/exploiting-active-directory.md)

@@ -106,7 +106,7 @@ Flag should be set to NT
 python hash-id.py 5460C85BD858A11475115D2DD3A82333
 ```
 
-<figure><img src="../../.gitbook/assets/image (4) (1) (3).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (4) (1) (3) (1).png" alt=""><figcaption></figcaption></figure>
 
 **What is the cracked value of this password?**
 
@@ -138,7 +138,7 @@ vi hash7.txt
 
 <figure><img src="../../.gitbook/assets/image (7) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
-<figure><img src="../../.gitbook/assets/image (5) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (5) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 ```
 john --single --format=raw-md5 hash7.txt

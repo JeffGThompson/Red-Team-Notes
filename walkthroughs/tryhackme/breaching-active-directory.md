@@ -46,9 +46,9 @@ sudo apt-get update && sudo apt-get -y install slapd ldap-utils && sudo systemct
 sudo dpkg-reconfigure -p low slapd
 ```
 
-<figure><img src="../../.gitbook/assets/image (13).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (13) (1).png" alt=""><figcaption></figcaption></figure>
 
-<figure><img src="../../.gitbook/assets/image (5).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (5) (1).png" alt=""><figcaption></figcaption></figure>
 
 **Kali**
 
@@ -87,7 +87,7 @@ ldapsearch -H ldap:// -x -LLL -s base -b "" supportedSASLMechanisms
 
 **After**
 
-<figure><img src="../../.gitbook/assets/image (11).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (11) (1).png" alt=""><figcaption></figcaption></figure>
 
 ### Capturing LDAP Credentials
 
@@ -103,7 +103,7 @@ Our rogue LDAP server has now been configured. When we click the "Test Settings"
 sudo tcpdump -SX -i breachad tcp port 389
 ```
 
-<figure><img src="../../.gitbook/assets/image (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 <figure><img src="../../.gitbook/assets/image (10).png" alt=""><figcaption></figcaption></figure>
 
@@ -131,7 +131,7 @@ hashcat -m 5600 hash.txt passwordlist.txt --force
 hashcat -m 5600 hash.txt passwordlist.txt --force --show
 ```
 
-<figure><img src="../../.gitbook/assets/image (2).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (2) (1).png" alt=""><figcaption></figcaption></figure>
 
 ## Microsoft Deployment Toolkit
 
@@ -206,7 +206,7 @@ cp /root/Rooms/BreachingAD/task7/mcafeesitelistpwddecryption.zip .
 unzip mcafeesitelistpwddecryption.zip
 ```
 
-<figure><img src="../../.gitbook/assets/image (4).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (4) (1).png" alt=""><figcaption></figcaption></figure>
 
 **Kali**
 
@@ -214,4 +214,4 @@ unzip mcafeesitelistpwddecryption.zip
 python2 mcafee-sitelist-pwd-decryption-master/mcafee_sitelist_pwd_decrypt.py  jWbTyS7BL1Hj7PkO5Di/QhhYmcGj5cOoZ2OkDTrFXsR/abAFPM9B3Q==
 ```
 
-<figure><img src="../../.gitbook/assets/image.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (18).png" alt=""><figcaption></figcaption></figure>

@@ -108,7 +108,7 @@ except:
 
 It took 2300 before the program crashed.
 
-![](<../../.gitbook/assets/image (13) (1) (1).png>)
+![](<../../.gitbook/assets/image (13) (1) (1) (2).png>)
 
 
 

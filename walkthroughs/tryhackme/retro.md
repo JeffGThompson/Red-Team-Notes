@@ -39,7 +39,7 @@ dirb http://$VICTIM:80 /usr/share/wordlists/dirb/big.txt
 wpscan --url http://$VICTIM/retro
 ```
 
-<figure><img src="../../.gitbook/assets/image (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1) (1) (2).png" alt=""><figcaption></figcaption></figure>
 
 **Kali**
 
@@ -47,7 +47,7 @@ wpscan --url http://$VICTIM/retro
 wpscan --url http://$VICTIM/retro --enumerate u
 ```
 
-<figure><img src="../../.gitbook/assets/image (21).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (21) (6).png" alt=""><figcaption></figcaption></figure>
 
 ### Burp
 
@@ -64,7 +64,7 @@ Content-Length: 91
 </methodCall>
 ```
 
-<figure><img src="../../.gitbook/assets/image (19).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (19) (2).png" alt=""><figcaption></figcaption></figure>
 
 
 

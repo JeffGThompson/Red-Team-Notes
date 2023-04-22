@@ -133,7 +133,7 @@ sudo yum localinstall root-1.0-1.noarch.rpm
 sudo -i
 ```
 
-<figure><img src="../../.gitbook/assets/image (19) (2).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (19) (2) (1).png" alt=""><figcaption></figcaption></figure>
 
 #### **Option #2 -** Spawn interactive root shell by loading a custom plugin
 

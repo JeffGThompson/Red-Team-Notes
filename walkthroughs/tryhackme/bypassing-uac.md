@@ -77,7 +77,7 @@ reg add %REG_KEY% /v "DelegateExecute" /d "" /f
 reg add %REG_KEY% /d %CMD% /f
 ```
 
-<figure><img src="../../.gitbook/assets/image (17).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (17) (4).png" alt=""><figcaption></figcaption></figure>
 
 **Kali**
 
