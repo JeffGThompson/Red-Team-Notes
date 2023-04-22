@@ -122,7 +122,7 @@ sudo responder -I breachad
 
 <figure><img src="../../.gitbook/assets/image (8).png" alt=""><figcaption></figcaption></figure>
 
-<figure><img src="../../.gitbook/assets/image (3) (9).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (3) (9) (2).png" alt=""><figcaption></figcaption></figure>
 
 **Kali**
 
