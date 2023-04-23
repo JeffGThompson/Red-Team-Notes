@@ -33,7 +33,7 @@ service slapd stop
 nc -lvp 389
 ```
 
-<figure><img src="../../.gitbook/assets/image (9).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (9) (9).png" alt=""><figcaption></figcaption></figure>
 
 <figure><img src="../../.gitbook/assets/image (14).png" alt=""><figcaption></figcaption></figure>
 
@@ -48,7 +48,7 @@ sudo dpkg-reconfigure -p low slapd
 
 <figure><img src="../../.gitbook/assets/image (13) (1).png" alt=""><figcaption></figcaption></figure>
 
-<figure><img src="../../.gitbook/assets/image (5) (1) (4).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (5) (1) (4) (1).png" alt=""><figcaption></figcaption></figure>
 
 **Kali**
 
@@ -118,7 +118,7 @@ sudo service slapd stop
 sudo responder -I breachad
 ```
 
-<figure><img src="../../.gitbook/assets/image (7) (5).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (7) (5) (2).png" alt=""><figcaption></figcaption></figure>
 
 <figure><img src="../../.gitbook/assets/image (8).png" alt=""><figcaption></figcaption></figure>
 
@@ -206,7 +206,7 @@ cp /root/Rooms/BreachingAD/task7/mcafeesitelistpwddecryption.zip .
 unzip mcafeesitelistpwddecryption.zip
 ```
 
-<figure><img src="../../.gitbook/assets/image (4) (1) (8).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (4) (1) (8) (1).png" alt=""><figcaption></figcaption></figure>
 
 **Kali**
 
@@ -214,4 +214,4 @@ unzip mcafeesitelistpwddecryption.zip
 python2 mcafee-sitelist-pwd-decryption-master/mcafee_sitelist_pwd_decrypt.py  jWbTyS7BL1Hj7PkO5Di/QhhYmcGj5cOoZ2OkDTrFXsR/abAFPM9B3Q==
 ```
 
-<figure><img src="../../.gitbook/assets/image (18).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (18) (7).png" alt=""><figcaption></figcaption></figure>
