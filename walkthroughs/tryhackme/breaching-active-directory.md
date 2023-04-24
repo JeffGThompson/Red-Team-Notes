@@ -95,7 +95,7 @@ Our rogue LDAP server has now been configured. When we click the "Test Settings"
 
 
 
-<figure><img src="../../.gitbook/assets/image (6) (5).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (6) (5) (3).png" alt=""><figcaption></figcaption></figure>
 
 **Kali**
 
@@ -118,7 +118,7 @@ sudo service slapd stop
 sudo responder -I breachad
 ```
 
-<figure><img src="../../.gitbook/assets/image (7) (5) (2).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (7) (5) (2) (1).png" alt=""><figcaption></figcaption></figure>
 
 <figure><img src="../../.gitbook/assets/image (8).png" alt=""><figcaption></figcaption></figure>
 
@@ -206,7 +206,7 @@ cp /root/Rooms/BreachingAD/task7/mcafeesitelistpwddecryption.zip .
 unzip mcafeesitelistpwddecryption.zip
 ```
 
-<figure><img src="../../.gitbook/assets/image (4) (1) (8) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (4) (1) (8) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 **Kali**
 

