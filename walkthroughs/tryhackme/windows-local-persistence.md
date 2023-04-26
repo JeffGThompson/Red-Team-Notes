@@ -119,7 +119,7 @@ We can assign such privileges to any user, independent of their group membership
 <pre class="language-powershell"><code class="lang-powershell"><strong>secedit /export /cfg C:\Users\Administrator\Desktop\config.inf
 </strong></code></pre>
 
-<figure><img src="../../.gitbook/assets/image (6) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (6) (1) (1) (2).png" alt=""><figcaption></figcaption></figure>
 
 <figure><img src="../../.gitbook/assets/image (4) (2).png" alt=""><figcaption></figcaption></figure>
 

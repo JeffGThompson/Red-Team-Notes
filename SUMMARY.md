@@ -68,3 +68,4 @@
   * [Enumerating Active Directory](walkthroughs/tryhackme/enumerating-active-directory.md)
   * [Exploiting Active Directory](walkthroughs/tryhackme/exploiting-active-directory.md)
   * [Persisting Active Directory](walkthroughs/tryhackme/persisting-active-directory.md)
+  * [Credentials Harvesting](walkthroughs/tryhackme/credentials-harvesting.md)

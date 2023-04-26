@@ -48,7 +48,7 @@ last
 sudo netstat -atpn
 ```
 
-<figure><img src="../../.gitbook/assets/image (11) (2).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (11) (2) (2).png" alt=""><figcaption></figcaption></figure>
 
 **What is the program name of the service listening on it?**
 
