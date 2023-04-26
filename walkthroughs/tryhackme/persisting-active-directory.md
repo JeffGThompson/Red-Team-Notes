@@ -160,7 +160,7 @@ Let's first see if we can view the certificates stored on the DC.
 crypto::certificates /systemstore:local_machine
 ```
 
-<figure><img src="../../.gitbook/assets/image (19).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (19) (8).png" alt=""><figcaption></figcaption></figure>
 
 We can see that there is a CA certificate on the DC. We can also note that some of these certificates were set not to allow us to export the key. Without this private key, we would not be able to generate new certificates. Luckily, Mimikatz allows us to patch memory to make these keys exportable.
 
@@ -181,7 +181,7 @@ crypto::certificates /systemstore:local_machine /export
 dir
 ```
 
-<figure><img src="../../.gitbook/assets/image (9) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (9) (1) (3).png" alt=""><figcaption></figcaption></figure>
 
 ### Generating our own Certificates
 
@@ -349,7 +349,7 @@ Get-ADUser $lowUser -Properties sidhistory
 dir \\thmdc.za.tryhackme.loc\c$ 
 ```
 
-<figure><img src="../../.gitbook/assets/image (16) (7).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (16) (7) (1).png" alt=""><figcaption></figcaption></figure>
 
 <figure><img src="../../.gitbook/assets/image (117).png" alt=""><figcaption></figcaption></figure>
 
@@ -425,7 +425,7 @@ Instantly, your low-privileged user should now have privileged access to THMDC. 
 dir \\thmdc.za.tryhackme.loc\c$\ 
 ```
 
-<figure><img src="../../.gitbook/assets/image (16).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (16) (7).png" alt=""><figcaption></figcaption></figure>
 
 Let's also verify that even though we created multiple groups, the Domain Admins group only has one new member:
 
