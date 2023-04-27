@@ -22,7 +22,7 @@ unzip passwordsprayer.zip
 python /root/Rooms/BreachingAD/task3/ntlm_passwordspray.py -u usernames.txt -f za.tryhackme.com -p Changeme123 -a "http://ntlmauth.za.tryhackme.com"
 ```
 
-<figure><img src="../../.gitbook/assets/image (15).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (15) (8).png" alt=""><figcaption></figcaption></figure>
 
 ## LDAP Bind Credentials
 
@@ -122,7 +122,7 @@ sudo responder -I breachad
 
 <figure><img src="../../.gitbook/assets/image (8).png" alt=""><figcaption></figcaption></figure>
 
-<figure><img src="../../.gitbook/assets/image (3) (9) (2).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (3) (9) (2) (1).png" alt=""><figcaption></figcaption></figure>
 
 **Kali**
 
@@ -206,7 +206,7 @@ cp /root/Rooms/BreachingAD/task7/mcafeesitelistpwddecryption.zip .
 unzip mcafeesitelistpwddecryption.zip
 ```
 
-<figure><img src="../../.gitbook/assets/image (4) (1) (8) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (4) (1) (8) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 **Kali**
 

