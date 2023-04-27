@@ -103,7 +103,7 @@ Our rogue LDAP server has now been configured. When we click the "Test Settings"
 sudo tcpdump -SX -i breachad tcp port 389
 ```
 
-<figure><img src="../../.gitbook/assets/image (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1) (1) (2).png" alt=""><figcaption></figcaption></figure>
 
 <figure><img src="../../.gitbook/assets/image (10).png" alt=""><figcaption></figcaption></figure>
 
@@ -131,7 +131,7 @@ hashcat -m 5600 hash.txt passwordlist.txt --force
 hashcat -m 5600 hash.txt passwordlist.txt --force --show
 ```
 
-<figure><img src="../../.gitbook/assets/image (2) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (2) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 ## Microsoft Deployment Toolkit
 
