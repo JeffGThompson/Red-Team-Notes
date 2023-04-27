@@ -166,3 +166,10 @@ python3.9 /opt/impacket/examples/secretsdump.py -sam sam-reg -system system-reg 
 To dump any running Windows process using the GUI, open the Task Manager, and from the Details tab, find the required process, right-click on it, and select "Create dump file".
 
 ![](<../../.gitbook/assets/image (7).png>)
+
+Once the dumping process is finished, a pop-up message will show containing the path of the dumped file. Now copy the file and transfer it to the AttackBox to extract NTLM hashes offline.
+
+Note: if we try this on the provided VM, you should get an error the first time this is run, until we fix the registry value in the Protected LSASS section later in this task.
+
+Copy the dumped process to the Mimikatz folder.
+
