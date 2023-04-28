@@ -87,7 +87,7 @@ View the contents of the /etc/shadow file.
 cat /etc/shadow
 ```
 
-<figure><img src="../../.gitbook/assets/image (2) (2) (3).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (2) (2) (3) (2).png" alt=""><figcaption></figcaption></figure>
 
 Each line of the file represents a user. A user's password hash (if they have one) can be found between the first and second colons (:) of each line.
 

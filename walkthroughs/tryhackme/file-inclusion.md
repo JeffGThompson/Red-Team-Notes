@@ -30,7 +30,7 @@ file\_get\_contents
 
 THM-profile
 
-<figure><img src="../../.gitbook/assets/image (49) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (49) (1) (2).png" alt=""><figcaption></figcaption></figure>
 
 **Try out Lab #6 and read /etc/os-release. What is the VERSION\_ID value**
 
@@ -54,7 +54,7 @@ hxxp://10.10.230.14/lab6.php?file=THM-profile//..//..//..//..//etc//os-release%0
 
 
 
-<figure><img src="../../.gitbook/assets/image (47).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (47) (2).png" alt=""><figcaption></figcaption></figure>
 
 <figure><img src="../../.gitbook/assets/image (10) (3) (1).png" alt=""><figcaption></figcaption></figure>
 
@@ -64,7 +64,7 @@ hxxp://10.10.230.14/lab6.php?file=THM-profile//..//..//..//..//etc//os-release%0
 
 Change the value from Guest to Admin and we can bypass the error message above.
 
-<figure><img src="../../.gitbook/assets/image (50) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (50) (1) (2).png" alt=""><figcaption></figcaption></figure>
 
 Change the value to the flag and we can see it on the page.
 

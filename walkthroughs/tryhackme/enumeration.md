@@ -134,7 +134,7 @@ netstat -nob
 dig -t AXFR redteam.thm @10.10.100.178
 ```
 
-<figure><img src="../../.gitbook/assets/image (2) (2).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (2) (2) (3).png" alt=""><figcaption></figcaption></figure>
 
 \
 **What is the name of the share available over SMB protocol and starts with `THM`?**
@@ -159,4 +159,4 @@ chmod +x snmpcheck-1.9.rb
 ./snmpcheck-1.9.rb 10.10.100.178 -c public
 ```
 
-<figure><img src="../../.gitbook/assets/image (11) (3).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (11) (3) (2).png" alt=""><figcaption></figcaption></figure>

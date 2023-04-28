@@ -91,7 +91,7 @@ net start
 Get-Process -Name thm-service
 ```
 
-<figure><img src="../../.gitbook/assets/image (12) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (12) (1) (3).png" alt=""><figcaption></figcaption></figure>
 
 **Victim(powershell)**
 

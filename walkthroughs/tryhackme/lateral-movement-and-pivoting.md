@@ -871,7 +871,7 @@ PsExec64.exe -s cmd.exe
 
 To list the existing sessions on a server, you can use the following command:
 
-<figure><img src="../../.gitbook/assets/image (5) (4) (2).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (5) (4).png" alt=""><figcaption></figcaption></figure>
 
 According to the command output above, if we were currently connected via RDP using the administrator user, our SESSIONNAME would be `rdp-tcp#6`. We can also see that a user named luke has left a session open with id `3`. Any session with a **Disc** state has been left open by the user and isn't being used at the moment. While you can take over active sessions as well, the legitimate user will be forced out of his session when you do, which could be noticed by them.
 
@@ -922,7 +922,7 @@ C:\tools\PsExec64.exe -s cmd.exe
 query user
 ```
 
-<figure><img src="../../.gitbook/assets/image (11) (4) (2).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (11) (4).png" alt=""><figcaption></figcaption></figure>
 
 **Victim(cmd)**
 
@@ -1125,7 +1125,7 @@ Putting the whole command together, we would end up with the following:
 
 Once all port forwards are in place, we can start Metasploit and configure the exploit so that the required ports match the ones we have forwarded through THMJMP2:
 
-<figure><img src="../../.gitbook/assets/image (6) (2).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (6) (2) (4).png" alt=""><figcaption></figcaption></figure>
 
 There is a lot to unpack here:
 
