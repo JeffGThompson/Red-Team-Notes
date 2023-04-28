@@ -557,7 +557,7 @@ In 2015, Microsoft removed storing the encrypted password in the SYSVOL folder. 
 
 The new method includes two new attributes (ms-mcs-AdmPwd and ms-mcs-AdmPwdExpirationTime) of computer objects in the Active Directory. The `ms-mcs-AdmPwd` attribute contains a clear-text password of the local administrator, while the `ms-mcs-AdmPwdExpirationTime` contains the expiration time to reset the password. LAPS uses `admpwd.dll` to change the local administrator password and update the value of `ms-mcs-AdmPwd`.
 
-<figure><img src="../../.gitbook/assets/image (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1) (2).png" alt=""><figcaption></figcaption></figure>
 
 ### Enumerate for LAPS
 
@@ -569,7 +569,7 @@ The provided VM has the LAPS enabled, so let's start enumerating it. First, we c
 dir "C:\Program Files\LAPS\CSE"
 ```
 
-<figure><img src="../../.gitbook/assets/image (7).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (7) (2).png" alt=""><figcaption></figcaption></figure>
 
 The output confirms that we have LAPS on the machine. Let's check the available commands to use for AdmPwd cmdlets as follows,
 
@@ -600,7 +600,7 @@ The output shows that the `THMGroupReader` group in `THMorg` has the right acces
  net groups "LAPsReader"
 ```
 
-<figure><img src="../../.gitbook/assets/image (5).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (5) (4).png" alt=""><figcaption></figcaption></figure>
 
 **Victim(powershell)**
 
@@ -608,7 +608,7 @@ The output shows that the `THMGroupReader` group in `THMorg` has the right acces
 net user bk-admin
 ```
 
-<figure><img src="../../.gitbook/assets/image (9).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (9) (3).png" alt=""><figcaption></figcaption></figure>
 
 ### Getting the Password
 
@@ -643,7 +643,7 @@ python3.9 /opt/impacket/examples/GetUserSPNs.py -dc-ip $VICTIM THM.red/thm
 Password: Passw0rd!
 ```
 
-<figure><img src="../../.gitbook/assets/image (8).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (8) (1).png" alt=""><figcaption></figcaption></figure>
 
 The previous command is straightforward: we provide the Domain Controller IP address and the domain name\username. Then the GetUserSPNs script asks for the user's password to retrieve the required information.
 
@@ -656,7 +656,7 @@ python3.9 /opt/impacket/examples/GetUserSPNs.py -dc-ip $VICTIM THM.red/thm -requ
 Password: Passw0rd!
 ```
 
-<figure><img src="../../.gitbook/assets/image (3).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (3) (1).png" alt=""><figcaption></figcaption></figure>
 
 Now, it is a matter of cracking the obtained TGS ticket using the HashCat tool using `-m 13100` mode as follows,
 
@@ -667,7 +667,7 @@ hashcat -a 0 -m 13100 spn.hash /usr/share/wordlists/rockyou.txt
 hashcat -a 0 -m 13100 spn.hash /usr/share/wordlists/rockyou.txt --show
 ```
 
-<figure><img src="../../.gitbook/assets/image (12).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (12) (9).png" alt=""><figcaption></figcaption></figure>
 
 Try replicating the steps against the attached VM by finding the SPN user and then performing the Kerberoasting attack. Once you have obtained the ticket, crack it and answer the question below.
 
@@ -675,7 +675,7 @@ Try replicating the steps against the attached VM by finding the SPN user and th
 
 AS-REP Roasting is the technique that enables the attacker to retrieve password hashes for AD users whose account options have been set to "Do not require Kerberos pre-authentication". This option relies on the old Kerberos authentication protocol, which allows authentication without a password. Once we obtain the hashes, we can try to crack it offline, and finally, if it is crackable, we got a password!
 
-<figure><img src="../../.gitbook/assets/image (11).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (11) (4).png" alt=""><figcaption></figcaption></figure>
 
 The attached VM has one of the AD users configured with the "Do not require Kerberos preauthentication" setting. Before performing the AS-REP Roasting, we need a list of domain accounts that should be gathered from the enumeration step. In our case, we created a `users.lst` list in the tmp directory. The following is the content of our list, which should be gathered during the enumeration process.
 

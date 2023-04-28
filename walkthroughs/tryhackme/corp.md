@@ -52,7 +52,7 @@ xfreerdp +clipboard /u:"Administrator" /v:$VICTIM:3389 /size:1024x568 /smart-siz
 Password: tqjJpEX9Qv8ybKI3yHcc=L!5e(!wW;$T
 ```
 
-<figure><img src="../../.gitbook/assets/image (7) (2).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (7) (2) (4).png" alt=""><figcaption></figcaption></figure>
 
 ## Kerberoasting
 

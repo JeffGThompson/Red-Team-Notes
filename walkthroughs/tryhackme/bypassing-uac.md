@@ -50,7 +50,7 @@ regedit
 
 When Windows opens a file, it checks the registry to know what application to use. The registry holds a key known as Programmatic ID (ProgID) for each filetype, where the corresponding application is associated. Let's say you try to open an HTML file. A part of the registry known as the **HKEY\_CLASSES\_ROOT** will be checked so that the system knows that it must use your preferred web client to open it. The command to use will be specified under the `shell/open/command` subkey for each file's ProgID. Taking the "htmlfile" ProgID as an example:
 
-<figure><img src="../../.gitbook/assets/image (12) (9).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (12) (9) (1).png" alt=""><figcaption></figcaption></figure>
 
 #### Putting it all together
 
@@ -194,7 +194,7 @@ reg add "HKCU\Software\Classes\ms-settings\CurVer" /d ".thm" /f
 fodhelper.exe
 </code></pre>
 
-<figure><img src="../../.gitbook/assets/image (3) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (3) (1) (1) (6).png" alt=""><figcaption></figcaption></figure>
 
 ## UAC: Environment Variable Expansion
 
@@ -218,7 +218,7 @@ Checking the Actions and Settings tabs, we have the following:
 
 <figure><img src="../../.gitbook/assets/image (8) (13).png" alt=""><figcaption></figcaption></figure>
 
-<figure><img src="../../.gitbook/assets/image (7) (2) (4).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (7) (2) (4) (1).png" alt=""><figcaption></figcaption></figure>
 
 The task can be run on-demand, executing the following command when invoked:
 

