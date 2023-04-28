@@ -83,7 +83,7 @@ powershell
 Get-ADDomain
 ```
 
-<figure><img src="../../.gitbook/assets/image (5) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (5) (1) (4).png" alt=""><figcaption></figcaption></figure>
 
 **Victim(powershell)**
 
@@ -181,7 +181,7 @@ crypto::certificates /systemstore:local_machine /export
 dir
 ```
 
-<figure><img src="../../.gitbook/assets/image (9) (1) (3) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (9) (1) (3) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 ### Generating our own Certificates
 
@@ -435,7 +435,7 @@ Let's also verify that even though we created multiple groups, the Domain Admins
 Get-ADGroupMember -Identity "Domain Admins"
 ```
 
-<figure><img src="../../.gitbook/assets/image (5).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (5) (1).png" alt=""><figcaption></figcaption></figure>
 
 ## Persistence through ACLs
 

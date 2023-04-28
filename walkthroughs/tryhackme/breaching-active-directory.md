@@ -35,7 +35,7 @@ nc -lvp 389
 
 <figure><img src="../../.gitbook/assets/image (9) (9).png" alt=""><figcaption></figcaption></figure>
 
-<figure><img src="../../.gitbook/assets/image (14).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (14) (10).png" alt=""><figcaption></figcaption></figure>
 
 ### Hosting a Rogue LDAP Server
 
@@ -48,7 +48,7 @@ sudo dpkg-reconfigure -p low slapd
 
 <figure><img src="../../.gitbook/assets/image (13) (1).png" alt=""><figcaption></figcaption></figure>
 
-<figure><img src="../../.gitbook/assets/image (5) (1) (4) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (5) (1) (4) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 **Kali**
 
@@ -83,7 +83,7 @@ ldapsearch -H ldap:// -x -LLL -s base -b "" supportedSASLMechanisms
 
 **Before**
 
-<figure><img src="../../.gitbook/assets/image (12).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (12) (10).png" alt=""><figcaption></figcaption></figure>
 
 **After**
 
@@ -103,9 +103,9 @@ Our rogue LDAP server has now been configured. When we click the "Test Settings"
 sudo tcpdump -SX -i breachad tcp port 389
 ```
 
-<figure><img src="../../.gitbook/assets/image (1) (1) (2).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1) (1) (2) (3).png" alt=""><figcaption></figcaption></figure>
 
-<figure><img src="../../.gitbook/assets/image (10).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (10) (9).png" alt=""><figcaption></figcaption></figure>
 
 
 
@@ -120,7 +120,7 @@ sudo responder -I breachad
 
 <figure><img src="../../.gitbook/assets/image (7) (5) (2) (1).png" alt=""><figcaption></figcaption></figure>
 
-<figure><img src="../../.gitbook/assets/image (8).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (8) (14).png" alt=""><figcaption></figcaption></figure>
 
 <figure><img src="../../.gitbook/assets/image (3) (9) (2) (1).png" alt=""><figcaption></figcaption></figure>
 
@@ -131,7 +131,7 @@ hashcat -m 5600 hash.txt passwordlist.txt --force
 hashcat -m 5600 hash.txt passwordlist.txt --force --show
 ```
 
-<figure><img src="../../.gitbook/assets/image (2) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (2) (1) (1) (6).png" alt=""><figcaption></figcaption></figure>
 
 ## Microsoft Deployment Toolkit
 
