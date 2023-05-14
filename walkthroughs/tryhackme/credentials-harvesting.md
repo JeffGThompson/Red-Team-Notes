@@ -557,7 +557,7 @@ In 2015, Microsoft removed storing the encrypted password in the SYSVOL folder. 
 
 The new method includes two new attributes (ms-mcs-AdmPwd and ms-mcs-AdmPwdExpirationTime) of computer objects in the Active Directory. The `ms-mcs-AdmPwd` attribute contains a clear-text password of the local administrator, while the `ms-mcs-AdmPwdExpirationTime` contains the expiration time to reset the password. LAPS uses `admpwd.dll` to change the local administrator password and update the value of `ms-mcs-AdmPwd`.
 
-<figure><img src="../../.gitbook/assets/image (1) (2).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1) (2) (1).png" alt=""><figcaption></figcaption></figure>
 
 ### Enumerate for LAPS
 
@@ -569,7 +569,7 @@ The provided VM has the LAPS enabled, so let's start enumerating it. First, we c
 dir "C:\Program Files\LAPS\CSE"
 ```
 
-<figure><img src="../../.gitbook/assets/image (7) (2).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (7) (2) (3).png" alt=""><figcaption></figcaption></figure>
 
 The output confirms that we have LAPS on the machine. Let's check the available commands to use for AdmPwd cmdlets as follows,
 
@@ -608,7 +608,7 @@ The output shows that the `THMGroupReader` group in `THMorg` has the right acces
 net user bk-admin
 ```
 
-<figure><img src="../../.gitbook/assets/image (9) (2).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (9) (2) (3).png" alt=""><figcaption></figcaption></figure>
 
 ### Getting the Password
 
@@ -656,7 +656,7 @@ python3.9 /opt/impacket/examples/GetUserSPNs.py -dc-ip $VICTIM THM.red/thm -requ
 Password: Passw0rd!
 ```
 
-<figure><img src="../../.gitbook/assets/image (3) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (3) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 Now, it is a matter of cracking the obtained TGS ticket using the HashCat tool using `-m 13100` mode as follows,
 

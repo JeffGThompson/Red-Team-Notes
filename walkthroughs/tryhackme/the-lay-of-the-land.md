@@ -76,7 +76,7 @@ Get-NetFirewallRule | select DisplayName, Enabled, Description
 net start
 ```
 
-<figure><img src="../../.gitbook/assets/image (10) (1) (2).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (10) (1) (2) (1).png" alt=""><figcaption></figcaption></figure>
 
 **Victim(powershell)**
 

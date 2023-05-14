@@ -184,7 +184,7 @@ hashcat -m 0 password.raw-md5 /usr/share/wordlists/rockyou.txt
 hashcat -m 0 password.raw-md5 /usr/share/wordlists/rockyou.txt --show
 ```
 
-<figure><img src="../../.gitbook/assets/image (3) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (3) (1) (1) (6).png" alt=""><figcaption></figcaption></figure>
 
 **Victim**
 
@@ -213,7 +213,7 @@ chmod +x linpeas.sh
 ./linpeas.sh
 ```
 
-<figure><img src="../../.gitbook/assets/image (37) (3).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (37) (3) (1).png" alt=""><figcaption></figcaption></figure>
 
 ## Privilege Escalation
 

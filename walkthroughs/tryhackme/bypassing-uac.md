@@ -194,7 +194,7 @@ reg add "HKCU\Software\Classes\ms-settings\CurVer" /d ".thm" /f
 fodhelper.exe
 </code></pre>
 
-<figure><img src="../../.gitbook/assets/image (3) (1) (1) (6).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (3) (1) (1) (6) (1).png" alt=""><figcaption></figcaption></figure>
 
 ## UAC: Environment Variable Expansion
 

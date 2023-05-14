@@ -63,7 +63,7 @@ Running the shell script in user3 home directory gives us root access right away
 /home/user3/shell
 ```
 
-<figure><img src="../../.gitbook/assets/image (4) (3) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (4) (3) (1) (2).png" alt=""><figcaption></figcaption></figure>
 
 ## Exploiting Writeable /etc/passwd
 

