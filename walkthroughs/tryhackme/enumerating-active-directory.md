@@ -79,7 +79,7 @@ Clicking on any of these users will allow us to review all of their properties a
 
 We can also use MMC to find hosts in the environment. If we click on either Servers or Workstations, the list of domain-joined machines will be displayed.
 
-<figure><img src="../../.gitbook/assets/image (11).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (11) (4).png" alt=""><figcaption></figcaption></figure>
 
 If we had the relevant permissions, we could also use MMC to directly make changes to AD, such as changing the user's password or adding an account to a specific group. Play around with MMC to better understand the AD domain structure. Make use of the search feature to look for objects.\
 
@@ -118,7 +118,7 @@ We can use the `net` command to list all users in the AD domain by using the `us
 net user /domain
 ```
 
-<figure><img src="../../.gitbook/assets/image (40).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (40) (3).png" alt=""><figcaption></figcaption></figure>
 
 This will return all AD users for us and can be helpful in determining the size of the domain to stage further attacks. We can also use this sub-option to enumerate more detailed information about a single user account:
 
@@ -211,7 +211,7 @@ We can use the `Get-ADUser` cmdlet to enumerate AD users:
 Get-ADUser -Identity gordon.stevens -Server za.tryhackme.com -Properties *
 ```
 
-<figure><img src="../../.gitbook/assets/image (42).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (42) (3).png" alt=""><figcaption></figcaption></figure>
 
 The parameters are used for the following:
 
@@ -376,11 +376,11 @@ We will run Sharphound using the All and Session collection methods:
 SharpHound.exe --CollectionMethods All --Domain za.tryhackme.com --ExcludeDCs
 ```
 
-<figure><img src="../../.gitbook/assets/image (39).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (39) (3).png" alt=""><figcaption></figcaption></figure>
 
 It will take about 1 minute for Sharphound to perform the enumeration. In larger organisations, this can take quite a bit longer, even hours to execute for the first time. Once completed, you will have a timestamped ZIP file in the same folder you executed Sharphound from.
 
-<figure><img src="../../.gitbook/assets/image (27).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (27) (5).png" alt=""><figcaption></figcaption></figure>
 
 In another Terminal tab, run `bloodhound --no-sandbox`. This will show you the authentication GUI:
 
@@ -446,7 +446,7 @@ Furthermore, there is an additional AD account with the username of ADMINISTRATO
 
 Each AD object that was discussed in the previous tasks can be a node in Bloodhound, and each will have a different icon depicting the type of object it is. If we want to formulate an attack path, we need to look at the available edges between the current position and privileges we have and where we want to go. Bloodhound has various available edges that can be accessed by the filter icon:
 
-<figure><img src="../../.gitbook/assets/image (47).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (47) (3).png" alt=""><figcaption></figcaption></figure>
 
 These are also constantly being updated as new attack vectors are discovered. We will be looking at exploiting these different edges in a future network. However, let's look at the most basic attack path using only the default and some special edges. We will run a search in Bloodhound to enumerate the attack path. Press the path icon to allow for path searching.
 
