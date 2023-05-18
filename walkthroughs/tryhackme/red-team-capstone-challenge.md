@@ -1,9 +1,5 @@
 # Red Team Capstone Challenge
 
-
-
-<figure><img src="../../.gitbook/assets/image (87) (2).png" alt=""><figcaption></figcaption></figure>
-
 **Project Registration**
 
 The Trimento government mandates that all red teamers from TryHackMe participating in the challenge must register to allow their single point of contact for the engagement to track activities. As the island's network is segregated, this will also provide the testers access to an email account for communication with the government and an approved phishing email address, should phishing be performed.
@@ -166,7 +162,7 @@ evolution &
 
 <figure><img src="../../.gitbook/assets/image (86).png" alt=""><figcaption></figcaption></figure>
 
-<figure><img src="../../.gitbook/assets/image (7).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (7) (2).png" alt=""><figcaption></figcaption></figure>
 
 <figure><img src="../../.gitbook/assets/image (121).png" alt=""><figcaption></figcaption></figure>
 
@@ -357,7 +353,7 @@ vpn folder has a .ovpn file.
 
 <figure><img src="../../.gitbook/assets/image (86) (2).png" alt=""><figcaption></figcaption></figure>
 
-I don't think it is useful. May just be a default file as the IP address are set as .X.X
+Had to change the IP in the ovpn file but if I see the correct subnet.
 
 **Kali**
 
@@ -365,7 +361,7 @@ I don't think it is useful. May just be a default file as the IP address are set
 openvpn corpUsername.ovpn
 ```
 
-<figure><img src="../../.gitbook/assets/image (82) (2).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (7).png" alt=""><figcaption></figcaption></figure>
 
 If I type my username and password provided I get a login error but if I try with a fake account with no password set I can bypass the login and download a ovpn file
 
@@ -375,7 +371,7 @@ If I type my username and password provided I get a login error but if I try wit
 
 <figure><img src="../../.gitbook/assets/image (42) (3).png" alt=""><figcaption></figcaption></figure>
 
-<figure><img src="../../.gitbook/assets/image (7) (2).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (7) (2) (3).png" alt=""><figcaption></figcaption></figure>
 
 It appears to work
 
@@ -437,6 +433,66 @@ We now have access to our mailbox
 The following email is in my inbox
 
 <figure><img src="../../.gitbook/assets/image (82).png" alt=""><figcaption></figcaption></figure>
+
+### 10.200.119.21
+
+**Kali**
+
+```
+nmap -p- 10.200.119.21 -Pn 
+```
+
+
+
+**Kali**
+
+```
+remmina
+```
+
+**Remmina**
+
+<pre><code><strong>Username: laura.wood
+</strong>Password: Password1@
+Domain: corp.thereserve.loc
+</code></pre>
+
+<figure><img src="../../.gitbook/assets/image (51).png" alt=""><figcaption></figcaption></figure>
+
+**Remmina**
+
+<pre><code><strong>Username: laura.wood
+</strong>Password: Password1@
+Domain: corp.thereserve.loc
+</code></pre>
+
+
+
+**Remmina**
+
+<pre><code><strong>Username: mohammad.ahmed
+</strong>Password: Password1!
+Domain: corp.thereserve.loc
+</code></pre>
+
+### 10.200.119.22
+
+**Kali**
+
+```
+nmap -p- 10.200.119.21 -Pn 
+```
+
+##
+
+##
+
+**Remmina**
+
+<pre><code><strong>Username: mohammad.ahmed
+</strong>Password: Password1!
+Domain: corp.thereserve.loc
+</code></pre>
 
 ## Creds found
 
