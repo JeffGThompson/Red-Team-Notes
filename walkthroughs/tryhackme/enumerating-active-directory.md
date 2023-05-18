@@ -211,7 +211,7 @@ We can use the `Get-ADUser` cmdlet to enumerate AD users:
 Get-ADUser -Identity gordon.stevens -Server za.tryhackme.com -Properties *
 ```
 
-<figure><img src="../../.gitbook/assets/image (42) (3).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (42) (3) (1).png" alt=""><figcaption></figcaption></figure>
 
 The parameters are used for the following:
 
@@ -380,7 +380,7 @@ SharpHound.exe --CollectionMethods All --Domain za.tryhackme.com --ExcludeDCs
 
 It will take about 1 minute for Sharphound to perform the enumeration. In larger organisations, this can take quite a bit longer, even hours to execute for the first time. Once completed, you will have a timestamped ZIP file in the same folder you executed Sharphound from.
 
-<figure><img src="../../.gitbook/assets/image (27) (5).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (27) (5) (2).png" alt=""><figcaption></figcaption></figure>
 
 In another Terminal tab, run `bloodhound --no-sandbox`. This will show you the authentication GUI:
 
