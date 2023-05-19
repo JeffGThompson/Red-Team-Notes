@@ -59,7 +59,7 @@ In MMC, we can now attach the AD RSAT Snap-In:
 
 If everything up to this point worked correctly, your MMC should now be pointed to, and authenticated against, the target Domain:
 
-<figure><img src="../../.gitbook/assets/image (37) (3).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (37) (3) (2).png" alt=""><figcaption></figcaption></figure>
 
 We can now start enumerating information about the AD structure here.
 
@@ -384,7 +384,7 @@ It will take about 1 minute for Sharphound to perform the enumeration. In larger
 
 In another Terminal tab, run `bloodhound --no-sandbox`. This will show you the authentication GUI:
 
-<figure><img src="../../.gitbook/assets/image (8) (2).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (8) (2) (2).png" alt=""><figcaption></figcaption></figure>
 
 The default credentials for the neo4j database will be `neo4j:neo4j`. Use this to authenticate in Bloodhound. To import our results, you will need to recover the ZIP file from the Windows host. The simplest way is to use SCP command on your AttackBox:
 
@@ -446,7 +446,7 @@ Furthermore, there is an additional AD account with the username of ADMINISTRATO
 
 Each AD object that was discussed in the previous tasks can be a node in Bloodhound, and each will have a different icon depicting the type of object it is. If we want to formulate an attack path, we need to look at the available edges between the current position and privileges we have and where we want to go. Bloodhound has various available edges that can be accessed by the filter icon:
 
-<figure><img src="../../.gitbook/assets/image (47) (3).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (47) (3) (1).png" alt=""><figcaption></figcaption></figure>
 
 These are also constantly being updated as new attack vectors are discovered. We will be looking at exploiting these different edges in a future network. However, let's look at the most basic attack path using only the default and some special edges. We will run a search in Bloodhound to enumerate the attack path. Press the path icon to allow for path searching.
 

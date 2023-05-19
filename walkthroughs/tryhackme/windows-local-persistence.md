@@ -538,7 +538,7 @@ copy revshell.exe "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\StartUp\
 
 Now be sure to sign out of your session from the start menu (closing the RDP window is not enough as it leaves your session open).
 
-<figure><img src="../../.gitbook/assets/image (8) (2) (2).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (8) (2) (2) (1).png" alt=""><figcaption></figcaption></figure>
 
 And log back via RDP. You should immediately receive a connection back to your attacker's machine.
 
