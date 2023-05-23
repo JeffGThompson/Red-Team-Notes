@@ -137,7 +137,7 @@ nmap -A $WebMail
 <pre><code><strong>nmap -sV -sT -O -p 1-65535 $WebMail
 </strong></code></pre>
 
-<figure><img src="../../.gitbook/assets/image (1) (2).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1) (2) (1).png" alt=""><figcaption></figcaption></figure>
 
 ### WebMail - HTTP port 80
 
@@ -454,7 +454,7 @@ chmod +x linpeas.sh
 
 
 
-<figure><img src="../../.gitbook/assets/image (51).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (51) (1).png" alt=""><figcaption></figcaption></figure>
 
 <figure><img src="../../.gitbook/assets/image (47).png" alt=""><figcaption></figcaption></figure>
 
@@ -523,7 +523,7 @@ su new
 Password: 123
 ```
 
-<figure><img src="../../.gitbook/assets/image (37).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (37) (1).png" alt=""><figcaption></figcaption></figure>
 
 ### Pivot
 
@@ -563,8 +563,30 @@ socks4 	127.0.0.1 9050
 **Victim**
 
 ```
-nmap -sn 10.200.119.0/24
+nmap -sn 10.200.X.0/24
 ```
+
+Hosts that are up
+
+```
+10.200.89.1                                                                       [16/61]
+10.200.89.11                                                                            
+10.200.89.12
+10.200.89.13                                                                            
+10.200.89.22
+10.200.89.22
+10.200.89.31
+10.200.89.32
+10.200.89.51
+10.200.89.52
+10.200.89.61
+10.200.89.100
+10.200.89.102
+10.200.89.201
+10.200.89.250
+```
+
+
 
 
 
@@ -597,7 +619,7 @@ nmap -A $WebMail
 
 
 
-<figure><img src="../../.gitbook/assets/image (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1) (2).png" alt=""><figcaption></figcaption></figure>
 
 <figure><img src="../../.gitbook/assets/image (42).png" alt=""><figcaption></figcaption></figure>
 
@@ -607,7 +629,7 @@ We now have access to our mailbox
 
 The following email is in my inbox
 
-<figure><img src="../../.gitbook/assets/image (82).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (82) (1).png" alt=""><figcaption></figcaption></figure>
 
 ### 10.200.119.21
 
@@ -650,17 +672,103 @@ Domain: corp.thereserve.loc
 Domain: corp.thereserve.loc
 </code></pre>
 
-### 10.200.119.22
+###
 
-**Kali**
+## 10.200.89.21
+
+scanned from VPN server after rooting
 
 ```
-nmap -p- 10.200.119.21 -Pn 
+nmap -sV -sT -O -p 1-65535 10.200.89.21
+```
+
+<figure><img src="../../.gitbook/assets/image (82).png" alt=""><figcaption></figcaption></figure>
+
+## 10.200.89.22
+
+scanned from VPN server after rooting
+
+```
+nmap -sV -sT -O -p 1-65535 10.200.89.22
+```
+
+<figure><img src="../../.gitbook/assets/image (37).png" alt=""><figcaption></figcaption></figure>
+
+## 10.200.89.31
+
+scanned from VPN server after rooting
+
+```
+nmap -sV -sT -O -p 1-65535 10.200.89.31
+```
+
+<figure><img src="../../.gitbook/assets/image (1).png" alt=""><figcaption></figcaption></figure>
+
+## 10.200.89.32
+
+scanned from VPN server after rooting
+
+```
+nmap -sV -sT -O -p 1-65535 10.200.89.32
+```
+
+<figure><img src="../../.gitbook/assets/image (51).png" alt=""><figcaption></figcaption></figure>
+
+## 10.200.89.51
+
+scanned from VPN server after rooting
+
+```
+nmap -sV -sT -O -p 1-65535 10.200.89.51
+```
+
+nothing found? or issue with server. will try again
+
+## 10.200.89.52
+
+scanned from VPN server after rooting
+
+```
+nmap -sV -sT -O -p 1-65535 10.200.89.52
+```
+
+## 10.200.89.61
+
+scanned from VPN server after rooting
+
+```
+nmap -sV -sT -O -p 1-65535 10.200.89.61
+```
+
+## 10.200.89.100
+
+scanned from VPN server after rooting
+
+```
+nmap -sV -sT -O -p 1-65535 10.200.89.100
+```
+
+## 10.200.89.102
+
+scanned from VPN server after rooting
+
+```
+nmap -sV -sT -O -p 1-65535 10.200.89.102
+```
+
+## 10.200.89.201
+
+scanned from VPN server after rooting
+
+```
+nmap -sV -sT -O -p 1-65535 10.200.89.201
 ```
 
 ##
 
-##
+
+
+
 
 **Remmina**
 

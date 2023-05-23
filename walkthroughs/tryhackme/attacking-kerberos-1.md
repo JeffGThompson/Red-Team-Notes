@@ -115,7 +115,7 @@ Hashcat found the passwords for both of the hashes.
 hashcat -m 13100 -a 0 hash.txt Pass.txt --show
 ```
 
-<figure><img src="../../.gitbook/assets/image (82) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (82) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 <figure><img src="../../.gitbook/assets/image (80) (1).png" alt=""><figcaption></figcaption></figure>
 

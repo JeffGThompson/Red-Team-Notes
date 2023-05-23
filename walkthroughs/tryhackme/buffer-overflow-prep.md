@@ -648,7 +648,7 @@ except:
     sys.exit()
 ```
 
-<figure><img src="../../.gitbook/assets/image (51) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (51) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 ### Finding a Jump Point
 

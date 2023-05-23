@@ -160,7 +160,7 @@ There is a password in the configuration file, it does not work for root but we 
 cat /var/www/html/configuration.php
 ```
 
-<figure><img src="../../.gitbook/assets/image (37) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (37) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 We can login as jjameson&#x20;
 

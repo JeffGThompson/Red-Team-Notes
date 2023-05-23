@@ -557,7 +557,7 @@ In 2015, Microsoft removed storing the encrypted password in the SYSVOL folder. 
 
 The new method includes two new attributes (ms-mcs-AdmPwd and ms-mcs-AdmPwdExpirationTime) of computer objects in the Active Directory. The `ms-mcs-AdmPwd` attribute contains a clear-text password of the local administrator, while the `ms-mcs-AdmPwdExpirationTime` contains the expiration time to reset the password. LAPS uses `admpwd.dll` to change the local administrator password and update the value of `ms-mcs-AdmPwd`.
 
-<figure><img src="../../.gitbook/assets/image (1) (2) (1) (4).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1) (2) (1) (4) (1).png" alt=""><figcaption></figcaption></figure>
 
 ### Enumerate for LAPS
 
