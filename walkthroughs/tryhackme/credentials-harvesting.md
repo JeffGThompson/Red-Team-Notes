@@ -675,7 +675,7 @@ Try replicating the steps against the attached VM by finding the SPN user and th
 
 AS-REP Roasting is the technique that enables the attacker to retrieve password hashes for AD users whose account options have been set to "Do not require Kerberos pre-authentication". This option relies on the old Kerberos authentication protocol, which allows authentication without a password. Once we obtain the hashes, we can try to crack it offline, and finally, if it is crackable, we got a password!
 
-<figure><img src="../../.gitbook/assets/image (11) (3) (3).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (11) (3) (3) (1).png" alt=""><figcaption></figcaption></figure>
 
 The attached VM has one of the AD users configured with the "Do not require Kerberos preauthentication" setting. Before performing the AS-REP Roasting, we need a list of domain accounts that should be gathered from the enumeration step. In our case, we created a `users.lst` list in the tmp directory. The following is the content of our list, which should be gathered during the enumeration process.
 
@@ -699,7 +699,7 @@ We will be using the Impacket Get-NPUsers script this time as follows,
 python3.9 /opt/impacket/examples/GetNPUsers.py -dc-ip $VICTIM thm.red/ -usersfile users.lst
 ```
 
-<figure><img src="../../.gitbook/assets/image (4) (2).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (4) (2) (6).png" alt=""><figcaption></figcaption></figure>
 
 We specified the IP address of the domain controller with the `-dc-ip` argument and provided a list of domain users to check against. Once the tool finds the right user with no preauthentication configuration, it will generate the ticket.
 
