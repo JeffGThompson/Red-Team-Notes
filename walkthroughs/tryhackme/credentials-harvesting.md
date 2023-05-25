@@ -699,7 +699,7 @@ We will be using the Impacket Get-NPUsers script this time as follows,
 python3.9 /opt/impacket/examples/GetNPUsers.py -dc-ip $VICTIM thm.red/ -usersfile users.lst
 ```
 
-<figure><img src="../../.gitbook/assets/image (4) (2) (6).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (4) (2) (6) (1).png" alt=""><figcaption></figcaption></figure>
 
 We specified the IP address of the domain controller with the `-dc-ip` argument and provided a list of domain users to check against. Once the tool finds the right user with no preauthentication configuration, it will generate the ticket.
 
