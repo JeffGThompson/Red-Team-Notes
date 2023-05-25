@@ -118,7 +118,7 @@ We can use the `net` command to list all users in the AD domain by using the `us
 net user /domain
 ```
 
-<figure><img src="../../.gitbook/assets/image (40) (3).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (40) (3) (1).png" alt=""><figcaption></figcaption></figure>
 
 This will return all AD users for us and can be helpful in determining the size of the domain to stage further attacks. We can also use this sub-option to enumerate more detailed information about a single user account:
 
