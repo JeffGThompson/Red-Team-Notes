@@ -608,18 +608,6 @@ Hosts that are up
 10.200.89.250
 ```
 
-
-
-
-
-
-
-
-
-
-
-12.100.1.10
-
 ## WebMail- Scanning&#x20;
 
 **Kali**
@@ -628,18 +616,12 @@ Hosts that are up
 nmap -A $WebMail
 ```
 
-
-
 ### Scan all ports
 
 **Kali**
 
 <pre><code><strong>nmap -sV -sT -O -p 1-65535 $WebMail
 </strong></code></pre>
-
-
-
-
 
 <figure><img src="../../.gitbook/assets/image (1) (2).png" alt=""><figcaption></figcaption></figure>
 
