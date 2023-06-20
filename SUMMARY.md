@@ -70,3 +70,4 @@
   * [Persisting Active Directory](walkthroughs/tryhackme/persisting-active-directory.md)
   * [Credentials Harvesting](walkthroughs/tryhackme/credentials-harvesting.md)
   * [Red Team Capstone Challenge](walkthroughs/tryhackme/red-team-capstone-challenge.md)
+  * [Crack the hash](walkthroughs/tryhackme/crack-the-hash.md)

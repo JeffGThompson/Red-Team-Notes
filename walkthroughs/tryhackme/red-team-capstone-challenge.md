@@ -714,7 +714,7 @@ scanned from VPN server after rooting
 nmap -sV -sT -O -p 1-65535 10.200.89.31
 ```
 
-<figure><img src="../../.gitbook/assets/image (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 ### Secretdump
 
@@ -1423,7 +1423,7 @@ Get SID of the domain
 Get-ADComputer -Identity "CORPDC"
 ```
 
-<figure><img src="../../.gitbook/assets/image (4).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (4) (1).png" alt=""><figcaption></figcaption></figure>
 
 Get SID of the Administrator account
 

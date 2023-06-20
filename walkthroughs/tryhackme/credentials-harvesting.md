@@ -98,7 +98,7 @@ Once the command is successfully executed, let's use the `vssadmin`, Volume Shad
 vssadmin list shadows
 ```
 
-<figure><img src="../../.gitbook/assets/image (6) (1) (5).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (6) (1) (5) (1).png" alt=""><figcaption></figcaption></figure>
 
 The output shows that we have successfully created a shadow copy volume of (C:) with the following path: \\?\GLOBALROOT\Device\HarddiskVolumeShadowCopy1.
 
@@ -165,7 +165,7 @@ To dump any running Windows process using the GUI, open the Task Manager, and fr
 
 ![](<../../.gitbook/assets/image (7) (1).png>)
 
-![](<../../.gitbook/assets/image (6) (1).png>)
+![](<../../.gitbook/assets/image (6) (1) (5).png>)
 
 Once the dumping process is finished, a pop-up message will show containing the path of the dumped file. Now copy the file and transfer it to the AttackBox to extract NTLM hashes offline.
 
@@ -494,7 +494,7 @@ The following is a one-liner PowerShell command to dump the NTDS file using the 
 powershell "ntdsutil.exe 'ac i ntds' 'ifm' 'create full c:\temp' q q"
 ```
 
-<figure><img src="../../.gitbook/assets/image (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 Now, if we check the `c:\temp` directory, we see two folders: Active Directory and registry, which contain the three files we need. Transfer them to the AttackBox and run the secretsdump.py script to extract the hashes from the dumped memory file.
 
@@ -537,7 +537,7 @@ hashcat -m 1000 -a 0 hashes.txt /usr/share/wordlists/rockyou.txt
 hashcat -m 1000 -a 0 hashes.txt /usr/share/wordlists/rockyou.txt --show
 ```
 
-<figure><img src="../../.gitbook/assets/image (2) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (2) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 ## Local Administrator Password Solution (LAPS)
 

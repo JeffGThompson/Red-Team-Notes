@@ -68,7 +68,7 @@ Change the value from Guest to Admin and we can bypass the error message above.
 
 Change the value to the flag and we can see it on the page.
 
-<figure><img src="../../.gitbook/assets/image (31) (2).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (31) (2) (1).png" alt=""><figcaption></figcaption></figure>
 
 What it would look like in burp.
 
