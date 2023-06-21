@@ -1673,7 +1673,7 @@ We find that essfunc.dll has 9 possible JMP ESPs to use. So we will start with t
 !mona find -s "\xff\xe4" -m essfunc.dll
 ```
 
-<figure><img src="../../.gitbook/assets/image (54).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (54) (2).png" alt=""><figcaption></figcaption></figure>
 
 ### Exploit
 
@@ -2017,7 +2017,7 @@ except:
 
 <figure><img src="../../.gitbook/assets/image (12) (7) (1).png" alt=""><figcaption></figcaption></figure>
 
-<figure><img src="../../.gitbook/assets/image (53).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (53) (2).png" alt=""><figcaption></figcaption></figure>
 
 ### Finding a Jump Point
 
@@ -2119,7 +2119,7 @@ nc -lvnp 4444
 python exploit.py $VICTIM 1337
 ```
 
-<figure><img src="../../.gitbook/assets/image (52).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (52) (2).png" alt=""><figcaption></figcaption></figure>
 
 ## oscp.exe - OVERFLOW7
 

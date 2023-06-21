@@ -52,7 +52,7 @@ Trying to login the page redirects to internal.htm so I add that to the host fil
 vi /etc/hosts
 ```
 
-<figure><img src="../../.gitbook/assets/image (24) (3).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (24) (3) (1).png" alt=""><figcaption></figcaption></figure>
 
 We are able to successfully get into wordpress with the credentials
 

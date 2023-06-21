@@ -239,7 +239,7 @@ We can use the `Get-ADGroup` cmdlet to enumerate AD groups:
 Get-ADGroup -Identity Administrators -Server za.tryhackme.com
 ```
 
-<figure><img src="../../.gitbook/assets/image (9) (2).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (9) (2) (3).png" alt=""><figcaption></figcaption></figure>
 
 We can also enumerate group membership using the `Get-ADGroupMember` cmdlet:
 
@@ -394,7 +394,7 @@ scp <AD Username>@THMJMP1.za.tryhackme.com:C:/Users/<AD Username>/Documents/<Sha
 
 Once you provide your password, this will copy the results to your current working directory. Drag and drop the ZIP file onto the Bloodhound GUI to import into Bloodhound. It will show that it is extracting the files and initiating the import.
 
-<figure><img src="../../.gitbook/assets/image (24).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (24) (3).png" alt=""><figcaption></figcaption></figure>
 
 Once all JSON files have been imported, we can start using Bloodhound to enumerate attack paths for this specific domain.\
 

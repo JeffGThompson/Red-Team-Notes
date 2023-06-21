@@ -608,7 +608,7 @@ The output shows that the `THMGroupReader` group in `THMorg` has the right acces
 net user bk-admin
 ```
 
-<figure><img src="../../.gitbook/assets/image (9) (2) (3).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (9) (2) (3) (2).png" alt=""><figcaption></figcaption></figure>
 
 ### Getting the Password
 
@@ -643,7 +643,7 @@ python3.9 /opt/impacket/examples/GetUserSPNs.py -dc-ip $VICTIM THM.red/thm
 Password: Passw0rd!
 ```
 
-<figure><img src="../../.gitbook/assets/image (8) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (8) (1) (6).png" alt=""><figcaption></figcaption></figure>
 
 The previous command is straightforward: we provide the Domain Controller IP address and the domain name\username. Then the GetUserSPNs script asks for the user's password to retrieve the required information.
 
