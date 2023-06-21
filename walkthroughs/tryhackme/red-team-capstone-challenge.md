@@ -65,13 +65,13 @@ Looking for php files we found the info file which can be used to find info abou
 dirb http://$WEB:80 /usr/share/wordlists/dirb/big.txt -X .php
 ```
 
-<figure><img src="../../.gitbook/assets/image (11) (3) (3).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (11) (3) (3) (1).png" alt=""><figcaption></figcaption></figure>
 
 <figure><img src="../../.gitbook/assets/image (37) (3).png" alt=""><figcaption></figcaption></figure>
 
 Manually looking around there is a meet the team page, when clicking on the images we can see the folder holding all their pictures with their names, potentially could be usernames.
 
-<figure><img src="../../.gitbook/assets/image (10).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (10) (4).png" alt=""><figcaption></figcaption></figure>
 
 **Output - users.txt**
 
@@ -162,7 +162,7 @@ evolution &
 
 <figure><img src="../../.gitbook/assets/image (86).png" alt=""><figcaption></figcaption></figure>
 
-<figure><img src="../../.gitbook/assets/image (7) (2).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (7) (2) (5).png" alt=""><figcaption></figcaption></figure>
 
 <figure><img src="../../.gitbook/assets/image (121).png" alt=""><figcaption></figcaption></figure>
 
@@ -206,7 +206,7 @@ john --wordlist=Capstone_Challenge_Resources/password_base_list.txt --rules=Caps
 hydra -L users.txt -P mangled-passwords.txt smtp://$WebMail -V -o smtp-results.txt
 ```
 
-<figure><img src="../../.gitbook/assets/image (11) (3).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (11) (3) (3).png" alt=""><figcaption></figcaption></figure>
 
 
 
@@ -361,7 +361,7 @@ Had to change the IP in the ovpn file but if I see the correct subnet.
 openvpn corpUsername.ovpn
 ```
 
-<figure><img src="../../.gitbook/assets/image (7).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (7) (2).png" alt=""><figcaption></figcaption></figure>
 
 If I type my username and password provided I get a login error but if I try with a fake account with no password set I can bypass the login and download a ovpn file
 
@@ -543,7 +543,7 @@ show tables;
 select * from users;
 ```
 
-### ![](<../../.gitbook/assets/image (11).png>)
+### ![](<../../.gitbook/assets/image (11) (3).png>)
 
 ### Pivot
 
@@ -1423,7 +1423,7 @@ Get SID of the domain
 Get-ADComputer -Identity "CORPDC"
 ```
 
-<figure><img src="../../.gitbook/assets/image (4) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (4) (1) (9).png" alt=""><figcaption></figcaption></figure>
 
 Get SID of the Administrator account
 
@@ -6742,7 +6742,7 @@ I can now login to the ROOTDC with RDP and from ROOTDC I can login to BANKDC
 
 **ROOTDC -> BANKDC**
 
-<figure><img src="../../.gitbook/assets/image (5).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (5) (3).png" alt=""><figcaption></figcaption></figure>
 
 If RDP session flashes black you can kill the sessions for BANKDC to ROOTDC
 

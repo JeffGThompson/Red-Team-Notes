@@ -600,7 +600,7 @@ The output shows that the `THMGroupReader` group in `THMorg` has the right acces
  net groups "LAPsReader"
 ```
 
-<figure><img src="../../.gitbook/assets/image (5) (3).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (5) (3) (3).png" alt=""><figcaption></figcaption></figure>
 
 **Victim(powershell)**
 
@@ -656,7 +656,7 @@ python3.9 /opt/impacket/examples/GetUserSPNs.py -dc-ip $VICTIM THM.red/thm -requ
 Password: Passw0rd!
 ```
 
-<figure><img src="../../.gitbook/assets/image (3) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (3) (1) (1) (7).png" alt=""><figcaption></figcaption></figure>
 
 Now, it is a matter of cracking the obtained TGS ticket using the HashCat tool using `-m 13100` mode as follows,
 
@@ -667,7 +667,7 @@ hashcat -a 0 -m 13100 spn.hash /usr/share/wordlists/rockyou.txt
 hashcat -a 0 -m 13100 spn.hash /usr/share/wordlists/rockyou.txt --show
 ```
 
-<figure><img src="../../.gitbook/assets/image (12) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (12) (1) (5).png" alt=""><figcaption></figcaption></figure>
 
 Try replicating the steps against the attached VM by finding the SPN user and then performing the Kerberoasting attack. Once you have obtained the ticket, crack it and answer the question below.
 
@@ -675,7 +675,7 @@ Try replicating the steps against the attached VM by finding the SPN user and th
 
 AS-REP Roasting is the technique that enables the attacker to retrieve password hashes for AD users whose account options have been set to "Do not require Kerberos pre-authentication". This option relies on the old Kerberos authentication protocol, which allows authentication without a password. Once we obtain the hashes, we can try to crack it offline, and finally, if it is crackable, we got a password!
 
-<figure><img src="../../.gitbook/assets/image (11) (3) (3) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (11) (3) (3) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 The attached VM has one of the AD users configured with the "Do not require Kerberos preauthentication" setting. Before performing the AS-REP Roasting, we need a list of domain accounts that should be gathered from the enumeration step. In our case, we created a `users.lst` list in the tmp directory. The following is the content of our list, which should be gathered during the enumeration process.
 

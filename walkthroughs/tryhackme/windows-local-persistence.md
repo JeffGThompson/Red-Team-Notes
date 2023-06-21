@@ -951,7 +951,7 @@ nc -lvp 4454
 
 With all that ready, let's navigate to `http://$VICTIM/` and insert an employee into the web application. Since the web application will send an INSERT statement to the database, our TRIGGER will provide us access to the system's console.
 
-<figure><img src="../../.gitbook/assets/image (10) (4).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (10) (4) (3).png" alt=""><figcaption></figcaption></figure>
 
 
 
