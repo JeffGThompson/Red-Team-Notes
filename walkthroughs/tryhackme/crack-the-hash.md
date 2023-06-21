@@ -87,9 +87,49 @@ john --format=raw-md4 hash.txt --wordlist=password
 
 ## Level 2
 
+### F09EDCB1FCEFC6DFB23DC3505A882655FF77375ED8AA2D1C13F640FCCC2D0C85
+
+```
+python hash-id.py F09EDCB1FCEFC6DFB23DC3505A882655FF77375ED8AA2D1C13F640FCCC2D0C85
+```
+
+
+
+```
+john --format=raw-md5 hash.txt 
+```
+
+### 1DFECA0C002AE40B8619ECF94819CC1B
+
+```
+python hash-id.py 1DFECA0C002AE40B8619ECF94819CC1B
+```
+
+###
+
+```
+john --format=raw-md5 hash.txt
+```
+
+### &#x20;$6$aReallyHardSalt$6WKUTqzq.UQQmrm0p/T7MPpMbGNnzXPMAXi4bJMl9be.cfi3/qxIf.hsGpS41BqMhSrHVXgMpdjS6xeKZAs02.
+
+Salt: aReallyHardSalt
+
+```
+python hash-id.py $6$aReallyHardSalt$6WKUTqzq.UQQmrm0p/T7MPpMbGNnzXPMAXi4bJMl9be.cfi3/qxIf.hsGpS41BqMhSrHVXgMpdjS6xeKZAs02.
+```
+
+
+
+```
+john --format=raw-md5 hash.txt
+```
+
 
 
 \---
+
+$6$aReallyHardSalt$6WKUTqzq.UQQmrm0p/T7MPpMbGNnzXPMAXi4bJMl9be.cfi3/qxIf.hsGpS41BqMhSrHVXgMpdjS6xeKZAs02.
 
 ### 7
 
