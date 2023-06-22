@@ -115,7 +115,7 @@ zip revshell.zip revshell.php
 nc -lvnp 443
 ```
 
-<figure><img src="../../.gitbook/assets/image (22) (7).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (22) (7) (1).png" alt=""><figcaption></figcaption></figure>
 
 I realized my reverse shell wasn't working as it is a Windows box. I uploaded a web shell and ran commands to realize this.
 

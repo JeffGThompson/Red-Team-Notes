@@ -498,7 +498,7 @@ powershell "ntdsutil.exe 'ac i ntds' 'ifm' 'create full c:\temp' q q"
 
 Now, if we check the `c:\temp` directory, we see two folders: Active Directory and registry, which contain the three files we need. Transfer them to the AttackBox and run the secretsdump.py script to extract the hashes from the dumped memory file.
 
-<figure><img src="../../.gitbook/assets/image (22).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (22) (7).png" alt=""><figcaption></figcaption></figure>
 
 
 

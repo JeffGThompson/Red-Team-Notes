@@ -72,3 +72,4 @@
   * [Red Team Capstone Challenge](walkthroughs/tryhackme/red-team-capstone-challenge.md)
   * [Crack the hash](walkthroughs/tryhackme/crack-the-hash.md)
   * [Ice](walkthroughs/tryhackme/ice.md)
+  * [Bounty Hunter](walkthroughs/tryhackme/bounty-hunter.md)

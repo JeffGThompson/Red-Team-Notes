@@ -994,7 +994,7 @@ Once our tunnel is set and running, we can go to the attacker's machine and RDP 
 
 Using this type of port forwarding would allow us to run reverse shells from hosts that normally wouldn't be able to connect back to us or simply make any service we want available to machines that have no direct connection to us.
 
-<figure><img src="../../.gitbook/assets/image (100).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (100) (1).png" alt=""><figcaption></figcaption></figure>
 
 To forward port 80 from the attacker's machine and make it available from PC-1, we can run the following command on PC-1:
 
@@ -1033,7 +1033,7 @@ Note that socat can't forward the connection directly to the attacker's machine 
 \
 
 
-<figure><img src="../../.gitbook/assets/image (98).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (98) (1).png" alt=""><figcaption></figcaption></figure>
 
 As usual, since a port is being opened on the pivot host, we might need to create a firewall rule to allow any connections to that port:
 
@@ -1119,7 +1119,7 @@ To forward such ports from our attacker machine to THMJMP2, we will use local po
 
 Putting the whole command together, we would end up with the following:
 
-<figure><img src="../../.gitbook/assets/image (99).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (99) (1).png" alt=""><figcaption></figcaption></figure>
 
 **Note:** If you are using the AttackBox and have joined other network rooms before, be sure to select the IP address assigned to the tunnel interface facing the `lateralmovementandpivoting` network as your ATTACKER\_IP, or else your reverse shells/connections won't work properly. For your convenience, the interface attached to this network is called `lateralmovement`, so you should be able to get the right IP address by running `ip add show lateralmovement`:
 

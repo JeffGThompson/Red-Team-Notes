@@ -465,7 +465,7 @@ ctrl + Z
 stty raw -echo;fg
 ```
 
-<figure><img src="../../.gitbook/assets/image (78).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (78) (1).png" alt=""><figcaption></figcaption></figure>
 
 ### **Transfer LinPeas**
 
