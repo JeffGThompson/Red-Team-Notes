@@ -234,7 +234,7 @@ In 2012, Microsoft implemented an LSA protection, to keep LSASS from being acces
 
 <figure><img src="../../.gitbook/assets/image (3) (15).png" alt=""><figcaption></figcaption></figure>
 
-<figure><img src="../../.gitbook/assets/image (16).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (16) (5).png" alt=""><figcaption></figcaption></figure>
 
 The steps are similar to the previous section, which runs the Mimikatz execution file with admin privileges and enables the debug mode. If the LSA protection is enabled, we will get an error executing the "sekurlsa::logonpasswords" command.
 
@@ -299,7 +299,7 @@ copy C:\Users\thm\AppData\Local\Temp\lsass.DMP C:\Tools\Mimikatz\lsass.DMP
 c:\Tools\SysinternalsSuite\procdump.exe -accepteula -ma lsass.exe c:\Tools\Mimikatz\lsass_dump
 ```
 
-<figure><img src="../../.gitbook/assets/image (18).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (18) (3).png" alt=""><figcaption></figcaption></figure>
 
 **Victim(cmd)**
 

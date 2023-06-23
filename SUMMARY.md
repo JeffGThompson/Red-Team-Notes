@@ -73,3 +73,4 @@
   * [Crack the hash](walkthroughs/tryhackme/crack-the-hash.md)
   * [Ice](walkthroughs/tryhackme/ice.md)
   * [Bounty Hunter](walkthroughs/tryhackme/bounty-hunter.md)
+  * [Agent Sudo](walkthroughs/tryhackme/agent-sudo.md)
