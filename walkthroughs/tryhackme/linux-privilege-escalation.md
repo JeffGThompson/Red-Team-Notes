@@ -32,7 +32,7 @@ uname -a
 cat /etc/issue
 ```
 
-<figure><img src="../../.gitbook/assets/image (46).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (46) (1).png" alt=""><figcaption></figcaption></figure>
 
 **What version of the Python language is installed on the system?**
 

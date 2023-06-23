@@ -6,7 +6,7 @@
 
 **Give Lab #1 a try to read /etc/passwd. What would the request URI be?**
 
-<figure><img src="../../.gitbook/assets/image (16) (5) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (16) (5).png" alt=""><figcaption></figcaption></figure>
 
 **In Lab #2, what is the directory specified in the include function?**
 

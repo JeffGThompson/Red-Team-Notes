@@ -59,7 +59,7 @@ If you refresh the page you'll go to a wordpress site.
 
 Test to see what users exist in wordpress, if the user doesn't exist it will give an error saying the user is invalid.
 
-<figure><img src="../../.gitbook/assets/image (26) (5).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (26) (5) (1).png" alt=""><figcaption></figcaption></figure>
 
 **Kali**
 
@@ -123,7 +123,7 @@ nc -lvnp 443
 
 <figure><img src="../../.gitbook/assets/image (6) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
-<figure><img src="../../.gitbook/assets/image (25) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (25) (1) (3).png" alt=""><figcaption></figcaption></figure>
 
 Connection is made but it isn't stable.
 

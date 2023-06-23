@@ -71,7 +71,7 @@ Let's take a look at the Active Directory structure. For this task, we will focu
 
 Let's take a look at the People directory. Here we see that the users are divided according to department OUs. Clicking on each of these OUs will show the users that belong to that department.
 
-<figure><img src="../../.gitbook/assets/image (28).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (28) (4).png" alt=""><figcaption></figcaption></figure>
 
 Clicking on any of these users will allow us to review all of their properties and attributes. We can also see what groups they are a member of:
 
@@ -165,7 +165,7 @@ We can use the `net` command to enumerate the password policy of the domain by u
 net accounts /domain
 ```
 
-<figure><img src="../../.gitbook/assets/image (26).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (26) (5).png" alt=""><figcaption></figcaption></figure>
 
 This will provide us with helpful information such as:
 
@@ -249,7 +249,7 @@ We can also enumerate group membership using the `Get-ADGroupMember` cmdlet:
 Get-ADGroupMember -Identity Administrators -Server za.tryhackme.com
 ```
 
-<figure><img src="../../.gitbook/assets/image (23).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (23) (2).png" alt=""><figcaption></figcaption></figure>
 
 ### AD Objects
 
@@ -262,7 +262,7 @@ $ChangeDate = New-Object DateTime(2022, 02, 28, 12, 00, 00)
 Get-ADObject -Filter 'whenChanged -gt $ChangeDate' -includeDeletedObjects -Server za.tryhackme.com
 ```
 
-<figure><img src="../../.gitbook/assets/image (48).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (48) (3).png" alt=""><figcaption></figcaption></figure>
 
 **Victim(powershell)**
 
@@ -283,7 +283,7 @@ We can use `Get-ADDomain` to retrieve additional information about the specific 
 Get-ADDomain -Server za.tryhackme.com
 ```
 
-<figure><img src="../../.gitbook/assets/image (49).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (49) (2).png" alt=""><figcaption></figcaption></figure>
 
 ### Altering AD Objects
 
@@ -407,7 +407,7 @@ There are several attack paths that Bloodhound can show. Pressing the three stri
 
 Note that if you import a new run of Sharphound, it would cumulatively increase these counts. First, we will look at Node Info. Let's search for our AD account in Bloodhound. You must click on the node to refresh the view. Also note you can change the label scheme by pressing LeftCtrl.
 
-<figure><img src="../../.gitbook/assets/image (41).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (41) (3).png" alt=""><figcaption></figcaption></figure>
 
 We can see that there is a significant amount of information returned regarding our use. Each of the categories provides the following information:
 

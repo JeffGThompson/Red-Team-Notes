@@ -363,7 +363,7 @@ You can get a list of available services using the following command.
 sc.exe query state=all
 ```
 
-<figure><img src="../../.gitbook/assets/image (18) (3) (3).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (18) (3).png" alt=""><figcaption></figcaption></figure>
 
 You should be able to find a stopped service called THMService3. To query the service's configuration, you can use the following command.
 

@@ -376,7 +376,7 @@ Sudo can be configured to inherit certain environment variables from the user's 
 sudo -l
 ```
 
-<figure><img src="../../.gitbook/assets/image (32) (3).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (32) (3) (1).png" alt=""><figcaption></figcaption></figure>
 
 **LD\_PRELOAD** and **LD\_LIBRARY\_PATH** are both inherited from the user's environment. LD\_PRELOAD loads a shared object before any others when a program is run. LD\_LIBRARY\_PATH provides a list of directories where shared libraries are searched for first.
 

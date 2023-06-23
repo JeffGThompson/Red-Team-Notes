@@ -44,7 +44,7 @@ smb: \> cd Share
 smb: \Share\> get gatekeeper.exe 
 ```
 
-<figure><img src="../../.gitbook/assets/image (55) (2).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (55).png" alt=""><figcaption></figcaption></figure>
 
 <figure><img src="../../.gitbook/assets/image (65) (1).png" alt=""><figcaption></figcaption></figure>
 
@@ -242,7 +242,7 @@ Now we need to find a place to jump to to run our payload.  We find there is onl
 !mona modules
 ```
 
-<figure><img src="../../.gitbook/assets/image (67) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (67) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 We find that gatekeeper.exe has 2 possible JMP ESPs to use. So we will start with the first one which is 0x080414c3 but when we add it to our code we need it in little endian format so it becomes \xaf\x11\x50\x62.
 
@@ -252,7 +252,7 @@ We find that gatekeeper.exe has 2 possible JMP ESPs to use. So we will start wit
 !mona find -s "\xff\xe4" -m gatekeeper.exe
 ```
 
-<figure><img src="../../.gitbook/assets/image (77).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (77) (1).png" alt=""><figcaption></figcaption></figure>
 
 ### Exploit - Staging
 

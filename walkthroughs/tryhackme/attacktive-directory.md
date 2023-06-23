@@ -104,7 +104,7 @@ hashcat -m18200 hash.txt passwordlist.txt
 hashcat -m18200 hash.txt passwordlist.txt --show
 ```
 
-<figure><img src="../../.gitbook/assets/image (28) (4).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (28) (4) (1).png" alt=""><figcaption></figcaption></figure>
 
 ### Back to the Basics
 

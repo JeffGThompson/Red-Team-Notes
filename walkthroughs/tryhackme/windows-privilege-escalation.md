@@ -45,7 +45,7 @@ runas /savecred /user:WPRIVESC1\mike.katz cmd.exe
 reg query HKEY_CURRENT_USER\Software\SimonTatham\PuTTY\Sessions\ /f "Proxy" /s
 ```
 
-<figure><img src="../../.gitbook/assets/image (19) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (19) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 ## Other Quick Wins
 
@@ -249,7 +249,7 @@ sc.exe start THMService
 
 ## Abusing dangerous privileges
 
-<figure><img src="../../.gitbook/assets/image (32).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (32) (3).png" alt=""><figcaption></figcaption></figure>
 
 **Kali**
 
