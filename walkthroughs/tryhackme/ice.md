@@ -12,9 +12,9 @@
 nmap -A $VICTIM
 ```
 
-<figure><img src="../../.gitbook/assets/image (70).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (52).png" alt=""><figcaption></figcaption></figure>
 
-<figure><img src="../../.gitbook/assets/image (77).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (54).png" alt=""><figcaption></figcaption></figure>
 
 ## Gain Access
 
@@ -33,13 +33,13 @@ set RHOSTS $VICTIM
 run
 ```
 
-<figure><img src="../../.gitbook/assets/image (53).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (41).png" alt=""><figcaption></figcaption></figure>
 
 ## Escalate
 
 
 
-<figure><img src="../../.gitbook/assets/image (67).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (49).png" alt=""><figcaption></figcaption></figure>
 
 **Meterpreter**
 
@@ -48,7 +48,7 @@ run post/multi/recon/local_exploit_suggester
 background
 ```
 
-<figure><img src="../../.gitbook/assets/image (76).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (53).png" alt=""><figcaption></figcaption></figure>
 
 **Metasploit**
 
@@ -61,7 +61,7 @@ run
 
 We are still user dark but have a lot of privilege's now
 
-<figure><img src="../../.gitbook/assets/image (52).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (32).png" alt=""><figcaption></figcaption></figure>
 
 ## Looting
 
@@ -71,7 +71,7 @@ We are still user dark but have a lot of privilege's now
 ps
 ```
 
-<figure><img src="../../.gitbook/assets/image (54).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (46).png" alt=""><figcaption></figcaption></figure>
 
 **Meterpreter**
 
@@ -87,7 +87,7 @@ load kiwi
 creds_all
 ```
 
-<figure><img src="../../.gitbook/assets/image (78).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (56).png" alt=""><figcaption></figcaption></figure>
 
 **Meterpreter**
 
@@ -95,7 +95,7 @@ creds_all
 hashdump
 ```
 
-<figure><img src="../../.gitbook/assets/image (64).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (48).png" alt=""><figcaption></figcaption></figure>
 
 **Meterpreter**
 
