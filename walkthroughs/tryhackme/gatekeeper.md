@@ -445,7 +445,7 @@ There wasn't much running on the server but I was able to see that firefox was r
 meterpreter > run post/windows/gather/enum_applications
 ```
 
-<figure><img src="../../.gitbook/assets/image (75).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (75) (1).png" alt=""><figcaption></figcaption></figure>
 
 ### **Transfer WinPeas**
 

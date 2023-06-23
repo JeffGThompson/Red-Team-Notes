@@ -845,7 +845,7 @@ Program crashed at 1300 bytes with fuzzer.py
 
 
 
-<figure><img src="../../.gitbook/assets/image (56) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (56) (1).png" alt=""><figcaption></figcaption></figure>
 
 ```
 /opt/metasploit-framework-5101/tools/exploit/pattern_create.rb -l 1300
@@ -2403,7 +2403,7 @@ We find that essfunc.dll has 9 possible JMP ESPs to use. So we will start with t
 !mona find -s "\xff\xe4" -m essfunc.dll
 ```
 
-<figure><img src="../../.gitbook/assets/image (38) (2).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (38) (2) (1).png" alt=""><figcaption></figcaption></figure>
 
 ### Exploit
 

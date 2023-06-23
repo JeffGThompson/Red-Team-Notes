@@ -364,7 +364,7 @@ wmic /node:$VICTIM /user:DOMAIN\USER product call install PackageLocation=c:\Win
 
 To complete this exercise, you will need to connect to THMJMP2 using the credentials assigned to you on Task 1 from [http://distributor.za.tryhackme.com/creds](http://distributor.za.tryhackme.com/creds). If you haven't done so yet, click on the link and get credentials. Once you have your credentials, connect to THMJMP2 via SSH:
 
-<figure><img src="../../.gitbook/assets/image (33) (2).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (33) (2) (1).png" alt=""><figcaption></figcaption></figure>
 
 **Kali**
 

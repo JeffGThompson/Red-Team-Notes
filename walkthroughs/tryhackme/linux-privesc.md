@@ -162,7 +162,7 @@ Generate a new password hash with a password of your choice.
 openssl passwd newpasswordhere
 ```
 
-<figure><img src="../../.gitbook/assets/image (29) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (29) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 Edit the /etc/passwd file and place the generated password hash between the first and second colon (:) of the root user's row (replacing the "x"). Switch to the root user, using the new password
 

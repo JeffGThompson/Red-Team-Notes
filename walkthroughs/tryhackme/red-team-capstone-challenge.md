@@ -389,7 +389,7 @@ openvpn fake.ovpn
 ip a
 ```
 
-<figure><img src="../../.gitbook/assets/image (39) (3).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (39) (3) (2).png" alt=""><figcaption></figcaption></figure>
 
 **Kali**
 
@@ -523,7 +523,7 @@ su new
 Password: 123
 ```
 
-<figure><img src="../../.gitbook/assets/image (37) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (37) (1) (2).png" alt=""><figcaption></figcaption></figure>
 
 ### MySQL
 
@@ -704,7 +704,7 @@ scanned from VPN server after rooting
 nmap -sV -sT -O -p 1-65535 10.200.89.22
 ```
 
-<figure><img src="../../.gitbook/assets/image (37).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (37) (1).png" alt=""><figcaption></figcaption></figure>
 
 ## 10.200.89.31
 
@@ -6738,7 +6738,7 @@ net group "Enterprise Admins" zgod /ADD /DOMAIN
 
 I can now login to the ROOTDC with RDP and from ROOTDC I can login to BANKDC
 
-<figure><img src="../../.gitbook/assets/image (40).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (40) (1).png" alt=""><figcaption></figcaption></figure>
 
 **ROOTDC -> BANKDC**
 
