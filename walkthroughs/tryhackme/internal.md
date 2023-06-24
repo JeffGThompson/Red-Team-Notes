@@ -148,7 +148,7 @@ The note for Bill
 cat /opt/wp-save.txt 
 ```
 
-<figure><img src="../../.gitbook/assets/image (47) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (47) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 Able to ssh in with the credentials. There is a file that says that Jenkins is running and we can confirm that is is running with netstat as well.
 

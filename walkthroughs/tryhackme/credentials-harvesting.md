@@ -357,7 +357,7 @@ The output shows that we have one stored credential in the specified vault. Now 
 VaultCmd /listcreds:"Web Credentials"
 ```
 
-<figure><img src="../../.gitbook/assets/image (35).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (35) (3).png" alt=""><figcaption></figcaption></figure>
 
 ### Credential Dumping
 

@@ -62,7 +62,7 @@ Password: andrea
 ftp> get ftp_flag.txt
 ```
 
-<figure><img src="../../.gitbook/assets/image (62).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (62) (2).png" alt=""><figcaption></figcaption></figure>
 
 **Browsing to `http://10.10.129.189:8080` displays a small challenge that will give you a flag once you solve it. What is the flag?**
 
