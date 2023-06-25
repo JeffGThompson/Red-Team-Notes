@@ -142,7 +142,7 @@ I realized my reverse shell wasn't working as it is a Windows box. I uploaded a 
 
 
 
-<figure><img src="../../.gitbook/assets/image (45) (3).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (45) (3) (1).png" alt=""><figcaption></figcaption></figure>
 
 
 

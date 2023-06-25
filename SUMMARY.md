@@ -76,3 +76,4 @@
   * [Agent Sudo](walkthroughs/tryhackme/agent-sudo.md)
   * [LazyAdmin](walkthroughs/tryhackme/lazyadmin.md)
   * [Wgel CTF](walkthroughs/tryhackme/wgel-ctf.md)
+  * [Cyborg](walkthroughs/tryhackme/cyborg.md)

@@ -30,7 +30,7 @@ nmap -sV -sT -O -p 1-65535 $VICTIM
 curl http://$VICTIM -I
 ```
 
-<figure><img src="../../.gitbook/assets/image (65).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (65) (2).png" alt=""><figcaption></figcaption></figure>
 
 **What is the flag hidden in the SSH server header?**
 

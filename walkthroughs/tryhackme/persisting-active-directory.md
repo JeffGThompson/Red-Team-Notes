@@ -311,7 +311,7 @@ This confirms that our user does not currently have any SID History set. Let's g
 Get-ADGroup "Domain Admins"
 ```
 
-<figure><img src="../../.gitbook/assets/image (36) (4).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (36) (4) (2).png" alt=""><figcaption></figcaption></figure>
 
 We could use something like Mimikatz to add SID history. However, the latest version of Mimikatz has a flaw that does not allow it to patch LSASS to update SID history. Hence we need to use something else. In this case, we will use the [DSInternals](https://github.com/MichaelGrafnetter/DSInternals) tools to directly patch the ntds.dit file, the AD database where all information is stored.
 

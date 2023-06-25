@@ -428,7 +428,7 @@ The output shows that we have a domain password stored as the `thm\thm-local` us
 runas /savecred /user:THM.red\thm-local cmd.exe
 ```
 
-<figure><img src="../../.gitbook/assets/image (36).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (36) (4).png" alt=""><figcaption></figcaption></figure>
 
 A new cmd.exe pops up with a command prompt ready to use. Now run the whoami command to confirm that we are running under the desired user. There is a flag in the c:\Users\thm-local\Saved Games\flag.txt, try to read it and answer the question below.
 
@@ -449,7 +449,7 @@ privilege::debug
 sekurlsa::credman
 ```
 
-<figure><img src="../../.gitbook/assets/image (45).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (45) (3).png" alt=""><figcaption></figcaption></figure>
 
 ## Domain Controller
 
