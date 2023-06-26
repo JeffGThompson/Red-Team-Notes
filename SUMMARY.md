@@ -77,3 +77,4 @@
   * [LazyAdmin](walkthroughs/tryhackme/lazyadmin.md)
   * [Wgel CTF](walkthroughs/tryhackme/wgel-ctf.md)
   * [Cyborg](walkthroughs/tryhackme/cyborg.md)
+  * [Year of the Rabbit](walkthroughs/tryhackme/year-of-the-rabbit.md)

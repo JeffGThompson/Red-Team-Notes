@@ -160,7 +160,7 @@ apt install evolution -y
 evolution &
 ```
 
-<figure><img src="../../.gitbook/assets/image (86).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (86) (2).png" alt=""><figcaption></figcaption></figure>
 
 <figure><img src="../../.gitbook/assets/image (7) (2) (5).png" alt=""><figcaption></figcaption></figure>
 
@@ -351,7 +351,7 @@ dirb http://$VPN:80 /usr/share/wordlists/dirb/big.txt
 
 vpn folder has a .ovpn file.
 
-<figure><img src="../../.gitbook/assets/image (86) (2).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (86) (2) (1).png" alt=""><figcaption></figcaption></figure>
 
 Had to change the IP in the ovpn file but if I see the correct subnet.
 
@@ -686,7 +686,7 @@ scanned from VPN server after rooting
 nmap -sV -sT -O -p 1-65535 10.200.89.21
 ```
 
-<figure><img src="../../.gitbook/assets/image (82).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (82) (2).png" alt=""><figcaption></figcaption></figure>
 
 ### Pivot
 

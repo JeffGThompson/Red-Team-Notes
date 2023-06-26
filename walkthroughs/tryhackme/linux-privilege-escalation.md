@@ -42,7 +42,7 @@ cat /etc/issue
 python -V
 ```
 
-<figure><img src="../../.gitbook/assets/image (92).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (92) (1).png" alt=""><figcaption></figcaption></figure>
 
 **What vulnerability seem to affect the kernel of the target system? (Enter a CVE number)**
 

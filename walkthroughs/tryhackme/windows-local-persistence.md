@@ -68,7 +68,7 @@ evil-winrm -i $VICTIM -u thmuser1 -p Password321
 *Evil-WinRM* PS C:\Users\thmuser1\Documents> whoami /groups
 ```
 
-<figure><img src="../../.gitbook/assets/image (94).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (94) (1).png" alt=""><figcaption></figcaption></figure>
 
 \----
 
