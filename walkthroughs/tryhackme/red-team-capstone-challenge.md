@@ -629,7 +629,7 @@ nmap -A $WebMail
 
 We now have access to our mailbox
 
-<figure><img src="../../.gitbook/assets/image (87).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (87) (1).png" alt=""><figcaption></figcaption></figure>
 
 The following email is in my inbox
 
@@ -1433,7 +1433,7 @@ Get SID of the Administrator account
 Get-ADGroup -Identity "Enterprise Admins" -Server rootdc.thereserve.loc
 ```
 
-<figure><img src="../../.gitbook/assets/image (84).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (84) (1).png" alt=""><figcaption></figcaption></figure>
 
 **Victim(mimikatz)**
 
@@ -1449,7 +1449,7 @@ We now have access to the rootdc
 dir \\rootdc.thereserve.loc\c$
 ```
 
-<figure><img src="../../.gitbook/assets/image (83).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (83) (3).png" alt=""><figcaption></figcaption></figure>
 
 ### Download Psexec
 

