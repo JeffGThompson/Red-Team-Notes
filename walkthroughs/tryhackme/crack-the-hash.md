@@ -43,7 +43,7 @@ john --format=raw-md5 hash.txt
 python hash-id.py CBFDAC6008F9CAB4083784CBD1874F76618D2A97 
 ```
 
-<figure><img src="../../.gitbook/assets/image (81).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (81) (3).png" alt=""><figcaption></figcaption></figure>
 
 ```
 john --format=raw-sha1 hash.txt --wordlist=/usr/share/wordlists/rockyou.txt
@@ -57,7 +57,7 @@ john --format=raw-sha1 hash.txt --wordlist=/usr/share/wordlists/rockyou.txt
 python hash-id.py 1C8BFE8F801D79745C4631D09FFF36C82AA37FC4CCE4FC946683D7B336B63032
 ```
 
-![](<../../.gitbook/assets/image (2).png>)
+![](<../../.gitbook/assets/image (2) (1).png>)
 
 ```
 john --format=raw-sha256 hash.txt
@@ -69,7 +69,7 @@ john --format=raw-sha256 hash.txt
 python hash-id.py $2y$12$Dwt1BZj6pcyc3Dy1FWZ5ieeUznr71EeNkJkUlypTsgbX1H68wsRom
 ```
 
-<figure><img src="../../.gitbook/assets/image (30).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (30) (2).png" alt=""><figcaption></figcaption></figure>
 
 hash-id couldn't find it so I went to hashcats website and looked at possible hashes. I also filtered for only four letter words from rockyou as mentioned in the hint.
 
@@ -88,7 +88,7 @@ john --format=bcrypt hash.txt --wordlist=new.txt
 python hash-id.py 279412f945939ba78ce0758d3fd83daa
 ```
 
-<figure><img src="../../.gitbook/assets/image (66).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (66) (2).png" alt=""><figcaption></figcaption></figure>
 
 ```
 john --format=raw-md4 hash.txt --wordlist=password
@@ -102,7 +102,7 @@ john --format=raw-md4 hash.txt --wordlist=password
 python hash-id.py F09EDCB1FCEFC6DFB23DC3505A882655FF77375ED8AA2D1C13F640FCCC2D0C85
 ```
 
-![](<../../.gitbook/assets/image (95).png>)
+![](<../../.gitbook/assets/image (95) (1).png>)
 
 ```
 john --format=raw-sha256 hash.txt 
@@ -116,7 +116,7 @@ Hash was a NTLM
 python hash-id.py 1DFECA0C002AE40B8619ECF94819CC1B
 ```
 
-<figure><img src="../../.gitbook/assets/image (3).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (3) (1).png" alt=""><figcaption></figcaption></figure>
 
 Used [https://hashes.com/en/decrypt/hash](https://hashes.com/en/decrypt/hashhttps://crackstation.net/) to solve
 
@@ -128,7 +128,7 @@ Used [https://hashes.com/en/decrypt/hash](https://hashes.com/en/decrypt/hashhttp
 
 Used [https://www.onlinehashcrack.com/hash-identification.php](https://www.onlinehashcrack.com/hash-identification.php) to identify the hash&#x20;
 
-<figure><img src="../../.gitbook/assets/image.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (6).png" alt=""><figcaption></figcaption></figure>
 
 **hash.txt**&#x20;
 
@@ -154,11 +154,11 @@ Salt: tryhackme
 python hash-id.py e5d8870e5bdd26602cab8dbe07a942c8669e56d6
 ```
 
-<figure><img src="../../.gitbook/assets/image (27).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (27) (1).png" alt=""><figcaption></figcaption></figure>
 
 **hash.txt**
 
-<figure><img src="../../.gitbook/assets/image (48).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (48) (4).png" alt=""><figcaption></figcaption></figure>
 
 ```
 hashcat -m 160 hash.txt /usr/share/wordlists/rockyou.txt

@@ -32,7 +32,7 @@ Password: stabilitythroughcurrency
 nmap -A $WEB
 ```
 
-<figure><img src="../../.gitbook/assets/image (80).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (80) (2).png" alt=""><figcaption></figcaption></figure>
 
 ### Scan all ports
 
@@ -324,7 +324,7 @@ Best regards,
 nmap -A $VPN 
 ```
 
-<figure><img src="../../.gitbook/assets/image (80).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (80) (2).png" alt=""><figcaption></figcaption></figure>
 
 ### Scan all ports
 

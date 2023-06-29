@@ -72,7 +72,7 @@ hydra -L fsocity.dic -p test  $VICTIM http-post-form "/wp-login.php:log=^USER^&p
 
 
 
-<figure><img src="../../.gitbook/assets/image (18) (2).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (18) (2) (2).png" alt=""><figcaption></figcaption></figure>
 
 Because there were so many entries in fsocity.dic I tried to reduce it as much as I could by removing duplicates and passwords that I thought would be unlikely.
 

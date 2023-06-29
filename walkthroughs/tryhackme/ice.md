@@ -14,7 +14,7 @@ nmap -A $VICTIM
 
 <figure><img src="../../.gitbook/assets/image (116).png" alt=""><figcaption></figcaption></figure>
 
-<figure><img src="../../.gitbook/assets/image (65).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (65) (3).png" alt=""><figcaption></figcaption></figure>
 
 ## Gain Access
 
@@ -39,7 +39,7 @@ run
 
 
 
-<figure><img src="../../.gitbook/assets/image (55).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (55) (3).png" alt=""><figcaption></figcaption></figure>
 
 **Meterpreter**
 
@@ -87,7 +87,7 @@ load kiwi
 creds_all
 ```
 
-<figure><img src="../../.gitbook/assets/image (18).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (18) (2).png" alt=""><figcaption></figcaption></figure>
 
 **Meterpreter**
 

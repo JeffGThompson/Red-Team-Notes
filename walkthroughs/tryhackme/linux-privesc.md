@@ -140,7 +140,7 @@ su root
 Password: newpasswordhere
 ```
 
-<figure><img src="../../.gitbook/assets/image (30) (2).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (30) (2) (2).png" alt=""><figcaption></figcaption></figure>
 
 ## Weak File Permissions - Writable /etc/passwd
 
@@ -252,7 +252,7 @@ TERM= sudo more /etc/profile
 
 <figure><img src="../../.gitbook/assets/image (1) (2) (1) (1) (2).png" alt=""><figcaption></figcaption></figure>
 
-<figure><img src="../../.gitbook/assets/image (2) (1) (3).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (2) (1) (3) (3).png" alt=""><figcaption></figcaption></figure>
 
 ### **less**
 

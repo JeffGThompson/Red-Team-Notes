@@ -345,7 +345,7 @@ echo '</pre>';
 rlwrap nc -lvnp 9000
 ```
 
-<figure><img src="../../.gitbook/assets/image (66) (2).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (66) (2) (1).png" alt=""><figcaption></figcaption></figure>
 
 
 
@@ -414,7 +414,7 @@ xfreerdp +clipboard /u:"wade" /v:$VICTIM:3389 /size:1024x568 /smart-sizing:800x1
 Password: parzival
 ```
 
-<figure><img src="../../.gitbook/assets/image (72).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (72) (2).png" alt=""><figcaption></figcaption></figure>
 
 Load PowerUp.ps1 into memory.
 

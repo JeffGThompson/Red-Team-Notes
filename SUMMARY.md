@@ -79,3 +79,4 @@
   * [Cyborg](walkthroughs/tryhackme/cyborg.md)
   * [Year of the Rabbit](walkthroughs/tryhackme/year-of-the-rabbit.md)
   * [Brute It](walkthroughs/tryhackme/brute-it.md)
+  * [Lian\_Yu](walkthroughs/tryhackme/lian\_yu.md)

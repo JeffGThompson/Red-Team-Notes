@@ -106,7 +106,7 @@ Password: password
 sudo -l
 ```
 
-<figure><img src="../../.gitbook/assets/image (3) (1) (6).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (3) (1) (6) (1).png" alt=""><figcaption></figcaption></figure>
 
 **Victim**
 
