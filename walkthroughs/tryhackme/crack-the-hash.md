@@ -116,7 +116,7 @@ Hash was a NTLM
 python hash-id.py 1DFECA0C002AE40B8619ECF94819CC1B
 ```
 
-<figure><img src="../../.gitbook/assets/image (3) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (3) (1) (2).png" alt=""><figcaption></figcaption></figure>
 
 Used [https://hashes.com/en/decrypt/hash](https://hashes.com/en/decrypt/hashhttps://crackstation.net/) to solve
 
@@ -128,7 +128,7 @@ Used [https://hashes.com/en/decrypt/hash](https://hashes.com/en/decrypt/hashhttp
 
 Used [https://www.onlinehashcrack.com/hash-identification.php](https://www.onlinehashcrack.com/hash-identification.php) to identify the hash&#x20;
 
-<figure><img src="../../.gitbook/assets/image (6).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (6) (3).png" alt=""><figcaption></figcaption></figure>
 
 **hash.txt**&#x20;
 

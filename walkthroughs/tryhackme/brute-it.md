@@ -11,7 +11,7 @@
 <pre><code><strong>nmap -A $VICTIM
 </strong></code></pre>
 
-<figure><img src="../../.gitbook/assets/image (48).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (120).png" alt=""><figcaption></figcaption></figure>
 
 ### Scan all ports
 
@@ -30,7 +30,7 @@ No other ports found.
 gobuster dir -u http://$VICTIM -w /usr/share/wordlists/SecLists/Discovery/Web-Content/directory-list-2.3-medium.txt -x php,html,txt
 ```
 
-<figure><img src="../../.gitbook/assets/image (43).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (117).png" alt=""><figcaption></figcaption></figure>
 
 
 
@@ -38,13 +38,13 @@ gobuster dir -u http://$VICTIM -w /usr/share/wordlists/SecLists/Discovery/Web-Co
 
 
 
-<figure><img src="../../.gitbook/assets/image (2).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (57).png" alt=""><figcaption></figcaption></figure>
 
 
 
-<figure><img src="../../.gitbook/assets/image (50).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (119).png" alt=""><figcaption></figcaption></figure>
 
-<figure><img src="../../.gitbook/assets/image (4).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (63).png" alt=""><figcaption></figcaption></figure>
 
 **Kali**
 
@@ -52,9 +52,9 @@ gobuster dir -u http://$VICTIM -w /usr/share/wordlists/SecLists/Discovery/Web-Co
 hydra -l admin -P /usr/share/wordlists/SecLists/Passwords/darkweb2017-top10000.txt $VICTIM http-post-form "/admin/:user=^USER^&pass=^PASS^:F=invalid" -V
 ```
 
-<figure><img src="../../.gitbook/assets/image (49).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (114).png" alt=""><figcaption></figcaption></figure>
 
-<figure><img src="../../.gitbook/assets/image (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (6).png" alt=""><figcaption></figcaption></figure>
 
 **Kali**
 
@@ -63,7 +63,7 @@ hydra -l admin -P /usr/share/wordlists/SecLists/Passwords/darkweb2017-top10000.t
 john --wordlist=/usr/share/wordlists/rockyou.txt id_john.txt 
 ```
 
-<figure><img src="../../.gitbook/assets/image (40).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (118).png" alt=""><figcaption></figcaption></figure>
 
 **Kali**
 
@@ -77,7 +77,7 @@ pass: rockinroll
 
 john can run cat as root, we can just use this to read root.txt but I decided to read the shadow file which I can't do from johns account, then send shadow and passwd files back to Kali to crack.
 
-<figure><img src="../../.gitbook/assets/image (47).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (113).png" alt=""><figcaption></figcaption></figure>
 
 **Victim**
 
@@ -94,9 +94,9 @@ unshadow passwd shadow > passwords.txt
 john --wordlist=/usr/share/wordlists/rockyou.txt passwords.txt
 ```
 
-<figure><img src="../../.gitbook/assets/image (109).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (123).png" alt=""><figcaption></figcaption></figure>
 
-<figure><img src="../../.gitbook/assets/image (53).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (122).png" alt=""><figcaption></figcaption></figure>
 
 
 

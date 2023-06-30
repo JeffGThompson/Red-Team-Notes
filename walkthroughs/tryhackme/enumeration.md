@@ -111,7 +111,7 @@ systeminfo
 netstat -n
 ```
 
-![](<../../.gitbook/assets/image (6) (3) (4).png>)
+![](<../../.gitbook/assets/image (6) (3) (4) (1).png>)
 
 **What is the name of the program listening on that port?**
 

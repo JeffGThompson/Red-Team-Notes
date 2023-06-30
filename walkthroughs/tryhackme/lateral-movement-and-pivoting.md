@@ -861,7 +861,7 @@ When an administrator uses Remote Desktop to connect to a machine and closes the
 
 If we have administrator-level access, we can get SYSTEM by any method of our preference. For now, we will be using psexec to do so. First, let's run a cmd.exe as administrator:
 
-<figure><img src="../../.gitbook/assets/image (3) (1) (2).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (3) (1) (2) (1).png" alt=""><figcaption></figcaption></figure>
 
 From there, run `PsExec64.exe`(available at `C:\tools\`):
 
@@ -976,7 +976,7 @@ A valid question that might pop up by this point is why we need port forwarding 
 
 Referring to the previous image, to forward port 3389 on the server back to our attacker's machine, we can use the following command on PC-1:
 
-<figure><img src="../../.gitbook/assets/image (112).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (112) (1).png" alt=""><figcaption></figcaption></figure>
 
 his will establish an SSH session from PC-1 to `1.1.1.1` (Attacker PC) using the `tunneluser` user.
 
@@ -1047,7 +1047,7 @@ If, on the other hand, we'd like to expose port 80 from the attacker's machine s
 
 As a result, PC-1 will spawn port 80 and listen for connections to be forwarded to port 80 on the attacker's machine:
 
-<figure><img src="../../.gitbook/assets/image (114).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (114) (1).png" alt=""><figcaption></figcaption></figure>
 
 #### Dynamic Port Forwarding and SOCKS
 
@@ -1095,7 +1095,7 @@ Note that we can't use port 3389 for our listener since it is already being used
 
 Once the listener has been set up, you should be able to connect to THMIIS via RDP from your attacker machine by pivoting through your socat listener at THMJMP2:
 
-<figure><img src="../../.gitbook/assets/image (108).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (108) (1).png" alt=""><figcaption></figcaption></figure>
 
 Once connected, you should get a flag from t1\_thomas.moore's desktop on THMIIS.
 

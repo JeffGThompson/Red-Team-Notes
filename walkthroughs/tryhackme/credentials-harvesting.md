@@ -335,7 +335,7 @@ We will be using the Microsoft Credentials Manager `vaultcmd` utility. Let's sta
 vaultcmd /list
 ```
 
-<figure><img src="../../.gitbook/assets/image (119).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (119) (1).png" alt=""><figcaption></figcaption></figure>
 
 By default, Windows has two vaults, one for Web and the other one for Windows machine credentials. The above output confirms that we have the two default vaults.
 
@@ -347,7 +347,7 @@ Let's check if there are any stored credentials in the Web Credentials vault by 
 VaultCmd /listproperties:"Web Credentials"
 ```
 
-<figure><img src="../../.gitbook/assets/image (118).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (118) (1).png" alt=""><figcaption></figcaption></figure>
 
 The output shows that we have one stored credential in the specified vault. Now let's try to list more information about the stored credential as follows,
 

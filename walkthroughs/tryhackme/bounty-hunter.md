@@ -11,7 +11,7 @@
 <pre><code><strong>nmap -A $VICTIM
 </strong></code></pre>
 
-<figure><img src="../../.gitbook/assets/image (5).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (5) (2).png" alt=""><figcaption></figcaption></figure>
 
 ### Scan all ports
 
@@ -39,7 +39,7 @@ ftp $VICTIM
 Username: anonymous
 ```
 
-<figure><img src="../../.gitbook/assets/image (125).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (125) (1).png" alt=""><figcaption></figcaption></figure>
 
 **Kali**
 
@@ -47,7 +47,7 @@ Username: anonymous
 hydra -l lin -P locks.txt ssh://$VICTIM
 ```
 
-<figure><img src="../../.gitbook/assets/image (55).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (55) (1).png" alt=""><figcaption></figcaption></figure>
 
 ```
 Username: lin

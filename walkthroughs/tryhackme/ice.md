@@ -95,7 +95,7 @@ creds_all
 hashdump
 ```
 
-<figure><img src="../../.gitbook/assets/image (70).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (70) (1).png" alt=""><figcaption></figcaption></figure>
 
 **Meterpreter**
 

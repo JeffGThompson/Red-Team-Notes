@@ -602,7 +602,7 @@ Note: While in a real-world set-up you could use any name for your registry entr
 
 After doing this, sign out of your current session and log in again, and you should receive a shell (it will probably take around 10-20 seconds).
 
-<figure><img src="../../.gitbook/assets/image (6) (3).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (6) (3) (4).png" alt=""><figcaption></figcaption></figure>
 
 ### Winlogon
 
