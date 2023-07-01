@@ -14,6 +14,7 @@ uname -a
 
 ```
 cat /etc/passwd
+cat /etc/shadow
 ```
 
 ```

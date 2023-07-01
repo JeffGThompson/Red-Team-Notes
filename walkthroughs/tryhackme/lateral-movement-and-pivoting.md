@@ -753,7 +753,7 @@ privilege::debug
 kerberos::ptt [0;363979]-2-0-40e10000-t1_toby.beck@krbtgt-ZA.TRYHACKME.COM.kirbi   
 ```
 
-<figure><img src="../../.gitbook/assets/image (7) (9).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (7) (9) (1).png" alt=""><figcaption></figcaption></figure>
 
 **Victim**
 

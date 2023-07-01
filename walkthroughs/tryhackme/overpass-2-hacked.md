@@ -18,7 +18,7 @@ What was the URL of the page they used to upload a reverse shell?
 tcpdump -r overpass2.pcapng | grep GET
 ```
 
-<figure><img src="../../.gitbook/assets/image (41) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (41) (1).png" alt=""><figcaption></figcaption></figure>
 
 **What payload did the attacker use to gain access?**
 

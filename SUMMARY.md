@@ -20,6 +20,7 @@
   * [Command Injection](methodologies-and-resources/cheat-sheets/command-injection.md)
   * [Credential Harvesting](methodologies-and-resources/cheat-sheets/credential-harvesting.md)
   * [Password Attacks](methodologies-and-resources/cheat-sheets/password-attacks.md)
+  * [Command Injection](methodologies-and-resources/cheat-sheets/command-injection-1.md)
 
 ## Walkthroughs
 

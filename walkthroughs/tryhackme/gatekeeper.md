@@ -511,7 +511,7 @@ git clone https://github.com/unode/firefox_decrypt.git
 python3.9 firefox_decrypt.py ./
 ```
 
-<figure><img src="../../.gitbook/assets/image (64) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (64) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 **Credentials Found**
 

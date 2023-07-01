@@ -13,7 +13,7 @@
 <pre><code><strong>nmap -A $VICTIM
 </strong></code></pre>
 
-<figure><img src="../../.gitbook/assets/image (60).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (60) (1).png" alt=""><figcaption></figcaption></figure>
 
 ### Scan all ports
 
@@ -41,15 +41,15 @@ searchsploit sweet rice
 searchsploit -m php/webapps/40718.txt
 ```
 
-<figure><img src="../../.gitbook/assets/image (49).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (49) (3).png" alt=""><figcaption></figcaption></figure>
 
-<figure><img src="../../.gitbook/assets/image (64).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (64) (1).png" alt=""><figcaption></figcaption></figure>
 
 <figure><img src="../../.gitbook/assets/image (137).png" alt=""><figcaption></figcaption></figure>
 
 
 
-<figure><img src="../../.gitbook/assets/image (62).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (62) (1).png" alt=""><figcaption></figcaption></figure>
 
 **Link:** [https://crackstation.net/](https://crackstation.net/)
 
@@ -66,7 +66,7 @@ searchsploit -m php/webapps/40716.py
 python 40716.py
 ```
 
-<figure><img src="../../.gitbook/assets/image (7) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (7) (9).png" alt=""><figcaption></figcaption></figure>
 
 The php reverse shell setups up a reverse shell so I setup a nc listener on Kali and went to the URL the script mentioned.
 
@@ -90,13 +90,13 @@ ctrl + Z
 stty raw -echo;fg
 ```
 
-<figure><img src="../../.gitbook/assets/image (53).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (53) (3).png" alt=""><figcaption></figcaption></figure>
 
 ### **Privilege Escalation**
 
 The user has access to run backup.pl without a password, I checked the the file and all it does is run a bash script. We have access to write to copy.sh so I changed it to a reverse shell one liner and setup my listener on Kali.
 
-<figure><img src="../../.gitbook/assets/image (56) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (56) (2).png" alt=""><figcaption></figcaption></figure>
 
 **Kali**
 

@@ -57,7 +57,7 @@ john --format=raw-sha1 hash.txt --wordlist=/usr/share/wordlists/rockyou.txt
 python hash-id.py 1C8BFE8F801D79745C4631D09FFF36C82AA37FC4CCE4FC946683D7B336B63032
 ```
 
-![](<../../.gitbook/assets/image (2) (1) (8).png>)
+![](<../../.gitbook/assets/image (2) (1).png>)
 
 ```
 john --format=raw-sha256 hash.txt
@@ -134,7 +134,7 @@ Used [https://www.onlinehashcrack.com/hash-identification.php](https://www.onlin
 
 The hash is already in the hash so didn't change anything.
 
-<figure><img src="../../.gitbook/assets/image (134).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (134) (1).png" alt=""><figcaption></figcaption></figure>
 
 ```
 john --format=sha512crypt --wordlist=/usr/share/wordlists/rockyou.txt hash.txt
