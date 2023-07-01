@@ -704,7 +704,7 @@ scanned from VPN server after rooting
 nmap -sV -sT -O -p 1-65535 10.200.89.22
 ```
 
-<figure><img src="../../.gitbook/assets/image (37) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (37) (1) (3).png" alt=""><figcaption></figcaption></figure>
 
 ## 10.200.89.31
 

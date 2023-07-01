@@ -32,7 +32,7 @@ gobuster dir -u http://$VICTIM -w /usr/share/wordlists/SecLists/Discovery/Web-Co
 
 
 
-<figure><img src="../../.gitbook/assets/image (76).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (76) (2).png" alt=""><figcaption></figcaption></figure>
 
 **Kali**
 
@@ -53,7 +53,7 @@ searchsploit -m php/webapps/40718.txt
 
 **Link:** [https://crackstation.net/](https://crackstation.net/)
 
-<figure><img src="../../.gitbook/assets/image (61).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (61) (2).png" alt=""><figcaption></figcaption></figure>
 
 Tried to ssh with the credentials but it didn't work, went back to searchsploit because I saw a python script before but it needed credentials. I modified the script to take the input because I waa lazy.&#x20;
 
@@ -66,7 +66,7 @@ searchsploit -m php/webapps/40716.py
 python 40716.py
 ```
 
-<figure><img src="../../.gitbook/assets/image (7).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (7) (1).png" alt=""><figcaption></figcaption></figure>
 
 The php reverse shell setups up a reverse shell so I setup a nc listener on Kali and went to the URL the script mentioned.
 
@@ -96,7 +96,7 @@ stty raw -echo;fg
 
 The user has access to run backup.pl without a password, I checked the the file and all it does is run a bash script. We have access to write to copy.sh so I changed it to a reverse shell one liner and setup my listener on Kali.
 
-<figure><img src="../../.gitbook/assets/image (56).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (56) (1).png" alt=""><figcaption></figcaption></figure>
 
 **Kali**
 

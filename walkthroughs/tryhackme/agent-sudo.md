@@ -22,7 +22,7 @@ nmap -p- $VICTIM
 gobuster dir -u http://$VICTIM -w /usr/share/wordlists/SecLists/Discovery/Web-Content/directory-list-2.3-medium.txt -x php,html,txt 
 ```
 
-<figure><img src="../../.gitbook/assets/image (37).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (37) (1).png" alt=""><figcaption></figcaption></figure>
 
 
 
@@ -30,7 +30,7 @@ gobuster dir -u http://$VICTIM -w /usr/share/wordlists/SecLists/Discovery/Web-Co
 
 
 
-<figure><img src="../../.gitbook/assets/image (77).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (77) (2).png" alt=""><figcaption></figcaption></figure>
 
 ### Burp
 
@@ -70,9 +70,9 @@ Username: chris
 Password: crystal
 ```
 
-<figure><img src="../../.gitbook/assets/image (2).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (2) (1).png" alt=""><figcaption></figcaption></figure>
 
-<figure><img src="../../.gitbook/assets/image (41).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (41) (1).png" alt=""><figcaption></figcaption></figure>
 
 **Kali**
 
@@ -90,7 +90,7 @@ zip2john 8702.zip > secure_john.txt
 john --wordlist=/usr/share/wordlists/rockyou.txt secure_john.txt 
 ```
 
-<figure><img src="../../.gitbook/assets/image (59).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (59) (2).png" alt=""><figcaption></figcaption></figure>
 
 **Kali**
 
@@ -105,7 +105,7 @@ Password: alien
 
 Link: [https://gchq.github.io/CyberChef/](https://gchq.github.io/CyberChef/)
 
-<figure><img src="../../.gitbook/assets/image (58).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (58) (3).png" alt=""><figcaption></figcaption></figure>
 
 **Kali**
 
@@ -129,7 +129,7 @@ Password: hackerrules!
 ls
 ```
 
-<figure><img src="../../.gitbook/assets/image (67).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (67) (2).png" alt=""><figcaption></figcaption></figure>
 
 **Kali**
 

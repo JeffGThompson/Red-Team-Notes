@@ -81,3 +81,4 @@
   * [Brute It](walkthroughs/tryhackme/brute-it.md)
   * [Lian\_Yu](walkthroughs/tryhackme/lian\_yu.md)
   * [ToolsRus](walkthroughs/tryhackme/toolsrus.md)
+  * [Chill Hack](walkthroughs/tryhackme/chill-hack.md)
