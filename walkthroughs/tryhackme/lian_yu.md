@@ -78,7 +78,7 @@ gobuster dir -u http://$VICTIM/island/2100 -w /usr/share/wordlists/SecLists/Disc
 
 **Link:** [https://gchq.github.io/CyberChef/](https://gchq.github.io/CyberChef/)
 
-<figure><img src="../../.gitbook/assets/image (12).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (12) (5).png" alt=""><figcaption></figcaption></figure>
 
 
 

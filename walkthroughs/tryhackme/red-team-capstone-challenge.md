@@ -335,7 +335,7 @@ OpenVPN port potentially found
 <pre><code><strong>nmap -sV -sT -O -p 1-65535 $VPN 
 </strong></code></pre>
 
-<figure><img src="../../.gitbook/assets/image (8) (2).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (8) (2) (1).png" alt=""><figcaption></figcaption></figure>
 
 ### VPN - HTTP port 80
 

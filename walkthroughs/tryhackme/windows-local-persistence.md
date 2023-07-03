@@ -815,7 +815,7 @@ copy c:\Windows\System32\cmd.exe C:\Windows\System32\utilman.exe
 
 To trigger our terminal, we will lock our screen from the start button.
 
-<figure><img src="../../.gitbook/assets/image (7) (4).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (7) (4) (4).png" alt=""><figcaption></figcaption></figure>
 
 And finally, proceed to click on the "Ease of Access" button. Since we replaced `utilman.exe` with a `cmd.exe` copy, we will get a command prompt with SYSTEM privileges.
 

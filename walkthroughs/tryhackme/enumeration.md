@@ -101,7 +101,7 @@ systeminfo
 systeminfo
 ```
 
-<figure><img src="../../.gitbook/assets/image (12) (5).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (12) (5) (2).png" alt=""><figcaption></figcaption></figure>
 
 **What is the lowest TCP port number listening on the system?**
 
