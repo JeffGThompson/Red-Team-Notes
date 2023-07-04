@@ -84,3 +84,4 @@
   * [ToolsRus](walkthroughs/tryhackme/toolsrus.md)
   * [Chill Hack](walkthroughs/tryhackme/chill-hack.md)
   * [Bolt](walkthroughs/tryhackme/bolt.md)
+  * [source](walkthroughs/tryhackme/source.md)

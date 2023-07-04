@@ -694,7 +694,7 @@ nmap -sV -sT -O -p 1-65535 10.200.89.21
 proxychains remmina 
 ```
 
-<figure><img src="../../.gitbook/assets/image (4) (2).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (4) (2) (7).png" alt=""><figcaption></figcaption></figure>
 
 ## 10.200.89.22
 

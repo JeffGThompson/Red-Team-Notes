@@ -152,7 +152,7 @@ Found credentials for mysql in one of the php files.
 cat /var/www/files/index.php
 ```
 
-<figure><img src="../../.gitbook/assets/image (27).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (27) (6).png" alt=""><figcaption></figcaption></figure>
 
 **Victim(apaar)**
 
