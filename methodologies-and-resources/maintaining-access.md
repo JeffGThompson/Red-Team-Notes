@@ -1,5 +1,15 @@
 # Payloads
 
+
+
+## **Reverse Shell Generator**
+
+Great site to just add your IP and port and gives you a list of many options for shells.
+
+{% embed url="https://www.revshells.com/" %}
+
+
+
 **Python Bind Shell**
 
 ```
