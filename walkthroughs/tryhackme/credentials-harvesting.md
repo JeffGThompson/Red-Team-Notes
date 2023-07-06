@@ -537,7 +537,7 @@ hashcat -m 1000 -a 0 hashes.txt /usr/share/wordlists/rockyou.txt
 hashcat -m 1000 -a 0 hashes.txt /usr/share/wordlists/rockyou.txt --show
 ```
 
-<figure><img src="../../.gitbook/assets/image (2) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (2) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 ## Local Administrator Password Solution (LAPS)
 
@@ -580,7 +580,7 @@ powershell
 Get-Command *AdmPwd*
 ```
 
-<figure><img src="../../.gitbook/assets/image (6) (2).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (6) (2) (5).png" alt=""><figcaption></figcaption></figure>
 
 Next, we need to find which AD organizational unit (OU) has the "All extended rights" attribute that deals with LAPS. We will be using the "Find-AdmPwdExtendedRights" cmdlet to provide the right OU. Note that getting the available OUs could be done in the enumeration step. Our OU target in this example is THMorg. You can use the -Identity \* argument to list all available OUs.
 

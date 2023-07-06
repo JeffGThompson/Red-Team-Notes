@@ -106,7 +106,7 @@ sudo apt install ncurses-hexedit
 
 Change the first hex values to **89 50 4E 47 0D 0A** to make it .PNG then save the file
 
-<figure><img src="../../.gitbook/assets/image (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1) (5).png" alt=""><figcaption></figcaption></figure>
 
 **Kali**
 

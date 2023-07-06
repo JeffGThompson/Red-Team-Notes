@@ -11,7 +11,7 @@
 <pre><code><strong>nmap -A $VICTIM
 </strong></code></pre>
 
-<figure><img src="../../.gitbook/assets/image (6).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (6) (2).png" alt=""><figcaption></figcaption></figure>
 
 
 
@@ -26,7 +26,7 @@ No other ports found.
 <pre><code><strong>nmap -sV -sT -O -p 1-65535 $VICTIM
 </strong></code></pre>
 
-<figure><img src="../../.gitbook/assets/image (5).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (5) (2).png" alt=""><figcaption></figcaption></figure>
 
 
 
@@ -34,13 +34,13 @@ No other ports found.
 
 
 
-<figure><img src="../../.gitbook/assets/image (13).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (13) (9).png" alt=""><figcaption></figcaption></figure>
 
 
 
-<figure><img src="../../.gitbook/assets/image (8).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (8) (15).png" alt=""><figcaption></figcaption></figure>
 
-<figure><img src="../../.gitbook/assets/image (7).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (7) (8).png" alt=""><figcaption></figcaption></figure>
 
 ###
 
@@ -67,7 +67,7 @@ set TARGETURI http://$VICTIM:8000
 run
 ```
 
-<figure><img src="../../.gitbook/assets/image.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (13).png" alt=""><figcaption></figcaption></figure>
 
 
 

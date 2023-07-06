@@ -85,3 +85,4 @@
   * [Chill Hack](walkthroughs/tryhackme/chill-hack.md)
   * [Bolt](walkthroughs/tryhackme/bolt.md)
   * [source](walkthroughs/tryhackme/source.md)
+  * [Brooklyn Nine Nine](walkthroughs/tryhackme/brooklyn-nine-nine.md)

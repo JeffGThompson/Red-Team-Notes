@@ -108,7 +108,7 @@ jjamerson is able to run yum with no password as sudo
 sudo -l
 ```
 
-<figure><img src="../../.gitbook/assets/image (1) (5) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1) (5) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 **Kali**&#x20;
 

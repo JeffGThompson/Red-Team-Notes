@@ -215,7 +215,7 @@ cd C:\tools\AccessChk
 accesschk64.exe -qlc thmservice
 ```
 
-<figure><img src="../../.gitbook/assets/image (7) (8).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (7) (8) (1).png" alt=""><figcaption></figcaption></figure>
 
 **Kali**
 

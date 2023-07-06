@@ -32,7 +32,7 @@ azman.msc
 
 This will spawn a notepad process that we can leverage to get a shell. To do so, go to File->Open and make sure to select All Files in the combo box on the lower right corner. Go to C:\Windows\System32 and search for cmd.exe and right-click to select Open:
 
-<figure><img src="../../.gitbook/assets/image (10) (7).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (10) (7) (2).png" alt=""><figcaption></figcaption></figure>
 
 <figure><img src="../../.gitbook/assets/image (13) (3).png" alt=""><figcaption></figcaption></figure>
 
@@ -93,7 +93,7 @@ And then proceed to execute fodhelper.exe, which in turn will trigger the execut
 fodhelper.exe
 ```
 
-<figure><img src="../../.gitbook/assets/image (3) (2).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (3) (2) (3).png" alt=""><figcaption></figcaption></figure>
 
 ## UAC: Improving the Fodhelper Exploit to Bypass Windows Defender
 

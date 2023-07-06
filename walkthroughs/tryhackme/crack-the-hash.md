@@ -57,7 +57,7 @@ john --format=raw-sha1 hash.txt --wordlist=/usr/share/wordlists/rockyou.txt
 python hash-id.py 1C8BFE8F801D79745C4631D09FFF36C82AA37FC4CCE4FC946683D7B336B63032
 ```
 
-![](<../../.gitbook/assets/image (2) (1).png>)
+![](<../../.gitbook/assets/image (2) (1) (1).png>)
 
 ```
 john --format=raw-sha256 hash.txt

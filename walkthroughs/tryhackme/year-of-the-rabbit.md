@@ -9,7 +9,7 @@
 <pre><code><strong>nmap -A $VICTIM
 </strong></code></pre>
 
-<figure><img src="../../.gitbook/assets/image (3).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (3) (2).png" alt=""><figcaption></figcaption></figure>
 
 ### Scan all ports
 
@@ -99,7 +99,7 @@ Elis creds is encoded with something called Brain fuck. There are tools online t
 
 **Link:** [https://www.dcode.fr/brainfuck-language](https://www.dcode.fr/brainfuck-language)
 
-<figure><img src="../../.gitbook/assets/image (10).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (10) (7).png" alt=""><figcaption></figcaption></figure>
 
 **Kali**
 

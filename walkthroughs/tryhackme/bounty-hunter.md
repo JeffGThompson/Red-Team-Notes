@@ -11,7 +11,7 @@
 <pre><code><strong>nmap -A $VICTIM
 </strong></code></pre>
 
-<figure><img src="../../.gitbook/assets/image (5) (2).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (5) (2) (4).png" alt=""><figcaption></figcaption></figure>
 
 ### Scan all ports
 

@@ -664,7 +664,7 @@ Execute the suid-so executable again, and note that this time, instead of a prog
 /usr/local/bin/suid-so
 ```
 
-<figure><img src="../../.gitbook/assets/image (3) (2) (3).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (3) (2) (3) (1).png" alt=""><figcaption></figcaption></figure>
 
 ## SUID / SGID Executables - Environment Variables
 
