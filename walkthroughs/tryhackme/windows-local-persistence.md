@@ -271,7 +271,7 @@ Now let's change the registry key to run our backdoor script in a hidden window.
 powershell.exe -windowstyle hidden C:\windows\backdoor2.ps1 %1
 ```
 
-<figure><img src="../../.gitbook/assets/image (19) (6).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (19) (6) (2).png" alt=""><figcaption></figcaption></figure>
 
 Finally, create a listener for your reverse shell and try to open any .txt file on the victim machine (create one if needed). You should receive a reverse shell with the privileges of the user opening the file.
 

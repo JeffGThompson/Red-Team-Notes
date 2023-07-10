@@ -128,7 +128,7 @@ hydra -L users.txt -P mangled-passwords.txt smtp://$WebMail -V
 nmap -A $WebMail
 ```
 
-<figure><img src="../../.gitbook/assets/image (5) (4).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (5) (4) (1).png" alt=""><figcaption></figcaption></figure>
 
 ### Scan all ports
 
@@ -137,7 +137,7 @@ nmap -A $WebMail
 <pre><code><strong>nmap -sV -sT -O -p 1-65535 $WebMail
 </strong></code></pre>
 
-<figure><img src="../../.gitbook/assets/image (1) (2) (1) (5).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1) (2) (1).png" alt=""><figcaption></figcaption></figure>
 
 ### WebMail - HTTP port 80
 
@@ -623,7 +623,7 @@ nmap -A $WebMail
 <pre><code><strong>nmap -sV -sT -O -p 1-65535 $WebMail
 </strong></code></pre>
 
-<figure><img src="../../.gitbook/assets/image (1) (2) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1) (2).png" alt=""><figcaption></figcaption></figure>
 
 <figure><img src="../../.gitbook/assets/image (42) (2).png" alt=""><figcaption></figcaption></figure>
 

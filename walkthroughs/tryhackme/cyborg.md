@@ -75,7 +75,7 @@ hashcat -m 1600 password --show
 
 <figure><img src="../../.gitbook/assets/image (138).png" alt=""><figcaption></figcaption></figure>
 
-<figure><img src="../../.gitbook/assets/image (22).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (22) (8).png" alt=""><figcaption></figcaption></figure>
 
 
 

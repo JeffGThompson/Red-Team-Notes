@@ -128,7 +128,7 @@ jessie:$1$new$p7ptkEKU1HnaHpRtzNizS1:1000:1000:jessie,,,:/home/jessie:/bin/bash
 
 ```
 
-<figure><img src="../../.gitbook/assets/image (2) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (2) (1).png" alt=""><figcaption></figcaption></figure>
 
 **Kali**
 

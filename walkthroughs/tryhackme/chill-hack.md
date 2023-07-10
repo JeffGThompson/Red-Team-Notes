@@ -20,7 +20,7 @@ No other ports found.
 <pre><code><strong>nmap -sV -sT -O -p 1-65535 $VICTIM
 </strong></code></pre>
 
-<figure><img src="../../.gitbook/assets/image (16).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (16) (1).png" alt=""><figcaption></figcaption></figure>
 
 ### TCP/80 - HTTP
 
@@ -84,7 +84,7 @@ sudo -u apaar /home/apaar/.helpline.sh
 /bin/bash
 ```
 
-<figure><img src="../../.gitbook/assets/image (21).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (21) (4).png" alt=""><figcaption></figcaption></figure>
 
 **Victim(apaar)**
 
@@ -101,7 +101,7 @@ curl localhost:9001
 
 <figure><img src="../../.gitbook/assets/image (46).png" alt=""><figcaption></figcaption></figure>
 
-<figure><img src="../../.gitbook/assets/image (18).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (18) (9).png" alt=""><figcaption></figcaption></figure>
 
 ### Pivot
 
@@ -194,7 +194,7 @@ Used no password
 steghide extract -sf hacker-with-laptop_23-2147985341.jpg
 ```
 
-<figure><img src="../../.gitbook/assets/image (17).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (17) (6).png" alt=""><figcaption></figcaption></figure>
 
 ### Cracking Password Protected Zip Files
 
@@ -214,7 +214,7 @@ unzip backup.zip
 Password: pass1word
 ```
 
-<figure><img src="../../.gitbook/assets/image (24).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (24) (7).png" alt=""><figcaption></figcaption></figure>
 
 **Kali**
 

@@ -46,6 +46,12 @@ wmic service get name,pathname,startname | findstr "Program Files"
 cacls *.exe
 ```
 
+**Recent Files**
+
+Might be able to find interesting files by looking at what was recently accessed. Start -> run -> recent.
+
+<figure><img src="../../.gitbook/assets/image (3).png" alt=""><figcaption></figcaption></figure>
+
 **Juicy Potato**
 
 * Download Juicy Potato to your attack machine

@@ -38,7 +38,7 @@ curl http://$VICTIM -I
 ssh -v $VICTIM
 ```
 
-<figure><img src="../../.gitbook/assets/image (3) (4).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (3) (4) (2).png" alt=""><figcaption></figcaption></figure>
 
 **We have an FTP server listening on a nonstandard port. What is the version of the FTP server?**
 

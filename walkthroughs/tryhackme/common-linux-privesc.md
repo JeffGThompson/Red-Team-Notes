@@ -179,7 +179,7 @@ cd /home/user5
 ./script
 ```
 
-<figure><img src="../../.gitbook/assets/image (2) (6).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (2) (6) (2).png" alt=""><figcaption></figcaption></figure>
 
 We now create a script called ls that gives us a bash shell.
 

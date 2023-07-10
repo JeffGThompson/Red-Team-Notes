@@ -922,7 +922,7 @@ C:\tools\PsExec64.exe -s cmd.exe
 query user
 ```
 
-<figure><img src="../../.gitbook/assets/image (11) (4) (2).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (11) (4) (2) (1).png" alt=""><figcaption></figcaption></figure>
 
 **Victim(cmd)**
 

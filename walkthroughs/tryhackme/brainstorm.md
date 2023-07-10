@@ -292,7 +292,7 @@ except:
 
 <figure><img src="../../.gitbook/assets/image (3) (3) (4).png" alt=""><figcaption></figcaption></figure>
 
-<figure><img src="../../.gitbook/assets/image (5) (4) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (5) (4) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 ### Finding a Jump Point
 

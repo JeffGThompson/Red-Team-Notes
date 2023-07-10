@@ -57,7 +57,7 @@ john --format=raw-sha1 hash.txt --wordlist=/usr/share/wordlists/rockyou.txt
 python hash-id.py 1C8BFE8F801D79745C4631D09FFF36C82AA37FC4CCE4FC946683D7B336B63032
 ```
 
-![](<../../.gitbook/assets/image (2) (1) (1) (7).png>)
+![](<../../.gitbook/assets/image (2) (1) (1).png>)
 
 ```
 john --format=raw-sha256 hash.txt
@@ -154,7 +154,7 @@ Salt: tryhackme
 python hash-id.py e5d8870e5bdd26602cab8dbe07a942c8669e56d6
 ```
 
-<figure><img src="../../.gitbook/assets/image (27) (1) (4).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (27) (1).png" alt=""><figcaption></figcaption></figure>
 
 **hash.txt**
 

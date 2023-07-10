@@ -67,7 +67,7 @@ python hash-id.py D7F4D3CCEE7ACD3DD7FAD3AC2BE2AAE9C44F4E9B7FB802D73136D4C5392014
 john --format=raw-sha256 hash3.txt --wordlist=/usr/share/wordlists/rockyou.txt 
 ```
 
-<figure><img src="../../.gitbook/assets/image (16) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (16) (1) (1) (2).png" alt=""><figcaption></figcaption></figure>
 
 **What type of hash is hash4.txt?**
 

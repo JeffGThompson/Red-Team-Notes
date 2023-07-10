@@ -24,7 +24,7 @@ No other ports found.
 <pre><code><strong>nmap -sV -sT -O -p 1-65535 $VICTIM
 </strong></code></pre>
 
-<figure><img src="../../.gitbook/assets/image (55) (4).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (55).png" alt=""><figcaption></figcaption></figure>
 
 ### TCP/80 - HTTP
 
@@ -68,7 +68,7 @@ nikto -id bob:bubbles -h http://$VICTIM:80/manager/html
 nikto -id bob:bubbles -h http://$VICTIM:1234/manager/html 
 ```
 
-<figure><img src="../../.gitbook/assets/image (11) (9).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (11) (4).png" alt=""><figcaption></figcaption></figure>
 
 **Kali**
 
