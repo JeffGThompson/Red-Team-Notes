@@ -332,7 +332,7 @@ nc -lvnp 4444
 python exploit.py $TESTMACHINE 31337
 ```
 
-<figure><img src="../../.gitbook/assets/image (74) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (74) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 ### Exploit - Production
 

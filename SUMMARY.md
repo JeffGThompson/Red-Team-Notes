@@ -86,3 +86,4 @@
   * [Bolt](walkthroughs/tryhackme/bolt.md)
   * [source](walkthroughs/tryhackme/source.md)
   * [Brooklyn Nine Nine](walkthroughs/tryhackme/brooklyn-nine-nine.md)
+  * [Anthem](walkthroughs/tryhackme/anthem.md)

@@ -60,7 +60,7 @@ Select the javascript.enabled toggle to change the value to false.
 
 
 
-<figure><img src="../../.gitbook/assets/image (79).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (79) (2).png" alt=""><figcaption></figcaption></figure>
 
 
 
@@ -72,7 +72,7 @@ Select the javascript.enabled toggle to change the value to false.
 strings Hot_Babe.png 
 ```
 
-<figure><img src="../../.gitbook/assets/image (80).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (80) (1).png" alt=""><figcaption></figcaption></figure>
 
 **Kali**
 

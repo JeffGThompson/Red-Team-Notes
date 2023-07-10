@@ -163,7 +163,7 @@ python3.9 /opt/impacket/examples/secretsdump.py -sam sam-reg -system system-reg 
 
 To dump any running Windows process using the GUI, open the Task Manager, and from the Details tab, find the required process, right-click on it, and select "Create dump file".
 
-![](<../../.gitbook/assets/image (7) (1).png>)
+![](<../../.gitbook/assets/image (7) (1) (4).png>)
 
 ![](<../../.gitbook/assets/image (6) (1) (5).png>)
 

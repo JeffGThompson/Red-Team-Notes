@@ -117,7 +117,7 @@ hashcat -m 13100 -a 0 hash.txt Pass.txt --show
 
 <figure><img src="../../.gitbook/assets/image (82) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
-<figure><img src="../../.gitbook/assets/image (80) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (80) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 ### Kerberoasting #2  - Impacket
 
