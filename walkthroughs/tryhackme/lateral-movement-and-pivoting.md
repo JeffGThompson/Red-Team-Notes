@@ -213,7 +213,7 @@ sc.exe \\thmiis.za.tryhackme.com create THMservice-3249 binPath= "%windir%\myser
 sc.exe \\thmiis.za.tryhackme.com start THMservice-3249
 ```
 
-<figure><img src="../../.gitbook/assets/image (35) (2) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (35) (2).png" alt=""><figcaption></figcaption></figure>
 
 <figure><img src="../../.gitbook/assets/image (36) (2).png" alt=""><figcaption></figcaption></figure>
 
@@ -1043,7 +1043,7 @@ netsh advfirewall firewall add rule name="Open Port 3389" dir=in action=allow pr
 
 If, on the other hand, we'd like to expose port 80 from the attacker's machine so that it is reachable by the server, we only need to adjust the command a bit:
 
-<figure><img src="../../.gitbook/assets/image (7) (1) (4) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (7) (1) (4).png" alt=""><figcaption></figcaption></figure>
 
 As a result, PC-1 will spawn port 80 and listen for connections to be forwarded to port 80 on the attacker's machine:
 

@@ -87,7 +87,7 @@ ldapsearch -H ldap:// -x -LLL -s base -b "" supportedSASLMechanisms
 
 **After**
 
-<figure><img src="../../.gitbook/assets/image (11) (1) (6).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (11) (1).png" alt=""><figcaption></figcaption></figure>
 
 ### Capturing LDAP Credentials
 

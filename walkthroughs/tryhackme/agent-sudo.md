@@ -10,7 +10,7 @@
 nmap -A $VICTIM
 ```
 
-<figure><img src="../../.gitbook/assets/image (3) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (3) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 ```
 nmap -p- $VICTIM
@@ -60,7 +60,7 @@ Change the user-agent to C
 hydra -l chris -P /usr/share/wordlists/SecLists/Passwords/Common-Credentials/10-million-password-list-top-1000.txt ftp://$VICTIM
 ```
 
-<figure><img src="../../.gitbook/assets/image (66) (3).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (66).png" alt=""><figcaption></figcaption></figure>
 
 **Kali**
 
