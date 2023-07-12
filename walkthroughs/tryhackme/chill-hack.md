@@ -20,7 +20,7 @@ No other ports found.
 <pre><code><strong>nmap -sV -sT -O -p 1-65535 $VICTIM
 </strong></code></pre>
 
-<figure><img src="../../.gitbook/assets/image (16) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (16) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 ### TCP/80 - HTTP
 
@@ -70,7 +70,7 @@ ctrl + Z
 stty raw -echo;fg
 ```
 
-<figure><img src="../../.gitbook/assets/image (20).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (20) (1).png" alt=""><figcaption></figcaption></figure>
 
 
 
@@ -194,7 +194,7 @@ Used no password
 steghide extract -sf hacker-with-laptop_23-2147985341.jpg
 ```
 
-<figure><img src="../../.gitbook/assets/image (17) (6).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (17) (6) (2).png" alt=""><figcaption></figcaption></figure>
 
 ### Cracking Password Protected Zip Files
 

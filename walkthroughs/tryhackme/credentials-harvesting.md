@@ -163,7 +163,7 @@ python3.9 /opt/impacket/examples/secretsdump.py -sam sam-reg -system system-reg 
 
 To dump any running Windows process using the GUI, open the Task Manager, and from the Details tab, find the required process, right-click on it, and select "Create dump file".
 
-![](<../../.gitbook/assets/image (7) (1).png>)
+![](<../../.gitbook/assets/image (7) (1) (4).png>)
 
 ![](<../../.gitbook/assets/image (6) (1) (5).png>)
 
@@ -234,7 +234,7 @@ In 2012, Microsoft implemented an LSA protection, to keep LSASS from being acces
 
 <figure><img src="../../.gitbook/assets/image (3) (15).png" alt=""><figcaption></figcaption></figure>
 
-<figure><img src="../../.gitbook/assets/image (16) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (16) (1) (1) (3).png" alt=""><figcaption></figcaption></figure>
 
 The steps are similar to the previous section, which runs the Mimikatz execution file with admin privileges and enables the debug mode. If the LSA protection is enabled, we will get an error executing the "sekurlsa::logonpasswords" command.
 
@@ -526,7 +526,7 @@ cd public
 python3.9 /opt/impacket/examples/secretsdump.py -security SECURITY -system SYSTEM -ntds ntds.dit local
 ```
 
-<figure><img src="../../.gitbook/assets/image (14) (1) (4).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (14) (1) (4) (1).png" alt=""><figcaption></figcaption></figure>
 
 Once we obtained hashes, we can either use the hash for a specific user to impersonate him or crack the hash using Cracking tools, such `hashcat`. We can use the hashcat `-m 1000` mode to crack the Windows NTLM hashes as follows:
 

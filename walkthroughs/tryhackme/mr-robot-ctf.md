@@ -45,7 +45,7 @@ dirb http://$VICTIM:80 /usr/share/wordlists/dirb/big.txt
 
 **Downloaded fsocity.dic**
 
-<figure><img src="../../.gitbook/assets/image (20) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (20) (1) (4).png" alt=""><figcaption></figcaption></figure>
 
 If you refresh the page you'll go to a wordpress site.
 

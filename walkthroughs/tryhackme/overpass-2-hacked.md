@@ -66,7 +66,7 @@ sudo john --wordlist=/usr/share/wordlists/fasttrack.txt dump.txt
 
 It's in the code on github
 
-<figure><img src="../../.gitbook/assets/image (3) (5).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (3) (5) (1).png" alt=""><figcaption></figcaption></figure>
 
 **What's the hardcoded salt for the backdoor?**
 

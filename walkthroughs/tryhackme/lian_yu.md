@@ -160,7 +160,7 @@ sudo -l
 
 
 
-<figure><img src="../../.gitbook/assets/image (19) (6).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (19) (6) (3).png" alt=""><figcaption></figcaption></figure>
 
 
 

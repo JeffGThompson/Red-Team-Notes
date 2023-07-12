@@ -68,7 +68,7 @@ nikto -id bob:bubbles -h http://$VICTIM:80/manager/html
 nikto -id bob:bubbles -h http://$VICTIM:1234/manager/html 
 ```
 
-<figure><img src="../../.gitbook/assets/image (11) (4).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (11) (4) (3).png" alt=""><figcaption></figcaption></figure>
 
 **Kali**
 
