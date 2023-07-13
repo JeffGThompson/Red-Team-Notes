@@ -70,7 +70,7 @@ hydra -l john -P dict.lst ssh://$VICTIM
 
 
 
-<figure><img src="../../.gitbook/assets/image (3).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (3) (16).png" alt=""><figcaption></figcaption></figure>
 
 
 

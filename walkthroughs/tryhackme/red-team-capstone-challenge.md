@@ -6742,7 +6742,7 @@ I can now login to the ROOTDC with RDP and from ROOTDC I can login to BANKDC
 
 **ROOTDC -> BANKDC**
 
-<figure><img src="../../.gitbook/assets/image (5) (3).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (5) (3) (4).png" alt=""><figcaption></figcaption></figure>
 
 If RDP session flashes black you can kill the sessions for BANKDC to ROOTDC
 
