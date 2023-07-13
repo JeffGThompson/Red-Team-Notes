@@ -151,7 +151,7 @@ nc -vlnp 443
 
 Added the same shell to footer.php which should appear on every page visited. Then I just went back to http://$VICTIM/join and it worked.
 
-<figure><img src="../../.gitbook/assets/image (2) (1) (7).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (2) (1) (7) (1).png" alt=""><figcaption></figcaption></figure>
 
 
 

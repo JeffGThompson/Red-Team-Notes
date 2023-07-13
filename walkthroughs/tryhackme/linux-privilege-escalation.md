@@ -361,7 +361,7 @@ unshadow passwd shadow > passwords.txt
 john --wordlist=/usr/share/wordlists/rockyou.txt passwords.txt
 ```
 
-<figure><img src="../../.gitbook/assets/image (29) (2).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (29) (2) (2).png" alt=""><figcaption></figcaption></figure>
 
 **Victim**
 

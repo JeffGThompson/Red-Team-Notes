@@ -42,7 +42,7 @@ python3 joomblah.py http://10.10.116.159
 john hash.txt --wordlist=/usr/share/wordlists/rockyou.txt --format=bcrypt
 ```
 
-<figure><img src="../../.gitbook/assets/image (24) (2).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (24) (2) (2).png" alt=""><figcaption></figcaption></figure>
 
 We can  now login to Joomla with the credentials we have found
 

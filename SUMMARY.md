@@ -88,3 +88,4 @@
   * [Brooklyn Nine Nine](walkthroughs/tryhackme/brooklyn-nine-nine.md)
   * [Anthem](walkthroughs/tryhackme/anthem.md)
   * [GamingServer](walkthroughs/tryhackme/gamingserver.md)
+  * [Chocolate Factory](walkthroughs/tryhackme/chocolate-factory.md)

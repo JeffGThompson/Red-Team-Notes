@@ -91,7 +91,7 @@ Username: wade
 Password: parzival
 ```
 
-<figure><img src="../../.gitbook/assets/image (23) (5).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (23) (5) (1).png" alt=""><figcaption></figcaption></figure>
 
 
 

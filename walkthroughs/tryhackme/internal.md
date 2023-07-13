@@ -88,7 +88,7 @@ TWENTY SEVENTEEN theme had a writable pages so I modified the 404 page with a re
 
 Just added the revshell.php code mentioned earlier.
 
-<figure><img src="../../.gitbook/assets/image (32) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (32) (1) (2).png" alt=""><figcaption></figcaption></figure>
 
 **Kali**
 

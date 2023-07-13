@@ -184,7 +184,7 @@ select * from users;
 
 Both set of credentials work on the login page, both bring up this page.
 
-<figure><img src="../../.gitbook/assets/image (32).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (32) (1).png" alt=""><figcaption></figcaption></figure>
 
 Used no password
 
