@@ -44,7 +44,7 @@ CVE-2019-6714
 
 Created the file mentioned in the exploit, just changed the IP to my IP.
 
-<figure><img src="../../.gitbook/assets/image (6) (1) (2) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (6) (1) (2).png" alt=""><figcaption></figcaption></figure>
 
 Setup a nc listener&#x20;
 

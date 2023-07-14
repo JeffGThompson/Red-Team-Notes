@@ -1214,7 +1214,7 @@ python exploit.py $VICTIM 1337
 !mona findmsp -distance 2100
 ```
 
-<figure><img src="../../.gitbook/assets/image (12) (4) (2).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (12) (4).png" alt=""><figcaption></figcaption></figure>
 
 ### Finding Bad Characters
 
@@ -2819,7 +2819,7 @@ nc -lvnp 4444
 python exploit.py $VICTIM 1337
 ```
 
-<figure><img src="../../.gitbook/assets/image (18) (1) (2) (2).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (18) (1) (2).png" alt=""><figcaption></figcaption></figure>
 
 ## oscp.exe - OVERFLOW1
 

@@ -162,7 +162,7 @@ Both passwords cracked.
 hashcat -m 18200 hash.txt Pass.txt --show
 ```
 
-<figure><img src="../../.gitbook/assets/image (4) (8).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (4) (8) (1).png" alt=""><figcaption></figcaption></figure>
 
 ## Pass the Ticket w/ mimikatz
 

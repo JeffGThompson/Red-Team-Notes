@@ -105,7 +105,7 @@ ssh alex@$VICTIM
 Password: S3cretP@s3
 ```
 
-<figure><img src="../../.gitbook/assets/image (76).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (76) (3).png" alt=""><figcaption></figcaption></figure>
 
 <figure><img src="../../.gitbook/assets/image (29) (2).png" alt=""><figcaption></figcaption></figure>
 

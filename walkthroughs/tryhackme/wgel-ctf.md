@@ -40,7 +40,7 @@ Ran gobuster and found a site under sitemap, nothing really interesting about it
 gobuster dir -u http://$VICTIM -w /usr/share/wordlists/SecLists/Discovery/Web-Content/directory-list-2.3-medium.txt -x php,html,txt 
 ```
 
-<figure><img src="../../.gitbook/assets/image (5) (8) (2).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (5) (8).png" alt=""><figcaption></figcaption></figure>
 
 gobuster wasn't really able to find anything interesting.
 

@@ -44,7 +44,7 @@ gobuster dir -u http://$VICTIM -w /usr/share/wordlists/SecLists/Discovery/Web-Co
 
 <figure><img src="../../.gitbook/assets/image (86).png" alt=""><figcaption></figcaption></figure>
 
-<figure><img src="../../.gitbook/assets/image (117).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (117) (2).png" alt=""><figcaption></figcaption></figure>
 
 **Kali**
 
@@ -63,7 +63,7 @@ hydra -l admin -P /usr/share/wordlists/SecLists/Passwords/darkweb2017-top10000.t
 john --wordlist=/usr/share/wordlists/rockyou.txt id_john.txt 
 ```
 
-<figure><img src="../../.gitbook/assets/image (31).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (31) (3).png" alt=""><figcaption></figcaption></figure>
 
 **Kali**
 

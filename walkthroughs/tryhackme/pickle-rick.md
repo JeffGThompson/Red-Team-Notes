@@ -76,7 +76,7 @@ www-data can actually run any command with sudo without entering a password.&#x2
 
 The last ingredient is found in the root directory.
 
-<figure><img src="../../.gitbook/assets/image (15) (3) (2).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (15) (3).png" alt=""><figcaption></figcaption></figure>
 
 ### SSH port 22
 
