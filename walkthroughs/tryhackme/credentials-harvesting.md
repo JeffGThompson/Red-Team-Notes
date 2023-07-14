@@ -46,7 +46,7 @@ powershell
 Get-ADUser -Filter * -Properties * | select Name,SamAccountName,Description
 ```
 
-<figure><img src="../../.gitbook/assets/image (18) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (18) (1) (2).png" alt=""><figcaption></figcaption></figure>
 
 ## Local Windows Credentials
 
@@ -88,7 +88,7 @@ Now let's apply what we discussed above and run the cmd.exe with administrator p
 wmic shadowcopy call create Volume='C:\'
 ```
 
-<figure><img src="../../.gitbook/assets/image (11) (2).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (11) (2) (1).png" alt=""><figcaption></figcaption></figure>
 
 Once the command is successfully executed, let's use the `vssadmin`, Volume Shadow Copy Service administrative command-line tool, to list and confirm that we have a shadow copy of the `C:` volume.&#x20;
 
@@ -608,7 +608,7 @@ The output shows that the `THMGroupReader` group in `THMorg` has the right acces
 net user bk-admin
 ```
 
-<figure><img src="../../.gitbook/assets/image (9) (2) (3) (2).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (9) (2) (3) (2) (1).png" alt=""><figcaption></figcaption></figure>
 
 ### Getting the Password
 

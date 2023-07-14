@@ -128,7 +128,7 @@ This will return all AD users for us and can be helpful in determining the size 
 net user zoe.marshall /domain
 ```
 
-<figure><img src="../../.gitbook/assets/image (3) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (3) (1) (1) (8).png" alt=""><figcaption></figcaption></figure>
 
 Note: If the user is only part of a small number of AD groups, this command will be able to show us group memberships. However, usually, after more than ten group memberships, the command will fail to list them all.\
 
@@ -153,7 +153,7 @@ This information can help us find specific groups to target for goal execution. 
 net group "Tier 1 Admins" /domain
 ```
 
-<figure><img src="../../.gitbook/assets/image (10) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (10) (1) (3).png" alt=""><figcaption></figcaption></figure>
 
 ### Password Policy
 
@@ -239,7 +239,7 @@ We can use the `Get-ADGroup` cmdlet to enumerate AD groups:
 Get-ADGroup -Identity Administrators -Server za.tryhackme.com
 ```
 
-<figure><img src="../../.gitbook/assets/image (9) (2) (3).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (9) (2) (3) (2).png" alt=""><figcaption></figcaption></figure>
 
 We can also enumerate group membership using the `Get-ADGroupMember` cmdlet:
 

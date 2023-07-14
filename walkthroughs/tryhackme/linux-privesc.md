@@ -525,7 +525,7 @@ Wait for the cron job to run (should not take longer than a minute). Run the /tm
 /tmp/rootbash -p
 ```
 
-<figure><img src="../../.gitbook/assets/image (4) (3) (2) (2).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (4) (3) (2) (2) (1).png" alt=""><figcaption></figcaption></figure>
 
 ## Cron Jobs - Wildcards
 
@@ -576,7 +576,7 @@ touch /home/user/--checkpoint=1
 touch /home/user/--checkpoint-action=exec=shell.elf
 ```
 
-<figure><img src="../../.gitbook/assets/image (4) (3) (2).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (4) (3) (2) (2).png" alt=""><figcaption></figcaption></figure>
 
 When the tar command in the cron job runs, the wildcard (\*) will expand to include these files. Since their filenames are valid tar command line options, tar will recognize them as such and treat them as command line options rather than filenames.
 

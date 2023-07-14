@@ -56,7 +56,7 @@ vi /etc/hosts
 
 We are able to successfully get into wordpress with the credentials
 
-<figure><img src="../../.gitbook/assets/image (8) (1) (3).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (8) (1) (3) (1).png" alt=""><figcaption></figcaption></figure>
 
 Reverse Shell Failed Attempt
 
@@ -198,7 +198,7 @@ Request Body: j_username=test&j_password=pass&from=%2F&Submit=Sign+in
 Failed login message: Invalid username or password
 ```
 
-<figure><img src="../../.gitbook/assets/image (10) (1) (3).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (10) (1) (3) (1).png" alt=""><figcaption></figcaption></figure>
 
 The default hydra was giving false positives and not getting the correct credentials so I downloaded from gitlab and ran the bruteforcing again.
 

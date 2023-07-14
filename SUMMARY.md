@@ -89,3 +89,4 @@
   * [Anthem](walkthroughs/tryhackme/anthem.md)
   * [GamingServer](walkthroughs/tryhackme/gamingserver.md)
   * [Chocolate Factory](walkthroughs/tryhackme/chocolate-factory.md)
+  * [Archangel](walkthroughs/tryhackme/archangel.md)
