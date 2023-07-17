@@ -244,7 +244,7 @@ The steps are similar to the previous section, which runs the Mimikatz execution
 sekurlsa::logonpasswords
 ```
 
-<figure><img src="../../.gitbook/assets/image (9) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (9) (1) (4).png" alt=""><figcaption></figcaption></figure>
 
 The command returns a 0x00000005 error code message (Access Denied). Lucky for us, Mimikatz provides a mimidrv.sys driver that works on kernel level to disable the LSA protection. We can import it to Mimikatz by executing "!+" as follows,
 
@@ -620,7 +620,7 @@ We found that the bk-admin user is a member of THMGroupReader, so in order to ge
 Get-AdmPwdPassword -ComputerName creds-harvestin
 ```
 
-<figure><img src="../../.gitbook/assets/image (2) (2).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (2) (2) (5).png" alt=""><figcaption></figcaption></figure>
 
 It is important to note that in a real-world AD environment, the LAPS is enabled on specific machines only. Thus, you need to enumerate and find the right target computer as well as the right user account to be able to get the LAPS password. There are many scripts to help with this, but we included the [LAPSToolkit](https://github.com/leoloobeek/LAPSToolkit) PowerShell script in `C:\Tool`to try it out.
 

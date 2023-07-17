@@ -193,7 +193,7 @@ chmod +x ls
 
 Before we change the path we can see ls goes to /bin/ls
 
-![](<../../.gitbook/assets/image (8) (7).png>)
+![](<../../.gitbook/assets/image (8) (7) (1).png>)
 
 Now after running the below command ls is now directed to our script.
 

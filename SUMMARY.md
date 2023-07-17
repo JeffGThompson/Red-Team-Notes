@@ -90,3 +90,4 @@
   * [GamingServer](walkthroughs/tryhackme/gamingserver.md)
   * [Chocolate Factory](walkthroughs/tryhackme/chocolate-factory.md)
   * [Archangel](walkthroughs/tryhackme/archangel.md)
+  * [Easy Peasy](walkthroughs/tryhackme/easy-peasy.md)

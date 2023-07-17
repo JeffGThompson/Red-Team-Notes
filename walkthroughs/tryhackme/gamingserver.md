@@ -11,7 +11,7 @@
 <pre><code><strong>nmap -A $VICTIM
 </strong></code></pre>
 
-<figure><img src="../../.gitbook/assets/image (7).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (7) (11).png" alt=""><figcaption></figcaption></figure>
 
 ### Scan all ports
 
@@ -44,7 +44,7 @@ gobuster dir -u http://$VICTIM -w /usr/share/wordlists/SecLists/Discovery/Web-Co
 
 
 
-<figure><img src="../../.gitbook/assets/image (20).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (20) (8).png" alt=""><figcaption></figcaption></figure>
 
 
 
@@ -136,7 +136,7 @@ lxc exec ignite /bin/sh
 id
 ```
 
-<figure><img src="../../.gitbook/assets/image (18).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (18) (10).png" alt=""><figcaption></figcaption></figure>
 
 
 

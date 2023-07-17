@@ -71,7 +71,7 @@ Let's take a look at the Active Directory structure. For this task, we will focu
 
 Let's take a look at the People directory. Here we see that the users are divided according to department OUs. Clicking on each of these OUs will show the users that belong to that department.
 
-<figure><img src="../../.gitbook/assets/image (28) (4).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (28) (4) (2).png" alt=""><figcaption></figcaption></figure>
 
 Clicking on any of these users will allow us to review all of their properties and attributes. We can also see what groups they are a member of:
 
@@ -153,7 +153,7 @@ This information can help us find specific groups to target for goal execution. 
 net group "Tier 1 Admins" /domain
 ```
 
-<figure><img src="../../.gitbook/assets/image (10) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (10) (1) (2).png" alt=""><figcaption></figcaption></figure>
 
 ### Password Policy
 

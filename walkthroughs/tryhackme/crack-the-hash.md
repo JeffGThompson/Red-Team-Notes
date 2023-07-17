@@ -116,7 +116,7 @@ Hash was a NTLM
 python hash-id.py 1DFECA0C002AE40B8619ECF94819CC1B
 ```
 
-<figure><img src="../../.gitbook/assets/image (3) (1) (2).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (3) (1) (2) (4).png" alt=""><figcaption></figcaption></figure>
 
 Used [https://hashes.com/en/decrypt/hash](https://hashes.com/en/decrypt/hashhttps://crackstation.net/) to solve
 

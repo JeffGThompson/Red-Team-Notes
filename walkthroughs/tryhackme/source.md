@@ -24,7 +24,7 @@ No other ports found.
 
 ### TCP/10000 - HTTP
 
-<figure><img src="../../.gitbook/assets/image (26).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (26) (2).png" alt=""><figcaption></figcaption></figure>
 
 Tried to bruteforce the admin password but it blocked my IP after so many attempts, this is clearly not the intended route.
 

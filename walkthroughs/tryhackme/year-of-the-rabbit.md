@@ -93,7 +93,7 @@ password: 5iez1wGXKfPKQ
 
 <figure><img src="../../.gitbook/assets/image (7) (4).png" alt=""><figcaption></figcaption></figure>
 
-<figure><img src="../../.gitbook/assets/image (48).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (48) (5).png" alt=""><figcaption></figcaption></figure>
 
 Elis creds is encoded with something called Brain fuck. There are tools online to decode it.
 

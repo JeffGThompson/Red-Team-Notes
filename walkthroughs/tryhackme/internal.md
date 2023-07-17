@@ -177,7 +177,7 @@ sshuttle -r aubreanna@10.10.46.54 127.0.0.1/24
 Password: bubb13guM!@#123
 ```
 
-<figure><img src="../../.gitbook/assets/image (45) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (45) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 **Option #2**
 

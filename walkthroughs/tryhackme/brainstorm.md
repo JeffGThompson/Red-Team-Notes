@@ -220,7 +220,7 @@ After running the program again we now can fill EIP with our Bs so we now have c
 python exploit.py $TESTMACHINE 9000
 ```
 
-<figure><img src="../../.gitbook/assets/image (22) (2).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (22) (2) (2).png" alt=""><figcaption></figcaption></figure>
 
 ### Finding Bad Characters
 

@@ -215,7 +215,7 @@ sc.exe \\thmiis.za.tryhackme.com start THMservice-3249
 
 <figure><img src="../../.gitbook/assets/image (35) (2).png" alt=""><figcaption></figcaption></figure>
 
-<figure><img src="../../.gitbook/assets/image (36) (2).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (36) (2) (1).png" alt=""><figcaption></figcaption></figure>
 
 <figure><img src="../../.gitbook/assets/image (20) (6).png" alt=""><figcaption></figcaption></figure>
 

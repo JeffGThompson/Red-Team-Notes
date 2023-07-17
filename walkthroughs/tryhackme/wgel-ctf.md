@@ -15,7 +15,7 @@
 <pre><code><strong>nmap -A $VICTIM
 </strong></code></pre>
 
-<figure><img src="../../.gitbook/assets/image (49).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (49) (4).png" alt=""><figcaption></figcaption></figure>
 
 ### Scan all ports
 
@@ -60,11 +60,11 @@ Ran dirb with defaults and it found a .ssh folder which has a id\_rsa so I downl
 dirb http://$VICTIM/sitemap/
 ```
 
-<figure><img src="../../.gitbook/assets/image (47).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (47) (1).png" alt=""><figcaption></figcaption></figure>
 
 
 
-<figure><img src="../../.gitbook/assets/image (61).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (61) (3).png" alt=""><figcaption></figcaption></figure>
 
 **Kali**
 
