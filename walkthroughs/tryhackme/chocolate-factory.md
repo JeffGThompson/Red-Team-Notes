@@ -121,7 +121,7 @@ cd /var/www/html/
 grep password *
 ```
 
-<figure><img src="../../.gitbook/assets/image (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 ### Shell
 
@@ -159,7 +159,7 @@ sudo -l
 sudo vi -c ':!/bin/sh' /dev/null
 ```
 
-<figure><img src="../../.gitbook/assets/image (5).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (5) (12).png" alt=""><figcaption></figcaption></figure>
 
 
 

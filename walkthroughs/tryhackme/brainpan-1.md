@@ -499,7 +499,7 @@ sudo -l
 sudo /home/anansi/bin/anansi_util manual
 ```
 
-<figure><img src="../../.gitbook/assets/image (10) (4) (2).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (10) (4) (2) (1).png" alt=""><figcaption></figcaption></figure>
 
 <figure><img src="../../.gitbook/assets/image (6) (1) (4) (1).png" alt=""><figcaption></figcaption></figure>
 

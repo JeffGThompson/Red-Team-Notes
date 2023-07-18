@@ -47,7 +47,7 @@ evil-winrm -i $VICTIM -u thmuser1 -p Password321
 *Evil-WinRM* PS C:\Users\thmuser1\Documents> whoami /groups
 ```
 
-<figure><img src="../../.gitbook/assets/image (1) (1) (7).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1) (1) (7) (1).png" alt=""><figcaption></figcaption></figure>
 
 This is due to User Account Control (UAC). One of the features implemented by UAC, **LocalAccountTokenFilterPolicy**, strips any local account of its administrative privileges when logging in remotely. While you can elevate your privileges through UAC from a graphical user session (Read more on UAC [here](https://tryhackme.com/room/windowsfundamentals1xbx)), if you are using WinRM, you are confined to a limited access token with no administrative privileges.
 

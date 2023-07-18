@@ -427,7 +427,7 @@ Create a shared object with the same name as one of the listed libraries (libcry
 <pre><code><strong>sudo LD_LIBRARY_PATH=/tmp apache2
 </strong></code></pre>
 
-<figure><img src="../../.gitbook/assets/image (4) (4).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (4) (4) (2).png" alt=""><figcaption></figcaption></figure>
 
 ## Cron Jobs - File Permissions
 

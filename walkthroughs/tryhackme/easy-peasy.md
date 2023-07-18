@@ -22,7 +22,7 @@ port 5698 and 65524 found
 <pre><code><strong>nmap -sV -sT -O -p 1-65535 $VICTIM
 </strong></code></pre>
 
-<figure><img src="../../.gitbook/assets/image (18).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (18) (9).png" alt=""><figcaption></figcaption></figure>
 
 
 
@@ -44,7 +44,7 @@ gobuster dir -u http://$VICTIM -w /usr/share/wordlists/dirbuster/directory-list-
 gobuster dir -u http://$VICTIM/hidden -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt
 ```
 
-<figure><img src="../../.gitbook/assets/image (10).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (10) (4).png" alt=""><figcaption></figcaption></figure>
 
 
 
@@ -70,7 +70,7 @@ curl http://$VICTIM:65524/robots.txt
 
 
 
-<figure><img src="../../.gitbook/assets/image (8).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (8) (3).png" alt=""><figcaption></figcaption></figure>
 
 
 
@@ -133,7 +133,7 @@ Password: mypasswordforthatjob
 
 <figure><img src="../../.gitbook/assets/image (36).png" alt=""><figcaption></figcaption></figure>
 
-<figure><img src="../../.gitbook/assets/image (3).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (3) (4).png" alt=""><figcaption></figcaption></figure>
 
 **Link:** [https://www.rapidtables.com/convert/number/binary-to-ascii.html](https://www.rapidtables.com/convert/number/binary-to-ascii.html)
 
@@ -154,7 +154,7 @@ Password: iconvertedmypasswordtobinary
 
 **Link:** [https://www.dcode.fr/caesar-cipher](https://www.dcode.fr/caesar-cipher)
 
-<figure><img src="../../.gitbook/assets/image (9).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (9) (5).png" alt=""><figcaption></figcaption></figure>
 
 
 

@@ -101,7 +101,7 @@ curl localhost:9001
 
 <figure><img src="../../.gitbook/assets/image (46).png" alt=""><figcaption></figcaption></figure>
 
-<figure><img src="../../.gitbook/assets/image (18) (9).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (18) (9) (1).png" alt=""><figcaption></figcaption></figure>
 
 ### Pivot
 
@@ -178,7 +178,7 @@ select * from users;
 
 
 
-<figure><img src="../../.gitbook/assets/image (14) (11).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (14) (11) (1).png" alt=""><figcaption></figcaption></figure>
 
 
 
