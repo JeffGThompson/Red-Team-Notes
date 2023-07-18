@@ -179,7 +179,7 @@ cd /home/user5
 ./script
 ```
 
-<figure><img src="../../.gitbook/assets/image (2) (6) (2).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (2) (6) (2) (1).png" alt=""><figcaption></figcaption></figure>
 
 We now create a script called ls that gives us a bash shell.
 
@@ -214,7 +214,7 @@ cd /home/user5
 /script 
 ```
 
-<figure><img src="../../.gitbook/assets/image (18) (3) (2).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (18) (3) (2) (1).png" alt=""><figcaption></figcaption></figure>
 
 Run the following to reset the path variable.
 

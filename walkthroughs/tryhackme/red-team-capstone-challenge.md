@@ -71,7 +71,7 @@ dirb http://$WEB:80 /usr/share/wordlists/dirb/big.txt -X .php
 
 Manually looking around there is a meet the team page, when clicking on the images we can see the folder holding all their pictures with their names, potentially could be usernames.
 
-<figure><img src="../../.gitbook/assets/image (10) (4) (2).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (10) (4) (1).png" alt=""><figcaption></figcaption></figure>
 
 **Output - users.txt**
 
@@ -714,7 +714,7 @@ scanned from VPN server after rooting
 nmap -sV -sT -O -p 1-65535 10.200.89.31
 ```
 
-<figure><img src="../../.gitbook/assets/image (1) (1) (7).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 ### Secretdump
 

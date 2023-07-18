@@ -26,7 +26,7 @@ cat /etc/*-release
 cat /etc/*-release
 ```
 
-<figure><img src="../../.gitbook/assets/image (6) (10) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (6) (10).png" alt=""><figcaption></figcaption></figure>
 
 
 

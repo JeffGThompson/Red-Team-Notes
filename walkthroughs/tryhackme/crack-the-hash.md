@@ -128,7 +128,7 @@ Used [https://hashes.com/en/decrypt/hash](https://hashes.com/en/decrypt/hashhttp
 
 Used [https://www.onlinehashcrack.com/hash-identification.php](https://www.onlinehashcrack.com/hash-identification.php) to identify the hash&#x20;
 
-<figure><img src="../../.gitbook/assets/image (6) (3).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (6) (3) (2).png" alt=""><figcaption></figcaption></figure>
 
 **hash.txt**&#x20;
 

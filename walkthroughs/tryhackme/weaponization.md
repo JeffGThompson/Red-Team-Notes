@@ -49,7 +49,7 @@ rlwrap nc -lvnp 443
 
 <figure><img src="../../.gitbook/assets/image (1) (2) (1) (2).png" alt=""><figcaption></figcaption></figure>
 
-<figure><img src="../../.gitbook/assets/image (7) (6).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (7) (6) (1).png" alt=""><figcaption></figcaption></figure>
 
 ### DOC
 

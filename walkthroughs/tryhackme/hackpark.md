@@ -26,7 +26,7 @@ hydra -l admin -P /usr/share/wordlists/SecLists/Passwords/darkweb2017-top10000.t
 ```
 {% endcode %}
 
-<figure><img src="../../.gitbook/assets/image (3) (3) (2).png" alt=""><figcaption><p>Credentials found</p></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (3) (3) (2) (1).png" alt=""><figcaption><p>Credentials found</p></figcaption></figure>
 
 ### Compromise the machine
 

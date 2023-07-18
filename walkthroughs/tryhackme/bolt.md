@@ -67,7 +67,7 @@ set TARGETURI http://$VICTIM:8000
 run
 ```
 
-<figure><img src="../../.gitbook/assets/image (13) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (13) (1) (2).png" alt=""><figcaption></figcaption></figure>
 
 
 
