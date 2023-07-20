@@ -11,7 +11,7 @@
 <pre><code><strong>nmap -A $VICTIM
 </strong></code></pre>
 
-<figure><img src="../../.gitbook/assets/image (30).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (30) (5).png" alt=""><figcaption></figcaption></figure>
 
 ### Scan all ports
 
@@ -48,9 +48,9 @@ gobuster dir -u http://$VICTIM/hidden -w /usr/share/wordlists/dirbuster/director
 
 
 
-<figure><img src="../../.gitbook/assets/image (23).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (23) (6).png" alt=""><figcaption></figcaption></figure>
 
-<figure><img src="../../.gitbook/assets/image (28).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (28) (4).png" alt=""><figcaption></figcaption></figure>
 
 **Kali**
 
@@ -76,7 +76,7 @@ curl http://$VICTIM:65524/robots.txt
 
 [https://md5hashing.net/hash/md5/a18672860d0510e5ab6699730763b250](https://md5hashing.net/hash/md5/a18672860d0510e5ab6699730763b250)
 
-<figure><img src="../../.gitbook/assets/image (37).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (37) (5).png" alt=""><figcaption></figcaption></figure>
 
 ## Flag #3&#x20;
 
@@ -84,17 +84,17 @@ curl http://$VICTIM:65524/robots.txt
 
 ## Hidden Directory
 
-<figure><img src="../../.gitbook/assets/image (42).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (42) (4).png" alt=""><figcaption></figcaption></figure>
 
 
 
 **CyberChef**: [https://gchq.github.io/CyberChef/#recipe=From\_Base62('0-9A-Za-z')\&input=T2JzSm1QMTczTjJYNmRPckFnRUFMMFZ1](https://gchq.github.io/CyberChef/#recipe=From\_Base62\('0-9A-Za-z'\)\&input=T2JzSm1QMTczTjJYNmRPckFnRUFMMFZ1)
 
-<figure><img src="../../.gitbook/assets/image (22).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (22) (9).png" alt=""><figcaption></figcaption></figure>
 
 
 
-<figure><img src="../../.gitbook/assets/image (34).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (34) (4).png" alt=""><figcaption></figcaption></figure>
 
 
 
@@ -117,7 +117,7 @@ Format turned out to be GOST
 john --wordlist=easypeasy.txt --format=GOST hash.txt
 ```
 
-<figure><img src="../../.gitbook/assets/image (20).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (20) (5).png" alt=""><figcaption></figcaption></figure>
 
 
 
@@ -131,13 +131,13 @@ steghide extract -sf binarycodepixabay.jpg
 Password: mypasswordforthatjob
 ```
 
-<figure><img src="../../.gitbook/assets/image (36).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (36) (5).png" alt=""><figcaption></figcaption></figure>
 
 <figure><img src="../../.gitbook/assets/image (3) (3).png" alt=""><figcaption></figcaption></figure>
 
 **Link:** [https://www.rapidtables.com/convert/number/binary-to-ascii.html](https://www.rapidtables.com/convert/number/binary-to-ascii.html)
 
-<figure><img src="../../.gitbook/assets/image (24).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (24) (8).png" alt=""><figcaption></figcaption></figure>
 
 **Kali**
 
@@ -146,11 +146,11 @@ ssh boring@$VICTIM:6498
 Password: iconvertedmypasswordtobinary
 ```
 
-<figure><img src="../../.gitbook/assets/image (25).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (25) (5).png" alt=""><figcaption></figcaption></figure>
 
 ## User Flag
 
-<figure><img src="../../.gitbook/assets/image (29).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (29) (4).png" alt=""><figcaption></figcaption></figure>
 
 **Link:** [https://www.dcode.fr/caesar-cipher](https://www.dcode.fr/caesar-cipher)
 
@@ -168,7 +168,7 @@ cd /var/www/
 ls -lah
 ```
 
-<figure><img src="../../.gitbook/assets/image (26).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (26) (7).png" alt=""><figcaption></figcaption></figure>
 
 <figure><img src="../../.gitbook/assets/image (61).png" alt=""><figcaption></figcaption></figure>
 

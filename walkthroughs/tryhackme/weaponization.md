@@ -25,7 +25,7 @@ python2 -m SimpleHTTPServer 81
 rlwrap nc -lvnp 443
 ```
 
-<figure><img src="../../.gitbook/assets/image (15) (2).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (15) (2) (2).png" alt=""><figcaption></figcaption></figure>
 
 <figure><img src="../../.gitbook/assets/image (4) (7) (1).png" alt=""><figcaption></figcaption></figure>
 

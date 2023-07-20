@@ -1214,7 +1214,7 @@ python exploit.py $VICTIM 1337
 !mona findmsp -distance 2100
 ```
 
-<figure><img src="../../.gitbook/assets/image (12) (4).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (12) (4) (2).png" alt=""><figcaption></figcaption></figure>
 
 ### Finding Bad Characters
 
