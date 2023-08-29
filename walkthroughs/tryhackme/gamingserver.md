@@ -34,7 +34,7 @@ gobuster dir -u http://$VICTIM -w /usr/share/wordlists/SecLists/Discovery/Web-Co
 
 
 
-<figure><img src="../../.gitbook/assets/image (16).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (16) (2).png" alt=""><figcaption></figcaption></figure>
 
 
 
@@ -70,7 +70,7 @@ hydra -l john -P dict.lst ssh://$VICTIM
 
 
 
-<figure><img src="../../.gitbook/assets/image (3) (16).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (3) (16) (1).png" alt=""><figcaption></figcaption></figure>
 
 
 
@@ -86,7 +86,7 @@ chmod 700 secretKey
 john --wordlist=/root/dict.lst id_john.txt 
 ```
 
-<figure><img src="../../.gitbook/assets/image (19).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (19) (6).png" alt=""><figcaption></figcaption></figure>
 
 **Kali**
 
@@ -95,7 +95,7 @@ ssh -i secretKey john@$VICTIM
 Password: letmein
 ```
 
-<figure><img src="../../.gitbook/assets/image (11).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (11) (1).png" alt=""><figcaption></figcaption></figure>
 
 
 
@@ -111,7 +111,7 @@ Followed this link on lxd privilege escalation&#x20;
 id
 ```
 
-<figure><img src="../../.gitbook/assets/image (17).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (17) (6).png" alt=""><figcaption></figcaption></figure>
 
 **Kali**
 

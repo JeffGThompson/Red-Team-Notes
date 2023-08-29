@@ -274,7 +274,7 @@ except:
 
 <figure><img src="../../.gitbook/assets/image (12) (4) (1).png" alt=""><figcaption><p>How to find the bad characters start location</p></figcaption></figure>
 
-<figure><img src="../../.gitbook/assets/image (15) (1) (2).png" alt=""><figcaption><p>Start location of bad characters</p></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (15) (1) (2) (1).png" alt=""><figcaption><p>Start location of bad characters</p></figcaption></figure>
 
 
 
@@ -3448,7 +3448,7 @@ except:
     sys.exit()
 ```
 
-<figure><img src="../../.gitbook/assets/image (14) (5).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (14) (5) (2).png" alt=""><figcaption></figcaption></figure>
 
 <figure><img src="../../.gitbook/assets/image (5) (3) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 

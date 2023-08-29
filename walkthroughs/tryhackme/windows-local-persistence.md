@@ -717,7 +717,7 @@ Notice that this registry key has no equivalent in HKLM, making your backdoor ap
 
 After doing this, sign out of your current session and log in again, and you should receive a shell (it will probably take around 10 seconds).
 
-<figure><img src="../../.gitbook/assets/image (21) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (21) (1) (2).png" alt=""><figcaption></figcaption></figure>
 
 
 

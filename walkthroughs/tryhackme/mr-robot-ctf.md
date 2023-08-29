@@ -37,7 +37,7 @@ This ran for the majority of the time I was working on the box, I found the word
 dirb http://$VICTIM:80 /usr/share/wordlists/dirb/big.txt
 ```
 
-<figure><img src="../../.gitbook/assets/image (16) (2).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (16) (2) (4).png" alt=""><figcaption></figcaption></figure>
 
 #### Key 1
 
@@ -175,7 +175,7 @@ ls
 cat password.raw-md5 
 ```
 
-<figure><img src="../../.gitbook/assets/image (15) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (15) (1) (2).png" alt=""><figcaption></figcaption></figure>
 
 **Kali**
 

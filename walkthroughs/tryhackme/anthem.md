@@ -9,7 +9,7 @@
 <pre><code><strong>nmap -A $VICTIM
 </strong></code></pre>
 
-<figure><img src="../../.gitbook/assets/image (17) (6).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (17) (6) (3).png" alt=""><figcaption></figcaption></figure>
 
 
 
@@ -24,7 +24,7 @@ port 5985 found
 <pre><code><strong>nmap -sV -sT -O -p 1-65535 $VICTIM
 </strong></code></pre>
 
-<figure><img src="../../.gitbook/assets/image (25) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (25) (1) (2).png" alt=""><figcaption></figcaption></figure>
 
 
 
@@ -54,7 +54,7 @@ Domain: anthem.com
 
 
 
-<figure><img src="../../.gitbook/assets/image (19) (6).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (19) (6) (4).png" alt=""><figcaption></figcaption></figure>
 
 
 
@@ -66,7 +66,7 @@ Domain: anthem.com
 
 
 
-<figure><img src="../../.gitbook/assets/image (21).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (21) (1).png" alt=""><figcaption></figcaption></figure>
 
 
 
