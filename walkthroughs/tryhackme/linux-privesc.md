@@ -265,7 +265,7 @@ sudo less /etc/profile
 !/bin/sh
 ```
 
-<figure><img src="../../.gitbook/assets/image (5) (1) (2).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (5) (1) (2) (3).png" alt=""><figcaption></figcaption></figure>
 
 <figure><img src="../../.gitbook/assets/image (9) (2) (1) (2).png" alt=""><figcaption></figcaption></figure>
 

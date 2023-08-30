@@ -580,7 +580,7 @@ Let's have a quick look at how Kerberos authentication works on Windows networks
 
 As a result, the KDC will send us a TGS and a **Service Session Key**, which we will need to authenticate to the service we want to access. The TGS is encrypted using the **Service Owner Hash**. The Service Owner is the user or machine account under which the service runs. The TGS contains a copy of the Service Session Key on its encrypted contents so that the Service Owner can access it by decrypting the TGS.
 
-<figure><img src="../../.gitbook/assets/image (9) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (9) (1) (1) (4).png" alt=""><figcaption></figcaption></figure>
 
 3. The TGS can then be sent to the desired service to authenticate and establish a connection. The service will use its configured account's password hash to decrypt the TGS and validate the Service Session Key.
 
@@ -861,7 +861,7 @@ When an administrator uses Remote Desktop to connect to a machine and closes the
 
 If we have administrator-level access, we can get SYSTEM by any method of our preference. For now, we will be using psexec to do so. First, let's run a cmd.exe as administrator:
 
-<figure><img src="../../.gitbook/assets/image (3) (1) (2) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (3) (1) (2) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 From there, run `PsExec64.exe`(available at `C:\tools\`):
 

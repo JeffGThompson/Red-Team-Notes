@@ -103,7 +103,7 @@ Our rogue LDAP server has now been configured. When we click the "Test Settings"
 sudo tcpdump -SX -i breachad tcp port 389
 ```
 
-<figure><img src="../../.gitbook/assets/image (1) (1) (2) (3) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1) (1) (2) (3) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 <figure><img src="../../.gitbook/assets/image (10) (9).png" alt=""><figcaption></figcaption></figure>
 

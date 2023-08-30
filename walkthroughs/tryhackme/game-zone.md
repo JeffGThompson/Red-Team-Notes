@@ -89,7 +89,7 @@ Password: videogamer124
 ss -tulpn
 ```
 
-<figure><img src="../../.gitbook/assets/image (8) (1) (2).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (8) (1) (2) (1).png" alt=""><figcaption></figcaption></figure>
 
 **What is the name of the exposed CMS?**
 

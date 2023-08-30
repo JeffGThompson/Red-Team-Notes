@@ -139,7 +139,7 @@ find / -type f -perm -04000 -ls 2>/dev/null
 cat /etc/passwd
 ```
 
-<figure><img src="../../.gitbook/assets/image (7) (1) (2).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (7) (1) (2) (2).png" alt=""><figcaption></figcaption></figure>
 
 **What is the password of user2?**
 

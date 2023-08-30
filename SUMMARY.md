@@ -94,3 +94,4 @@
   * [ColddBox: Easy](walkthroughs/tryhackme/colddbox-easy.md)
   * [Fowsniff CTF](walkthroughs/tryhackme/fowsniff-ctf.md)
   * [Blaster](walkthroughs/tryhackme/blaster.md)
+  * [The Cod Caper](walkthroughs/tryhackme/the-cod-caper.md)

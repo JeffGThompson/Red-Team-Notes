@@ -537,7 +537,7 @@ hashcat -m 1000 -a 0 hashes.txt /usr/share/wordlists/rockyou.txt
 hashcat -m 1000 -a 0 hashes.txt /usr/share/wordlists/rockyou.txt --show
 ```
 
-<figure><img src="../../.gitbook/assets/image (2) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (2) (1) (1) (1) (3).png" alt=""><figcaption></figcaption></figure>
 
 ## Local Administrator Password Solution (LAPS)
 

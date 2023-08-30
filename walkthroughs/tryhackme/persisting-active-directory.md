@@ -325,7 +325,7 @@ Add-ADDBSidHistory -SamAccountName $UsernameOfOurLow-privelegedADAccount -SidHis
 Start-Service -Name ntds  
 ```
 
-<figure><img src="../../.gitbook/assets/image (4) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (4) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 The NTDS database is locked when the NTDS service is running. In order to patch our SID history, we must first stop the service. You must restart the NTDS service after the patch, otherwise, authentication for the entire network will not work anymore.
 
@@ -435,7 +435,7 @@ Let's also verify that even though we created multiple groups, the Domain Admins
 Get-ADGroupMember -Identity "Domain Admins"
 ```
 
-<figure><img src="../../.gitbook/assets/image (5) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (5) (1) (2).png" alt=""><figcaption></figcaption></figure>
 
 ## Persistence through ACLs
 
