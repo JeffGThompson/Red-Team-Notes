@@ -49,7 +49,7 @@ This will brute force user accounts from a domain controller using a supplied wo
 ./kerbrute userenum --dc CONTROLLER.local -d CONTROLLER.local User.txt
 ```
 
-<figure><img src="../../.gitbook/assets/image (1) (1) (1) (1) (4).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1) (1) (1) (1) (4) (1).png" alt=""><figcaption></figcaption></figure>
 
 ## Harvesting & Brute-Forcing Tickets w/ Rubeus
 

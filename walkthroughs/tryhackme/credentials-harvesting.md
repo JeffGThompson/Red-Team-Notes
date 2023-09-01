@@ -494,7 +494,7 @@ The following is a one-liner PowerShell command to dump the NTDS file using the 
 powershell "ntdsutil.exe 'ac i ntds' 'ifm' 'create full c:\temp' q q"
 ```
 
-<figure><img src="../../.gitbook/assets/image (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1) (1) (1) (1) (4).png" alt=""><figcaption></figcaption></figure>
 
 Now, if we check the `c:\temp` directory, we see two folders: Active Directory and registry, which contain the three files we need. Transfer them to the AttackBox and run the secretsdump.py script to extract the hashes from the dumped memory file.
 
@@ -537,7 +537,7 @@ hashcat -m 1000 -a 0 hashes.txt /usr/share/wordlists/rockyou.txt
 hashcat -m 1000 -a 0 hashes.txt /usr/share/wordlists/rockyou.txt --show
 ```
 
-<figure><img src="../../.gitbook/assets/image (2) (1) (1) (1) (3).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (2) (1) (1) (1) (3) (1).png" alt=""><figcaption></figcaption></figure>
 
 ## Local Administrator Password Solution (LAPS)
 

