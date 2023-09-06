@@ -97,3 +97,4 @@
   * [The Cod Caper](walkthroughs/tryhackme/the-cod-caper.md)
   * [SQL Injection Lab](walkthroughs/tryhackme/sql-injection-lab.md)
   * [Agent T](walkthroughs/tryhackme/agent-t.md)
+  * [Avengers Blog](walkthroughs/tryhackme/avengers-blog.md)
