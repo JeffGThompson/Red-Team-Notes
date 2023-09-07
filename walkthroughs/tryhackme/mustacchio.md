@@ -79,7 +79,7 @@ Password: bulldog19
 
 <figure><img src="../../.gitbook/assets/image (188).png" alt=""><figcaption></figcaption></figure>
 
-
+### Initial Shell
 
 In the source code there's two interesting places to look
 
@@ -137,6 +137,8 @@ Password: urieljames
 ```
 
 <figure><img src="../../.gitbook/assets/image (197).png" alt=""><figcaption></figcaption></figure>
+
+### Privilege Escalation
 
 We find a program owned by root in joes folder. When we run strings on it we can see tail command is being ran but it is not using full path so we can exploit this.
 
