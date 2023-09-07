@@ -10,7 +10,7 @@
 nmap -A 10.10.68.22
 ```
 
-<img src="../../.gitbook/assets/image (1) (1) (1) (1) (1).png" alt="" data-size="original">
+<img src="../../.gitbook/assets/image (1) (1) (1) (1) (1) (1).png" alt="" data-size="original">
 
 The box is vulnerable to ms17-010
 

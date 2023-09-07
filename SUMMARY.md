@@ -98,3 +98,4 @@
   * [SQL Injection Lab](walkthroughs/tryhackme/sql-injection-lab.md)
   * [Agent T](walkthroughs/tryhackme/agent-t.md)
   * [Avengers Blog](walkthroughs/tryhackme/avengers-blog.md)
+  * [Mustacchio](walkthroughs/tryhackme/mustacchio.md)
