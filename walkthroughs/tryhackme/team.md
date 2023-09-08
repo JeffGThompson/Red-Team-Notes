@@ -430,9 +430,7 @@ Had to remove the # from each line
 
 <figure><img src="../../.gitbook/assets/image (19).png" alt=""><figcaption></figcaption></figure>
 
-
-
-
+## Initial Shell
 
 **Kali**
 
@@ -443,7 +441,9 @@ ssh -i id_rsa dale@$VICTIM
 
 <figure><img src="../../.gitbook/assets/image (20).png" alt=""><figcaption></figcaption></figure>
 
-There is a script in gyles home directory that accepts two inputs, the first one doesn't matter but the other we can use to escalte to become the user gyles. Once done it will seem to have frozen but if we get a full TTY shell with python then it works.
+## Lateral Movement
+
+There is a script in gyles home directory that accepts two inputs, the first one doesn't matter but the other we can use to escalate to become the user gyles. Once done it will seem to have frozen but if we get a full TTY shell with python then it works.
 
 **Victim**
 
@@ -467,7 +467,6 @@ python3 -c 'import pty;pty.spawn("/bin/bash")'
 ```
 wget https://github.com/DominicBreuker/pspy/releases/download/v1.2.1/pspy32 
 python2 -m SimpleHTTPServer 81
-
 ```
 
 **Victim**
@@ -482,7 +481,9 @@ We can see a script.sh being run under a folder called admin\_stuff
 
 <figure><img src="../../.gitbook/assets/image (22).png" alt=""><figcaption></figcaption></figure>
 
-The script just calls two other scripts, one of them we can write to
+## Privilege Escalation
+
+The script just calls two other scripts, one of them we can write to.
 
 <figure><img src="../../.gitbook/assets/image (23).png" alt=""><figcaption></figcaption></figure>
 

