@@ -21,7 +21,7 @@ port 5986 discovered. Potentially we can use this later for WinRM.
 <pre><code><strong>nmap -sV -sT -O -p 1-65535 $VICTIM
 </strong></code></pre>
 
-<figure><img src="../../.gitbook/assets/image (7) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (7) (1) (1) (2).png" alt=""><figcaption></figcaption></figure>
 
 ### HTTP port 80
 

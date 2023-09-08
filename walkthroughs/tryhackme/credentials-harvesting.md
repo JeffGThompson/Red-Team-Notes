@@ -46,7 +46,7 @@ powershell
 Get-ADUser -Filter * -Properties * | select Name,SamAccountName,Description
 ```
 
-<figure><img src="../../.gitbook/assets/image (18) (1) (5).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (18) (1) (5) (1).png" alt=""><figcaption></figcaption></figure>
 
 ## Local Windows Credentials
 
@@ -272,7 +272,7 @@ mimikatz.exe
 !+
 ```
 
-<figure><img src="../../.gitbook/assets/image (19) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (19) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 \
 Once the driver is loaded, we can disable the LSA protection by executing the following Mimikatz command:
@@ -590,7 +590,7 @@ Next, we need to find which AD organizational unit (OU) has the "All extended ri
 Find-AdmPwdExtendedRights -Identity THMorg
 ```
 
-<figure><img src="../../.gitbook/assets/image (25) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (25) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 The output shows that the `THMGroupReader` group in `THMorg` has the right access to LAPS. Let's check the group and its members.
 

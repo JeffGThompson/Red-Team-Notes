@@ -99,3 +99,4 @@
   * [Agent T](walkthroughs/tryhackme/agent-t.md)
   * [Avengers Blog](walkthroughs/tryhackme/avengers-blog.md)
   * [Mustacchio](walkthroughs/tryhackme/mustacchio.md)
+  * [Team](walkthroughs/tryhackme/team.md)

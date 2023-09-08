@@ -113,7 +113,7 @@ sudo -l
 sudo vim -c ':!/bin/sh'
 ```
 
-<figure><img src="../../.gitbook/assets/image (18) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (18) (1) (5).png" alt=""><figcaption></figcaption></figure>
 
 ### Privilege Escalation Option 2 - FTP
 

@@ -129,7 +129,7 @@ There is a backup script that is ran every minute by root which backs up /var/ww
 
 
 
-<figure><img src="../../.gitbook/assets/image (11) (1) (2) (2) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (11) (1) (2) (2) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 **Victim**
 

@@ -167,7 +167,7 @@ export PATH=/tmp/:$PATH
 /home/joe/live_log 
 ```
 
-<figure><img src="../../.gitbook/assets/image.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (26).png" alt=""><figcaption></figcaption></figure>
 
 
 

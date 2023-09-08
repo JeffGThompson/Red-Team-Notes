@@ -46,7 +46,7 @@ sudo apt-get update && sudo apt-get -y install slapd ldap-utils && sudo systemct
 sudo dpkg-reconfigure -p low slapd
 ```
 
-<figure><img src="../../.gitbook/assets/image (13) (1) (4).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (13) (1) (4) (2).png" alt=""><figcaption></figcaption></figure>
 
 <figure><img src="../../.gitbook/assets/image (5) (1) (4) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 

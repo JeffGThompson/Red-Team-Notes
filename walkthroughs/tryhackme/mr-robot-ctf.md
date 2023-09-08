@@ -121,7 +121,7 @@ nc -lvnp 443
 
 
 
-<figure><img src="../../.gitbook/assets/image (6) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (6) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 <figure><img src="../../.gitbook/assets/image (25) (1) (3).png" alt=""><figcaption></figcaption></figure>
 
@@ -175,7 +175,7 @@ ls
 cat password.raw-md5 
 ```
 
-<figure><img src="../../.gitbook/assets/image (15) (1) (2).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (15) (1) (2) (1).png" alt=""><figcaption></figcaption></figure>
 
 **Kali**
 
