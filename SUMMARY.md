@@ -101,3 +101,4 @@
   * [Mustacchio](walkthroughs/tryhackme/mustacchio.md)
   * [Team](walkthroughs/tryhackme/team.md)
   * [Tech\_Supp0rt: 1](walkthroughs/tryhackme/tech\_supp0rt-1.md)
+  * [Gallery](walkthroughs/tryhackme/gallery.md)
