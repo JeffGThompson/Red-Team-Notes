@@ -272,7 +272,7 @@ mimikatz.exe
 !+
 ```
 
-<figure><img src="../../.gitbook/assets/image (19) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (19) (1) (1) (2).png" alt=""><figcaption></figcaption></figure>
 
 \
 Once the driver is loaded, we can disable the LSA protection by executing the following Mimikatz command:

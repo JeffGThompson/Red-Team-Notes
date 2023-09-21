@@ -104,3 +104,4 @@
   * [Gallery](walkthroughs/tryhackme/gallery.md)
   * [Jack-of-All-Trades](walkthroughs/tryhackme/jack-of-all-trades.md)
   * [Mother's Secret](walkthroughs/tryhackme/mothers-secret.md)
+  * [Traverse](walkthroughs/tryhackme/traverse.md)

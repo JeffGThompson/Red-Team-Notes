@@ -970,7 +970,7 @@ Once the exploit completes, run /usr/bin/passwd to gain a root shell:
 /usr/bin/passwd
 ```
 
-<figure><img src="../../.gitbook/assets/image (6) (1) (1) (1) (2).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (6) (1) (1) (1) (2) (1).png" alt=""><figcaption></figcaption></figure>
 
 
 

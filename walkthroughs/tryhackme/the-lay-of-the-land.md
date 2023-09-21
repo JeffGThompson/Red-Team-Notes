@@ -26,7 +26,7 @@ systeminfo | findstr Domain
  Get-ADUser -Filter * -SearchBase "OU=THM,DC=THMREDTEAM,DC=COM"
 ```
 
-<figure><img src="../../.gitbook/assets/image (18) (1) (1) (2).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (18) (1) (1) (2) (1).png" alt=""><figcaption></figcaption></figure>
 
 **Once you run the previous command, what is the UserPrincipalName (email) of the admin account?**
 

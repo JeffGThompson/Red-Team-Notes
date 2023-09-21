@@ -461,7 +461,7 @@ Note: During this task, you are assumed to be familiar with the methods and tool
 
 Before diving into the actual lateral movement techniques, let's take a look at how NTLM authentication works:
 
-<figure><img src="../../.gitbook/assets/image (13) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (13) (1) (1) (2).png" alt=""><figcaption></figcaption></figure>
 
 1. The client sends an authentication request to the server they want to access.
 2. The server generates a random number and sends it as a challenge to the client.
