@@ -103,3 +103,4 @@
   * [Tech\_Supp0rt: 1](walkthroughs/tryhackme/tech\_supp0rt-1.md)
   * [Gallery](walkthroughs/tryhackme/gallery.md)
   * [Jack-of-All-Trades](walkthroughs/tryhackme/jack-of-all-trades.md)
+  * [Mother's Secret](walkthroughs/tryhackme/mothers-secret.md)
