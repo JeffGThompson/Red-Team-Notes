@@ -106,3 +106,4 @@
   * [Mother's Secret](walkthroughs/tryhackme/mothers-secret.md)
   * [Traverse](walkthroughs/tryhackme/traverse.md)
   * [Anonforce](walkthroughs/tryhackme/anonforce.md)
+  * [Dav](walkthroughs/tryhackme/dav.md)
