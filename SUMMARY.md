@@ -105,3 +105,4 @@
   * [Jack-of-All-Trades](walkthroughs/tryhackme/jack-of-all-trades.md)
   * [Mother's Secret](walkthroughs/tryhackme/mothers-secret.md)
   * [Traverse](walkthroughs/tryhackme/traverse.md)
+  * [Anonforce](walkthroughs/tryhackme/anonforce.md)
