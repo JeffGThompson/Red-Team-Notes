@@ -14,7 +14,7 @@
 
 Sent a failed login request to Burp to see what it would look like. With this info I was able to craft my request for hydra. I just needed to get the URL and everything that is sent after VIEWSTATE and just change the input to use ^USER^ and ^PASS^ to brute force these fields.
 
-<figure><img src="../../.gitbook/assets/image (20) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (20) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 I could also do this without burp by just opening the console and getting the info from there
 
@@ -32,7 +32,7 @@ hydra -l admin -P /usr/share/wordlists/SecLists/Passwords/darkweb2017-top10000.t
 
 **Now you have logged into the website, are you able to identify the version of the BlogEngine?**
 
-<figure><img src="../../.gitbook/assets/image (22) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (22) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 **What is the CVE?**
 
@@ -130,7 +130,7 @@ winPEASx64.exe
 
 ![](<../../.gitbook/assets/image (25) (1) (1) (1) (1).png>)
 
-<figure><img src="../../.gitbook/assets/image (19) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (19) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 ```
 cd C:\Program Files (x86)\SystemScheduler\Events
