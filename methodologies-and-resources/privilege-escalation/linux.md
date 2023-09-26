@@ -49,7 +49,11 @@ rpm -qa # red hat
 pacman -Qe # arch linux
 ```
 
+**Look at open ports**
 
+```
+ss -ltp
+```
 
 ## PSPY
 
