@@ -111,3 +111,4 @@
   * [VulnNet: Internal](walkthroughs/tryhackme/vulnnet-internal.md)
   * [Library](walkthroughs/tryhackme/library.md)
   * [Flatline](walkthroughs/tryhackme/flatline.md)
+  * [b3dr0ck](walkthroughs/tryhackme/b3dr0ck.md)

@@ -1,6 +1,24 @@
 # Enumeration
 
+## **Scans**
 
+Initial scan
+
+```
+nmap -A $VICTIM
+```
+
+Longer scan
+
+```
+nmap -sV -sT -O -p 1-65535 $VICTIM
+```
+
+Even longer scan
+
+```
+nmap -sC -sV -p- $VICTIM
+```
 
 ## **Ports**
 
