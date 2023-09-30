@@ -21,6 +21,7 @@
   * [Credential Harvesting](methodologies-and-resources/cheat-sheets/credential-harvesting.md)
   * [Password Attacks](methodologies-and-resources/cheat-sheets/password-attacks.md)
   * [Command Injection](methodologies-and-resources/cheat-sheets/command-injection-1.md)
+  * [SQL Injection](methodologies-and-resources/cheat-sheets/sql-injection.md)
 
 ## Walkthroughs
 
@@ -112,3 +113,4 @@
   * [Library](walkthroughs/tryhackme/library.md)
   * [Flatline](walkthroughs/tryhackme/flatline.md)
   * [b3dr0ck](walkthroughs/tryhackme/b3dr0ck.md)
+  * [Lesson Learned?](walkthroughs/tryhackme/lesson-learned.md)
