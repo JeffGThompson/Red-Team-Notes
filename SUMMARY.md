@@ -22,6 +22,7 @@
   * [Password Attacks](methodologies-and-resources/cheat-sheets/password-attacks.md)
   * [Command Injection](methodologies-and-resources/cheat-sheets/command-injection-1.md)
   * [SQL Injection](methodologies-and-resources/cheat-sheets/sql-injection.md)
+  * [Bypass File Upload](methodologies-and-resources/cheat-sheets/bypass-file-upload.md)
 
 ## Walkthroughs
 
@@ -114,3 +115,4 @@
   * [Flatline](walkthroughs/tryhackme/flatline.md)
   * [b3dr0ck](walkthroughs/tryhackme/b3dr0ck.md)
   * [Lesson Learned?](walkthroughs/tryhackme/lesson-learned.md)
+  * [Opacity](walkthroughs/tryhackme/opacity.md)
