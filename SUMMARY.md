@@ -116,3 +116,4 @@
   * [b3dr0ck](walkthroughs/tryhackme/b3dr0ck.md)
   * [Lesson Learned?](walkthroughs/tryhackme/lesson-learned.md)
   * [Opacity](walkthroughs/tryhackme/opacity.md)
+  * [Plotted-TMS](walkthroughs/tryhackme/plotted-tms.md)

