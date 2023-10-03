@@ -117,3 +117,4 @@
   * [Lesson Learned?](walkthroughs/tryhackme/lesson-learned.md)
   * [Opacity](walkthroughs/tryhackme/opacity.md)
   * [Plotted-TMS](walkthroughs/tryhackme/plotted-tms.md)
+  * [GLITCH](walkthroughs/tryhackme/glitch.md)
