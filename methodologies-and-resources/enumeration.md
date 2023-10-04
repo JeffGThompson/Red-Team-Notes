@@ -122,6 +122,18 @@ dirb http://$VICTIM:$PORT/ -o scans/$VICTIM-dirb-$PORT-common
 dirb http://$VICTIM:80 /usr/share/wordlists/dirb/big.txt -z10 -o scans/$NAME-dirb-big-80
 ```
 
+
+
+This looks for all php files under folder cvs
+
+**Kali**
+
+```
+ffuf -u http://$VICTIM/cvs/FUZZ.php -w /usr/share/wfuzz/wordlist/general/common.txt
+```
+
+
+
 ```
 dirsearch -u $VICTIM:$PORT -o $FULLPATH/$NAME-dirsearch-80
 ```

@@ -23,6 +23,7 @@
   * [Command Injection](methodologies-and-resources/cheat-sheets/command-injection-1.md)
   * [SQL Injection](methodologies-and-resources/cheat-sheets/sql-injection.md)
   * [Bypass File Upload](methodologies-and-resources/cheat-sheets/bypass-file-upload.md)
+  * [PATH Variables](methodologies-and-resources/cheat-sheets/path-variables.md)
 
 ## Walkthroughs
 
@@ -118,3 +119,4 @@
   * [Opacity](walkthroughs/tryhackme/opacity.md)
   * [Plotted-TMS](walkthroughs/tryhackme/plotted-tms.md)
   * [GLITCH](walkthroughs/tryhackme/glitch.md)
+  * [Hacker vs. Hacker](walkthroughs/tryhackme/hacker-vs.-hacker.md)

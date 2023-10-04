@@ -2,7 +2,7 @@
 
 
 
-**Gathering Info**
+## **Gathering Info**
 
 ```
 whoami
@@ -17,9 +17,19 @@ cat /etc/passwd
 cat /etc/shadow
 ```
 
+### Crontab
+
 ```
 cat /etc/crontab
 ```
+
+Possible other places crons are running
+
+```
+cat /etc/cron.d/
+```
+
+
 
 **Files with SUID-bit set**
 
@@ -30,7 +40,7 @@ find / -perm -u=s -type f 2> /dev/null
 **Files where group permissions equal to "writable"**
 
 ```
-find /etc -type f -perm /g=w -exec ls -l {} + 2> /dev/null 
+find / -type f -perm /g=w -exec ls -l {} + 2> /dev/null 
 ```
 
 ```
