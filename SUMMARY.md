@@ -120,3 +120,4 @@
   * [Plotted-TMS](walkthroughs/tryhackme/plotted-tms.md)
   * [GLITCH](walkthroughs/tryhackme/glitch.md)
   * [Hacker vs. Hacker](walkthroughs/tryhackme/hacker-vs.-hacker.md)
+  * [Valley](walkthroughs/tryhackme/valley.md)
