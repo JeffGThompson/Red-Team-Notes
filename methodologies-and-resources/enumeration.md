@@ -124,6 +124,8 @@ dirb http://$VICTIM:80 /usr/share/wordlists/dirb/big.txt -z10 -o scans/$NAME-dir
 
 
 
+### Find Directories
+
 This looks for all php files under folder cvs
 
 **Kali**
@@ -132,10 +134,24 @@ This looks for all php files under folder cvs
 ffuf -u http://$VICTIM/cvs/FUZZ.php -w /usr/share/wfuzz/wordlist/general/common.txt
 ```
 
+#### Find folders
 
+**Kali**
 
 ```
-dirsearch -u $VICTIM:$PORT -o $FULLPATH/$NAME-dirsearch-80
+gobuster dir --url http://$VICTIM/static -w /usr/share/dirb/wordlists/big.txt -l
+```
+
+**Kali**
+
+```
+ffuf -u http://$VICTIM/static/FUZZ -w /usr/share/dirb/wordlists/big.txt
+```
+
+**Kali**
+
+```
+dirsearch -u $VICTIM:$PORT 
 ```
 
 Nikto Tuning (-T) Options
