@@ -24,6 +24,7 @@
   * [SQL Injection](methodologies-and-resources/cheat-sheets/sql-injection.md)
   * [Bypass File Upload](methodologies-and-resources/cheat-sheets/bypass-file-upload.md)
   * [PATH Variables](methodologies-and-resources/cheat-sheets/path-variables.md)
+  * [Tunneling and Port Forwarding](methodologies-and-resources/cheat-sheets/tunneling-and-port-forwarding.md)
 
 ## Walkthroughs
 
@@ -121,3 +122,4 @@
   * [GLITCH](walkthroughs/tryhackme/glitch.md)
   * [Hacker vs. Hacker](walkthroughs/tryhackme/hacker-vs.-hacker.md)
   * [Valley](walkthroughs/tryhackme/valley.md)
+  * [magician](walkthroughs/tryhackme/magician.md)
