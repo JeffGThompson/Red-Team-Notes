@@ -123,3 +123,4 @@
   * [Hacker vs. Hacker](walkthroughs/tryhackme/hacker-vs.-hacker.md)
   * [Valley](walkthroughs/tryhackme/valley.md)
   * [magician](walkthroughs/tryhackme/magician.md)
+  * [HeartBleed](walkthroughs/tryhackme/heartbleed.md)

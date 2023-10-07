@@ -188,8 +188,16 @@ nikto -h $VICTIM -T 9 -Format txt -o scans/$VICTIM-nikto-80-sqli
 Check if the target is vulnerable to Shellshock
 
 ```
-sudo nmap $VICTIM -p80 --script http-shellshock -oN scans/$VICTIM-nmap-scripts-80-http-shellshock
+nmap -p 80 $VICTIM --script http-shellshock 
 ```
+
+Check if the target is vulnerable to Heartbleed
+
+```
+nmap -p 443 --script ssl-heartbleed $VICTIM
+```
+
+
 
 Check if these files exist to gather info
 
