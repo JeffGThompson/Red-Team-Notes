@@ -124,3 +124,4 @@
   * [Valley](walkthroughs/tryhackme/valley.md)
   * [magician](walkthroughs/tryhackme/magician.md)
   * [HeartBleed](walkthroughs/tryhackme/heartbleed.md)
+  * [Expose](walkthroughs/tryhackme/expose.md)
