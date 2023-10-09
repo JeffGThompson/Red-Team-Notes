@@ -1,6 +1,6 @@
 # Expose
 
-Room Link: [https://tryhackme.com/room/expose](https://tryhackme.com/room/expose)
+**Room Link:** [https://tryhackme.com/room/expose](https://tryhackme.com/room/expose)
 
 ### Initial Scan
 
