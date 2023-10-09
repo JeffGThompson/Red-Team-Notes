@@ -189,6 +189,85 @@ d4d5f4384c9034cd2c77a6bee5b17a732f028b2a4c00344c220fc0022a1efc0195018ca054772246
 
 
 
+
+
+<figure><img src="../../.gitbook/assets/image (390).png" alt=""><figcaption></figcaption></figure>
+
+**Kali**
+
+```
+sed 's/,/\n/g' usernames.txt > users.txt 
+```
+
+**users.txt**
+
+```
+Lucas Washington
+Harry Turner
+Andrea Phillips
+Liam Hernandez
+Adam Jenkins
+Landon Alexander
+Kennedy Anderson
+Sydney Wright
+Aaliyah Sanders
+Olivia Murphy
+Olivia Ross
+Grace Brooks
+Jordan White
+Diego Baker
+Liam Ward
+Carlos Barnes
+Carlos Lopez
+Oliver Gonzalez
+Sophie Sanchez
+Maya Sanders
+Joshua Reed
+Aaliyah Allen
+Jasmine King
+Jonathan Long
+Samuel Anderson
+Julian Robinson
+Gianna Harris
+Madelyn Morgan
+Ella Garcia
+Zoey Gonzales
+Abigail Morgan
+Joseph Rivera
+Elizabeth Cook
+Parker Cox
+Savannah Torres
+Aaliyah Williams
+Blake Washington
+Claire Miller
+Brody Stewart
+Kimberly Murphy
+```
+
+
+
+Stopped here
+
+<figure><img src="../../.gitbook/assets/image (392).png" alt=""><figcaption></figcaption></figure>
+
+
+
+<figure><img src="../../.gitbook/assets/image (391).png" alt=""><figcaption></figcaption></figure>
+
+
+
+
+
+
+
+
+
+Notes
+
+<figure><img src="../../.gitbook/assets/image (388).png" alt=""><figcaption></figcaption></figure>
+
+
+
 **Kali**
 
 ```
