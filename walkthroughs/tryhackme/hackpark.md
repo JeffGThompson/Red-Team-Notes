@@ -32,7 +32,7 @@ hydra -l admin -P /usr/share/wordlists/SecLists/Passwords/darkweb2017-top10000.t
 
 **Now you have logged into the website, are you able to identify the version of the BlogEngine?**
 
-<figure><img src="../../.gitbook/assets/image (22) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (22) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 **What is the CVE?**
 
@@ -54,7 +54,7 @@ rlwrap nc -lvnp 4445
 
 Upload the file
 
-<figure><img src="../../.gitbook/assets/image (24) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (24) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 <figure><img src="../../.gitbook/assets/image (12) (2) (1).png" alt=""><figcaption></figcaption></figure>
 

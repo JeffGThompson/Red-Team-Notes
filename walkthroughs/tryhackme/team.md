@@ -479,17 +479,17 @@ chmod +x pspy32
 
 We can see a script.sh being run under a folder called admin\_stuff
 
-<figure><img src="../../.gitbook/assets/image (22) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (22) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 ## Privilege Escalation
 
 The script just calls two other scripts, one of them we can write to.
 
-<figure><img src="../../.gitbook/assets/image (23) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (23) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 I added the last line to connect back to my machine.
 
-<figure><img src="../../.gitbook/assets/image (24).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (24) (1).png" alt=""><figcaption></figcaption></figure>
 
 **Kali**
 
