@@ -1,5 +1,9 @@
 # LFI / RFI
 
+## Useful Links
+
+[https://book.hacktricks.xyz/pentesting-web/file-inclusion](https://book.hacktricks.xyz/pentesting-web/file-inclusion)
+
 ## Places to look if LFI is possible
 
 | Location                    | Description                                                                                                                                                       |

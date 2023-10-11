@@ -25,6 +25,7 @@
   * [Bypass File Upload](methodologies-and-resources/cheat-sheets/bypass-file-upload.md)
   * [PATH Variables](methodologies-and-resources/cheat-sheets/path-variables.md)
   * [Tunneling and Port Forwarding](methodologies-and-resources/cheat-sheets/tunneling-and-port-forwarding.md)
+  * [Full TTYs](methodologies-and-resources/cheat-sheets/full-ttys.md)
 
 ## Walkthroughs
 
@@ -126,3 +127,4 @@
   * [HeartBleed](walkthroughs/tryhackme/heartbleed.md)
   * [Expose](walkthroughs/tryhackme/expose.md)
   * [Madeye's Castle](walkthroughs/tryhackme/madeyes-castle.md)
+  * [dogcat](walkthroughs/tryhackme/dogcat.md)
