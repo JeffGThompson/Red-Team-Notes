@@ -2,7 +2,11 @@
 
 ## Useful Links
 
-[https://book.hacktricks.xyz/pentesting-web/file-inclusion](https://book.hacktricks.xyz/pentesting-web/file-inclusion)
+{% embed url="https://book.hacktricks.xyz/pentesting-web/file-inclusion" %}
+
+{% embed url="https://github.com/swisskyrepo/PayloadsAllTheThings/tree/master/File%20Inclusion" %}
+
+##
 
 ## Places to look if LFI is possible
 
