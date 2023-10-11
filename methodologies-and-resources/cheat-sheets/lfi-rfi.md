@@ -6,7 +6,7 @@
 
 {% embed url="https://github.com/swisskyrepo/PayloadsAllTheThings/tree/master/File%20Inclusion" %}
 
-##
+{% embed url="https://github.com/RoqueNight/LFI---RCE-Cheat-Sheet" %}
 
 ## Places to look if LFI is possible
 
@@ -342,5 +342,9 @@ Maybe the back-end is checking the folder path:
 http://example.com/index.php?page=utils/scripts/../../../../../etc/passwd
 ```
 
+## LFI to RCE via Apache Log File Poisoning (PHP) <a href="#user-content-lfi-to-rce-via-apache-log-file-poisoning-php" id="user-content-lfi-to-rce-via-apache-log-file-poisoning-php"></a>
 
+Like a log file, send the payload in the User-Agent, it will be reflected inside the /proc/self/environ file
+
+<figure><img src="../../.gitbook/assets/image.png" alt=""><figcaption></figcaption></figure>
 
