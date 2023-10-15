@@ -104,7 +104,7 @@ A page that doesn't exist to trigger the reverse shell.
 http://www.internal.thm/blog/index.php/2020/08/03/hello-worlgd/
 ```
 
-<figure><img src="../../.gitbook/assets/image (27) (1) (2).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (27) (1) (2) (1).png" alt=""><figcaption></figcaption></figure>
 
 Get full TTY shell
 

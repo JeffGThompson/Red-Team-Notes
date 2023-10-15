@@ -72,7 +72,7 @@ Change the value to the flag and we can see it on the page.
 
 What it would look like in burp.
 
-<figure><img src="../../.gitbook/assets/image (32) (2).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (32) (2) (1).png" alt=""><figcaption></figcaption></figure>
 
 **Capture Flag3 at /etc/flag3**
 
@@ -92,7 +92,7 @@ Changing to post and added extra slashed and null character at end.
 
 Created the following file to run the hostname command.
 
-![](<../../.gitbook/assets/image (14) (1) (1) (1) (1) (1) (1) (1).png>)
+![](<../../.gitbook/assets/image (14) (1) (1) (1) (1) (1) (1) (1) (1).png>)
 
 **Kali**
 

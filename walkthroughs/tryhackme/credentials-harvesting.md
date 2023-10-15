@@ -590,7 +590,7 @@ Next, we need to find which AD organizational unit (OU) has the "All extended ri
 Find-AdmPwdExtendedRights -Identity THMorg
 ```
 
-<figure><img src="../../.gitbook/assets/image (25) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (25) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 The output shows that the `THMGroupReader` group in `THMorg` has the right access to LAPS. Let's check the group and its members.
 

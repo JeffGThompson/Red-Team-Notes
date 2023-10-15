@@ -398,7 +398,7 @@ Create a shared object using the code located at /home/user/tools/sudo/preload.c
 sudo LD_PRELOAD=/tmp/preload.so /usr/bin/ftp
 ```
 
-<figure><img src="../../.gitbook/assets/image (31) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (31) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 A root shell should spawn. Exit out of the shell before continuing. Depending on the program you chose, you may need to exit out of this as well.
 
