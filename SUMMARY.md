@@ -131,3 +131,4 @@
     * [Old Madeye's Castle](walkthroughs/tryhackme/madeyes-castle/old-madeyes-castle.md)
   * [Startup](walkthroughs/tryhackme/startup.md)
   * [Overpass](walkthroughs/tryhackme/overpass.md)
+  * [0day](walkthroughs/tryhackme/0day.md)
