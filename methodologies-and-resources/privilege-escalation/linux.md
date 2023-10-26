@@ -29,15 +29,25 @@ Possible other places crons are running
 cat /etc/cron.d/
 ```
 
+### Sudo/SUID/Capabilities <a href="#user-content-sudosuidcapabilities" id="user-content-sudosuidcapabilities"></a>
 
+Run all of these commands then check [https://gtfobins.github.io/](https://gtfobins.github.io/) . They may give different results
 
 **Files with SUID-bit set**
+
+```
+sudo -l
+```
 
 ```
 find / -perm -u=s -type f 2> /dev/null 
 ```
 
-**Files where group permissions equal to "writable"**
+```
+getcap -r / 2>/dev/null
+```
+
+## **Files where group permissions equal to "writable"**
 
 ```
 find / -type f -perm /g=w -exec ls -l {} + 2> /dev/null 
@@ -64,6 +74,14 @@ pacman -Qe # arch linux
 ```
 ss -ltp
 ```
+
+##
+
+```
+getcap -r / 2>/dev/null
+```
+
+##
 
 ## PSPY
 

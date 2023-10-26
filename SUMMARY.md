@@ -132,3 +132,4 @@
   * [Startup](walkthroughs/tryhackme/startup.md)
   * [Overpass](walkthroughs/tryhackme/overpass.md)
   * [0day](walkthroughs/tryhackme/0day.md)
+  * [Mindgames](walkthroughs/tryhackme/mindgames.md)
