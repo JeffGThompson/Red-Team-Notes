@@ -29,7 +29,7 @@ Possible other places crons are running
 cat /etc/cron.d/
 ```
 
-### Sudo/SUID/Capabilities <a href="#user-content-sudosuidcapabilities" id="user-content-sudosuidcapabilities"></a>
+## Sudo/SUID/Capabilities <a href="#user-content-sudosuidcapabilities" id="user-content-sudosuidcapabilities"></a>
 
 Run all of these commands then check [https://gtfobins.github.io/](https://gtfobins.github.io/) . They may give different results
 
@@ -47,7 +47,9 @@ find / -perm -u=s -type f 2> /dev/null
 getcap -r / 2>/dev/null
 ```
 
-## **Files where group permissions equal to "writable"**
+
+
+**Files where group permissions equal to "writable"**
 
 ```
 find / -type f -perm /g=w -exec ls -l {} + 2> /dev/null 
@@ -123,4 +125,8 @@ Copy Material from here:
 | Linux Priv Checker:           | [https://github.com/linted/linuxprivchecker](https://github.com/linted/linuxprivchecker)                                                                                                       |
 
 
+
+## Other Cheat sheets
+
+[https://github.com/RoqueNight/Linux-Privilege-Escalation-Basics](https://github.com/RoqueNight/Linux-Privilege-Escalation-Basics)
 
