@@ -26,6 +26,8 @@
   * [PATH Variables](methodologies-and-resources/cheat-sheets/path-variables.md)
   * [Tunneling and Port Forwarding](methodologies-and-resources/cheat-sheets/tunneling-and-port-forwarding.md)
   * [Full TTYs](methodologies-and-resources/cheat-sheets/full-ttys.md)
+  * [Burp](methodologies-and-resources/cheat-sheets/burp.md)
+  * [Static Binaries](methodologies-and-resources/cheat-sheets/static-binaries.md)
 
 ## Walkthroughs
 
