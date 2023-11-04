@@ -138,3 +138,4 @@
   * [HaskHell](walkthroughs/tryhackme/haskhell.md)
   * [Annie](walkthroughs/tryhackme/annie.md)
   * [ContainMe](walkthroughs/tryhackme/containme.md)
+  * [Develpy](walkthroughs/tryhackme/develpy.md)
