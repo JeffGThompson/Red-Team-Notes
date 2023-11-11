@@ -143,3 +143,4 @@
   * [Develpy](walkthroughs/tryhackme/develpy.md)
   * [Watcher](walkthroughs/tryhackme/watcher.md)
   * [Spring](walkthroughs/tryhackme/spring.md)
+  * [Anonymous](walkthroughs/tryhackme/anonymous.md)

