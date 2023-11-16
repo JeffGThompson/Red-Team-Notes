@@ -144,3 +144,4 @@
   * [Watcher](walkthroughs/tryhackme/watcher.md)
   * [Spring](walkthroughs/tryhackme/spring.md)
   * [Anonymous](walkthroughs/tryhackme/anonymous.md)
+  * [Boiler CTF](walkthroughs/tryhackme/boiler-ctf.md)
