@@ -30,6 +30,7 @@
   * [Full TTYs](methodologies-and-resources/cheat-sheets/full-ttys.md)
   * [Burp](methodologies-and-resources/cheat-sheets/burp.md)
   * [Static Binaries](methodologies-and-resources/cheat-sheets/static-binaries.md)
+  * [Script Abuse](methodologies-and-resources/cheat-sheets/script-abuse.md)
 
 ## Walkthroughs
 
@@ -145,3 +146,4 @@
   * [Spring](walkthroughs/tryhackme/spring.md)
   * [Anonymous](walkthroughs/tryhackme/anonymous.md)
   * [Boiler CTF](walkthroughs/tryhackme/boiler-ctf.md)
+  * [Wonderland](walkthroughs/tryhackme/wonderland.md)
