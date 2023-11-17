@@ -67,7 +67,7 @@ Pass: HowDothTheLittleCrocodileImproveHisShiningTail
 
 <figure><img src="../../.gitbook/assets/image (7).png" alt=""><figcaption></figcaption></figure>
 
-
+## Lateral Movement - Abusing Library path
 
 **Victim**
 
@@ -111,7 +111,7 @@ sudo -u rabbit /usr/bin/python3.6 /home/alice/walrus_and_the_carpenter.py
 
 <figure><img src="../../.gitbook/assets/image (13).png" alt=""><figcaption></figcaption></figure>
 
-### Netcat
+## Lateral Movement - Abusing Paths
 
 **Kali(receiving)**
 
@@ -158,9 +158,7 @@ cat date
 
 <figure><img src="../../.gitbook/assets/image (16).png" alt=""><figcaption></figcaption></figure>
 
-
-
-
+## Privilege Escalation&#x20;
 
 **Victim(hatter)**
 
