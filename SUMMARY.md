@@ -148,3 +148,4 @@
   * [Boiler CTF](walkthroughs/tryhackme/boiler-ctf.md)
   * [Wonderland](walkthroughs/tryhackme/wonderland.md)
   * [Blog](walkthroughs/tryhackme/blog.md)
+  * [Biohazard](walkthroughs/tryhackme/biohazard.md)

@@ -9,7 +9,7 @@
 <pre><code><strong>nmap -A $VICTIM
 </strong></code></pre>
 
-<figure><img src="../../.gitbook/assets/image.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (10).png" alt=""><figcaption></figcaption></figure>
 
 ## Scan all ports
 
@@ -18,7 +18,7 @@
 <pre><code><strong>nmap -sV -sT -O -p 1-65535 $VICTIM
 </strong></code></pre>
 
-<figure><img src="../../.gitbook/assets/image (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1) (16).png" alt=""><figcaption></figcaption></figure>
 
 ## TCP/80 - HTTP
 
@@ -28,11 +28,11 @@
 gobuster dir -u http://$VICTIM -w /usr/share/wordlists/SecLists/Discovery/Web-Content/directory-list-2.3-medium.txt -x php,html,txt
 ```
 
-<figure><img src="../../.gitbook/assets/image (3).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (3) (17).png" alt=""><figcaption></figcaption></figure>
 
 I can see I'm on the right track on the browser
 
-<figure><img src="../../.gitbook/assets/image (5).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (5) (13).png" alt=""><figcaption></figcaption></figure>
 
 **Kali**
 
@@ -40,7 +40,7 @@ I can see I'm on the right track on the browser
 gobuster dir -u http://$VICTIM/r/ -w /usr/share/wordlists/SecLists/Discovery/Web-Content/directory-list-2.3-medium.txt -x php,html,txt
 ```
 
-<figure><img src="../../.gitbook/assets/image (4).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (4) (12).png" alt=""><figcaption></figcaption></figure>
 
 **Kali**
 
@@ -52,9 +52,9 @@ gobuster dir -u http://$VICTIM/r/a -w /usr/share/wordlists/SecLists/Discovery/We
 
 After a few letters I was able to just guess the word it's spelling out
 
-<figure><img src="../../.gitbook/assets/image (2).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (2) (12).png" alt=""><figcaption></figcaption></figure>
 
-<figure><img src="../../.gitbook/assets/image (6).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (6) (12).png" alt=""><figcaption></figcaption></figure>
 
 ## TCP/22 - SSH
 
@@ -65,7 +65,7 @@ ssh alice@$VICTIM
 Pass: HowDothTheLittleCrocodileImproveHisShiningTail
 ```
 
-<figure><img src="../../.gitbook/assets/image (7).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (7) (12).png" alt=""><figcaption></figcaption></figure>
 
 ## Lateral Movement - Abusing Library path
 
@@ -76,7 +76,7 @@ sudo -l
 cat /home/alice/walrus_and_the_carpenter.py
 ```
 
-<figure><img src="../../.gitbook/assets/image (9).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (9) (12).png" alt=""><figcaption></figcaption></figure>
 
 Using the first command we can see the path it follows, we can see the first thing it will try is the current directory so we can make a random.py script of our own and put anything we want in it.
 
@@ -87,7 +87,7 @@ python3 -c 'import sys; print (sys.path)'
 locate random.py
 ```
 
-<figure><img src="../../.gitbook/assets/image (10).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (10) (11).png" alt=""><figcaption></figcaption></figure>
 
 **Victim**
 
