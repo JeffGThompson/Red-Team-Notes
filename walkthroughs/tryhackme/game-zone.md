@@ -27,7 +27,7 @@ Saved the request into a file called request.txt, if you highlight everything an
 
 <figure><img src="../../.gitbook/assets/image (4) (3) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
-<figure><img src="../../.gitbook/assets/image (29) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (29) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 <figure><img src="../../.gitbook/assets/image (6) (3) (2) (1).png" alt=""><figcaption></figcaption></figure>
 
@@ -49,7 +49,7 @@ agent47
 
 post
 
-<figure><img src="../../.gitbook/assets/image (26) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (26) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 
 
@@ -109,7 +109,7 @@ Username: agent47
 Password: videogamer124
 ```
 
-<figure><img src="../../.gitbook/assets/image (28) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (28) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 ### **Privilege Escalation with Metasploit**
 

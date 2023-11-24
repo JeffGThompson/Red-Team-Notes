@@ -30,7 +30,7 @@ No other ports found.
 gobuster dir -u http://$VICTIM -w /usr/share/wordlists/SecLists/Discovery/Web-Content/directory-list-2.3-medium.txt -x php,html,txt
 ```
 
-<figure><img src="../../.gitbook/assets/image (39).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (39) (3).png" alt=""><figcaption></figcaption></figure>
 
 
 
@@ -74,7 +74,7 @@ stty raw -echo;fg
 
 
 
-<figure><img src="../../.gitbook/assets/image (37) (2).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (37) (2) (1).png" alt=""><figcaption></figcaption></figure>
 
 **Victim**
 
@@ -99,7 +99,7 @@ netstat -at
 curl localhost:9001
 ```
 
-<figure><img src="../../.gitbook/assets/image (46).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (46) (2).png" alt=""><figcaption></figcaption></figure>
 
 <figure><img src="../../.gitbook/assets/image (18) (9).png" alt=""><figcaption></figcaption></figure>
 
@@ -142,7 +142,7 @@ ssh -D 9050 apaar@VICTIM
 
 I can now see the webpage from Kali but no login credentials to use.
 
-<figure><img src="../../.gitbook/assets/image (40).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (40) (4).png" alt=""><figcaption></figcaption></figure>
 
 Found credentials for mysql in one of the php files.
 
@@ -170,11 +170,11 @@ SHOW TABLES;
 select * from users;
 ```
 
-<figure><img src="../../.gitbook/assets/image (44).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (44) (4).png" alt=""><figcaption></figcaption></figure>
 
 
 
-<figure><img src="../../.gitbook/assets/image (41).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (41) (1).png" alt=""><figcaption></figcaption></figure>
 
 
 
@@ -184,7 +184,7 @@ select * from users;
 
 Both set of credentials work on the login page, both bring up this page.
 
-<figure><img src="../../.gitbook/assets/image (32) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (32) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 Used no password
 
@@ -205,7 +205,7 @@ zip2john backup.zip > secure_john.txt
 john --wordlist=/usr/share/wordlists/rockyou.txt secure_john.txt 
 ```
 
-<figure><img src="../../.gitbook/assets/image (43) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (43) (1) (3).png" alt=""><figcaption></figcaption></figure>
 
 **Kali**
 
@@ -231,7 +231,7 @@ echo "IWQwbnRLbjB3bVlwQHNzdzByZA==" | base64 -d
 <strong>Password: !d0ntKn0wmYp@ssw0rd
 </strong></code></pre>
 
-<figure><img src="../../.gitbook/assets/image (33) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (33) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 ## **Privilege Escalation**
 
@@ -246,7 +246,7 @@ groups
 docker run -v /:/mnt --rm -it alpine chroot /mnt sh
 ```
 
-<figure><img src="../../.gitbook/assets/image (34) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (34) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 
 

