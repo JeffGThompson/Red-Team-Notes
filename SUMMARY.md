@@ -150,3 +150,4 @@
   * [Blog](walkthroughs/tryhackme/blog.md)
   * [Biohazard](walkthroughs/tryhackme/biohazard.md)
   * [UltraTech](walkthroughs/tryhackme/ultratech.md)
+  * [The Marketplace](walkthroughs/tryhackme/the-marketplace.md)
