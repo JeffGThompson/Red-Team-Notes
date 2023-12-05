@@ -168,6 +168,8 @@ Look at below rooms of docker breakout
 
 [dogcat.md](../../../../walkthroughs/tryhackme/dogcat.md "mention")
 
+[the-marketplace.md](../../../../walkthroughs/tryhackme/the-marketplace.md "mention")
+
 
 
 Copy Material from here:
