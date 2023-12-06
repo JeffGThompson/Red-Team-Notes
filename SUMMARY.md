@@ -151,3 +151,4 @@
   * [Biohazard](walkthroughs/tryhackme/biohazard.md)
   * [UltraTech](walkthroughs/tryhackme/ultratech.md)
   * [The Marketplace](walkthroughs/tryhackme/the-marketplace.md)
+  * [CMesS](walkthroughs/tryhackme/cmess.md)
