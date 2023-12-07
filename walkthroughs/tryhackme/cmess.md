@@ -48,15 +48,17 @@ Mostly junk
 
 ## Fuzzing Domains
 
-rerun next time
+Fuzzed with a long subdomain list then filtered to reduce the amount of results. Only one stands out, dev.&#x20;
 
 **Kali**
 
 ```
 wfuzz -c -f sub-fighter -w /usr/share/wordlists/SecLists/Discovery/DNS/subdomains-top1million-110000.txt -u 'http://cmess.thm/' -H "Host: FUZZ.cmess.thm" > results.txt
+
+grep -v '290 W' results.txt
 ```
 
-
+<figure><img src="../../.gitbook/assets/image (560).png" alt=""><figcaption></figcaption></figure>
 
 
 
