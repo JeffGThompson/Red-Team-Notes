@@ -125,7 +125,7 @@ cat .password.bak
 
 
 
-## TCP/80 - HTTP
+## TCP/21 - SSH
 
 **Kali**
 
