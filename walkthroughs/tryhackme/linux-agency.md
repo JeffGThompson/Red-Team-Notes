@@ -186,21 +186,110 @@ cd /home/mission12/
 chmod +r flag.txt
 cat flag.txt
 
-su mission12
-Password:
+su mission13
+Password: mission13{076124e360406b4c98ecefddd13ddb1f}
 ```
 
 <figure><img src="../../.gitbook/assets/image (576).png" alt=""><figcaption></figcaption></figure>
 
+**Victim(mission13)**
+
+```
+cd /home/mission13/
+cat flag.txt
+echo 'bWlzc2lvbjE0e2Q1OThkZTk1NjM5NTE0Yjk5NDE1MDc2MTdiOWU1NGQyfQo=' | base64 -d
+
+su mission14
+Password: mission14{d598de95639514b9941507617b9e54d2}
+```
+
+<figure><img src="../../.gitbook/assets/image (577).png" alt=""><figcaption></figcaption></figure>
+
+**Victim(mission14)**
+
+```
+cd /home/mission14/
+cat flag.txt
+
+su mission15
+Password: mission15{fc4915d818bfaeff01185c3547f25596}
+```
+
+<figure><img src="../../.gitbook/assets/image (579).png" alt=""><figcaption></figcaption></figure>
 
 
 
+<figure><img src="../../.gitbook/assets/image (578).png" alt=""><figcaption></figcaption></figure>
+
+**Victim(mission15)**
+
+```
+cd /home/mission15/
+cat flag.txt
+
+su mission16
+Password: mission16{884417d40033c4c2091b44d7c26a908e}
+```
 
 
 
+<figure><img src="../../.gitbook/assets/image (580).png" alt=""><figcaption></figcaption></figure>
 
+**Victim(mission16)**
 
+```
+cd /home/mission16/
+chmod flag
+./flag
 
+su mission17
+Password: mission17{49f8d1348a1053e221dfe7ff99f5cbf4}
+```
+
+<figure><img src="../../.gitbook/assets/image (581).png" alt=""><figcaption></figcaption></figure>
+
+**Victim(mission17)**
+
+```
+cd /home/mission17/
+ls
+javac flag.java
+ls
+java flag
+
+su mission18
+Password: mission18{f09760649986b489cda320ab5f7917e8}
+```
+
+<figure><img src="../../.gitbook/assets/image (582).png" alt=""><figcaption></figcaption></figure>
+
+**Victim(mission18)**
+
+```
+cd /home/mission18/
+ls
+ruby flag.rb 
+
+su mission19
+Password: mission19{a0bf41f56b3ac622d808f7a4385254b7}
+```
+
+<figure><img src="../../.gitbook/assets/image (583).png" alt=""><figcaption></figcaption></figure>
+
+**Victim(mission19)**
+
+```
+cd /home/mission19/
+ls
+gcc flag.c
+ls
+./a.out 
+
+su mission20
+Password:  mission20{b0482f9e90c8ad2421bf4353cd8eae1c}
+```
+
+<figure><img src="../../.gitbook/assets/image (584).png" alt=""><figcaption></figcaption></figure>
 
 
 
