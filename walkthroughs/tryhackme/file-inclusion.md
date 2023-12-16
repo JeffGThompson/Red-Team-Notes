@@ -92,7 +92,7 @@ Changing to post and added extra slashed and null character at end.
 
 Created the following file to run the hostname command.
 
-![](<../../.gitbook/assets/image (14) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1).png>)
+![](<../../.gitbook/assets/image (14) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1).png>)
 
 **Kali**
 

@@ -123,7 +123,7 @@ stty raw -echo;fg
 
 There is a backup script that is ran every minute by root which backs up /var/www/html
 
-<figure><img src="../../.gitbook/assets/image (14) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (14) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 <figure><img src="../../.gitbook/assets/image (31) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
