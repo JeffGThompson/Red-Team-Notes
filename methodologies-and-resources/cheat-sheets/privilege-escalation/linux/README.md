@@ -92,10 +92,6 @@ find / -perm -u=s -type f 2> /dev/null
 getcap -r / 2>/dev/null
 ```
 
-
-
-
-
 **Files where group permissions equal to "writable"**
 
 ```
@@ -223,7 +219,9 @@ Copy Material from here:
 
 
 
+## Room with other things to try
 
+[https://jeffgthompsons-organization.gitbook.io/red-team/walkthroughs/tryhackme/linux-privesc](https://jeffgthompsons-organization.gitbook.io/red-team/walkthroughs/tryhackme/linux-privesc)
 
 ## Other Cheat sheets
 
