@@ -154,3 +154,4 @@
   * [CMesS](walkthroughs/tryhackme/cmess.md)
   * [Linux Agency](walkthroughs/tryhackme/linux-agency.md)
   * [Road](walkthroughs/tryhackme/road.md)
+  * [Tokyo Ghoul](walkthroughs/tryhackme/tokyo-ghoul.md)
