@@ -157,3 +157,4 @@
   * [Tokyo Ghoul](walkthroughs/tryhackme/tokyo-ghoul.md)
   * [GoldenEye](walkthroughs/tryhackme/goldeneye.md)
   * [Oh My WebServer](walkthroughs/tryhackme/oh-my-webserver.md)
+  * [HA Joker CTF](walkthroughs/tryhackme/ha-joker-ctf.md)
