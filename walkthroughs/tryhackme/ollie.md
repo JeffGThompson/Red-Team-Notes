@@ -83,7 +83,9 @@ python3 exploit.py  -usr admin -pwd OllieUnixMontgomery! -cmd 'whoami' -url http
 
 
 
+We can run commands from the browser as well.
 
+<figure><img src="../../.gitbook/assets/image (633).png" alt=""><figcaption></figcaption></figure>
 
 
 
