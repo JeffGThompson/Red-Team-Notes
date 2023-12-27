@@ -53,7 +53,7 @@ If LD\_PRELOAD is set try below then running the script we can run with NOPASSWD
 vi preload.c
 ```
 
-<figure><img src="../../../../.gitbook/assets/image (4) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../../.gitbook/assets/image (4) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 **preload.c - code**
 
