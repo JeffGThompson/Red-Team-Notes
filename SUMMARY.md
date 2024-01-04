@@ -159,4 +159,4 @@
   * [Oh My WebServer](walkthroughs/tryhackme/oh-my-webserver.md)
   * [HA Joker CTF](walkthroughs/tryhackme/ha-joker-ctf.md)
   * [Ollie](walkthroughs/tryhackme/ollie.md)
-  * [The Great Escape](walkthroughs/tryhackme/the-great-escape.md)
+  * [Looking Glass](walkthroughs/tryhackme/looking-glass.md)
