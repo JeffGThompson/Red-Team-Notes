@@ -161,4 +161,4 @@
   * [Ollie](walkthroughs/tryhackme/ollie.md)
   * [Looking Glass](walkthroughs/tryhackme/looking-glass.md)
   * [VulnNet](walkthroughs/tryhackme/vulnnet.md)
-  * [LocalPotato](walkthroughs/tryhackme/localpotato.md)
+  * [Olympus](walkthroughs/tryhackme/olympus.md)
