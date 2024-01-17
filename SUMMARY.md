@@ -162,3 +162,4 @@
   * [Looking Glass](walkthroughs/tryhackme/looking-glass.md)
   * [VulnNet](walkthroughs/tryhackme/vulnnet.md)
   * [Olympus](walkthroughs/tryhackme/olympus.md)
+  * [Wekor](walkthroughs/tryhackme/wekor.md)
