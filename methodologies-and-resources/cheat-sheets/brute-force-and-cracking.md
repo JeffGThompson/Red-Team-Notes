@@ -72,9 +72,9 @@ hydra -l $USERNAME -P /usr/share/wordlists/SecLists/Passwords/darkweb2017-top100
 john --wordlist=/usr/share/wordlists/rockyou.txt id_john.txt 
 ```
 
+## Files
 
-
-## Protected Zip Files
+### Protected Zip Files
 
 #### Examples
 
@@ -99,8 +99,6 @@ john --wordlist=/usr/share/wordlists/rockyou.txt secure_john.txt
 /opt/john/rar2john secure.rar > secure_john.txt
 john --wordlist=/usr/share/wordlists/rockyou.txt secure_john.txt
 ```
-
-
 
 
 
