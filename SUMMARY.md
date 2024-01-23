@@ -31,7 +31,7 @@
   * [Burp](methodologies-and-resources/cheat-sheets/burp.md)
   * [Static Binaries](methodologies-and-resources/cheat-sheets/static-binaries.md)
   * [Script Abuse](methodologies-and-resources/cheat-sheets/script-abuse.md)
-  * [Brute force  & Cracking](methodologies-and-resources/cheat-sheets/brute-force-and-cracking.md)
+  * [Credential Gathering & Cracking](methodologies-and-resources/cheat-sheets/credential-gathering-and-cracking.md)
 
 ## Walkthroughs
 
