@@ -165,3 +165,4 @@
   * [Olympus](walkthroughs/tryhackme/olympus.md)
   * [Wekor](walkthroughs/tryhackme/wekor.md)
   * [Bookstore](walkthroughs/tryhackme/bookstore.md)
+  * [biteme](walkthroughs/tryhackme/biteme.md)
