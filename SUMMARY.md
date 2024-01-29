@@ -166,3 +166,4 @@
   * [Wekor](walkthroughs/tryhackme/wekor.md)
   * [Bookstore](walkthroughs/tryhackme/bookstore.md)
   * [biteme](walkthroughs/tryhackme/biteme.md)
+  * [CMSpit](walkthroughs/tryhackme/cmspit.md)
