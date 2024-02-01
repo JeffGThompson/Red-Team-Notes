@@ -1,7 +1,5 @@
 # Credential Gathering & Cracking
 
-Finished at [magician.md](../../walkthroughs/tryhackme/magician.md "mention")
-
 ## Analyzing Hashes
 
 ### Websites
