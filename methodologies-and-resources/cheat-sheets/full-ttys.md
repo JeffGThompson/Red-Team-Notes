@@ -8,6 +8,8 @@
 
 ```
 python -c 'import pty; pty.spawn("/bin/sh")'
+python2 -c 'import pty; pty.spawn("/bin/sh")'
+python3 -c 'import pty; pty.spawn("/bin/sh")'
 echo os.system('/bin/bash')
 /bin/sh -i
 script -qc /bin/bash /dev/null
