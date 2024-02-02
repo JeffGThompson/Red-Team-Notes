@@ -1,8 +1,12 @@
 # Enumeration
 
+## **stopped at skynet**
+
 ## **Scans**
 
 Initial scan
+
+**Kali**
 
 ```
 nmap -A $VICTIM
@@ -10,11 +14,15 @@ nmap -A $VICTIM
 
 Longer scan
 
+**Kali**
+
 ```
 nmap -sV -sT -O -p 1-65535 $VICTIM
 ```
 
 Even longer scan
+
+**Kali**
 
 ```
 nmap -sC -sV -p- $VICTIM
@@ -22,72 +30,115 @@ nmap -sC -sV -p- $VICTIM
 
 ## **Ports**
 
-### TCP/21 - **FTP**
+## TCP/21 - **FTP**
 
-Login (try using anonymous:anonymous, anonymous:password, guest:guest, etc.).
+### **Common Credentials**
+
+#### Usernames
+
+```
+anonymous
+admin
+guest
+```
+
+#### Passwords
+
+```
+anonymous
+password
+guest
+```
+
+### Access FTP
+
+**Kali**
 
 ```
 ftp $VICTIM 21
 ```
 
-List files.
+### List files
+
+**Kali(ftp)**
 
 ```
 ls
 ```
 
-List files (using Curl).
+#### List files (using Curl)
+
+**Kali**
 
 ```
 curl ftp://anonymous:anonymous@$VICTIM:21
 ```
 
+
+
+### Download  files
+
 Change to Binary mode & passive (an important setting if you're uploading/downloading binary files like pictures and/or executables!).
+
+**Kali(ftp)**
 
 ```
 binary
 passive
 ```
 
-Download a file.
+**Kali(ftp)**
 
 ```
-get file.txt
+get $fileName.txt
 ```
 
-Download all files.
+#### Download all files
+
+**Kali(ftp)**
 
 ```
 mget *
 ```
 
-Download all files to the current directory (using Wget).
+#### Download all files to the current directory (using Wget)
+
+**Kali**
 
 ```
 wget -m ftp://anonymous:anonymous@$VICTIM:21 -nd
 ```
 
-Upload a file.
+### Upload files
+
+Change to Binary mode & passive (an important setting if you're uploading/downloading binary files like pictures and/or executables!).
+
+**Kali(ftp)**
+
+```
+binary
+passive
+```
+
+**Kali(ftp)**
 
 ```
 put file.txt
 ```
 
-End a FTP session.
 
-```
-exit
-```
 
 ### **TCP/21 - SSH**
 
-
+**Kali**
 
 ```
-hydra -l root -P /usr/share/wordlists/rockyou.txt  ssh://10.11.12.13
+hydra -l $USERNAME -P /usr/share/wordlists/rockyou.txt  ssh://$VICTIM
 ```
 
 ### **TCP/25 - SMTP**
+
+**Kali**
 
 ```
 telnet $VICTIM25
@@ -96,17 +147,25 @@ VRFY root
 QUIT
 ```
 
-```
-sudo nmap $VICTIM -p25 --script smtp-commands -oN scans/$VICTIM-nmap-scripts-smtp-commands
-```
+**Kali**
 
 ```
-sudo nmap $VICTIM -p25 --script smtp-enum-users --script-args smtp-enum-users.methods={VRFY,EXPN,RCPT} -oN scans/$VICTIM -nmap-scripts-smtp-enum-users
+sudo nmap $VICTIM -p25 --script smtp-commands 
 ```
+
+**Kali**
+
+```
+sudo nmap $VICTIM -p25 --script smtp-enum-users --script-args smtp-enum-users.methods={VRFY,EXPN,RCPT} -
+```
+
+**Kali**
 
 ```
 smtp-user-enum -M VRFY -U /usr/share/wordlists/metasploit/unix_users.txt -t $VICTIM
 ```
+
+**Kali**
 
 ```
 sudo nmap $VICTIM -p25 --script smtp-vuln* -oN scans/mailman-nmap-scripts-smtp-vuln
@@ -139,7 +198,7 @@ ffuf -u http://$VICTIM/cvs/FUZZ.php -w /usr/share/wfuzz/wordlist/general/common.
 **Kali**
 
 ```
-gobuster dir --url http://$VICTIM/static -w /usr/share/dirb/wordlists/big.txt -l
+gobuster dir --url http://$VICTIM/ -w /usr/share/dirb/wordlists/big.txt -l
 ```
 
 **Kali**
@@ -176,13 +235,13 @@ x – Reverse Tuning Options (i.e., include all except specified)
 Scan for misconfigurations.
 
 ```
-nikto -h $VICTIM -T 2 -Format txt -o scans/$VICTIM-nikto-80-misconfig
+nikto -h $VICTIM -T 2 -Format txt 
 ```
 
 Scan for SQL injection vulnerabilities.
 
 ```
-nikto -h $VICTIM -T 9 -Format txt -o scans/$VICTIM-nikto-80-sqli
+nikto -h $VICTIM -T 9 -Format txt 
 ```
 
 Check if the target is vulnerable to Shellshock
@@ -194,7 +253,7 @@ nmap -p 80 $VICTIM --script http-shellshock
 Check if the target is vulnerable to Heartbleed
 
 ```
-nmap -p 443 --script ssl-heartbleed $VICTIM
+nmap -p 443  $VICTIM --script ssl-heartbleed
 ```
 
 
@@ -259,12 +318,25 @@ enum4linux $VICTIM
 
 ### **TCP/445  - SMB**
 
+**List Shares**
+
+**Kali**
+
 ```
-smbclient -L //$VICTIM/ # list shares
-smbclient -L //$VICTIM/ -p $PORT # specify non-standard SMB/Samba port
+smbclient -L //$VICTIM/ 
 ```
 
-Download files with smbclient
+#### List shares on a non-stanadrd SMB/Samba port
+
+**Kali**
+
+```
+smbclient -L //$VICTIM/ -p $PORT 
+```
+
+#### Download files&#x20;
+
+**Kali**
 
 <pre><code><strong>cd loot
 </strong>smbclient \\\\$VICTIM\\$SHARE
@@ -272,30 +344,34 @@ prompt
 mget *
 </code></pre>
 
-The SMB shares discovered have the following permissions.
+? The SMB shares discovered have the following permissions
+
+**Kali**
 
 ```
 smbmap -H $VICTIM
 smbmap -H $VICTIM-P $PORT
 ```
 
-Download files with smbget
+Download files
+
+**Kali**
 
 ```
 smbget -R smb://$VICTIM/$SHARE
 smbget -R smb://$VICTIM:$PORT/$SHARE
 ```
 
-#### Detect Vulnerabilities
+### Detect Vulnerabilities
 
 ```
 # check if vulnerable to EternalBlue
-sudo nmap $VICTIM -p445 --script smb-vuln-ms17-010 -oN scans/$NAME-nmap-scripts-smb-vuln-ms17-010
+sudo nmap $VICTIM -p445 --script smb-vuln-ms17-010 
 ```
 
 ```
 # check if vulnerable to SambaCry
-sudo nmap $VICTIM -p445 --script smb-vuln-cve-2017-7494 --script-args smb-vuln-cve-2017-7494.check-version -oN scans/$NAME-nmap-scripts-smb-vuln-cve-2017-7494
+sudo nmap $VICTIM -p445 --script smb-vuln-cve-2017-7494 --script-args smb-vuln-cve-2017-7494.check-version
 ```
 
 ### **TCP/667 - IRC**
