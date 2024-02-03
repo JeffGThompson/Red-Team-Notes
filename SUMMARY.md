@@ -165,3 +165,4 @@
   * [Bookstore](walkthroughs/tryhackme/bookstore.md)
   * [biteme](walkthroughs/tryhackme/biteme.md)
   * [CMSpit](walkthroughs/tryhackme/cmspit.md)
+  * [Peak Hill](walkthroughs/tryhackme/peak-hill.md)
