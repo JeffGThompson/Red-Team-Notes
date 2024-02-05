@@ -166,3 +166,4 @@
   * [biteme](walkthroughs/tryhackme/biteme.md)
   * [CMSpit](walkthroughs/tryhackme/cmspit.md)
   * [Peak Hill](walkthroughs/tryhackme/peak-hill.md)
+  * [SQHell](walkthroughs/tryhackme/sqhell.md)
