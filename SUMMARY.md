@@ -167,3 +167,4 @@
   * [CMSpit](walkthroughs/tryhackme/cmspit.md)
   * [Peak Hill](walkthroughs/tryhackme/peak-hill.md)
   * [SQHell](walkthroughs/tryhackme/sqhell.md)
+  * [Zeno](walkthroughs/tryhackme/zeno.md)
