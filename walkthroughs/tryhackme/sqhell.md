@@ -2,6 +2,10 @@
 
 **Room Link:** [https://tryhackme.com/room/sqhell](https://tryhackme.com/room/sqhell)
 
+
+
+Put in SQL Injection notes
+
 [https://pencer.io/ctf/ctf-thm-sqhell/#flag-4---out-of-band---browser-method](https://pencer.io/ctf/ctf-thm-sqhell/#flag-4---out-of-band---browser-method)
 
 ## **Scans**
