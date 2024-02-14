@@ -168,3 +168,4 @@
   * [Peak Hill](walkthroughs/tryhackme/peak-hill.md)
   * [SQHell](walkthroughs/tryhackme/sqhell.md)
   * [Zeno](walkthroughs/tryhackme/zeno.md)
+  * [ffuf](walkthroughs/tryhackme/ffuf.md)
