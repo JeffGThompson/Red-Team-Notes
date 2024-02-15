@@ -1,6 +1,6 @@
 # Enumeration
 
-## **stopped at skynet**
+## **stopped at internal**
 
 ## **Scans**
 
