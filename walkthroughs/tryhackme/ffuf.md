@@ -169,9 +169,84 @@ ffuf -u http://$VICTIM/FUZZ -w /usr/share/wordlists/SecLists/Discovery/Web-Conte
 
 <figure><img src="../../.gitbook/assets/image (815).png" alt=""><figcaption></figcaption></figure>
 
+## Fuzzing parameters
+
+What would you do when you find a page or API endpoint but don't know which parameters are accepted? You fuzz!
+
+Discovering a vulnerable parameter could lead to file inclusion, path disclosure, XSS, SQL injection, or even command injection. Since ffuf allows you to put the keyword anywhere we can use it to fuzz for parameters.
+
+**Kali**
+
+```
+ffuf -u http://$VICTIM/sqli-labs/Less-1/?FUZZ=1 -c -w /usr/share/wordlists/SecLists/Discovery/Web-Content/raft-medium-words-lowercase.txt -fw 39
+```
+
+<figure><img src="../../.gitbook/assets/image (816).png" alt=""><figcaption></figcaption></figure>
+
+Now that we found a parameter accepting integer values we'll start fuzzing values.
+
+At this point, we could generate a wordlist and save a file containing integers. To cut out a step we can use `-w -` which tells ffuf to read a wordlist from [stdout](https://www.gnu.org/software/libc/manual/html\_node/Standard-Streams.html). This will allow us to generate a list of integers with a command of our choice then pipe the output to ffuf. Below is a list of 5 different ways to generate numbers 0 - 255.
 
 
 
+### Option #1
+
+**Kali**
+
+```
+ruby -e '(0..255).each{|i| puts i}' | ffuf -u http://$VICTIM/sqli-labs/Less-1/?id=FUZZ -c -w - -fw 33
+```
+
+<figure><img src="../../.gitbook/assets/image (817).png" alt=""><figcaption></figcaption></figure>
+
+### Option #2
+
+**Kali**
+
+```
+ruby -e 'puts (0..255).to_a' | ffuf -u http://$VICTIM/sqli-labs/Less-1/?id=FUZZ -c -w - -fw 33
+```
+
+<figure><img src="../../.gitbook/assets/image (818).png" alt=""><figcaption></figcaption></figure>
+
+### Option #3
+
+**Kali**
+
+```
+for i in {0..255}; do echo $i; done | ffuf -u http://$VICTIM/sqli-labs/Less-1/?id=FUZZ -c -w - -fw 33
+```
+
+<figure><img src="../../.gitbook/assets/image (819).png" alt=""><figcaption></figcaption></figure>
+
+### Option #4
+
+**Kali**
+
+```
+seq 0 255 | ffuf -u http://$VICTIM/sqli-labs/Less-1/?id=FUZZ -c -w - -fw 33
+```
+
+<figure><img src="../../.gitbook/assets/image (820).png" alt=""><figcaption></figcaption></figure>
+
+\
+We can also use ffuf for wordlist-based brute-force attacks, for example, trying passwords on an authentication page.
+
+**Kali**
+
+```
+ffuf -u http://$VICTIM/sqli-labs/Less-11/ -c -w /usr/share/wordlists/SecLists/Passwords/Leaked-Databases/hak5.txt -X POST -d 'uname=Dummy&passwd=FUZZ&submit=Submit' -fs 1435 -H 'Content-Type: application/x-www-form-urlencoded'
+```
+
+<figure><img src="../../.gitbook/assets/image (821).png" alt=""><figcaption></figcaption></figure>
+
+Here we have to use the POST method (specified with `-X`) and to give the POST data (with `-d`) where we include the `FUZZ` keyword in place of the password.
+
+We also have to specify a custom header `-H 'Content-Type: application/x-www-form-urlencoded'` because ffuf doesn't set this content-type header automatically as curl does.
+
+
+
+## Finding vhosts and subdomains
 
 
 
