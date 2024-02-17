@@ -1,6 +1,6 @@
 # Enumeration
 
-## **stopped at internal**
+## **stopped at basic pentesting**
 
 ## **Scans**
 
@@ -192,11 +192,7 @@ sudo nmap $VICTIM -p25 --script smtp-vuln*
 
 Add things from this room: [https://tryhackme.com/room/contentdiscovery](https://tryhackme.com/room/contentdiscovery)
 
-```
-dirb http://$VICTIM
-dirb http://$VICTIM:$PORT/ -o scans/$VICTIM-dirb-$PORT-common
-dirb http://$VICTIM:80 /usr/share/wordlists/dirb/big.txt -z10 -o scans/$NAME-dirb-big-80
-```
+
 
 
 
@@ -208,6 +204,14 @@ This looks for all php files under folder cvs
 
 ```
 ffuf -u http://$VICTIM/cvs/FUZZ.php -w /usr/share/wfuzz/wordlist/general/common.txt
+```
+
+**Kali**
+
+```
+dirb http://$VICTIM/
+dirb http://$VICTIM:$PORT/
+dirb http://$VICTIM:80 /usr/share/wordlists/dirb/big.txt -z10 
 ```
 
 #### Find folders
@@ -317,8 +321,6 @@ python2 -m SimpleHTTPServer 81
 
 ### Wordpress
 
-
-
 #### Scan wordpress site
 
 #### Kali
@@ -343,6 +345,8 @@ wpscan --url http://$VICTIM --passwords /usr/share/wordlists/rockyou.txt
 
 [#jenkins-web](../walkthroughs/tryhackme/internal.md#jenkins-web "mention")
 
+
+
 ## UDP/88 - Kerberos
 
 #### Username Enumeration
@@ -363,6 +367,8 @@ QUIT
 
 ## **TCP/135 - RPC**
 
+**Kali**
+
 ```
 rpcclient -U '' $VICTIM
 srvinfo
@@ -371,18 +377,57 @@ netshareenum # print the real file-path of shares; good for accurate RCE
 
 ## **TCP/139 - NetBIOS**
 
+**Examples**&#x20;
+
+[gatekeeper.md](../walkthroughs/tryhackme/gatekeeper.md "mention")
+
 **Kali**
 
 ```
 nbtscan $VICTIM
+```
+
+**Examples**
+
+[attacktive-directory.md](../walkthroughs/tryhackme/attacktive-directory.md "mention")
+
+**Kali**
+
+```
 enum4linux $VICTIM
 ```
 
-
+##
 
 ## **TCP/445  - SMB**
 
+### Scanning
+
+**Examples**
+
+[basic-pentesting.md](../walkthroughs/tryhackme/basic-pentesting.md "mention")
+
+**Kali**
+
+```
+nmap $VICTIM --script=smb-enum*
+```
+
+### **Common Credentials**
+
+#### Usernames
+
+```
+anonymous
+admin
+guest
+```
+
 ### **List Shares**
+
+**Examples**
+
+[gatekeeper.md](../walkthroughs/tryhackme/gatekeeper.md "mention")[attacktive-directory.md](../walkthroughs/tryhackme/attacktive-directory.md "mention")[basic-pentesting.md](../walkthroughs/tryhackme/basic-pentesting.md "mention")
 
 **Kali**
 
@@ -526,13 +571,29 @@ mysql -u $USER -h $VICTIM
 
 ## **TCP/3389 - RDP**
 
+### **Scan**
+
+**Kali**
+
 ```
 sudo nmap $VICTIM -p3389 --script rdp-ntlm-info 
 ```
 
+### **Login to host**
+
+**Kali**
+
 ```
-rdesktop -u administrator $VICTIM
+rdesktop -u $USERNAME $VICTIM
 ```
+
+**Kali**
+
+```
+xfreerdp /u:$USERNAME /p:$PASSWORD /cert:ignore /v:$VICTIM /workarea  +clipboard
+```
+
+##
 
 ## **TCP/5327 - Postgres**
 
