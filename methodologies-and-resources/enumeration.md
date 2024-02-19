@@ -1,6 +1,6 @@
 # Enumeration
 
-## **stopped at basic pentesting**
+## **Stopped at Mr Robot CTF**
 
 ## **Scans**
 
@@ -188,13 +188,25 @@ sudo nmap $VICTIM -p25 --script smtp-vuln*
 
 [#smtp](cheat-sheets/credential-gathering-and-cracking.md#smtp "mention")
 
+
+
+## **UDP/53 - DNS**
+
+### Find subdomains
+
+**Example**
+
+[#dns-smb-and-snmp](../walkthroughs/tryhackme/enumeration.md#dns-smb-and-snmp "mention")
+
+**Kali**
+
+```
+dig -t AXFR $HOST.thm @$DNSSERVER
+```
+
 ## **TCP/80:443 - HTTP(s)**
 
 Add things from this room: [https://tryhackme.com/room/contentdiscovery](https://tryhackme.com/room/contentdiscovery)
-
-
-
-
 
 ### Find Directories
 
@@ -397,7 +409,25 @@ nbtscan $VICTIM
 enum4linux $VICTIM
 ```
 
-##
+## **UDP/161 - SNMP**
+
+## **Collect Information**
+
+**Examples**
+
+[#dns-smb-and-snmp](../walkthroughs/tryhackme/enumeration.md#dns-smb-and-snmp "mention")
+
+**Kali**
+
+```
+git clone https://gitlab.com/kalilinux/packages/snmpcheck.git
+cd snmpcheck/
+gem install snmp
+chmod +x snmpcheck-1.9.rb
+./snmpcheck-1.9.rb $VICTIM -c $COMMUNITYSTRING
+```
+
+
 
 ## **TCP/445  - SMB**
 
@@ -425,6 +455,8 @@ guest
 
 ### **List Shares**
 
+**Option #1**
+
 **Examples**
 
 [gatekeeper.md](../walkthroughs/tryhackme/gatekeeper.md "mention")[attacktive-directory.md](../walkthroughs/tryhackme/attacktive-directory.md "mention")[basic-pentesting.md](../walkthroughs/tryhackme/basic-pentesting.md "mention")
@@ -437,6 +469,20 @@ smbclient -L //$VICTIM/
 # List shares on a non-standard SMB/Samba port
 smbclient -L //$VICTIM/ -p $PORT 
 ```
+
+**Option #2**&#x20;
+
+**Examples**
+
+[#dns-smb-and-snmp](../walkthroughs/tryhackme/enumeration.md#dns-smb-and-snmp "mention")
+
+**Victim**
+
+```
+net share
+```
+
+
 
 ### Download files&#x20;
 
