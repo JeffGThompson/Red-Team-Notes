@@ -284,9 +284,65 @@ For example, it is possible that you can't find a sub-domain with direct subdoma
 
 Vhost enumeration technique shouldn't be discounted as it may lead to discovering content that wasn't meant to be accessed externally.
 
+## Proxifying ffuf traffic
 
+Whether it' for [network pivoting](https://blog.raw.pm/en/state-of-the-art-of-network-pivoting-in-2019/) or for using BurpSuite plugins you can send all the ffuf traffic through a web proxy (HTTP or SOCKS5).
 
+**Kali**
 
+```
+ffuf -u http://$VICTIM -c -w /usr/share/wordlists/SecLists/Discovery/Web-Content/common.txt -x http://127.0.0.1:8080
+```
 
+It's also possible to send only matches to your proxy for replaying:
 
+**Kali**
 
+```
+ffuf -u http://$VICTIM  -c -w /usr/share/wordlists/SecLists/Discovery/Web-Content/common.txt -replay-proxy http://127.0.0.1:8080
+```
+
+This may be useful if you don't need all the traffic to traverse an upstream proxy and want to minimize resource usage or to avoid polluting your proxy history.
+
+## Reviewing the options
+
+**How do you save the output to a markdown file (ffuf.md)?**
+
+```
+// Some code
+```
+
+**How do you re-use a raw http request file?**
+
+<pre><code><strong>-request
+</strong></code></pre>
+
+**How do you strip comments from a wordlist?**
+
+```
+-ic
+```
+
+**How would you read a wordlist from STDIN?**
+
+```
+-w -
+```
+
+**How do you print full URLs and redirect locations?**
+
+```
+-v
+```
+
+**What option would you use to follow redirects?**
+
+```
+-r
+```
+
+**How do you enable colorized output?**
+
+```
+-c
+```
