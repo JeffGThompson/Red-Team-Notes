@@ -171,6 +171,8 @@ Looking through the returned response, we can see that the first column name (`i
 
 <figure><img src="../../.gitbook/assets/image (830).png" alt=""><figcaption></figcaption></figure>
 
+<figure><img src="../../.gitbook/assets/image.png" alt=""><figcaption></figcaption></figure>
+
 We have successfully pulled the first column name out of the database, but we now have a problem. The page is only displaying the first matching item — we need to see all of the matching items.
 
 Fortunately, we can use our SQLi to group the results. We can still only retrieve one result at a time, but by using the `group_concat()` function, we can amalgamate all of the column names into a single output:\
@@ -187,7 +189,7 @@ Fortunately, we can use our SQLi to group the results. We can still only retriev
 
 This process is shown below:
 
-<figure><img src="../../.gitbook/assets/image (832).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1).png" alt=""><figcaption></figcaption></figure>
 
 We have successfully identified eight columns in this table: `id`, `firstName`, `lastName`, `pfpLink`, `role`, `shortRole`, `bio`, and `notes`.
 
@@ -206,16 +208,4 @@ Let's craft a query to extract this flag:\
 Hey presto, we have a flag!
 
 <figure><img src="../../.gitbook/assets/image (835).png" alt=""><figcaption></figcaption></figure>
-
-
-
-
-
-
-
-
-
-
-
-
 
