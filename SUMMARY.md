@@ -169,3 +169,4 @@
   * [SQHell](walkthroughs/tryhackme/sqhell.md)
   * [Zeno](walkthroughs/tryhackme/zeno.md)
   * [ffuf](walkthroughs/tryhackme/ffuf.md)
+  * [Burp Suite: Repeater](walkthroughs/tryhackme/burp-suite-repeater.md)
