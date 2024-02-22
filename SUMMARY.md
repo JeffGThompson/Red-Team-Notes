@@ -170,3 +170,4 @@
   * [Zeno](walkthroughs/tryhackme/zeno.md)
   * [ffuf](walkthroughs/tryhackme/ffuf.md)
   * [Burp Suite: Repeater](walkthroughs/tryhackme/burp-suite-repeater.md)
+  * [Burp Suite: Intruder](walkthroughs/tryhackme/burp-suite-intruder.md)
