@@ -2,10 +2,6 @@
 
 **Room Link:** [https://tryhackme.com/room/burpsuiteom](https://tryhackme.com/room/burpsuiteom)
 
-
-
-
-
 ## Decoder: Overview
 
 The Decoder module of Burp Suite gives user data manipulation capabilities. As implied by its name, it not only decodes data intercepted during an attack but also provides the function to encode our own data, prepping it for transmission to the target. Decoder also allows us to create hashsums of data, as well as providing a Smart Decode feature, which attempts to decode provided data recursively until it is back to being plaintext (like the "Magic" function of [Cyberchef](https://gchq.github.io/CyberChef/)).
@@ -158,4 +154,83 @@ For example, when performing a login bruteforce or credential stuffing attack wi
     * Password: `w58ySK4W`
 
     Send the request again, then pass the new response to Comparer.
+
+## Sequencer: Overview
+
+Sequencer allows us to evaluate the entropy, or randomness, of "tokens". Tokens are strings used to identify something and should ideally be generated in a cryptographically secure manner. These tokens could be session cookies or **C**ross-**S**ite **R**equest **F**orgery (CSRF) tokens used to protect form submissions. If these tokens aren't generated securely, then, in theory, we could predict upcoming token values. The implications could be substantial, for instance, if the token in question is used for password resets.
+
+Let's start by looking at the Sequencer interface:
+
+![](https://tryhackme-images.s3.amazonaws.com/user-uploads/645b19f5d5848d004ab9c9e2/room-content/dab1d10ba6ae4740453d593706cff315.png)
+
+We have two main ways to perform token analysis with Sequencer:
+
+* **Live Capture**: This is the more common method and is the default sub-tab for Sequencer. Live capture lets us pass a request that will generate a token to Sequencer for analysis. For instance, we might want to pass a POST request to a login endpoint to Sequencer, knowing that the server will respond with a cookie. With the request passed in, we can instruct Sequencer to start a live capture. It will then automatically make the same request thousands of times, storing the generated token samples for analysis. After collecting enough samples, we stop the Sequencer and allow it to analyze the captured tokens.
+* **Manual Load**: This allows us to load a list of pre-generated token samples directly into Sequencer for analysis. Using Manual Load means we don't need to make thousands of requests to our target, which can be noisy and resource-intensive. However, it does require that we have a large list of pre-generated tokens.
+
+We will be focusing on live captures in this room.
+
+## Sequencer: Live Capture
+
+Great, let's dive into the process of using the Sequencer's live capture for entropy analysis on the anti-bruteforce token used in the admin login form.
+
+First, capture a request to `http://10.10.5.41/admin/login/` in the Proxy. Right-click on the request and select Send to Sequencer.
+
+In the "Token Location Within Response" section, we can select between Cookie, Form field, and Custom location. Since we're testing the loginToken in this case, select the "Form field" radio button and choose the loginToken from the dropdown menu:
+
+![](https://tryhackme-images.s3.amazonaws.com/user-uploads/5d9e176315f8850e719252ed/room-content/9bb4ea43eb0acb59dee493699d336930.png)
+
+In this situation, we can safely leave all other options at their default values. So, click on the Start live capture button.
+
+A new window will pop up indicating that a live capture is in progress and displaying the number of tokens captured so far. Wait until a sufficient number of tokens are captured (approximately 10,000 should suffice); the more tokens we have, the more precise our analysis will be.
+
+Once around 10,000 tokens are captured, click on Pause and then select the Analyze now button:
+
+![](https://tryhackme-images.s3.amazonaws.com/user-uploads/5d9e176315f8850e719252ed/room-content/715caf9a950bdd3a3c9ec4a5360ae9ca.png)
+
+It's important to note that we could have also chosen to Stop the capture. However, by opting to pause, we keep the option to resume the capture later if the report doesn't have enough samples to accurately calculate the token's entropy.
+
+If we wished for periodic updates on the analysis, we could have also selected the "Auto analyze" checkbox. This option tells Burp to perform the entropy analysis after every 2000 requests, providing frequent updates that will become increasingly accurate as more samples are loaded into Sequencer.
+
+At this point, it's also worth noting that we could choose to copy or save the captured tokens for further analysis at a later time.
+
+Upon clicking the Analyze now button, Burp will analyze the token's entropy and generate a report.
+
+## Sequencer: Analysis
+
+Now that we have a report for the entropy analysis of our token, it's time to analyze it!
+
+The generated entropy analysis report is split into four primary sections. The first of these is the **Summary** of the results. The summary gives us the following:
+
+![](https://tryhackme-images.s3.amazonaws.com/user-uploads/645b19f5d5848d004ab9c9e2/room-content/ff780f0e74d75191ea4945dbe7794a29.png)
+
+* **Overall result**: This gives a broad assessment of the security of the token generation mechanism. In this case, the level of entropy indicates that the tokens are likely securely generated.
+* **Effective entropy**: This measures the randomness of the tokens. The effective entropy of 117 bits is relatively high, indicating that the tokens are sufficiently random and, therefore, secure against prediction or brute force attacks.
+* **Reliability**: The significance level of 1% implies that there is 99% confidence in the accuracy of the results. This level of confidence is quite high, providing assurance in the accuracy of the effective entropy estimation.
+* **Sample**: This provides details about the token samples analyzed during the entropy testing process, including the number of tokens and their characteristics.
+
+While the summary report often provides enough information to assess the security of the token generation process, it's important to remember that further investigation may be necessary in some cases. The character-level and bit-level analysis can provide more detailed insights into the randomness of the tokens, especially when the summary results raise potential concerns.
+
+While the entropy report can provide a strong indicator of the security of the token generation mechanism, there needs to be more definitive proof. Other factors could also impact the security of the tokens, and the nature of probability and statistics means there's always a degree of uncertainty. That said, an effective entropy of 117 bits with a significance level of 1% suggests a robustly secure token generation process.
+
+## Organizer: Overview
+
+The Organizer module of Burp Suite is designed to help you store and annotate copies of HTTP requests that you may want to revisit later. This tool can be particularly useful for organizing your penetration testing workflow. Here are some of its key features:
+
+* You can store requests that you want to investigate later, save requests that you've already identified as interesting, or save requests that you want to add to a report later.
+*   You can send HTTP requests to Burp Organizer from other Burp Modules such as **Proxy** or **Repeater**. You can do this by right-clicking the request and selecting **Send to Organizer** or using the default hotkey `Ctrl + O`. Each HTTP request that you send to Organizer is a read-only copy of the original request saved at the point you sent it to Organizer.
+
+    ![](https://tryhackme-images.s3.amazonaws.com/user-uploads/645b19f5d5848d004ab9c9e2/room-content/7551e6fcdd971342784281037dfc1b15.png)
+*   Requests are stored in a table, which contains columns such as the request index number, the time the request was made, workflow status, Burp tool that the request was sent from, HTTP method, server hostname, URL file path, URL query string, number of parameters in the request, HTTP status code of the response, length of the response in bytes, and any notes that you have made.
+
+    ![](https://tryhackme-images.s3.amazonaws.com/user-uploads/645b19f5d5848d004ab9c9e2/room-content/955bb17bde53aa6805d2db5ae2e83193.png)
+
+To view the request and response:
+
+1. Click on any Organizer item.
+2.  The request and response are both read-only. You can search within the request or response, select the request, and then use the search bar below the request.
+
+    ![](https://tryhackme-images.s3.amazonaws.com/user-uploads/645b19f5d5848d004ab9c9e2/room-content/1c64258009c23f8b89572955256a0723.png)
+
+
 
