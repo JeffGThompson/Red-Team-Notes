@@ -172,3 +172,4 @@
   * [Burp Suite: Repeater](walkthroughs/tryhackme/burp-suite-repeater.md)
   * [Burp Suite: Intruder](walkthroughs/tryhackme/burp-suite-intruder.md)
   * [Burp Suite: Other Modules](walkthroughs/tryhackme/burp-suite-other-modules.md)
+  * [Burp Suite: Extensions](walkthroughs/tryhackme/burp-suite-extensions.md)
