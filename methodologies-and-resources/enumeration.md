@@ -1,6 +1,6 @@
 # Enumeration
 
-## **Stopped at Mr Robot CTF**
+## **Stopped at** Breaching Active Directory
 
 ## **Scans**
 
@@ -454,6 +454,18 @@ gem install snmp
 chmod +x snmpcheck-1.9.rb
 ./snmpcheck-1.9.rb $VICTIM -c $COMMUNITYSTRING
 ```
+
+## **TCP/389 - LDAP**
+
+### Breaching Active Directory
+
+A lot of info. Just read through [#breaching-active-directory](enumeration.md#breaching-active-directory "mention")
+
+**Examples**
+
+[breaching-active-directory.md](../walkthroughs/tryhackme/breaching-active-directory.md "mention")
+
+
 
 
 
