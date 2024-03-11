@@ -174,3 +174,4 @@
   * [Burp Suite: Other Modules](walkthroughs/tryhackme/burp-suite-other-modules.md)
   * [Burp Suite: Extensions](walkthroughs/tryhackme/burp-suite-extensions.md)
   * [Linux PrivEsc Arena](walkthroughs/tryhackme/linux-privesc-arena.md)
+  * [tomghost](walkthroughs/tryhackme/tomghost.md)
