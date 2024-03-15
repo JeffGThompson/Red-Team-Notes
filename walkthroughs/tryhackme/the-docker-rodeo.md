@@ -162,15 +162,128 @@ curl -X GET http://docker-rodeo.thm:7000/v2/securesolutions/webserver/manifests/
 
 <figure><img src="../../.gitbook/assets/image (5).png" alt=""><figcaption></figcaption></figure>
 
+## Vulnerability #2: Reverse Engineering Docker Images
+
+We'll be following on from the previous vulnerability outlined in Task 3. "Abusing a Docker Registry".\
+As we've discovered, we are able to query the Docker registry and the data contained within without needing to authenticate. \
+Not only can we query Docker registries, but a fundamental feature of Docker is being able to download these repositories for someone to use themselves. This is known as an image; tools such as [Dive ](https://github.com/wagoodman/dive)to reverse engineer these images that we download.\
+Without doing it justice, [Dive](https://github.com/wagoodman/dive) acts as a man-in-the-middle between ourselves and Docker when we use it to run a container. Dive monitors and reassembles how each layer is created and the containers file system at each stage.\
+We'll start off with an example. Let's download a Docker image from our vulnerable repository and starting _diving_ in. \
+4.1. [Install Dive](https://github.com/wagoodman/dive#installation) from their official GitHub
+
+**Kali**
+
+```
+DIVE_VERSION=$(curl -sL "https://api.github.com/repos/wagoodman/dive/releases/latest" | grep '"tag_name":' | sed -E 's/.*"v([^"]+)".*/\1/')
+curl -OL https://github.com/wagoodman/dive/releases/download/v${DIVE_VERSION}/dive_${DIVE_VERSION}_linux_amd64.deb
+sudo apt install ./dive_${DIVE_VERSION}_linux_amd64.deb
+```
+
+\
+4.2. Download the Docker image we are going to decompile using
+
+**Kali**
+
+```
+docker pull docker-rodeo.thm:5000/dive/example
+```
+
+&#x20;\
+Note: If you receive this warning:`Error response from daemon: Get https://docker-rodeo.thm:5000/v2/: http: server gave HTTP response to HTTPS client`you need to revisit Step 1 in the first task of this room and then restart your Computer to ensure Docker has properly restarted.\
+
+
+<div align="center">
+
+<img src="https://resources.cmnatic.co.uk/TryHackMe/rooms/docker-rodeo/reversedockerimages/pullerror.png" alt="">
+
+</div>
+
+\
+4.3. Find the IMAGE\_ID of the repository image that we have downloaded in Step 2:4.3.1. run `docker images` and look for the name of the repository we downloaded `docker-rodeo.thm:5000/dive/example`4.3.2. The "IMAGE\_ID" is the value in the third column:
 
 
 
+**Kali**
+
+```
+docker images
+```
+
+<figure><img src="https://resources.cmnatic.co.uk/TryHackMe/rooms/docker-rodeo/reversedockerimages/diveexample-id.png" alt=""><figcaption></figcaption></figure>
+
+In this case, it is "_398736241322"_ for me.4.4 Start dive by running `dive` and provide the "IMAGE\_ID" of the image we want to decompile. For example:&#x20;
+
+**Kali**
+
+```
+dive 398736241322
+```
+
+![](https://resources.cmnatic.co.uk/TryHackMe/rooms/docker-rodeo/reversedockerimages/using-dive.png)\
+\
+4.5. Using DiveDive is a little overwhelming at first, however, it quickly makes sense. We have four different views, we are only interested in these three views:4.5.1. Layers (pictured in red)4.5.1.1. This window shows the various layers and stages the docker container has gone through4.6.1. Current Layer Contents (pictured in green)4.6.1.1. This window shows you the contents of the container's filesystem at the selected layer4.7.1. Layer Details (pictured in red)4.7.1.1. Shows miscellaneous information such as the ID of the layer and any command executed in the Dockerfile for that layer.\
 
 
+![](https://resources.cmnatic.co.uk/TryHackMe/rooms/docker-rodeo/reversedockerimages/using-dive2.png)
+
+* Navigate the data within the current window using the "Up" and "Down" Arrow-keys.
+* You can swap between the Windows using the "Tab" key.\
 
 
+\
+4.8. Disassembling Our First Image in DiveLooking at the "Layers" window in the top-left, we can see a total of 7 individual layers\
+\
+\
+Note how we can see the commands executed by the container when the image is being built in the "Layers" panel.\
+For example, take a look at the first layer then press the "Tab" key to switch windows and scroll down (using the arrow keys) to the "home" directory in "Current Layer Contents" and then press the "Tab" key again to switch back to the "Layers" window.\
 
 
+<figure><img src="https://resources.cmnatic.co.uk/TryHackMe/rooms/docker-rodeo/reversedockerimages/using-dive3.png" alt=""><figcaption></figcaption></figure>
+
+<div align="center">
+
+<img src="https://resources.cmnatic.co.uk/TryHackMe/rooms/docker-rodeo/reversedockerimages/using-dive4.png" alt="">
+
+</div>
+
+\
+At the 1st layer, there is nothing located in "/home" (highlighted in green in the above screenshot) on the container. However, if we were to proceed to the 2nd layer, the command `mkdir -p /home/user` is executed, and now we can see the directory "/home/user" (highlighted in red) has now been made on the container.\
 
 
+![](https://resources.cmnatic.co.uk/TryHackMe/rooms/docker-rodeo/reversedockerimages/using-dive5.png)
 
+4.9. ChallengePull the challenge image using
+
+**Kali**
+
+```
+docker pull docker-rodeo.thm:5000/dive/challenge
+```
+
+&#x20;and apply what we have done above for the questions below.\
+\
+Remember! You will need to use `docker images` to get the "IMAGE\_ID" for the new image and use that with the `dive` command.
+
+**What is the "IMAGE\_ID" for the "challenge" Docker image that you just downloaded?**
+
+**Kali**
+
+```
+docker images
+```
+
+<figure><img src="../../.gitbook/assets/image (859).png" alt=""><figcaption></figcaption></figure>
+
+**Using Dive, how many "Layers" are there in this image?**
+
+**Kali**
+
+```
+dive 2a0a63ea5d88
+```
+
+<figure><img src="../../.gitbook/assets/image (860).png" alt=""><figcaption></figcaption></figure>
+
+**What user is successfully added?**
+
+<figure><img src="../../.gitbook/assets/image (861).png" alt=""><figcaption></figcaption></figure>
