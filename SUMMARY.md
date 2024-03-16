@@ -176,3 +176,4 @@
   * [Linux PrivEsc Arena](walkthroughs/tryhackme/linux-privesc-arena.md)
   * [tomghost](walkthroughs/tryhackme/tomghost.md)
   * [The Docker Rodeo](walkthroughs/tryhackme/the-docker-rodeo.md)
+  * [Empline](walkthroughs/tryhackme/empline.md)
