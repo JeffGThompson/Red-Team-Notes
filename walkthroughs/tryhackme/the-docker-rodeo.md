@@ -495,9 +495,85 @@ We are essentially mounting the hosts "/" directory to the "/mnt" dir in a new c
 
 </div>
 
+## Vulnerability #6: Shared Namespaces
+
+Let's backpedal a little bit...
+
+I purposefully waited until this stage to show you exactly how Docker "isolates" containers from one another. Let's bring back our trusty diagram that demonstrates how containers run on the operating system.
+
+![](https://assets.tryhackme.com/additional/docker-rodeo/namespaces/docker-containers.png)
+
+As you would have discovered during this room,  containers have networking capabilities and their own file storage...I mean we have previously used SSH to connect to the container into them and there were files present! They achieve this by using three components of the Linux kernel:
+
+* Namespaces
+* Cgroups
+* OverlayFS
+
+But we're only going to be interested in namespaces here, after all, they lay at the heart of it. Namespaces essentially segregate system resources such as processes, files and memory away from other namespaces.\
+
+
+Every process running on Linux will be assigned two things:\
+
+
+* A namespace
+* A process identifier (PID)
+
+Namespaces are how containerization is achieved! Processes can only "see" the process that is in the same namespace - no conflicts in theory. Take Docker for example, every new container will be running as a new namespace, although the container may be running multiple applications (and in turn, processes).
+
+Let's prove the concept of containerisation by comparing the number of processes there are in a Docker container that is running a webserver versus host operating system at the time:\
+
+
+![](https://assets.tryhackme.com/additional/docker-rodeo/namespaces/ps1.png)
+
+Note some useful information highlighted in red. On the very left we can see system user the process is running as then the processes number. There are a few more columns that aren't worth explaining for this task. But notice in the last column, the command that is running. I've highlighted a Docker command running, and an instance of Google Chrome running. You can see I have a considerable amount of processes running.
+
+Let's list the processes running in our Docker container using `ps aux` It's important to note that we only have 6 processes running. This difference is a great indicator that we're in a container.
+
+![](https://assets.tryhackme.com/additional/docker-rodeo/namespaces/ps2.png)
+
+Here's why it matters to us:\
+
+
+Put simply, the process with an ID of 0 is the process that is started when the system boots. Processes numbers increment and must be started by another process, so naturally, the next process ID will be #1. This process is the systems `init` , for example, the latest versions of Ubuntu use `systemd`. Any other process that runs will be controlled by `systemd` (process #1).
+
+We can use process #1's namespace on an operating system to escalate our privileges. Whilst containers are designed to use these namespaces to isolate from another, they can instead, coincide with the host computers processes, rather than isolated from...this gives us a nice opportunity to escape!
+
+8.3. Getting started
+
+This vulnerability generally relies on having root permissions to the container already so that the container is exposed to namespaces on the host.&#x20;
+
+Connect to your Instance using SSH with the following details:
+
+New Instance IP: MACHINE\_IP
+
+SSH Port: 2244
+
+Username: root
+
+Password: danny
+
+8.4. Our exploit here is simple...
+
+We can confirm that the container we're connected to in namespaces of the host by using `ps aux`. Remember how we were only expecting a couple of entries? Now we can see the whole systems process...
+
+![](https://assets.tryhackme.com/additional/docker-rodeo/namespaces/esc1.png)
+
+The exploit here is actually rather trivial, but I'll digress nonetheless. We'll be invoking the [nsenter](https://man7.org/linux/man-pages/man1/nsenter.1.html) command. To summarise, this command allows you to execute start processes and place them within the same namespace as another process.&#x20;
 
 
 
+| <p>Use the following exploit: <code>nsenter --target 1 --mount sh</code> which does the following:</p><p><br></p><p>1. We use the <code>--target</code> switch with the value of "1" to execute our shell command that we later provide to execute in the namespace of the special system process ID, to get ultimate root!</p><p>2. Specifying <code>--mount</code> this is where we provide the mount namespace of the process that we are targeting. <em>"If no file is specified, enter the mount namespace of the target process."</em> <a href="https://man7.org/linux/man-pages/man1/nsenter.1.html">(Man.org., 2013)</a></p><p>3. As we are targeting  the "/sbin/init" process #1 (although it's actually a symbolic link to "lib/systemd/systemd" for backwards-compatibility), we are using the namespace and permissions of the <a href="https://www.freedesktop.org/wiki/Software/systemd/">systemd </a>daemon for our new process (the shell)     </p><p>4. Here's where our process that will be executed into this privileged namespace: <code>sh</code> or a shell. This will execute in the same namespace (and therefore privileges of) the kernel.</p> |
+| -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+
+\
+![](https://assets.tryhackme.com/additional/docker-rodeo/namespaces/esc2.png)
+
+You may need to "Ctrl + C" to cancel the exploit once or twice for this vulnerability to work, but as you can see below, we have escaped the docker container can look around the host OS (showing the change in hostname)
+
+Remembering that our exploit is as follows: `nsenter --target 1 --mount sh`\
+
+
+![](https://assets.tryhackme.com/additional/docker-rodeo/namespaces/fin.png)
 
 
 
