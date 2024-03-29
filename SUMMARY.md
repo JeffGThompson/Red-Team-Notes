@@ -177,3 +177,4 @@
   * [tomghost](walkthroughs/tryhackme/tomghost.md)
   * [The Docker Rodeo](walkthroughs/tryhackme/the-docker-rodeo.md)
   * [Empline](walkthroughs/tryhackme/empline.md)
+  * [The Great Escape](walkthroughs/tryhackme/the-great-escape.md)

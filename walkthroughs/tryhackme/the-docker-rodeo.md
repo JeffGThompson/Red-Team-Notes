@@ -122,7 +122,7 @@ Note the response - specifically the "history" key;  albeit slightly hard to rea
 sudo nmap -sV $VICTIM
 ```
 
-<figure><img src="../../.gitbook/assets/image (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 **What is the name of the repository within this registry?**
 
@@ -132,7 +132,7 @@ sudo nmap -sV $VICTIM
 curl -X GET http://docker-rodeo.thm:7000/v2/_catalog
 ```
 
-<figure><img src="../../.gitbook/assets/image (2) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (2) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 **What is the name of the tag that has been published?**
 
@@ -142,7 +142,7 @@ curl -X GET http://docker-rodeo.thm:7000/v2/_catalog
 curl -X GET http://docker-rodeo.thm:7000/v2/securesolutions/webserver/tags/list
 ```
 
-<figure><img src="../../.gitbook/assets/image (3) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (3) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 **What is the Username in the database configuration?**
 
@@ -152,7 +152,7 @@ curl -X GET http://docker-rodeo.thm:7000/v2/securesolutions/webserver/tags/list
 curl -X GET http://docker-rodeo.thm:7000/v2/securesolutions/webserver/manifests/production
 ```
 
-<figure><img src="../../.gitbook/assets/image (4) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (4) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 **What is the Password in the database configuration?**
 
@@ -162,7 +162,7 @@ curl -X GET http://docker-rodeo.thm:7000/v2/securesolutions/webserver/manifests/
 curl -X GET http://docker-rodeo.thm:7000/v2/securesolutions/webserver/manifests/production
 ```
 
-<figure><img src="../../.gitbook/assets/image (5) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (5) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 ## Vulnerability #2: Reverse Engineering Docker Images
 
