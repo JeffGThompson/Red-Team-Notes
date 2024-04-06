@@ -215,6 +215,8 @@ http://$VICTIM/robots.txt
 http://$VICTIM/sitemap.xml
 ```
 
+
+
 ### Find Directories
 
 This looks for all php files under folder cvs
@@ -233,7 +235,15 @@ dirb http://$VICTIM:$PORT/
 dirb http://$VICTIM:80 /usr/share/wordlists/dirb/big.txt -z10 
 ```
 
-### Find folders
+
+
+### Find Pages
+
+**Kali**
+
+```
+gobuster dir -u http://$VICTIM -w /usr/share/wordlists/SecLists/Discovery/Web-Content/directory-list-2.3-medium.txt -x php,html,txt
+```
 
 **Kali**
 
