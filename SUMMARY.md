@@ -30,6 +30,7 @@
   * [Static Binaries](methodologies-and-resources/cheat-sheets/static-binaries.md)
   * [Script Abuse](methodologies-and-resources/cheat-sheets/script-abuse.md)
   * [Credential Gathering & Cracking](methodologies-and-resources/cheat-sheets/credential-gathering-and-cracking.md)
+  * [Other Cheat sheets](methodologies-and-resources/cheat-sheets/other-cheat-sheets.md)
 
 ## Walkthroughs
 
