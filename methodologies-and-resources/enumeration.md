@@ -1,6 +1,6 @@
 # Enumeration
 
-## **Stopped at** ToolsRus
+## **Stopped at** Blaster
 
 ## **Scans**
 
@@ -434,9 +434,13 @@ kerbrute/dist/kerbrute_linux_386 userenum --dc=$VICTIM -d=$commonName $ListOfUse
 telnet $VICTIM 110
 USER root
 PASS root
-RETR 1
+RETR 1 #change number for each available message
 QUIT
 ```
+
+### Check this page for cracking examples
+
+[#pop3](cheat-sheets/credential-gathering-and-cracking.md#pop3 "mention")
 
 ## **TCP/135 - RPC**
 
@@ -720,7 +724,7 @@ rdesktop -u $USERNAME $VICTIM
 
 **Examples**
 
-[retro.md](../walkthroughs/tryhackme/retro.md "mention")
+[retro.md](../walkthroughs/tryhackme/retro.md "mention")[blaster.md](../walkthroughs/tryhackme/blaster.md "mention")
 
 **Kali**
 
@@ -728,7 +732,12 @@ rdesktop -u $USERNAME $VICTIM
 xfreerdp /u:$USERNAME /p:$PASSWORD /cert:ignore /v:$VICTIM /workarea  +clipboard
 ```
 
-##
+**Kali**
+
+```
+xfreerdp +clipboard /u:"$USERNAME" /v:$VICTIM:3389 /size:1024x568 /smart-sizing:800x1200
+Password: $PASSWORD 
+```
 
 ## **TCP/5327 - Postgres**
 
