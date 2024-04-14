@@ -181,3 +181,4 @@
   * [The Great Escape](walkthroughs/tryhackme/the-great-escape.md)
   * [VulnNet: Active](walkthroughs/tryhackme/vulnnet-active.md)
   * [battery](walkthroughs/tryhackme/battery.md)
+  * [Hip Flask](walkthroughs/tryhackme/hip-flask.md)
