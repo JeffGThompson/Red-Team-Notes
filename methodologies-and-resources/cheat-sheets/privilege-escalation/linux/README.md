@@ -244,6 +244,26 @@ id
 
 
 
+## PolKit
+
+**Examples:** [hip-flask.md](../../../../walkthroughs/tryhackme/hip-flask.md "mention")
+
+See if it exists.
+
+**Kali**
+
+```
+apt list --upgradeable
+```
+
+<figure><img src="../../../../.gitbook/assets/image (921).png" alt=""><figcaption></figcaption></figure>
+
+Check out this room for more details
+
+{% embed url="https://tryhackme.com/r/room/polkit" %}
+
+##
+
 ## Monitor Processes
 
 ### PSPY

