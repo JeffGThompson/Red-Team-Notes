@@ -182,3 +182,4 @@
   * [VulnNet: Active](walkthroughs/tryhackme/vulnnet-active.md)
   * [battery](walkthroughs/tryhackme/battery.md)
   * [Hip Flask](walkthroughs/tryhackme/hip-flask.md)
+  * [TryHack3M: Bricks Heist](walkthroughs/tryhackme/tryhack3m-bricks-heist.md)
