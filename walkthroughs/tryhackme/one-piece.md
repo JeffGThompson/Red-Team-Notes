@@ -2,8 +2,6 @@
 
 **Room Link:** [https://tryhackme.com/r/room/ctfonepiece65](https://tryhackme.com/r/room/ctfonepiece65)
 
-
-
 ## **Scans** <a href="#scans" id="scans"></a>
 
 Initial scan
@@ -287,6 +285,8 @@ ssh 7uffy_vs_T3@ch@$VICTIM
 Password: Wh0_w1ll_b3_th3_k1ng?
 ```
 
+## **Privilege Escalation**&#x20;
+
 **Victim**
 
 ```
@@ -311,8 +311,3 @@ sudo less /etc/profile
 ```
 
 <figure><img src="../../.gitbook/assets/image (965).png" alt=""><figcaption></figcaption></figure>
-
-
-
-
-
