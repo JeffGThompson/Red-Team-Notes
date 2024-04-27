@@ -184,3 +184,4 @@
   * [Hip Flask](walkthroughs/tryhackme/hip-flask.md)
   * [TryHack3M: Bricks Heist](walkthroughs/tryhackme/tryhack3m-bricks-heist.md)
   * [One Piece](walkthroughs/tryhackme/one-piece.md)
+  * [Inferno](walkthroughs/tryhackme/inferno.md)
