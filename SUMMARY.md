@@ -187,3 +187,4 @@
   * [Inferno](walkthroughs/tryhackme/inferno.md)
   * [Kitty](walkthroughs/tryhackme/kitty.md)
   * [AVenger](walkthroughs/tryhackme/avenger.md)
+  * [Umbrella](walkthroughs/tryhackme/umbrella.md)
