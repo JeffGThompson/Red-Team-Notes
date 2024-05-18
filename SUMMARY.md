@@ -189,3 +189,4 @@
   * [AVenger](walkthroughs/tryhackme/avenger.md)
   * [Umbrella](walkthroughs/tryhackme/umbrella.md)
   * [Stealth](walkthroughs/tryhackme/stealth.md)
+  * [Athena](walkthroughs/tryhackme/athena.md)
