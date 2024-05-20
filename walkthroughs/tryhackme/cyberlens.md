@@ -59,6 +59,10 @@ ffuf -u http://cyberlens.thm:61777/FUZZ -w /usr/share/wordlists/SecLists/Discove
 
 <figure><img src="../../.gitbook/assets/image (1048).png" alt=""><figcaption></figcaption></figure>
 
+The other web server is running Tika 1.17 which has a command injection exploit.
+
+<figure><img src="../../.gitbook/assets/image.png" alt=""><figcaption></figcaption></figure>
+
 ## Initial Shell
 
 **Kali**
@@ -170,6 +174,3 @@ msiexec /quiet /qn /i C:\temp\shell.msi
 ```
 
 <figure><img src="../../.gitbook/assets/image (1052).png" alt=""><figcaption></figcaption></figure>
-
-
-
