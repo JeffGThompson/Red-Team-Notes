@@ -192,3 +192,4 @@
   * [Athena](walkthroughs/tryhackme/athena.md)
   * [Napping](walkthroughs/tryhackme/napping.md)
   * [CyberLens](walkthroughs/tryhackme/cyberlens.md)
+  * [Obscure](walkthroughs/tryhackme/obscure.md)
