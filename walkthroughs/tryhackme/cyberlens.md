@@ -61,7 +61,7 @@ ffuf -u http://cyberlens.thm:61777/FUZZ -w /usr/share/wordlists/SecLists/Discove
 
 The other web server is running Tika 1.17 which has a command injection exploit.
 
-<figure><img src="../../.gitbook/assets/image.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (20).png" alt=""><figcaption></figcaption></figure>
 
 ## Initial Shell
 
