@@ -28,8 +28,6 @@ No other ports found
 
 
 
-
-
 ### TCP/80 - HTTP
 
 gobuster didn't find anything and the home page was just the default ubuntu page. Couldn't find anything of interest.
@@ -42,7 +40,7 @@ gobuster dir -u http://$VICTIM -w /usr/share/wordlists/SecLists/Discovery/Web-Co
 
 <figure><img src="../../.gitbook/assets/image (202).png" alt=""><figcaption></figcaption></figure>
 
-### TCP/445 - SMB
+## TCP/445 - SMB
 
 **Kali**
 
@@ -139,8 +137,6 @@ Just get flag
 LFILE=/root/root.txt
 sudo iconv -f 8859_1 -t 8859_1 "$LFILE"
 ```
-
-
 
 
 

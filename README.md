@@ -1,8 +1,22 @@
 # About
 
-test
+To do:
 
+Make XXE page
 
+Make SQL page
+
+Make  File page
+
+Make page dedicated to web&#x20;
+
+Update LFI/RFI
+
+Update Linux Priv
+
+Update Windows Priv
+
+Add common passwords to Credential Gathering page
 
 
 

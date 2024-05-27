@@ -1537,7 +1537,7 @@ hashcat -m 18200 hash.txt Pass.txt --show
 
 #### Examples
 
-[cyborg.md](../../walkthroughs/tryhackme/cyborg.md "mention")
+[cyborg.md](../../walkthroughs/tryhackme/cyborg.md "mention")[dav.md](../../walkthroughs/tryhackme/dav.md "mention")
 
 **Kali**
 
@@ -1556,6 +1556,40 @@ hashcat -m 1600 password --show
 
 ```
 john --wordlist=easypeasy.txt --format=GOST hash.txt
+```
+
+## Common Passwords
+
+#### Examples
+
+[thompson.md](../../walkthroughs/tryhackme/thompson.md "mention")
+
+**Tomcat default passwords**
+
+```
+password   
+Password1 
+password1 
+admin     
+tomcat    
+tomcat    
+manager   
+role1     
+tomcat    
+changethis
+Password1 
+changethis
+password  
+password1 
+r00t      
+root      
+toor      
+tomcat   
+s3cret    
+password1 
+password  
+admin     
+changethis
 ```
 
 

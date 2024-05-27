@@ -56,6 +56,8 @@ gobuster dir -u http://$VICTIM:8080 -w /usr/share/wordlists/SecLists/Discovery/W
 
 <figure><img src="../../.gitbook/assets/image (216).png" alt=""><figcaption></figcaption></figure>
 
+## SQL Injection
+
 SQL injection worked on username field
 
 ```
