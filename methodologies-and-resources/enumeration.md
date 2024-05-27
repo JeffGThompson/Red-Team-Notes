@@ -263,6 +263,40 @@ ffuf -u http://$VICTIM/static/FUZZ -w /usr/share/dirb/wordlists/big.txt
 dirsearch -u $VICTIM:$PORT 
 ```
 
+### Crack Login
+
+**Example**
+
+[#sql](../walkthroughs/tryhackme/the-cod-caper.md#sql "mention")
+
+**Kali**
+
+```
+sqlmap -u http://$VICTIM/$PAGE.php --forms --dump
+```
+
+
+
+## Cookies
+
+**Example**
+
+[#cookies](../walkthroughs/tryhackme/avengers-blog.md#cookies "mention")
+
+Get the flag with developer console by checking the cookie.
+
+<figure><img src="../.gitbook/assets/image (174).png" alt=""><figcaption></figcaption></figure>
+
+## HTTP Headers
+
+**Example**
+
+[#http-headers](../walkthroughs/tryhackme/avengers-blog.md#http-headers "mention")
+
+<figure><img src="../.gitbook/assets/image (175).png" alt=""><figcaption></figcaption></figure>
+
+
+
 ### Download file
 
 #### wget

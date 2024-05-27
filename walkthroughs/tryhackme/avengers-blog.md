@@ -11,8 +11,6 @@
 
 <figure><img src="../../.gitbook/assets/image (173).png" alt=""><figcaption></figcaption></figure>
 
-
-
 ### Scan all ports
 
 No other ports found.
@@ -50,6 +48,8 @@ Get the flag with developer console by checking the cookie.
 ## HTTP Headers
 
 <figure><img src="../../.gitbook/assets/image (175).png" alt=""><figcaption></figcaption></figure>
+
+##
 
 ## Enumeration and FTP
 
@@ -93,14 +93,4 @@ Password: ' or 1=1--
 ## Remote Code Execution and Linux
 
 <figure><img src="../../.gitbook/assets/image (180).png" alt=""><figcaption></figcaption></figure>
-
-
-
-
-
-
-
-
-
-
 

