@@ -1,6 +1,6 @@
 # Enumeration
 
-## **Stopped at** Blaster
+## **Stopped at** VulnNet: Internal
 
 ## **Scans**
 
@@ -672,10 +672,33 @@ irssi -c $VICTIM -p $PORT
 
 ## **TCP/873 - RSYNC**
 
+### **Check Modules**
+
 ```
 sudo nmap $VICTIM -p873 --script rsync-list-modules
-rsync -av rsync://$VICTIM/$SHARE --list-only
-rsync -av rsync://$VICTIM/$SHARE loot
+```
+
+### **List files**
+
+**Example**
+
+[#tcp-873-rsync](../walkthroughs/tryhackme/vulnnet-internal.md#tcp-873-rsync "mention")
+
+```
+rsync --list-only rsync://$VICTIM 
+rsync --list-only rsync://$USERNAME@$VICTIM/$FOLDER
+Password: $PASSWORD
+```
+
+### **Transfer files**
+
+**Example**
+
+[#tcp-873-rsync](../walkthroughs/tryhackme/vulnnet-internal.md#tcp-873-rsync "mention")
+
+```
+rsync authorized_keys rsync://$USERNAME@$VICTIM/$FOLDER/.ssh
+Password: $PASSWORD
 ```
 
 ## **TCP/2049 - NFS**
@@ -814,13 +837,14 @@ python3 secretsdump.py  $DOMAIN/$USERNAME:$PASSWORD@$VICTIM
 
 **Example**
 
-[vulnnet-internal.md](../walkthroughs/tryhackme/vulnnet-internal.md "mention")
+[#tcp-6379-redis](../walkthroughs/tryhackme/vulnnet-internal.md#tcp-6379-redis "mention")
 
 ```
 redis-cli -h $VICTIM -a "$PASSWORD"
 $VICTIM:6379> KEYS *
 $VICTIM:6379> KEYS "$VALUE"
 $VICTIM:6379> GET "$VALUE"
+$VICTIM:6379> LRANGE "$VALUE" 1 100
 ```
 
 

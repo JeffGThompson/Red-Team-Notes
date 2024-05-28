@@ -103,7 +103,7 @@ echo "QXV0aG9yaXphdGlvbiBmb3IgcnN5bmM6Ly9yc3luYy1jb25uZWN0QDEyNy4wLjAuMSB3aXRoIH
 
 ### TCP/873 - RSYNC
 
-We are able to transfer are key to allow us to login to as the sys-internal user.
+We are able to transfer out key to allow us to login to as the sys-internal user.
 
 **Kali**
 
