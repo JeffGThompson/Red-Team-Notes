@@ -492,7 +492,7 @@ netshareenum # print the real file-path of shares; good for accurate RCE
 
 **Examples**&#x20;
 
-[gatekeeper.md](../walkthroughs/tryhackme/gatekeeper.md "mention")
+[gatekeeper.md](../walkthroughs/tryhackme/gatekeeper.md "mention")[vulnnet-internal.md](../walkthroughs/tryhackme/vulnnet-internal.md "mention")
 
 **Kali**
 
@@ -683,6 +683,14 @@ rsync -av rsync://$VICTIM/$SHARE loot
 <pre><code><strong>sudo nmap $VICTIM -p111 --script-nfs*
 </strong></code></pre>
 
+
+
+### Mount drive
+
+**Examples**
+
+[vulnnet-internal.md](../walkthroughs/tryhackme/vulnnet-internal.md "mention")
+
 ```
 #This will list some folders hopefully
 showmount -e $VICTIM
@@ -801,6 +809,21 @@ Dump hashes of other users if the user you have access to has the privilege's to
 ```
 python3 secretsdump.py  $DOMAIN/$USERNAME:$PASSWORD@$VICTIM
 ```
+
+## TCP/6379 - Redis
+
+**Example**
+
+[vulnnet-internal.md](../walkthroughs/tryhackme/vulnnet-internal.md "mention")
+
+```
+redis-cli -h $VICTIM -a "$PASSWORD"
+$VICTIM:6379> KEYS *
+$VICTIM:6379> KEYS "$VALUE"
+$VICTIM:6379> GET "$VALUE"
+```
+
+
 
 ## TCP/7070 - AnyConnect
 

