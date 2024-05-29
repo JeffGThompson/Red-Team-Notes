@@ -10,6 +10,8 @@ Make  File page
 
 Make page dedicated to web&#x20;
 
+Make Bypass page
+
 Update LFI/RFI
 
 Update Linux Priv
