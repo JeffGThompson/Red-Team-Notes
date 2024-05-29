@@ -58,7 +58,7 @@ I remembered we had that secret file as well, I was able to read it and it had s
 
 <figure><img src="../../.gitbook/assets/image (6) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
-### TCP/2 - FTP
+### TCP/21 - FTP
 
 **Kali**
 
@@ -199,6 +199,3 @@ ssh root@$VICTIM -i id_rsa
 ```
 
 <figure><img src="../../.gitbook/assets/image (17) (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
-
-
-

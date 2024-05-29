@@ -6,7 +6,7 @@ Make XXE page
 
 Make SQL page
 
-Make  File page
+Make  File page + Abusing scripts
 
 Make page dedicated to web&#x20;
 
