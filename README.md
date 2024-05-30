@@ -8,7 +8,7 @@ Make SQL page
 
 Make  File page + Abusing scripts
 
-Make page dedicated to web&#x20;
+Make page dedicated to web and specific software&#x20;
 
 Make Bypass page
 

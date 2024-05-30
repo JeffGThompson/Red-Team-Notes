@@ -128,7 +128,7 @@ chmod +x linpeas.sh
 
 
 
-MySQL
+## MySQL
 
 **Victim**
 

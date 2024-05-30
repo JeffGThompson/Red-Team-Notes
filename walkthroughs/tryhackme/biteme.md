@@ -212,7 +212,7 @@ Password: 1a2b3c4d
 
 
 
-Lateral Movement
+## Lateral Movement
 
 **Victim**
 
@@ -304,6 +304,4 @@ whoami
 ```
 
 <figure><img src="../../.gitbook/assets/image (771).png" alt=""><figcaption></figcaption></figure>
-
-
 

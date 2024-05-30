@@ -13,10 +13,6 @@
 
 <figure><img src="../../.gitbook/assets/image (17) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
-
-
-
-
 ## Scan all ports
 
 **Kali**
@@ -46,21 +42,7 @@ dirb http://olympus.thm
 
 <figure><img src="../../.gitbook/assets/image (2) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+## SQLMap
 
 
 
@@ -127,12 +109,6 @@ Password: summertime
 
 
 
-
-
-
-
-
-
 <figure><img src="../../.gitbook/assets/image (2) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 
@@ -169,10 +145,6 @@ subl php-reverse-shell.php
 ```
 gobuster -U prometheus -P summertime dir -u chat.olympus.thm -w /usr/share/wordlists/SecLists/Discovery/Web-Content/directory-list-2.3-medium.txt -x php,html,txt
 ```
-
-
-
-
 
 This was there before when we ran sqlmap
 
@@ -241,8 +213,6 @@ ls -lah /usr/bin/cputils
 
 
 
-
-
 ## Netcat
 
 **Kali(receiving)**
@@ -305,12 +275,6 @@ whoami
 
 
 
-
-
-
-
-
-
 ## Secret Flag
 
 **Kali**
@@ -345,8 +309,6 @@ grep -r  "flag{" /
 ```
 
 <figure><img src="../../.gitbook/assets/image (699).png" alt=""><figcaption></figcaption></figure>
-
-
 
 
 

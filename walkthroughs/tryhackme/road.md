@@ -120,7 +120,7 @@ stty raw -echo;fg
 
 
 
-## TCP/27017 - Mongo
+## TCP/27017 - MongoDB
 
 **Victim**
 

@@ -28,17 +28,11 @@ Same as the first scan, a lot of ssh ports open
 
 
 
-
-
-
-
 ## TCP/22 - SSH
 
 **Kali**
 
 <figure><img src="../../.gitbook/assets/image (655).png" alt=""><figcaption></figcaption></figure>
-
-
 
 **Kali**
 
@@ -76,12 +70,6 @@ for i in $(seq 12345 13465); do echo "connecting to port $i"; ssh -o 'LogLevel=E
 ```
 
 <figure><img src="../../.gitbook/assets/image (660).png" alt=""><figcaption></figcaption></figure>
-
-
-
-
-
-
 
 ```
 Key: thealphabetcipher
@@ -163,7 +151,7 @@ stty raw -echo;fg
 
 
 
-**Victim(**tweedledee)
+**Victim(tweedledee)**
 
 <pre><code><strong>cd /home/tweedledee
 </strong><strong>cat humptydumpty.txt 
@@ -173,7 +161,7 @@ stty raw -echo;fg
 
 <figure><img src="../../.gitbook/assets/image (5) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
-**Victim(**tweedledee)
+**Victim(tweedledee)**
 
 <pre><code><strong>sudo -l
 </strong>sudo -u tweedledum /bin/bash 
@@ -181,7 +169,7 @@ stty raw -echo;fg
 
 <figure><img src="../../.gitbook/assets/image (6) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
-**Victim(**tweedledum)
+**Victim(tweedledum)**
 
 <pre><code><strong>cd /home/tweedledum/
 </strong>cat humptydumpty.txt 
@@ -253,6 +241,4 @@ sudo -h ssalg-gnikool /bin/bash
 ```
 
 <figure><img src="../../.gitbook/assets/image (13) (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
-
-
 

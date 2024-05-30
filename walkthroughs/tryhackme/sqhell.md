@@ -153,12 +153,6 @@ python flag.py
 
 ## Flag 3 - Blind/Boolean - Curl Method
 
-&#x20;
-
-### &#x20;<a href="#machine-information" id="machine-information"></a>
-
-
-
 ### SQL Injection Info <a href="#sql-injection-info" id="sql-injection-info"></a>
 
 Looking at the room description we’re told specifically to find five different flags using various types SQL injection:
@@ -183,7 +177,7 @@ For BurpSuite I’m using FoxyProxy to redirect my browser to it. Here’s the c
 
 ![sqhell-foxy-burp](https://pencer.io/assets/images/2021-06-08-22-36-12.png)
 
-### Initial Access[Permalin](https://pencer.io/ctf/ctf-thm-sqhell/#initial-access) <a href="#initial-access" id="initial-access"></a>
+### Initial Access <a href="#initial-access" id="initial-access"></a>
 
 First let’s add the server IP to our hosts file:
 
@@ -198,7 +192,7 @@ Now we can have a look at the website:
 
 We have a simple static html based website with five areas for us to exploit. Let’s start on the first flag.
 
-### Flag 1 - In-Band/Error Based - Browser Method[Permalink](https://pencer.io/ctf/ctf-thm-sqhell/#flag-1---in-banderror-based---browser-method) <a href="#flag-1---in-banderror-based---browser-method" id="flag-1---in-banderror-based---browser-method"></a>
+### Flag 1 - In-Band/Error Based - Browser Method <a href="#flag-1---in-banderror-based---browser-method" id="flag-1---in-banderror-based---browser-method"></a>
 
 The first flag is the easiest, start by clicking on the Login button which takes us here:
 

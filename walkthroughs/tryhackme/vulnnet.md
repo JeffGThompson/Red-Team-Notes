@@ -94,8 +94,6 @@ curl -s http://vulnnet.thm/?referer=/etc/passwd
 
 
 
-## &#x20;
-
 <figure><img src="../../.gitbook/assets/image (674).png" alt=""><figcaption></figcaption></figure>
 
 
@@ -292,22 +290,4 @@ Password: 123
 ```
 
 <figure><img src="../../.gitbook/assets/image (691).png" alt=""><figcaption></figcaption></figure>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
