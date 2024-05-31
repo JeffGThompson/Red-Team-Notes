@@ -405,6 +405,23 @@ binwalk $IMAGE.jpg -e
 
 <figure><img src="../../.gitbook/assets/image (33).png" alt=""><figcaption></figcaption></figure>
 
+#### stegseek
+
+#### Examples
+
+[one-piece.md](../../walkthroughs/tryhackme/one-piece.md "mention")
+
+**Kali**
+
+```
+Download deb file from: https://github.com/RickdeJager/stegseek/releases
+
+sudo apt install ./stegseek_0.6-1.deb
+stegseek --crack -sf kaido.jpeg -wl /usr/share/wordlists/rockyou.txt
+```
+
+###
+
 ### Firefox
 
 #### Examples

@@ -12,11 +12,17 @@ Make page dedicated to web and specific software&#x20;
 
 Make Bypass page
 
+Make proxychain page
+
 Update LFI/RFI
 
 Update Linux Priv
 
 Update Windows Priv
+
+Update Payloads
+
+Update Buffer Overflow
 
 Add common passwords to Credential Gathering page
 
