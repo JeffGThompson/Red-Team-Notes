@@ -31,6 +31,8 @@
   * [Script Abuse](methodologies-and-resources/cheat-sheets/script-abuse.md)
   * [Credential Gathering & Cracking](methodologies-and-resources/cheat-sheets/credential-gathering-and-cracking.md)
   * [Other Cheat sheets](methodologies-and-resources/cheat-sheets/other-cheat-sheets.md)
+  * [Software](methodologies-and-resources/cheat-sheets/software.md)
+  * [Proxy Chaining](methodologies-and-resources/cheat-sheets/proxy-chaining.md)
 
 ## Walkthroughs
 
@@ -193,3 +195,4 @@
   * [Napping](walkthroughs/tryhackme/napping.md)
   * [CyberLens](walkthroughs/tryhackme/cyberlens.md)
   * [Obscure](walkthroughs/tryhackme/obscure.md)
+  * [Vulnerabilities Seen](walkthroughs/tryhackme/vulnerabilities-seen.md)

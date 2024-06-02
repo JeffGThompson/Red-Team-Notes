@@ -1,5 +1,7 @@
 # About
 
+## **Stopped at skynet**
+
 To do:
 
 Make XXE page
@@ -13,6 +15,8 @@ Make page dedicated to web and specific software&#x20;
 Make Bypass page
 
 Make proxychain page
+
+Make page for vulnerablities seen
 
 Update LFI/RFI
 

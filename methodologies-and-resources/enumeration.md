@@ -1,10 +1,8 @@
 # Enumeration
 
-## **Stopped at f**fuf
-
 ## **Scans**
 
-Initial scan
+**Initial scan**
 
 **Kali**
 
@@ -12,7 +10,7 @@ Initial scan
 nmap -A $VICTIM
 ```
 
-Longer scan
+**Longer scan**
 
 **Kali**
 
@@ -20,12 +18,22 @@ Longer scan
 nmap -sV -sT -O -p 1-65535 $VICTIM
 ```
 
-Even longer scan
+**Even longer scan**
 
 **Kali**
 
 ```
 nmap -sC -sV -p- $VICTIM
+```
+
+**Scan for vulnerabilities**
+
+Change ports to the ports found from previous scans
+
+**Kali**
+
+```
+nmap -p1,2,3,4 --script=vuln $VICTIM
 ```
 
 ## **Ports**

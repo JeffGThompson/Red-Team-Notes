@@ -6,6 +6,19 @@
 
 {% embed url="https://book.hacktricks.xyz/pentesting-web/sql-injection" %}
 
+### **SQL Injection**
+
+```
+a' or 1=1 -- -
+
+```
+
+
+
+
+
+
+
 
 
 **List**

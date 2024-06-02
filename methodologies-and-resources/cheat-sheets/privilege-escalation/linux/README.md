@@ -112,6 +112,7 @@ find / -perm -u=s -type f 2> /dev/null
 | doas                          | Can read files or copy files                                                                                        | [glitch.md](../../../../walkthroughs/tryhackme/glitch.md "mention")                                                                                                                                                                                                                                          |
 | strings                       | Can read files                                                                                                      | [jack-of-all-trades.md](../../../../walkthroughs/tryhackme/jack-of-all-trades.md "mention")                                                                                                                                                                                                                  |
 | cputils                       | Can copy files                                                                                                      | [olympus.md](../../../../walkthroughs/tryhackme/olympus.md "mention")                                                                                                                                                                                                                                        |
+| tar                           | Can spawn shell                                                                                                     | [skynet.md](../../../../walkthroughs/tryhackme/skynet.md "mention")                                                                                                                                                                                                                                          |
 
 ### Getcap
 
@@ -317,7 +318,7 @@ Copy Material from here:
 | LinEnum                       | [https://github.com/rebootuser/LinEnum](https://github.com/rebootuser/LinEnum)                                                                                                                 |
 | LES (Linux Exploit Suggester) | [https://github.com/mzet-/linux-exploit-suggester](https://github.com/mzet-/linux-exploit-suggester)                                                                                           |
 | Linux Smart Enumeration       | [https://github.com/diego-treitos/linux-smart-enumeration](https://github.com/diego-treitos/linux-smart-enumeration)                                                                           |
-| Linux Priv Checker:           | [https://github.com/linted/linuxprivchecker](https://github.com/linted/linuxprivchecker)                                                                                                       |
+| Linux Priv Checker            | [https://github.com/linted/linuxprivchecker](https://github.com/linted/linuxprivchecker)                                                                                                       |
 
 
 
