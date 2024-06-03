@@ -33,6 +33,7 @@
   * [Other Cheat sheets](methodologies-and-resources/cheat-sheets/other-cheat-sheets.md)
   * [Software](methodologies-and-resources/cheat-sheets/software.md)
   * [Proxy Chaining](methodologies-and-resources/cheat-sheets/proxy-chaining.md)
+  * [Vulnerabilities Seen](methodologies-and-resources/cheat-sheets/vulnerabilities-seen.md)
 
 ## Walkthroughs
 
@@ -195,4 +196,3 @@
   * [Napping](walkthroughs/tryhackme/napping.md)
   * [CyberLens](walkthroughs/tryhackme/cyberlens.md)
   * [Obscure](walkthroughs/tryhackme/obscure.md)
-  * [Vulnerabilities Seen](walkthroughs/tryhackme/vulnerabilities-seen.md)

@@ -46,6 +46,16 @@ wmic service get name,pathname,startname | findstr "Program Files"
 cacls *.exe
 ```
 
+### **Whoami /priv**
+
+| Finding                 | Comment                                                 | Examples                                                          |
+| ----------------------- | ------------------------------------------------------- | ----------------------------------------------------------------- |
+| SeImpersonatePrivilege  | Printspoofer - works on Windows 10 and Server 2016/2019 | [relevant.md](../../walkthroughs/tryhackme/relevant.md "mention") |
+|                         |                                                         |                                                                   |
+|                         |                                                         |                                                                   |
+
+###
+
 ### **Recent Files**
 
 Might be able to find interesting files by looking at what was recently accessed. Start -> run -> recent.

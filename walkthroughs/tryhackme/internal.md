@@ -26,7 +26,6 @@ No other ports found.
 
 ```
 gobuster dir -u http://10.10.46.54 -w /usr/share/wordlists/SecLists/Discovery/Web-Content/directory-list-2.3-medium.txt -x php,html,txt -t 30
-
 ```
 
 <figure><img src="../../.gitbook/assets/image (46) (1) (1).png" alt=""><figcaption></figcaption></figure>
