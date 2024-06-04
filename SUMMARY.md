@@ -34,6 +34,7 @@
   * [Software](methodologies-and-resources/cheat-sheets/software.md)
   * [Proxy Chaining](methodologies-and-resources/cheat-sheets/proxy-chaining.md)
   * [Vulnerabilities Seen](methodologies-and-resources/cheat-sheets/vulnerabilities-seen.md)
+  * [Active Directory](methodologies-and-resources/cheat-sheets/active-directory.md)
 
 ## Walkthroughs
 

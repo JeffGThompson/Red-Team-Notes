@@ -51,11 +51,11 @@ sudo -l
 
 
 
-| Finding | Comment              | Examples                                                                      |
-| ------- | -------------------- | ----------------------------------------------------------------------------- |
-| yum     | Privilege Escalation | [daily-bugle.md](../../../../walkthroughs/tryhackme/daily-bugle.md "mention") |
-|         |                      |                                                                               |
-|         |                      |                                                                               |
+| Finding      | Comment              | Examples                                                                      |
+| ------------ | -------------------- | ----------------------------------------------------------------------------- |
+| yum          | Privilege Escalation | [daily-bugle.md](../../../../walkthroughs/tryhackme/daily-bugle.md "mention") |
+| anansi\_util | Privilege Escalation | [brainpan-1.md](../../../../walkthroughs/tryhackme/brainpan-1.md "mention")   |
+|              |                      |                                                                               |
 
 ### **LD\_PRELOAD**
 

@@ -1,6 +1,6 @@
 # About
 
-## **Stopped at** Buffer Overflow Prep
+## **Stopped at** Attacking Kerberos - keep doing
 
 To do:
 
