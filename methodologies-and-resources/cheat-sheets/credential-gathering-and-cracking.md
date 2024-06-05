@@ -1526,7 +1526,7 @@ hashcat -m 5600 hash.txt /usr/share/wordlists/rockyou.txt --show
 
 #### Examples
 
-[attacking-kerberos-1.md](../../walkthroughs/tryhackme/attacking-kerberos-1.md "mention")[post-exploitation-basics.md](../../walkthroughs/tryhackme/post-exploitation-basics.md "mention")
+[attacking-kerberos.md](../../walkthroughs/tryhackme/attacking-kerberos.md "mention")[post-exploitation-basics.md](../../walkthroughs/tryhackme/post-exploitation-basics.md "mention")
 
 
 
@@ -1541,7 +1541,7 @@ hashcat -m 13100 -a 0 hash.txt Pass.txt --show
 
 #### Examples
 
-[attacking-kerberos-1.md](../../walkthroughs/tryhackme/attacking-kerberos-1.md "mention")
+[attacking-kerberos.md](../../walkthroughs/tryhackme/attacking-kerberos.md "mention")
 
 **Kali**
 
