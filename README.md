@@ -1,6 +1,6 @@
 # About
 
-## **Stopped after** Common Linux Privesc
+## **Stopped after** Linux PrivEsc
 
 To do:
 

