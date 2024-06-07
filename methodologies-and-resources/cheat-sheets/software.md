@@ -1,5 +1,11 @@
 # Software
 
+## Druva inSync
+
+### Privileges Escalation
+
+[#case-study-druva-insync-6.6.3](../../walkthroughs/tryhackme/windows-privilege-escalation.md#case-study-druva-insync-6.6.3 "mention")
+
 ## Jenkins
 
 ### Get reverse shell from web

