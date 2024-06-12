@@ -18,7 +18,7 @@ systeminfo | findstr Domain
 
 ## Users and Groups Management
 
-**Use the Get-ADUser -Filter \* -SearchBase command to list the available user accounts within THM OU in the thmredteam.com domain. How many users are available?**
+Use the Get-ADUser -Filter \* -SearchBase command to list the available user accounts within THM OU in the thmredteam.com domain. How many users are available?
 
 **Victim(powershell)**
 

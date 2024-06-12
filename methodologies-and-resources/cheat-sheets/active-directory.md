@@ -28,6 +28,40 @@ wget https://raw.githubusercontent.com/Cryilllic/Active-Directory-Wordlists/mast
 
 
 
+## Information Gathering
+
+**Examples**
+
+[#active-directory-a-d-environment](../../walkthroughs/tryhackme/the-lay-of-the-land.md#active-directory-a-d-environment "mention")
+
+The output of the systeminfo provides information about the machine, including the operating system name and version, hostname, and other hardware information as well as the AD domain.
+
+**Victim(cmd)**
+
+```
+systeminfo | findstr Domain
+```
+
+## Users and Groups Management
+
+Examples
+
+[#users-and-groups-management](../../walkthroughs/tryhackme/the-lay-of-the-land.md#users-and-groups-management "mention")
+
+Use the Get-ADUser -Filter \* -SearchBase command to list the available user accounts within THM OU in the thmredteam.com domain. How many users are available?
+
+**Victim(powershell)**
+
+```
+ Get-ADUser -Filter * -SearchBase "OU=THM,DC=THMREDTEAM,DC=COM"
+```
+
+
+
+
+
+
+
 ## Enumeration w/ Kerbrute
 
 This will brute force user accounts from a domain controller using a supplied wordlist

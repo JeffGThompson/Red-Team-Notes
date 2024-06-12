@@ -222,7 +222,19 @@ http://$VICTIM/robots.txt
 http://$VICTIM/sitemap.xml
 ```
 
+### Create wordlist&#x20;
 
+Creating a wordlist from this site based off of what is on the website.
+
+**Examples**
+
+[password-attacks.md](../walkthroughs/tryhackme/password-attacks.md "mention")
+
+**Kali**
+
+```
+cewl -m 8 -w $LIST.lst https://$VICTIM 
+```
 
 ### Find Directories
 
@@ -239,8 +251,6 @@ dirb http://$VICTIM/
 dirb http://$VICTIM:$PORT/
 dirb http://$VICTIM:80 /usr/share/wordlists/dirb/big.txt -z10 
 ```
-
-
 
 ### Find Pages
 
@@ -1243,6 +1253,10 @@ cat allhashes.txt | awk -F : '{print $1 ":" $3}' | sort | uniq
 
 ### Login with found username and password
 
+**Examples**
+
+[#tampering-with-unprivileged-accounts](../walkthroughs/tryhackme/windows-local-persistence.md#tampering-with-unprivileged-accounts "mention")
+
 ```
 evil-winrm -u $USER -p $PASSWORD -i $VICTIM
 ```
@@ -1251,7 +1265,7 @@ evil-winrm -u $USER -p $PASSWORD -i $VICTIM
 
 **Examples**
 
-[attacktive-directory.md](../walkthroughs/tryhackme/attacktive-directory.md "mention")
+[attacktive-directory.md](../walkthroughs/tryhackme/attacktive-directory.md "mention")[windows-local-persistence.md](../walkthroughs/tryhackme/windows-local-persistence.md "mention")
 
 ```
 evil-winrm -i $VICTIM -u $VICTIMUSERNAME  -H $FOUNDHASH

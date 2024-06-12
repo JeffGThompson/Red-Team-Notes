@@ -1,6 +1,6 @@
 # About
 
-## **Stopped after** Linux PrivEsc
+## **Stopped after** Windows Local Persistence
 
 To do:
 

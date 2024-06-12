@@ -176,22 +176,22 @@ sudo -l
 
 
 
-| Finding      | Comments             | Examples                                                                                                                                                                               |
-| ------------ | -------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| yum          | Privilege Escalation | [daily-bugle.md](../../../../walkthroughs/tryhackme/daily-bugle.md "mention")                                                                                                          |
-| anansi\_util | Privilege Escalation | [brainpan-1.md](../../../../walkthroughs/tryhackme/brainpan-1.md "mention")                                                                                                            |
-| vi           |                      | [#escaping-vi-editor](../../../../walkthroughs/tryhackme/common-linux-privesc.md#escaping-vi-editor "mention")                                                                         |
-| apache2      |                      | [#apache2](../../../../walkthroughs/tryhackme/linux-privesc.md#apache2 "mention")                                                                                                      |
-| nmap         |                      | [#nmap](../../../../walkthroughs/tryhackme/linux-privesc.md#nmap "mention")                                                                                                            |
-| ftp          |                      | [#ftp](../../../../walkthroughs/tryhackme/linux-privesc.md#ftp "mention")                                                                                                              |
-| more         |                      | [#more](../../../../walkthroughs/tryhackme/linux-privesc.md#more "mention")                                                                                                            |
-| less         |                      | [#less](../../../../walkthroughs/tryhackme/linux-privesc.md#less "mention")                                                                                                            |
-| awk          |                      | [#awk](../../../../walkthroughs/tryhackme/linux-privesc.md#awk "mention")                                                                                                              |
-| man          |                      | [#man](../../../../walkthroughs/tryhackme/linux-privesc.md#man "mention")                                                                                                              |
-| vim          |                      | [#vim](../../../../walkthroughs/tryhackme/linux-privesc.md#vim "mention")                                                                                                              |
-| find         |                      | [#find](../../../../walkthroughs/tryhackme/linux-privesc.md#find "mention")[linux-privilege-escalation.md](../../../../walkthroughs/tryhackme/linux-privilege-escalation.md "mention") |
-| iftop        |                      | [#iftop](../../../../walkthroughs/tryhackme/linux-privesc.md#iftop "mention")                                                                                                          |
-|              |                      |                                                                                                                                                                                        |
+| Finding      | Comments             | Examples                                                                                                                                                                                                                         |
+| ------------ | -------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| yum          | Privilege Escalation | [daily-bugle.md](../../../../walkthroughs/tryhackme/daily-bugle.md "mention")                                                                                                                                                    |
+| anansi\_util | Privilege Escalation | [brainpan-1.md](../../../../walkthroughs/tryhackme/brainpan-1.md "mention")                                                                                                                                                      |
+| vi           |                      | [#escaping-vi-editor](../../../../walkthroughs/tryhackme/common-linux-privesc.md#escaping-vi-editor "mention")                                                                                                                   |
+| apache2      |                      | [#apache2](../../../../walkthroughs/tryhackme/linux-privesc.md#apache2 "mention")                                                                                                                                                |
+| nmap         |                      | [#nmap](../../../../walkthroughs/tryhackme/linux-privesc.md#nmap "mention")                                                                                                                                                      |
+| ftp          |                      | [#ftp](../../../../walkthroughs/tryhackme/linux-privesc.md#ftp "mention")                                                                                                                                                        |
+| more         |                      | [#more](../../../../walkthroughs/tryhackme/linux-privesc.md#more "mention")                                                                                                                                                      |
+| less         |                      | [#less](../../../../walkthroughs/tryhackme/linux-privesc.md#less "mention")                                                                                                                                                      |
+| awk          |                      | [#awk](../../../../walkthroughs/tryhackme/linux-privesc.md#awk "mention")                                                                                                                                                        |
+| man          |                      | [#man](../../../../walkthroughs/tryhackme/linux-privesc.md#man "mention")                                                                                                                                                        |
+| vim          |                      | [#vim](../../../../walkthroughs/tryhackme/linux-privesc.md#vim "mention")                                                                                                                                                        |
+| find         |                      | <p><a data-mention href="../../../../walkthroughs/tryhackme/linux-privesc.md#find">#find</a></p><p><a data-mention href="../../../../walkthroughs/tryhackme/linux-privilege-escalation.md">linux-privilege-escalation.md</a></p> |
+| iftop        |                      | [#iftop](../../../../walkthroughs/tryhackme/linux-privesc.md#iftop "mention")                                                                                                                                                    |
+|              |                      |                                                                                                                                                                                                                                  |
 
 ### SUID / SGID Executables - Known Exploits
 
@@ -205,11 +205,11 @@ find / -type f -a \( -perm -u+s -o -perm -g+s \) -exec ls -l {} \; 2> /dev/null
 
 
 
-| Finding | Comments       | Examples                                                                                                                                    |
-| ------- | -------------- | ------------------------------------------------------------------------------------------------------------------------------------------- |
-| exim    | version 4.84-3 | [#suid-sgid-executables-known-exploits](../../../../walkthroughs/tryhackme/linux-privesc.md#suid-sgid-executables-known-exploits "mention") |
-|         |                |                                                                                                                                             |
-|         |                |                                                                                                                                             |
+| Finding | Comments                                    | Examples                                                                                                                                    |
+| ------- | ------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------- |
+| exim    | version 4.84-3                              | [#suid-sgid-executables-known-exploits](../../../../walkthroughs/tryhackme/linux-privesc.md#suid-sgid-executables-known-exploits "mention") |
+| base64  | Read files we shouldn't have access to read | [linux-privilege-escalation.md](../../../../walkthroughs/tryhackme/linux-privilege-escalation.md "mention")                                 |
+|         |                                             |                                                                                                                                             |
 
 
 
@@ -735,6 +735,18 @@ Check out this room for more details
 ##
 
 ## Monitor Processes
+
+**Examples**
+
+[enumeration.md](../../../../walkthroughs/tryhackme/enumeration.md "mention")
+
+**Victim**
+
+```
+ps axf
+```
+
+
 
 ### PSPY
 
