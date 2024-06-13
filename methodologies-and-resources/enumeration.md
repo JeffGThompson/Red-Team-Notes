@@ -610,12 +610,12 @@ wpscan --url http://$VICTIM --disable-tls-checks
 
 **Examples**
 
-[retro.md](../walkthroughs/tryhackme/retro.md "mention")
+[retro.md](../walkthroughs/tryhackme/retro.md "mention")[wordpress-cve-2021-29447.md](../walkthroughs/tryhackme/wordpress-cve-2021-29447.md "mention")
 
 #### Kali
 
 ```
-wpscan --url http://$VICTIM--enumerate u
+wpscan --url http://$VICTIM -e p,t,u
 ```
 
 #### Bruteforce admin page

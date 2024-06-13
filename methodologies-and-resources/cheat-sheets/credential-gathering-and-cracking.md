@@ -1364,6 +1364,19 @@ john --format=raw-md4 hash.txt --wordlist=password
 john --format=raw-md5 hash.txt 
 ```
 
+### Crack MD5(Wordpress) hash
+
+#### Examples
+
+[wordpress-cve-2021-29447.md](../../walkthroughs/tryhackme/wordpress-cve-2021-29447.md "mention")
+
+**Kali**
+
+```
+john --format=phpass-opencl hash.txt
+john --format=phpass-opencl hash.txt --show
+```
+
 ### Crack SHA-1 hash
 
 #### Examples

