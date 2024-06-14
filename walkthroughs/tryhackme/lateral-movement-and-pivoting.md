@@ -1,6 +1,6 @@
 # Lateral Movement and Pivoting
 
-**RoomLink:** [https://tryhackme.com/room/lateralmovementandpivoting](https://tryhackme.com/room/lateralmovementandpivoting)
+**Room Link:** [https://tryhackme.com/room/lateralmovementandpivoting](https://tryhackme.com/room/lateralmovementandpivoting)
 
 
 
@@ -1175,7 +1175,7 @@ ssh tunneluser@$KALI -R 8888:thmdc.za.tryhackme.com:80 -L *:1990:127.0.0.1:1990 
 
 <figure><img src="../../.gitbook/assets/image (1) (2) (6) (2).png" alt=""><figcaption></figcaption></figure>
 
-**Kali(Metasploit**
+**Kali(Metasploit)**
 
 ```
 msfconsole

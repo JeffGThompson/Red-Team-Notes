@@ -1,6 +1,12 @@
 # About
 
-## **Stopped after** Windows Local Persistence
+## **Redo** to understand better:
+
+Lateral Movement and Pivoting&#x20;
+
+Bypassing UAC
+
+## **Stopped after Mr Robot**
 
 To do:
 
