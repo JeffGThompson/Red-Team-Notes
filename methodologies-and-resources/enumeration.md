@@ -1234,7 +1234,11 @@ psql -U postgres -p 5437 -h $VICTIM # postgres:postgres
 SELECT pg_ls_dir('/');
 ```
 
-## **TCP/5985 - WinRM**
+## **TCP/5985** - WinRM or wsman
+
+See TCP/5986 - WinRM for WinRM information
+
+## **TCP/**5986 **- WinRM**
 
 ### **Dump Hashes**
 

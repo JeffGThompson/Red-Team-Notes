@@ -6,7 +6,7 @@ Lateral Movement and Pivoting&#x20;
 
 Bypassing UAC
 
-## **Stopped after Mr Robot**
+## **Stopped after** Breaching Active Directory
 
 To do:
 

