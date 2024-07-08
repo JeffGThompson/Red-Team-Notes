@@ -6,7 +6,7 @@ Lateral Movement and Pivoting&#x20;
 
 Bypassing UAC
 
-## **Stopped after** Breaching Active Directory
+## **Stopped after** Enumerating Active Directory
 
 To do:
 

