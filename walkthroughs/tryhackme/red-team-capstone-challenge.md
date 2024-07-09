@@ -106,19 +106,11 @@ theme-preview
 
 <figure><img src="../../.gitbook/assets/image (47) (3).png" alt=""><figcaption></figcaption></figure>
 
-
-
-
-
 **Kali**
 
 ```
 hydra -L users.txt -P mangled-passwords.txt smtp://$WebMail -V
 ```
-
-
-
-##
 
 ## WebMail - Scanning&#x20;
 

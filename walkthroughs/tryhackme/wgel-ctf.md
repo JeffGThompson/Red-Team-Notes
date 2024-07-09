@@ -2,10 +2,6 @@
 
 **Room Link:** [https://tryhackme.com/room/wgelctf](https://tryhackme.com/room/wgelctf)
 
-
-
-
-
 ## Scanning
 
 ### Initial Scan
@@ -125,7 +121,6 @@ nc -lvnp 4444
 
 ```
 jessie:$1$new$p7ptkEKU1HnaHpRtzNizS1:1000:1000:jessie,,,:/home/jessie:/bin/bash
-
 ```
 
 <figure><img src="../../.gitbook/assets/image (2) (1) (7).png" alt=""><figcaption></figcaption></figure>

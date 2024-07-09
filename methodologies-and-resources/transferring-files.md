@@ -2,6 +2,10 @@
 
 ## **SMB**
 
+**Examples**
+
+[#registry-hives](../walkthroughs/tryhackme/credentials-harvesting.md#registry-hives "mention")
+
 **Kali**
 
 ```

