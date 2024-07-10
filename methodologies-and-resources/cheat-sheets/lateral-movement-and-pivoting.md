@@ -68,7 +68,54 @@ sshuttle -r $USERNAME@$VICTIM 127.0.0.1/24
 Password: $PASSWORD
 ```
 
+### SSH
 
+**Examples**
+
+[chill-hack.md](../../walkthroughs/tryhackme/chill-hack.md "mention")
+
+**Kali**
+
+```
+ssh-keygen -t rsa
+cat /root/.ssh/id_rsa.pub
+```
+
+**Victim**
+
+copy paste id\_rsa.pub from Kali to the Victim server
+
+```
+copy id_rsa.pub to /home/$VICTIM/.ssh/authorized_keys
+```
+
+**Kali**
+
+```
+vi /etc/proxychains.conf
+```
+
+**proxychains.conf**
+
+```
+socks4 	127.0.0.1 9050
+```
+
+**Kali**
+
+```
+ssh -D 9050 $USERNAME@VICTIM
+```
+
+<figure><img src="../../.gitbook/assets/image (42) (2).png" alt=""><figcaption></figcaption></figure>
+
+
+
+I can now see the webpage from Kali but no login credentials to use.
+
+<figure><img src="../../.gitbook/assets/image (40) (4).png" alt=""><figcaption></figcaption></figure>
+
+Found
 
 
 

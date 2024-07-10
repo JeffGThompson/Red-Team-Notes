@@ -32,9 +32,21 @@
 
 
 
+## Bolt
+
+### Reverse shell from web after login
+
+**Examples**
+
+[bolt.md](../../walkthroughs/tryhackme/bolt.md "mention")
 
 
 
+## WebMin
 
+### Remote code execution
 
+**Examples**
+
+[source.md](../../walkthroughs/tryhackme/source.md "mention")
 

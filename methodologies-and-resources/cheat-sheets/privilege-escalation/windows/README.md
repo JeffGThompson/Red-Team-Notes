@@ -101,7 +101,13 @@ Retrieve the saved password stored in the saved PuTTY session under your profile
 reg query HKEY_CURRENT_USER\Software\SimonTatham\PuTTY\Sessions\ /f "Proxy" /s
 ```
 
+### See hidden files
 
+**Examples**
+
+[anthem.md](../../../../walkthroughs/tryhackme/anthem.md "mention")
+
+<figure><img src="../../../../.gitbook/assets/image (21) (1) (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 ### System and Sam
 

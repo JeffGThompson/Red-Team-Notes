@@ -6,7 +6,7 @@ Lateral Movement and Pivoting&#x20;
 
 Bypassing UAC
 
-## **Stopped after** Lian\_Yu
+## **Stopped after** Easy Peasy
 
 To do:
 
