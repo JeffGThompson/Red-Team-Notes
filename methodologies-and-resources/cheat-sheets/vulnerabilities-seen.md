@@ -8,15 +8,13 @@
 
 [steel-mountain.md](../../walkthroughs/tryhackme/steel-mountain.md "mention")
 
-
-
 ## CVE-2017-0143
 
 [blue.md](../../walkthroughs/tryhackme/blue.md "mention")[relevant.md](../../walkthroughs/tryhackme/relevant.md "mention")
 
-## CVE-2019-1388
+## CVE-2019-1388 - hhupd
 
-[retro.md](../../walkthroughs/tryhackme/retro.md "mention")
+[retro.md](../../walkthroughs/tryhackme/retro.md "mention")[blaster.md](../../walkthroughs/tryhackme/blaster.md "mention")
 
 ## CVE-2019-6714
 
@@ -24,9 +22,58 @@
 
 
 
-### CVE-2021-29447 - Wordpress version 5.6.2
+## CVE-2021-29447 - Wordpress version 5.6.2
 
 [wordpress-cve-2021-29447.md](../../walkthroughs/tryhackme/wordpress-cve-2021-29447.md "mention")
 
 
 
+## Druva inSync
+
+### Privileges Escalation
+
+[#case-study-druva-insync-6.6.3](../../walkthroughs/tryhackme/windows-privilege-escalation.md#case-study-druva-insync-6.6.3 "mention")
+
+## Jenkins
+
+### Get reverse shell from web
+
+[alfred.md](../../walkthroughs/tryhackme/alfred.md "mention")[internal.md](../../walkthroughs/tryhackme/internal.md "mention")
+
+## Joomla
+
+### Gather User Info
+
+[daily-bugle.md](../../walkthroughs/tryhackme/daily-bugle.md "mention")
+
+## Wordpress
+
+### Reverse shell from web after login
+
+**Examples**
+
+[internal.md](../../walkthroughs/tryhackme/internal.md "mention")
+
+## Bolt
+
+### Reverse shell from web after login
+
+**Examples**
+
+[bolt.md](../../walkthroughs/tryhackme/bolt.md "mention")
+
+## WebMin
+
+### Remote code execution
+
+**Examples**
+
+[source.md](../../walkthroughs/tryhackme/source.md "mention")
+
+## PHP/8.1.0-dev
+
+### Remote code execution
+
+**Examples**
+
+[#exploit](../../walkthroughs/tryhackme/agent-t.md#exploit "mention")

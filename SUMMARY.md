@@ -32,7 +32,6 @@
   * [Script Abuse](methodologies-and-resources/cheat-sheets/script-abuse.md)
   * [Credential Gathering & Cracking](methodologies-and-resources/cheat-sheets/credential-gathering-and-cracking.md)
   * [Other Cheat sheets](methodologies-and-resources/cheat-sheets/other-cheat-sheets.md)
-  * [Software](methodologies-and-resources/cheat-sheets/software.md)
   * [Lateral Movement and Pivoting](methodologies-and-resources/cheat-sheets/lateral-movement-and-pivoting.md)
   * [Vulnerabilities Seen](methodologies-and-resources/cheat-sheets/vulnerabilities-seen.md)
   * [Active Directory](methodologies-and-resources/cheat-sheets/active-directory.md)

