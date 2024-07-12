@@ -12,6 +12,10 @@
 
 [blue.md](../../walkthroughs/tryhackme/blue.md "mention")[relevant.md](../../walkthroughs/tryhackme/relevant.md "mention")
 
+## CVE-2018-19422 - SubrionCMS-RCE
+
+[tech\_supp0rt-1.md](../../walkthroughs/tryhackme/tech\_supp0rt-1.md "mention")
+
 ## CVE-2019-1388 - hhupd
 
 [retro.md](../../walkthroughs/tryhackme/retro.md "mention")[blaster.md](../../walkthroughs/tryhackme/blaster.md "mention")

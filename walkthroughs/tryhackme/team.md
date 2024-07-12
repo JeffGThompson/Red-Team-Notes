@@ -24,8 +24,6 @@ No other ports found
 
 
 
-
-
 ### TCP/80 - HTTP
 
 gobuster didn't find anything and the home page was just the default ubuntu page. Couldn't find anything of interest.
@@ -49,7 +47,7 @@ I wasn't finding anything so I decided to give the victim IP a hostname based of
 **Kali**
 
 ```
-echo "10.10.201.197   team.thm" >> /etc/hosts
+echo "10.10.201.197 team.thm" >> /etc/hosts
 ```
 
 **Kali**
@@ -110,8 +108,6 @@ Password: T3@m$h@r3
 ```
 ftp $VICTIM
 ```
-
-
 
 <figure><img src="../../.gitbook/assets/image (10) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
@@ -498,20 +494,3 @@ nc -lvnp 1337
 ```
 
 <figure><img src="../../.gitbook/assets/image (25) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

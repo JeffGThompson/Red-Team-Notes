@@ -12,9 +12,6 @@ groups
 uname -a
 ```
 
-```
-```
-
 Check for passwords in environment variables
 
 ```
@@ -224,9 +221,9 @@ sudo -l
 | find         |                      | <p><a data-mention href="../../../../walkthroughs/tryhackme/linux-privesc.md#find">#find</a></p><p><a data-mention href="../../../../walkthroughs/tryhackme/linux-privilege-escalation.md">linux-privilege-escalation.md</a></p>                                                                                                               |
 | iftop        |                      | [#iftop](../../../../walkthroughs/tryhackme/linux-privesc.md#iftop "mention")                                                                                                                                                                                                                                                                  |
 | sudo         |                      | [#privilege-escalation](../../../../walkthroughs/tryhackme/agent-sudo.md#privilege-escalation "mention")                                                                                                                                                                                                                                       |
-| cat          |                      | [brute-it.md](../../../../walkthroughs/tryhackme/brute-it.md "mention")                                                                                                                                                                                                                                                                        |
+| cat          |                      | [brute-it.md](../../../../walkthroughs/tryhackme/brute-it.md "mention")[dav.md](../../../../walkthroughs/tryhackme/dav.md "mention")                                                                                                                                                                                                           |
 | pkexec       |                      | [lian\_yu.md](../../../../walkthroughs/tryhackme/lian\_yu.md "mention")                                                                                                                                                                                                                                                                        |
-|              |                      |                                                                                                                                                                                                                                                                                                                                                |
+| nano         |                      | [#privilege-escalation](../../../../walkthroughs/tryhackme/gallery.md#privilege-escalation "mention")                                                                                                                                                                                                                                          |
 
 ### SUID / SGID Executables - Known Exploits
 
