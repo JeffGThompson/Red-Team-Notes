@@ -36,23 +36,9 @@ gobuster dir -u http://$VICTIM -w /usr/share/wordlists/SecLists/Discovery/Web-Co
 
 <figure><img src="../../.gitbook/assets/image (342).png" alt=""><figcaption></figcaption></figure>
 
-
-
-
-
-
-
 <figure><img src="../../.gitbook/assets/image (326).png" alt=""><figcaption></figcaption></figure>
 
-
-
-
-
 <figure><img src="../../.gitbook/assets/image (327).png" alt=""><figcaption></figcaption></figure>
-
-
-
-
 
 <figure><img src="../../.gitbook/assets/image (328).png" alt=""><figcaption></figcaption></figure>
 
@@ -120,8 +106,6 @@ Accept-Encoding: gzip, deflate
 Connection: close
 Cookie: token=value
 Upgrade-Insecure-Requests: 1
-
-
 ```
 
 
@@ -218,10 +202,4 @@ Password: 123
 ```
 
 <figure><img src="../../.gitbook/assets/image (340).png" alt=""><figcaption></figcaption></figure>
-
-
-
-
-
-
 

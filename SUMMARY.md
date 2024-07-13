@@ -29,13 +29,14 @@
   * [Tunneling and Port Forwarding](methodologies-and-resources/cheat-sheets/tunneling-and-port-forwarding.md)
   * [Burp](methodologies-and-resources/cheat-sheets/burp.md)
   * [Static Binaries](methodologies-and-resources/cheat-sheets/static-binaries.md)
-  * [Script Abuse](methodologies-and-resources/cheat-sheets/script-abuse.md)
+  * [File Info Gathering & Script Abuse](methodologies-and-resources/cheat-sheets/file-info-gathering-and-script-abuse.md)
   * [Credential Gathering & Cracking](methodologies-and-resources/cheat-sheets/credential-gathering-and-cracking.md)
   * [Other Cheat sheets](methodologies-and-resources/cheat-sheets/other-cheat-sheets.md)
   * [Lateral Movement and Pivoting](methodologies-and-resources/cheat-sheets/lateral-movement-and-pivoting.md)
   * [Vulnerabilities Seen](methodologies-and-resources/cheat-sheets/vulnerabilities-seen.md)
   * [Active Directory](methodologies-and-resources/cheat-sheets/active-directory.md)
   * [Web](methodologies-and-resources/cheat-sheets/web.md)
+  * [Page 1](methodologies-and-resources/cheat-sheets/page-1.md)
 
 ## Walkthroughs
 

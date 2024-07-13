@@ -2,7 +2,7 @@
 
 
 
-
+[https://book.hacktricks.xyz/pentesting-web/sql-injection](https://book.hacktricks.xyz/pentesting-web/sql-injection)
 
 {% embed url="https://book.hacktricks.xyz/pentesting-web/sql-injection" %}
 
@@ -10,7 +10,7 @@
 
 **Examples**
 
-[sql-injection-lab.md](../../walkthroughs/tryhackme/sql-injection-lab.md "mention")[#sql-injection](../../walkthroughs/tryhackme/avengers-blog.md#sql-injection "mention")[gallery.md](../../walkthroughs/tryhackme/gallery.md "mention")
+[sql-injection-lab.md](../../walkthroughs/tryhackme/sql-injection-lab.md "mention")[#sql-injection](../../walkthroughs/tryhackme/avengers-blog.md#sql-injection "mention")[gallery.md](../../walkthroughs/tryhackme/gallery.md "mention")[lesson-learned.md](../../walkthroughs/tryhackme/lesson-learned.md "mention")[plotted-tms.md](../../walkthroughs/tryhackme/plotted-tms.md "mention")
 
 ```
 a' or 1=1 -- -
@@ -26,7 +26,11 @@ a' or 1=1 -- -
 
 
 
+## Test  SQL Injection with Burp
 
+**Examples**
+
+[lesson-learned.md](../../walkthroughs/tryhackme/lesson-learned.md "mention")
 
 **List**
 
@@ -57,7 +61,7 @@ a' or 1=1 -- -
 
 
 
-## Bruteforce fields
+### Bruteforce fields
 
 Good wordlist to use. You would do this if you discovered one field already, than you just replace it(in the example below you change password) with your list.&#x20;
 

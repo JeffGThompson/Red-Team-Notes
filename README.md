@@ -6,7 +6,7 @@ Lateral Movement and Pivoting&#x20;
 
 Bypassing UAC
 
-## **Stopped after** Thompson
+## **Stopped after** Valley
 
 To do:
 

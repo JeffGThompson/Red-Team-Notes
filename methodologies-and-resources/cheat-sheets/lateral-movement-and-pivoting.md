@@ -72,7 +72,7 @@ Password: $PASSWORD
 
 **Examples**
 
-[chill-hack.md](../../walkthroughs/tryhackme/chill-hack.md "mention")
+[chill-hack.md](../../walkthroughs/tryhackme/chill-hack.md "mention")[vulnnet-internal.md](../../walkthroughs/tryhackme/vulnnet-internal.md "mention")
 
 **Kali**
 
@@ -114,8 +114,6 @@ ssh -D 9050 $USERNAME@VICTIM
 I can now see the webpage from Kali but no login credentials to use.
 
 <figure><img src="../../.gitbook/assets/image (40) (4).png" alt=""><figcaption></figcaption></figure>
-
-Found
 
 
 

@@ -78,10 +78,6 @@ ctrl + Z
 stty raw -echo;fg
 ```
 
-
-
-##
-
 ### Transfer file
 
 In /opt we find a keepass file so I transfered back to Kali to try to crack it
@@ -154,10 +150,6 @@ chmod +x pspy32
 
 <figure><img src="../../.gitbook/assets/image (307).png" alt=""><figcaption></figcaption></figure>
 
-
-
-
-
 <figure><img src="../../.gitbook/assets/image (308).png" alt=""><figcaption></figcaption></figure>
 
 The script calls backup.inc.php in the lib folder, we can't edit this file but we can delete it and replace it so I copied the same php reverse shell script that was used before and replaced backup. After that I just waited until the script ran on its own.
@@ -184,40 +176,6 @@ nc -lvnp 1337
 ```
 
 <figure><img src="../../.gitbook/assets/image (309).png" alt=""><figcaption></figcaption></figure>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

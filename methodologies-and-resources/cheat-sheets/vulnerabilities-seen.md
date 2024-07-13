@@ -74,6 +74,24 @@
 
 [source.md](../../walkthroughs/tryhackme/source.md "mention")
 
+## TeamCity
+
+### Remote code execution
+
+**Examples**
+
+[#tcp-22-ssh](../../walkthroughs/tryhackme/vulnnet-internal.md#tcp-22-ssh "mention")
+
+
+
+## FreeSWITCH
+
+### Remote code execution
+
+**Examples**
+
+[flatline.md](../../walkthroughs/tryhackme/flatline.md "mention")
+
 ## PHP/8.1.0-dev
 
 ### Remote code execution
