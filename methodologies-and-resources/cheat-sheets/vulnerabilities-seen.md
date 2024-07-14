@@ -4,9 +4,17 @@
 
 [game-zone.md](../../walkthroughs/tryhackme/game-zone.md "mention")
 
+## CVE-2014-0160 - HeartBleed
+
+[heartbleed.md](../../walkthroughs/tryhackme/heartbleed.md "mention")
+
 ## CVE-2014-6287
 
 [steel-mountain.md](../../walkthroughs/tryhackme/steel-mountain.md "mention")
+
+## CVE-2016–3714 - ImageMagick
+
+[magician.md](../../walkthroughs/tryhackme/magician.md "mention")
 
 ## CVE-2017-0143
 

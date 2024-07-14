@@ -80,7 +80,7 @@ ls /SecLists/Discovery/Web-Content/common.txt
 
 **Examples**
 
-[#sql](../../walkthroughs/tryhackme/the-cod-caper.md#sql "mention")[#sql-injection](../../walkthroughs/tryhackme/gallery.md#sql-injection "mention")
+[#sql](../../walkthroughs/tryhackme/the-cod-caper.md#sql "mention")[#sql-injection](../../walkthroughs/tryhackme/gallery.md#sql-injection "mention")[expose.md](../../walkthroughs/tryhackme/expose.md "mention")
 
 **Kali**
 

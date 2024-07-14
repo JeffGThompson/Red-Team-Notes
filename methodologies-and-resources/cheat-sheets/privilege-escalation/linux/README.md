@@ -229,7 +229,7 @@ sudo -l
 
 ### SUID / SGID Executables - Known Exploits
 
-Find all the SUID/SGID executables on the Debian VM.
+Find all the SUID/SGID executables.
 
 **Victim**
 
@@ -243,7 +243,7 @@ find / -type f -a \( -perm -u+s -o -perm -g+s \) -exec ls -l {} \; 2> /dev/null
 | ------- | ------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------- |
 | exim    | version 4.84-3                              | [#suid-sgid-executables-known-exploits](../../../../walkthroughs/tryhackme/linux-privesc.md#suid-sgid-executables-known-exploits "mention") |
 | base64  | Read files we shouldn't have access to read | [linux-privilege-escalation.md](../../../../walkthroughs/tryhackme/linux-privilege-escalation.md "mention")                                 |
-|         |                                             |                                                                                                                                             |
+| find    | Privlege Escalation                         | [#privilege-escalation](../../../../walkthroughs/tryhackme/expose.md#privilege-escalation "mention")                                        |
 
 
 
