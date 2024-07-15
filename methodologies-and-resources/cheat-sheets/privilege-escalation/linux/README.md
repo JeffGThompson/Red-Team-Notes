@@ -36,8 +36,6 @@ Files owned by group
 find / -type f -group $GROUP 2>/dev/null
 ```
 
-
-
 Find passwords
 
 ```
@@ -226,6 +224,10 @@ sudo -l
 | nano                        |                      | [#privilege-escalation](../../../../walkthroughs/tryhackme/gallery.md#privilege-escalation "mention")                                                                                                                                                                                                                                          |
 | certutil                    | Read files           | [#tcp-22-ssh](../../../../walkthroughs/tryhackme/b3dr0ck.md#tcp-22-ssh "mention")                                                                                                                                                                                                                                                              |
 | <p>base64 </p><p>base32</p> | Read files           | [b3dr0ck.md](../../../../walkthroughs/tryhackme/b3dr0ck.md "mention")                                                                                                                                                                                                                                                                          |
+| env                         |                      | [#privilege-escalation](../../../../walkthroughs/tryhackme/dogcat.md#privilege-escalation "mention")                                                                                                                                                                                                                                           |
+| pico                        |                      | [#lateral-movement](../../../../walkthroughs/tryhackme/madeyes-castle/#lateral-movement "mention")                                                                                                                                                                                                                                             |
+| flask                       |                      | [#privilege-escalation](../../../../walkthroughs/tryhackme/haskhell.md#privilege-escalation "mention")                                                                                                                                                                                                                                         |
+| python3                     |                      | [#lateral-movement-will](../../../../walkthroughs/tryhackme/watcher.md#lateral-movement-will "mention")                                                                                                                                                                                                                                        |
 
 ### SUID / SGID Executables - Known Exploits
 
@@ -243,7 +245,8 @@ find / -type f -a \( -perm -u+s -o -perm -g+s \) -exec ls -l {} \; 2> /dev/null
 | ------- | ------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------- |
 | exim    | version 4.84-3                              | [#suid-sgid-executables-known-exploits](../../../../walkthroughs/tryhackme/linux-privesc.md#suid-sgid-executables-known-exploits "mention") |
 | base64  | Read files we shouldn't have access to read | [linux-privilege-escalation.md](../../../../walkthroughs/tryhackme/linux-privilege-escalation.md "mention")                                 |
-| find    | Privlege Escalation                         | [#privilege-escalation](../../../../walkthroughs/tryhackme/expose.md#privilege-escalation "mention")                                        |
+| find    | Privilege Escalation                        | [#privilege-escalation](../../../../walkthroughs/tryhackme/expose.md#privilege-escalation "mention")                                        |
+| python3 |                                             | [#privilege-escalation](../../../../walkthroughs/tryhackme/annie.md#privilege-escalation "mention")                                         |
 
 
 
@@ -535,6 +538,8 @@ cat /home/user/myvpn.ovpn
 
 ### SSH Keys
 
+### Copy keys from Victim
+
 **Examples**
 
 [#passwords-and-keys-ssh-keys](../../../../walkthroughs/tryhackme/linux-privesc.md#passwords-and-keys-ssh-keys "mention")
@@ -544,7 +549,7 @@ Look for hidden files & directories in the system root.
 **Victim**
 
 ```
-cat /home/$USER/.ssh/#KEY
+cat /home/$USER/.ssh/$KEY
 ```
 
 Copy the key over to your Kali box (it's easier to just view the contents of the $KEY file and copy/paste the key) and give it the correct permissions, otherwise your SSH client will refuse to use it.
@@ -554,6 +559,37 @@ Copy the key over to your Kali box (it's easier to just view the contents of the
 <pre><code><strong>chmod 600 $KEY
 </strong><strong>ssh -i $KEY -oPubkeyAcceptedKeyTypes=+ssh-rsa -oHostKeyAlgorithms=+ssh-rsa $USER@$VICTIM
 </strong></code></pre>
+
+
+
+### **Add Keys to Victim**
+
+**Examples**
+
+[madeyes-castle](../../../../walkthroughs/tryhackme/madeyes-castle/ "mention")
+
+**Kali**
+
+```
+ssh-keygen -t rsa
+cat ~/.ssh/id_rsa.pub 
+```
+
+<figure><img src="../../../../.gitbook/assets/image (29) (1).png" alt=""><figcaption></figcaption></figure>
+
+**Victim**
+
+```
+echo "$YOURKEY" >> /home/$USER/.ssh/authorized_keys
+```
+
+**Kali**
+
+```
+ssh $USER@$VICTIM
+```
+
+
 
 ## NFS
 

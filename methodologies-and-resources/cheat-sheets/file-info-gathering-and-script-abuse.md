@@ -14,7 +14,7 @@ If it's a file we can't read like a binary file we might be able to still gather
 strings $FILE > out.txt
 ```
 
-##
+
 
 ## Abusing Library paths&#x20;
 
@@ -51,5 +51,7 @@ groups
 
 
 
+## Ghidra
 
+[#ghidra](../../walkthroughs/tryhackme/madeyes-castle/#ghidra "mention")
 
