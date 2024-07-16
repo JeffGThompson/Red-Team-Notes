@@ -217,10 +217,22 @@ Add things from this room: [https://tryhackme.com/room/contentdiscovery](https:/
 
 ### Info gathering info
 
+Check if any pages are listed
+
 ```
 http://$VICTIM/robots.txt
 http://$VICTIM/sitemap.xml
 ```
+
+Check certificate for hostname. Then add to hosts file.
+
+**Examples**
+
+[spring.md](../walkthroughs/tryhackme/spring.md "mention")
+
+<figure><img src="../.gitbook/assets/image.png" alt=""><figcaption></figcaption></figure>
+
+
 
 ### Create wordlist&#x20;
 
@@ -369,10 +381,6 @@ ffuf allows you to put the keyword anywhere we can use it to fuzz for parameters
 ffuf -u http://$VICTIM/sqli-labs/Less-1/?FUZZ=1 -c -w /usr/share/wordlists/SecLists/Discovery/Web-Content/raft-medium-words-lowercase.txt -fw 39
 ```
 
-
-
-
-
 ### Find Vulnerabilities&#x20;
 
 Nikto Tuning (-T) Options
@@ -484,12 +492,6 @@ It's also possible to send only matches to your proxy for replaying:
 ffuf -u http://$VICTIM  -c -w /usr/share/wordlists/SecLists/Discovery/Web-Content/common.txt -replay-proxy http://127.0.0.1:8080
 ```
 
-
-
-
-
-
-
 ### SQLMap
 
 #### Get information
@@ -507,8 +509,6 @@ sqlmap -u http://$VICTIM/$PAGE.php --forms --dump
 OR
 sqlmap -r request.txt --dbms=mysql --dump #Get request from Burp
 ```
-
-
 
 #### **Get Databases**
 
@@ -547,8 +547,6 @@ Get values of specific fields
 ```
 sudo sqlmap -r request.req --current-db $DATABASE  --tables -T $TABLE  -C $FIELD1, $FIELD2 --dump
 ```
-
-
 
 #### **Rescan SQLMap**
 
@@ -625,6 +623,26 @@ wpscan --url http://$VICTIM -e p,t,u
 ```
 wpscan --url http://$VICTIM --passwords /usr/share/wordlists/rockyou.txt
 ```
+
+### .git folder found
+
+**Examples**
+
+[#gitdumper](../walkthroughs/tryhackme/spring.md#gitdumper "mention")
+
+**Kali**
+
+```
+pip install git-dumper
+mkdir git
+git-dumper https://$VICTIM/sources/new/.git/ git/
+cd git
+git log
+
+grep -r pass *
+```
+
+
 
 ## Jenkins
 

