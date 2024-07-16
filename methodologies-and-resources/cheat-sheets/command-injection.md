@@ -29,6 +29,18 @@
 
 
 
+### %A
+
+**Examples**
+
+[ultratech.md](../../walkthroughs/tryhackme/ultratech.md "mention")
+
+Command Injection Payload: [https://github.com/payloadbox/command-injection-payload-list](https://github.com/payloadbox/command-injection-payload-list)
+
+<figure><img src="../../.gitbook/assets/image (507).png" alt=""><figcaption></figcaption></figure>
+
+<figure><img src="../../.gitbook/assets/image (508).png" alt=""><figcaption></figcaption></figure>
+
 ### Bypass with backslash newline
 
 **Examples**

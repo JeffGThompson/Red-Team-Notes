@@ -6,7 +6,7 @@ Lateral Movement and Pivoting&#x20;
 
 Bypassing UAC
 
-## **Stopped after** watcher
+## **Stopped after** Linux Agency
 
 To do:
 

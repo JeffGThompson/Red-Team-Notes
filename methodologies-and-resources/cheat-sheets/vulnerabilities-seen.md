@@ -107,3 +107,11 @@
 **Examples**
 
 [#exploit](../../walkthroughs/tryhackme/agent-t.md#exploit "mention")
+
+## Joomla sar2html
+
+### Remote code execution
+
+**Examples**
+
+[#initial-shell](../../walkthroughs/tryhackme/boiler-ctf.md#initial-shell "mention")

