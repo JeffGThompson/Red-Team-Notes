@@ -58,13 +58,17 @@
 
 [daily-bugle.md](../../walkthroughs/tryhackme/daily-bugle.md "mention")
 
+### Reverse shell&#x20;
+
+[ha-joker-ctf.md](../../walkthroughs/tryhackme/ha-joker-ctf.md "mention")
+
 ## Wordpress
 
 ### Reverse shell from web after login
 
 **Examples**
 
-[internal.md](../../walkthroughs/tryhackme/internal.md "mention")
+[internal.md](../../walkthroughs/tryhackme/internal.md "mention")[#initial-shell](../../walkthroughs/tryhackme/wekor.md#initial-shell "mention")
 
 ## Bolt
 

@@ -51,7 +51,16 @@ groups
 
 
 
+
+
+**Kali**
+
+```
+cd db
+cat joomladb.sql | grep admin
+```
+
 ## Ghidra
 
-[#ghidra](../../walkthroughs/tryhackme/madeyes-castle/#ghidra "mention")[#ghidra](../../walkthroughs/tryhackme/wonderland.md#ghidra "mention")[linux-agency.md](../../walkthroughs/tryhackme/linux-agency.md "mention")
+[#ghidra](../../walkthroughs/tryhackme/madeyes-castle/#ghidra "mention")[#ghidra](../../walkthroughs/tryhackme/wonderland.md#ghidra "mention")[linux-agency.md](../../walkthroughs/tryhackme/linux-agency.md "mention")[#ghidra](../../walkthroughs/tryhackme/tokyo-ghoul.md#ghidra "mention")
 

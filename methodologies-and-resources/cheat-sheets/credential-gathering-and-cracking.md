@@ -420,7 +420,17 @@ sudo apt install ./stegseek_0.6-1.deb
 stegseek --crack -sf kaido.jpeg -wl /usr/share/wordlists/rockyou.txt
 ```
 
-###
+### SQL
+
+**Examples**
+
+[ha-joker-ctf.md](../../walkthroughs/tryhackme/ha-joker-ctf.md "mention")
+
+**Kali**
+
+```
+cat joomladb.sql | grep admin
+```
 
 ### Firefox
 
