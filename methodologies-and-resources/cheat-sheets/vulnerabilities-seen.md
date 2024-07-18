@@ -32,7 +32,9 @@
 
 [hackpark.md](../../walkthroughs/tryhackme/hackpark.md "mention")
 
+## CVE-2020-35846 - Cockpit CMS 0.11.1 NoSQL Injection to Remote Code Execution
 
+[cmspit.md](../../walkthroughs/tryhackme/cmspit.md "mention")
 
 ## CVE-2021-29447 - Wordpress version 5.6.2
 

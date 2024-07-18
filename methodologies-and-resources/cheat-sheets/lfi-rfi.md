@@ -352,13 +352,18 @@ Connection: close
 Upgrade-Insecure-Requests: 1
 ```
 
+## Find what can run commands
 
+**Examples**
 
+[bookstore.md](../../walkthroughs/tryhackme/bookstore.md "mention")
 
+**Kali**
 
-
-
-##
+```
+wfuzz -c -f bookstore.txt -u "http://$VICTIM:5000/api/v1/resources/books?FUZZ=.bash_history" -w /usr/share/wordlists/SecLis
+ts/Discovery/Web-Content/directory-list-2.3-medium.txt --hc 404
+```
 
 
 

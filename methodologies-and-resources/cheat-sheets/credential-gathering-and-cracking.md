@@ -1467,6 +1467,20 @@ evil-winrm -u $USERNAME -H $HASH -i $VICTIM
 
 First identify the hash with one of the HASH analyzers.
 
+### Hex to Binary
+
+This isn't really a hash but it looks like a MD5 hash at first sigh so worth trying.
+
+#### Examples
+
+[#finding-username](../../walkthroughs/tryhackme/biteme.md#finding-username "mention")
+
+**Kali**
+
+```
+echo $HEXSTRING| xxd -r -p
+```
+
 ### Crack MD4 hash
 
 #### Examples
