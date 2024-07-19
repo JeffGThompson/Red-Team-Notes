@@ -1,6 +1,6 @@
 # Zeno
 
-**oom Link:** [https://tryhackme.com/room/zeno](https://tryhackme.com/room/zeno)
+R**oom Link:** [https://tryhackme.com/room/zeno](https://tryhackme.com/room/zeno)
 
 
 
@@ -238,6 +238,3 @@ ls -lah
 ```
 
 <figure><img src="../../.gitbook/assets/image (811).png" alt=""><figcaption></figcaption></figure>
-
-
-

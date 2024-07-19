@@ -6,7 +6,9 @@ Lateral Movement and Pivoting&#x20;
 
 Bypassing UAC
 
-## **Stopped after PeakHill**
+
+
+## **Stopped after** tomghost
 
 To do:
 

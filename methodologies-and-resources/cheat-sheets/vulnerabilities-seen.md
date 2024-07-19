@@ -32,6 +32,10 @@
 
 [hackpark.md](../../walkthroughs/tryhackme/hackpark.md "mention")
 
+## CVE-2020-1938 - Apache Tomcat 9.0.30 - Remote Code Execution
+
+[tomghost.md](../../walkthroughs/tryhackme/tomghost.md "mention")
+
 ## CVE-2020-35846 - Cockpit CMS 0.11.1 NoSQL Injection to Remote Code Execution
 
 [cmspit.md](../../walkthroughs/tryhackme/cmspit.md "mention")
@@ -121,3 +125,11 @@
 **Examples**
 
 [#initial-shell](../../walkthroughs/tryhackme/boiler-ctf.md#initial-shell "mention")
+
+
+
+## Restaurant Management System 1.0 -&#x20;
+
+### Remote Code Execution
+
+[#restaurant-management-system-exploit](../../walkthroughs/tryhackme/zeno.md#restaurant-management-system-exploit "mention")
