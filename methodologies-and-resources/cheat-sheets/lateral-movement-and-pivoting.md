@@ -6,7 +6,7 @@
 
 **Examples**
 
-[game-zone.md](../../walkthroughs/tryhackme/game-zone.md "mention")[internal.md](../../walkthroughs/tryhackme/internal.md "mention")
+[game-zone.md](../../walkthroughs/tryhackme/game-zone.md "mention")[internal.md](../../walkthroughs/tryhackme/internal.md "mention")[kitty.md](../../walkthroughs/tryhackme/kitty.md "mention")
 
 **Local port forwarding** allows us to "pull" a port from an SSH server into the SSH client. In our scenario, this could be used to take any service available in our attacker's machine and make it available through a port on PC-1. That way, any host that can't connect directly to the attacker's PC but can connect to PC-1 will now be able to reach the attacker's services through the pivot host.
 

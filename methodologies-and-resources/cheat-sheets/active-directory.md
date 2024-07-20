@@ -116,7 +116,7 @@ Get-ADGroupMember -Identity "$GROUPNAME" -Server $DOMAINHOSTNAME
 
 **Bloodhound Examples**
 
-[exploiting-active-directory.md](../../walkthroughs/tryhackme/exploiting-active-directory.md "mention")
+[exploiting-active-directory.md](../../walkthroughs/tryhackme/exploiting-active-directory.md "mention")[vulnnet-active.md](../../walkthroughs/tryhackme/vulnnet-active.md "mention")
 
 You will often hear users refer to Sharphound and Bloodhound interchangeably. However, they are not the same. Sharphound is the enumeration tool of Bloodhound. It is used to enumerate the AD information that can then be visually displayed in Bloodhound. Bloodhound is the actual GUI used to display the AD attack graphs. Therefore, we first need to learn how to use Sharphound to enumerate AD before we can look at the results visually using Bloodhound.
 
