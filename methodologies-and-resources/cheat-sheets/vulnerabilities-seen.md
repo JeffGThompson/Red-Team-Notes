@@ -104,8 +104,6 @@
 
 [#tcp-22-ssh](../../walkthroughs/tryhackme/vulnnet-internal.md#tcp-22-ssh "mention")
 
-
-
 ## FreeSWITCH
 
 ### Remote code execution
@@ -145,3 +143,17 @@
 ### Remote Code Execution
 
 [empline.md](../../walkthroughs/tryhackme/empline.md "mention")
+
+
+
+## Tika 1.17
+
+### Reverse shell
+
+[cyberlens.md](../../walkthroughs/tryhackme/cyberlens.md "mention")
+
+## Odoo CRM 10.0&#x20;
+
+### Remote Code Execution&#x20;
+
+[obscure.md](../../walkthroughs/tryhackme/obscure.md "mention")

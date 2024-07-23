@@ -1086,7 +1086,7 @@ Password: $PASSWORD
 
 **Example**
 
-[the-great-escape.md](../walkthroughs/tryhackme/the-great-escape.md "mention")
+[the-great-escape.md](../walkthroughs/tryhackme/the-great-escape.md "mention")[umbrella.md](../walkthroughs/tryhackme/umbrella.md "mention")
 
 **Kali**
 
@@ -1116,13 +1116,11 @@ Wait 30 seconds
 sudo systemctl start docker
 ```
 
-
-
 ### **List repositories**
 
 **Example**
 
-[the-docker-rodeo.md](../walkthroughs/tryhackme/the-docker-rodeo.md "mention")[#tcp-5000-docker-registry](../walkthroughs/tryhackme/umbrella.md#tcp-5000-docker-registry "mention")
+[the-docker-rodeo.md](../walkthroughs/tryhackme/the-docker-rodeo.md "mention")[#tcp-5000-docker-registry](../walkthroughs/tryhackme/umbrella.md#tcp-5000-docker-registry "mention")[umbrella.md](../walkthroughs/tryhackme/umbrella.md "mention")
 
 **Kali**
 
@@ -1134,7 +1132,7 @@ curl -s http://$VICTIM:5000/v2/_catalog
 
 **Example**
 
-[the-docker-rodeo.md](../walkthroughs/tryhackme/the-docker-rodeo.md "mention")[#tcp-5000-docker-registry](../walkthroughs/tryhackme/umbrella.md#tcp-5000-docker-registry "mention")
+[the-docker-rodeo.md](../walkthroughs/tryhackme/the-docker-rodeo.md "mention")[#tcp-5000-docker-registry](../walkthroughs/tryhackme/umbrella.md#tcp-5000-docker-registry "mention")[umbrella.md](../walkthroughs/tryhackme/umbrella.md "mention")
 
 **Kali**
 
@@ -1146,7 +1144,7 @@ curl -s http://$VICTIM:5000/v2/$REPOSITORY/tags/list
 
 **Example**
 
-[the-docker-rodeo.md](../walkthroughs/tryhackme/the-docker-rodeo.md "mention")[#tcp-5000-docker-registry](../walkthroughs/tryhackme/umbrella.md#tcp-5000-docker-registry "mention")
+[the-docker-rodeo.md](../walkthroughs/tryhackme/the-docker-rodeo.md "mention")[#tcp-5000-docker-registry](../walkthroughs/tryhackme/umbrella.md#tcp-5000-docker-registry "mention")[umbrella.md](../walkthroughs/tryhackme/umbrella.md "mention")
 
 Inside the manifest we can find potential credentials
 
@@ -1401,10 +1399,6 @@ show collections
 db.$FIELD.find();
 exit
 ```
-
-
-
-
 
 ## Knock
 

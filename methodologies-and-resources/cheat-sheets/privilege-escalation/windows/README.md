@@ -48,13 +48,21 @@ Find text in file
 type C:\Windows\path\to\file\$FILE | findstr $STRING
 ```
 
+Find passwords
+
+```
+reg query HKLM /f password /t REG_SZ /s
+```
+
+###
+
 ### **Whoami /priv**
 
-| Finding                 | Comment                                                 | Examples                                                                |
-| ----------------------- | ------------------------------------------------------- | ----------------------------------------------------------------------- |
-| SeImpersonatePrivilege  | Printspoofer - works on Windows 10 and Server 2016/2019 | [relevant.md](../../../../walkthroughs/tryhackme/relevant.md "mention") |
-|                         |                                                         |                                                                         |
-|                         |                                                         |                                                                         |
+| Finding                 | Comment                                                 | Examples                                                                                                                                     |
+| ----------------------- | ------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------- |
+| SeImpersonatePrivilege  | Printspoofer - works on Windows 10 and Server 2016/2019 | [relevant.md](../../../../walkthroughs/tryhackme/relevant.md "mention")[stealth.md](../../../../walkthroughs/tryhackme/stealth.md "mention") |
+| SeImpersonatePrivilege  | Using EfsPotato                                         | [stealth.md](../../../../walkthroughs/tryhackme/stealth.md "mention")                                                                        |
+|                         |                                                         |                                                                                                                                              |
 
 
 
