@@ -198,3 +198,4 @@
   * [CyberLens](walkthroughs/tryhackme/cyberlens.md)
   * [Obscure](walkthroughs/tryhackme/obscure.md)
   * [Wordpress: CVE-2021-29447](walkthroughs/tryhackme/wordpress-cve-2021-29447.md)
+  * [File Inclusion, Path Traversal](walkthroughs/tryhackme/file-inclusion-path-traversal.md)
