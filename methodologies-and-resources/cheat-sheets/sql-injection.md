@@ -1644,3 +1644,11 @@ From SQHell, go over and put in notes
 * [Flag 4 - Out-of-band - Curl Method](https://pencer.io/ctf/ctf-thm-sqhell/#flag-4---out-of-band---curl-method)
 * [Flag 4 - Out-of-band - SQLMap Method](https://pencer.io/ctf/ctf-thm-sqhell/#flag-4---out-of-band---sqlmap-method)
 
+
+
+### **NoSQL Injection**
+
+**Examples**
+
+[nosql-injection.md](../../walkthroughs/tryhackme/nosql-injection.md "mention")
+
