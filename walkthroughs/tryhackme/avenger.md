@@ -48,10 +48,6 @@ ffuf -u http://$VICTIM/FUZZ -w /usr/share/wordlists/SecLists/Discovery/Web-Conte
 
 <figure><img src="../../.gitbook/assets/image (981).png" alt=""><figcaption></figcaption></figure>
 
-
-
-
-
 <figure><img src="../../.gitbook/assets/image (980).png" alt=""><figcaption></figcaption></figure>
 
 
@@ -80,8 +76,6 @@ cat /etc/hosts
 ```
 ffuf -u http://avenger.tryhackme/gift/FUZZ -w /usr/share/wordlists/SecLists/Discovery/Web-Content/directory-list-2.3-medium.txt -fc 404,403 -e .php,.html,.txt
 ```
-
-
 
 
 
@@ -165,7 +159,7 @@ curl https://nim-lang.org/choosenim/init.sh -sSf | sh
 subl rev_shell.nim
 ```
 
-<figure><img src="../../.gitbook/assets/image (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1) (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 **Kali #1**
 
@@ -237,7 +231,7 @@ Username: hugo
 Password: SurpriseMF123!
 ```
 
-<figure><img src="../../.gitbook/assets/image (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 I can run a administrator shell from the GUI
 

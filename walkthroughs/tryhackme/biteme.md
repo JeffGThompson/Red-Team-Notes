@@ -20,8 +20,6 @@
 
 <figure><img src="../../.gitbook/assets/image (749).png" alt=""><figcaption></figcaption></figure>
 
-
-
 ## TCP/80 - HTTP
 
 **Kali**
@@ -33,8 +31,6 @@ gobuster dir -u http://$VICTIM -w /usr/share/wordlists/SecLists/Discovery/Web-Co
 
 
 <figure><img src="../../.gitbook/assets/image (753).png" alt=""><figcaption></figcaption></figure>
-
-
 
 
 
@@ -66,7 +62,7 @@ gobuster dir -u http://$VICTIM/console -w /usr/share/wordlists/SecLists/Discover
 echo 6a61736f6e5f746573745f6163636f756e74 | xxd -r -p
 ```
 
-<figure><img src="../../.gitbook/assets/image (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 ## Recreating login
 

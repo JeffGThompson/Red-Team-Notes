@@ -1,0 +1,244 @@
+# Advanced SQL Injection
+
+**Room Link:** [https://tryhackme.com/r/room/advancedsqlinjection](https://tryhackme.com/r/room/advancedsqlinjection)
+
+
+
+## Second-Order SQL Injection
+
+Second-order SQL injection, also known as stored SQL injection, exploits vulnerabilities where user-supplied input is saved and subsequently used in a different part of the application, possibly after some initial processing. This type of attack is more insidious because the malicious SQL code does not need to immediately result in a SQL syntax error or other obvious issues, making it harder to detect with standard input validation techniques. The injection occurs upon the second use of the data when it is retrieved and used in a SQL command, hence the name "Second Order".
+
+![second order sql injection workflow diagram](https://tryhackme-images.s3.amazonaws.com/user-uploads/62a7685ca6e7ce005d3f3afe/room-content/62a7685ca6e7ce005d3f3afe-1716989709301)\
+
+
+Impact
+
+The danger of Second-Order SQL Injection lies in its ability to bypass typical front-end defences like basic input validation or sanitisation, which only occur at the point of initial data entry. Since the payload does not cause disruption during the first step, it can be overlooked until it's too late, making the attack particularly stealthy.\
+
+
+Example\
+We will be using a book review application. The application allows users to add new books via a web page (`add.php`). Users are prompted to provide details about the book they wish to add to the database. You can access the app at `http://MACHINE_IP/second/add.php`[.](http://machine\_ip/case1.) The data collected includes the `SSN`, `book_name`, and `author`. Let's consider adding a book with the following details: SSN: UI00012, Book Name: Intro to PHP, Author: Tim. This information is input through a form on the `add.php` page, and upon submission, it is stored in the BookStore database as shown below:
+
+![adding a new book in database](https://tryhackme-images.s3.amazonaws.com/user-uploads/62a7685ca6e7ce005d3f3afe/room-content/62a7685ca6e7ce005d3f3afe-1715774633948)\
+
+
+As we know, Second-Order SQL injection is notably challenging to identify. Unlike traditional SQL Injection, which exploits real-time processing vulnerabilities, it occurs when data previously stored in a database is later used in a SQL query. Detecting this vulnerability often requires understanding how data flows through the application and is reused, necessitating a deep knowledge of the backend operations.\
+
+
+Analysis of the Code
+
+Consider the PHP code snippet used in our application for adding books:
+
+```php
+if (isset($_POST['submit'])) {
+
+    $ssn = $conn->real_escape_string($_POST['ssn']);
+
+    $book_name = $conn->real_escape_string($_POST['book_name']);
+
+    $author = $conn->real_escape_string($_POST['author']);
+
+    $sql = "INSERT INTO books (ssn, book_name, author) VALUES ('$ssn', '$book_name', '$author')";
+
+    if ($conn->query($sql) === TRUE) {
+
+        echo "<p class='text-green-500'>New book added successfully</p>";
+
+    } else {
+
+        echo "<p class='text-red-500'>Error: " . $conn->error . "</p>";
+
+    }
+
+}
+```
+
+The code uses the `real_escape_string()` method to escape special characters in the inputs. While this method can mitigate some risks of immediate SQL Injection by escaping single quotes and other SQL meta-characters, it does not secure the application against Second Order SQLi. The key issue here is the lack of parameterised queries, which is essential for preventing SQL injection attacks. When data is inserted using the `real_escape_string()` method, it might include payload characters that don't cause immediate harm but can be activated upon subsequent retrieval and use in another SQL query. For instance, inserting a book with a name like `Intro to PHP'; DROP TABLE books;--` might not affect the INSERT operation but could have serious implications if the book name is later used in another SQL context without proper handling.
+
+Let's try adding another book with the SSN `test'`.\
+
+
+![total books in the database](https://tryhackme-images.s3.amazonaws.com/user-uploads/62a7685ca6e7ce005d3f3afe/room-content/62a7685ca6e7ce005d3f3afe-1715776065076)
+
+Here we go, the SSN `test'` is successfully inserted into the database. The application includes a feature to update book details through an interface like `update.php`. This interface might display existing book details in editable form fields, retrieved based on earlier stored data, and then update them based on user input. The pentester would investigate whether the application reuses the data (such as `book_name`) that was previously stored and potentially tainted. Then, he would construct SQL queries for updating records using this potentially tainted data without proper sanitisation or parameterisation. By manipulating the update feature, the tester can see if the malicious payload added during the insertion phase gets executed during the update operation. If the application fails to employ proper security practices at this stage, the earlier injected payload `'; DROP TABLE books; --` could be activated, leading to the execution of a harmful SQL command like dropping a table. You can visit the page `http://MACHINE_IP/second/update.php` to update any book details.
+
+![update book content dashboard](https://tryhackme-images.s3.amazonaws.com/user-uploads/62a7685ca6e7ce005d3f3afe/room-content/62a7685ca6e7ce005d3f3afe-1715786150389)\
+
+
+Now, let's review the `update.php` code. The PHP script allows users to update book details within the BookStore database. Through the query structure, we will analyse a typical scenario where a penetration tester might look for SQL injection vulnerabilities, specifically focusing on how user inputs are handled and utilised in SQL queries.&#x20;
+
+```php
+if ( isset($_POST['update'])) {
+    $unique_id = $_POST['update'];
+    $ssn = $_POST['ssn_' . $unique_id];
+    $new_book_name = $_POST['new_book_name_' . $unique_id];
+    $new_author = $_POST['new_author_' . $unique_id];
+
+    $update_sql = "UPDATE books SET book_name = '$new_book_name', author = '$new_author' WHERE ssn = '$ssn'; INSERT INTO logs (page) VALUES ('update.php');";
+..
+...
+```
+
+The script begins by checking if the request method is POST and if the update button was pressed, indicating that a user intends to update a book's details. Following this, the script retrieves user inputs directly from the POST data:
+
+```php
+    $unique_id = $_POST['update'];
+    $ssn = $_POST['ssn_' . $unique_id];
+    $new_book_name = $_POST['new_book_name_' . $unique_id];
+    $new_author = $_POST['new_author_' . $unique_id];
+```
+
+These variables (`ssn, new_book_name, new_author`) are then used to construct an SQL query for updating the specified book's details in the database:
+
+```php
+$update_sql = "UPDATE books SET book_name = '$new_book_name', author = '$new_author' WHERE ssn = '$ssn'; INSERT INTO logs (page) VALUES ('update.php');";
+```
+
+The script uses `multi_query` to execute multiple queries. It also inserts logs into the logs table for analytical purposes.\
+
+
+Preparing the Payload
+
+We know that we can add or modify the book details based on their `ssn`. The normal query for updating a book might look like this:
+
+```php
+UPDATE books SET book_name = '$new_book_name', author = '$new_author' WHERE ssn = '123123';
+```
+
+However, the SQL command could be manipulated if an attacker inserts a specially crafted `ssn` value. For example, if the attacker uses the `ssn` value:
+
+```php
+12345'; UPDATE books SET book_name = 'Hacked'; --
+```
+
+When this value is used in the update query, it effectively ends the initial update command after `12345` and starts a new command. This would change the `book_name` of all entries in the books table to Hacked.\
+
+
+Let's do this
+
+* Initial Payload Insertion: A new book is added with the payload `12345'; UPDATE books SET book_name = 'Hacked'; --` is inserted as the `ssn`. The semicolon (`;`) will be used to terminate the current SQL statement.
+
+![total books in database with injection payload](https://tryhackme-images.s3.amazonaws.com/user-uploads/62a7685ca6e7ce005d3f3afe/room-content/62a7685ca6e7ce005d3f3afe-1715789331772)\
+
+
+* Malicious SQL Execution: After that, when the admin or any other user visits the URL `http://MACHINE_IP/second/update.php` and updates the book, the inserted payload breaks out of the intended SQL command structure and injects a new command that updates all records in the books table. Let's visit the page  `http://MACHINE_IP/second/update.php page`, update the book name to anything, and click the Update button. The code will execute the following statement in the backend.
+
+```php
+UPDATE books SET book_name = 'Testing', author = 'Hacker' WHERE ssn = '12345'; Update books set book_name ="hacked"; --'; INSERT INTO logs (page) VALUES ('update.php');
+```
+
+* Commenting Out the Rest: The double dash (`--`) is an SQL comment symbol. Anything following `--` will be ignored by the SQL server, effectively neutralising any remaining parts of the original SQL statement that could cause errors or reveal the attack. Once the above query is executed, it will change the name of all the books to hacked, as shown below:
+
+![state of database after executing payload](https://tryhackme-images.s3.amazonaws.com/user-uploads/62a7685ca6e7ce005d3f3afe/room-content/62a7685ca6e7ce005d3f3afe-1715789376753)
+
+In this task, we explored the Second-Order SQL injection concept through a vulnerable book review web application. As a penetration tester, examining how user inputs are stored and later utilised within SQL queries is crucial. This involves verifying that all forms of data handling are secure against such vulnerabilities, emphasising the importance of thorough testing and knowledge of security practices to safeguard against injection threats.
+
+## Filter Evasion Techniques
+
+In advanced SQL injection attacks, evading filters is crucial for successfully exploiting vulnerabilities. Modern web applications often implement defensive measures to sanitise or block common attack patterns, making simple SQL injection attempts ineffective. As pentesters, we must adapt using more sophisticated techniques to bypass these filters. This section will cover such methods, including character encoding, no-quote SQL injection, and handling scenarios where spaces cannot be used. We can effectively penetrate web applications with stringent input validation and security controls by understanding and applying these techniques. ![list of keywords for filter evasion](https://tryhackme-images.s3.amazonaws.com/user-uploads/62a7685ca6e7ce005d3f3afe/room-content/62a7685ca6e7ce005d3f3afe-1716922193553)
+
+Character Encoding\
+Character encoding involves converting special characters in the SQL injection payload into encoded forms that may bypass input filters.\
+
+
+* URL Encoding: URL encoding is a common method where characters are represented using a percent (%) sign followed by their ASCII value in hexadecimal. For example, the payload `' OR 1=1--` can be encoded as `%27%20OR%201%3D1--`. This encoding can help the input pass through web application filters and be decoded by the database, which might not recognise it as malicious during initial processing.
+* Hexadecimal Encoding: Hexadecimal encoding is another effective technique for constructing SQL queries using hexadecimal values. For instance, the query `SELECT * FROM users WHERE name = 'admin'` can be encoded as `SELECT * FROM users WHERE name = 0x61646d696e`. By representing characters as hexadecimal numbers, the attacker can bypass filters that do not decode these values before processing the input.
+* `Unicode Encoding`: Unicode encoding represents characters using Unicode escape sequences. For example, the string `admin` can be encoded as `\u0061\u0064\u006d\u0069\u006e`. This method can bypass filters that only check for specific ASCII characters, as the database will correctly process the encoded input.
+
+Example
+
+In this example, we explore how developers can implement basic filtering to prevent SQL injection attacks by removing specific keywords and characters from user input. However, we will also see how attackers can bypass these defences using character encoding techniques like URL encoding.
+
+Note: In the upcoming exercises, we will use databases that are different from the last ones. You can access the page at `http://10.10.106.31/encoding/`.
+
+Here's the PHP code (search\_books.php) that handles the search functionality:
+
+```php
+$book_name = $_GET['book_name'] ?? '';
+$special_chars = array("OR", "or", "AND", "and" , "UNION", "SELECT");
+$book_name = str_replace($special_chars, '', $book_name);
+$sql = "SELECT * FROM books WHERE book_name = '$book_name'";
+echo "<p>Generated SQL Query: $sql</p>";
+$result = $conn->query($sql) or die("Error: " . $conn->error . " (Error Code: " . $conn->errno . ")");
+if ($result->num_rows > 0) {
+    while ($row = $result->fetch_assoc()) {
+...
+..
+```
+
+Here's the Javascript code in the index.html page that provides the user interface for searching books:
+
+```php
+function searchBooks() {
+const bookName = document.getElementById('book_name').value;
+const xhr = new XMLHttpRequest();
+xhr.open('GET', 'search_books.php?book_name=' + encodeURIComponent(bookName), true);
+   xhr.onload = function() {
+       if (this.status === 200) {
+           document.getElementById('results').innerHTML = this.responseText;
+```
+
+In the above example, the developer has implemented a basic defence mechanism to prevent SQL injection attacks by removing specific SQL keywords, such as `OR`, `AND`, `UNION`, and `SELECT`. The filtering uses the `str_replace` function, which strips these keywords from the user input before they are included in the SQL query. This filtering approach aims to make it harder for attackers to inject malicious SQL commands, as these keywords are essential for many SQL injection payloads.
+
+Preparing the Payload
+
+Let's go through the process of preparing an SQL injection payload step-by-step, showing how URL encoding can bypass basic defences. First, let’s see what happens with a normal input that contains special characters or SQL keywords. When we search for a book named `Intro to PHP`, we get the successful result as shown below:
+
+![search for a book dashboard](https://tryhackme-images.s3.amazonaws.com/user-uploads/62a7685ca6e7ce005d3f3afe/room-content/62a7685ca6e7ce005d3f3afe-1716201873529)\
+
+
+But what if we try to break the query by adding special characters like `'`, `;`, etc? We will get the following output:
+
+![error result while searching a book](https://tryhackme-images.s3.amazonaws.com/user-uploads/62a7685ca6e7ce005d3f3afe/room-content/62a7685ca6e7ce005d3f3afe-1716201925761)\
+
+
+The SQL query is not executing correctly, which probably means there is a chance of SQL Injection. Let's try to inject the payload "`Intro to PHP' OR 1=1`". We will get the following output:
+
+![error result with injection payload](https://tryhackme-images.s3.amazonaws.com/user-uploads/62a7685ca6e7ce005d3f3afe/room-content/62a7685ca6e7ce005d3f3afe-1716202022860)\
+
+
+So, what is happening here? When this input is passed to the PHP script, the `str_replace` function will strip out the OR keyword and the single quote, resulting in a sanitised input that will not execute the intended SQL injection. This input is ineffective because the filtering removes the critical components needed for the SQL injection to succeed.
+
+To bypass the filtering, we need to encode the input using URL encoding, which represents special characters and keywords in a way that the filter does not recognise and remove. Here is the example payload `1%27%20||%201=1%20--+`.
+
+* `%27` is the URL encoding for the single quote (').
+* `%20` is the URL encoding for a space ( ).
+* `||` represents the SQL OR operator.
+* `%3D` is the URL encoding for the equals sign (=).
+* `%2D%2D` is the URL encoding for --, which starts a comment in SQL.
+
+In the above payload, `1'` closes the current string or value in the SQL query. For example, if the query is looking for a book name that matches 1, adding `'` closes the string, making the rest of the input part of the SQL statement. `|| 1=1` part uses the SQL `OR` operator to add a condition that is always true. This condition ensures that the query returns true for all records, bypassing the original condition that was supposed to restrict the results. Similarly, `--` starts a comment in SQL, causing the database to ignore the rest of the query. This is useful to terminate any remaining part of the query that might cause syntax errors or unwanted conditions. To ensure proper spacing, `+` add a space after the comment, ensuring that the comment is properly terminated and there are no syntax issues.
+
+From the console, we can see that clicking the search button makes an AJAX call to `search_book.php`.\
+
+
+![network tab in console](https://tryhackme-images.s3.amazonaws.com/user-uploads/62a7685ca6e7ce005d3f3afe/room-content/62a7685ca6e7ce005d3f3afe-1716099780661)
+
+_Click to enlarge the image._
+
+Let's use the payload directly on the PHP page to avoid unnecessary tweaking/validation from the client.  Let's visit the URL [http://10.10.106.31/encoding/search\_books.php?book\_name=Intro%20to%20PHP%27%20OR%201=1](http://10.10.106.31/encoding/search\_books.php?book\_name=Intro%20to%20PHP%27%20OR%201=1) with the standard payload `Intro to PHP' OR 1=1`, and you will see an error.&#x20;
+
+\
+
+
+<figure><img src="https://tryhackme-images.s3.amazonaws.com/user-uploads/62a7685ca6e7ce005d3f3afe/room-content/62a7685ca6e7ce005d3f3afe-1716202208504" alt=""><figcaption></figcaption></figure>
+
+Now, URL encode the payload `Intro to PHP' || 1=1 --+` using [Cyber Chef](https://gchq.github.io/CyberChef/#recipe=URL\_Encode\(false\)) and try to access the URL with an updated payload. We will get the following output dumping the complete information:
+
+<figure><img src="../../.gitbook/assets/image (1083).png" alt=""><figcaption></figcaption></figure>
+
+**Note:** It was not working from the browser so I copied and pasted the output of CyberChef into Burp to get the results.
+
+<figure><img src="../../.gitbook/assets/image.png" alt=""><figcaption></figcaption></figure>
+
+\
+
+
+<figure><img src="https://tryhackme-images.s3.amazonaws.com/user-uploads/62a7685ca6e7ce005d3f3afe/room-content/62a7685ca6e7ce005d3f3afe-1716100417790" alt=""><figcaption></figcaption></figure>
+
+The payload works because URL encoding represents the special characters and SQL keywords in a way that bypasses the filtering mechanism. When the server decodes the URL-encoded input, it restores the special characters and keywords, allowing the SQL injection to execute successfully. Using URL encoding, attackers can craft payloads that bypass basic input filtering mechanisms designed to block SQL injection. This demonstrates the importance of using more robust defences, such as parameterised queries and prepared statements, which can prevent SQL injection attacks regardless of the input's encoding.
+
+
+
+
+

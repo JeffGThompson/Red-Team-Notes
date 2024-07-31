@@ -4,8 +4,6 @@
 
 
 
-
-
 ## Initial Scan
 
 **Kali**
@@ -14,8 +12,6 @@
 </strong></code></pre>
 
 <figure><img src="../../.gitbook/assets/image (623).png" alt=""><figcaption></figcaption></figure>
-
-
 
 ## Scan all ports
 
@@ -100,16 +96,6 @@ john hash.txt --wordlist=/usr/share/wordlists/rockyou.txt
 
 
 
-
-
-
-
-
-
-
-
-
-
 **Browser**
 
 ```
@@ -145,7 +131,7 @@ subl php-reverse-shell.php
 nc -lvnp 1234
 ```
 
-<figure><img src="../../.gitbook/assets/image (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 <figure><img src="../../.gitbook/assets/image (2) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 

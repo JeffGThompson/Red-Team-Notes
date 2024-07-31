@@ -22,7 +22,7 @@
 <pre><code><strong>nmap -sV -sT -O -p 1-65535 $VICTIM
 </strong></code></pre>
 
-<figure><img src="../../.gitbook/assets/image (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 
 
@@ -93,10 +93,6 @@ hydra -l boris -P /usr/share/wordlists/fasttrack.txt pop3://$VICTIM:55007
 
 <figure><img src="../../.gitbook/assets/image (13) (1) (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
-
-
-
-
 **Kali**
 
 ```
@@ -130,10 +126,6 @@ RETR 3
 
 <figure><img src="../../.gitbook/assets/image (17) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
-
-
-
-
 Added severnaya-station.com to my hosts file and then navigated to http://severnaya-station.com/gnocertdir as mentioned in the email
 
 ```
@@ -143,13 +135,7 @@ password: RCP90rulez!
 
 <figure><img src="../../.gitbook/assets/image (12) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
-
-
 <figure><img src="../../.gitbook/assets/image (18) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
-
-
-
-
 
 <figure><img src="../../.gitbook/assets/image (19) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
@@ -158,8 +144,6 @@ password: RCP90rulez!
 ```
 hydra -l doak -P /usr/share/wordlists/fasttrack.txt pop3://$VICTIM:55007
 ```
-
-
 
 **Kali**
 
@@ -180,8 +164,6 @@ RETR 1
 
 <figure><img src="../../.gitbook/assets/image (612).png" alt=""><figcaption></figcaption></figure>
 
-
-
 **Kali**
 
 ```
@@ -190,8 +172,6 @@ echo 'eFdpbnRlcjE5OTV4IQ==' | base64 -d
 ```
 
 <figure><img src="../../.gitbook/assets/image (613).png" alt=""><figcaption></figcaption></figure>
-
-
 
 It was the password for admin
 

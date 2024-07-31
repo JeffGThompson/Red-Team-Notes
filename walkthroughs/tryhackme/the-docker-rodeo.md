@@ -122,7 +122,7 @@ Note the response - specifically the "history" key;  albeit slightly hard to rea
 sudo nmap -sV $VICTIM
 ```
 
-<figure><img src="../../.gitbook/assets/image (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 **What is the name of the repository within this registry?**
 
@@ -706,34 +706,4 @@ Containers allow environment variables to be provided from the host operating sy
 Note how we utilised "cgroups" in Task 10. Cgroups are used by containerisation software such as LXC or Docker. Let's look for them with by navigating to "/proc/1" and then _catting_  the "cgroups" file...It is worth mentioning that the "cgroups" file contains paths including the word "docker":
 
 ![](https://assets.tryhackme.com/additional/docker-rodeo/detecting-container/cgroups.png)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
