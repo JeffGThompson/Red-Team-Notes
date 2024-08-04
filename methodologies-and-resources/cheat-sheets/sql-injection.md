@@ -24,6 +24,28 @@ a' or 1=1 -- -
 
 
 
+## Second-Order SQL Injection
+
+**Examples**
+
+[advanced-sql-injection.md](../../walkthroughs/tryhackme/advanced-sql-injection.md "mention")
+
+
+
+## Filter Evasion Techniques
+
+**Examples**
+
+[advanced-sql-injection.md](../../walkthroughs/tryhackme/advanced-sql-injection.md "mention")
+
+
+
+## Out-of-band SQL Injection
+
+**Examples**
+
+[advanced-sql-injection.md](../../walkthroughs/tryhackme/advanced-sql-injection.md "mention")
+
 
 
 ## Test  SQL Injection with Burp

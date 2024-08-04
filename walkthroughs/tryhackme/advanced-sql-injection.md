@@ -135,9 +135,13 @@ In this task, we explored the Second-Order SQL injection concept through a vulne
 
 ## Filter Evasion Techniques
 
-In advanced SQL injection attacks, evading filters is crucial for successfully exploiting vulnerabilities. Modern web applications often implement defensive measures to sanitise or block common attack patterns, making simple SQL injection attempts ineffective. As pentesters, we must adapt using more sophisticated techniques to bypass these filters. This section will cover such methods, including character encoding, no-quote SQL injection, and handling scenarios where spaces cannot be used. We can effectively penetrate web applications with stringent input validation and security controls by understanding and applying these techniques. ![list of keywords for filter evasion](https://tryhackme-images.s3.amazonaws.com/user-uploads/62a7685ca6e7ce005d3f3afe/room-content/62a7685ca6e7ce005d3f3afe-1716922193553)
+In advanced SQL injection attacks, evading filters is crucial for successfully exploiting vulnerabilities. Modern web applications often implement defensive measures to sanitise or block common attack patterns, making simple SQL injection attempts ineffective. As pentesters, we must adapt using more sophisticated techniques to bypass these filters. This section will cover such methods, including character encoding, no-quote SQL injection, and handling scenarios where spaces cannot be used. We can effectively penetrate web applications with stringent input validation and security controls by understanding and applying these techniques.&#x20;
 
-Character Encoding\
+![list of keywords for filter evasion](https://tryhackme-images.s3.amazonaws.com/user-uploads/62a7685ca6e7ce005d3f3afe/room-content/62a7685ca6e7ce005d3f3afe-1716922193553)
+
+### Character Encoding
+
+\
 Character encoding involves converting special characters in the SQL injection payload into encoded forms that may bypass input filters.\
 
 
