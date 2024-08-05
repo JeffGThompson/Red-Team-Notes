@@ -36,6 +36,7 @@
   * [Vulnerabilities Seen](methodologies-and-resources/cheat-sheets/vulnerabilities-seen.md)
   * [Active Directory](methodologies-and-resources/cheat-sheets/active-directory.md)
   * [Web](methodologies-and-resources/cheat-sheets/web.md)
+  * [Enumeration & Brute Force](methodologies-and-resources/cheat-sheets/enumeration-and-brute-force.md)
 
 ## Walkthroughs
 
