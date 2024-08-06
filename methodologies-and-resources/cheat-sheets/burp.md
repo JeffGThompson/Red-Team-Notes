@@ -108,7 +108,17 @@ Upgrade-Insecure-Requests: 1
 
 <figure><img src="../../.gitbook/assets/image (335).png" alt=""><figcaption></figcaption></figure>
 
+## Exploiting Vulnerable Password Reset Logic(OTP)
 
+**Examples**
+
+[#exploiting-vulnerable-password-reset-logic](enumeration-and-brute-force.md#exploiting-vulnerable-password-reset-logic "mention")
+
+## Exploiting HTTP Basic Authentication
+
+**Examples**
+
+[#exploiting-http-basic-authentication](enumeration-and-brute-force.md#exploiting-http-basic-authentication "mention")
 
 ##
 

