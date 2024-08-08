@@ -202,3 +202,4 @@
   * [File Inclusion, Path Traversal](walkthroughs/tryhackme/file-inclusion-path-traversal.md)
   * [NoSQL Injection](walkthroughs/tryhackme/nosql-injection.md)
   * [Advanced SQL Injection](walkthroughs/tryhackme/advanced-sql-injection.md)
+  * [XXE Injection](walkthroughs/tryhackme/xxe-injection.md)
