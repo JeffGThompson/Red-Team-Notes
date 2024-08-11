@@ -203,3 +203,4 @@
   * [NoSQL Injection](walkthroughs/tryhackme/nosql-injection.md)
   * [Advanced SQL Injection](walkthroughs/tryhackme/advanced-sql-injection.md)
   * [XXE Injection](walkthroughs/tryhackme/xxe-injection.md)
+  * [LDAP Injection](walkthroughs/tryhackme/ldap-injection.md)
