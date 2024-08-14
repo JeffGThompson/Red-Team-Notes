@@ -112,21 +112,442 @@ The exploit code is `?k304=y%0D%0A%0D%0A%3Cimg+src%3Dcopyparty+onerror%3Dalert(1
 
 The attached VM has the vulnerable server running at port 3923. You can reach the vulnerable server at `http://10.10.225.118:3923` via your AttackBox’s browser.
 
+<figure><img src="../../.gitbook/assets/image (3).png" alt=""><figcaption></figcaption></figure>
+
+
+
+<figure><img src="../../.gitbook/assets/image (1) (1).png" alt=""><figcaption></figcaption></figure>
+
+## Stored XSS
+
+Stored XSS, or Persistent XSS, is a web application security vulnerability that occurs when the application stores user-supplied input and later embeds it in web pages served to other users without proper sanitization or escaping. Examples include web forum posts, product reviews, user comments, and other data stores. In other words, stored XSS takes place when user input is saved in a data store and later included in the web pages served to other users without adequate escaping.
+
+<div align="center">
+
+<img src="https://tryhackme-images.s3.amazonaws.com/user-uploads/5f04259cf9bf5b57aed2c476/room-content/ef358fef49e6a39c8314f2490ac3c93b.svg" alt="The attacker posts a malicious script as part of their comment. A user views the comment. Consequently, something malicious takes place on their laptop.">
+
+</div>
+
+Stored XSS begins with an attacker injecting a malicious script in an input field of a vulnerable web application. The vulnerability might lie in how the web application processes the data in the comment box, forum post, or profile information section. When other users access this stored content, the injected malicious script executes within their browsers. The script can perform a wide range of actions, from stealing session cookies to performing actions on behalf of the user without their consent.
+
+### Vulnerable Web Application
+
+There are many reasons for a web application to be vulnerable to stored XSS. Some of the best practices to prevent stored XSS vulnerabilities are:
+
+* **Validate and sanitize input**: Define clear rules and enforce strict validation on all user-supplied data. For instance, only alphanumeric characters can be used in a username, and only integers can be allowed in age fields.
+* **Use output escaping**: When displaying user-supplied input within an HTML context, encode all HTML-specific characters, such as `<`, `>`, and `&`.
+* **Apply context-specific encoding**: For instance, within a JavaScript context, we must use JavaScript encoding whenever we insert data within a JavaScript code. On the other hand, data placed in URLs must use relevant URL-encoding techniques, like percent-encoding. The purpose is to ensure that URLs remain valid while preventing script injection.
+* **Practice defence in depth**: Don’t rely on a single layer of defence; use server-side validation instead of solely relying on client-side validation.
+
+In the following examples, we list vulnerable code snippets in various languages. This exercise should be easy this time as the solutions resemble the solutions implemented earlier.
+
+#### PHP
+
+Vulnerable Code
+
+The code below has multiple vulnerabilities. It does two things:
+
+* Read a comment from the user and save it in the `$comment` variable.
+* Adds the `$comment` to the column `comment` in the table `comments` in a database.
+* Later, it iterates over all the rows in the column `comment` and displays them on screen.
+
+Please take a look at it and think of what might go wrong.
+
+```php
+// Storing user comment
+$comment = $_POST['comment'];
+mysqli_query($conn, "INSERT INTO comments (comment) VALUES ('$comment')");
+
+// Displaying user comment
+$result = mysqli_query($conn, "SELECT comment FROM comments");
+while ($row = mysqli_fetch_assoc($result)) {
+    echo $row['comment'];
+}
+```
+
+We are concerned with stored XSS, as SQL injection is outside the scope of this room. The main issue is that the comment is saved and later displayed, among the other comments, without sanitization.
+
+Fixed Code
+
+```php
+// Storing user comment
+$comment = mysqli_real_escape_string($conn, $_POST['comment']);
+mysqli_query($conn, "INSERT INTO comments (comment) VALUES ('$comment')");
+
+// Displaying user comment
+$result = mysqli_query($conn, "SELECT comment FROM comments");
+while ($row = mysqli_fetch_assoc($result)) {
+    $sanitizedComment = htmlspecialchars($row['comment']);
+    echo $sanitizedComment;
+}
+```
+
+Before displaying every comment on the screen, we pass it through the `htmlspecialchars()` function to ensure all special characters are converted to HTML entities. Consequently, any attempts for stored XSS won’t make it to the end user’s browser.
+
+This is outside the scope of this room; however, if you are curious about the SQL injection vulnerability, this is alleviated using the `mysqli_real_escape_string()`. This function escapes special characters in the input string so it can safely be used in an SQL statement.
+
+#### JavaScript (Node.js)
+
+Vulnerable Code
+
+The following JavaScript code reads a comment received from a user that was saved in a database table. We assume the `comments` array has been populated from the database. Discover what makes it vulnerable to stored XSS and how to solve it.
+
+```javascript
+app.get('/comments', (req, res) => {
+  let html = '<ul>';
+  for (const comment of comments) {
+    html += `<li>${comment}</li>`;
+  }
+  html += '</ul>';
+  res.send(html);
+});
+```
+
+The main issue in the code above is that it reads the user’s input saved in `comment` (from the `comments` array) and is displayed as part of the HTML code. Consequently, when another user views this user’s comment as HTML, the browser will execute any scripts injected into it.
+
+Fixed Code
+
+```javascript
+const sanitizeHtml = require('sanitize-html');
+
+app.get('/comments', (req, res) => {
+  let html = '<ul>';
+  for (const comment of comments) {
+    const sanitizedComment = sanitizeHtml(comment);
+    html += `<li>${sanitizedComment}</li>`;
+  }
+  html += '</ul>';
+  res.send(html);
+});
+```
+
+Part of the solution is sanitizing the HTML before displaying it to the user. We can remove HTML elements outside the allowlist using the `sanitizeHTML()` function. In general, we expect to allow basic text formatting such as bold and italic (`<b>` and `<i>`), but we would remove potentially dangerous or unsafe elements such as `<script>` and `<onload>`. More information can be found on its [official page](https://www.npmjs.com/package/sanitize-html).
+
+#### Python (Flask)
+
+Vulnerable Code
+
+Similar to the code snippets we have displayed, the following code uses the Flask framework. By now, you can expect the mistakes plaguing this code.
+
+```python
+from flask import Flask, request, render_template_string
+from flask_sqlalchemy import SQLAlchemy
+
+app = Flask(__name__)
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///site.db'
+db = SQLAlchemy(app)
+
+class Comment(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    content = db.Column(db.String, nullable=False)
+
+@app.route('/comment', methods=['POST'])
+def add_comment():
+    comment_content = request.form['comment']
+    comment = Comment(content=comment_content)
+    db.session.add(comment)
+    db.session.commit()
+    return 'Comment added!'
+
+@app.route('/comments')
+def show_comments():
+    comments = Comment.query.all()
+    return render_template_string(''.join(['<div>' + c.content + '</div>' for c in comments]))
+```
+
+The first issue is that the `comment_content` is set to the user’s form submission retrieved from `request.form['comment']` without sanitization. This in itself lays the ground for stored XSS and SQL injection. Furthermore, when a user wants to view the comments, they are displayed without escaping, another perfect recipe for stored XSS.
+
+Fixed Code
+
+We are concerned with fixing stored XSS vulnerabilities. We need to ensure that no malicious scripts are saved in the database; furthermore, we will escape any content before displaying it as HTML.
+
+```python
+from flask import Flask, request, render_template_string, escape
+from flask_sqlalchemy import SQLAlchemy
+from markupsafe import escape
+
+app = Flask(__name__)
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///site.db'
+db = SQLAlchemy(app)
+
+class Comment(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    content = db.Column(db.String, nullable=False)
+
+@app.route('/comment', methods=['POST'])
+def add_comment():
+    comment_content = request.form['comment']
+    comment = Comment(content=comment_content)
+    db.session.add(comment)
+    db.session.commit()
+    return 'Comment added!'
+
+@app.route('/comments')
+def show_comments():
+    comments = Comment.query.all()
+    sanitized_comments = [escape(c.content) for c in comments]
+    return render_template_string(''.join(['<div>' + comment + '</div>' for comment in sanitized_comments]))
+```
+
+We used the `escape()` function to ensure that any special characters in the user-submitted comment are replaced with HTML entities. As you would expect, the characters `&`, `<`, `>`, `'`, and `"` are converted to HTML entities (`&amp;`, `&lt;`, `&gt;`, `&#39;`, and `&quot;`). We made two changes:
+
+Although the user-submitted input `request.form['comment']` is saved verbatim, the content of each saved comment `c` goes through the escape() function before it is sent to the user’s browser to be displayed as HTML.
+
+#### C# (ASP.NET)
+
+Vulnerable Code
+
+The following C# code has multiple vulnerabilities. Take a quick look at the code below and think about what needs to be changed.
+
+```csharp
+public void SaveComment(string userComment)
+{
+    var command = new SqlCommand("INSERT INTO Comments (Comment) VALUES ('" + userComment + "')", connection);
+    // Execute the command
+}
+
+public void DisplayComments()
+{
+    var reader = new SqlCommand("SELECT Comment FROM Comments", connection).ExecuteReader();
+    while (reader.Read())
+    {
+        Response.Write(reader["Comment"].ToString());
+    }
+    // Execute the command
+}
+```
+
+One of the vulnerabilities we observe in the code above is stored XSS. The system stores whatever comment the user inputs without any changes and later displays it to other users. Another vulnerability outside the scope of this room is SQL injection.
+
+Fixed Code
+
+```csharp
+using System.Web;
+
+public void SaveComment(string userComment)
+{
+    var command = new SqlCommand("INSERT INTO Comments (Comment) VALUES (@comment)", connection);
+    command.Parameters.AddWithValue("@comment", userComment);
+}
+
+public void DisplayComments()
+{
+    var reader = new SqlCommand("SELECT Comment FROM Comments", connection).ExecuteReader();
+    while (reader.Read())
+    {
+        var comment = reader["Comment"].ToString();
+        var sanitizedComment = HttpUtility.HtmlEncode(comment);
+        Response.Write(sanitizedComment);
+    }
+    reader.Close();
+}
+```
+
+With a few changes, the code’s security has improved. Stored-XSS is fixed by using the `HttpUtility.HtmlEncode()` method before displaying the `userComment` as part of a web page. (If you are curious, the SQL injection vulnerability is fixed by using parametrized SQL queries with values passed separately instead of building the SQL query via string concatenation. This can be achieved using the `Parameters.AddWithValue()` method in the `SqlCommand` objects.
+
+## CVE-2021-38757 - Vulnerable Web Application 2
+
+Start the attached VM by clicking on the `Start Machine` button to finish this task.
+
+The attached VM runs the vulnerable project [Hospital Management System](https://github.com/kishan0725/Hospital-Management-System). The project was uploaded a few years ago and was never updated since then. It is fully functional. Unfortunately, a stored XSS vulnerability was discovered and tagged as [CVE-2021-38757](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-38757) and an [exploit](https://packetstormsecurity.com/files/163869/Hospital-Management-System-Cross-Site-Scripting.html) was published, but the application has not been patched till the time of writing.
+
+To exploit the vulnerability, the attacker only needs to click on “Contact”, and fill in the name, email, phone number, and submit the payload in the message field. Something simple such as `<script>alert("Simple XSS")</script>` would still work.
+
+Any message sent via the Contact page appears to the Receptionist when they log in. To log in as the Receptionist via the corresponding tab, use the following credentials:
+
+* Username: `admin`
+* Password: `admin123`
+
+The attached VM has its vulnerable server running at port 80. You can access it at `http://10.10.52.103`.
+
+The vulnerability lies in the [contact.php](https://github.com/kishan0725/Hospital-Management-System/blob/master/contact.php). Although the code works well, it is not secure. As we can see in the listing below, the user’s submitted message is saved unsanitized in the database table.
+
+```php
+<?php 
+$con=mysqli_connect("localhost","root","","myhmsdb");
+if(isset($_POST['btnSubmit']))
+{
+    $name = $_POST['txtName'];
+    $email = $_POST['txtEmail'];
+    $contact = $_POST['txtPhone'];
+    $message = $_POST['txtMsg'];
+
+    $query="insert into contact(name,email,contact,message) values('$name','$email','$contact','$message');";
+
+//...
+}
+```
+
 <figure><img src="../../.gitbook/assets/image.png" alt=""><figcaption></figcaption></figure>
+
+<figure><img src="../../.gitbook/assets/image (2).png" alt=""><figcaption></figcaption></figure>
 
 
 
 <figure><img src="../../.gitbook/assets/image (1).png" alt=""><figcaption></figcaption></figure>
 
+## DOM-Based XSS
+
+If you check any updated Security Advisories, it is easy to find new reflected and stored XSS vulnerabilities discovered monthly. However, the same is not true for DOM-based XSS, which is getting scarce nowadays. The reason is that DOM-based XSS is completely browser-based and does not need to go to the server and back to the client. At one point, a proof of concept [example of DOM-based XSS](http://www.webappsec.org/projects/articles/071105.shtml) could be created using a static HTML page; however, with the improved inherent security of web browsers, DOM-based XSS has become extremely difficult.
+
+Before we dive into DOM-based XSS, let’s review what Document Object Model (DOM) is. The DOM is a programming interface representing a web document as a tree. The DOM makes it possible to programmatically access and manipulate the different parts of a website using JavaScript. Let’s consider a practical example.
+
+Consider the HTML code of [example.com](http://www.example.com/) in the screenshot below (as fetched on the first of February 2024). We opened the Web Developer Tools using the Firefox web browser and checked the Inspector tab.
+
+\
 
 
+<figure><img src="https://tryhackme-images.s3.amazonaws.com/user-uploads/5f04259cf9bf5b57aed2c476/room-content/efe6900be6b1e1f6d205ebc32544eb6e.png" alt=""><figcaption></figcaption></figure>
+
+The DOM tree shown above is like the following list with sublists.
+
+* `document`
+  * `<!DOCTYPE html>`
+  * `html`
+    * `head`
+      * `title`
+      * `meta`
+      * `meta`
+      * `meta`
+      * `style`
+    * `body`
+      * `div`
+        * `h1`
+        * `p`
+        * `p`
+          * `a`
+
+The tree starts with the `document` node and branches into `DOCTYPE` and `html`. The `html` node branches into `head` and `body`. The `head` has the `title`, a few `meta` tags, and a `style`. In this simple example, the `body` has a single `div` that branches into one `h1` and two `p`. This is a concise page. More practical pages would have tens or hundreds of branches.
+
+We can view the DOM tree using the web browser’s built-in Web Developer’s Tools. For example, press Ctrl + Shift + I on Firefox and check the Inspector tab.
+
+Alternatively, we can access the JavaScript console, as mentioned in Task 2. Using JavaScript, you can manipulate the DOM tree. For example, you can create a new element using `document.createElement()` and add a child to any element using `element.append()`. Here is an example from [MDN documentation](https://developer.mozilla.org/en-US/docs/Web/API/Document).
+
+```javascript
+let div = document.createElement("div");
+let p = document.createElement("p");
+div.append(p);
+
+console.log(div.childNodes); // NodeList [ <p> ]
+```
+
+In the example code above, we created two elements, `div` and `p`. Then, we appended the latter element to the `div` element.
+
+### Vulnerable Web Applications
+
+DOM-based XSS vulnerabilities take place within the browser. They don’t need to go to the server and return to the client’s web browser. In other words, the attacker will try to exploit this situation by injecting a malicious script, for example, into the URL, and it will be executed on the client’s side without any role for the server in this. We will present an elementary and minimal static site without relying on the back-end code to demonstrate this concept.
+
+#### Vulnerable “Static” Site
+
+Let’s consider the following basic example. It is too simple that it is unrealistic; however, it is enough to demonstrate the DOM-based XSS.
+
+```html
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Vulnerable Page</title>
+</head>
+<body>
+    <div id="greeting"></div>
+    <script>
+        const name = new URLSearchParams(window.location.search).get('name');
+        document.write("Hello, " + name);
+    </script>
+</body>
+</html>
+```
+
+The page above expects the user to provide their name after `?name=`. In the screenshot below:
+
+1. The user has entered Web Tester after `?name` in the URL.
+2. The greeting worked as expected and displayed “Hello, Web Tester”.
+3. Finally, the DOM structure on the right is left intact; the `<body>` has three direct children.
+
+\
 
 
+<figure><img src="https://tryhackme-images.s3.amazonaws.com/user-uploads/5f04259cf9bf5b57aed2c476/room-content/861e32e88c58c05c0ab84a4b5ffe3f8f.png" alt=""><figcaption></figcaption></figure>
 
+The user might try to inject a malicious script. In the screenshot below, we see the following:
 
+1. The user added `<script>alert("XSS")</script>` instead of only `Web Tester` as their name.
+2. The script was executed, and an alert dialogue box was displayed.
+3. Most importantly, we can see how the DOM tree got a new element. `<body>` has four children now.
 
+<figure><img src="https://tryhackme-images.s3.amazonaws.com/user-uploads/5f04259cf9bf5b57aed2c476/room-content/4d52f01782bfe2e2faf1f24d4522c35e.png" alt=""><figcaption></figcaption></figure>
 
+This basic example illustrates a couple of things:
 
+* The server has no direct role in DOM-based vulnerabilities. In this demonstration, everything took place on the client’s browser without using a back end.
+* The DOM was insecurely modified using `document.write()`.
 
+#### Fixed “Static” Site
 
+```html
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Secure Page</title>
+</head>
+<body>
+    <div id="greeting"></div>
+    <script>
+        const name = new URLSearchParams(window.location.search).get('name');
+        // Escape the user input to prevent XSS attacks
+        const escapedName = encodeURIComponent(name);
+        document.getElementById("greeting").textContent = "Hello, " + escapedName;
+    </script>
+</body>
+</html>
+```
+
+One way to fix this page is by avoiding adding user input directly with `document.write()`. Instead, we first escaped the user input using `encodeURIComponent()` and then added it to `textContent`.
+
+The previous attempt does not work now. We can see that:
+
+1. The user has added JavaScript as part of their input.
+2. The JavaScript code is displayed as encoded characters and presents no threat in the current context.
+3. The DOM structure is no longer affected when the user attempts to add code as part of their submitted name.
+
+<figure><img src="https://tryhackme-images.s3.amazonaws.com/user-uploads/5f04259cf9bf5b57aed2c476/room-content/d934f51f984af5d8cee9f557f7fdcdd5.png" alt=""><figcaption></figcaption></figure>
+
+## Context and Evasion
+
+### Context
+
+The injected payload will most likely find its way within one of the following:
+
+* Between HTML tags
+* Within HTML tags
+* Inside JavaScript
+
+When XSS happens between HTML tags, the attacker can run `<script>alert(document.cookie)</script>`.
+
+However, when the injection is within an HTML tag, we need to end the HTML tag to give the script a turn to load. Consequently, we might adapt our payload to `><script>alert(document.cookie)</script>` or `"><script>alert(document.cookie)</script>` or something similar that would fit in the context.
+
+We might need to terminate the script to run the injected one if we can inject our XSS within an existing JavaScript. For instance, we can start with `</script>` to end the script and continue from there. If your code is within a JavaScript string, you can close the string with `'`, complete the command with a semicolon, execute your command, and comment out the rest of the line with `//`. You can try something like this `';alert(document.cookie)//`.
+
+This example should give you some ideas to escape the context you start from. Generally speaking, being aware of the context where your XXS payload is executing is very important for the successful execution of the payload.
+
+### Evasion
+
+Various repositories can be consulted to build your custom XSS payload. This gives you plenty of room for experimentation. One such list is the [XSS Payload List](https://github.com/payloadbox/xss-payload-list).
+
+However, sometimes, there are filters blocking XSS payloads. If there is a limitation based on the payload length, then [Tiny XSS Payloads](https://github.com/terjanq/Tiny-XSS-Payloads) can be a great starting point to bypass length restrictions.
+
+If XSS payloads are blocked based on specific blocklists, there are various tricks for evasion. For instance, a horizontal tab, a new line, or a carriage return can break up the payload and evade the detection engines.
+
+* Horizontal tab (TAB) is `9` in hexadecimal representation
+* New line (LF) is `A` in hexadecimal representation
+* Carriage return (CR) is `D` in hexadecimal representation
+
+Consequently, based on the [XSS Filter Evasion Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/XSS\_Filter\_Evasion\_Cheat\_Sheet.html), we can break up the payload. `<IMG SRC="javascript:alert('XSS');">` in various ways:
+
+```javascript
+<IMG SRC="jav&#x09;ascript:alert('XSS');">
+<IMG SRC="jav&#x0A;ascript:alert('XSS');">
+<IMG SRC="jav&#x0D;ascript:alert('XSS');">
+```
+
+There are hundreds of evasion techniques; the choice would depend on the target security and require trial and error before achieving a successful outcome.
 

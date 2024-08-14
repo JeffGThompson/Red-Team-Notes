@@ -12,7 +12,7 @@
 nmap -A $VICTIM
 ```
 
-<figure><img src="../../.gitbook/assets/image (3) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (3) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 
 
@@ -166,8 +166,4 @@ cat /etc/passwd
 <figure><img src="../../.gitbook/assets/image (871).png" alt=""><figcaption></figcaption></figure>
 
 <figure><img src="../../.gitbook/assets/image (872).png" alt=""><figcaption></figcaption></figure>
-
-
-
-
 
