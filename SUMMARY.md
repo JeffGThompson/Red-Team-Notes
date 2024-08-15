@@ -205,3 +205,4 @@
   * [XXE Injection](walkthroughs/tryhackme/xxe-injection.md)
   * [LDAP Injection](walkthroughs/tryhackme/ldap-injection.md)
   * [XSS](walkthroughs/tryhackme/xss.md)
+  * [DOM-Based Attacks](walkthroughs/tryhackme/dom-based-attacks.md)
