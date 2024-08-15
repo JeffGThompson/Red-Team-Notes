@@ -335,11 +335,33 @@ Base64 encode the file
 <search>&test;</search>
 ```
 
-##
+## XSS
 
-## XSS - Steal JVT
+### Reflected XSS
 
-Examples
+**Examples**
+
+[#reflected-xss](../../walkthroughs/tryhackme/xss.md#reflected-xss "mention")
+
+[#cve-2023-38501-vulnerable-web-application-1](../../walkthroughs/tryhackme/xss.md#cve-2023-38501-vulnerable-web-application-1 "mention")
+
+### Stored XSS
+
+**Examples**
+
+[#reflected-xss](../../walkthroughs/tryhackme/xss.md#reflected-xss "mention")
+
+[#cve-2021-38757-vulnerable-web-application-2](../../walkthroughs/tryhackme/xss.md#cve-2021-38757-vulnerable-web-application-2 "mention")
+
+### Dom-Based XSS
+
+**Examples**
+
+[#dom-based-xss](../../walkthroughs/tryhackme/xss.md#dom-based-xss "mention")
+
+### XSS - Steal JVT
+
+**Examples**
 
 [#xss-steal-jvt](../../walkthroughs/tryhackme/the-marketplace.md#xss-steal-jvt "mention")
 
