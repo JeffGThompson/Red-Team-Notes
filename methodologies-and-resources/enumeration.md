@@ -230,7 +230,7 @@ Check certificate for hostname. Then add to hosts file.
 
 [spring.md](../walkthroughs/tryhackme/spring.md "mention")
 
-<figure><img src="../.gitbook/assets/image (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 
 
