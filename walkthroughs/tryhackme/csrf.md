@@ -316,7 +316,221 @@ Securing the Breach
 ![protected from csrf - invalid attempt](https://tryhackme-images.s3.amazonaws.com/user-uploads/62a7685ca6e7ce005d3f3afe/room-content/b72585407d23eae854a1cc97ca7ad223.png)\
 
 
+## Samesite Cookie Bypass
 
+Overview
+
+Let's dive into a crucial defence mechanism known as SameSite cookies. These cookies come with a special attribute designed to control when they are sent along with cross-site requests. Implementing the SameSite cookie property is a reliable safeguard against cross-origin data leaks, CSRF, and XSS attacks. Depending on the request's context, it tells the browser when to transmit the cookie. Strict, Lax, and None are the three potential values for the attribute.\
+
+
+The most substantial level of protection is offered by setting it to strict, which guarantees that the cookie is only sent if the request comes from the same origin as the cookie. Specific cross-site usage is permitted by lax, such as top-level navigations, which are less likely to raise red flags. None of them need the secure attribute, and all requests made by websites that belong to third parties will send cookies.
+
+Different Types of SameSite Cookies![different type of samesite cookies](https://tryhackme-images.s3.amazonaws.com/user-uploads/62a7685ca6e7ce005d3f3afe/room-content/1cea15bc2776b3af859b1259bb399c1f.svg)
+
+* Lax: Lax SameSite cookies are like a friendly neighbour. They provide a moderate level of protection by allowing cookies to be sent in top-level navigations and safe HTTP methods like GET, HEAD, and OPTIONS. This means that cookies will not be sent with cross-origin POST requests, helping to mitigate certain types of CSRF attacks. However, cookies are still included in GET requests initiated by external websites, which may pose a security risk if sensitive information is stored in cookies.
+* Strict: Strict SameSite cookies act as vigilant guards. They offer the highest level of protection by restricting cookies to be sent only in a first-party context. This means that cookies are only sent with requests originating from the same site that set the cookie, effectively preventing cross-site request forgery attacks. By enforcing strict isolation between different origins, strict SameSite cookies significantly enhance the security of web applications, especially in scenarios where sensitive user data is involved.
+* None: None SameSite cookies behave like carefree globetrotters. They are sent with both first-party and cross-site requests, making them convenient for scenarios where cookies need to be accessible across different origins. However, to prevent potential security risks associated with cross-site requests, None SameSite cookies require the Secure attribute if the request is made over HTTPS. This ensures that cookies are only transmitted over secure connections, reducing the likelihood of interception or tampering by malicious actors during transit.
+
+The Lax Exploit Adventure
+
+* Now that the attacker can access Josh's bank account, his main objective is to log him out of his current account so that he cannot make any further bank transactions.
+* He noticed a logout cookie that is set once he logs in, and this cookie is set as Lax, which means that this will be sent in all top-level navigations and safe HTTP requests like GET.
+
+![email screenshot](https://tryhackme-images.s3.amazonaws.com/user-uploads/62a7685ca6e7ce005d3f3afe/room-content/60889a399b04b110cd95a86268b03415.png)\
+
+
+_Click to enlarge the image._
+
+* Here is the server-side code that validates the cookie and checks its value; based on the value, the code logs out the user.
+
+```php
+<?php
+$cookieNames = array_keys($_COOKIE);
+if($_COOKIE["logout"] == "xxxxxxx"){
+	// Loop through each cookie and delete it
+foreach ($cookieNames as $cookieName) {
+// If it's desired to kill the session, also delete the session cookie.
+session_destroy();
+..
+...
+}
+```
+
+* The script requires a cookie value, but this entirely depends upon the type of SameSite value. Since the type is Lax, it won't be forwarded to cross-site requests other than top-level navigation and GET requests.
+* To log Josh out of his bank account, the attacker can send another email to him, masquerading as a bank representative and persuading him to participate in a survey to win a prize.&#x20;
+
+![screenshot of email](https://tryhackme-images.s3.amazonaws.com/user-uploads/62a7685ca6e7ce005d3f3afe/room-content/a47ea764b447f5c8c8e957ac882dca46.png)\
+
+
+* Navigate to `mailbox.thm:8081`, and open the mail with a red flag titled "Exclusive Opportunity: Complete Our Survey for a Chance to Win a Ferrari!".
+
+![selected email screenshot](https://tryhackme-images.s3.amazonaws.com/user-uploads/62a7685ca6e7ce005d3f3afe/room-content/462bd0231f2b95561e90b07251b77805.png)\
+
+
+* You will see that the logout CSRF payload is crafted using the following payload:
+
+```html
+<a href="https://mybank.thm:8080/logout.php" target="_blank">Survey Link!</a>
+```
+
+* The attacker must make a simple GET request to `logout.php`; since the cookie is set as Lax, it will be forwarded to the page.\
+
+* As the request is coming from a verified source and the logout cookie is also set, Josh will be logged out of the bank website with no way to![josh crying on the side](https://tryhackme-images.s3.amazonaws.com/user-uploads/62a7685ca6e7ce005d3f3afe/room-content/08a4c1117546e85f0159f928f87994b0.svg) log in again (as the password was changed in the previous task).
+
+What was the missing link?
+
+* The developer of MyBank LLC did not consider the SameSite attribute for cookies while writing the code. The attack would have been avoided if the SameSite attribute had been set to Strict instead of Lax.  If the attribute had been Strict, the cookie wouldn't have been passed during the cross-site request.
+* Moreover, as a pentester/red teamer, it's essential to analyse each attribute of the cookie set by a domain. Most of the time, small mistakes by coders open avenues of exploitation in an apparently secure web application.
+
+Lax with POST Scenario - Chaining the Exploit
+
+As a pentester, it is important to check the cookies being set by the website. As the cookie set in the last example was Lax, it was possible to logout any user. But the above scenario is possible only with GET requests, and nothing can be done in case of POST requests.
+
+Initially, when the SameSite attribute was introduced to increase web security by restricting how cookies are sent in cross-site requests, Google Chrome and other browsers did not enforce a default behaviour for cookies without a specified SameSite attribute. This meant developers had to explicitly set `SameSite=None` to allow cookies to be sent in cross-site requests, such as in iframes or third-party content. However, Chrome changed its default behaviour to enhance security and privacy further and better protect against CSRF attacks. If a SameSite attribute is not specified for a cookie, Chrome automatically treats it as `SameSite=Lax`. This default setting allows cookies to be sent in a first-party context and with top-level navigation GET requests but not in third-party or cross-site requests, thereby balancing usability with increased security measures.\
+
+
+But what if we want to make a POST request? Can we do something? The answer is Yes. As per the official documentation by [Chrome](https://chromestatus.com/feature/5088147346030592):
+
+_"Chrome will make an exception for cookies set without a SameSite attribute less than 2 minutes ago. Such cookies will also be sent with non-idempotent (e.g. POST) top-level cross-site requests despite normal SameSite=Lax cookies requiring top-level cross-site requests to have a safe (e.g. GET) HTTP method."_
+
+So, any cookie that is not set with SameSite attribute and if the server reads or modifies the cookie will be sent in cross-site request till 2 minutes just like `SameSite=None`; after 2 minutes, it will be treated as Lax by the browser. We will see how we can exploit this in the following example.
+
+After reviewing the code, we can see that there is an `isBanned` cookie that is set after logging in. The value of the cookie determines if the user is banned or not and displays him a message if he is banned. Our objective is to change the value of the cookie once the user clicks on the malicious link. Here is the server-side code that performs the validation:
+
+```php
+if (!isset($_COOKIE['isBanned'])) { echo('&#60;script&#62;alert("isBanned cookie not found in request");&#60;/script&#62;'); 	exit(); }
+if (isset($_POST['isBanned'])) {
+	$status=$_POST['isBanned'];
+     echo('<script>document.cookie="isBanned='.$status.'";</script>'); 
+}
+```
+
+* There is a POST API call to `index.php` that accepts a parameter `isBanned` and sets the cookie's value. However, the server-side script expects the cookie (isBanned) to avoid any CSRF attack.
+* If there is a cross-site request to the page, we cannot execute the script to create the cookie directly, as there won't be an `isBanned` cookie in our request.
+* Let's try this. Log in again to the bank app using the username `GB82MYBANK5699` and password `GB82MYBANK5697`. As we log in, the script will update the value of `isBanned` cookie, so we need to wait for 2 minutes here, otherwise, it will be forwarded till 2 minutes window.
+* After 2 minutes, open the mail titled Test Scenario - LAX+POST.&#x20;
+
+![lax plus post test buttons](https://tryhackme-images.s3.amazonaws.com/user-uploads/62a7685ca6e7ce005d3f3afe/room-content/227844a4c0b289149e7ec15d9c429547.png)\
+
+
+* The email consists of two learning buttons; the first will make a POST request to `index.php` to update the `isBanned` cookie value.
+* The first button uses the following code:
+
+```javascript
+<script>
+function launchAttack(){ setTimeout(function(){bank.submit()},1000)
+}
+</script>
+<form style="display:none" name="bank" 
+method=post action="http://mybank.thm:8080/index.php">
+<input name="isBanned" value="true">
+<input type="submit">
+</form>
+```
+
+* Click on the button and see what happens - you will see the following error:
+
+![isbanned cookie not found error](https://tryhackme-images.s3.amazonaws.com/user-uploads/62a7685ca6e7ce005d3f3afe/room-content/cc1ca1a6778b07e946416c785c131278.png)\
+
+
+* This is because the `isBanned` cookie was not forwarded by the browser during the request.\
+
+* So, what is the solution here? We can exploit the Chrome feature that sends the cookies in each web request if modified in the last 2 minutes. As a pentester, it is essential to understand each web request and response. The `isBanned` cookie value is updated in two instances, once during login and the other during logout.
+* We can chain the process to make the user visit the logout link; once he is logged out and the `isBanned` cookie is updated, we have a 2-minute window to call `index.php` to update the isBanned cookie value.
+* Here is the code that will take the user to the logout page and then make a call to `index.php` with the updated `isBanned` cookie value.\
+
+
+```javascript
+<script>
+function launchAttackSuccess(){
+let win = window.open("http://mybank.thm:8080/logout.php",'');
+setTimeout(function(){win.close();bank.submit()},1000)
+}
+</script>
+<form style="display:none" name="bank" 
+method=post action="http://mybank.thm:8080/index.php">
+<input name="isBanned" value="true">
+<input type="submit">
+</form> 
+```
+
+* Click on the `Successful Attack` button, which will first log out the user, then make a POST request to `index.php`, and update the `isBanned` cookie value. Chrome will forward the cookie in the request as it is updated in less than 2 minutes.\
+
+
+![user banned message](https://tryhackme-images.s3.amazonaws.com/user-uploads/62a7685ca6e7ce005d3f3afe/room-content/0f234faf633173af4c657383528ebef9.png)\
+
+
+## Few Additional Exploitation Techniques
+
+﻿XMLHttpRequest Exploitation
+
+In the context of an AJAX request, CSRF is like someone making your web browser unknowingly send a request to a website where you're logged in. It's as if someone tricked your browser into doing something on a trusted site without your awareness, potentially causing unintended actions or changes in your account. CSRF attacks can still succeed even when AJAX requests are subject to the [Same-Origin Policy (SOP)](https://en.wikipedia.org/wiki/Same-origin\_policy), which typically forbids cross-origin requests.&#x20;
+
+\
+![ajax csrf exploitation process](https://tryhackme-images.s3.amazonaws.com/user-uploads/62a7685ca6e7ce005d3f3afe/room-content/5f206941b7f37e0f00f126aa6ba492ff.svg)
+
+Here's an example of how an attacker can update a password on `mybank.thm` and send an asynchronous request to update the email seamlessly.
+
+```javascript
+<script>
+        var xhr = new XMLHttpRequest();
+        xhr.open('POST', 'http://mybank.thm/updatepassword', true);
+        xhr.setRequestHeader("X-Requested-With", "XMLHttpRequest");
+        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
+                alert("Action executed!");
+            }
+        };
+        xhr.send('action=execute&parameter=value');
+    </script>
+```
+
+The XMLHttpRequest in the above code is designed to submit form data to the server and include custom headers. The complete process of sending requests will be seamless as the requests are performed in Javascript using AJAX. \
+
+
+Same Origin Policy (SOP) and Cross-Origin Resource Sharing (CORS) Bypass
+
+[CORS and SOP](https://tryhackme.com/r/room/corsandsop) bypass to launch CSRF is like an attacker using a trick to make your web browser send requests to a different website than the one you're on. Under an appropriate CORS policy, certain requests could only be submitted by recognised origins. However, misconfigurations in CORS policies can allow attackers to circumvent these limitations if they rely on origins that the attacker can control or if credentials are included in cross-origin requests.&#x20;
+
+```php
+<?php // Server-side code (PHP)
+ header('Access-Control-Allow-Origin: *'); 
+// Allow requests from any origin (vulnerable CORS configuration) .
+..// code to update email address ?>
+```
+
+﻿This is a simple PHP server-side script that handles the POST request. It has a vulnerable CORS configuration (Access-Control-Allow-Origin: \*), allowing requests from any origin, and thus is vulnerable to CSRF since it doesn't implement anti-CSRF measures. The usage of Access-Control-Allow-Origin: \* depends on the specific business use case and requirements. There are scenarios where allowing requests from different origins is necessary and legitimate, such as in public APIs or content distribution networks. However, it's crucial to carefully consider the security implications and ensure that Access-Control-Allow-Credentials is set accordingly to forward credentials only to trusted origins. It's important to note that Access-Control-Allow-Origin: \* and Access-Control-Allow-Credentials:true cannot be used together due to security restrictions imposed by the [CORS specification](https://fetch.spec.whatwg.org/#cors-protocol-and-credentials). You will learn various CORS bypass techniques in a separate room on THM.\
+
+
+Referer Header Bypass
+
+When making an HTTP request, the referer header contains the URL of the last page the user visited before making the current request. Some websites guard against CSRF by only allowing queries if the referer header matches their domain. The utility of this as a stand-alone CSRF protection solution is reduced when this header may be changed or eliminated, as happens with user-installed browser extensions, privacy tools, or meta tags that instruct the browser to omit the Referer.\
+
+
+Now that we have an understanding of various exploitation techniques of CSRF. We will now discuss key mitigation measures to protect from the attack.&#x20;
+
+## Defense Mechanisms
+
+CSRF plays a critical role for pentesters, allowing them to simulate attacks where users unwittingly execute unauthorised actions on trusted websites. By exploiting CSRF vulnerabilities, pentesters can assess the effectiveness of an application's defences against forged requests, identify potential security gaps in session management, and evaluate the robustness of implemented anti-CSRF measures. Following are some of the critical measures that are recommended for pentesters and secure coders.
+
+Pentesters/Red Teamers
+
+* CSRF Testing: Actively test applications for CSRF vulnerabilities by attempting to execute unauthorised actions through![protection shield showing guard against csrf](https://tryhackme-images.s3.amazonaws.com/user-uploads/62a7685ca6e7ce005d3f3afe/room-content/458c17f9e81a4f2779a10ffefbe8caa9.svg) manipulated requests and assess the effectiveness of implemented protections.&#x20;
+* Boundary Validation: Evaluate the application's validation mechanisms, ensuring that user inputs are appropriately validated and anti-CSRF tokens are present and correctly verified to prevent request forgery.
+* Security Headers Analysis: Assess the presence and effectiveness of security headers, such as CORS and Referer, to enhance the overall security and prevent various attack vectors, including CSRF.
+* Session Management Testing: Examine the application's session management mechanisms, ensuring that session tokens are securely generated, transmitted, and validated to prevent unauthorised access and actions.
+* CSRF Exploitation Scenarios: Explore various CSRF exploitation scenarios, such as embedding malicious requests in image tags or exploiting trusted endpoints, to identify potential weaknesses in the application's defences and improve security measures.
+
+Secure Coders
+
+* Anti-CSRF Tokens: Integrate anti-CSRF tokens into each form or request to ensure that only requests with valid and unpredictable tokens are accepted, thwarting CSRF attacks. \
+
+* SameSite Cookie Attribute: Set the SameSite attribute on cookies to 'Strict' or 'Lax' to control when cookies are sent with cross-site requests, minimising the risk of CSRF by restricting cookie behaviour.
+* Referrer Policy: Implement a strict referrer policy, limiting the information disclosed in the referer header and ensuring that requests come from trusted sources, thereby preventing unauthorised cross-site requests.
+* Content Security Policy (CSP): Utilise CSP to define and enforce a policy that specifies the trusted sources of content, mitigating the risk of injecting malicious scripts into web pages.
+* Double-Submit Cookie Pattern: Implement a secure double-submit cookie pattern, where an anti-CSRF token is stored both in a cookie and as a request parameter. The server then compares both values to authenticate requests.
+* Implement CAPTCHAS: Secure developers can incorporate CAPTCHA challenges as an additional layer of defense against CSRF attacks especially in user authentication, form submissions, and account creation processes.
 
 
 

@@ -445,7 +445,11 @@ This wasn't working before but after next time I went to this box tried I could 
 eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjIsInVzZXJuYW1lIjoibWljaGFlbCIsImFkbWluIjp0cnVlLCJpYXQiOjE3MDE1MjgzODN9.O8218jJ0nmWedeewklX6fkb9sjlgH81ciU7dJG5l9YY
 ```
 
+## CSRF
 
+**Examples**
+
+[csrf.md](../../walkthroughs/tryhackme/csrf.md "mention")
 
 
 
