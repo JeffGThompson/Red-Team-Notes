@@ -41,7 +41,8 @@
 ## Walkthroughs
 
 * [Tryhackme](walkthroughs/tryhackme/README.md)
-  * [Hydra ](walkthroughs/tryhackme/hydra.md)
+  * [Hydra ](walkthroughs/tryhackme/hydra/README.md)
+    * [Container Vulnerabilities](walkthroughs/tryhackme/hydra/container-vulnerabilities.md)
   * [Blue](walkthroughs/tryhackme/blue.md)
   * [Steel Mountain](walkthroughs/tryhackme/steel-mountain.md)
   * [Alfred](walkthroughs/tryhackme/alfred.md)

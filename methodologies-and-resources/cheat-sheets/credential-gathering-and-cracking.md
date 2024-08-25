@@ -85,7 +85,7 @@ make install
 
 #### Examples
 
-[hydra.md](../../walkthroughs/tryhackme/hydra.md "mention")[brute-it.md](../../walkthroughs/tryhackme/brute-it.md "mention")
+[hydra](../../walkthroughs/tryhackme/hydra/ "mention")[brute-it.md](../../walkthroughs/tryhackme/brute-it.md "mention")
 
 **Kali**
 
@@ -193,7 +193,7 @@ python3.9 firefox_decrypt.py ./
 
 #### Examples
 
-[hydra.md](../../walkthroughs/tryhackme/hydra.md "mention")[brooklyn-nine-nine.md](../../walkthroughs/tryhackme/brooklyn-nine-nine.md "mention")[gamingserver.md](../../walkthroughs/tryhackme/gamingserver.md "mention")[fowsniff-ctf.md](../../walkthroughs/tryhackme/fowsniff-ctf.md "mention")[jack-of-all-trades.md](../../walkthroughs/tryhackme/jack-of-all-trades.md "mention")[library.md](../../walkthroughs/tryhackme/library.md "mention")
+[hydra](../../walkthroughs/tryhackme/hydra/ "mention")[brooklyn-nine-nine.md](../../walkthroughs/tryhackme/brooklyn-nine-nine.md "mention")[gamingserver.md](../../walkthroughs/tryhackme/gamingserver.md "mention")[fowsniff-ctf.md](../../walkthroughs/tryhackme/fowsniff-ctf.md "mention")[jack-of-all-trades.md](../../walkthroughs/tryhackme/jack-of-all-trades.md "mention")[library.md](../../walkthroughs/tryhackme/library.md "mention")
 
 **Kali**
 
