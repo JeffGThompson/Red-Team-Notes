@@ -868,6 +868,8 @@ chmod +x pspy32
 
 **Examples**
 
+[container-vulnerabilities.md](../../../../walkthroughs/tryhackme/hydra/container-vulnerabilities.md "mention")
+
 [ultratech.md](../../../../walkthroughs/tryhackme/ultratech.md "mention")
 
 [dogcat.md](../../../../walkthroughs/tryhackme/dogcat.md "mention")
