@@ -209,3 +209,4 @@
   * [DOM-Based Attacks](walkthroughs/tryhackme/dom-based-attacks.md)
   * [CSRF](walkthroughs/tryhackme/csrf.md)
   * [TryHack3M: Sch3Ma D3Mon](walkthroughs/tryhackme/tryhack3m-sch3ma-d3mon.md)
+  * [PrintNightmare](walkthroughs/tryhackme/printnightmare.md)
