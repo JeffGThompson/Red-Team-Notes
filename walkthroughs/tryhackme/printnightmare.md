@@ -271,19 +271,152 @@ shell
 
 <figure><img src="../../.gitbook/assets/image (1120).png" alt=""><figcaption></figcaption></figure>
 
+## Indicators of Compromise
+
+Let's imagine the worst-case scenario that the THMdepartment was compromised a couple of days after the PoC for PrintNightmare was released, and you are THMdepartment's Threat Hunter. Your company suspects that an attacker used PrintNightmare to access the Domain Controller, and your task is to find evidence or indicators of compromise. So, the next question would be what indicators should you look for in order to detect the PrintNightmare attack?
+
+The attacker would most likely use rpcdump.py to scan for vulnerable hosts. After finding the vulnerable print server, the attacker can then execute the exploit code (similar to the Python script in the previous task), which will load the malicious DLL file to exploit the vulnerability. More specifically, the exploit code will call the pcAddPrinterDriverEx() function from the authenticated user account and load the malicious DLL file in order to exploit the vulnerability. The pcAddPrinterDriverEx() function is used to install a printer driver on the system.
+
+Sygnia shared some advanced threat hunting tips to detect PrintNightmare. When hunting for PrintNightmare, you should look for the following:
+
+Search for the spoolsv.exe process launching rundll32.exe as a child process without any command-line arguments Considering the usage of the pcAddPrinterDriverEx() function, you will mostly find the malicious DLL dropped into one of these folders %WINDIR%\system32\spool\drivers\x64\3\ folder along with DLLs that were loaded afterward from %WINDIR%\system32\spool\drivers\x64\3\Old\ (You should proactively monitor the folders for any unusual DLLs) Hunt for suspicious spoolsv.exe child processes (cmd.exe, powershell.exe, etc.) The attacker might even use Mimikatz to perform the attack, in this case, a print driver named ‘QMS 810’ will be created. This can be detected by logging the registry changes (e.g., Sysmon ID 13). Search for DLLs that are part of the proof-of-concept codes that were made public, such as MyExploit.dll, evil.dll, addCube.dll, rev.dll, rev2.dll, main64.dll, mimilib.dll. If they're present on the endpoint, you can find them with Event ID 808 in Microsoft-Windows-PrintService. Splunk also did a great job of providing us with some detection search queries:
+
+Identifies Print Spooler adding a new Printer Driver:
+
+```
+source="WinEventLog:Microsoft-Windows-PrintService/Operational" EventCode=316 category = "Adding a printer driver" Message = "kernelbase.dll," Message = "UNIDRV.DLL," Message = ".DLL." | stats count min(_time) as firstTime max(_time) as lastTime by OpCode EventCode ComputerName 
+```
+
+Message Detects spoolsv.exe with a child process of rundll32.exe:
+
+```
+| tstats count min(_time) as firstTime max(_time) as lastTime from datamodel=Endpoint.Processes where Processes.parent_process_name=spoolsv.exe Processes.process_name=rundll32.exe by Processes.dest Processes.user Processes.parent_process Processes.process_name Processes.process Processes.process_id Processes.parent_process_id 
+```
+
+Suspicious rundll32.exe instances without any command-line arguments:
+
+```
+| tstats count FROM datamodel=Endpoint.Processes where Processes.process_name=spoolsv.exe by _time Processes.process_id Processes.process_name Processes.dest | rename "Processes." as * | join process_guid _time [| tstats count min(_time) as firstTime max(_time) as lastTime FROM datamodel=Endpoint.Filesystem where Filesystem.file_path="\spool\drivers\x64\" Filesystem.file_name=".dll" by _time Filesystem.dest Filesystem.file_create_time Filesystem.file_name Filesystem.file_path | rename "Filesystem.*" as * | fields _time dest file_create_time file_name file_path process_name process_path process] | dedup file_create_time | table dest file_create_time, file_name, file_path, process_name 
+```
+
+Detects when a new printer plug-in has failed to load:
+
+```
+source="WinEventLog:Microsoft-Windows-PrintService/Admin" ((ErrorCode="0x45A" (EventCode="808" OR EventCode="4909")) OR ("The print spooler failed to load a plug-in module" OR "\drivers\x64\")) | stats count min(_time) as firstTime max(_time) as lastTime by OpCode EventCode ComputerName Message
+```
+
+## Detection: Windows Event Logs
+
+Windows Event Logs are detailed records of security, system, and application notifications created by the Windows operating system. There are some logs that record events related to Print Spooler activity. Still, they might not be enabled by default and need to be configured using Windows Group Policy or Powershell.&#x20;
+
+The logs related to Print Spooler Activity are:\
+
+
+* _Microsoft-Windows-PrintService/Admin_\
+
+* _Microsoft-Windows-PrintService/Operational_
+
+We can detect the PrintNightmare artifacts by looking at the endpoint events or Windows Event Logs mentioned above.
+
+You can look for the following Event IDs:
+
+* Microsoft-Windows-PrintService/Operational (Event ID 316) - look for _"Printer driver \[file] for Windows x64 Version-3 was added or updated. Files:- UNIDRV.DLL, AddUser.dll, AddUser.dll. No user action is required.”_
+* Microsoft-Windows-PrintService/Admin (Event ID 808) - A security event source has attempted to register (can detect unsigned drivers and malicious DLLs loaded by spoolsv.exe)
+* Microsoft-Windows-PrintService/Operational (Event ID 811) - Logs the information regarding failed operations. The event will provide information about the full path of the dropped DLL.
+* Microsoft-Windows-SMBClient/Security (Event ID 31017) - This Event ID can also be used to detect unsigned drivers loaded by spoolsv.exe.
+* Windows System (Event ID 7031) - Service Stop Operations (This event ID will show you unexpected termination of print spooler service).\
+
+
+You can also use Sysmon to detect PrintNightmare terror: \
+
+
+* Microsoft-Windows-Sysmon/Operational (Event ID 3) - Network connection (Look for suspicious ports)
+* Microsoft-Windows-Sysmon/Operational (Event ID 11) - FileCreate (File creation events are being logged,  you can look for loaded DLLs in the Print Spooler’s driver directory: _C:\Windows\System32\spool\drivers\x64\3_)
+* Microsoft-Windows-Sysmon/Operational (Event IDs 23, 26) - FileDelete (You can hunt for deleted malicious DLLs)
+
+You are still in the middle of hunting for THMDepartment to determine if the PrintNightmare attack actually took place.\
+Armed with all the knowledge above, can you detect the PrintNightmare artifacts in the Event Logs?&#x20;
 
 
 
+<figure><img src="../../.gitbook/assets/image.png" alt=""><figcaption></figcaption></figure>
+
+Add the following filters
+
+**Event Level**
+
+```
+Critical, Warning, Verbose Error, Information
+```
+
+**Event Logs**
+
+```
+Windows Logs/System
+Application and Services Logs/Microsoft/Windows/PrintService
+Application and Services Logs/Microsoft/Windows/SMBClient
+Application and Services Logs/Microsoft/Windows/Sysmon
+```
+
+**Event IDs**
+
+```
+316,808,811,31017,7031,3,11,23,26
+```
 
 
 
+**Provide the name of the dropped DLL, including the error code. (no space after the comma)**
 
+<figure><img src="../../.gitbook/assets/image (1).png" alt=""><figcaption></figcaption></figure>
 
+**Provide the event log name and the event ID that detected the dropped DLL. (no space after the comma)**
 
+<figure><img src="../../.gitbook/assets/image (2).png" alt=""><figcaption></figcaption></figure>
 
+**Find the source name and the event ID when the Print Spooler Service stopped unexpectedly and how many times was this event logged? (format: answer,answer,answer)**
 
+<figure><img src="../../.gitbook/assets/image (3).png" alt=""><figcaption></figcaption></figure>
 
+**After some threat hunting steps, you are more confident now that it's a PrintNightmare attack. Hunt for the attacker's shell connection. Provide the log name, event ID, and destination port. (format: answer,answer,answer)**
 
+**Find...**
+
+```
+rundll32
+```
+
+<figure><img src="../../.gitbook/assets/image (4).png" alt=""><figcaption></figcaption></figure>
+
+**Oh no! You think you've found the attacker's connection. You need to know the attacker's IP address and the destination hostname in order to terminate the connection.  Provide the attacker's IP address and the hostname. (format: answer,answer)**
+
+<figure><img src="../../.gitbook/assets/image (5).png" alt=""><figcaption></figcaption></figure>
+
+**A Sysmon FileCreated event was generated and logged. Provide the full path to the dropped DLL and the earliest creation time in UTC. (format:answer,yyyy-mm-dd hh-mm-ss)**
+
+**Find...**
+
+```
+spoolsv
+```
+
+<figure><img src="../../.gitbook/assets/image (6).png" alt=""><figcaption></figcaption></figure>
+
+## Detection: Packet Analysis
+
+Packet captures (pcap) play a crucial role in detecting signs of compromise.
+
+If you are not familiar with Wireshark, no worries. You can learn more about Wireshark and how to analyze the packet captures by joining the [Wireshark 101](https://tryhackme.com/room/wireshark) room. It will be a lot of fun!&#x20;
+
+Detecting the PrintNightmare attack, specifically to (CVE-2021-1675 and CVE-2021-34527) by analyzing the network traffic is not as easy as inspecting the artifacts like Windows Event Logs on the victim's machine. The attacker relies on adding a printer driver using [DCE/RPC commands](https://wiki.wireshark.org/DCE/RPC) RpcAddPrinterDriver or RpcAddPrinterDriverEx.
+
+DCE/RPC stands for Distributed Computing Environment/Remote Procedure Calls and is the remote procedure call that establishes APIs and an over-the-network protocol.  But what makes the detection of the attack harder is that there are legitimate uses for RpcAddPrinterDriver or RpcAddPrinterDriverEx commands, so you cannot always rely only on the network traffic analysis to be confident that the PrintNightmare attack occurred in your environment. According to [Corelight](https://corelight.com/blog/why-is-printnightmare-hard-to-detect), it can get even harder to detect, especially if the exploit wraps the DCE/RPC calls in[ SMB3 encryption. ](https://docs.microsoft.com/en-us/windows-server/storage/file-server/smb-security)To identify the encrypted DCE/RPC calls, you need to somehow decrypt and decode the payloads, which is a time-consuming task.&#x20;
+
+Corelight also released a [Zeek package ](https://github.com/corelight/CVE-2021-1675)that detects the printer driver additions over DCE/RPC commands that are not encrypted.&#x20;
+
+Attached to this task is a PCAP from a PrintNightmare attack you can download and open in your local Wireshark instance.&#x20;
+
+Task: Inspect the PCAP and answer the questions below.&#x20;
 
 
 
