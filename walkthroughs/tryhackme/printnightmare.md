@@ -418,7 +418,148 @@ Attached to this task is a PCAP from a PrintNightmare attack you can download an
 
 Task: Inspect the PCAP and answer the questions below.&#x20;
 
+## Detection: Packet Analysis
 
+**What is the host name of the domain controller?**
+
+**Wireshark**
+
+```
+smb
+```
+
+<figure><img src="../../.gitbook/assets/image (1121).png" alt=""><figcaption></figcaption></figure>
+
+**Wireshark**
+
+```
+ip.addr==10.10.114.174 || ip.addr==10.10.124.236 and smb
+```
+
+<figure><img src="../../.gitbook/assets/image (1122).png" alt=""><figcaption></figcaption></figure>
+
+**What is the local domain?**
+
+**Wireshark**
+
+```
+ip.addr==10.10.114.174 || ip.addr==10.10.124.236 and smb2
+```
+
+<figure><img src="../../.gitbook/assets/image (1123).png" alt=""><figcaption></figcaption></figure>
+
+**What user account was utilized to exploit the vulnerability?**
+
+<figure><img src="../../.gitbook/assets/image (1124).png" alt=""><figcaption></figcaption></figure>
+
+**What was the malicious DLL used in the exploit?**
+
+<figure><img src="../../.gitbook/assets/image (1125).png" alt=""><figcaption></figcaption></figure>
+
+**What was the attacker's IP address?**
+
+<figure><img src="../../.gitbook/assets/image (1126).png" alt=""><figcaption></figcaption></figure>
+
+
+
+**What was the UNC path where the malicious DLL was hosted?**
+
+<figure><img src="../../.gitbook/assets/image (1127).png" alt=""><figcaption></figcaption></figure>
+
+**There are encrypted packets in the results. What was the associated protocol?**
+
+<figure><img src="../../.gitbook/assets/image (1128).png" alt=""><figcaption></figcaption></figure>
+
+## Mitigation: Disable Print Spooler
+
+It was not just a nightmare, and now you are 100% confident that it was a PrintNightmare attack on THMDepartment. You checked the other domain controllers on your network, and it appears that they are clean.
+
+It is not the end of the world just yet. You can still mitigate or defend against the attack by disabling the Print Spooler on all domain controllers and modify the registry settings (if applicable). How can you do it?
+
+[Microsoft ](https://msrc.microsoft.com/update-guide/vulnerability/CVE-2021-34527)provided the steps to detect if Print Spooler service is enabled and how to disable them:
+
+First, you need to determine if the Print Spooler service is running.
+
+Run the following in Windows PowerShell (Run as administrator):\
+
+
+`Get-Service -Name Spooler`
+
+If Print Spooler is running or if the service is not set to disabled, then select one of the options below to either disable the Print Spooler service or to Disable inbound remote printing through Group Policy.
+
+Option 1)  Disable the Print Spooler service:\
+
+
+If disabling the Print Spooler service is appropriate for your environment, use the following PowerShell commands:
+
+`Stop-Service -Name Spooler -Force`
+
+`Set-Service -Name Spooler -StartupType Disabled`
+
+NOTE: By disabling the Print Spooler service, you remove the ability to print locally and remotely.
+
+Option 2)  Disable inbound remote printing through Group Policy:\
+
+
+The settings via Group Policy can be configured as follows:\
+
+
+`Computer Configuration / Administrative Templates / Printers`\
+
+
+Disable the _“Allow Print Spooler to accept client connections”_ policy to block remote attacks.
+
+This policy will block the remote attack vector by preventing inbound remote printing operations. The system will no longer operate as a print server, but local printing to a directly attached device will still work.
+
+Note: Remember that for the group policy to take effect across the domain, or even the local machine, you need to issue a `gpupdate /force` command.\
+
+
+For more information, see: [Use Group Policy settings to control printers.](https://docs.microsoft.com/en-us/troubleshoot/windows-server/printing/use-group-policy-to-control-ad-printer)\
+
+
+The[ security update ](https://msrc.microsoft.com/update-guide/vulnerability/CVE-2021-34527)for Windows Server 2012, Windows Server 2016, and Windows 10, Version 1607 have been released by Microsoft on July 7, 2021.&#x20;
+
+Additional steps for mitigation besides installing the updates recommended by Microsoft:
+
+You must confirm that the following registry settings are set to 0 (zero) or are not defined (Note: The mentioned below registry keys do not exist by default, and therefore are already at the secure setting.), also check that your Group Policy settings are correct (see [FAQ](https://msrc.microsoft.com/update-guide/vulnerability/CVE-2021-34527)):
+
+`HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows NT\Printers\PointAndPrint`
+
+NoWarningNoElevationOnInstall = 0 (DWORD) or not defined (default setting)
+
+UpdatePromptSettings = 0 (DWORD) or not defined (default setting)
+
+Note: Having NoWarningNoElevationOnInstall set to 1 makes your system vulnerable by design.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+**Wireshark**
+
+```
+smb
+```
+
+
+
+**Wireshark**
+
+```
+smb
+```
 
 
 

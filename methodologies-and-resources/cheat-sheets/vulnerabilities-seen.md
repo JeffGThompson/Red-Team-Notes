@@ -40,6 +40,10 @@
 
 [cmspit.md](../../walkthroughs/tryhackme/cmspit.md "mention")
 
+## CVE-2021-1675 - PrintNightmare
+
+[printnightmare.md](../../walkthroughs/tryhackme/printnightmare.md "mention")
+
 ## CVE-2021-29447 - Wordpress version 5.6.2
 
 [wordpress-cve-2021-29447.md](../../walkthroughs/tryhackme/wordpress-cve-2021-29447.md "mention")
