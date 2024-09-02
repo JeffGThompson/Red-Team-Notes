@@ -210,3 +210,4 @@
   * [CSRF](walkthroughs/tryhackme/csrf.md)
   * [TryHack3M: Sch3Ma D3Mon](walkthroughs/tryhackme/tryhack3m-sch3ma-d3mon.md)
   * [PrintNightmare](walkthroughs/tryhackme/printnightmare.md)
+  * [GitLab CVE-2023-7028](walkthroughs/tryhackme/gitlab-cve-2023-7028.md)

@@ -233,7 +233,7 @@ Now, URL encode the payload `Intro to PHP' || 1=1 --+` using [Cyber Chef](https:
 
 **Note:** It was not working from the browser so I copied and pasted the output of CyberChef into Burp to get the results.
 
-<figure><img src="../../.gitbook/assets/image (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 \
 
