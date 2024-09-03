@@ -211,3 +211,8 @@
   * [TryHack3M: Sch3Ma D3Mon](walkthroughs/tryhackme/tryhack3m-sch3ma-d3mon.md)
   * [PrintNightmare](walkthroughs/tryhackme/printnightmare.md)
   * [GitLab CVE-2023-7028](walkthroughs/tryhackme/gitlab-cve-2023-7028.md)
+  * [Python for Pentesters](walkthroughs/tryhackme/python-for-pentesters.md)
+  * [PowerShell for Pentesters](walkthroughs/tryhackme/powershell-for-pentesters.md)
+  * [Web Enumeration](walkthroughs/tryhackme/web-enumeration.md)
+  * [Holo](walkthroughs/tryhackme/holo.md)
+* [Linux: Local Enumeration](walkthroughs/linux-local-enumeration.md)
