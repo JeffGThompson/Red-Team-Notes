@@ -215,4 +215,4 @@
   * [PowerShell for Pentesters](walkthroughs/tryhackme/powershell-for-pentesters.md)
   * [Web Enumeration](walkthroughs/tryhackme/web-enumeration.md)
   * [Holo](walkthroughs/tryhackme/holo.md)
-* [Linux: Local Enumeration](walkthroughs/linux-local-enumeration.md)
+  * [Linux: Local Enumeration](walkthroughs/tryhackme/linux-local-enumeration.md)
