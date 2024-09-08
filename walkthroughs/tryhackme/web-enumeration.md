@@ -190,21 +190,57 @@ Below you will find a useful list of wordlists that are installed on Kali Linux 
 
 In addition to the above, Daniel Miessler has created an amazing GitHub repo called [SecLists](https://github.com/danielmiessler/SecLists). It compiles many different lists used for many different things. The best part is, it's in apt! You can `sudo apt install seclists` and get the entire repo! We won't dive into any other lists as there are many. However, between what's installed by default on Kali and the SecLists repo, I doubt you'll need anything else.
 
+## Practical: Gobuster (Deploy #1)
 
+**Run a directory scan on the host. Other than the standard css, images and js directories, what other directories are available?**
 
+**Kali**
 
+```
+gobuster dir -u http://webenum.thm -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt -x css,js
+```
 
+<figure><img src="../../.gitbook/assets/image (1139).png" alt=""><figcaption></figcaption></figure>
 
+**Run a directory scan on the host. In the "C\*\*\*\*\*\*" directory, what file extensions exist?**
 
+**Kali**
 
+```
+gobuster dir -u http://webenum.thm/Changes/ -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt -x html,js,conf,txt -t 64
+```
 
+<figure><img src="../../.gitbook/assets/image (1140).png" alt=""><figcaption></figcaption></figure>
 
+**There's a flag out there that can be found by directory scanning! Find it!**
 
+Added php as one of the file extenion types.
 
+**Kali**
 
+```
+gobuster dir -u http://webenum.thm/VIDEO -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt -x html,js,conf,txt,php -t 64
+```
 
+<figure><img src="../../.gitbook/assets/image (1141).png" alt=""><figcaption></figcaption></figure>
 
+**There are some virtual hosts running on this server. What are they?**
 
+**Kali**
 
+```
+gobuster vhost -u http://webenum.thm -w /usr/share/wordlists/SecLists/Discovery/DNS/subdomains-top1million-5000.txt
+```
 
+<figure><img src="../../.gitbook/assets/image (1142).png" alt=""><figcaption></figcaption></figure>
+
+**There's another flag to be found in one of the virtual hosts! Find it!**
+
+**Kali**
+
+```
+gobuster dir -u http://products.webenum.thm -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt -x html,js,conf,txt,php -t 64
+```
+
+<figure><img src="../../.gitbook/assets/image (1143).png" alt=""><figcaption></figcaption></figure>
 
