@@ -244,3 +244,307 @@ gobuster dir -u http://products.webenum.thm -w /usr/share/wordlists/dirbuster/di
 
 <figure><img src="../../.gitbook/assets/image (1143).png" alt=""><figcaption></figcaption></figure>
 
+## Introduction to WPScan
+
+##
+
+First released in June 2011, WPScan has survived the tests of time and stood out as a tool that every pentester should have in their toolkits.
+
+The WPScan framework is capable of enumerating & researching a few security vulnerability categories present in WordPress sites - including - but not limited to:
+
+* Sensitive Information Disclosure (Plugin & Theme installation versions for disclosed vulnerabilities or CVE's)
+* Path Discovery (Looking for misconfigured file permissions i.e. wp-config.php)
+* Weak Password Policies (Password bruteforcing)
+* Presence of Default Installation (Looking for default files)
+* Testing Web Application Firewalls (Common WAF plugins)
+
+### Installing WPScan 
+
+Thankfully for us, WPScan comes pre-installed on the latest versions of penetration testing systems such as Kali Linux and Parrot. If you are using an older version of Kali Linux (such as 2019) for example, WPScan is in the apt repository, so can be installed by a simple `sudo apt update && sudo apt install wpscan`&#x20;
+
+## ![](https://assets.tryhackme.com/additional/web-enumeration-redux/install-wpscan.png) 
+
+﻿Installing WPScan on other operating systems such as Ubuntu or Debian involves extra steps. Whilst the TryHackMe AttackBox comes pre-installed with WPScan, you can follow the [developer's installation guide](https://github.com/wpscanteam/wpscan#install) for your local environment.\
+
+
+### A Primer on WPScan's Database
+
+WPScan uses information within a local database as a primary reference point when enumerating for themes and plugins. As we'll come to detail later, a technique that WPScan uses when enumerating is looking for common themes and plugins. Before using WPScan, it is highly recommended that you update this database before performing any scans.
+
+Thankfully, this is an easy process to do. Simply run `wpscan --update`&#x20;
+
+![](https://assets.tryhackme.com/additional/web-enumeration-redux/update-wpscan.png)
+
+## WPScan Modes
+
+### Enumerating for Installed Themes
+
+WPScan has a few methods of determining the active theme on a running WordPress installation. At a premise, it boils down to a technique that we can manually do ourselves. Simply, we can look at the assets our web browser loads and then looks for the location of these on the webserver. Using the "Network" tab in your web browsers developer tools, you can see what files are loaded when you visit a webpage.
+
+Take the screenshot below, we can see many assets are loaded, some of these will be scripts & the stylings of the theme that determines how the browser renders the website. Highlighted in the screenshot below is the URL: [http://redacted/wp-content/themes/twentytwentyone/assets/](http://redacted/wp-content/themes/twentytwentyone/assets/)
+
+![](https://assets.tryhackme.com/additional/web-enumeration-redux/manual-discover-theme-2.png)
+
+&#x20;We can take a pretty good guess that the name of the current theme is "twentytwentyone". After inspecting the source code of the website, we can note additional references to "twentytwentyone"
+
+![](https://assets.tryhackme.com/additional/web-enumeration-redux/manual-discover-theme.png)
+
+However, let's use WPScan to speed this process up by using the `--enumerate` flag with the `t` argument like so:
+
+`wpscan --url http://cmnatics.playground/ --enumerate t`&#x20;
+
+After a couple of minutes, we can begin to see some results:
+
+![](https://assets.tryhackme.com/additional/web-enumeration-redux/enum-themes.png)
+
+The great thing about WPScan is that the tool lets you know how it determined the results it has got. In this case, we're told that the "twentytwenty" theme was confirmed by scanning "_Known Locations_". The "twentytwenty" theme is the default WordPress theme for WordPress versions in 2020.
+
+### Enumerating for Installed Plugins
+
+A very common feature of webservers is "Directory Listing" and is often enabled by default. Simply, "Directory Listing" is the listing of files in the directory that we are navigating to (just as if we were to use Windows Explorer or Linux's `ls` command. URL's in this context are very similar to file paths. The URL [http://cmnatics.playground/a/directory](http://cmnatics.playground/a/directory) is actually the configured root of the _webserver/a/directory:_
+
+![](https://assets.tryhackme.com/additional/web-enumeration-redux/webserver-fs.png)
+
+"Directory Listing" occurs when there is no file present that the webserver has been told to process. A very common file is "index.html" and "index.php". As these files aren't present in /a/directory, the contents are instead displayed:
+
+![](https://assets.tryhackme.com/additional/web-enumeration-redux/index2.png)
+
+WPScan can leverage this feature as one technique to look for plugins installed. Since they will all be located in /wp-content/plugins/pluginname, WPScan can enumerate for common/known plugins.
+
+In the screenshot below, "easy-table-of-contents" has been discovered. Great! This could be vulnerable. To determine that, we need to know the version number. Luckily, this handed to us on a plate by WordPress.
+
+&#x20;![](https://assets.tryhackme.com/additional/web-enumeration-redux/enum-plugins2.png)
+
+Reading through WordPress' developer documentation, we can learn about "[Plugin Readme's](https://developer.wordpress.org/plugins/wordpress-org/how-your-readme-txt-works/#how-the-readme-is-parsed)" to figure out how WPScan determined the version number. Simply, plugins must have a "README.txt" file. This file contains meta-information such as the plugin name, the versions of WordPress it is compatible with and a description.
+
+![](https://assets.tryhackme.com/additional/web-enumeration-redux/example-readme.png)\
+
+
+[An Example ReadMe. (WordPress Developer Documentation., 2021)](https://developer.wordpress.org/plugins/wordpress-org/how-your-readme-txt-works/#example-readme)
+
+WPScan uses additional methods to discover plugins (such as looking for references or embeds on pages for plugin assets). We can use the `--enumerate` flag with the `p` argument like so:
+
+`wpscan --url http://cmnatics.playground/ --enumerate p`&#x20;
+
+### Enumerating for Users
+
+We've highlighted that WPScan is capable of performing brute-forcing attacks. Whilst we must provide a password list such as _rockyou.txt_, the way how WPScan enumerates for users is interestingly simple. WordPress sites use authors for posts. Authors are in fact a type of user. ![](https://assets.tryhackme.com/additional/web-enumeration-redux/wordpress-post.png)
+
+And sure enough, this author is picked up by our WPScan:
+
+![](https://assets.tryhackme.com/additional/web-enumeration-redux/enum-users.png)\
+
+
+This scan was performed by using the `--enumerate` flag with the `u` argument like so:
+
+`wpscan --url http://cmnatics.playground/ --enumerate u`&#x20;
+
+
+
+The "Vulnerable" Flag
+
+In the commands so far, we have only enumerated WordPress to discover what themes, plugins and users are present. At the moment, we'd have to look at the output and use sites such as MITRE, NVD and CVEDetails to look up the names of these plugins and the version numbers to determine any vulnerabilities.
+
+WPScan has the `v` argument for the `--enumerate` flag. We provide this argument alongside another (such as `p` for plugins). For example, our syntax would like so: `wpscan --url http://cmnatics.playground/ --enumerate vp`&#x20;
+
+Note, that this requires setting up WPScan to use the WPVulnDB API which is out-of-scope for this room.&#x20;
+
+<figure><img src="https://assets.tryhackme.com/additional/web-enumeration-redux/vulndb.png" alt=""><figcaption></figcaption></figure>
+
+### Performing a Password Attack
+
+After determining a list of possible usernames on the WordPress install, we can use WPScan to perform a bruteforcing technique against the username we specify and a password list that we provide. Simply, we use the output of our username enumeration to build a command like so: `wpscan –-url http://cmnatics.playground –-passwords rockyou.txt –-usernames cmnatic`
+
+<figure><img src="https://assets.tryhackme.com/additional/web-enumeration-redux/password-attack.png" alt=""><figcaption></figcaption></figure>
+
+### Adjusting WPScan's Aggressiveness (WAF)
+
+Unless specified, WPScan will try to be as least "noisy" as possible. Lots of requests to a web server can trigger things such as firewalls and ultimately result in you being blocked by the server.\
+This means that some plugins and themes may be missed by our WPScan. Luckily, we can use arguments such as `--plugins-detection` and an aggressiveness profile (passive/aggressive) to specify this. For example: `--plugins-detection aggressive`\
+Summary - Cheatsheet\
+
+
+| Flag       | Description                                                                                           | Full Example                   |
+| ---------- | ----------------------------------------------------------------------------------------------------- | ------------------------------ |
+| p          | Enumerate Plugins                                                                                     | --enumerate p                  |
+| t          | Enumerate Themes                                                                                      | --enumerate t                  |
+| u          | Enumerate Usernames                                                                                   | --enumerate u                  |
+| v          | Use WPVulnDB to cross-reference for vulnerabilities. Example command looks for vulnerable plugins (p) | --enumerate vp                 |
+| aggressive | This is an aggressiveness profile for WPScan to use.                                                  | --plugins-detection aggressive |
+
+\
+Practical: WPScan (Deploy #2)
+-----------------------------
+
+**Enumerate the site, what is the name of the theme that is detected as running?**
+
+**Kali**
+
+```
+wpscan --url http://wpscan.thm/ --enumerate t 
+```
+
+<figure><img src="../../.gitbook/assets/image (1144).png" alt=""><figcaption></figcaption></figure>
+
+**Enumerate the site, what is the name of the plugin that WPScan has found?**
+
+**Kali**
+
+```
+wpscan --url http://wpscan.thm/ --enumerate p
+```
+
+<figure><img src="../../.gitbook/assets/image (1145).png" alt=""><figcaption></figcaption></figure>
+
+**Enumerate the site, what username can WPScan find?**
+
+**Kali**
+
+```
+wpscan --url http://wpscan.thm/ --enumerate u
+```
+
+<figure><img src="../../.gitbook/assets/image (1146).png" alt=""><figcaption></figcaption></figure>
+
+**Construct a WPScan command to brute-force the site with this username, using the rockyou wordlist as the password list. What is the password to this user?**
+
+**Kali**
+
+```
+wpscan --url http://wpscan.thm/ --passwords /usr/share/wordlists/rockyou.txt --usernames phreakazoid
+```
+
+<figure><img src="../../.gitbook/assets/image (1147).png" alt=""><figcaption></figcaption></figure>
+
+## Introduction to Nikto
+
+Initially released in 2001, Nikto has made leaps and bounds over the years and has proven to be a very popular vulnerability scanner due to being both open-source nature and feature-rich. Nikto is capable of performing an assessment on all types of webservers (and isn't application-specific such as WPScan.). Nikto can be used to discover possible vulnerabilities including:
+
+* Sensitive files
+* Outdated servers and programs (i.e. [vulnerable web server installs](https://httpd.apache.org/security/vulnerabilities\_24.html))
+* Common server and software misconfigurations (Directory indexing, cgi scripts, x-ss protections)
+
+### Installing Nikto 
+
+Thankfully for us, Nikto comes pre-installed on the latest versions of penetration testing systems such as Kali Linux and Parrot. If you are using an older version of Kali Linux (such as 2019) for example, Nikto is in the apt repository, so can be installed by a simple `sudo apt update && sudo apt install nikto`
+
+﻿Installing Nikto on other operating systems such as Ubuntu or Debian involves extra steps. Whilst the TryHackMe AttackBox comes pre-installed with Nikto, you can follow the [developer's installation guide](https://cirt.net/nikto2-docs/installation.html#id2780292) for your local environment.
+
+## Nikto Modes
+
+### Basic Scanning
+
+The most basic scan can be performed by using the -h flag and providing an IP address or domain name as an argument. This scan type will retrieve the headers advertised by the webserver or application (I.e. Apache2, Apache Tomcat, Jenkins or JBoss) and will look for any sensitive files or directories (i.e. login.php, /admin/, etc)
+
+An example of this is the following: `nikto -h vulnerable_ip`
+
+![](https://assets.tryhackme.com/additional/web-enumeration-redux/nikto/basic-scan.png)
+
+Note a few interesting things are given to us in this example:
+
+* Nikto has identified that the application is Apache Tomcat using the favicon and the presence of "_/examples/servlets/index.html_" which is the location for the default Apache Tomcat application.
+* HTTP Methods "_PUT_" and "_DELETE_" can be performed by clients - we may be able to leverage these to exploit the application by uploading or deleting files.
+
+### Scanning Multiple Hosts & Ports
+
+Nikto is extensive in the sense that we can provide multiple arguments in a way that's similar to tools such as Nmap. In fact, so much so, we can take input directly from an Nmap scan to scan a host range. By scanning a subnet, we can look for hosts across an entire network range. We must instruct Nmap to output a scan into a format that is friendly for Nikto to read using Nmap's  `-oG`  flags
+
+For example, we can scan 172.16.0.0/24 (subnet mask 255.255.255.0, resulting in 254 possible hosts) with Nmap (using the default web port of 80) and parse the output to Nikto like so: `nmap -p80 172.16.0.0/24 -oG - | nikto -h -`&#x20;
+
+There are not many circumstances where you would use this other than when you have gained access to a network. A much more common scenario will be scanning multiple ports on one specific host. We can do this by using the `-p` flag and providing a list of port numbers delimited by a comma - such as the following: `nikto -h 10.10.10.1 -p 80,8000,8080`
+
+![](https://assets.tryhackme.com/additional/web-enumeration-redux/nikto/multiple-ports.png)
+
+### Introduction to Plugins
+
+Plugins further extend the capabilities of Nikto. Using information gathered from our basic scans, we can pick and choose plugins that are appropriate to our target. You can use the `--list-plugins` flag with Nikto to list the plugins or [view the whole list in an easier to read format online](https://github.com/sullo/nikto/wiki/Plugin-list).
+
+Some interesting plugins include:
+
+| Plugin Name    | Description                                                                                                                                                                            |
+| -------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| apacheusers    | Attempt to enumerate Apache HTTP Authentication Users                                                                                                                                  |
+| cgi            | Look for CGI scripts that we may be able to exploit                                                                                                                                    |
+| robots         | Analyse the robots.txt file which dictates what files/folders we are able to navigate to                                                                                               |
+| dir\_traversal | Attempt to use a directory traversal attack (i.e. LFI) to look for system files such as /etc/passwd on Linux (http://ip\_address/application.php?view=../../../../../../../etc/passwd) |
+
+We can specify the plugin we wish to use by using the `-Plugin` argument and the name of the plugin we wish to use...For example, to use the "_apacheuser_" plugin, our Nikto scan would look like so: `nikto -h 10.10.10.1 -Plugin apacheuser`
+
+![](https://assets.tryhackme.com/additional/web-enumeration-redux/nikto/plugin-scan.png)
+
+### Verbosing our Scan
+
+We can increase the verbosity of our Nikto scan by providing the following arguments with the `-Display` flag. Unless specified, the output given by Nikto is not the entire output, as it can sometimes be irrelevant (but that isn't always the case!)
+
+| Argument | Description                                           | Reasons for Use                                                                                                                                                                                                         |
+| -------- | ----------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 1        | Show any redirects that are given by the web server.  | <p>Web servers may want to relocate us to a specific file or directory, so we will need to adjust our scan accordingly for this.<br></p>                                                                                |
+| 2        | Show any cookies received                             | Applications often use cookies as a means of storing data. For example, web servers use sessions, where e-commerce sites may store products in your basket as these cookies. Credentials can also be stored in cookies. |
+| E        | Output any errors                                     | This will be useful for debugging if your scan is not returning the results that you expect!                                                                                                                            |
+
+\
+
+
+### Tuning Your Scan for Vulnerability Searching
+
+Nikto has several categories of vulnerabilities that we can specify our scan to enumerate and test for. The following list is not extensive and only include the ones that you may commonly use. We can use the `-Tuning` flag and provide a value in our Nikto scan:&#x20;
+
+| Category Name                     | Description                                                                                                                                                        | Tuning Option |
+| --------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------- |
+| File Upload                       | Search for anything on the web server that may permit us to upload a file. This could be used to upload a reverse shell for an application to execute.             | 0             |
+| Misconfigurations / Default Files | Search for common files that are sensitive (and shouldn't be accessible such as configuration files) on the web server.                                            | 2             |
+| <p>Information Disclosure<br></p> | Gather information about the web server or application (i.e. verison numbers, HTTP headers, or any information that may be useful to leverage in our attack later) | 3             |
+| Injection                         | Search for possible locations in which we can perform some kind of injection attack such as XSS or HTML                                                            | 4             |
+| <p>Command Execution<br></p>      | Search for anything that permits us to execute OS commands (such as to spawn a shell)                                                                              | 8             |
+| SQL Injection                     | Look for applications that have URL parameters that are vulnerable to SQL Injection                                                                                | 9             |
+
+### Saving Your Findings
+
+Rather than working with the output on the terminal, we can instead, just dump it directly into a file for further analysis - making our lives much easier!
+
+Nikto is capable of putting to a few file formats including:
+
+* Text File
+* HTML report
+
+We can use the `-o` argument (short for `-Output`) and provide both a filename and compatible extension. We _can_ specify the format (`-f`) specifically, but Nikto is smart enough to use the extension we provide in the `-o` argument to adjust the output accordingly.
+
+For example, let's scan a web server and output this to "_report.html_": `nikto -h http://ip_address -o report.html`
+
+![](https://assets.tryhackme.com/additional/web-enumeration-redux/nikto/html-command.png)
+
+![](https://assets.tryhackme.com/additional/web-enumeration-redux/nikto/html-report.png)\
+
+
+## Nikto Practical (Deploy #3)
+
+**What is the name & version of the web server that Nikto has determined running on port 80?**
+
+**Kali**
+
+```
+nikto -h $VICTIM -p 80
+```
+
+<figure><img src="../../.gitbook/assets/image (1148).png" alt=""><figcaption></figcaption></figure>
+
+**There is another web server running on another port. What is the name & version of this web server?**
+
+**Kali**
+
+```
+nikto -h 10.10.170.211  -p 8000,8080,443
+```
+
+<figure><img src="../../.gitbook/assets/image (1149).png" alt=""><figcaption></figcaption></figure>
+
+**What is the name of the Cookie that this JBoss server gives?**
+
+**Kali**
+
+```
+nikto -h $VICTIM  -p 8080 -Display 2
+```
+
+<figure><img src="../../.gitbook/assets/image (1150).png" alt=""><figcaption></figcaption></figure>
+
