@@ -2191,3 +2191,65 @@ When using PowerShell for offensive operations, you will need to play around wit
 ### Answer the questions
 
 **Read the above and enumerate PC-FILESRV01 using PowerShell.**
+
+## Post Exploitation That's not a cat that's a dawg
+
+Now that we have administrator access to the machine, we can follow our post-exploitation methodology and dump credentials. To aid us in dumping credentials, we will be using the infamous tool Mimikatz. We will also be utilizing Covenant to drop Mimikatz.\
+
+
+Mimikatz is a well-known tool for a variety of post-exploitation activities. We will be using it to dump credentials from LSASS. [T1003](https://attack.mitre.org/techniques/T1003/001/) From MITRE ATT\&CK. Described from ATT\&CK as "Adversaries may attempt to access credential material stored in the process memory of the Local Security Authority Subsystem Service (LSASS). After a user logs on, the system generates and stores various credential materials in LSASS process memory. These credential materials can be harvested by an administrative user or SYSTEM and used to conduct Lateral Movement using Use Alternate Authentication Material."\
+
+
+To run Mimikatz, we can use Covenant to drop the binary. Covenant has a task for Mimikatz; however, it is outdated and does not work on modern Windows systems, so we will need to compile or download our binary to use.\
+
+
+We can upload a Mimikatz binary using the `Upload` task and obtain a binary from the releases page [https://github.com/gentilkiwi/mimikatz/releases/](https://github.com/gentilkiwi/mimikatz/releases/) or compile the project yourself. Covenant will present you with a pop-up window to drop the file onto, and Covenant will host the file for you and upload the file to the server. Find an example of the window below.
+
+<figure><img src="https://i.imgur.com/hxjbw1U.png" alt=""><figcaption></figcaption></figure>
+
+To ensure a successful upload, you will need to specify where the file is to be uploaded on the target and the file's location on your attacking machine. Find an example of file path syntax below.
+
+<figure><img src="https://i.imgur.com/KUdJPzZ.png" alt=""><figcaption></figcaption></figure>
+
+Once the file is uploaded, we can use the `Shell` task to execute the binary. Since Mimikatz has its own CLI, you will need to send all commands to be run within Mimikatz in one command so that Covenant can interpret it.\
+
+
+***
+
+Now that we have Mimikatz executing on the system, we can look through its modules and syntax. Find an outline of a few Mimikatz modules below.
+
+* `standard`
+* `privilege`
+* `crypto`
+* `sekurlsa`
+* `kerberos`
+* `lsadump`
+* `vault`
+* and more
+
+For this task, we will be focusing on the `privilege`, `token`, and `sekurlsa` modules. Within each of these modules, a number of commands can be used to perform various operations. For more information about all the features of Mimikatz, check out the GitHub wiki, [https://github.com/gentilkiwi/mimikatz/wiki](https://github.com/gentilkiwi/mimikatz/wiki).
+
+The first module we will be looking at is `privilege`, from this module, we will use the `privilege::debug` command. This command will allow us to ensure that Mimikatz is running at the proper privilege levels before performing any operations.
+
+The second module we will be looking at is `token`, from this module, we will use the `token::elevate` command. This command will perform token impersonation to gain elevated integrity on the system. Token elevation is not always necessary but can help to troubleshoot when Mimikatz is struggling to dump credentials.
+
+The third module we will be looking at is `sekurlsa`, this module will contain a majority of the commands to interact with and abuse LSASS. From this module, we will be using the `sekurlsa::logonpasswords`. This command will dump the credentials of accounts already authenticated to the endpoint. We can also use the command `lsadump::lsa`, which has a similar function but will dump LSASS credentials from memory.\
+
+
+We can put all of these commands together to make a final Mimikatz command that we can use in Covenant. If using this tool normally, you could send each one of these commands separately, but we have to send them a little bit differently because we are using Covenant. Find example syntax below for Mimikatz.\
+
+
+Syntax: `.\Mimikatz.exe "privilege::debug" "token::elevate" "sekurlsa::logonpasswords" exit`
+
+It is important that you exit Mimikatz, or your shell task will never complete.
+
+We should now have a working method to dump credentials on the endpoint.
+
+### Answer the questions
+
+**Read the above and attempt to dump credentials on S-SRV01.**
+
+**What domain user's credentials can we dump on S-SRV01?**
+
+**What is the domain user's password that we can dump on S-SRV01?**
+
