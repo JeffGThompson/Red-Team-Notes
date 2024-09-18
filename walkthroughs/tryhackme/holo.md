@@ -2253,3 +2253,129 @@ We should now have a working method to dump credentials on the endpoint.
 
 **What is the domain user's password that we can dump on S-SRV01?**
 
+## Post Exploitation Good Intentions, Courtesy of Microsoft: Part II
+
+If cracking the hash fails, we always know that there is a backup when operating in Windows. Windows allows functionality to pass a hash to WinRM and RDP to enable authentication. This gives us as attackers an advantage, getting rid of the need to crack hashes. This attack is known as pass-the-hash.
+
+Pass the hash (PtH) is an attack wherein we can leverage found NTLM or LanMan hashes of user passwords to authenticate the user they belong to. This is possible due to the well-intentioned security 'feature' within Windows, where passwords are hashed predictably before being sent over the network. Done originally with the intent of avoiding password disclosure, we can leverage this feature to capture and replay hashes, allowing us to authenticate as our victim users.\
+
+
+To aid us in passing the hash, we can use crackmapexec and Evil-WinRM.
+
+The first tool we will be looking at is crackmapexec,&#x20;
+
+[https://github.com/byt3bl33d3r/CrackMapExec](https://github.com/byt3bl33d3r/CrackMapExec). From the crackmapexec GitHub, "CrackMapExec (a.k.a CME) is a post-exploitation tool that helps automate assessing the security of large Active Directory networks. Built with stealth in mind, CME follows the concept of "Living off the Land": abusing built-in Active Directory features/protocols to achieve its functionality and allowing it to evade most endpoint protection/IDS/IPS solutions." We will be using only one of the many features of CME. We can pass the hash over SMB, SSH, WinRM, LDAP, or MSSQL; we recommend using SMB.
+
+
+
+We will be deploying CME across the entire CIDR subnet to identify endpoints in which the credentials successfully authenticate. Find syntax usage for CME below.\
+
+
+Syntax: `crackmapexec smb 10.200.x.0/24 -u <user> -d <domain> -H <hash>`
+
+Above you will see crackmapexec output over proxy chains. Crackmapexec can take a decent amount of time when operating over proxy chains.\
+
+
+For more information about crackmapexec check out the GitHub wiki, [https://github.com/byt3bl33d3r/CrackMapExec/wiki](https://github.com/byt3bl33d3r/CrackMapExec/wiki).
+
+***
+
+The second tool we will be looking at is Evil-WinRM, [https://github.com/Hackplayers/evil-winrm](https://github.com/Hackplayers/evil-winrm). This tool will abuse the WinRM protocol to communicate to a remote endpoint. From the Evil-WinRM GitHub "WinRM (Windows Remote Management) is the Microsoft implementation of WS-Management Protocol. A standard SOAP-based protocol that allows hardware and operating systems from different vendors to interoperate. Microsoft included it in their Operating Systems to make life easier to system administrators." Thus, we can use our previously found endpoint and our hash and username to authenticate to the server and gain remote access successfully.\
+
+
+The easiest way to install Evil-WinRM is to install from the gem package manager, as the tool is built in Ruby. Find the command to install Evil-WinRM below.\
+
+
+Command: `gem install evil-winrm`
+
+After the installation, it is relatively simple to use Evil-WinRM as it operates similarly to other RDP or SSH clients. Find the Evil-WinRM syntax below.\
+
+
+Syntax: `evil-winrm -i <address> -u <user> -H <hash>`
+
+If successfully authenticated, you should now have a working WinRM shell that you can use to execute remote commands.
+
+### Answer the questions
+
+**Read the above and attempt to pass the hash.**
+
+**What is the hostname of the remote endpoint we can authenticate to?**
+
+## Post Exploitation Watson left her locker open
+
+After landing on PC-FILESRV01 and attempting to perform situational awareness, you may notice that you get an error when executing applications. This is due to whitelist application controls set on the server. We will be covering what AppLocker is and how it can be bypassed within this task.\
+
+
+From the Microsoft Docs, "Application control policies specify which programs are allowed to run on the local computer. AppLocker can be part of your application control strategy because you can control what software is allowed to run on your computers." In a brief summary of the Microsoft Docs, AppLocker is a set of Windows application control policies that can be used to restrict access to various sections of a device or multiple devices across a domain. To learn more about AppLocker, check out the Microsoft documentation [https://docs.microsoft.com/en-us/windows/security/threat-protection/windows-defender-application-control/applocker/applocker-overview](https://docs.microsoft.com/en-us/windows/security/threat-protection/windows-defender-application-control/applocker/applocker-overview)
+
+Whenever AppLocker blocks a program from running, you will encounter the error: _This program is blocked by group policy. For more information, contact your system administrator._ AppLocker will also send an event via ETW to the event log.\
+
+
+To begin understanding AppLocker, we need to identify its structure and implementation in Windows.\
+
+
+AppLocker doesn't take shape; it is just a policy similar to a company password policy or timeout policy that runs in the background and takes minimal action when needed. AppLocker consists of a set of rules that can be defaults, automatically generated, or a custom set of rules. These rules will typically be denying or allowing access to specific directories or sets of directories. Rules can also offer granular access control to specify which users can access what and which rules apply to what users.
+
+The policy configuration for AppLocker is located in `secpol.msc` or the local security policy editor. This can also be the group policy editor if changing AppLocker to deploy in a domain context. The policy is located under _Application Control Policies_.\
+
+
+![](https://i.imgur.com/f2tFlRf.png)\
+
+
+From the above screenshot, you will notice four rule types. Each rule type is outlined below.
+
+* `Executable Rules` Determines what executables and applications can be run from specified directories.
+* `Windows Installer Rules` Determines what Installers can be run
+* `Script Rules` Determines what and where scripts can be run
+* `Packaged app Rules` Determines what pre-packaged Windows applications can be run
+
+Below is the default rule list created by AppLocker.\
+
+
+The default rule set will allow every user to execute applications from the _Program Files_ and _Windows_ directory and enable Administrators to execute all files.\
+
+
+<figure><img src="https://i.imgur.com/GlZjAl0.png" alt=""><figcaption></figcaption></figure>
+
+System Administrators can create and edit rules that AppLocker will enforce. The wizard is straightforward to use and can allow administrators to push rules remotely to all servers in the domain.
+
+<figure><img src="https://i.imgur.com/IvA1i7h.png" alt=""><figcaption></figcaption></figure>
+
+The above allow rule will allow everyone to access the _Program Files_ directory.\
+
+
+***
+
+The idea behind bypassing AppLocker is to abuse misconfigurations within the rule sets themselves. Several default directories have execute permissions along with a few scripts and cheat sheets that you can use to aid you in abusing AppLocker.\
+
+
+There are a few other ways to bypass AppLocker including,
+
+* Signed/verified packages and binaries (LOLBAS)
+* PowerShell downgrade
+* Alternate Data Streams
+
+For a complete list of default directories to bypass AppLocker along with other techniques, check out this GitHub repo [https://github.com/api0cradle/UltimateAppLockerByPassList/blob/master/Generic-AppLockerbypasses.md](https://github.com/api0cradle/UltimateAppLockerByPassList/blob/master/Generic-AppLockerbypasses.md).\
+
+
+It is important to note that in terms of noise within a network, a default directory is favored; however, blue teams may use other detection rules to monitor directories known to be abused. It is up to you to decide your objectives and what attack to use when dealing with AppLocker.\
+
+
+To aid us in quickly identify directories we can use to execute programs; we can use an AppLocker directory check script [https://github.com/HackLikeAPornstar/GibsonBird/blob/master/chapter4/applocker-bypas-checker.ps1](https://github.com/HackLikeAPornstar/GibsonBird/blob/master/chapter4/applocker-bypas-checker.ps1)
+
+This script will automatically check for execution permissions on all known directories within the system. This can be helpful when dealing with a custom ruleset and other mitigations.\
+
+
+System Administrators will often not restrict PowerShell scripts, or you can directly run the script from the command line. Therefore, you will need to adjust how you approach running this script depending on the system. Find an example output below.\
+
+
+![](https://i.imgur.com/0hEAgPk.png)
+
+Directories and execution permissions will change based on the AppLocker policies. Therefore, this is not how the output of the script will always look.\
+
+
+Once we have identified a directory with execution permissions from manual enumeration or the PowerShell script, we can place a malicious binary such as our Covenant launcher within the directory and execute the binary.
+
+### Answer the questions
+
+**Read the above and bypass AppLocker on PC-FILESRV01.**
