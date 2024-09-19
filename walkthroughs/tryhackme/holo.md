@@ -2379,3 +2379,88 @@ Once we have identified a directory with execution permissions from manual enume
 ### Answer the questions
 
 **Read the above and bypass AppLocker on PC-FILESRV01.**
+
+## Situational Awareness - So it's just fancy malware?
+
+Now that we have a user account on PC-FILESRV01 and a directory that we can use to execute from, we can begin situational awareness. Like Linux situational awareness, Windows situational awareness means understanding the system you have landed on and what is available to you. In the following four tasks, we will be covering: AV enumeration, user and system enumeration, privilege escalation enumeration, and common escalations. In this task, we will be covering AV enumeration. Various teams may approach situational awareness, but we will be showcasing our preferred methodology and tools.\
+
+
+To begin assessing what tools may be most useful when attacking a system, you can start by attempting to enumerate what AV and detection methods are in place. It is essential to enumerate detections on an endpoint as this will allow you to determine your attack surface accessible.\
+
+
+***
+
+The first tool we will be looking at is Seatbelt, [https://github.com/GhostPack/Seatbelt](https://github.com/GhostPack/Seatbelt). From the Seatbelt GitHub,"Seatbelt is a C# project that performs a number of security-oriented host-survey "safety checks" relevant from both offensive and defensive security perspectives." As covered in Task 7, you will need to build Seatbelt using a Visual Studio solution file. The build process will produce an application file, an XML file, and a PDB file. The application file is the only file needed for Seatbelt to run. Files will be built to `Seatbelt-master\Seatbelt-master\Seatbelt\bin\Debug`\
+
+
+We can use a combination of seven commands within Seatbelt to begin to identify counter-measures. We will be covering Seatbelt further in-depth in a later task. Find an outline of commands used below.
+
+* `AMSIProviders` Providers registered for AMSI
+* `AntiVirus` Registered antivirus (via WMI)
+* `Sysmon` Sysmon configuration from the registry
+* `WindowsDefender` Windows Defender settings (including exclusion locations)
+* `WindowsEventForwarding` Windows Event Forwarding (WEF) settings via the registry
+* `McAfeeConfigs` Finds McAfee configuration files
+* `InterestingProcesses` "Interesting" processes - defensive products and admin tools
+
+The usage behind these commands may vary depending on the permission levels of the endpoint; however, you can expect a small amount of information to be gathered from them to help identify AV products. Find syntax for Seatbelt below.
+
+Syntax: `Seatbelt.exe —group=system`
+
+A majority of the commands used above can also be used remotely. This means we will not have to worry about AMSI or Defender as they operate from WMI queries. Find remote syntax for Seatbelt below.
+
+Syntax: `Seatbelt.exe -group=remote -computername=<address> -username=<DOMAIN\user> -password=<password`
+
+You can find examples of command output indicating AV detections on an endpoint below.
+
+![](https://i.imgur.com/AlBXho0.png)
+
+<figure><img src="https://i.imgur.com/AOiopVS.png" alt=""><figcaption></figcaption></figure>
+
+***
+
+The second tool we will be looking at is SharpEDRChecker, [https://github.com/PwnDexter/SharpEDRChecker](https://github.com/PwnDexter/SharpEDRChecker).\
+
+
+From the SharpEDRChecker GitHub "SharpEDRChecker, checks running processes, process metadata, DLLs loaded into your current process and the each DLLs metadata, common install directories, installed services and each service binaries metadata, installed drivers and each drivers metadata, all for the presence of known defensive products such as AV's, EDR's and logging tools."\
+
+
+This means that we can identify more advanced forms of anti-virus and detection agents that Seatbelt or other tools may not be able to locate using their methods. For example, Carbon Black, Tanium, or Crowd Strike; these solution platforms can deploy agents onto an endpoint custom to the organization similar to a malicious payload (basically malware, right?)\
+
+
+Below we will go into each of the functions of SharpEDRChecker and how they can benefit us in situational awareness.
+
+* `FileChecker` This function of the tool is what really separates it from other tools. It will check the metadata of the file that cannot be changed as it will invalidate code signing and break other aspects of the file.
+* `ProcessChecker` Similar function to Seatbelt's `InterestingProcesses`, The first part of this module will inspect all processes. The second part of the module will check for DLLs loaded by processes, this is important for identifying products such as Cylance and AMSI.
+* `ServiceChecker` Inspects installed services, a similar function to `ProcessChecker`.
+* `DriverChecker` Performs checks on all drivers using `P/Invoke`.
+* `DirectoryChecker` Dumps all interesting subdirectories on common directories (Program Files, ProgramData, etc.)
+
+To begin using SharpEDRChecker, you can either download a pre-compiled release from GitHub or compile from source using the solution file. For more information about compiling, return to Task 7. Find releases here, [https://github.com/PwnDexter/SharpEDRChecker/releases/tag/1.1](https://github.com/PwnDexter/SharpEDRChecker/releases/tag/1.1).\
+
+
+Find syntax and example output from SharpEDRChecker below.
+
+Syntax: `.\SharpEDRChecker.exe`
+
+<figure><img src="https://i.imgur.com/wjWlmx8.png" alt=""><figcaption></figcaption></figure>
+
+From the above screenshot, we can see that this tool gives us a much more detailed output than Seatbelt, which is a lot more focused and offers more insight than Seatbelt and other tools.\
+
+
+For more information about SharpEDRChecker, check out this blog, [https://redteaming.co.uk/2021/03/18/sharpedrchecker/](https://redteaming.co.uk/2021/03/18/sharpedrchecker/).\
+
+
+Depending on the approach you decide to take, you may have to return to Task 27-31 to pass the tools through anti-virus.\
+
+
+This step of situational awareness can also be done before or after gaining root access depending on how you want to approach it, or it can be skipped entirely depending on your target
+
+### Answer the questions
+
+**Read the above and attempt to identify defensive products on PC-FILESRV01.**
+
+**What anti-malware product is employed on PC-FILESRV01?**
+
+**What anti-virus product is employed on PC-FILESRV01?**
+
