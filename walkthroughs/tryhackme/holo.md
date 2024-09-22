@@ -2692,7 +2692,7 @@ When using PowerShell for offensive operations, you will need to play around wit
 
 **Read the above and enumerate PC-FILESRV01 using PowerShell.**
 
-## Privilege Escalation WERE TAKING OVER THIS DLL!
+## Privilege Escalation - WERE TAKING OVER THIS DLL!
 
 Now that we have performed all the enumeration and situational awareness, we can move on to privilege escalation. Looking through our enumeration steps, you may notice a unique application connected to a scheduled task on the endpoint. We can attempt a DLL hijack on this application to escalate privileges, then set up persistence on the endpoint.
 
@@ -2747,3 +2747,152 @@ Finally, execute the vulnerable application or wait for the scheduled task to tr
 **Read the above and exploit the application.**
 
 **What is the name of the vulnerable application found on PC-FILESRV01?**
+
+## Persistence - WERE TAKING OVER THIS DLL! Part: II
+
+Now that we have administrator privileges or moved the application onto our local development machine, we can search for other vulnerable DLL locations using ProcMon or Processhacker2. We can identify vulnerable DLLs by finding the process and PID of the application we are targeting then use filters or modules to search for the DLLs that meet specific requirements to be vulnerable. To be vulnerable, a DLL must meet the below requirements.
+
+* Defined by the target application
+* Ends with .DLL
+* Must be run by the target application
+* DLL does not exist on the system
+* Write privileges for DLL location
+
+In this task, we will be focusing on identifying DLLs with ProcMon, part of the Sysinternals suite [https://docs.microsoft.com/en-us/sysinternals/downloads/procmon](https://docs.microsoft.com/en-us/sysinternals/downloads/procmon).
+
+\
+
+
+To begin, we will need to open ProcMon as an Administrator. ProcMon will start with an extensive list of all DLLs and processes from all PIDs running on the system. To aid us, we can apply filters to this output to identify information.
+
+<figure><img src="https://i.imgur.com/PRRDZI6.png" alt=""><figcaption></figcaption></figure>
+
+To open the filters, navigate to _filter > Filter._
+
+You will want to filter based on the process name so change the filter to be: `Process Name, Contains, Name of Vulnerable Application`, then navigate to add and add the filter to ProcMon.
+
+![](https://i.imgur.com/i0hl1x5.png)
+
+If you look at the process list, there will only be processes from the vulnerable application.
+
+![](https://i.imgur.com/t6UJrCQ.png)
+
+Now that we have refined the search down to the application, we can filter it again to only show .DLL files.\
+
+
+You will filter on the pathname so change the filter to be: `Path, ends with, .dll`, then navigate to add and add the filter to ProcMon.\
+
+
+![](https://i.imgur.com/y2XjIxD.png)
+
+Now that we have refined our search again, we can look through the output of DLLs run by the vulnerable application.
+
+![](https://i.imgur.com/l4Xie7q.png)
+
+When looking for a DLL to target, we want to look for a DLL in a path that we can write. We also want to ensure the DLL does not exist on the system in its current state; this will show up as `NAME NOT FOUND`. This means the application attempts to load it but cannot because it does not exist on the system. We can then hijack and use it to run our malicious code.\
+
+
+Since we're looking for files with paths that we can access, we may want to filter again to something like Desktop, Downloads, Documents. This will allow us to refine our search further for DLLs that we can write. The preferred way to filter again would be to filter the result based on `NAME NOT FOUND`.
+
+You will filter on the result so change the filter to be: Result, contains, `NAME NOT FOUND`, then navigate to add and add the filter to ProcMon.\
+
+
+![](https://i.imgur.com/32vFfu8.png)
+
+If we look at the list of processes in ProcMon, we will see a list of DLLs that can be exploited.
+
+![](https://i.imgur.com/8xu1QAf.png)
+
+We can now control the DLLs using our previously created malicious DLLs and set up quiet persistence on the device by working off applications and processes already running.
+
+### Answer the questions
+
+**Read the above and set up persistence on PC-FILESRV01.**
+
+**What is the first listed vulnerable DLL located in the Windows folder from the application**
+
+## NTLM Relay -  Never trust the LanMan
+
+You now have administrator access to PC-FILESRV01; you know that you are in a domain content. Your research team has developed a brand new never-seen exploit to relay requests and dump domain credentials. We will cover this new exploit in the following four tasks and weaponize it to gain domain administrator access and own the domain with a relay.\
+
+
+To begin this attack, we will identify what NTLM is and how it is integrated into Windows.
+
+Net-NTLMv1 is a challenge/response protocol that uses NTHash. This version will use both NT and LM hashes. You can find the algorithm used to hash below.
+
+`C = 8-byte server challenge, random K1 | K2 | K3 = LM/NT-hash | 5-bytes-0 response = DES(K1,C) | DES(K2,C) | DES(K3,C)`\
+
+
+Net-NTLMv2 is an updated version of Net-NTLMv1. This hash protocol will use the same processes as v1 but will use a different algorithm and response. This version is the default since Windows 2000.
+
+`SC = 8-byte server challenge, random CC = 8-byte client challenge, random CC* = (X, time, CC2, domain name) v2-Hash = HMAC-MD5(NT-Hash, user name, domain name) LMv2 = HMAC-MD5(v2-Hash, SC, CC) NTv2 = HMAC-MD5(v2-Hash, SC, CC*) response = LMv2 | CC | NTv2 | CC*`
+
+***
+
+Now that we understand what an NTLM hash is and how it is hashed, we can look at how it responds and requests and why it can only be relayed and not replayed.\
+
+
+The reason we can only relay hashes is that it uses a challenge-based request. A client will attempt to authenticate to a server; the server will approve or deny initial authentication and move on to send a client a Challenge string to encrypt with the client's NTLM hash (Challenge-Request). If the client can encrypt the string correctly, the client will be permitted to authenticate to the server; if not, authentication will fail (Challenge-Response). We can break down the technical process below.\
+
+
+1. (Interactive authentication only) A user accesses a client computer and provides a domain name, user name, and password. The client computes a cryptographic [_hash_](https://docs.microsoft.com/en-us/windows/win32/secgloss/h-gly) of the password and discards the actual password.
+2. The client sends the user name to the server (in [_plaintext_](https://docs.microsoft.com/en-us/windows/win32/secgloss/p-gly)).
+3. The server generates a 16-byte random number, called a _challenge_ or [_nonce_](https://docs.microsoft.com/en-us/windows/win32/secgloss/n-gly), and sends it to the client.
+4. The client encrypts this challenge with the hash of the user's password and returns the result to the server. This is called the _response_.
+5. The server sends the following three items to the domain controller:
+   * User name
+   * Challenge sent to the client.
+   * Response received from the client.
+6. The domain controller uses the user name to retrieve the hash of the user's password from the Security Account Manager database. It uses this password hash to encrypt the challenge.
+7. The domain controller compares the encrypted challenge it computed (in step 6) to the response computed by the client (in step 4). If they are identical, authentication is successful.
+
+Source: [https://docs.microsoft.com/en-us/windows/win32/secauthn/microsoft-ntlm?redirectedfrom=MSDN](https://docs.microsoft.com/en-us/windows/win32/secauthn/microsoft-ntlm?redirectedfrom=MSDN)
+
+Now that we understand Net-NTLMv1 and Net-NTLMv2 and how they can be used for authentication, we can move on to exploiting Net-NTLM.\
+
+
+## NTLM Relay - Now you see me, now you don't
+
+If a server sends out SMB connections, you can use abuse NTLM relaying to gain a foothold from these SMB connections. This is an example of how NTLM relaying works and how a Net-NTLM session is created. To exploit the network, we will need to adjust the attack from our research.\
+
+
+To begin relaying hashes, we need first to understand how hashes would generally be abused. We will demonstrate two tools that are usually used: Responder, [https://github.com/lgandx/Responder](https://github.com/lgandx/Responder) and NTLMRelayX, [https://github.com/SecureAuthCorp/impacket/blob/master/examples/ntlmrelayx.py](https://github.com/SecureAuthCorp/impacket/blob/master/examples/ntlmrelayx.py)\
+
+
+The first tool we will be looking at is Responder. From the Responder GitHub, "Responder is a LLMNR, NBT-NS and MDNS poisoner, with built-in HTTP/SMB/MSSQL/FTP/LDAP rogue authentication server supporting NTLMv1/NTLMv2/LMv2, Extended Security NTLMSSP and Basic HTTP authentication." We can use Responder in our situation to poison LLMNR, Netbios, and DNS and then capture the response from the server.\
+
+
+To begin poisoning requests, we will need to turn off SMB in the Responder configuration as NTLMRelayX will be handling SMB. Find an example command used below.
+
+Command used: `sudo sed -i 's/SMB = On/SMB = Off/' /etc/responder/Responder.conf`
+
+You can also manually edit the configuration file and turn off SMB.
+
+Now that SMB is off, we can start responder poisoning across our network interface. Find syntax to start Responder below.
+
+Syntax: `sudo python Responder.py -I <Interface>`
+
+Responder is now poisoning requests across the network, and we can begin relaying them.
+
+**Note:** It is not necessary to use Responder when attempting to Remotely NTLMRelay. Responder should be used for poisoning a local network, not a remote network. Using Responder is **not** required to complete Holo.
+
+***
+
+The second tool we will be looking at is NTLMRelayX, part of the Impacket suite. From the Impacket GitHub, "This module performs the SMB Relay attacks originally discovered by cDc extended to many target protocols (SMB, MSSQL, LDAP, etc). It receives a list of targets, and for every connection received, it will choose the next target and try to relay the credentials. Also, if specified, it will first try to authenticate against the client connecting to us."
+
+We can use it against a specified protocol to relay inbound sessions. Find syntax for starting NTLMRelayX below.
+
+Syntax: `ntlmrelayx.py -t ldap://<IP> -smb2support --escalate-user <user>`
+
+This is an example of creating a Net-NTLM session. When a valid SMB session is received, NTLMRelayX will act as a proxy and send a challenge to exploit the target system.\
+
+
+Now that we understand how an NTLM relay works and how a Net-NTLM session is created, we can move on to remote NTLM relaying.
+
+### Answer the questions
+
+**Read the above and move on to remotely exploiting NLTM.**
+
+**In order for these attacks to work, it is important for SMB signing to be disabled. Use Nmap to scan for SMB signing privileges on the network.**
+
+**What host has SMB signing disabled?**
