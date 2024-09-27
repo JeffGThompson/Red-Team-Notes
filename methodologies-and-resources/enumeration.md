@@ -213,7 +213,11 @@ dig -t AXFR $HOST.thm @$DNSSERVER
 
 ## **TCP/80:443 - HTTP(s)**
 
-Add things from this room: [https://tryhackme.com/room/contentdiscovery](https://tryhackme.com/room/contentdiscovery)
+### Web Enumeration
+
+Useful info on how to run a lot of the tools in this section.
+
+[web-enumeration.md](../walkthroughs/tryhackme/web-enumeration.md "mention")
 
 ### Info gathering info
 

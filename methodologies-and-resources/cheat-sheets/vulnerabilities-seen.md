@@ -58,6 +58,12 @@
 
 [#initial-shell](../../walkthroughs/tryhackme/tryhack3m-bricks-heist.md#initial-shell "mention")
 
+## CVE-2023-7028 - Gitlab
+
+[gitlab-cve-2023-7028.md](../../walkthroughs/tryhackme/gitlab-cve-2023-7028.md "mention")
+
+
+
 ## Druva inSync
 
 ### Privileges Escalation

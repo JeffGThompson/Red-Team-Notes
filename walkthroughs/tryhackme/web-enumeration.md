@@ -246,8 +246,6 @@ gobuster dir -u http://products.webenum.thm -w /usr/share/wordlists/dirbuster/di
 
 ## Introduction to WPScan
 
-##
-
 First released in June 2011, WPScan has survived the tests of time and stood out as a tool that every pentester should have in their toolkits.
 
 The WPScan framework is capable of enumerating & researching a few security vulnerability categories present in WordPress sites - including - but not limited to:
@@ -258,7 +256,7 @@ The WPScan framework is capable of enumerating & researching a few security vuln
 * Presence of Default Installation (Looking for default files)
 * Testing Web Application Firewalls (Common WAF plugins)
 
-### Installing WPScan 
+### Installing WPScan
 
 Thankfully for us, WPScan comes pre-installed on the latest versions of penetration testing systems such as Kali Linux and Parrot. If you are using an older version of Kali Linux (such as 2019) for example, WPScan is in the apt repository, so can be installed by a simple `sudo apt update && sudo apt install wpscan`&#x20;
 
