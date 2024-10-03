@@ -227,3 +227,94 @@ find /etc/ \( -path /lib -o -path /snap -o -path /etc/sane.d -o -path /etc/fonts
 ```
 
 <figure><img src="../../.gitbook/assets/image (1156).png" alt=""><figcaption></figcaption></figure>
+
+## Unit 4 - SUID
+
+Set User ID (SUID**)** is a type of permission that allows users to execute a file with the permissions of another user.\
+Those files which have SUID permissions run with higher privileges.  Assume we are accessing the target system as a non-root user and we found SUID bit enabled binaries, then those file/program/command can be run with root privileges.&#x20;
+
+SUID abuse is a common privilege escalation technique that allows us to gain root access by executing a root-owned binary with SUID enabled.
+
+You can find all SUID file by executing this simple find command:
+
+`find / -perm -u=s -type f 2>/dev/null`
+
+\-u=s searches files that are owned by the root user.\
+\-type f search for files, not directories
+
+After displaying all SUID files, compare them to a list on [GTFObins](http://gtfobins.github.io/#+SUID) to see if there's a way to abuse them to get root access.&#x20;
+
+**Victim**
+
+```
+find / -perm -u=s -type f 2>/dev/null
+```
+
+<figure><img src="../../.gitbook/assets/image (1157).png" alt=""><figcaption></figcaption></figure>
+
+**Victim**
+
+```
+LFILE=/etc/shadow
+grep '' $LFILE
+```
+
+<figure><img src="../../.gitbook/assets/image (1158).png" alt=""><figcaption></figcaption></figure>
+
+
+
+## \[Bonus] - Port Forwarding
+
+﻿According to Wikipedia, "Port forwarding is an application of network address translation (NAT) that redirects a communication request from one address and port number combination to another while the packets are traversing a network gateway, such as a router or firewall".&#x20;
+
+Port forwarding not only allows you to bypass firewalls but also gives you an opportunity to enumerate some local services and processes running on the box.&#x20;
+
+The Linux netstat command gives you a bunch of information about your network connections, the ports that are in use, and the processes using them. In order to see all TCP connections, execute `netstat -at | less`. This will give you a list of running processes that use TCP. From this point, you can easily enumerate running processes and gain some valuable information.
+
+`netstat -tulpn` will provide you a much nicer output with the most interesting data.
+
+Read more about port forwarding here: [fumenoid.github.io/posts/port-forwarding](https://fumenoid.github.io/posts/port-forwarding)
+
+**Victim**
+
+```
+f
+```
+
+## Unit 5 - Automating scripts
+
+Even though I, personally, dislike any automatic enumeration scripts, they are really important to the privilege escalation process as they help you to omit the 'human error' in your enum process.&#x20;
+
+\> Linpeas
+
+LinPEAS - Linux local Privilege Escalation Awesome Script (.sh) is a script that searches for possible paths to escalate privileges on Linux/ hosts.&#x20;
+
+<figure><img src="https://tryhackme-images.s3.amazonaws.com/user-uploads/5e9c5d0148cf664325c8a075/room-content/5e9c5d0148cf664325c8a075-1716337058116" alt=""><figcaption></figcaption></figure>
+
+Linpeas automatically searches for passwords, SUID files and Sudo right abuse to hint you on your way towards root.&#x20;
+
+They are different ways of getting the script on the box, but the most reliable one would be to first download the script on your system and then transfer it on the target.
+
+![](https://i.imgur.com/yAfGFDW.png)
+
+`wget https://raw.githubusercontent.com/carlospolop/privilege-escalation-awesome-scripts-suite/master/linPEAS/linpeas.sh`
+
+After that, you get a nice output with all the vulnerable parts marked.
+
+\> LinEnum
+
+The second tool on our list is LinEnum. It performs 'Scripted Local Linux Enumeration & Privilege Escalation Checks' and appears to be a bit easier than linpeas.
+
+You can get the script by running:
+
+`wget https://raw.githubusercontent.com/rebootuser/LinEnum/master/LinEnum.sh`
+
+Now, as you have two tools on the box, try running both of them and see if either of them shows something interesting!\
+_Please note: It's always a good idea to run multiple scripts separately and compare their output, as far as each one of them has their own specific scope of exploration._
+
+
+
+
+
+
+
