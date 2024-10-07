@@ -386,7 +386,7 @@ Used to get hidden messages/files from a image. Requires a password.&#x20;
 
 #### Examples
 
-[jack-of-all-trades.md](../../walkthroughs/tryhackme/jack-of-all-trades.md "mention")[biohazard.md](../../walkthroughs/tryhackme/biohazard.md "mention")[tokyo-ghoul.md](../../walkthroughs/tryhackme/tokyo-ghoul.md "mention")[blog.md](../../walkthroughs/tryhackme/blog.md "mention")[linux-agency.md](../../walkthroughs/tryhackme/linux-agency.md "mention")
+[jack-of-all-trades.md](../../walkthroughs/tryhackme/jack-of-all-trades.md "mention")[biohazard.md](../../walkthroughs/tryhackme/biohazard.md "mention")[tokyo-ghoul.md](../../walkthroughs/tryhackme/tokyo-ghoul.md "mention")[blog.md](../../walkthroughs/tryhackme/blog.md "mention")[finish-linux-agency.md](../../walkthroughs/tryhackme/finish-linux-agency.md "mention")
 
 **Kali**
 

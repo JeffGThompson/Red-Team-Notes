@@ -62,5 +62,5 @@ cat joomladb.sql | grep admin
 
 ## Ghidra
 
-[#ghidra](../../walkthroughs/tryhackme/madeyes-castle/#ghidra "mention")[#ghidra](../../walkthroughs/tryhackme/wonderland.md#ghidra "mention")[linux-agency.md](../../walkthroughs/tryhackme/linux-agency.md "mention")[#ghidra](../../walkthroughs/tryhackme/tokyo-ghoul.md#ghidra "mention")[#ghidra](../../walkthroughs/tryhackme/bookstore.md#ghidra "mention")[obscure.md](../../walkthroughs/tryhackme/obscure.md "mention")
+[#ghidra](../../walkthroughs/tryhackme/madeyes-castle/#ghidra "mention")[#ghidra](../../walkthroughs/tryhackme/wonderland.md#ghidra "mention")[finish-linux-agency.md](../../walkthroughs/tryhackme/finish-linux-agency.md "mention")[#ghidra](../../walkthroughs/tryhackme/tokyo-ghoul.md#ghidra "mention")[#ghidra](../../walkthroughs/tryhackme/bookstore.md#ghidra "mention")[obscure.md](../../walkthroughs/tryhackme/obscure.md "mention")
 

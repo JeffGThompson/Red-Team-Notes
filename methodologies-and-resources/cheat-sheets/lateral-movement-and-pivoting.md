@@ -27,7 +27,7 @@ Password: $ASSWORD
 
 **Examples**
 
-&#x20;[#ssh-remote-port-forwarding](../../walkthroughs/tryhackme/lateral-movement-and-pivoting.md#ssh-remote-port-forwarding "mention")
+&#x20;[#ssh-remote-port-forwarding](../../walkthroughs/tryhackme/lateral-movement-and-pivoting.md#ssh-remote-port-forwarding "mention")[#bonus-port-forwarding](../../walkthroughs/tryhackme/linux-local-enumeration.md#bonus-port-forwarding "mention")
 
 In our example, let's assume that firewall policies block the attacker's machine from directly accessing port 3389 on the server. If the attacker has previously compromised PC-1 and, in turn, PC-1 has access to port 3389 of the server, it can be used to pivot to port 3389 using remote port forwarding from PC-1. **Remote port forwarding** allows you to take a reachable port from the SSH client (in this case, PC-1) and project it into a **remote** SSH server (the attacker's machine).
 
@@ -46,17 +46,30 @@ useradd tunneluser
 passwd tunneluser
 ```
 
+**/etc/ssh/sshd\_config**
+
+If it's not working, it could because these settings aren't set
+
+```
+AllowTcpForwarding yes
+GatewayPorts yes
+```
+
 **Victim**
 
 ```
 ssh tunneluser@$KALI -R 8888:thmdc.za.tryhackme.com:80 -L *:1990:127.0.0.1:1990 -L *:1029:127.0.0.1:1029 -N
 ```
 
+
+
 ## Socat
+
+If there is a website running on port 6666 that can only be seen on the Victims side locally, we can forward it so we can see it on Kali. Below will allows us to see the website on our Kali instance on port 7777
 
 **Examples**
 
-[#port-forwarding-and-finding-flag](../../walkthroughs/tryhackme/magician.md#port-forwarding-and-finding-flag "mention")
+[#port-forwarding-and-finding-flag](../../walkthroughs/tryhackme/magician.md#port-forwarding-and-finding-flag "mention")[#bonus-port-forwarding](../../walkthroughs/tryhackme/linux-local-enumeration.md#bonus-port-forwarding "mention")
 
 **Kali**
 
