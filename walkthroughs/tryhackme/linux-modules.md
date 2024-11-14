@@ -791,6 +791,26 @@ Examples
 
 ![](https://tryhackme-images.s3.amazonaws.com/user-uploads/5eff6381a8b8f6323ba744fe/room-content/6c8758a7bb7caeefa191f62f98d38fe3.png)
 
+### Answer the questions
+
+How will you enable time logging at every new activity that this tool initiates?
+
+```
+-N
+```
+
+What command will you use to download [https://xyz.com/mypackage.zip](https://xyz.com/mypackage.zip) using wget, appending logs to an existing file named "package-logs.txt"
+
+```
+wget -a package-logs.txt https://xyz.com/mypackage.zip
+```
+
+Write the command to read URLs from "file.txt" and limit the download speed to 1mbps.
+
+```
+wget -i file.txt --limit-rate=1m
+```
+
 ## xxd
 
 xxd, which is well known for hexdumps or even the reverse. This command is not very vast to explore, but still knowing this command thoroughly will help you handling hex strings and hex digits. Whether you're playing ctfs, or bypassing JWT with automation, xxd can do it all. This command can take input from a file or the input can be passed through piping or redirection.
@@ -954,4 +974,34 @@ References
 
 * [Difference between Systemctl and service command - Stack Overflow](https://stackoverflow.com/questions/43537851/difference-between-systemctl-and-service-command)
 * [Systemctl Cheatsheet (github.com)](https://gist.github.com/adriacidre/307d2f9f5179fc748f22edac5af3d218) (A small cheatsheet you wanna read before working with systemctl).
+
+### Answer the questions
+
+**It's safe to run systemctl command and experiment on your main linux system neither following a proper guide or having any prior knowledge? (Right/Wrong)**
+
+```
+Wrong
+```
+
+**How will you import a given PGP private key. (Suppose the name of the file is key.gpg)**
+
+```
+gpg --import key.gpg
+```
+
+**How will you list all port activity if netstat is not available on a machine? (Full Name)**
+
+```
+Socket Statistics
+```
+
+**What command can be used to fix a broken/irregular/weird acting terminal shell?**
+
+```
+reset
+```
+
+
+
+
 
