@@ -864,6 +864,34 @@ Just by appending the offset's value with a hyphen the command starts dumping fr
 
 Sidenote: There is a difference between `-s +offset` and `-s offset` while seeking through stdin. I am not gonna go in brief explaining the difference just keep in mind that if there is error while seeking offset through stdin, try redirecting stdin to a file and then perform hexdump with xxd that might solve your problem.
 
+### Answer the questions
+
+**How will you seek at 10th byte(in hex) in file.txt and display only 50 bytes?**
+
+```
+xxd -s 0xa -l 50 -b file.txt 
+```
+
+**How to display a n bytes of hexdump in 3 columns with a group of 3 octets per row from file.txt? (Use flags alphabetically)**
+
+```
+xxd -c 9 -g 3 file.txt
+```
+
+**Which has more precedence over the other -c flag or -g flag?**
+
+```
+-c
+```
+
+**Download the file and find the value of flag.**
+
+```
+cat flag_1611749859927.txt | xxd -r -p
+```
+
+<figure><img src="../../.gitbook/assets/image.png" alt=""><figcaption></figcaption></figure>
+
 ## Other modules
 
 ﻿Let's start with the commands I found after doing a  `| sort | uniq` search on the first word on every line in my \~/.bash\_history(31337 commands got listed. This task won't include nmap/gobuster commands, because that's not what this room is about).&#x20;

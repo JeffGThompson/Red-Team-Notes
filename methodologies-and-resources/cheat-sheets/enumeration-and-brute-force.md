@@ -247,7 +247,7 @@ Using the AttackBox or your own attacking VM, use Crunch to generate a list of n
 crunch 3 3 -o otp.txt -t %%% -s 100 -e 200             
 ```
 
-<figure><img src="../../.gitbook/assets/image (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 Go back to Intruder and configure the payload to use the generated file.
 
