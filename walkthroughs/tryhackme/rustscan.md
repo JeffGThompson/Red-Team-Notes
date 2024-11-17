@@ -124,7 +124,7 @@ If you want to scan ports in a random order (which will help with not setting of
 rustscan -a $VICTIM
 ```
 
-<figure><img src="../../.gitbook/assets/image.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1).png" alt=""><figcaption></figcaption></figure>
 
 ```
 2
@@ -138,7 +138,7 @@ rustscan -a $VICTIM
 rustscan -a $VICTIM  -p 22 -- -A -sC
 ```
 
-<figure><img src="../../.gitbook/assets/image (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 ```
 6.6.1p1
