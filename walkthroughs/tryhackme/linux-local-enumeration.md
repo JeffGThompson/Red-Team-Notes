@@ -128,7 +128,7 @@ Execute `uname -a` to print out all information about the system.This simple box
 <figure><img src="https://i.imgur.com/3y949OY.png" alt=""><figcaption></figcaption></figure>
 
 Most of the commands open us an opportunity to escalate our priviligies via simple tricks described in [GTFObins](https://gtfobins.github.io/#+sudo).\
-_Note: Output on the picture demonstrates that user may run ALL commands on the system with sudo rights. A given configuration is the easiest way to get root._&#x20;
+&#xNAN;_&#x4E;ote: Output on the picture demonstrates that user may run ALL commands on the system with sudo rights. A given configuration is the easiest way to get root._&#x20;
 
 **Kali**
 
@@ -230,7 +230,7 @@ find /etc/ \( -path /lib -o -path /snap -o -path /etc/sane.d -o -path /etc/fonts
 
 ## Unit 4 - SUID
 
-Set User ID (SUID**)** is a type of permission that allows users to execute a file with the permissions of another user.\
+Set User ID (SUI&#x44;**)** is a type of permission that allows users to execute a file with the permissions of another user.\
 Those files which have SUID permissions run with higher privileges.  Assume we are accessing the target system as a non-root user and we found SUID bit enabled binaries, then those file/program/command can be run with root privileges.&#x20;
 
 SUID abuse is a common privilege escalation technique that allows us to gain root access by executing a root-owned binary with SUID enabled.
@@ -239,8 +239,8 @@ You can find all SUID file by executing this simple find command:
 
 `find / -perm -u=s -type f 2>/dev/null`
 
-\-u=s searches files that are owned by the root user.\
-\-type f search for files, not directories
+-u=s searches files that are owned by the root user.\
+-type f search for files, not directories
 
 After displaying all SUID files, compare them to a list on [GTFObins](http://gtfobins.github.io/#+SUID) to see if there's a way to abuse them to get root access.&#x20;
 
@@ -356,7 +356,7 @@ You can get the script by running:
 `wget https://raw.githubusercontent.com/rebootuser/LinEnum/master/LinEnum.sh`
 
 Now, as you have two tools on the box, try running both of them and see if either of them shows something interesting!\
-_Please note: It's always a good idea to run multiple scripts separately and compare their output, as far as each one of them has their own specific scope of exploration._
+&#xNAN;_&#x50;lease note: It's always a good idea to run multiple scripts separately and compare their output, as far as each one of them has their own specific scope of exploration._
 
 
 

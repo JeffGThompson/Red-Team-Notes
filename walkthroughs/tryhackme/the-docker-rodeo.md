@@ -73,11 +73,7 @@ curl -X GET http://docker-rodeo.thm:5000/v2/_catalog
 curl -X GET http://docker-rodeo.thm:5000/v2/cmnatic/myapp1/tags/list
 ```
 
-<div align="center">
-
-<img src="https://resources.cmnatic.co.uk/TryHackMe/rooms/docker-rodeo/dockerregistry/catalog1.png" alt="">
-
-</div>
+<div align="center"><img src="https://resources.cmnatic.co.uk/TryHackMe/rooms/docker-rodeo/dockerregistry/catalog1.png" alt=""></div>
 
 \
 In this example, we're given a response of three repositories. For now, we are only going to focus on "cmnatic/myapp1".\
@@ -108,11 +104,7 @@ curl -X GET http://docker-rodeo.thm:5000/v2/cmnatic/myapp1/manifests/notsecure
 Note the response - specifically the "history" key;  albeit slightly hard to read, we have a command that was executed during the image building stage stored in plaintext (`` echo \\\"here's a flag\\\" \\u003e /root/root.txt\"]` `` ). In this image, it's a string insert into /root/root.txt on the container. Although imagine if this was a password!\
 
 
-<div align="center">
-
-<img src="https://resources.cmnatic.co.uk/TryHackMe/rooms/docker-rodeo/dockerregistry/manifest1.png" alt="">
-
-</div>
+<div align="center"><img src="https://resources.cmnatic.co.uk/TryHackMe/rooms/docker-rodeo/dockerregistry/manifest1.png" alt=""></div>
 
 **What is the port number of the 2nd Docker registry?**
 
@@ -194,11 +186,7 @@ docker pull docker-rodeo.thm:5000/dive/example
 Note: If you receive this warning:`Error response from daemon: Get https://docker-rodeo.thm:5000/v2/: http: server gave HTTP response to HTTPS client`you need to revisit Step 1 in the first task of this room and then restart your Computer to ensure Docker has properly restarted.\
 
 
-<div align="center">
-
-<img src="https://resources.cmnatic.co.uk/TryHackMe/rooms/docker-rodeo/reversedockerimages/pullerror.png" alt="">
-
-</div>
+<div align="center"><img src="https://resources.cmnatic.co.uk/TryHackMe/rooms/docker-rodeo/reversedockerimages/pullerror.png" alt=""></div>
 
 \
 Find the IMAGE\_ID of the repository image that we have downloaded in Step 2:4.3.1. run `docker images` and look for the name of the repository we downloaded `docker-rodeo.thm:5000/dive/example`4.3.2. The "IMAGE\_ID" is the value in the third column:
@@ -244,11 +232,7 @@ For example, take a look at the first layer then press the "Tab" key to switch w
 
 <figure><img src="https://resources.cmnatic.co.uk/TryHackMe/rooms/docker-rodeo/reversedockerimages/using-dive3.png" alt=""><figcaption></figcaption></figure>
 
-<div align="center">
-
-<img src="https://resources.cmnatic.co.uk/TryHackMe/rooms/docker-rodeo/reversedockerimages/using-dive4.png" alt="">
-
-</div>
+<div align="center"><img src="https://resources.cmnatic.co.uk/TryHackMe/rooms/docker-rodeo/reversedockerimages/using-dive4.png" alt=""></div>
 
 \
 At the 1st layer, there is nothing located in "/home" (highlighted in green in the above screenshot) on the container. However, if we were to proceed to the 2nd layer, the command `mkdir -p /home/user` is executed, and now we can see the directory "/home/user" (highlighted in red) has now been made on the container.\
@@ -300,25 +284,17 @@ Without proper authentication, we can upload our own image to the target's regis
 The screenshot below is a "Dockerfile" that uses the Docker `RUN` instruction to execute "netcat" within the container to connect to our machine! \
 
 
-<div align="center">
-
-<img src="https://resources.cmnatic.co.uk/TryHackMe/rooms/docker-rodeo/malicious/reverseshell1.png" alt="">
-
-</div>
+<div align="center"><img src="https://resources.cmnatic.co.uk/TryHackMe/rooms/docker-rodeo/malicious/reverseshell1.png" alt=""></div>
 
 \
 We compile this into an image with `docker build`. Once compiled and added to the vulnerable registry, we set up a listener on our attacker machine and wait for the new image to be executed by the target.\
 
 
-<div align="center">
-
-<img src="https://resources.cmnatic.co.uk/TryHackMe/rooms/docker-rodeo/malicious/reverseshell2.png" alt="">
-
-</div>
+<div align="center"><img src="https://resources.cmnatic.co.uk/TryHackMe/rooms/docker-rodeo/malicious/reverseshell2.png" alt=""></div>
 
 \
 Note this will only grant us root access to the container using the image, and not the actual host - but it's a connection as root nonetheless. We can start to use these newly gained root privileges to look for configuration files, passwords or attempt to escape!\
-_Additional reading:_ [_A Malicious DockerHub Image allowed attackers mine cryptocurrency_](https://www.trendmicro.com/vinfo/us/security/news/virtualization-and-cloud/malicious-docker-hub-container-images-cryptocurrency-mining)\
+&#xNAN;_&#x41;dditional reading:_ [_A Malicious DockerHub Image allowed attackers mine cryptocurrency_](https://www.trendmicro.com/vinfo/us/security/news/virtualization-and-cloud/malicious-docker-hub-container-images-cryptocurrency-mining)\
 
 
 ## Vulnerability #4: RCE via Exposed Docker Daemon
@@ -331,11 +307,7 @@ If I were to mention the word "socket" you would most likely think of networking
 There was an interesting [benchmark test](https://www.percona.com/blog/2020/04/13/need-to-connect-to-a-local-mysql-server-use-unix-domain-socket/) between using both types of sockets for querying a MySQL database. Notice in the screenshot below how there are an incredibly higher amount of queries performed when using UNIX sockets; database systems such as Redis are known for their performance due to this reason.\
 
 
-<div align="center">
-
-<img src="https://www.percona.com/blog/wp-content/uploads/2020/04/image2-2.png" alt="">
-
-</div>
+<div align="center"><img src="https://www.percona.com/blog/wp-content/uploads/2020/04/image2-2.png" alt=""></div>
 
 [(Percona., 2020)](https://www.percona.com/blog/2020/04/13/need-to-connect-to-a-local-mysql-server-use-unix-domain-socket/)
 
@@ -456,11 +428,7 @@ Password: danny
 7.2. Looking for the exposed Docker socket\
 Armed with the knowledge we've learnt about the Docker socket in "_Vulnerability #4: RCE via Exposed Docker Daemon_", we can look for exposure of this file within the container, and confirm whether or not the current user has permissions to run docker commands with `groups`.
 
-<div align="center">
-
-<img src="https://assets.tryhackme.com/additional/docker-rodeo/container-socket/container-sock1.png" alt="">
-
-</div>
+<div align="center"><img src="https://assets.tryhackme.com/additional/docker-rodeo/container-socket/container-sock1.png" alt=""></div>
 
 \
 
@@ -477,11 +445,7 @@ docker run -v /:/mnt --rm -it alpine chroot /mnt sh
 
 ```
 
-<div align="center">
-
-<img src="https://assets.tryhackme.com/additional/docker-rodeo/container-socket/container-sock2.png" alt="">
-
-</div>
+<div align="center"><img src="https://assets.tryhackme.com/additional/docker-rodeo/container-socket/container-sock2.png" alt=""></div>
 
 _Note: If you do not receive any output after 30 seconds you will need to cancel the command by "Ctrl + C" and attempt to run it again._
 
@@ -489,11 +453,7 @@ We are essentially mounting the hosts "/" directory to the "/mnt" dir in a new c
 
 7.4. Verify lootSuccess! We have a shell, let's verify who we're now connected as and enumerate around the file system.
 
-<div align="left">
-
-<img src="https://assets.tryhackme.com/additional/docker-rodeo/container-socket/container-sock3.png" alt="">
-
-</div>
+<div align="left"><img src="https://assets.tryhackme.com/additional/docker-rodeo/container-socket/container-sock3.png" alt=""></div>
 
 ## Vulnerability #6: Shared Namespaces
 

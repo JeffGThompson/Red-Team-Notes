@@ -67,7 +67,7 @@ In other terms, `grep -E` functions same as `egrep` and `grep -F` functions same
 
 You might be wondering the difference between -E and -e flag. I suggest to understand this as the following:
 
-* \-e flag can be used to specify multiple patterns, with multiple use of -e flag( grep -e PATTERN1 -e PATTERN2 -e PATTERN3 file.txt), whereas, -E can be used to specify one single pattern(You can't use -E multiple times within a single grep statement).
+* -e flag can be used to specify multiple patterns, with multiple use of -e flag( grep -e PATTERN1 -e PATTERN2 -e PATTERN3 file.txt), whereas, -E can be used to specify one single pattern(You can't use -E multiple times within a single grep statement).
 
 Other point that you can use to understand the difference is, -e works on the BREs(Basic Regular Expressions) and -E works on EREs (Extended Regular Expressions).
 
@@ -76,7 +76,7 @@ Other point that you can use to understand the difference is, -e works on the BR
 
 Hope, you get an idea how this works.&#x20;
 
-Here's a real short note, you might wanna read, on official GNU documentation: [Basic vs Extended (GNU Grep 3.5)](https://www.gnu.org/software/grep/manual/html\_node/Basic-vs-Extended.html). If you didn't understand much from that paragraph, make sure, you've practiced your regex well.&#x20;
+Here's a real short note, you might wanna read, on official GNU documentation: [Basic vs Extended (GNU Grep 3.5)](https://www.gnu.org/software/grep/manual/html_node/Basic-vs-Extended.html). If you didn't understand much from that paragraph, make sure, you've practiced your regex well.&#x20;
 
 ### Answer the questions
 
@@ -270,8 +270,8 @@ This is not it... There is a lot more on AWK, you can do operations, find string
 JIC if you wanna read more on the tool, here are some great resources regarding awk scripting.\
 
 
-* [AWK - Workflow - Tutorialspoint](https://www.tutorialspoint.com/awk/awk\_workflow.htm) (For learning awk scripting in brief and quick)
-* [The printf statement in awk](http://osr5doc.xinuos.com/en/OSUserG/\_The\_printf\_statement.html) (If you want to do more with formatting strings; you can use printf function also)\
+* [AWK - Workflow - Tutorialspoint](https://www.tutorialspoint.com/awk/awk_workflow.htm) (For learning awk scripting in brief and quick)
+* [The printf statement in awk](http://osr5doc.xinuos.com/en/OSUserG/_The_printf_statement.html) (If you want to do more with formatting strings; you can use printf function also)\
 
 * [AWK command in Unix/Linux with examples - GeeksforGeeks](https://www.geeksforgeeks.org/awk-command-unixlinux-examples/)
 * And if you really want to dive deep on this tool, do check out man pages on gawk&#x20;
@@ -296,11 +296,11 @@ Ending this task with a fun fact, AWK is abbreviated after it's creators (Aho, W
 **Download the above given file, and use awk command  to print the following output:**
 
 _ippsec:34024_\
-_john:50024_\
-_thecybermentor:25923_\
-_liveoverflow:45345_\
-_nahamsec:12365_\
-_stok:1234_
+&#xNAN;_&#x6A;ohn:50024_\
+&#xNAN;_&#x74;hecybermentor:25923_\
+&#xNAN;_&#x6C;iveoverflow:45345_\
+&#xNAN;_&#x6E;ahamsec:12365_\
+&#xNAN;_&#x73;tok:1234_
 
 
 
@@ -390,7 +390,7 @@ Let's view a few more examples to get the concept clear:
 
 <figure><img src="https://tryhackme-images.s3.amazonaws.com/user-uploads/5eff6381a8b8f6323ba744fe/room-content/0e828482c6fa7936c760e23bca6de2f9.png" alt=""><figcaption></figcaption></figure>
 
-\-n flag suppressed the output and we got the duplicates created by p arg.
+-n flag suppressed the output and we got the duplicates created by p arg.
 
 * Viewing the entire file except a given range
 
@@ -908,8 +908,8 @@ _Sidenote: GPG(Gnu Privacy Guard) and PGP(Pretty Good Privacy) are 2 different t
 
 Resources
 
-* [gpg - Unix, Linux Command - Tutorialspoint](https://www.tutorialspoint.com/unix\_commands/gpg.htm)
-* [GPG Cheat Sheet (hawaii.edu)](http://irtfweb.ifa.hawaii.edu/\~lockhart/gpg/)
+* [gpg - Unix, Linux Command - Tutorialspoint](https://www.tutorialspoint.com/unix_commands/gpg.htm)
+* [GPG Cheat Sheet (hawaii.edu)](http://irtfweb.ifa.hawaii.edu/~lockhart/gpg/)
 
 ### tar command
 

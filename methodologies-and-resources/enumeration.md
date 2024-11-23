@@ -1264,7 +1264,7 @@ SELECT pg_ls_dir('/');
 
 See TCP/5986 - WinRM for WinRM information
 
-## **TCP/**5986 **- WinRM**
+## **TCP/**&#x35;986 **- WinRM**
 
 ### **Dump Hashes**
 
