@@ -382,6 +382,8 @@ winexe -U 'admin%password' //$VICTIM cmd.exe
 
 List any saved credentials:
 
+**Victim**
+
 ```
 cmdkey /list
 ```
