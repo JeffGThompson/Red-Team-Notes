@@ -35,7 +35,7 @@ In summary, verbose errors are like breadcrumbs leading attackers deeper into th
 
 #### Enumeration in Authentication Forms
 
-In this HackerOne [report](https://hackerone.com/reports/1166054), the attacker was able to enumerate users using the website's Forget Password function. Similarly, we can also enumerate emails in login forms. For example, navigate to [http://enum.thm/labs/verbose\_login/](http://enum.thm/labs/verbose\_login/) and put any email address in the Email input field.
+In this HackerOne [report](https://hackerone.com/reports/1166054), the attacker was able to enumerate users using the website's Forget Password function. Similarly, we can also enumerate emails in login forms. For example, navigate to [http://enum.thm/labs/verbose\_login/](http://enum.thm/labs/verbose_login/) and put any email address in the Email input field.
 
 When you input an invalid email, the website will respond with "Email does not exist." indicating that the email has not been registered yet.
 
@@ -116,43 +116,31 @@ if __name__ == "__main__":
 * ```python
   ```
 
-<!---->
+- ```python
+  ```
+- ```python
+  ```
 
 * ```python
   ```
 * ```python
   ```
 
-<!---->
-
-* ```python
+- ```python
   ```
-* ```python
-  ```
-
-<!---->
 
 * ```python
   ```
 
-<!---->
-
-* ```python
+- ```python
   ```
-
-<!---->
-
-* ```python
-  ```
-
-<!---->
 
 * ```python
   ```
 
 </details>
 
-We can use a common list of emails from this [repository](https://github.com/nyxgeek/username-lists/blob/master/usernames-top100/usernames\_gmail.com.txt).
+We can use a common list of emails from this [repository](https://github.com/nyxgeek/username-lists/blob/master/usernames-top100/usernames_gmail.com.txt).
 
 ![Usernames list from github](https://tryhackme-images.s3.amazonaws.com/user-uploads/645b19f5d5848d004ab9c9e2/room-content/645b19f5d5848d004ab9c9e2-1720084910130.png)\
 
@@ -167,7 +155,7 @@ Once you've downloaded the payload list, use the script on the AttackBox or your
 python3 script.py  usernames_gmail.com.txt 
 ```
 
-<figure><img src="../../.gitbook/assets/image (2) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (2) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 ## Exploiting Vulnerable Password Reset Logic
 
@@ -208,7 +196,7 @@ $query->execute();
 
 The code above sets a random three-digit PIN as the reset token of the submitted email. Since this token doesn't employ mixed characters, it can be easily brute-forced.
 
-To demonstrate this, go to [http://enum.thm/labs/predictable\_tokens/](http://enum.thm/labs/predictable\_tokens/).
+To demonstrate this, go to [http://enum.thm/labs/predictable\_tokens/](http://enum.thm/labs/predictable_tokens/).
 
 ![Predictable tokens login](https://tryhackme-images.s3.amazonaws.com/user-uploads/645b19f5d5848d004ab9c9e2/room-content/645b19f5d5848d004ab9c9e2-1719133556444)\
 
@@ -247,7 +235,7 @@ Using the AttackBox or your own attacking VM, use Crunch to generate a list of n
 crunch 3 3 -o otp.txt -t %%% -s 100 -e 200             
 ```
 
-<figure><img src="../../.gitbook/assets/image (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 Go back to Intruder and configure the payload to use the generated file.
 
@@ -289,7 +277,7 @@ where `<credentials>` is the base64 encoding of `username:password`. For detaile
 
 #### Exploitation
 
-To demonstrate this, go to [http://enum.thm/labs/basic\_auth/](http://enum.thm/labs/basic\_auth/).
+To demonstrate this, go to [http://enum.thm/labs/basic\_auth/](http://enum.thm/labs/basic_auth/).
 
 ![Basic Authentication Lab Homepage](https://tryhackme-images.s3.amazonaws.com/user-uploads/645b19f5d5848d004ab9c9e2/room-content/645b19f5d5848d004ab9c9e2-1719138339394)\
 

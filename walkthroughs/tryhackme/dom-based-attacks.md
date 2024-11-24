@@ -35,11 +35,7 @@ Using the developer tools, we can also interface with the JavaScript console and
 6. Your new text should be loaded, as shown below.\
 
 
-<div align="center">
-
-<img src="https://tryhackme-images.s3.amazonaws.com/user-uploads/6093e17fa004d20049b6933e/room-content/71e76d68460b0b8f7a1dcced921db74a.png" alt="DOM shown from the browser view">
-
-</div>
+<div align="center"><img src="https://tryhackme-images.s3.amazonaws.com/user-uploads/6093e17fa004d20049b6933e/room-content/71e76d68460b0b8f7a1dcced921db74a.png" alt="DOM shown from the browser view"></div>
 
 This is also where the true power of DOM-based attacks lies. If we can inject into the DOM, we can alter what the user sees or even potentially take actions as the user, effectively impersonating them! This became a significantly larger problem with modern web application frameworks or so-called single-page web applications where control over the DOM does not just mean control over a single webpage but persistence across the entire web application.
 
@@ -207,35 +203,19 @@ Enumeration of a Modern Frontend Application
 In order to do this challenge and answer the questions, you will need to analyse the Vue application. Navigating to the application you will see the following:\
 
 
-<div align="center">
-
-<img src="https://tryhackme-images.s3.amazonaws.com/user-uploads/6093e17fa004d20049b6933e/room-content/93dd95e4214248d5c894a06dddf9b8e9.png" alt="DOM shown from the browser view for a modern frontend web application">
-
-</div>
+<div align="center"><img src="https://tryhackme-images.s3.amazonaws.com/user-uploads/6093e17fa004d20049b6933e/room-content/93dd95e4214248d5c894a06dddf9b8e9.png" alt="DOM shown from the browser view for a modern frontend web application"></div>
 
 If you simply use View Page Source, this doesn't really help you a lot:
 
-<div align="center">
-
-<img src="https://tryhackme-images.s3.amazonaws.com/user-uploads/6093e17fa004d20049b6933e/room-content/c8b45044dced74bb2b0adb284920e100.png" alt="DOM shown from the browser view for a modern frontend web application">
-
-</div>
+<div align="center"><img src="https://tryhackme-images.s3.amazonaws.com/user-uploads/6093e17fa004d20049b6933e/room-content/c8b45044dced74bb2b0adb284920e100.png" alt="DOM shown from the browser view for a modern frontend web application"></div>
 
 However, the browser will actually rebuild the Vue application for us in the debugger. You can access the debugger by Right-Clicking, selecting Inspect, and then clicking the Debugger tab. You will see the following:
 
-<div align="center">
-
-<img src="https://tryhackme-images.s3.amazonaws.com/user-uploads/6093e17fa004d20049b6933e/room-content/0ec798edaf330f082617627ea8d086de.png" alt="DOM shown from the browser view for a modern frontend web application">
-
-</div>
+<div align="center"><img src="https://tryhackme-images.s3.amazonaws.com/user-uploads/6093e17fa004d20049b6933e/room-content/0ec798edaf330f082617627ea8d086de.png" alt="DOM shown from the browser view for a modern frontend web application"></div>
 
 Using this, you can navigate to src -> components, which will show you the rebuilt (referred to as mapped) Vue files, as shown below:
 
-<div align="center">
-
-<img src="https://tryhackme-images.s3.amazonaws.com/user-uploads/6093e17fa004d20049b6933e/room-content/ceb2cd10366bed7e409e364c9618945f.png" alt="DOM shown from the browser view for a modern frontend web application">
-
-</div>
+<div align="center"><img src="https://tryhackme-images.s3.amazonaws.com/user-uploads/6093e17fa004d20049b6933e/room-content/ceb2cd10366bed7e409e364c9618945f.png" alt="DOM shown from the browser view for a modern frontend web application"></div>
 
 You will have to use this feature to solve the challenge and answer the questions below!\
 
@@ -252,13 +232,13 @@ v-html can be used for HTML Injection
 
 
 
-<figure><img src="../../.gitbook/assets/image (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 If I try to delete the secret I see the following in  the tabs 'Console' and 'Network'.
 
-<figure><img src="../../.gitbook/assets/image (2) (1) (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (2) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
-<figure><img src="../../.gitbook/assets/image (3) (1) (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (3) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 
 

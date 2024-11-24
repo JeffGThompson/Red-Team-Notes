@@ -4,7 +4,7 @@
 
 ## Windows Print Spooler Service
 
-Microsoft defines the [Print spooler service](https://docs.microsoft.com/en-us/openspecs/windows\_protocols/ms-prsod/7262f540-dd18-46a3-b645-8ea9b59753dc) as a service that runs on each computer system. As you can guess from the name, the Print spooler service manages the printing processes. The Print spooler's responsibilities are managing the print jobs, receiving files to be printed, queueing them, and scheduling.
+Microsoft defines the [Print spooler service](https://docs.microsoft.com/en-us/openspecs/windows_protocols/ms-prsod/7262f540-dd18-46a3-b645-8ea9b59753dc) as a service that runs on each computer system. As you can guess from the name, the Print spooler service manages the printing processes. The Print spooler's responsibilities are managing the print jobs, receiving files to be printed, queueing them, and scheduling.
 
 You are able to Start/Stop/Pause/Resume the Print Spooler Service by simply navigating to Services on your Windows system.&#x20;
 
@@ -339,7 +339,7 @@ Armed with all the knowledge above, can you detect the PrintNightmare artifacts 
 
 
 
-<figure><img src="../../.gitbook/assets/image (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 Add the following filters
 
@@ -368,15 +368,15 @@ Application and Services Logs/Microsoft/Windows/Sysmon
 
 **Provide the name of the dropped DLL, including the error code. (no space after the comma)**
 
-<figure><img src="../../.gitbook/assets/image (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 **Provide the event log name and the event ID that detected the dropped DLL. (no space after the comma)**
 
-<figure><img src="../../.gitbook/assets/image (2) (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (2) (1) (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 **Find the source name and the event ID when the Print Spooler Service stopped unexpectedly and how many times was this event logged? (format: answer,answer,answer)**
 
-<figure><img src="../../.gitbook/assets/image (3) (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (3) (1) (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 **After some threat hunting steps, you are more confident now that it's a PrintNightmare attack. Hunt for the attacker's shell connection. Provide the log name, event ID, and destination port. (format: answer,answer,answer)**
 
