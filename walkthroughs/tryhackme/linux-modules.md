@@ -890,7 +890,7 @@ xxd -c 9 -g 3 file.txt
 cat flag_1611749859927.txt | xxd -r -p
 ```
 
-<figure><img src="../../.gitbook/assets/image (3) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (3) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 ## Other modules
 

