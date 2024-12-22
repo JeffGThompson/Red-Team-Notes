@@ -155,7 +155,7 @@ Once you've downloaded the payload list, use the script on the AttackBox or your
 python3 script.py  usernames_gmail.com.txt 
 ```
 
-<figure><img src="../../.gitbook/assets/image (2) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (2) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 ## Exploiting Vulnerable Password Reset Logic
 
@@ -235,7 +235,7 @@ Using the AttackBox or your own attacking VM, use Crunch to generate a list of n
 crunch 3 3 -o otp.txt -t %%% -s 100 -e 200             
 ```
 
-<figure><img src="../../.gitbook/assets/image (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 Go back to Intruder and configure the payload to use the generated file.
 

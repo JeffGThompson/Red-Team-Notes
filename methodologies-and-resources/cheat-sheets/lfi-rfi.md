@@ -184,7 +184,7 @@ In the original post you can find a detailed explanation of the technique, but h
 * The final problem is to see **how to leak more than the initial letter**. By using order memory filters like **convert.iconv.UTF16.UTF-16BE, convert.iconv.UCS-4.UCS-4LE, convert.iconv.UCS-4.UCS-4LE** is possible to change the order of the chars and get in the first position other letters of the text.
   * And in order to be able to obtain **further data** the idea if to **generate 2 bytes of junk data at the beginning** with **convert.iconv.UTF16.UTF16**, apply **UCS-4LE** to make it **pivot with the next 2 bytes**, and d**elete the data until the junk data** (this will remove the first 2 bytes of the initial text). Continue doing this until you reach the disired bit to leak.
 
-In the post a tool to perform this automatically was also leaked: [php\_filters\_chain\_oracle\_exploit](https://github.com/synacktiv/php\_filter\_chains\_oracle\_exploit).
+In the post a tool to perform this automatically was also leaked: [php\_filters\_chain\_oracle\_exploit](https://github.com/synacktiv/php_filter_chains_oracle_exploit).
 
 
 
@@ -302,7 +302,7 @@ In the original post you can find a detailed explanation of the technique, but h
 * The final problem is to see **how to leak more than the initial letter**. By using order memory filters like **convert.iconv.UTF16.UTF-16BE, convert.iconv.UCS-4.UCS-4LE, convert.iconv.UCS-4.UCS-4LE** is possible to change the order of the chars and get in the first position other letters of the text.
   * And in order to be able to obtain **further data** the idea if to **generate 2 bytes of junk data at the beginning** with **convert.iconv.UTF16.UTF16**, apply **UCS-4LE** to make it **pivot with the next 2 bytes**, and d**elete the data until the junk data** (this will remove the first 2 bytes of the initial text). Continue doing this until you reach the disired bit to leak.
 
-In the post a tool to perform this automatically was also leaked: [php\_filters\_chain\_oracle\_exploit](https://github.com/synacktiv/php\_filter\_chains\_oracle\_exploit).
+In the post a tool to perform this automatically was also leaked: [php\_filters\_chain\_oracle\_exploit](https://github.com/synacktiv/php_filter_chains_oracle_exploit).
 
 ##
 
@@ -344,7 +344,7 @@ if(isset($_GET['page'])){
 
 It's possible to comply with this requirement and navigate to other directories. This can be achieved by appending the necessary directory traversal sequences after the mandatory base folder.
 
-For example, go to [http://10.10.198.29/lfi.php](http://machine\_ip/lfi.php) and use the payload `/var/www/html/..//..//..//etc/passwd`.
+For example, go to [http://10.10.198.29/lfi.php](http://machine_ip/lfi.php) and use the payload `/var/www/html/..//..//..//etc/passwd`.
 
 The PHP function `containsStr` checks if a substring exists within a string. The if condition checks two things. First, if `$_GET['page']` does not contain the substring `../..`, and if `$_GET['page']` contains the substring `/var/www/html`, however, `..//..//` bypasses this filter because it still effectively navigates up two directories, similar to `../../`. It does not exactly match the blocked pattern `../..` due to the extra slashes. The extra slashes `//` in `..//..//` are treated as a single slash by the file system. This means `../../` and `..//..//` are functionally equivalent in terms of directory navigation but only `../../` is explicitly filtered out by the code.
 
@@ -464,7 +464,7 @@ The attacker then uses LFI to include the access log file: `?page=/var/log/apach
 
 Like a log file, send the payload in the User-Agent, it will be reflected inside the /proc/self/environ file
 
-<figure><img src="../../.gitbook/assets/image (5) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (5) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 
 

