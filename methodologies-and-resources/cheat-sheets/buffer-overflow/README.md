@@ -173,7 +173,7 @@ We see the win function is located at 0x400646
 objdump -t ret
 ```
 
-<figure><img src="../../../.gitbook/assets/image (11) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/image (11) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 Confirmed it crashes after 136.
 
@@ -235,7 +235,7 @@ Testing that the payload still works on our local machine.
 (cat payload.bin; cat) | ./ret
 ```
 
-<figure><img src="../../../.gitbook/assets/image (12) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/image (12) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 **Kali**
 

