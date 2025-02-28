@@ -1776,6 +1776,475 @@ This results in a menu which gives us access to a variety of amazing features, i
 
 To delete agents in Starkiller we can use either the trashcan icon in the pop-out agent Window, or the kill button in the action menu for the agent back in the Agents tab of Starkiller.
 
+## Empire: Hop Listeners
+
+As mentioned previously, Empire agents can't be proxied with a socat relay or any equivalent redirects; but there must be a way to get an agent back from a target with no outbound access, right?
+
+The answer is yes. We use something called a Hop Listener.
+
+Hop Listeners create what looks like a regular listener in our list of listeners (like the http listener we used before); however, rather than opening a port to receive a connection, hop listeners create files to be copied across to the compromised "jump" server and served from there. These files contain instructions to connect back to a normal (usually HTTP) listener on our attacking machine. As such, the hop listener in the listeners menu can be thought of as more of a placeholder -- a reference to be used when generating stagers.
+
+If this doesn't make much sense just now, don't worry! Hopefully it will once we have worked through an example.
+
+The hop listener we will be working with is the most common kind: the `http_hop` listener.
+
+When created, this will create a set of `.php` files which must be uploaded to the jumpserver (our compromised webserver) and served by a HTTP server. Under normal circumstances this would be a trivial task as the compromised server already has a webserver running; however, out of courtesy to anyone else attempting the network, we will not be using the installed webserver.
+
+***
+
+Let's first look at starting the listener in Empire CLI.
+
+Switch into the context of the listener using `uselistener http_hop` from the main Empire menu (you may need to use `back` a few times to get out of any agents, etc). There are a few options we're interested in here:
+
+<figure><img src="https://assets.tryhackme.com/additional/wreath-network/empire-update-4.0/8fff79486323.png" alt=""><figcaption></figcaption></figure>
+
+Specifically we need:-
+
+* A RedirectListener -- this is a regular listener to forward any received agents to. Think of the hop listener as being something like a relay on the compromised server; we still need to catch it with something! You could use the listener you set up earlier for this, or create an entirely new HTTP listener using the same steps we used earlier. Make sure that this matches up with the name of an already active listener though!\
+
+* A Host -- the IP of the compromised webserver (`.200`).
+* A Port -- this is the port which will be used for the webserver hosting our hop files. Pick a random port here (above 15000), but remember it!
+
+When filled in, our options should look something like this:
+
+<figure><img src="https://assets.tryhackme.com/additional/wreath-network/empire-update-4.0/0a85d9e55345.png" alt=""><figcaption></figcaption></figure>
+
+As shown in the screenshot, we then once again use `execute` to start the listener.
+
+This will have written a variety of files into a new `http_hop` directory in `/tmp` of our attacking machine. We will need to replicate this file structure on our jump server (the compromised `.200` webserver) when we serve the files. Notice that these files (`news.php`, `admin/get.php`, and `login/process.php`) would not look out of place amongst genuine web application files -- and indeed could easily be discretely merged into an existing webapp.
+
+***
+
+Let's look at setting up a `http_hop` listener in Starkiller.
+
+By this stage you should be fairly familiar with this process, so we will go through this quickly.
+
+Switch back to the Listeners menu in Starkiller using the menu at the left-hand side of the screen:\
+![Showing the listeners menu in Starkiller again](https://assets.tryhackme.com/additional/wreath-network/fed6f29eee3a.png)\
+
+
+Create a new listener and choose "http\_hop" for the type. We then fill in the options much like with the Empire CLI Client:\
+![Filling in the options for the http\_hop listener in Starkiller](https://assets.tryhackme.com/additional/wreath-network/empire-update-4.0/c7a7339d03cb.png)\
+
+
+Again, we set the Host (`.200`), Port, and RedirectListener.\
+
+
+_Note: if you also have a Hop Listener set up using the Empire CLI then you should also change the OutFolder to avoid overwriting the previously generated files._
+
+Click "Submit", and the listener starts!
+
+## Git Server
+
+Time to put this all into practice!
+
+You should already have a `http_hop` listener started in either Empire or Starkiller from the last task. If you don't, take this opportunity to start one before continuing.
+
+With the listener started there are two things we must do before we can get an agent back from the Git Server:-
+
+* We must generate an appropriate stager for the target
+* We must put the `http_hop` files into position on .200, and start a webserver to serve the files on the port we selected during the listener creation. This server must be able to execute PHP, so a PHP Debug server is ideal
+
+***
+
+Let's start with generating a stager. For this we will use the `multi/launcher` stager. We already covered how to create stagers back in task 26, so you should be able to do this relatively unguided. The only option needing to be set here is the "Listener" option, which needs set to the name of the `http_hop` listener we created in the previous task:
+
+Empire CLI:\
+
+
+<figure><img src="https://assets.tryhackme.com/additional/wreath-network/empire-update-4.0/948827be57c0.png" alt=""><figcaption></figcaption></figure>
+
+Starkiller:\
+
+
+<figure><img src="https://assets.tryhackme.com/additional/wreath-network/empire-update-4.0/18461d0a00ec.png" alt=""><figcaption></figcaption></figure>
+
+If using the Empire CLI, you will be presented with a payload to copy and paste into the target's command line:
+
+<figure><img src="https://assets.tryhackme.com/additional/wreath-network/597e71846d80.png" alt=""><figcaption></figcaption></figure>
+
+If using Starkiller you can copy the payload to your clipboard by clicking on the copy button of the Actions menu for the stager in the main Stagers menu:
+
+<figure><img src="https://assets.tryhackme.com/additional/wreath-network/empire-update-4.0/df9e3449f125.png" alt=""><figcaption></figcaption></figure>
+
+Whichever method you chose, save the provided command somewhere and _do not_ execute it yet. We will need it once we have set up the hop files on the jumpserver.\
+
+
+***
+
+Now let's get that jumpserver set up!
+
+First of all, in the /tmp directory of the compromised webserver, create and enter a directory called `hop-USERNAME`. e.g.:
+
+<figure><img src="https://assets.tryhackme.com/additional/wreath-network/d2ca11ee5470.png" alt=""><figcaption></figcaption></figure>
+
+Transfer the contents from the `/tmp/http_hop` (or whatever you called it) directory across to this directory on the target server. A good way to do this is by zipping up the contents of the directory (`cd /tmp/http_hop && zip -r hop.zip *`), then transferring the zipfile across using one of the methods previously shown. For example, doing this with a Python HTTP server:\
+![Demonstrating transferring the zip file using a Python HTTP server, as well as how to zip the file up.](https://assets.tryhackme.com/additional/wreath-network/b3fa83178a6e.png)\
+
+
+We can then unzip the zipfile on the webserver (i.e. `unzip hop.zip`):
+
+<figure><img src="https://assets.tryhackme.com/additional/wreath-network/f5e072039e18.png" alt=""><figcaption></figcaption></figure>
+
+_Note: the output of_ `ls` must _match up with the screenshot -- i.e. there should be a_ `news.php` _file in your current directory, with_ `admin/` _and_ `login/` _as subdirectories._\
+
+
+We now need to actually serve the files on the port we chose when generating the http\_hop listener (task 28). Fortunately we already know that this server has PHP installed as it serves as the backend to the main website. This means that we can use the PHP development webserver to serve our files! The syntax for this is as follows:\
+`php -S 0.0.0.0:PORT &>/dev/null &`\
+
+
+e.g:\
+![Demonstrating the process of setting up the PHP debug server](https://assets.tryhackme.com/additional/wreath-network/b46fe13b58a7.png)
+
+As shown in the screenshot, the webserver is now listening in the background on the chosen port 47000.
+
+_Note: Remember to open up the port in the firewall if you haven't already!_\
+
+
+This is a handy trick for when we need to serve PHP files, as our standard Python HTTP webserver is not capable of interpreting the PHP language and so cannot execute the scripts.
+
+***
+
+We now have everything we need to get this show on the road!\
+
+
+Answer the questions below
+
+Both the reverse shell we received way back in task 19, and our evil-winrm access are already running in Powershell, so we would need to adapt the stager generated for us by Empire in order to use them. Instead, it is easier to use it with the webshell we originally used to compromise the machine (i.e. paste the stager as the value of the "a" parameter in cURL or BurpSuite), remembering to URL encode the stager first.\
+
+
+After sending the web request, you should receive an agent in Empire CLI / Starkiller!\
+![Receiving the agent](https://assets.tryhackme.com/additional/wreath-network/8f727d417f68.png)
+
+Note that the IP here is still `.200`. This is due to the jumpserver in between our target (the Git server) and our Empire client acting as a proxy in and out of the network.
+
+Bearing this in mind, get an agent back from the Git Server!
+
+## Empire: Modules
+
+As mentioned previously, modules are used to perform various tasks on a compromised target, through an active Empire agent. For example, we could use Mimikatz through its Empire module to dump various secrets from the target.
+
+As per usual, let's look at loading modules in both Empire CLI and Starkiller.
+
+***
+
+Starting with Empire CLI:
+
+Inside the context of an agent, type `usemodule` . As expected, this will show a dropdown with a huge list of modules which can be loaded into the agent for execution.
+
+It doesn't really matter here as we already have full access to the target, but for the sake of learning, let's try loading in the Sherlock Empire module. This checks for potential privilege escalation vectors on the target.\
+`usemodule powershell/privesc/sherlock`
+
+<figure><img src="https://assets.tryhackme.com/additional/wreath-network/empire-update-4.0/081792f6213e.png" alt=""><figcaption></figcaption></figure>
+
+As previously, we can use `options` to get information about the module after loading it in.
+
+This module requires one option to be set: the `Agent` value. This is already set for us here; however, if it was incorrect or there was no option set already then we could set it using the command: `set Agent AGENT_NAME`, (the same syntax as in previous parts of the framework).\
+
+
+We start the module using the usual `execute` command. The module will then run as a background job, returning the results when it completes.
+
+<figure><img src="https://assets.tryhackme.com/additional/wreath-network/empire-update-4.0/8ec5020e81a2.png" alt=""><figcaption></figcaption></figure>
+
+If we know approximately what we want to do, but don't know the exact path to a module, we can just type `usemodule NAME_OF_MODULE` and it should come up in the dropdown menu:\
+![Demonstrating searching for modules using the dropdown menu](https://assets.tryhackme.com/additional/wreath-network/empire-update-4.0/02eba19664ee.png)\
+
+
+***
+
+Now let's do the same thing in Starkiller.
+
+First we switch over to the modules menu:\
+![Showing the modules menu in Starkiller](https://assets.tryhackme.com/additional/wreath-network/43556845ab7b.png)
+
+In the top right corner we can search for our desired module. Let's search for the Sherlock module again:
+
+<figure><img src="https://assets.tryhackme.com/additional/wreath-network/empire-update-4.0/ec88bc6ff7b5.png" alt=""><figcaption></figcaption></figure>
+
+Select the module by clicking on its name.\
+
+
+From here we click on the Agents menu, then select the agent(s) to use the module through:
+
+<figure><img src="https://assets.tryhackme.com/additional/wreath-network/empire-update-4.0/fc2e34bbfd15.png" alt=""><figcaption></figcaption></figure>
+
+Click Submit to run the module!
+
+To view the results we need to switch over to the "Reporting" section of the main menu on the left side of the window:\
+![Showing the reporting tab found in the left hand menu of Starkiller](https://assets.tryhackme.com/additional/wreath-network/f8553e45f903.png)\
+
+
+From here we can see the task we just ran, showing the Agent in use, the event type, command, user, and a timestamp.\
+
+
+<figure><img src="https://assets.tryhackme.com/additional/wreath-network/empire-update-4.0/f57165fc44fc.png" alt=""><figcaption></figcaption></figure>
+
+Clicking on the dropdown arrow to the left of the task gives the task results:
+
+<figure><img src="https://assets.tryhackme.com/additional/wreath-network/empire-update-4.0/213d58186b7f.png" alt=""><figcaption></figcaption></figure>
+
+## Empire: Interactive Shell
+
+The interactive shell was a new feature in Empire 4.0. It effectively allows you to access a traditional pseudo-command shell from within Starkiller or the Empire CLI Client. This can be used to execute PowerShell commands, as you would in a Powershell reverse shell.
+
+To access the interactive shell in the Empire CLI Client, we can use the `shell` command from within the context of an agent:
+
+<figure><img src="https://assets.tryhackme.com/additional/wreath-network/empire-update-4.0/a864fce42efc.png" alt=""><figcaption></figcaption></figure>
+
+In Starkiller this is even easier as the shell can be found directly in the Agent interaction interface:\
+
+
+<figure><img src="https://assets.tryhackme.com/additional/wreath-network/empire-update-4.0/c1b8fc62f751.png" alt=""><figcaption></figcaption></figure>
+
+Whilst not quite as "familiar" as the command line shell, this gives us the exact same access.
+
+## Enumeration
+
+We will soon be moving on to the final teaching point of this network: Anti-virus evasion techniques.
+
+Before we can do that, however, we first need to scope out the final target!
+
+We know from the briefing that this target is likely to be the other Windows machine on the network. By process of elimination we can tell that this is Thomas' PC which he told us has antivirus software installed. If we're very lucky it will be out of date though!
+
+As always, we need to enumerate the target before we can do anything else, but how can we do this from a compromised Windows host? As mentioned way back in the Pivoting Enumeration task, Nmap won't work on Windows unless it's been properly installed on the target. Scanning through one proxy is bad, but at this point we'd be scanning through _two_ proxies, which would be unbearable. We could write a tool to do it for us, but let's leave that for the time being (there will be more than enough coding in the upcoming section as it is!). Instead, let's look closer to home and ask one burning question:
+
+How do Empire Modules work?
+
+For the most part Empire modules are quite literally just scripts (usually in PowerShell) that are executed by the framework through an active agent.  In other words, these are just PowerShell scripts, and we have PowerShell access to the target.
+
+For the sake of learning, let's upload the Empire Port Scanning script and execute it manually on the target.
+
+***
+
+In our current situation (on an isolated target, communicating through a jumpserver), under normal circumstances uploading tools manually would usually be something of a chore -- think relays and webservers. Fortunately evil-winrm gives us several easy options for transferring and including tools.
+
+Upload/Download:\
+The first option available to us is the in-built Upload/Download feature built into the tool. From within evil-winrm we can use `upload LOCAL_FILEPATH REMOTE_FILEPATH` to upload files to the target. Conversely, we can use `download REMOTE_FILEPATH LOCAL_FILEPATH` to download files back from the target. These could come in handy if we, say, wanted to upload a tool to the target, save the results from running it to a log file, then download the log file back to our attacking machine for storage. In both instances if we miss out the destination filepath (e.g. the remote filepath on upload, or the local filepath on download), the tool will be uploaded into our current working directory.\
+
+
+For example:\
+
+
+<figure><img src="https://assets.tryhackme.com/additional/wreath-network/e02003103ad1.png" alt=""><figcaption></figcaption></figure>
+
+In this example we upload an example tool (`nc.exe`) to `C:\Windows\Temp`, we then create a new file (`demo.txt`) and download it to the current working directory. Note that in the real world using the `C:\Windows\Temp` directory is often a bad idea as it's flagged as a common location for hackers to upload tools. In this case we are using it to keep the box neat and tidy for other users.\
+
+
+Local Scripts:\
+Uploading tools is all well and good, but if the tool happens to be a PowerShell script then there is another (even more convenient) method. If you check the help menu for evil-winrm, you will see an interesting `-s` option. This allows us to specify a local directory containing PowerShell scripts -- these scripts will be made accessible for us to import directly into memory using our evil-winrm session (meaning they don't need to touch the disk at all). For example, if we happened to have our scripts located at `/opt/scripts`, we could include them in the connection with:\
+`evil-winrm -u USERNAME  -p PASSWORD -i IP -s /opt/scripts`\
+
+
+Let's use this option to include the Empire Portscan module.
+
+The Empire scripts are stored at `/usr/share/powershell-empire/empire/server/data/module_source/situational_awareness/network/` if you installed using apt as recommended. A copy of this tool is also included in the zipfile attached to Task 1, or can be downloaded [here](https://github.com/BC-SECURITY/Empire/blob/master/empire/server/data/module_source/situational_awareness/network/Invoke-Portscan.ps1), if you can't find it locally.\
+
+
+Regardless, we can now sign in as the Administrator using the password hash discovered previously, including the Empire network scanning scripts:\
+`evil-winrm -u Administrator -H HASH -i IP -s EMPIRE_DIR`\
+
+
+Type `Invoke-Portscan.ps1` and press enter to initialise the script.\
+
+
+Now if we type `Get-Help Invoke-Portscan` we should see the help menu for the tool without having to import or upload anything manually!
+
+<figure><img src="https://assets.tryhackme.com/additional/wreath-network/67448956442a.png" alt=""><figcaption></figcaption></figure>
+
+***
+
+The Empire Portscan module is designed to be similar to Nmap in terms of syntax. You are encouraged to read through the full help menu for the tool; however, we only need two switches: `-Hosts` and `-TopPorts`. We _could_ use the `-Ports` switch and just scan a range of ports, but for the sake of speed we can use the -TopPorts switch to scan a user-specified number of the most commonly open ports. For example, `-TopPorts 50` would scan the 50 most commonly open ports.
+
+The full command would then look like this (using the top 50 ports and our example of 172.16.0.10):\
+`Invoke-Portscan -Hosts 172.16.0.10 -TopPorts 50`
+
+### Answer the questions below
+
+**Scan the top 50 ports of the last IP address you found in Task 17. Which ports are open (lowest to highest, separated by commas)?**
+
+```
+// Some code
+```
+
+## Pivoting
+
+We found two ports open in the previous task. RDP won't be of much use to us without credentials (or at least a hash, although Pass-the-Hash attacks are often restricted through RDP anyway); however, the webserver is worth looking into. Wreath told us that he worked on his website using a local environment on his own PC, so this bleeding-edge version may contain some vulnerabilities that we could use to exploit the target. Before we can do that, however, we must figure out how to access the development webserver on Wreath's PC from our attacking machine.
+
+We have two immediate options for this: Chisel, and Plink.
+
+### Answer the questions below
+
+If you followed the recommended route of using sshuttle to pivot from the webserver then a _chisel forward proxy_ is recommended here as it will be relatively easy to connect to through the sshuttle connection without requiring a relay -- look back at the Chisel task if you need help with this!
+
+When using this option you will need to open up a port in the Windows firewall to allow the forward connection to be made. The syntax for opening a port using `netsh` looks something like this:\
+`netsh advfirewall firewall add rule name="NAME" dir=in action=allow protocol=tcp localport=PORT`
+
+Please use the `name-USERNAME` naming convention -- for example:\
+`netsh advfirewall firewall add rule name="Chisel-MuirlandOracle" dir=in action=allow protocol=tcp localport=47000`\
+
+
+<figure><img src="https://assets.tryhackme.com/additional/wreath-network/31589c0e89b3.png" alt=""><figcaption></figcaption></figure>
+
+**Whether you choose the recommended option or not, get a pivot up and running!**
+
+
+
+**Access the website in your web browser (using FoxyProxy if you used the recommended forward proxy, or directly if you used a port forward).**
+
+**Using the Wappalyzer browser extension (**[**Firefox**](https://addons.mozilla.org/en-GB/firefox/addon/wappalyzer/) **|** [**Chrome**](https://chrome.google.com/webstore/detail/wappalyzer/gppongmhjkpfnbhagpmjfkannfbllamg?hl=en)**) or an alternative method, identify the server-side Programming language (including the version number) used on the website.**
+
+
+
+## The Wonders of Git
+
+It seems we guessed right! It appears to be a carbon copy of the website running on the webserver. If there are any differences here then they are clearly not going to be immediately visible, which means we may need to look at fuzzing this site through two proxies...
+
+Before we start messing around with fuzzing tools though, let's take a step back and think about this.
+
+We know from the brief that Thomas has been using git server to version control his projects -- just because the version on the webserver isn't up to date, doesn't mean that he hasn't been committing to the repo more regularly! In other words, rather than fuzzing the server, we might be able to just download the source code for the site and review it locally.
+
+Ideally we could just clone the repo directly from the server. This would likely require credentials, which we would need to find. Alternatively, given we already have local admin access to the git server, we could just download the repository from the hard disk and re-assemble it locally which does not require any (further) authentication.
+
+For the sake of practice, let's use this latter option.
+
+
+
+### Answer the questions below
+
+**Use your WinRM access to look around the Git Server. What is the absolute path to the `Website.git` directory?**
+
+```
+// Some code
+```
+
+Use `evil-winrm` to download the entire directory.
+
+From the directory above Website.git, use:\
+`download PATH\TO\Website.git`
+
+Be warned -- this will take a while, but should complete after a minute or two!
+
+_Note: You may need to specify the local path as well as the absolute path to the Website.git directory!_
+
+
+
+Exit out of evil-winrm -- you should see that a new directory called Website.git has been created locally. If you enter into this directory you will see an oddly named subdirectory (the same as the answer to question 1 of this task).
+
+Rename this _subdirectory_ to `.git`.
+
+Git repositories always contain a special directory called `.git` which contains all of the meta-information for the repository. This directory can be used to fully recreate a readable copy of the repository, including things like version control and branches. If the repository is local then this directory would be a part of the full repository -- the rest of which would be the items of the repository in a human-readable format; however, as the `.git` directory is enough to recreate the repository in its entirety, the server doesn't need to store the easily readable versions of the files. This means that what we've downloaded isn't actually the full repository, so much as the building blocks we can use to recreate the repo (which is exactly what happens when using `git clone` to create a local copy of a repo!).\
+
+
+In order to extract the information from the repository, we use a suite of tools called GitTools.
+
+Clone the GitTools repository into your current directory using:\
+`git clone https://github.com/internetwache/GitTools`\
+
+
+The GitTools repository contains three tools:
+
+* Dumper can be used to download an exposed `.git` directory from a website should the owner of the site have forgotten to delete it
+* Extractor can be used to take a local `.git` directory and recreate the repository in a readable format. This is designed to work in conjunction with the Dumper, but will also work on the repo that we stole from the Git server. Unfortunately for us, whilst Extractor _will_ give us each commit in a readable format, it will not sort the commits by date\
+
+* Finder can be used to search the internet for sites with exposed `.git` directories. This is significantly less useful to an ethical hacker, although may have applications in bug bounty programmes
+
+Let's use Extractor to obtain a readable format of the repository!
+
+The syntax for Extractor is as follows:\
+`./extractor.sh REPO_DIR DESTINATION_DIR`
+
+This is slightly confusing, so explaining each option:
+
+* The `REPO_DIR` is the directory _containing_ the `.git` directory for the repository. Note that this is not the `.git` directory itself. Extractor looks for a `.git` directory _inside_ the specified directory (which is why we had to change the original name of the directory to ".git")
+* The `DESTINATION_DIR` is the subdirectory into which the repository will be created\
+
+
+For example, if we cloned the GitTools repo into the same directory as the `.git` directory we downloaded from the Git Server, we can extract the contents of the stolen repository into a subdirectory called "Website" using:\
+`GitTools/Extractor/extractor.sh . Website`
+
+This uses the current directory "`.`" (as the parent of the `.git` directory) and extracts into a newly created `Website` subdirectory.\
+
+
+<figure><img src="https://assets.tryhackme.com/additional/wreath-network/6f1a257091d4.png" alt=""><figcaption></figcaption></figure>
+
+Recreate the repository -- we will perform some code analysis in the next task!\
+
+
+Complete
+
+Let's head into the newly recreated repository. We see three directories:\
+\
+
+
+<figure><img src="https://assets.tryhackme.com/additional/wreath-network/e1479598dc52.png" alt=""><figcaption></figcaption></figure>
+
+Each of these corresponds to a commit; however, as mentioned previously, these are not sorted by date...
+
+It's up to us to piece together the order of the commits. Fortunately there are only three commits in this repository, and each commit comes with a `commit-meta.txt` file which we can use to get an idea of the order.
+
+We could just cat each of these files out separately, but we may as well do it the fancy way with a bash one-liner:\
+`separator="======================================="; for i in $(ls); do printf "\n\n$separator\n\033[4;1m$i\033[0m\n$(cat $i/commit-meta.txt)\n"; done; printf "\n\n$separator\n\n\n"`\
+
+
+This gives us the three `commit-meta.txt` files in a nicely formatted order:\
+
+
+<figure><img src="https://assets.tryhackme.com/additional/wreath-network/fcd4bcda0749.png" alt=""><figcaption></figcaption></figure>
+
+Here we can see three commit messages: `Updated the filter`, `Initial Commit for the back-end`, and `Static Website Commit`.
+
+_Note: The number at the start of these directories is arbitrary, and depends on the order in which GitTools extracts the directories. What matters is the hash at the end of the filename._\
+
+
+Logically speaking, we can guess that these are currently in reverse order based on the commit message; however, we could also check the parent value of each commit. Starting at the only commit without a parent (which must be the initial commit), we can work down the tree in stages like so:
+
+<figure><img src="https://assets.tryhackme.com/additional/wreath-network/3a87596c906b.png" alt=""><figcaption></figcaption></figure>
+
+We find the commit that has no parent (`70dde80cc19ec76704567996738894828f4ee895`), and check to see which of the other commits specifies it as a direct parent (`82dfc97bec0d7582d485d9031c09abcb5c6b18f2`). We then repeat the process to find the full commit order:
+
+1. 70dde80cc19ec76704567996738894828f4ee895
+2. 82dfc97bec0d7582d485d9031c09abcb5c6b18f2
+3. 345ac8b236064b431fa43f53d91c98c4834ef8f3
+
+We _could_ also do this by checking the timestamps attached to the commits (in UNIX format, after the emails); however, it is possible to fake these. Feel free to use them, but be aware that they may not always be accurate.\
+
+
+***
+
+If that didn't make sense, don't worry!
+
+The short version is: the most up to date version of the site stored in the Git repository is in the `NUMBER-345ac8b236064b431fa43f53d91c98c4834ef8f3` directory.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
